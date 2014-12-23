@@ -1,0 +1,39 @@
+#!/usr/bin/node --harmony
+
+"use strict"
+
+let net = require( "net" )
+let fs = require( "fs" )
+let constants = require( "constants" )
+
+let version = new Buffer( [ 0x7e, 0xff, 0x3, 0x1, 0x8, 0x0, 0x0, 0x20, 0x12, 0x0, 0x0, 0x0, 0x0, 0x68, 0x39 ] )
+
+// let socket = new net.Socket()
+// socket.connect( 2233 )
+// socket.on( "connect", function () {
+// 	socket.write( version )
+// } )
+// socket.on( "data", function ( data ) {
+// 	console.log( data )
+// } )
+
+let f = fs.openSync( "/dev/ttyACM0", constants.O_RDWR | constants.O_NOCTTY )
+
+let b = new Buffer( 100 )
+!function r() {
+	fs.read( f, b, 0, b.length, null, function ( error, bytesRead ) {
+		if ( error )
+			console.log( "read error:", error )
+		else
+			console.log( "read:", bytesRead, b.slice( 0, bytesRead ) )
+		r()
+	} )
+}()
+
+fs.write( f, version, 0, version.length, null, function ( error, bytesWritten ) {
+	if ( error )
+		console.log( "write error:", error )
+	else
+		console.log( "written:", bytesWritten )
+} )
+
