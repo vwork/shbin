@@ -29,7 +29,7 @@ int rs232_init()
 	int thread_error;
 	struct termios options;
 
-	tty = open("/dev/ttyUSB0", O_RDWR | O_NOCTTY | O_NONBLOCK);
+	tty = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NONBLOCK);
       	if (tty < 0)
       	{
         	printf("Error: open rs232 port\n");
