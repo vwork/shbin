@@ -1,0 +1,27 @@
+CACHE MANIFEST
+
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1419332805824
+
+CACHE:
+
+/favicon.ico
+/favicon96.ico
+/js/index.min.js
+/images/menu/help.svg
+/images/menu/logo.svg
+/images/menu/back.svg
+/images/room.svg
+/images/bedroom.svg
+/images/device.svg
+/touch.svg
+/messages
+/templates
+
+NETWORK:
+
+/images/
+
+/js/index.js
+/cookie
+/devices
+/rooms

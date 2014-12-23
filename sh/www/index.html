@@ -1,0 +1,1299 @@
+<html manifest='/index.manifest' id='j1hlszuboud4gd'>
+
+<noscript id='j2d0cfd9vck4ge'>
+!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1419332805823
+</noscript>
+<head id='idepruy8y94gf'>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' id='j2o4vxl4iff4gg'/>
+
+<meta name='mobile-web-app-capable' content='yes' id='j17ezza8l764gi'/>
+<meta name='apple-mobile-web-app-capable' content='yes' id='j2o9a7rhzoi4gj'/>
+
+<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' id='j9olhoj1u224gk'/>
+
+<meta name='format-detection' content='telephone=no' id='j2orsqd0ovz4gl'/>
+
+
+<meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=0' id='j70akb66h1b4gm'/>
+
+<style id='j80slkzsig44gn'> html { -webkit-text-size-adjust: 100%; } </style>
+
+<link rel='shortcut icon' href='/favicon96.ico' id='j4c3y3angvv4go'/>
+
+
+
+
+
+
+
+
+
+ 
+
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 480px) and
+		(-webkit-device-pixel-ratio: 1)' href='apple-touch-startup-image-320x460.png' id='j5pk18yqm664gq'/>
+
+ 
+
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 480px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x920.png' id='j5wuitc548x4gr'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 568px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x1096.png' id='j4b8go0zbpi4gs'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 375px) and
+		(device-height: 667px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-750x1294.png' id='j421ek2n5yo4gt'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 414px) and
+		(device-height: 736px) and
+		(-webkit-device-pixel-ratio: 3)' href='apple-touch-startup-image-1242×2148.png' id='j3ls6w1rc154gu'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(orientation: portrait) and
+		(device-width: 768px) and
+		(device-height: 1024px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1536x2008.png' id='j23zvvxurur4gv'/>
+<link rel='apple-touch-startup-image' media='
+		(orientation: landscape) and
+		(device-width: 768px) and
+		(device-height: 1024px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1496x2048.png' id='j5olw54i6ft4gw'/>
+
+
+
+
+
+
+
+
+
+<meta id='screenTitle' name='apple-mobile-web-app-title' content='My home'/>
+<title id='j40shd133b04gx'>Sweet home</title>
+<script>"use strict";
+!function() {
+  var bind = (function(obj, name) {
+    return obj && obj[name] && obj[name].bind(obj);
+  });
+  var lockOrientation = null || bind(screen.orientation, "lock") || bind(screen, "lockOrientation") || bind(screen.orientation, "webkitLock") || bind(screen, "webkitLockOrientation") || bind(screen.orientation, "mozLock") || bind(screen, "mozLockOrientation") || bind(screen.orientation, "msLock") || bind(screen, "msLockOrientation") || ((function(_) {
+    return false;
+  }));
+  var locked = bind(lockOrientation("portrait-primary"), "then");
+  window.onAppOrientationLocked = locked ? (function(cb) {
+    return locked(cb, cb);
+  }) : setTimeout;
+}();
+</script>
+</head>
+<body class='translucent' style='background-color: black;' id='j9ta5162qib4gy'>
+<style type='text/css' id='j7lvjb8cieh4gz'>
+/* contextMenu */
+.contextMenuShown .contextMenu {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 17mm;
+background-color: black;
+}
+.translucent .application.window_app.layout_vertical.contextMenuShown .contextMenu {
+top: 5mm;
+}
+/* startupScreen */
+.startupScreen {
+padding-top: 15mm;
+background-color: black;
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+font-size: 17pt;
+text-align: center;
+}
+.loadingScreen {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+background-color: black;
+padding-top: 50%;
+text-align: center;
+font-size: 10mm;
+background-image: url( /touch.svg );
+background-repeat: no-repeat;
+background-position: center;
+}
+.pageRunning .startupScreen,
+.pageRunning .loadingScreen,
+.pageRunning .contextMenu {
+-webkit-transition-duration: 0.5s;
+-webkit-transition-property: opacity;
+transition-duration: 0.5s;
+transition-property: opacity;
+}
+.JSONloaded .loadingScreen,
+.alreadyRun .startupScreen,
+.contextMenuHidden .contextMenu {
+pointer-events: none;
+opacity: 0;
+/*display: none;*/
+}
+.JSONloading .loadingScreen,
+.firstRun .startupScreen,
+.contextMenuShown .contextMenu {
+pointer-events: all;
+opacity: 1;
+/*display: initial;*/
+}
+</style>
+<style type='text/css' id='j55mgwv41ik4h0'>@font-face {
+font-family: "Web App";
+/*src: url("web-app.eot");*/
+src: url("web-app.eot?#iefix") format("embedded-opentype"),
+url("web-app.woff") format("woff"),
+url("web-app.ttf") format("truetype"),
+url("web-app.svg#JosefinSansLight") format("svg"),
+url("web-app.otf") format("opentype");
+/*font-weight: normal;*/
+/*font-style: normal;*/
+}
+/* no spaces by default. do not change this section. do change next ones. */
+body { margin: 0; padding: 0; }
+table { border-spacing: 0; border-collapse: collapse; }
+td { padding: 0; }
+/* custom settings */
+body {
+font-family: 'Myriad Set Pro', 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+/*font-family: 'Helvetica Neue';*/
+/*font-size: 22px;*/
+font-style: normal;
+font-weight: 200;
+background-color: #131313;
+color: white;
+}
+.application, .top, .menu, .bottom, .help, .logo, .back, .icon {
+overflow: hidden;
+}
+.application {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+}
+.marginTop, .marginBottom {
+display: none;
+}
+.top, .bottom, .menu {
+position: absolute;
+left: 0;
+width: 100%;
+}
+.top {
+top: 0;
+}
+.bottom {
+bottom: 0;
+}
+/*.translucent .application.window_app.layout_vertical .menu {
+height: 74.5%;
+}
+.translucent .application.window_app.layout_vertical .marginTop {
+display: block;
+height: 1.5%;
+}*/
+.top, .menu, .bottom {
+/*-webkit-transition-delay: 0s;*/
+/*-webkit-transition-duration: 0.2s;*/
+/*-webkit-transition-timing-function: linear;*/
+/*-webkit-transition-property: display height;*/
+/*background-color: blue;*/
+}
+/*.layout_horizontal .top {
+display: none;
+height: 0%;
+}
+.layout_horizontal .bottom {
+height: 0%;
+}
+.layout_horizontal .menu {
+height: 100%;
+}*/
+.menu img {
+height: 100%;
+width: 100%;
+}
+.help, .logo, .back {
+position: absolute;
+width: 33.333%;
+top: 0;
+bottom: 0;
+text-align: center;
+background-repeat: no-repeat;
+background-position: center;
+}
+.help {
+left: 0%;
+}
+.logo {
+left: 33.333%;
+}
+.back {
+left: 66.666%;
+}
+.command {
+display: block;
+font-size: 20pt;
+margin-top: 7mm;
+text-align: center;
+text-decoration: none;
+}
+.startupScreen .houseTemplate {
+text-align: left;
+margin-top: 1em;
+margin-right: 1em;
+cursor: pointer;
+}
+.place {
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+display: none;
+overflow: visible;
+}
+.placeContent {
+position: absolute;
+/*width: 100%;*/
+/*height: 100%;*/
+-webkit-transition-duration: 0.10s;
+-webkit-transition-timing-function: linear;
+-webkit-transition-property: -webkit-transform;
+}
+.placeContent.panning {
+-webkit-transition-duration: 0.02s;
+}
+.icon {
+position: absolute;
+}
+.icon img {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+}
+.icon .iconLabel {
+position: absolute;
+width: 100%;
+/*height: 5mm;*/
+bottom: 5mm;
+text-align: center;
+}
+@media screen and ( orientation: landscape ) {
+.room { display: none !important; }
+}
+img.error {
+visibility: hidden;
+}
+img.on, img.off {
+-webkit-transition-duration: 0.4s;
+-webkit-transition-property: opacity;
+transition-duration: 0.4s;
+transition-property: opacity;
+}
+</style>
+<style type='text/css' id='j8sbtvf6phe4h1'>.application, .application table, a, a:visited {
+color: #03EADC;
+}
+.top {
+height: 17mm;
+}
+.bottom {
+height: 17mm;
+}
+.menu {
+top: 17mm;
+bottom: 17mm;
+}
+.top, .top table {
+font-size: 20pt;
+font-variant: small-caps;
+}
+.top, .contextMenu, .menu {
+/*border-bottom: 1px solid #03EADC;*/
+}
+.contextMenuHidden .contextMenu {
+/*border-bottom: none;*/
+}
+.top, .bottom {
+background-color: #212121;
+/*background-color: rgba( 3, 234, 220, 0.3 );*/
+/*background-color: rgba( 255, 255, 255, 1 );*/
+}
+.top, .bottom, .top table, .bottom table {
+color: #03EADC;
+}
+.help {
+background-image: url( /images/menu/help.svg );
+}
+.logo {
+background-image: url( /images/menu/logo.svg );
+}
+.back {
+background-image: url( /images/menu/back.svg );
+}
+.command.disabled {
+color: #777;
+}
+</style>
+<template class='Command' data-callback='' data-msg='' data-url='' id='iaity30xc84h4'>
+<a class='command' href='javascript:void(0)' target='_self' id='j5m1zm5ekfm4h5'></a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.iaity30xc84h4;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.iaity30xc84h4;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var callback = $__7 == null ? undefined : $__7.callback;
+  if (callback === undefined)
+    callback = $__6.getAttribute("data-callback") || callback;
+  if (callback === undefined)
+    callback = null;
+  var msg = $__7 == null ? undefined : $__7.msg;
+  if (msg === undefined)
+    msg = $__6.getAttribute("data-msg") || msg;
+  if (msg === undefined)
+    msg = null;
+  var url = $__7 == null ? undefined : $__7.url;
+  if (url === undefined)
+    url = $__6.getAttribute("data-url") || url;
+  if (url === undefined)
+    url = null;
+  var command = $__2.j5m1zm5ekfm4h5;
+  !function() {
+    command.classList.add(url || callback ? "enabled" : "disabled");
+    command.classList.add(msg);
+    if (url && !callback) {
+      command.setAttribute("href", url);
+      command.setAttribute("rel", "external");
+      command.setAttribute("target", "_blank");
+    } else
+      CS.onTouch(command, (function(event) {
+        event.preventDefault();
+        if (callback) {
+          app.isContextMenu = false;
+          callback();
+        }
+      }));
+    CS.content(command, (function() {
+      return app.message(msg);
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='ContextMenu' id='j7elofyt84a4h6'>
+<div class='contextMenu' id='j3t1jy24jwu4h7'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j7elofyt84a4h6;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var Command = $__3.iaity30xc84h4;
+  var $__6 = $__3.j7elofyt84a4h6;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var contextMenu = $__2.j3t1jy24jwu4h7;
+  !function() {
+    CS.content(contextMenu, (function() {
+      return [CS.importTemplate(Command, {msg: "commandSearchDevices"}), CS.importTemplate(Command, {
+        msg: "commandAddToHomeScreen",
+        url: "http://tut.by/"
+      }), CS.importTemplate(Command, {msg: "commandMoveIcons"}), CS.importTemplate(Command, {msg: "commandLanguage"}), CS.importTemplate(Command, {
+        msg: "commandResetToFactorySettings",
+        callback: function() {
+          app.reset();
+        }
+      }), CS.importTemplate(Command, {msg: "commandTestMenu"})];
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j5k17vcwp2v4he'>
+<li class='houseTemplate' id='i572oi6koz4hf'></li>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j5k17vcwp2v4he;
+  var $__5 = window.j93i8ydsgw44h3;
+  var $__6 = $__4.$__DATASET__$;
+  if ($__6 === undefined)
+    $__6 = $__4.$__DATASET__$ = {};
+  var $__7 = $__4.j7ktn8ku54x4h8;
+  var $__8 = $__3.$__DATASET__$;
+  if ($__8 === undefined)
+    $__8 = $__3.$__DATASET__$ = {};
+  var $__9 = $__3.j5k17vcwp2v4he;
+  var $__10 = $__2.$__DATASET__$;
+  if ($__10 === undefined)
+    $__10 = $__2.$__DATASET__$ = {};
+  var text = $__10 == null ? undefined : $__10.text;
+  if (text === undefined)
+    text = $__9.getAttribute("data-text") || text;
+  if (text === undefined)
+    text = null;
+  var houseTemplate = $__2.i572oi6koz4hf;
+  !function() {
+    CS.content(houseTemplate, (function() {
+      return text;
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='StartupScreen' id='j7ktn8ku54x4h8'>
+<div class='startupScreen' id='j9oewnx2yji4h9'>
+<p id='j96bpccp7t44ha'>Добро пожаловать в Ваш<br id='j37eem1fwxw4hb'/>Умный Дом!</p>
+<div class='templates' id='j9iocfn56mm4hc'>
+<p id='j9lxyvojqa44hd'>Пожалуйста, выберите место, где используется этот пульт:</p>
+<noscript data-template-reference='j5k17vcwp2v4he'></noscript>
+<ul class='houseTemplates' id='j85lcls5fu34hg'></ul>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j9iocfn56mm4hc;
+  var $__4 = window.j93i8ydsgw44h3;
+  var template = $__6;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j7ktn8ku54x4h8;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var templates = $__2.j9iocfn56mm4hc;
+  var HouseTemplate = $__2.j5k17vcwp2v4he;
+  var houseTemplates = $__2.j85lcls5fu34hg;
+  !function() {
+    CS.content(houseTemplates, (function() {
+      return app.templates && app.templates.map((function(houseTemplate, index) {
+        var ret = CS.importTemplate(HouseTemplate, {text: houseTemplate.ru});
+        CS.onTouch(ret, (function() {
+          return app.setTemplate(houseTemplate);
+        }));
+        return ret;
+      }));
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='loading' id='j5jhu1l6bt54hh'></div>
+</div>
+</template><template class='LoadingScreen' id='iwag7audey4hi'>
+<div class='loadingScreen' id='j4htcinhev14hj'></div>
+</template><template class='Centered' data-content='' id='j5w6prfy6gj4hk'>
+<table style='width: 100%; height: 100%;' id='j12cpp4agds4hl'>
+<tr style='width: 100%; height: 100%;' id='i9xjlp85je4hm'>
+<td style='width: 100%; height: 100%; verticalAlign: middle; text-align: center;' id='j9d0nnxrcru4hn'>
+<span class='self' id='j2e7t9zwblx4ho'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j9d0nnxrcru4hn;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var $__6 = $__3.j5w6prfy6gj4hk;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var content = $__7 == null ? undefined : $__7.content;
+  if (content === undefined)
+    content = $__6.getAttribute("data-content") || content;
+  if (content === undefined)
+    content = null;
+  var self = $__2.j2e7t9zwblx4ho;
+  !function() {
+    CS.content(self, content);
+  }.call($__0);
+}();
+</script>
+</td>
+</tr>
+</table>
+</template><template class='Icon' data-iconId='' data-iconDescr='' data-index='' id='j729je7amxp4hp'>
+<div class='icon' id='j2xqifung004hq'>
+<img class='error off' src='/images/room.svg' id='j94rpgmqnzb4hr'/>
+<img class='error on' src='/images/room_on.svg' id='j13s2mxn8h24hs'/>
+<img class='error absent' src='/images/room_absent.svg' id='j76hn23g1jl4ht'/>
+<span class='iconLabel' id='i8848nfnzj4hu'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j2xqifung004hq;
+  var style = window.j8sbtvf6phe4h1;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__5 == null ? undefined : $__5.local;
+  if (local === undefined)
+    local = $__4.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var Command = $__3.iaity30xc84h4;
+  var $__6 = $__3.j729je7amxp4hp;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var iconId = $__7 == null ? undefined : $__7.iconId;
+  if (iconId === undefined)
+    iconId = $__6.getAttribute("data-iconId") || iconId;
+  if (iconId === undefined)
+    iconId = null;
+  var iconDescr = $__7 == null ? undefined : $__7.iconDescr;
+  if (iconDescr === undefined)
+    iconDescr = $__6.getAttribute("data-iconDescr") || iconDescr;
+  if (iconDescr === undefined)
+    iconDescr = null;
+  var index = $__7 == null ? undefined : $__7.index;
+  if (index === undefined)
+    index = $__6.getAttribute("data-index") || index;
+  if (index === undefined)
+    index = null;
+  var icon = $__2.j2xqifung004hq;
+  var img = $__2.j76hn23g1jl4ht;
+  var off = $__2.j94rpgmqnzb4hr;
+  var on = $__2.j13s2mxn8h24hs;
+  var absent = $__2.j76hn23g1jl4ht;
+  var iconLabel = $__2.i8848nfnzj4hu;
+  !function() {
+    lodash.assign(on, app.imgProps);
+    lodash.assign(off, app.imgProps);
+    lodash.assign(absent, app.imgProps);
+    CS.updateClassX(icon, iconId);
+    CS.watchX((function() {
+      var ph = app.pageHeight || 1;
+      var pw = app.pageWidth || 1;
+      var h = index % ph;
+      var w = (index - h) / ph;
+      icon.style.left = (w * 100 / pw) + "%";
+      icon.style.top = (h * 100 / ph) + "%";
+    }));
+    CS.watchX((function() {}));
+    CS.contentX(iconLabel, (function() {
+      return iconDescr.get(local.language) || iconDescr.get("ru") || iconDescr.get("en");
+    }));
+    function logGesture(gesture) {
+      LOG(gesture.yellow);
+    }
+    CS.onTouchStart(this, (function() {
+      logGesture("TouchStart");
+    }));
+    CS.onTouchEnd(this, (function() {
+      logGesture("TouchEnd");
+    }));
+    CS.onTap(this, (function() {
+      logGesture("Tap");
+      app.iconCommand(iconDescr, iconId, "Short");
+    }));
+    CS.onPress(this, (function() {
+      logGesture("Press");
+      app.iconCommand(iconDescr, iconId, "Long");
+    }));
+    CS.onSwipeUp(this, (function() {
+      logGesture("SwipeUp");
+      app.iconCommand(iconDescr, iconId, "Up");
+    }));
+    CS.onSwipeDown(this, (function() {
+      logGesture("SwipeDown");
+      app.iconCommand(iconDescr, iconId, "Down");
+    }));
+    CS.onPanUp(this, (function() {
+      logGesture("PanUp");
+    }));
+    CS.onPanDown(this, (function() {
+      logGesture("PanDown");
+    }));
+    var deviceId = iconDescr.defineProperty("device");
+    var content = iconDescr.defineProperty("content");
+    var present = ra((function() {
+      return content.valueOf() || deviceId.valueOf();
+    }));
+    var device = ra((function() {
+      return app.devices.data.get(lu.valueOf(deviceId));
+    }));
+    var state = ra((function() {
+      var d = lu.valueOf(device);
+      if (!d)
+        return 0;
+      if (d.newstate_timestamp && (!d.state_timestamp || d.newstate_timestamp > d.state_timestamp))
+        return d.newstate;
+      else
+        return d.state;
+    }));
+    ra((function() {
+      return on.style.opacity = +(lu.valueOf(present) && lu.valueOf(state));
+    }));
+    ra((function() {
+      return off.style.opacity = +(lu.valueOf(present) ? (1 - lu.valueOf(state)) * 0.333 : 0);
+    }));
+    ra((function() {
+      return absent.style.opacity = 0.7 * +!lu.valueOf(present);
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='Place' data-placeId='' data-placeDescr='' id='i5iwuc1xyh4hv'>
+<div class='place' id='j6r19uxvljf4hw'></div>
+<style class='style' id='j3wjto2k8vi4hx'></style>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.i5iwuc1xyh4hv;
+  var style = $__2.j3wjto2k8vi4hx;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var Icon = $__3.j729je7amxp4hp;
+  var $__6 = $__3.i5iwuc1xyh4hv;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var placeId = $__7 == null ? undefined : $__7.placeId;
+  if (placeId === undefined)
+    placeId = $__6.getAttribute("data-placeId") || placeId;
+  if (placeId === undefined)
+    placeId = null;
+  var placeDescr = $__7 == null ? undefined : $__7.placeDescr;
+  if (placeDescr === undefined)
+    placeDescr = $__6.getAttribute("data-placeDescr") || placeDescr;
+  if (placeDescr === undefined)
+    placeDescr = null;
+  var place = $__2.j6r19uxvljf4hw;
+  !function() {
+    CS.updateClassX(place, placeId);
+    style.innerHTML = ("." + placeId + " .place." + placeId + " { display: initial }");
+    var content = placeDescr.defineProperty("content");
+    var ids = ra((function() {
+      var c = lu.valueOf(content);
+      if (c)
+        c = Object.keys(c).sort((function(a, b) {
+          return lu.compare(c[a].index, c[b.index]);
+        }));
+      return c;
+    }), lu.arrayEqual);
+    CS.content(place, (function() {
+      if (ids.valueOf())
+        return ids.valueOf().map((function(iconId, index) {
+          return CS.importTemplate(Icon, {
+            iconId: iconId,
+            index: index,
+            iconDescr: ra((function() {
+              return app.places.data.valueOf()[iconId];
+            }))
+          });
+        }));
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='Main' id='j4823flaj2o4hy'>
+<div class='top' id='j6qzu2tc88t4hz'>
+<span class='self' id='j5ii7rfr1nn4i0'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j6qzu2tc88t4hz;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__5 == null ? undefined : $__5.local;
+  if (local === undefined)
+    local = $__4.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var Centered = $__3.j5w6prfy6gj4hk;
+  var Place = $__3.i5iwuc1xyh4hv;
+  var $__6 = $__3.j4823flaj2o4hy;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var self = $__2.j5ii7rfr1nn4i0;
+  !function() {
+    CS.content(self, CS.importTemplate(Centered, {content: (function() {
+        var ret;
+        if (local.activePlace != "main") {
+          var place = local.house.get(local.activePlace);
+          if (place)
+            ret = place[local.language] || place.ru || place.en;
+        }
+        return ret || app.message("favorites");
+      })}));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='menu' id='i9efk79o2v4i1'>
+
+<span class='self' id='j7ek8xol8ld4i2'></span>
+<style class='style' id='j2sfg9rx7nz4i3'></style>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.i9efk79o2v4i1;
+  var style = $__2.j2sfg9rx7nz4i3;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var Place = $__3.i5iwuc1xyh4hv;
+  var $__6 = $__3.j4823flaj2o4hy;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var menu = $__2.i9efk79o2v4i1;
+  var self = $__2.j7ek8xol8ld4i2;
+  !function() {
+    var id = UID();
+    this.classList.add(id);
+    CS.watch((function() {
+      style.innerHTML = ("." + id + " .icon {\n\t\t\twidth: " + 100 / app.pageWidth + "%;\n\t\t\theight: " + 100 / app.pageHeight + "%;\n\t\t}");
+    }));
+    CS.updateClass(this, (function() {
+      return app.activePlace;
+    }));
+    var shown = {};
+    var first = true;
+    ra((function() {
+      var id = app.activePlace;
+      if (!id || shown[id])
+        return;
+      shown[id] = true;
+      var place = ra((function() {
+        return app.places.data.get(id);
+      }));
+      var placeControl = CS.importTemplate(Place, {
+        placeId: id,
+        placeDescr: place
+      });
+      if (first) {
+        CS.content(self, placeControl);
+        first = false;
+      } else
+        self.appendChild(placeControl);
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='bottom' id='j1aubf5ke134i4'>
+<div class='help' id='j6tugcu1z7k4i5'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j6tugcu1z7k4i5;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var $__6 = $__3.j4823flaj2o4hy;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  !function() {
+    CS.onTouch(this, (function() {
+      return httpClient.post("/debugHtml", document.documentElement.innerHTML);
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='logo' id='j43ym9eafkj4i6'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j43ym9eafkj4i6;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var ContextMenu = $__3.j7elofyt84a4h6;
+  var $__6 = $__3.j4823flaj2o4hy;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  !function() {
+    CS.onPress(this, (function() {
+      return app.isContextMenu = true;
+    }));
+    CS.onTap(this, (function() {
+      app.isContextMenu = false;
+      app.go("");
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='back' id='j44tzx9w7yq4i7'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j44tzx9w7yq4i7;
+  var $__4 = window.j93i8ydsgw44h3;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var ContextMenu = $__3.j7elofyt84a4h6;
+  var $__6 = $__3.j4823flaj2o4hy;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var back = $__2.j44tzx9w7yq4i7;
+  !function() {
+    CS.onTouch(this, (function() {
+      if (app.isContextMenu)
+        app.isContextMenu = false;
+      else
+        app.back();
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</div>
+</template><template class='App' data-app='' data-local='' data-appid='state' id='j93i8ydsgw44h3'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j93i8ydsgw44h3;
+  var $__3 = window.j93i8ydsgw44h3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var dataset = $__4;
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var appid = $__4 == null ? undefined : $__4.appid;
+  if (appid === undefined)
+    appid = $__3.getAttribute("data-appid") || appid;
+  if (appid === undefined)
+    appid = null;
+  !function() {
+    lodash.assign(dataset, require("app")(appid));
+    dataset.app.pageStarting = true;
+  }.call($__0);
+}();
+</script>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j93i8ydsgw44h3;
+  var $__3 = window.j93i8ydsgw44h3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__4 == null ? undefined : $__4.local;
+  if (local === undefined)
+    local = $__3.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  !function() {
+    window._app = app;
+    window._local = local;
+  }.call($__0);
+}();
+</script>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j93i8ydsgw44h3;
+  var $__3 = window.j93i8ydsgw44h3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__4 == null ? undefined : $__4.local;
+  if (local === undefined)
+    local = $__3.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  !function() {
+    if (navigator.standalone)
+      void 0;
+    else {
+      ra((function() {
+        if (local.activePlace && local.activePlace.valueOf()) {
+          var title = ("TITLE_" + local.activePlace);
+          var icon = ("ICON_" + local.activePlace);
+          screenTitle.setAttribute("content", title);
+          if (local.activePlace && local.activePlace != "main")
+            history.replaceState(null, title, ("?appicon=" + icon));
+          else
+            history.replaceState(null, title, "?");
+          httpClient.post(("/cookie?appicon=" + icon), "");
+        }
+      }));
+    }
+  }.call($__0);
+}();
+</script>
+<noscript data-template-reference='iaity30xc84h4'></noscript>
+<noscript data-template-reference='j7elofyt84a4h6'></noscript>
+<noscript data-template-reference='j7ktn8ku54x4h8'></noscript>
+<noscript data-template-reference='iwag7audey4hi'></noscript>
+<noscript data-template-reference='j5w6prfy6gj4hk'></noscript>
+<noscript data-template-reference='j729je7amxp4hp'></noscript>
+<noscript data-template-reference='i5iwuc1xyh4hv'></noscript>
+<noscript data-template-reference='j4823flaj2o4hy'></noscript>
+<div class='application' id='j2arw29u4nv4i8'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j93i8ydsgw44h3;
+  var $__3 = window.j93i8ydsgw44h3;
+  var template = $__3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var ContextMenu = $__2.j7elofyt84a4h6;
+  var application = $__2.j2arw29u4nv4i8;
+  !function() {
+    var initial = application.className.split(/\s+/);
+    CS.watch((function() {
+      return application.className = initial.concat([app.pageStarting ? "pageStarting" : "pageRunning", app.initialLoading ? "JSONloading" : "JSONloaded", app.initialized ? "alreadyRun" : "firstRun", app.templates ? "templatesLoaded" : "templatesLoading", app.isContextMenu ? "contextMenuShown" : "contextMenuHidden"]).join(" ");
+    }));
+  }.call($__0);
+}();
+</script>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j93i8ydsgw44h3;
+  var $__3 = window.j93i8ydsgw44h3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var ContextMenu = $__2.j7elofyt84a4h6;
+  var StartupScreen = $__2.j7ktn8ku54x4h8;
+  var LoadingScreen = $__2.iwag7audey4hi;
+  var Main = $__2.j4823flaj2o4hy;
+  var application = $__2.j2arw29u4nv4i8;
+  !function() {
+    CS.content(application, [CS.importTemplate(Main), CS.importTemplate(StartupScreen), CS.importTemplate(ContextMenu), CS.importTemplate(LoadingScreen)]);
+    setTimeout((function() {
+      return app.pageStarting = false;
+    }), 1);
+  }.call($__0);
+}();
+</script>
+</template>
+
+<template class='TwoApp' id='j9fraslhwmq4i9'>
+<style id='j54s7tcrio84ib'>
+.app1 .application, .app2 .application {
+position: fixed;
+left: 20;
+top: 10;
+width: 350;
+height: 600;
+}
+.app2 .application {
+left: 400;
+width: 950;
+}
+</style>
+<div class='app1' id='j5kw57yef0o4ic'></div>
+<div class='app2' id='j99xermy73g4id'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j9fraslhwmq4i9;
+  var App = window.j93i8ydsgw44h3;
+  var $__3 = window.j9fraslhwmq4i9;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app1 = $__2.j5kw57yef0o4ic;
+  var app2 = $__2.j99xermy73g4id;
+  !function() {
+    app2.appendChild(CS.importTemplate(App, {appid: "state2"}));
+    app1.appendChild(CS.importTemplate(App, {appid: "state1"}));
+  }.call($__0);
+}();
+</script>
+
+</template>
+<template class='OneApp' id='j1tl2ob58pz4ie'>
+<style id='ho01hfnfl4if'> .application { position: fixed !important; } } </style>
+<span class='self' id='j3ez4mzhi8w4ig'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j1tl2ob58pz4ie;
+  var App = window.j93i8ydsgw44h3;
+  var $__3 = window.j1tl2ob58pz4ie;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var self = $__2.j3ez4mzhi8w4ig;
+  !function() {
+    CS.content(self, CS.importTemplate(App));
+  }.call($__0);
+}();
+</script>
+</template>
+<script>"use strict";
+!function(global) {
+  "use strict";
+  function storeChildren(store, childNodes, owner, scripts) {
+    if (!childNodes)
+      return;
+    var $__0 = function(i, l) {
+      var c = childNodes.item(i);
+      var id;
+      if (c.tagName == "NOSCRIPT" && (id = c.getAttribute("data-template-reference"))) {
+        c = global[id];
+      }
+      if (c instanceof HTMLTemplateElement && c.id)
+        store[c.id] = {
+          content: c.content,
+          id: c.id,
+          $__PARENT_INSTANCE__$: store,
+          getAttribute: (function(n) {
+            return c.getAttribute(n);
+          })
+        };
+      else if (c instanceof HTMLScriptElement) {
+        if (c.getAttribute("data-want-template-instance") != null) {
+          c.$__TEMPLATE_INSTANCE__$ = store;
+          scripts.push(c);
+        }
+      } else {
+        if (c.id)
+          store[c.id] = c;
+        storeChildren(store, c.childNodes, c, scripts);
+      }
+    };
+    for (var i = 0,
+        l = childNodes.length; i < l; ++i) {
+      $__0(i, l);
+    }
+  }
+  global.$__IMPORT_TEMPLATE__$ = (function(template, dataset) {
+    var ret = document.importNode(template.content, true);
+    var instance = Object.create(null);
+    var scripts = [];
+    storeChildren(instance, ret.childNodes, ret, scripts);
+    instance.$__TEMPLATE_INSTANCE__$ = template.$__PARENT_INSTANCE__$;
+    instance.$__DATASET__$ = dataset;
+    if (scripts.length) {
+      var s = document.createDocumentFragment();
+      scripts.forEach((function(c) {
+        return s.appendChild(c);
+      }));
+      document.body.appendChild(s);
+    }
+    return ret;
+  });
+  global.$__GET_TEMPLATE_INSTANCE__$ = (function() {
+    var c = document.currentScript;
+    c.parentNode.removeChild(c);
+    var ret = c.$__TEMPLATE_INSTANCE__$;
+    delete c.$__TEMPLATE_INSTANCE__$;
+    return ret;
+  });
+}(typeof window != "undefined" ? window : global);
+</script>
+
+<span id='appHolder'></span>
+<span id='dynamicStyleHolder'></span>
+<script>"use strict";
+window.APP_DEBUG = 0;
+window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
+</script>
+<script>"use strict";
+!function $__1() {
+  var $__0 = window.j9ta5162qib4gy;
+  var App = window.j93i8ydsgw44h3;
+  var TwoApp = window.j9fraslhwmq4i9;
+  var OneApp = window.j1tl2ob58pz4ie;
+  !function() {
+    onAppOrientationLocked((function() {
+      appHolder.innerHTML = (localStorage.getItem("html") || "").replace(/\bscript\b/, "noscript");
+      setInterval((function() {
+        return localStorage.setItem("html", appHolder.innerHTML);
+      }), 1000);
+      console.log("cache html loaded");
+      setTimeout(start, 200);
+    }));
+    function start() {
+      var timer = window.performance || Date;
+      var startTime = timer.now();
+      console.log("started html update");
+      var timeout = 3000;
+      window.APP_TIMEOUT = Date.now() + timeout;
+      setTimeout((function() {
+        if (document.querySelector(".menu"))
+          return;
+        alert("Application timed out");
+      }), timeout);
+      console.log(("loading script in " + (timer.now() - startTime) / 1000 + "s"));
+      var x = new XMLHttpRequest;
+      x.open("get", window.APP_DEBUG ? "js/index.js" : "js/index.min.js", false);
+      x.send();
+      console.log(("script loaded in " + (timer.now() - startTime) / 1000 + "s"));
+      var s = document.createElement("script");
+      s.appendChild(document.createTextNode(("window.SHModules = function () { " + x.response + " }")));
+      document.body.appendChild(s);
+      console.log(("script compiled in " + (timer.now() - startTime) / 1000 + "s"));
+      window.SHModules();
+      console.log(("script run in " + (timer.now() - startTime) / 1000 + "s"));
+      require("webpage");
+      var A = OneApp;
+      var t = CS.importTemplate(A);
+      CS.content(appHolder, t);
+      ra.forceCalculations();
+      console.log(("html updated in " + (timer.now() - startTime) / 1000 + "s"));
+    }
+  }.call($__0);
+}();
+</script>
+
+<style id='j1k0uy75nk04ii'>
+#RELOAD {
+position: fixed;
+left: 0;
+top: 0;
+width: 2cm;
+height: 2cm;
+}
+</style>
+<div style='' id='RELOAD'></div>
+<script>"use strict";
+RELOAD.addEventListener("touchstart", (function() {
+  return window.location.reload();
+}));
+RELOAD.addEventListener("mousedown", (function() {
+  return window.location.reload();
+}));
+</script>
+
+<script>"use strict";
+!function() {
+  var x = new XMLHttpRequest();
+  x.open("POST", "/info?" + encodeURIComponent((screen.width + "x" + screen.height + "x" + (window.devicePixelRatio || "-") + " " + navigator.vendor + " " + navigator.userAgent)));
+  x.send();
+}();
+</script>
+</body>
+</html>
