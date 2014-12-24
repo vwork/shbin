@@ -1,4 +1,6 @@
 #!/bin/sh
 
+sudo -u vadzim ./call_update
+
 cd ./sh
-./run
+./$1
