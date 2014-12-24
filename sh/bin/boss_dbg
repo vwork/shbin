@@ -14706,7 +14706,8 @@ server.on("request", co.func($traceurRuntime.initGeneratorFunction(function $__4
       i,
       $__0,
       $__1,
-      a;
+      a,
+      ret;
   return $traceurRuntime.createGeneratorInstance(function($ctx) {
     while (true)
       switch ($ctx.state) {
@@ -14731,7 +14732,6 @@ server.on("request", co.func($traceurRuntime.initGeneratorFunction(function $__4
               interfaces[f].push(intf.address);
             }));
           }));
-          console.log(interfaces);
           $ctx.state = 23;
           break;
         case 23:
@@ -14773,11 +14773,15 @@ server.on("request", co.func($traceurRuntime.initGeneratorFunction(function $__4
         case 8:
           for ($__0 = i[$traceurRuntime.toProperty(Symbol.iterator)](); !($__1 = $__0.next()).done; ) {
             a = $__1.value;
-            response.answer.push(dns[type]({
-              name: q.name,
-              address: a,
-              ttl: config.TTL
-            }));
+            {
+              ret = dns[type]({
+                name: q.name,
+                address: a,
+                ttl: config.TTL
+              });
+              response.answer.push(ret);
+              console.log(ret);
+            }
           }
           $ctx.state = 17;
           break;
