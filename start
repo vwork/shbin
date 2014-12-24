@@ -1,6 +1,7 @@
 #!/bin/sh
 
-sudo -u vadzim ./call_update
+# sudo -u sh ./call_update
+./call_update
 
 cd ./sh
 ./$1
