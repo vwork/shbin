@@ -22344,7 +22344,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -27441,10 +27441,10 @@ module.exports = Scheduler;
       while (true)
         switch ($ctx.state) {
           case 0:
-            $ctx.pushTry(33, null);
-            $ctx.state = 36;
+            $ctx.pushTry(23, null);
+            $ctx.state = 26;
             break;
-          case 36:
+          case 26:
             $ctx.state = 2;
             return modem.devices.waitForReady(response);
           case 2:
@@ -27455,9 +27455,9 @@ module.exports = Scheduler;
             deviceId = request.query.id;
             device = modem.devices.getState()[deviceId];
             deviceCommand = request.query.cmd;
-            $ctx.state = 26;
+            $ctx.state = 16;
             break;
-          case 26:
+          case 16:
             $ctx.state = (!device) ? 5 : 6;
             break;
           case 5:
@@ -27467,9 +27467,9 @@ module.exports = Scheduler;
           case 6:
             newstate = deviceActions.getNewState(device, deviceCommand);
             commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand);
-            $ctx.state = 28;
+            $ctx.state = 18;
             break;
-          case 28:
+          case 18:
             $ctx.state = (!commands || !commands.length) ? 8 : 9;
             break;
           case 8:
@@ -27480,20 +27480,20 @@ module.exports = Scheduler;
             passedToModem = false;
             my_timestamp = Inc();
             errors = [];
-            $ctx.state = 30;
-            break;
-          case 30:
-            $ctx.pushTry(null, 18);
-            $ctx.state = 20;
-            break;
-          case 20:
+            co.defer((function() {
+              if (!passedToModem && my_timestamp == modem.devices.getState()[deviceId].newstate_timestamp)
+                modem.devices.applyItemChanges(deviceId, {
+                  newstate: null,
+                  newstate_timestamp: null
+                });
+            }));
             modem.devices.applyItemChanges(deviceId, {
               newstate: newstate,
               newstate_timestamp: my_timestamp
             });
-            $ctx.state = 16;
+            $ctx.state = 20;
             break;
-          case 16:
+          case 20:
             $ctx.state = 12;
             return modem.session($traceurRuntime.initGeneratorFunction(function $__140(command) {
               var $__0,
@@ -27596,41 +27596,25 @@ module.exports = Scheduler;
             }));
           case 12:
             $ctx.maybeThrow();
-            $ctx.state = 18;
-            $ctx.finallyFallThrough = 14;
-            break;
-          case 18:
-            $ctx.popTry();
-            $ctx.state = 24;
-            break;
-          case 24:
-            if (!passedToModem && my_timestamp == modem.devices.getState()[deviceId].newstate_timestamp)
-              modem.devices.applyItemChanges(deviceId, {
-                newstate: null,
-                newstate_timestamp: null
-              });
-            $ctx.state = 22;
+            $ctx.state = 14;
             break;
           case 14:
             response.end();
-            $ctx.state = 32;
+            $ctx.state = 22;
             break;
-          case 32:
+          case 22:
             $ctx.popTry();
             $ctx.state = -2;
             break;
-          case 33:
+          case 23:
             $ctx.popTry();
             error = $ctx.storedException;
-            $ctx.state = 39;
+            $ctx.state = 29;
             break;
-          case 39:
+          case 29:
             console.error(error);
             response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end();
             $ctx.state = -2;
-            break;
-          case 22:
-            $ctx.state = $ctx.finallyFallThrough;
             break;
           default:
             return $ctx.end();
