@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+while true;
+do
+	date
+	echo starting boss
+	date >>/tmp/nj.log
+	echo starting boss >>/tmp/nj.log
+	./bin/boss_dbg $1;
+	echo waiting 1 second before restarting...
+	sleep 1
+done
