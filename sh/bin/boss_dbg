@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-global.__UsedScriptIdentifiers__+=',$name,$traceurRuntime,AAAA,APP_DEBUG,APP_TIMEOUT,ARPA,AbstractGuard,Array,BADNAME,BADRESP,Boolean,BufferCursorOverflow,CNAME,CONNREFUSED,Cell,DESTRUCTION,DOMAIN,DONE,Date,EKill,EventEmitter,FAMILY_TO_QTYPE,FORMERR,FRAGMENT,Function,GState,GenericType,Getter,IN,IP6,IPv4,IPv6,ImmutableInterface,Lookup,MX,Map,Math,MemoryStore,ModuleStore,MultiError,MutationObserver,NAME_TO_QCLASS,NAME_TO_QTYPE,NAME_TO_RCODE,NAPTR,NODATA,NODE_DEBUG,NOERROR,NOMEM,NOTFOUND,NOTIMP,NS,Number,OPT,Object,OrderedMap,PATH,PORT,PTR,Promise,QCLASS_TO_NAME,QTYPE_TO_FAMILY,QTYPE_TO_NAME,QUERY_DATA,Question,RCODE_TO_NAME,REFUSED,Range,Reflect,RegExp,Repeat,Request,Resolve,SCHEME,SERVFAIL,SError,SOA,SPF,SRV,Sequence,Set,SpecialRanges,String,Symbol,System,SystemRoot,TCPSocket,TERM,TIMEOUT,TLSA,TTL,TXT,Thread,Type,TypeError,UDPSocket,UID,USER_INFO,VERSION,VError,Vector,WError,WeakMap,WebKitMutationObserver,WinRTError,aa,abs,action,add,addEventListener,additional,address,admin,after,age,all,amd,america,answer,any,apply,applyDiff,applyDiffImm,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,ase_errors,assign,asyncWrap,at,attempts,authority,base_size,be,bind,bindAll,bindKey,blue,body,bound,buf,buff,buffer,bundleStore,byteLength,ca,cache,call,callee,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchMessages,catchThreads,cause,cb,ceil,cell,chain,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,class,clean,clear,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,co,code,collect,com,common,compact,compose,concat,conf,connect,constant,constructor,constructorOpt,consts,contains,copy,count,countBy,create,createCallback,createClass,createGeneratorInstance,createIteratorResultObject,createPrivateName,createServer,createSocket,createStringIterator,createTCPServer,createTextNode,createUDPServer,criteria,currentThread,currentThreadData,curry,data,debounce,debug,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,dest,detach,detect,dgram_type,difference,dirname,do,domain,done,down,drop,each,eachRight,edns,edns_options,edns_version,elements,emit,enabled,encoding,end,ensure_absolute,entries,entries_,env,eof,equal,err,errback,errno,error,escape,evaluate,every,exchange,exec,execute,exit,expiration,exports,extend,fail,family,fill,filter,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,fired,first,flags,flatten,floor,flush,foldl,foldr,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,fourOctet,freeze,fromCharCode,fromJS,func,funcDecomp,funcNames,functions,genericType,get,getModuleImpl,getName,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getResponseHeader,getTime,getUncoatedModule,github,global,gmail,go,gocall,google,gray,greet,grey,groupBy,handle,handleException,handleMessage,handleTimeout,has,hasOwnProperty,hash,head,header,hosts,href,html,html5rocks,httpClient,iana,id,identity,ietf,importFrom,imports,include,index,indexBy,indexOf,info,inherits,init,initGeneratorFunction,initial,inject,input,insert,inspect,interactive,internal,interpolate,intersection,inverse,invert,invoke,io,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isDate,isElement,isEmpty,isEqual,isExtensible,isFinished,isFinite,isFunction,isGetter,isIP,isIPv4,isIPv4MappedAddress,isIPv6,isLiteral,isNaN,isNull,isNumber,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isTTY,isUndefined,isValid,is_absolute,iterator,iteratorFailed,iteratorObject_,join,joinData,js,jse_cause,jse_shortmsg,jse_summary,jst,key,keys,kill,kind,label,last,lastIndex,lastIndexOf,later,leading,len,length,linkName,listen,live,loadedBy,location,lodash,log,longValue,lookup,lu,magenta,makeDiff,makeDiffImm,map,mapValues,map_,maps,match,matchingtype,max,maxCount,maxIndex,maxTicks,maxTime,maxTime1,maxWait,max_keys,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,message,method,methods,mid,min,minTime,minimum,mixin,move,mozilla,name,nameToQtype,name_servers,neroelectronics,networkInterfaces,next,nextTick,noConflict,noTouch,node,nodeType,noop,normalize,notEqual,now,number,object,objectIndex_,observe,octets,ok,omit,on,onClick,onReject_,onResolve_,once,onerror,onload,onmessage,onread,onreadystatechange,ontimeout,onwritten,opcode,open,options,opts,order,org,pairs,parse,parseInt,parseResolv,parser,partial,partialRight,parts,payload,pebbles,performance,pick,platform,pluck,polyfillAll,pop,popTry,port,port1,port2,pos,position,postMessage,pow,preference,preventExtensions,primary,primitiveIndex_,print,printf,priority,process,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,prototype,pull,purge,push,pushTry,pushedA,pushedC,qr,qtypeToName,question,ra,rainbow,random,range,raw,rcode,rd,re,read,readDoubleBE,readDoubleLE,readFile,readFloatBE,readFloatLE,readInt16BE,readInt16LE,readInt32BE,readInt32LE,readInt8,readStream,readUInt16BE,readUInt16LE,readUInt32BE,readUInt32LE,readUInt8,ready,readyState,red,reduce,reduceRight,ref,refresh,regexp,register,registerModule,registerPolyfill,reject,reload,remote,remove,removeDotSegments,removeListener,renderComponentToString,replace,replacement,requestAnimationFrame,require,res1,res2,res3,resolve,resolve4,resolve6,resolveCname,resolveMx,resolveNs,resolveSrv,resolveTlsa,resolveTxt,resolveUrl,response,responseType,rest,result,results,resume,rethrow,retry,retryOnTruncate,returnValue,reverse,reverseIP,root,round,rrtype,runAll,runAllCount,runCount,runInContext,sample,scheduled,scopeid,seal,search_path,second,seek,select,selector,self,send,sent,sentIgnoreThrow,sent_,serial,serve,server,service,set,setImmediate,setTheme,setTimeout,setupGlobals,shift,shuffle,sin,size,sleep,slice,some,sort,sortBy,sortedIndex,source,sourceURL,splice,split,spread,sprintf,srv,stack,start,state,status,statusText,status_,stderr,stdout,stop,store,storedException,str,strict,string,stringIndex_,strip,stripCause,stripColors,stripError,stripStack,styles,stylize,subnetMatch,substring,superCall,superConstructor,superGet,superSet,support,supportsColor,syscall,tail,take,tap,target,tc,tell,template,templateSettings,test,testingPrefix_,themes,then,throttle,throw,tick,timeout,timer_,times,toArray,toByteArray,toIPv4Address,toIPv4MappedAddress,toInteger,toJSON,toLength,toLocaleString,toLowerCase,toNormalizedString,toObject,toProperty,toString,toUint32,toUpperCase,totalTime,trace,traceur,trailing,transform,trap,tryStack_,try_edns,ttl,type,typeDescriptor,uid,unescape,union,uniq,unique,uniqueId,unref,unshift,unwise,unzip,up,updates,url,usage,value,valueOf,value_,values,variable,version,w3,wait,waitForInput,warn,watch,we_cause,weight,where,white,wikipedia,wildcard,window,withMutations,without,wordToNumber,wrap,write,writeDoubleBE,writeDoubleLE,writeFileSync,writeFloatBE,writeFloatLE,writeHead,writeInt16BE,writeInt16LE,writeInt32BE,writeInt32LE,writeInt8,writeUInt16BE,writeUInt16LE,writeUInt32BE,writeUInt32LE,writeUInt8,written,xhr,xor,yellow,yield,zalgo,zebra,zip,zipObject,zone';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
+global.__UsedScriptIdentifiers__+=',$name,$traceurRuntime,AAAA,APP_DEBUG,APP_TIMEOUT,ARPA,AbstractGuard,Array,BADNAME,BADRESP,Boolean,BufferCursorOverflow,CNAME,CONNREFUSED,Cell,DESTRUCTION,DOMAIN,DONE,Date,EKill,EventEmitter,FAMILY_TO_QTYPE,FORMERR,FRAGMENT,Function,GState,GenericType,Getter,IN,IP6,IPv4,IPv6,ImmutableInterface,Lookup,MX,Map,Math,MemoryStore,ModuleStore,MultiError,MutationObserver,NAME_TO_QCLASS,NAME_TO_QTYPE,NAME_TO_RCODE,NAPTR,NODATA,NODE_DEBUG,NOERROR,NOMEM,NOTFOUND,NOTIMP,NS,Number,OPT,Object,OrderedMap,PATH,PORT,PTR,Promise,QCLASS_TO_NAME,QTYPE_TO_FAMILY,QTYPE_TO_NAME,QUERY_DATA,Question,RCODE_TO_NAME,REFUSED,Range,Reflect,RegExp,Repeat,Request,Resolve,SCHEME,SERVFAIL,SError,SOA,SPF,SRV,Sequence,Set,SpecialRanges,String,Symbol,System,SystemRoot,TCPSocket,TERM,TIMEOUT,TLSA,TTL,TXT,Thread,Type,TypeError,UDPSocket,UID,USER_INFO,VERSION,VError,Vector,WError,WeakMap,WebKitMutationObserver,WinRTError,aa,abs,action,add,addEventListener,additional,address,admin,after,age,all,amd,america,answer,any,apply,applyDiff,applyDiffImm,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,ase_errors,assign,asyncWrap,at,attempts,authority,base_size,be,bind,bindAll,bindKey,blue,body,boss,bound,buf,buff,buffer,bundleStore,byteLength,ca,cache,call,callee,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchMessages,catchThreads,cause,cb,ceil,cell,chain,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,class,clean,clear,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,co,code,collect,com,common,compact,compose,concat,conf,connect,constant,constructor,constructorOpt,consts,contains,copy,count,countBy,create,createCallback,createClass,createGeneratorInstance,createIteratorResultObject,createPrivateName,createServer,createSocket,createStringIterator,createTCPServer,createTextNode,createUDPServer,criteria,currentThread,currentThreadData,curry,data,debounce,debug,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,dest,detach,detect,dgram_type,difference,dirname,do,domain,done,down,drop,each,eachRight,edns,edns_options,edns_version,elements,emit,enabled,encoding,end,ensure_absolute,entries,entries_,env,eof,equal,err,errback,errno,error,escape,evaluate,every,exchange,exec,execute,exit,expiration,exports,extend,fail,family,fill,filter,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,fired,first,flags,flatten,floor,flush,foldl,foldr,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,fourOctet,freeze,fromCharCode,fromJS,func,funcDecomp,funcNames,functions,genericType,get,getModuleImpl,getName,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getResponseHeader,getTime,getUncoatedModule,github,global,gmail,go,gocall,google,gray,greet,grey,groupBy,handle,handleException,handleMessage,handleTimeout,has,hasOwnProperty,hash,head,header,hosts,href,html,html5rocks,httpClient,iana,id,identity,ietf,importFrom,imports,include,index,indexBy,indexOf,info,inherits,init,initGeneratorFunction,initial,inject,input,insert,inspect,interactive,internal,interpolate,intersection,inverse,invert,invoke,io,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isDate,isElement,isEmpty,isEqual,isExtensible,isFinished,isFinite,isFunction,isGetter,isIP,isIPv4,isIPv4MappedAddress,isIPv6,isLiteral,isNaN,isNull,isNumber,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isTTY,isUndefined,isValid,is_absolute,iterator,iteratorFailed,iteratorObject_,join,joinData,js,jse_cause,jse_shortmsg,jse_summary,json,jst,key,keys,kill,kind,label,last,lastIndex,lastIndexOf,later,leading,len,length,linkName,listen,live,loadedBy,location,lodash,log,longValue,lookup,lu,magenta,makeDiff,makeDiffImm,map,mapValues,map_,maps,match,matchingtype,max,maxCount,maxIndex,maxTicks,maxTime,maxTime1,maxWait,max_keys,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,message,method,methods,mid,min,minTime,minimum,mixin,move,mozilla,name,nameToQtype,name_servers,neroelectronics,networkInterfaces,next,nextTick,noConflict,noTouch,node,nodeType,noop,normalize,notEqual,now,number,object,objectIndex_,observe,octets,ok,omit,on,onClick,onReject_,onResolve_,once,onerror,onload,onmessage,onread,onreadystatechange,ontimeout,onwritten,opcode,open,options,opts,order,org,pairs,parse,parseInt,parseResolv,parser,partial,partialRight,parts,payload,pebbles,performance,pick,platform,pluck,polyfillAll,pop,popTry,port,port1,port2,pos,position,postMessage,pow,preference,preventExtensions,primary,primitiveIndex_,print,printf,priority,process,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,prototype,pull,purge,push,pushTry,pushedA,pushedC,qr,qtypeToName,question,ra,rainbow,random,range,raw,rcode,rd,re,read,readDoubleBE,readDoubleLE,readFile,readFloatBE,readFloatLE,readInt16BE,readInt16LE,readInt32BE,readInt32LE,readInt8,readStream,readUInt16BE,readUInt16LE,readUInt32BE,readUInt32LE,readUInt8,ready,readyState,red,reduce,reduceRight,ref,refresh,regexp,register,registerModule,registerPolyfill,reject,reload,remote,remove,removeDotSegments,removeListener,renderComponentToString,replace,replacement,requestAnimationFrame,require,res1,res2,res3,resolve,resolve4,resolve6,resolveCname,resolveMx,resolveNs,resolveSrv,resolveTlsa,resolveTxt,resolveUrl,response,responseType,rest,result,results,resume,rethrow,retry,retryOnTruncate,returnValue,reverse,reverseIP,root,round,rrtype,runAll,runAllCount,runCount,runInContext,sample,scheduled,scopeid,seal,search_path,second,seek,select,selector,self,send,sent,sentIgnoreThrow,sent_,serial,serve,server,service,set,setImmediate,setTheme,setTimeout,setupGlobals,shift,shuffle,sin,size,sleep,slice,some,sort,sortBy,sortedIndex,source,sourceURL,splice,split,spread,sprintf,srv,stack,start,state,status,statusText,status_,stderr,stdout,stop,store,storedException,str,strict,string,stringIndex_,strip,stripCause,stripColors,stripError,stripStack,styles,stylize,subnetMatch,substring,superCall,superConstructor,superGet,superSet,support,supportsColor,syscall,tail,take,tap,target,tc,tell,template,templateSettings,test,testingPrefix_,themes,then,throttle,throw,tick,timeout,timer_,times,toArray,toByteArray,toIPv4Address,toIPv4MappedAddress,toInteger,toJSON,toLength,toLocaleString,toLowerCase,toNormalizedString,toObject,toProperty,toString,toUint32,toUpperCase,totalTime,trace,traceur,trailing,transform,trap,tryStack_,try_edns,ttl,type,typeDescriptor,uid,unescape,union,uniq,unique,uniqueId,unref,unshift,unwise,unzip,up,updates,url,usage,value,valueOf,value_,values,variable,version,w3,wait,waitForInput,warn,watch,we_cause,weight,where,white,wikipedia,wildcard,window,withMutations,without,wordToNumber,wrap,write,writeDoubleBE,writeDoubleLE,writeFileSync,writeFloatBE,writeFloatLE,writeHead,writeInt16BE,writeInt16LE,writeInt32BE,writeInt32LE,writeInt8,writeUInt16BE,writeUInt16LE,writeUInt32BE,writeUInt32LE,writeUInt8,written,xhr,xor,yellow,yield,zalgo,zebra,zip,zipObject,zone';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -14664,9 +14664,21 @@ var lodash = require("lodash");
 var os = require("os");
 var co = require("co");
 var dns = require("native-dns");
-var config = {
+var configName = process.argv[2] || __dirname + "/../config.boss.json";
+var config;
+try {
+  config = require(configName);
+} catch (_) {}
+config = lodash.merge({
   TTL: 180,
-  re: /\.neroelectronics\.(by|ru|com|vadzim\.info)$/
+  re: "(.*)\.(?:sh|dom|home)\.neroelectronics\.(?:by|ru|com|vadzim\.info)"
+}, config);
+config.re = new RegExp(("^" + config.re + "$"));
+var DB = {
+  work: {},
+  m1: {},
+  m2: {},
+  m3: {}
 };
 var server = dns.createServer();
 var families = {
@@ -14689,6 +14701,7 @@ server.on("request", co.func($traceurRuntime.initGeneratorFunction(function $__4
       $__2,
       $__3,
       q,
+      name,
       type,
       i,
       $__0,
@@ -14719,31 +14732,45 @@ server.on("request", co.func($traceurRuntime.initGeneratorFunction(function $__4
             }));
           }));
           console.log(interfaces);
-          $ctx.state = 16;
+          $ctx.state = 23;
           break;
-        case 16:
+        case 23:
           $__2 = request.question[$traceurRuntime.toProperty(Symbol.iterator)]();
-          $ctx.state = 10;
+          $ctx.state = 17;
           break;
-        case 10:
-          $ctx.state = (!($__3 = $__2.next()).done) ? 11 : -2;
+        case 17:
+          $ctx.state = (!($__3 = $__2.next()).done) ? 18 : -2;
+          break;
+        case 18:
+          q = $__3.value;
+          $ctx.state = 19;
+          break;
+        case 19:
+          name = config.re.exec(q.name);
+          $ctx.state = 11;
           break;
         case 11:
-          q = $__3.value;
-          $ctx.state = 12;
+          $ctx.state = (!name) ? 17 : 5;
           break;
-        case 12:
-          $ctx.state = (!config.re.test(q.name)) ? 10 : 2;
+        case 5:
+          name = name[1];
+          $ctx.state = 13;
+          break;
+        case 13:
+          $ctx.state = (!DB.hasOwnProperty(name)) ? 1 : 2;
+          break;
+        case 1:
+          $ctx.state = -2;
           break;
         case 2:
           type = dns.consts.QTYPE_TO_NAME[q.type] || q.type;
           i = interfaces[type];
-          $ctx.state = 8;
+          $ctx.state = 15;
+          break;
+        case 15:
+          $ctx.state = (!i) ? 17 : 8;
           break;
         case 8:
-          $ctx.state = (!i) ? 10 : 5;
-          break;
-        case 5:
           for ($__0 = i[$traceurRuntime.toProperty(Symbol.iterator)](); !($__1 = $__0.next()).done; ) {
             a = $__1.value;
             response.answer.push(dns[type]({
@@ -14752,7 +14779,7 @@ server.on("request", co.func($traceurRuntime.initGeneratorFunction(function $__4
               ttl: config.TTL
             }));
           }
-          $ctx.state = 10;
+          $ctx.state = 17;
           break;
         default:
           return $ctx.end();
