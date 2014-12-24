@@ -22344,7 +22344,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -27441,10 +27441,16 @@ module.exports = Scheduler;
       while (true)
         switch ($ctx.state) {
           case 0:
-            $ctx.pushTry(23, null);
-            $ctx.state = 26;
+            co.defer((function() {
+              return response.end();
+            }));
+            $ctx.state = 31;
             break;
-          case 26:
+          case 31:
+            $ctx.pushTry(21, null);
+            $ctx.state = 24;
+            break;
+          case 24:
             $ctx.state = 2;
             return modem.devices.waitForReady(response);
           case 2:
@@ -27599,21 +27605,17 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            response.end();
-            $ctx.state = 22;
-            break;
-          case 22:
             $ctx.popTry();
             $ctx.state = -2;
             break;
-          case 23:
+          case 21:
             $ctx.popTry();
             error = $ctx.storedException;
-            $ctx.state = 29;
+            $ctx.state = 27;
             break;
-          case 29:
+          case 27:
             console.error(error);
-            response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end();
+            response.status(HTTPStatus.INTERNAL_SERVER_ERROR);
             $ctx.state = -2;
             break;
           default:
