@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,APP_DEBUG,APP_TIMEOUT,AbstractGuard,ActiveXObject,Array,BAD_REQUEST,Boolean,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,Cell,DOMAIN,DONE,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Getter,Glob,GlobSync,HTTPStatus,INTERNAL_SERVER_ERROR,ImmutableInterface,Inf,Init_Device_Mode,JSONCookie,JSONCookies,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,Type,TypeError,UID,USER_INFO,UTC,VERSION,Vector,WeakMap,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyDiffImm,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cell,cfg,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,co,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,common,compact,complete,compose,concat,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,dest,destroy,detach,detect,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,elements,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,encoding,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,fd,field,filter,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,flush,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,fromJS,fs,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getName,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getResponseHeader,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hour,href,hrtime,html,html5rocks,http,httpClient,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,importFrom,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interpolate,intersection,inverse,invert,invoke,io,ip,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isGetter,isLiteral,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,join,joinData,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,later,leading,leadspaces,length,level,line,lineBreaks,lines,linkName,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,lodash,log,long,lstat,lstatSync,ltrim,lu,magenta,make,makeAbs,makeDiff,makeDiffImm,makeRe,map,mapValues,map_,mapping,maps,mark,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxCount,maxIndex,maxLength,maxTicks,maxTime,maxTime1,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minTime,minimatch,minute,mixin,mkdir,mm,model,modem,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,net,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,noTouch,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,omit,on,onClick,onReject_,onResolve_,once,onerror,onload,onmessage,onread,onreadystatechange,ontimeout,onwritten,open,options,org,originalUrl,ownProp,ownerID,pairs,parallel,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pattern,pause,paused,pebbles,performance,pick,pipe,places,platform,pluck,polling,polyfillAll,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,proto,protocolOK,prototype,pull,push,pushAll,pushTry,pushedA,pushedC,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,ra,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,renderComponentToString,replace,replaceAll,req,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,response,responseText,responseType,rest,result,resume,rethrow,retryInterval,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,row,rowDelimiter,rtrim,runAll,runAllCount,runCount,runInContext,running,sample,save,savedUID,scheduled,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,session,set,setImmediate,setIn,setLength,setName,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,shift,shuffle,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,splice,split,spread,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,statusText,status_,stderr,stdout,stop,storedException,str,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,tick,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLocaleString,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,totalTime,trace,traceDeprecation,traceur,trailing,transform,trap,trim,trimRight,tryStack_,txt,type,typeDescriptor,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,updates,url,use,useColors,userAgent,utf8chr,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,warn,wasAltered,watch,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,writable,write,writeFile,writeFileSync,writeHead,written,xhr,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
+global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,APP_DEBUG,APP_TIMEOUT,AbstractGuard,ActiveXObject,Array,BAD_REQUEST,Boolean,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,Cell,DOMAIN,DONE,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Getter,Glob,GlobSync,HTTPStatus,INTERNAL_SERVER_ERROR,ImmutableInterface,Inf,Init_Device_Mode,JSONCookie,JSONCookies,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,Type,TypeError,UID,USER_INFO,UTC,VERSION,Vector,WeakMap,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyDiffImm,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cell,cfg,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,co,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,common,compact,complete,compose,concat,conf,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,dest,destroy,detach,detect,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,elements,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,encoding,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,fd,field,filter,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,flush,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,fromJS,fs,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getName,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getResponseHeader,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hour,href,hrtime,html,html5rocks,http,httpClient,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,importFrom,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interpolate,intersection,inverse,invert,invoke,io,ip,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isGetter,isLiteral,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,join,joinData,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,later,leading,leadspaces,length,level,line,lineBreaks,lines,linkName,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,lodash,log,long,lstat,lstatSync,ltrim,lu,magenta,make,makeAbs,makeDiff,makeDiffImm,makeRe,map,mapValues,map_,mapping,maps,mark,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxCount,maxIndex,maxLength,maxTicks,maxTime,maxTime1,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minTime,minimatch,minute,mixin,mkdir,mm,model,modem,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,neroelectronics,net,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,noTouch,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,omit,on,onClick,onReject_,onResolve_,once,onerror,onload,onmessage,onread,onreadystatechange,ontimeout,onwritten,open,options,org,originalUrl,ownProp,ownerID,pairs,parallel,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pattern,pause,paused,pebbles,performance,pick,pipe,places,platform,pluck,polling,polyfillAll,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,proto,protocolOK,prototype,pull,push,pushAll,pushTry,pushedA,pushedC,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,ra,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,renderComponentToString,replace,replaceAll,req,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,response,responseText,responseType,rest,result,resume,rethrow,retryInterval,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,row,rowDelimiter,rtrim,runAll,runAllCount,runCount,runInContext,running,sample,save,savedUID,scheduled,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,session,set,setImmediate,setIn,setLength,setName,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,sh,shift,shuffle,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,splice,split,spread,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,statusText,status_,stderr,stdout,stop,storedException,str,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,tick,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLocaleString,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,totalTime,trace,traceDeprecation,traceur,trailing,transform,trap,trim,trimRight,tryStack_,txt,type,typeDescriptor,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,updates,url,use,useColors,userAgent,utf8chr,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,warn,wasAltered,watch,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,writable,write,writeFile,writeFileSync,writeHead,written,xhr,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -16945,21 +16945,6 @@ function listener(event, done) {
     }
     return argument;
   }
-  var path = typeof require !== 'undefined' && require('path');
-  function relativeRequire(callerPath, requiredPath) {
-    function isDirectory(path) {
-      return (path.slice(-1) === '/');
-    }
-    function isAbsolute(path) {
-      return (path.charAt(0) === '/');
-    }
-    function isRelative(path) {
-      return (path.charAt(0) === '.');
-    }
-    if (isDirectory(requiredPath) || isAbsolute(requiredPath))
-      return;
-    return isRelative(requiredPath) ? require(path.resolve(path.dirname(callerPath), requiredPath)) : require(requiredPath);
-  }
   function polyfillSymbol(global, Symbol) {
     if (!global.Symbol) {
       global.Symbol = Symbol;
@@ -16990,16 +16975,16 @@ function listener(event, done) {
     isSymbolString: isSymbolString,
     keys: $keys,
     setupGlobals: setupGlobals,
-    require: relativeRequire,
     toObject: toObject,
     toProperty: toProperty,
     typeof: typeOf
   };
-})(typeof global !== 'undefined' ? global : this);
+})(typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 (function() {
   'use strict';
-  var path = typeof require !== 'undefined' && require('path');
+  var path;
   function relativeRequire(callerPath, requiredPath) {
+    path = path || typeof require !== 'undefined' && require('path');
     function isDirectory(path) {
       return path.slice(-1) === '/';
     }
@@ -17139,6 +17124,9 @@ function listener(event, done) {
 })();
 (function() {
   'use strict';
+  if (typeof $traceurRuntime !== 'object') {
+    throw new Error('traceur runtime not found.');
+  }
   var createPrivateName = $traceurRuntime.createPrivateName;
   var $defineProperties = $traceurRuntime.defineProperties;
   var $defineProperty = $traceurRuntime.defineProperty;
@@ -17500,11 +17488,30 @@ function listener(event, done) {
     this.argumentTypes = argumentTypes;
   };
   ($traceurRuntime.createClass)(GenericType, {}, {});
+  var typeRegister = Object.create(null);
   function genericType(type) {
     for (var argumentTypes = [],
         $__1 = 1; $__1 < arguments.length; $__1++)
       argumentTypes[$__1 - 1] = arguments[$__1];
-    return new GenericType(type, argumentTypes);
+    var typeMap = typeRegister;
+    var key = $traceurRuntime.getOwnHashObject(type).hash;
+    if (!typeMap[key]) {
+      typeMap[key] = Object.create(null);
+    }
+    typeMap = typeMap[key];
+    for (var i = 0; i < argumentTypes.length - 1; i++) {
+      key = $traceurRuntime.getOwnHashObject(argumentTypes[i]).hash;
+      if (!typeMap[key]) {
+        typeMap[key] = Object.create(null);
+      }
+      typeMap = typeMap[key];
+    }
+    var tail = argumentTypes[argumentTypes.length - 1];
+    key = $traceurRuntime.getOwnHashObject(tail).hash;
+    if (!typeMap[key]) {
+      typeMap[key] = new GenericType(type, argumentTypes);
+    }
+    return typeMap[key];
   }
   $traceurRuntime.GenericType = GenericType;
   $traceurRuntime.genericType = genericType;
@@ -17560,6 +17567,33 @@ function listener(event, done) {
       return stack.join('\n');
     }
   }, {}, Error);
+  function beforeLines(lines, number) {
+    var result = [];
+    var first = number - 3;
+    if (first < 0)
+      first = 0;
+    for (var i = first; i < number; i++) {
+      result.push(lines[i]);
+    }
+    return result;
+  }
+  function afterLines(lines, number) {
+    var last = number + 1;
+    if (last > lines.length - 1)
+      last = lines.length - 1;
+    var result = [];
+    for (var i = number; i <= last; i++) {
+      result.push(lines[i]);
+    }
+    return result;
+  }
+  function columnSpacing(columns) {
+    var result = '';
+    for (var i = 0; i < columns - 1; i++) {
+      result += '-';
+    }
+    return result;
+  }
   var UncoatedModuleInstantiator = function UncoatedModuleInstantiator(url, func) {
     $traceurRuntime.superConstructor($UncoatedModuleInstantiator).call(this, url, null);
     this.func = func;
@@ -17569,11 +17603,34 @@ function listener(event, done) {
       if (this.value_)
         return this.value_;
       try {
-        return this.value_ = this.func.call(global);
+        var relativeRequire;
+        if (typeof $traceurRuntime !== undefined) {
+          relativeRequire = $traceurRuntime.require.bind(null, this.url);
+        }
+        return this.value_ = this.func.call(global, relativeRequire);
       } catch (ex) {
         if (ex instanceof ModuleEvaluationError) {
           ex.loadedBy(this.url);
           throw ex;
+        }
+        if (ex.stack) {
+          var lines = this.func.toString().split('\n');
+          var evaled = [];
+          ex.stack.split('\n').some(function(frame) {
+            if (frame.indexOf('UncoatedModuleInstantiator.getUncoatedModule') > 0)
+              return true;
+            var m = /(at\s[^\s]*\s).*>:(\d*):(\d*)\)/.exec(frame);
+            if (m) {
+              var line = parseInt(m[2], 10);
+              evaled = evaled.concat(beforeLines(lines, line));
+              evaled.push(columnSpacing(m[3]) + '^');
+              evaled = evaled.concat(afterLines(lines, line));
+              evaled.push('= = = = = = = = =');
+            } else {
+              evaled.push(frame);
+            }
+          });
+          ex.stack = evaled.join('\n');
         }
         throw new ModuleEvaluationError(this.url, ex);
       }
@@ -17614,8 +17671,8 @@ function listener(event, done) {
   }
   var ModuleStore = {
     normalize: function(name, refererName, refererAddress) {
-      if (typeof name !== "string")
-        throw new TypeError("module name must be a string, not " + typeof name);
+      if (typeof name !== 'string')
+        throw new TypeError('module name must be a string, not ' + typeof name);
       if (isAbsolute(name))
         return canonicalizeUrl(name);
       if (/[^\.]\/\.\.\//.test(name)) {
@@ -17648,7 +17705,7 @@ function listener(event, done) {
     set baseURL(v) {
       baseURL = String(v);
     },
-    registerModule: function(name, func) {
+    registerModule: function(name, deps, func) {
       var normalizedName = ModuleStore.normalize(name);
       if (moduleInstantiators[normalizedName])
         throw new Error('duplicate module named ' + normalizedName);
@@ -17657,7 +17714,7 @@ function listener(event, done) {
     bundleStore: Object.create(null),
     register: function(name, deps, func) {
       if (!deps || !deps.length && !func.length) {
-        this.registerModule(name, func);
+        this.registerModule(name, deps, func);
       } else {
         this.bundleStore[name] = {
           deps: deps,
@@ -17691,7 +17748,9 @@ function listener(event, done) {
       return this.get(this.testingPrefix_ + name);
     }
   };
-  ModuleStore.set('@traceur/src/runtime/ModuleStore', new Module({ModuleStore: ModuleStore}));
+  var moduleStoreModule = new Module({ModuleStore: ModuleStore});
+  ModuleStore.set('@traceur/src/runtime/ModuleStore', moduleStoreModule);
+  ModuleStore.set('@traceur/src/runtime/ModuleStore.js', moduleStoreModule);
   var setupGlobals = $traceurRuntime.setupGlobals;
   $traceurRuntime.setupGlobals = function(global) {
     setupGlobals(global);
@@ -17699,6 +17758,7 @@ function listener(event, done) {
   $traceurRuntime.ModuleStore = ModuleStore;
   global.System = {
     register: ModuleStore.register.bind(ModuleStore),
+    registerModule: ModuleStore.registerModule.bind(ModuleStore),
     get: ModuleStore.get,
     set: ModuleStore.set,
     normalize: ModuleStore.normalize
@@ -17707,13 +17767,10 @@ function listener(event, done) {
     var instantiator = getUncoatedModuleInstantiator(name);
     return instantiator && instantiator.getUncoatedModule();
   };
-})(typeof global !== 'undefined' ? global : this);
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/utils", [], function() {
+})(typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/utils";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/utils", path);
-  }
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/utils.js";
   var $ceil = Math.ceil;
   var $floor = Math.floor;
   var $isFinite = isFinite;
@@ -17871,13 +17928,10 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/utils", [], functi
     }
   };
 });
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Map", [], function() {
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/Map.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/Map";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/Map", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/Map.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       isObject = $__0.isObject,
       maybeAddIterator = $__0.maybeAddIterator,
       registerPolyfill = $__0.registerPolyfill;
@@ -18139,18 +18193,15 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Map", [], function
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Map" + '');
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Set", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Map.js" + '');
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/Set.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/Set";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/Set", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/Set.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       isObject = $__0.isObject,
       maybeAddIterator = $__0.maybeAddIterator,
       registerPolyfill = $__0.registerPolyfill;
-  var Map = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Map").Map;
+  var Map = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Map.js").Map;
   var getOwnHashObject = $traceurRuntime.getOwnHashObject;
   var $hasOwnProperty = Object.prototype.hasOwnProperty;
   function initSet(set) {
@@ -18295,13 +18346,10 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Set", [], function
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Set" + '');
-System.register("traceur-runtime@0.0.74/node_modules/rsvp/lib/rsvp/asap", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Set.js" + '');
+System.registerModule("traceur-runtime@0.0.79/node_modules/rsvp/lib/rsvp/asap.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/node_modules/rsvp/lib/rsvp/asap";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/node_modules/rsvp/lib/rsvp/asap", path);
-  }
+  var __moduleName = "traceur-runtime@0.0.79/node_modules/rsvp/lib/rsvp/asap.js";
   var len = 0;
   function asap(callback, arg) {
     queue[len] = callback;
@@ -18366,14 +18414,11 @@ System.register("traceur-runtime@0.0.74/node_modules/rsvp/lib/rsvp/asap", [], fu
       return $__default;
     }};
 });
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Promise", [], function() {
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/Promise.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/Promise";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/Promise", path);
-  }
-  var async = System.get("traceur-runtime@0.0.74/node_modules/rsvp/lib/rsvp/asap").default;
-  var registerPolyfill = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils").registerPolyfill;
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/Promise.js";
+  var async = System.get("traceur-runtime@0.0.79/node_modules/rsvp/lib/rsvp/asap.js").default;
+  var registerPolyfill = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js").registerPolyfill;
   var promiseRaw = {};
   function isPromise(x) {
     return x && typeof x === 'object' && x.status_ !== undefined;
@@ -18610,15 +18655,12 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Promise", [], func
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Promise" + '');
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/StringIterator", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Promise.js" + '');
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/StringIterator.js", [], function() {
   "use strict";
   var $__2;
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/StringIterator";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/StringIterator", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/StringIterator.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       createIteratorResultObject = $__0.createIteratorResultObject,
       isObject = $__0.isObject;
   var toProperty = $traceurRuntime.toProperty;
@@ -18679,14 +18721,11 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/StringIterator", [
       return createStringIterator;
     }};
 });
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/String", [], function() {
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/String.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/String";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/String", path);
-  }
-  var createStringIterator = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/StringIterator").createStringIterator;
-  var $__1 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/String.js";
+  var createStringIterator = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/StringIterator.js").createStringIterator;
+  var $__1 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       maybeAddFunctions = $__1.maybeAddFunctions,
       maybeAddIterator = $__1.maybeAddIterator,
       registerPolyfill = $__1.registerPolyfill;
@@ -18734,20 +18773,26 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/String", [], funct
     }
     return $lastIndexOf.call(string, searchString, start) == start;
   }
-  function contains(search) {
+  function includes(search) {
     if (this == null) {
       throw TypeError();
     }
     var string = String(this);
+    if (search && $toString.call(search) == '[object RegExp]') {
+      throw TypeError();
+    }
     var stringLength = string.length;
     var searchString = String(search);
     var searchLength = searchString.length;
     var position = arguments.length > 1 ? arguments[1] : undefined;
     var pos = position ? Number(position) : 0;
-    if (isNaN(pos)) {
+    if (pos != pos) {
       pos = 0;
     }
     var start = Math.min(Math.max(pos, 0), stringLength);
+    if (searchLength + start > stringLength) {
+      return false;
+    }
     return $indexOf.call(string, searchString, pos) != -1;
   }
   function repeat(count) {
@@ -18841,7 +18886,7 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/String", [], funct
   }
   function polyfillString(global) {
     var String = global.String;
-    maybeAddFunctions(String.prototype, ['codePointAt', codePointAt, 'contains', contains, 'endsWith', endsWith, 'startsWith', startsWith, 'repeat', repeat]);
+    maybeAddFunctions(String.prototype, ['codePointAt', codePointAt, 'endsWith', endsWith, 'includes', includes, 'repeat', repeat, 'startsWith', startsWith]);
     maybeAddFunctions(String, ['fromCodePoint', fromCodePoint, 'raw', raw]);
     maybeAddIterator(String.prototype, stringPrototypeIterator, Symbol);
   }
@@ -18853,8 +18898,8 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/String", [], funct
     get endsWith() {
       return endsWith;
     },
-    get contains() {
-      return contains;
+    get includes() {
+      return includes;
     },
     get repeat() {
       return repeat;
@@ -18876,15 +18921,12 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/String", [], funct
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/String" + '');
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/ArrayIterator", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/String.js" + '');
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/ArrayIterator.js", [], function() {
   "use strict";
   var $__2;
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/ArrayIterator";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/ArrayIterator", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/ArrayIterator.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       toObject = $__0.toObject,
       toUint32 = $__0.toUint32,
       createIteratorResultObject = $__0.createIteratorResultObject;
@@ -18953,17 +18995,14 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/ArrayIterator", []
     }
   };
 });
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Array", [], function() {
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/Array.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/Array";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/Array", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/ArrayIterator"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/Array.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/ArrayIterator.js"),
       entries = $__0.entries,
       keys = $__0.keys,
       values = $__0.values;
-  var $__1 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var $__1 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       checkIterable = $__1.checkIterable,
       isCallable = $__1.isCallable,
       isConstructor = $__1.isConstructor,
@@ -19100,14 +19139,11 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Array", [], functi
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Array" + '');
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Object", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Array.js" + '');
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/Object.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/Object";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/Object", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/Object.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       maybeAddFunctions = $__0.maybeAddFunctions,
       registerPolyfill = $__0.registerPolyfill;
   var $__1 = $traceurRuntime,
@@ -19170,14 +19206,11 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Object", [], funct
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Object" + '');
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Number", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Object.js" + '');
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/Number.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/Number";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/Number", path);
-  }
-  var $__0 = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils"),
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/Number.js";
+  var $__0 = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js"),
       isNumber = $__0.isNumber,
       maybeAddConsts = $__0.maybeAddConsts,
       maybeAddFunctions = $__0.maybeAddFunctions,
@@ -19241,15 +19274,12 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/Number", [], funct
     }
   };
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/Number" + '');
-System.register("traceur-runtime@0.0.74/src/runtime/polyfills/polyfills", [], function() {
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/Number.js" + '');
+System.registerModule("traceur-runtime@0.0.79/src/runtime/polyfills/polyfills.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.74/src/runtime/polyfills/polyfills";
-  function require(path) {
-    return $traceurRuntime.require("traceur-runtime@0.0.74/src/runtime/polyfills/polyfills", path);
-  }
-  var polyfillAll = System.get("traceur-runtime@0.0.74/src/runtime/polyfills/utils").polyfillAll;
-  polyfillAll(this);
+  var __moduleName = "traceur-runtime@0.0.79/src/runtime/polyfills/polyfills.js";
+  var polyfillAll = System.get("traceur-runtime@0.0.79/src/runtime/polyfills/utils.js").polyfillAll;
+  polyfillAll(Reflect.global);
   var setupGlobals = $traceurRuntime.setupGlobals;
   $traceurRuntime.setupGlobals = function(global) {
     setupGlobals(global);
@@ -19257,7 +19287,7 @@ System.register("traceur-runtime@0.0.74/src/runtime/polyfills/polyfills", [], fu
   };
   return {};
 });
-System.get("traceur-runtime@0.0.74/src/runtime/polyfills/polyfills" + '');
+System.get("traceur-runtime@0.0.79/src/runtime/polyfills/polyfills.js" + '');
 
 },{"path":false}],"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js":[function(require,module,exports){
 // Generated by CoffeeScript 1.7.1
@@ -21129,9 +21159,9 @@ var path = require("path");
 var Immutable = require("immutable");
 var MAX_CACHE_SIZE = 10000;
 var SLEEP_BETWEEN_SAVES = 300;
-var mkdir = co.node(fs.mkdir);
-var writeFile = co.node(fs.writeFile);
-var readFile = co.node(fs.readFile);
+var mkdir = co.cb(fs.mkdir);
+var writeFile = co.cb(fs.writeFile);
+var readFile = co.cb(fs.readFile);
 var JSONservice = function JSONservice(file, template) {
   var $__0 = this;
   var M = ra.clean({
@@ -21441,7 +21471,7 @@ function isDataLongerThan(maxLength, data) {
 }
 
 //# sourceMappingURL=JSONservice.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/JSONservice.js
       } )
     }()
 
@@ -21559,7 +21589,7 @@ function createCommandSequence(group, deviceType, action) {
 exports.createCommandSequence = createCommandSequence;
 
 //# sourceMappingURL=actionToCommands.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/actionToCommands.js
       } )
     }()
 
@@ -21633,36 +21663,20 @@ exports.func = (function(fun) {
     return new Thread(fun.apply(this, arguments));
   };
 });
-var laterPromise = (function(cb) {
-  return new Promise((function(resolve, reject) {
-    return later.then((function() {
-      return cb(resolve, reject);
-    }));
-  }));
-});
-exports.node = (function(funWithCB) {
-  return function() {
-    for (var args = [],
-        $__4 = 0; $__4 < arguments.length; $__4++)
-      args[$__4] = arguments[$__4];
-    var $__0 = this;
-    return laterPromise((function(resolve, reject) {
-      args.push((function(error, value) {
-        return error ? reject(error) : resolve(value);
-      }));
-      funWithCB.apply($__0, args);
-    }));
-  };
-});
 exports.cb = (function(funWithCB) {
   return function() {
     for (var args = [],
         $__4 = 0; $__4 < arguments.length; $__4++)
       args[$__4] = arguments[$__4];
     var $__0 = this;
-    return laterPromise((function(resolve) {
-      args.push(resolve);
-      funWithCB.apply($__0, args);
+    return new Promise((function(resolve, reject) {
+      var $__5;
+      return ($__5 = funWithCB).call.apply($__5, $traceurRuntime.spread([$__0], args, [(function(error, value) {
+        if (error != null)
+          reject(error);
+        else
+          resolve(value);
+      })]));
     }));
   };
 });
@@ -21956,9 +21970,9 @@ var Thread = function Thread(iterator) {
       } else if (!v.value)
         exports.yield.then(step.next);
       else if (v.value.then) {
-        v = v.value.then(step.next, step.fail);
-        if (v && v.kill)
-          this._current = v;
+        var p = v.value.then(step.next, step.fail);
+        if (p && p.kill)
+          this._current = p;
       } else if (v.value.next) {
         this._stack.push(this._iterator);
         this._iterator = new IteratorProxy(v.value);
@@ -22013,7 +22027,7 @@ exports.currentThread = (new Thread({next: function() {
 exports.global = exports.currentThread._global;
 
 //# sourceMappingURL=co.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/co.js
       } )
     }()
 
@@ -22093,7 +22107,7 @@ function readCSV(text) {
     while (true)
       switch ($ctx.state) {
         case 0:
-          $__3 = co.node;
+          $__3 = co.cb;
           $__4 = csv.parse;
           $__5 = $__3.call(co, $__4);
           $__6 = $__5(text, {});
@@ -22267,7 +22281,7 @@ function parseArrays(csv) {
 }
 
 //# sourceMappingURL=csvConfig.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/csvConfig.js
       } )
     }()
 
@@ -22333,12 +22347,12 @@ function getNewState(device, action) {
 exports.getNewState = getNewState;
 
 //# sourceMappingURL=deviceActions.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/deviceActions.js
       } )
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -22476,7 +22490,7 @@ var httpClient = {
 module.exports = httpClient;
 
 //# sourceMappingURL=httpClient.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/httpClient.js
       } )
     }()
 
@@ -22522,7 +22536,7 @@ module.exports = (function() {
 });
 
 //# sourceMappingURL=inc.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/inc.js
       } )
     }()
 
@@ -22561,7 +22575,7 @@ module.exports = (function() {
 module.exports = new (require("scheduler"))();
 
 //# sourceMappingURL=later.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/later.js
       } )
     }()
 
@@ -23506,7 +23520,7 @@ var lu = module.exports = {
 };
 
 //# sourceMappingURL=localUtils.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/localUtils.js
       } )
     }()
 
@@ -24528,7 +24542,7 @@ function compose(t1, t2) {
 }();
 
 //# sourceMappingURL=modem.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/modem.js
       } )
     }()
 
@@ -24693,7 +24707,7 @@ module.exports = {
 };
 
 //# sourceMappingURL=modemcrc.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/modemcrc.js
       } )
     }()
 
@@ -24734,8 +24748,8 @@ var stream = require("stream");
 var constants = require("constants");
 var co = require("co");
 var lodash = require("lodash");
-var cowrite = co.node(fs.write);
-var coread = co.node(fs.read);
+var cowrite = co.cb(fs.write);
+var coread = co.cb(fs.read);
 var PingPong = function PingPong(options) {
   $traceurRuntime.superConstructor($PingPong).call(this);
   if (options == null)
@@ -24846,7 +24860,7 @@ var $PingPong = PingPong;
 module.exports = PingPong;
 
 //# sourceMappingURL=pingpong.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/pingpong.js
       } )
     }()
 
@@ -24945,116 +24959,9 @@ function initImmutableIterators() {
   it(m.keys().constructor, indexedIterator);
   it(Immutable.Sequence(2, 3, 4).constructor, indexedIterator);
 }
-global.window && (global.Promise = (function() {
-  var Promise = function Promise(callback) {
-    var _onresolve = [];
-    var _onreject = [];
-    var _then = (function(onresolve, onreject) {
-      _onresolve.push(onresolve);
-      _onreject.push(onreject);
-    });
-    var resolve = (function(data) {
-      if (!_onresolve)
-        return;
-      _then = (function(onresolve, onreject) {
-        return process.nextTick((function() {
-          return onresolve(data);
-        }));
-      });
-      _onresolve.forEach((function(onresolve) {
-        return _then(onresolve, null);
-      }));
-      _onresolve = null;
-      _onreject = null;
-    });
-    var reject = (function(reason) {
-      if (!_onresolve)
-        return;
-      _then = (function(onresolve, onreject) {
-        return process.nextTick((function() {
-          return onreject(reason);
-        }));
-      });
-      _onreject.forEach((function(onreject) {
-        return _then(null, onreject);
-      }));
-      _onresolve = null;
-      _onreject = null;
-    });
-    this.then = (function(onresolve, onreject) {
-      return new Promise((function(resolve, reject) {
-        var compose = (function(transformer, saver) {
-          return !transformer ? saver : (function(data) {
-            try {
-              resolve(transformer(data));
-            } catch (error) {
-              reject(error);
-            }
-          });
-        });
-        _then(compose(onresolve, resolve), compose(onreject, reject));
-      }));
-    });
-    try {
-      callback(resolve, reject);
-    } catch (error) {
-      reject(error);
-    }
-  };
-  return ($traceurRuntime.createClass)(Promise, {catch: function(onreject) {
-      return this.then(null, onreject);
-    }}, {
-    resolve: function(data) {
-      return new Promise((function(resolve) {
-        return resolve(data);
-      }));
-    },
-    reject: function(reason) {
-      return new Promise((function(resolve, reject) {
-        return reject(reason);
-      }));
-    },
-    all: function(iterable) {
-      var ret = [];
-      for (var $__2 = iterable[$traceurRuntime.toProperty(Symbol.iterator)](),
-          $__3; !($__3 = $__2.next()).done; ) {
-        var p = $__3.value;
-        ret.push(p);
-      }
-      return new Promise((function(resolve, reject) {
-        var n = ret.length + 1;
-        var dec = (function() {
-          return !--n && ret && resolve(ret);
-        });
-        var onreject = (function(reason) {
-          ret = null;
-          resolve = null;
-          reject(reason);
-        });
-        ret.forEach((function(p, i) {
-          return p.then((function(data) {
-            if (ret)
-              ret[i] = data;
-            dec();
-          }), onreject);
-        }));
-        dec();
-      }));
-    },
-    race: function(iterable) {
-      return new Promise((function(resolve, reject) {
-        for (var $__2 = iterable[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__3; !($__3 = $__2.next()).done; ) {
-          var p = $__3.value;
-          p.then(resolve, reject);
-        }
-      }));
-    }
-  });
-}()));
 
 //# sourceMappingURL=platform.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/platform.js
       } )
     }()
 
@@ -26250,7 +26157,7 @@ exports.slice = (function(dest, source, keysVar) {
 });
 
 //# sourceMappingURL=ra.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/ra.js
       } )
     }()
 
@@ -26351,7 +26258,7 @@ var Scheduler = function Scheduler(options) {
 module.exports = Scheduler;
 
 //# sourceMappingURL=scheduler.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/scheduler.js
       } )
     }()
 
@@ -26406,14 +26313,12 @@ module.exports = Scheduler;
   var deviceTypes = require("deviceTypes");
   var Modem = require("modem");
   var Inc = require("inc");
-  var configName = process.argv[2] || __dirname + "/../config.json";
-  var config;
-  try {
-    config = require(configName);
-  } catch (_) {}
+  var configName = process.argv[2] || __dirname + "/../server.conf";
+  var config = YAML.load(configName);
   config = lodash.merge({
     port: 80,
-    modem: "/dev/ttyACM*"
+    modem: "/dev/ttyACM*",
+    server: "https://controller.sh.neroelectronics.com"
   }, config);
   var modem = ra({
     retryInterval: 2000,
@@ -26929,7 +26834,7 @@ module.exports = Scheduler;
         switch ($ctx.state) {
           case 0:
             $ctx.state = 2;
-            return co.node(fs.readdir)(path);
+            return co.cb(fs.readdir)(path);
           case 2:
             names = $ctx.sent;
             $ctx.state = 4;
@@ -26938,7 +26843,7 @@ module.exports = Scheduler;
             if (filter)
               names = names.filter(filter);
             files = names.map((function(fn) {
-              return [fn, co.node(fs.readFile)(path + "/" + fn, "utf8")];
+              return [fn, co.cb(fs.readFile)(path + "/" + fn, "utf8")];
             }));
             $ctx.state = 8;
             break;
@@ -27072,7 +26977,7 @@ module.exports = Scheduler;
                   break;
                 case 39:
                   $ctx.state = 2;
-                  return co.node(fs.mkdir)(path.dirname(fn)).catch((function(_) {}));
+                  return co.cb(fs.mkdir)(path.dirname(fn)).catch((function(_) {}));
                 case 2:
                   $ctx.maybeThrow();
                   $ctx.state = 4;
@@ -27083,7 +26988,7 @@ module.exports = Scheduler;
                   break;
                 case 16:
                   $__91 = JSON.parse;
-                  $__92 = co.node;
+                  $__92 = co.cb;
                   $__93 = fs.readFile;
                   $__94 = $__92.call(co, $__93);
                   $__95 = $__94(fn);
@@ -27150,7 +27055,7 @@ module.exports = Scheduler;
                   break;
                 case 29:
                   $ctx.state = 35;
-                  return co.node(fs.writeFile)(fn, JSON.stringify(file, null, "   ")).catch((function(_) {}));
+                  return co.cb(fs.writeFile)(fn, JSON.stringify(file, null, "   ")).catch((function(_) {}));
                 case 35:
                   $ctx.maybeThrow();
                   $ctx.state = -2;
@@ -27210,7 +27115,7 @@ module.exports = Scheduler;
             break;
           case 10:
             $__99 = response.end;
-            $__100 = co.node;
+            $__100 = co.cb;
             $__101 = fs.readFile;
             $__102 = $__100.call(co, $__101);
             $__103 = $__102(__dirname + "/../tmp/debug.html", "utf8");
@@ -27252,7 +27157,7 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            $__109 = co.node;
+            $__109 = co.cb;
             $__110 = fs.writeFile;
             $__111 = $__109.call(co, $__110);
             $__112 = lu.readStream;
@@ -27385,7 +27290,7 @@ module.exports = Scheduler;
           case 0:
             $__129 = JSON.stringify;
             $__130 = cfg.read;
-            $__131 = co.node;
+            $__131 = co.cb;
             $__132 = fs.readFile;
             $__133 = $__131.call(co, $__132);
             $__134 = $__133(__dirname + "/../templates/messages.csv", "utf8");
@@ -27895,7 +27800,7 @@ module.exports = Scheduler;
 }.call(Reflect.global);
 
 //# sourceMappingURL=server.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/server.js
       } )
     }()
 
@@ -27946,7 +27851,7 @@ module.exports = function uid(obj) {
 };
 
 //# sourceMappingURL=uid.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/uid.js
       } )
     }()
 
@@ -27999,7 +27904,7 @@ function watch(fn) {
 module.exports = watch;
 
 //# sourceMappingURL=watchStop.map
-
+//# sourceURL=/home/vadzim/v/work/nerojs/src/watchStop.js
       } )
     }()
 
