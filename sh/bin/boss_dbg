@@ -16583,6 +16583,7 @@ config = lodash.merge({
 config.re = new RegExp(("^" + config.re + "$"));
 require("watchStop")(configName);
 var DB = require("boss_db").DB;
+var server = {controller: true};
 var families = {
   IPv4: "A",
   IPv6: "AAAA"
@@ -16665,7 +16666,7 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
           $ctx.state = 13;
           break;
         case 13:
-          $ctx.state = (!DB.hasOwnProperty(name)) ? 17 : 5;
+          $ctx.state = (!server.hasOwnProperty(name) && !DB.hasOwnProperty(name)) ? 17 : 5;
           break;
         case 5:
           type = dns.consts.QTYPE_TO_NAME[q.type] || q.type;

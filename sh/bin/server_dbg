@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,ActiveXObject,Array,BAD_REQUEST,Boolean,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,DOMAIN,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Glob,GlobSync,HTTPStatus,INTERNAL_SERVER_ERROR,Inf,Init_Device_Mode,JSONCookie,JSONCookies,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,TypeError,USER_INFO,UTC,VERSION,Vector,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cfg,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,compact,complete,compose,concat,conf,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,destroy,detach,detect,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,fd,field,filter,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,fs,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hour,href,hrtime,html,html5rocks,http,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interpolate,intersection,inverse,invert,invoke,io,ip,isAbsolute,isArguments,isArray,isBoolean,isCallable,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,join,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,leading,leadspaces,length,level,line,lineBreaks,lines,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,log,long,lstat,lstatSync,ltrim,magenta,make,makeAbs,makeDiff,makeRe,map,mapValues,map_,mapping,maps,mark,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxLength,maxTicks,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minimatch,minute,mixin,mkdir,mm,model,modem,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,neroelectronics,net,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,omit,on,onClick,onReject_,onResolve_,once,onerror,onload,onmessage,onreadystatechange,open,options,org,originalUrl,ownProp,ownerID,pairs,parallel,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pattern,pause,paused,pebbles,performance,pick,pipe,places,platform,pluck,polling,polyfillAll,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,promise,property,propertyIsEnumerable,proto,protocolOK,prototype,pull,push,pushAll,pushTry,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,replace,replaceAll,req,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,responseText,rest,result,resume,rethrow,retryInterval,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,row,rowDelimiter,rtrim,runInContext,running,sample,save,savedUID,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,session,set,setImmediate,setIn,setLength,setName,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,sh,shift,shuffle,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,splice,split,spread,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,status_,stderr,stdout,stop,storedException,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,traceDeprecation,traceur,trailing,transform,trap,trim,trimRight,tryStack_,txt,type,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,url,use,useColors,userAgent,utf8chr,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,wasAltered,watch,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,writable,write,writeFile,writeFileSync,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
+global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,APP_DEBUG,APP_TIMEOUT,AbstractGuard,ActiveXObject,Array,Authorization,BAD_REQUEST,Boolean,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,Cell,DOMAIN,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Getter,Glob,GlobSync,INTERNAL_SERVER_ERROR,ImmutableInterface,Inf,Init_Device_Mode,JSONCookie,JSONCookies,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,Type,TypeError,UNAUTHORIZED,USER_INFO,UTC,VERSION,Vector,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,auth,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cell,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,compact,complete,compose,concat,conf,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createServer,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,dest,destroy,detach,detect,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,fd,field,filter,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getName,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hour,href,hrtime,html,html5rocks,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,importFrom,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interpolate,intersection,inverse,invert,invoke,io,ip,is,isAbsolute,isArguments,isArray,isBoolean,isCallable,isClosed,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isGetter,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,join,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,later,leading,leadspaces,length,level,line,lineBreaks,lines,linkName,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,log,long,lstat,lstatSync,ltrim,magenta,make,makeAbs,makeDiff,makeRe,map,mapValues,map_,mapping,maps,mark,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxCount,maxIndex,maxLength,maxTicks,maxTime,maxTime1,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minTime,minimatch,minute,mixin,mkdir,mm,model,modem,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,neroelectronics,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,noTouch,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,omit,on,onClick,onReject_,onResolve_,once,onerror,onload,onmessage,onread,onreadystatechange,onwritten,open,options,org,originalUrl,ownProp,ownerID,pairs,parallel,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pattern,pause,paused,pebbles,performance,pick,pipe,places,platform,pluck,polling,polyfillAll,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,processing,procs,promise,property,propertyIsEnumerable,proto,protocolOK,prototype,pull,push,pushAll,pushTry,pushedA,pushedC,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,ra,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,replace,replaceAll,req,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,responseText,rest,result,resume,rethrow,retryInterval,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,row,rowDelimiter,rtrim,runAll,runAllCount,runCount,runInContext,running,sample,save,savedUID,scheduled,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,session,set,setHeader,setImmediate,setIn,setLength,setName,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,sh,shift,shuffle,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,splice,split,spread,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,status_,stderr,stdout,stop,storedException,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,tick,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLocaleString,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,totalTime,traceDeprecation,traceur,trailing,transform,trap,trim,trimRight,tryStack_,txt,type,typeDescriptor,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unlink,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,updates,url,use,useColors,userAgent,utf8chr,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,wasAltered,watch,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,writable,write,writeFile,writeFileSync,written,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -21157,6 +21157,9 @@ module.exports = Yaml;
 var $__2;
 var path = require("path");
 var Immutable = require("immutable");
+var co = require("co");
+var ra = require("ra");
+var fs = require("fs");
 var MAX_CACHE_SIZE = 10000;
 var SLEEP_BETWEEN_SAVES = 300;
 var mkdir = co.cb(fs.mkdir);
@@ -21475,7 +21478,7 @@ function isDataLongerThan(maxLength, data) {
       } )
     }()
 
-},{"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","path":false}],"/home/vadzim/v/work/nerojs/src/actionToCommands.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js"}],"/home/vadzim/v/work/nerojs/src/actionToCommands.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22093,6 +22096,8 @@ Object.defineProperties(exports, {
   __esModule: {value: true}
 });
 var csv = require("csv");
+var co = require("co");
+var lodash = require("lodash");
 function isStars(str) {
   return [].slice.call(str).every((function(ch) {
     return ch == "*";
@@ -22286,7 +22291,7 @@ function parseArrays(csv) {
       } )
     }()
 
-},{"csv":"/home/vadzim/v/work/nerojs/node_modules/csv/lib/index.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","csv":"/home/vadzim/v/work/nerojs/node_modules/csv/lib/index.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22353,7 +22358,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -23636,7 +23641,117 @@ module.exports = {
       } )
     }()
 
-},{}],"/home/vadzim/v/work/nerojs/src/pingpong.js":[function(require,module,exports){
+},{}],"/home/vadzim/v/work/nerojs/src/modemstub.js":[function(require,module,exports){
+!function () {
+      !function ( body ) {
+        var now = global.performance || Date
+        var total = 0
+        var start = now.now()
+        var oldRequire = require
+        var newRequire = function () {
+          total += now.now() - start
+          require = oldRequire
+          try {
+            return oldRequire.apply( this, arguments )
+          }
+          finally {
+            require = newRequire
+            start = now.now()
+          }
+        }
+        require = newRequire
+        try {
+          body()
+        }
+        finally {
+          require = oldRequire
+          total += now.now() - start
+          total /= 1000
+          if ( !global.__require_stats__ )
+            global.__require_stats__ = {}
+          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/modemstub.js" ] = total
+        }
+      }( function () {
+        "use strict";
+var Modem = require("modem");
+var net = require("net");
+var fs = require("fs");
+require("colors");
+var createServer = (function(port) {
+  var server = net.createServer((function(socket) {
+    socket.on("data", (function(data) {
+      console.log(("stub: <Buffer " + lu.array(data).map((function(x) {
+        return x.toString(16);
+      })).join(" ") + ">").yellow);
+      data = Modem.extractMessage(data);
+      console.log(("stub: " + JSON.stringify(data)).yellow);
+      socket.pause();
+      setTimeout((function() {
+        socket.resume();
+        var ret = null;
+        switch (data.id) {
+          case "Version":
+            ret = {
+              PRODUCT_VERSION: 1,
+              PRODUCT_ID: 73,
+              PRODUCT_HARD: 22,
+              PRODUCT_VARIANT: 8
+            };
+            break;
+          case "Free_Cell_Count":
+            ret = {COUNT: 122};
+            break;
+          case "Functions":
+            ret = {
+              PROTOCOLS: {
+                NERO_II_SmartHome: true,
+                INTRO_II_SmartHome: true
+              },
+              MODEM_FUNCTIONS: {}
+            };
+            break;
+          case "Change_modem_work_mode":
+            if (data.MODEM_MODE == "Work_Mode")
+              ret = "OK";
+            break;
+          case "Write_Group":
+          case "Set_To_Comfort":
+          case "Set_To_Comfort_1":
+          case "Set_To_Comfort_2":
+          case "Up":
+          case "Down":
+          case "Stop":
+            ret = "OK";
+            break;
+        }
+        if (ret != null) {
+          if (typeof ret == "string")
+            ret = {
+              id: "answer_Result",
+              RESULT: ret
+            };
+          socket.write(Modem.encode(ret.id || ("answer_" + data.id), ret));
+        }
+      }), 300);
+    }));
+  }));
+  server.on("error", (function(error) {
+    return console.log("stub error:".red, error);
+  }));
+  server.listen(port);
+  return server;
+});
+createServer(2233);
+fs.unlink("/tmp/stub2233", (function() {
+  return createServer("/tmp/stub2233");
+}));
+
+//# sourceMappingURL=modemstub.map
+//# sourceURL=/home/vadzim/v/work/nerojs/src/modemstub.js
+      } )
+    }()
+
+},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false}],"/home/vadzim/v/work/nerojs/src/pingpong.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -23882,7 +23997,1203 @@ function initImmutableIterators() {
       } )
     }()
 
-},{}],"/home/vadzim/v/work/nerojs/src/scheduler.js":[function(require,module,exports){
+},{}],"/home/vadzim/v/work/nerojs/src/ra.js":[function(require,module,exports){
+!function () {
+      !function ( body ) {
+        var now = global.performance || Date
+        var total = 0
+        var start = now.now()
+        var oldRequire = require
+        var newRequire = function () {
+          total += now.now() - start
+          require = oldRequire
+          try {
+            return oldRequire.apply( this, arguments )
+          }
+          finally {
+            require = newRequire
+            start = now.now()
+          }
+        }
+        require = newRequire
+        try {
+          body()
+        }
+        finally {
+          require = oldRequire
+          total += now.now() - start
+          total /= 1000
+          if ( !global.__require_stats__ )
+            global.__require_stats__ = {}
+          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/ra.js" ] = total
+        }
+      }( function () {
+        "use strict";
+var $__2;
+var later = require("later").push;
+var co = require("co");
+var UID = require("uid");
+var lodash = require("lodash");
+var actionKey = "ACTION_" + UID();
+var updates = {};
+updates.scheduled = false;
+updates.procs = [];
+updates.index = 0;
+updates.maxIndex = 32768;
+updates.processing = false;
+updates.totalTime = 0;
+updates.maxTime = 0;
+updates.maxTime1 = 0;
+updates.minTime = Infinity;
+updates.runCount = 0;
+updates.runAllCount = 0;
+global.updates = updates;
+var performance = global.performance || global.Date;
+updates.start = performance.now();
+updates.log = (function() {
+  return console.log((":: " + updates.totalTime / 1000 + " / " + (performance.now() - updates.start) / 1000 + " (" + updates.maxTime / 1000 + ", " + updates.maxTime1 / 1000 + ", " + updates.minTime / 1000 + ", " + Action.maxCount + ", " + updates.runCount + ", " + updates.runAllCount + ")"));
+});
+updates.checkSchedule = (function() {
+  if (!updates.scheduled && updates.procs.length > 0) {
+    updates.scheduled = true;
+    later(updates.tick);
+  }
+});
+updates.tick = (function() {
+  updates.scheduled = false;
+  var $__12 = function(_try) {
+    try {
+      updates.runAll();
+      return 0;
+    } catch (error) {
+      setTimeout((function() {
+        throw error;
+      }), 1);
+    }
+  },
+      $__13;
+  $__11: for (var _try = 0; _try < 1000; ++_try) {
+    $__13 = $__12(_try);
+    switch ($__13) {
+      case 0:
+        break $__11;
+    }
+  }
+  updates.checkSchedule();
+});
+updates.runAll = (function() {
+  var start = performance.now();
+  var st1 = start;
+  var runCount = updates.runCount;
+  var processing = updates.processing;
+  updates.processing = true;
+  var action = co.global[actionKey];
+  if (action != null)
+    co.global[actionKey] = null;
+  try {
+    while (updates.index < updates.procs.length) {
+      if (global.APP_TIMEOUT && global.APP_TIMEOUT < Date.now) {
+        alert("Application is running too long");
+      }
+      var proc = updates.procs[updates.index];
+      ++updates.index;
+      ++updates.runCount;
+      if (updates.index >= updates.maxIndex && updates.index * 3 > updates.procs.length) {
+        updates.procs.splice(0, updates.index);
+        updates.index = 0;
+      }
+      proc();
+      var t1 = performance.now();
+      if (updates.maxTime1 < t1 - st1)
+        updates.maxTime1 = t1 - st1;
+      st1 = t1;
+    }
+    updates.index = updates.procs.length = 0;
+  } finally {
+    if (action != null)
+      co.global[actionKey] = action;
+    updates.processing = processing;
+    if (!processing) {
+      var time = performance.now() - start;
+      updates.totalTime += time;
+      if (updates.maxTime < time)
+        updates.maxTime = time;
+      runCount = updates.runCount - runCount;
+      if (runCount) {
+        ++updates.runAllCount;
+        if (updates.minTime > time)
+          updates.minTime = time;
+      }
+    }
+  }
+});
+updates.later = (function(proc) {
+  updates.procs.push(proc);
+  updates.checkSchedule();
+});
+updates.later.then = updates.later;
+var emptyMap = typeof Immutable == "undefined" ? null : Immutable.Map();
+var checkNull = (function(value) {
+  return value == null || value == emptyMap ? null : value;
+});
+var checkMap = (function(value) {
+  return value == null ? emptyMap : value;
+});
+var returnThis = function() {
+  return this;
+};
+var isLiteral = (function(value) {
+  return value && typeof value == "object" && value.constructor == Object;
+});
+var getValue = (function(value) {
+  return value == null || value.valueOf == null ? value : value.valueOf();
+});
+var close = (function(value) {
+  return value != null && value.close != null && value.close();
+});
+function AbstractGuard() {}
+var invalidKeyCall = function(key) {
+  throw new Error(("access to an undeclared property \"" + this.$name + "." + key + "\""));
+};
+var usedProps = Object.create(null);
+var usedPropsProto = Object.create(null);
+var guardProp = (function(key) {
+  if (!usedProps[key]) {
+    usedProps[key] = true;
+    Object.defineProperty(usedPropsProto, key, {
+      get: function() {
+        invalidKeyCall.call(this, key);
+      },
+      set: function() {
+        invalidKeyCall.call(this, key);
+      }
+    });
+  }
+});
+AbstractGuard.prototype = usedPropsProto;
+if (global.APP_DEBUG) {
+  AbstractGuard.prototype = (global.__UsedScriptIdentifiers__ + "").split(/[\s,]+/).reduce((function(proto, key) {
+    var $__2;
+    return Object.create(proto, ($__2 = {}, Object.defineProperty($__2, key, {
+      value: {
+        get: function() {
+          invalidKeyCall.call(this, key);
+        },
+        set: function(_) {
+          invalidKeyCall.call(this, key);
+        }
+      },
+      configurable: true,
+      enumerable: true,
+      writable: true
+    }), $__2));
+  }), AbstractGuard.prototype);
+}
+AbstractGuard.prototype = Object.create(AbstractGuard.prototype, {
+  toString: {value: {}.toString},
+  valueOf: {value: {}.valueOf},
+  toLocaleString: {value: {}.toLocaleString},
+  hasOwnProperty: {value: {}.hasOwnProperty},
+  isPrototypeOf: {value: {}.isPrototypeOf},
+  propertyIsEnumerable: {value: {}.propertyIsEnumerable},
+  $name: {
+    value: "<...>",
+    writable: 1
+  }
+});
+var EMPTY_ARRAY = [];
+Object.freeze(EMPTY_ARRAY);
+var ImmutableInterface = function ImmutableInterface() {
+  $traceurRuntime.superConstructor($ImmutableInterface).apply(this, arguments);
+};
+var $ImmutableInterface = ImmutableInterface;
+($traceurRuntime.createClass)(ImmutableInterface, {
+  get props() {
+    throw new Error("access to deprecated 'props' property detected");
+  },
+  get declaredProperties() {
+    return this.live;
+  },
+  get length() {
+    var m = this.valueOf();
+    return m == null ? 0 : Object.keys(m).length;
+  },
+  get: function(key) {
+    if (key != null) {
+      var m = this.valueOf();
+      if (m != null && m.hasOwnProperty(key))
+        return m[key];
+    }
+    return null;
+  },
+  map: function(fun) {
+    var m = this.valueOf();
+    return m && lodash.mapValues(m, fun);
+  },
+  keys: function() {
+    var m = this.valueOf();
+    return m == null ? EMPTY_ARRAY : Object.keys(m);
+  }
+}, {}, AbstractGuard);
+var ReadOnlyCell = function ReadOnlyCell(parent) {
+  $traceurRuntime.superConstructor($ReadOnlyCell).call(this);
+  this._parent = parent;
+};
+var $ReadOnlyCell = ReadOnlyCell;
+($traceurRuntime.createClass)(ReadOnlyCell, {
+  getReadOnly: function() {
+    return this;
+  },
+  get live() {
+    return this._parent.live;
+  },
+  get $name() {
+    return this._parent.$name;
+  },
+  valueOf: function() {
+    return this._parent.valueOf.apply(this._parent, arguments);
+  },
+  noTouch: function() {
+    return this._parent.noTouch.apply(this._parent, arguments);
+  },
+  toString: function() {
+    return this._parent.toString.apply(this._parent, arguments);
+  },
+  toJSON: function() {
+    return this._parent.toJSON.apply(this._parent, arguments);
+  },
+  getName: function() {
+    return this._parent.getName.apply(this._parent, arguments);
+  }
+}, {}, ImmutableInterface);
+var Getter = (function(fun, isValueEqual) {
+  var last;
+  var ret = !isValueEqual ? function() {
+    return fun.apply(this, arguments);
+  } : function() {
+    var ret = fun.apply(this, arguments);
+    if (!Object.is(last, ret) && !isValueEqual(last, ret))
+      last = ret;
+    return last;
+  };
+  ret.isGetter = true;
+  return ret;
+});
+var Type = (function(f) {
+  g.typeDescriptor = true;
+  return g;
+  function g() {
+    return f.apply(this, arguments);
+  }
+});
+var runGetter = (function(cell, getter, sticky) {
+  return (new Action(getter, cell, sticky)).linkName(cell, ":getter");
+});
+var runSetter = (function(cell, setter, sticky) {
+  return (new Action((function() {
+    return setter(cell.valueOf());
+  }), null, sticky)).linkName(cell, ":setter");
+});
+var Cell = function Cell(sticky) {
+  var $__0 = this;
+  $traceurRuntime.superConstructor($Cell).call(this);
+  this._id = UID();
+  this._value = null;
+  this._isValueEqual = Object.is;
+  this._initialized = false;
+  this._closed = false;
+  this._dirty = false;
+  this._live = null;
+  this._liveArray = null;
+  this._actionsArr = [];
+  this._onchange = [];
+  this.$name = {toString: (function() {
+      return $__0.getName();
+    })};
+  this._notifyWritten();
+  this._sticky = !!sticky;
+};
+var $Cell = Cell;
+($traceurRuntime.createClass)(Cell, {
+  valueOf: function() {
+    return this._read();
+  },
+  assign: function(value) {
+    return this._write(value, false);
+  },
+  noTouch: function() {
+    if (this._dirty)
+      this._updateSelf();
+    return this._value;
+  },
+  then: function(proc) {
+    this._onchange.push(proc);
+  },
+  close: function() {
+    if (this._closed)
+      return;
+    this._closed = true;
+    this._fire();
+    if (this._parent)
+      this._parent.close();
+    if (this._liveArray) {
+      for (var $__3 = this._liveArray[$traceurRuntime.toProperty(Symbol.iterator)](),
+          $__4; !($__4 = $__3.next()).done; ) {
+        var p = $__4.value;
+        p.close();
+      }
+      this._liveArray = null;
+    }
+    this._value = null;
+    this._actionsArr = null;
+    this._parent = null;
+  },
+  get live() {
+    return this._live;
+  },
+  getReadOnly: function() {
+    return this._readOnly || (this._readOnly = new ReadOnlyCell(this));
+  },
+  toString: function() {
+    var $__10;
+    for (var args = [],
+        $__7 = 0; $__7 < arguments.length; $__7++)
+      args[$__7] = arguments[$__7];
+    var v = this._read();
+    return (v == null) || !v.toString ? "" + v : ($__10 = v).toString.apply($__10, $traceurRuntime.spread(args));
+  },
+  toJSON: function() {
+    var $__10;
+    for (var args = [],
+        $__8 = 0; $__8 < arguments.length; $__8++)
+      args[$__8] = arguments[$__8];
+    var v = this._read();
+    return (v == null) || !v.toJSON ? v : ($__10 = v).toJSON.apply($__10, $traceurRuntime.spread(args));
+  },
+  setName: function(name) {
+    this._name = name;
+    return this;
+  },
+  getName: function() {
+    var ret = this._name || this._key;
+    var p = this._parent;
+    while (p) {
+      ret = (p._name || p._key) + "." + ret;
+      p = p._parent;
+    }
+    return ret;
+  },
+  defineProperty: function(key) {
+    if (!this._live) {
+      this._live = {};
+      this._liveArray = [];
+    }
+    if (!key)
+      return;
+    guardProp(key);
+    var c = this._live[key];
+    if (this._live.hasOwnProperty(key))
+      return c;
+    this._liveArray.push(c = this._live[key] = new $Cell(this._sticky));
+    c._key = key;
+    c._parent = this;
+    c._level = (this._level || 0) + 1;
+    Object.defineProperty(this, key, {
+      enumerable: true,
+      configurable: true,
+      get: (function() {
+        if (c._live)
+          return c;
+        else
+          return c._read();
+      }),
+      set: (function(value) {
+        return c._write(value, false);
+      })
+    });
+    if (this._value != null)
+      c._write(this._value[key], true);
+    return c;
+  },
+  init: function(value) {
+    this._init(value, false, false);
+  },
+  setConst: function(prop, value) {
+    Object.defineProperty(this, prop, {
+      enumerable: true,
+      get: (function() {
+        return value;
+      })
+    });
+    return this;
+  },
+  setVar: function(prop, value) {
+    Object.defineProperty(this, prop, {
+      enumerable: true,
+      writable: true,
+      value: value
+    });
+    return this;
+  },
+  _init: function(value, recursive, isGetter, isValueEqual) {
+    var cell = this;
+    if (!recursive && cell._initialized)
+      throw new Error("already initialized");
+    if (this._parent)
+      this._parent._dirty = true;
+    cell._initialized = true;
+    if (isValueEqual)
+      this._isValueEqual = isValueEqual;
+    value = checkNull(value);
+    if (value == null)
+      return;
+    if (typeof value == "function" && value.typeDescriptor)
+      value = value(cell._key);
+    if (typeof value == "function" && (isGetter || value.isGetter)) {
+      runGetter(cell, value, this._sticky);
+      return;
+    }
+    if (!isLiteral(value)) {
+      if (value == null || typeof value != "object" || value.valueOf == Object.prototype.valueOf)
+        cell._value = value;
+      else
+        cell._init((function() {
+          return getValue(value);
+        }), true, true);
+      return;
+    }
+    if (recursive)
+      throw new Error("wrong parameters");
+    cell.defineProperty();
+    var $__15 = function(key) {
+      var descr = Object.getOwnPropertyDescriptor(value, key);
+      if (!descr)
+        return 0;
+      var get = descr.get;
+      var subValue = descr.value;
+      if (descr.set)
+        throw new Error("wrong parameters");
+      else if (get)
+        subValue = get.length == 0 ? get : (function() {
+          return get();
+        });
+      if (key == "$")
+        cell._init(subValue, true, !!get);
+      else
+        cell.defineProperty(key)._init(subValue, false, !!get);
+    },
+        $__16;
+    $__14: for (var key in value) {
+      $__16 = $__15(key);
+      switch ($__16) {
+        case 0:
+          continue $__14;
+      }
+    }
+  },
+  _read: function() {
+    if (this._dirty)
+      this._updateSelf();
+    var action = co.global[actionKey];
+    if (action)
+      if (this._closed)
+        action.close();
+      else
+        action.onread(this);
+    return this._value;
+  },
+  _write: function(newValue, down) {
+    this._initialized = true;
+    this._dirty = false;
+    newValue = checkNull(newValue);
+    if (this._closed) {
+      var action = co.global[actionKey];
+      if (action)
+        action.close();
+    } else if (!this._isValueEqual(this._value, newValue)) {
+      this._value = newValue;
+      if (this._live)
+        for (var $__3 = this._liveArray[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__4; !($__4 = $__3.next()).done; ) {
+          var p = $__4.value;
+          p._write(newValue && newValue[p._key], true);
+        }
+      this._fire();
+      if (!down) {
+        var p$__17 = this._parent;
+        while (p$__17 && !p$__17._dirty) {
+          p$__17._dirty = true;
+          p$__17._fire();
+        }
+      }
+    }
+    if (!down)
+      this._notifyWritten();
+    return newValue;
+  },
+  _updateSelf: function() {
+    var cnt = 0;
+    var ret = {};
+    for (var key in this._value)
+      if (this._value.hasOwnProperty(key)) {
+        ret[key] = this._value[key];
+        ++cnt;
+      }
+    for (var $__3 = this._liveArray[$traceurRuntime.toProperty(Symbol.iterator)](),
+        $__4; !($__4 = $__3.next()).done; ) {
+      var p = $__4.value;
+      {
+        if (p._dirty)
+          p._updateSelf();
+        var value = p._value;
+        if (value == null) {
+          if (ret.hasOwnProperty(p._key)) {
+            delete ret[p._key];
+            --cnt;
+          }
+        } else {
+          ret[p._key] = value;
+          cnt = Infinity;
+        }
+      }
+    }
+    if (cnt == 0)
+      ret = null;
+    this._value = ret;
+    this._dirty = false;
+  },
+  debug: function(cb) {
+    this._actionsArr.push({action: {_fire: cb}});
+  },
+  debugger: function() {
+    this.debug((function() {
+      debugger;
+    }));
+  },
+  _fire: function() {
+    var a;
+    a = this._actionsArr;
+    if (a.length) {
+      for (var i = 0; i < a.length; i++) {
+        var c = a[i];
+        if (c.action)
+          c.action._fire();
+        c.pushedC = false;
+      }
+      a.length = 0;
+    }
+    a = this._onchange;
+    if (a.length) {
+      for (var i$__18 = 0; i$__18 < a.length; i$__18++)
+        updates.later(a[i$__18]);
+      a.length = 0;
+    }
+  },
+  _notifyWritten: function() {
+    var action = co.global[actionKey];
+    if (action)
+      action.onwritten(this);
+  }
+}, {}, ImmutableInterface);
+var rethrow = (function(error) {
+  return setTimeout((function() {
+    throw error;
+  }), 1);
+});
+var Action = function Action(fun, dest, sticky) {
+  var $__0 = this;
+  this._id = UID();
+  this._fun = fun;
+  this._dest = dest;
+  this._cellSet = {};
+  this._cellSetSize = 0;
+  this._cellArr = [];
+  this.$name = {toString: (function() {
+      return "<Action>";
+    })};
+  this._thread = co.gocall(this._loop, this).linkName(this).waitForInput();
+  this._runCount = 0;
+  var owner;
+  if ((owner = co.global[actionKey]) && owner._children)
+    owner._children.push(this);
+  this._children = null;
+  this._threads = null;
+  this._onthread = null;
+  this._generatorProxy = null;
+  this._generator = null;
+  if (sticky) {
+    this._children = [];
+    this._threads = [];
+    this._onthread = (function(thread) {
+      return $__0._threads.push(thread);
+    });
+  }
+};
+var $Action = Action;
+($traceurRuntime.createClass)(Action, ($__2 = {}, Object.defineProperty($__2, "linkName", {
+  value: function(value) {
+    var suffix = arguments[1] !== (void 0) ? arguments[1] : ":action";
+    if (value.$name)
+      value = value.$name;
+    this.$name.toString = (function() {
+      return "" + value + suffix;
+    });
+    return this;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_initGeneratorProxy", {
+  value: function() {
+    var $__2;
+    var $__0 = this;
+    var _value;
+    var _next = (function() {
+      return $__0._generator.next(_value);
+    });
+    var _throw = (function() {
+      return $__0._generator.throw(_value);
+    });
+    this._generatorProxy = ($__2 = {}, Object.defineProperty($__2, Symbol.iterator, {
+      value: returnThis,
+      configurable: true,
+      enumerable: true,
+      writable: true
+    }), Object.defineProperty($__2, "next", {
+      value: (function(v) {
+        _value = v;
+        try {
+          return co.catchThreads(_next, $__0._onthread);
+        } finally {
+          _value = null;
+        }
+      }),
+      configurable: true,
+      enumerable: true,
+      writable: true
+    }), Object.defineProperty($__2, "throw", {
+      value: (function(v) {
+        _value = v;
+        try {
+          return co.catchThreads(_throw, $__0._onthread);
+        } finally {
+          _value = null;
+        }
+      }),
+      configurable: true,
+      enumerable: true,
+      writable: true
+    }), $__2);
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_loop", {
+  value: $traceurRuntime.initGeneratorFunction(function $__24() {
+    var $__0,
+        next,
+        errorCatched,
+        ret,
+        $__25,
+        $__26,
+        $__27,
+        $__28,
+        error;
+    return $traceurRuntime.createGeneratorInstance(function($ctx) {
+      while (true)
+        switch ($ctx.state) {
+          case 0:
+            $__0 = this;
+            $ctx.state = 89;
+            break;
+          case 89:
+            $ctx.state = 2;
+            return updates.later;
+          case 2:
+            $ctx.maybeThrow();
+            $ctx.state = 4;
+            break;
+          case 4:
+            next = {then: (function(next) {
+                $__0._onchange = next;
+              })};
+            co.global[actionKey] = this;
+            errorCatched = false;
+            $ctx.state = 91;
+            break;
+          case 91:
+            $ctx.pushTry(80, null);
+            $ctx.state = 83;
+            break;
+          case 83:
+            $ctx.state = (!errorCatched) ? 55 : 59;
+            break;
+          case 55:
+            $ctx.state = (this.isClosed()) ? 7 : 54;
+            break;
+          case 54:
+            this._begin();
+            errorCatched = true;
+            $ctx.state = 57;
+            break;
+          case 57:
+            $ctx.state = (this._children) ? 33 : 50;
+            break;
+          case 33:
+            ret = co.catchThreads(this._fun, this._onthread);
+            $ctx.state = 34;
+            break;
+          case 34:
+            $ctx.state = (ret && ret.next && ret.throw) ? 30 : 21;
+            break;
+          case 30:
+            if (!this._generatorProxy)
+              this._initGeneratorProxy();
+            this._generator = ret;
+            $ctx.state = 31;
+            break;
+          case 31:
+            $ctx.pushTry(null, 23);
+            $ctx.state = 25;
+            break;
+          case 25:
+            $__25 = this._generatorProxy[Symbol.iterator]();
+            $ctx.sent = void 0;
+            $ctx.action = 'next';
+            $ctx.state = 19;
+            break;
+          case 19:
+            $__26 = $__25[$ctx.action]($ctx.sentIgnoreThrow);
+            $ctx.state = 16;
+            break;
+          case 16:
+            $ctx.state = ($__26.done) ? 10 : 9;
+            break;
+          case 10:
+            $ctx.sent = $__26.value;
+            $ctx.state = 17;
+            break;
+          case 9:
+            $ctx.state = 19;
+            return $__26.value;
+          case 17:
+            ret = $ctx.sentIgnoreThrow;
+            $ctx.state = 23;
+            $ctx.finallyFallThrough = 21;
+            break;
+          case 23:
+            $ctx.popTry();
+            $ctx.state = 29;
+            break;
+          case 29:
+            this._generator = null;
+            $ctx.state = 27;
+            break;
+          case 50:
+            ret = (0, this._fun)();
+            $ctx.state = 51;
+            break;
+          case 51:
+            $ctx.state = (ret && ret.next && ret.throw) ? 45 : 21;
+            break;
+          case 45:
+            $__27 = ret[Symbol.iterator]();
+            $ctx.sent = void 0;
+            $ctx.action = 'next';
+            $ctx.state = 46;
+            break;
+          case 46:
+            $__28 = $__27[$ctx.action]($ctx.sentIgnoreThrow);
+            $ctx.state = 43;
+            break;
+          case 43:
+            $ctx.state = ($__28.done) ? 37 : 36;
+            break;
+          case 37:
+            $ctx.sent = $__28.value;
+            $ctx.state = 44;
+            break;
+          case 36:
+            $ctx.state = 46;
+            return $__28.value;
+          case 44:
+            ret = $ctx.sentIgnoreThrow;
+            $ctx.state = 21;
+            break;
+          case 21:
+            if (this._dest)
+              this._dest.assign(ret);
+            $ctx.state = 59;
+            break;
+          case 59:
+            $ctx.state = (this.isClosed()) ? 7 : 70;
+            break;
+          case 70:
+            errorCatched = false;
+            $ctx.state = 73;
+            break;
+          case 73:
+            switch (this._end()) {
+              default:
+                $ctx.state = 83;
+                break;
+              case false:
+                $ctx.state = 7;
+                break;
+              case true:
+                $ctx.state = 63;
+                break;
+            }
+            break;
+          case 64:
+            $ctx.maybeThrow();
+            $ctx.state = 83;
+            break;
+          case 63:
+            $ctx.state = 64;
+            return next;
+          case 74:
+            $ctx.popTry();
+            $ctx.state = 91;
+            break;
+          case 80:
+            $ctx.popTry();
+            error = $ctx.storedException;
+            $ctx.state = 79;
+            break;
+          case 79:
+            $ctx.state = (error instanceof co.EKill) ? 7 : 77;
+            break;
+          case 77:
+            rethrow(error);
+            $ctx.state = 91;
+            break;
+          case 7:
+            co.global[actionKey] = null;
+            this._finalize();
+            $ctx.state = -2;
+            break;
+          case 27:
+            $ctx.state = $ctx.finallyFallThrough;
+            break;
+          default:
+            return $ctx.end();
+        }
+    }, $__24, this);
+  }),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "isClosed", {
+  value: function() {
+    return !this._cellSet;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "close", {
+  value: function() {
+    var thread = this._thread;
+    this._fire();
+    this._finalize();
+    thread && thread.kill();
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_closeChildren", {
+  value: function() {
+    var c;
+    if (c = this._children) {
+      for (var i = 0,
+          l = c.length; i < l; ++i)
+        c[i].close();
+      c.length = 0;
+    }
+    if (c = this._threads) {
+      for (var i$__19 = 0,
+          l$__20 = c.length; i$__19 < l$__20; ++i$__19)
+        c[i$__19].kill();
+      c.length = 0;
+    }
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_finalize", {
+  value: function() {
+    this._unsubscribe();
+    this._cellSet = null;
+    this._cellArr = null;
+    this._fun = null;
+    this._dest = null;
+    this._thread = null;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_begin", {
+  value: function() {
+    this._unsubscribe();
+    ++this._runCount;
+    if ($Action.maxCount < this._runCount) {
+      $Action.maxCount = this._runCount;
+    }
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_unsubscribe", {
+  value: function() {
+    this._onchange = null;
+    var a = this._cellArr;
+    for (var i = 0; i < a.length; ++i) {
+      var c = a[i];
+      c.cell = null;
+      c.value = null;
+      c.action = null;
+      c.read = false;
+      c.written = false;
+      c.pushedA = false;
+    }
+    if (this._cellSetSize > 32 && a.length < this._cellSetSize / 4)
+      this._cellSet = {};
+    a.length = 0;
+    this._closeChildren();
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_end", {
+  value: function() {
+    var ret = false;
+    var a = this._cellArr;
+    for (var i = 0; i < a.length; ++i) {
+      var c = a[i];
+      if (c.written)
+        c.action = null;
+      else {
+        if (!c.pushedC) {
+          c.cell._actionsArr.push(c);
+          c.pushedC = true;
+        }
+        if (!Object.is(c.value, c.cell._value))
+          return null;
+        c.action = this;
+        ret = true;
+      }
+      c.value = null;
+      c.cell = null;
+    }
+    return ret;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_linkCell", {
+  value: function(cell) {
+    var c = this._cellSet[cell._id];
+    if (c == null) {
+      c = this._cellSet[cell._id] = {
+        cell: null,
+        value: null,
+        action: null,
+        read: false,
+        written: false,
+        pushedA: false,
+        pushedC: false
+      };
+      ++this._cellSetSize;
+    }
+    if (!c.pushedA) {
+      this._cellArr.push(c);
+      c.cell = cell;
+      c.pushedA = true;
+    }
+    return c;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "onread", {
+  value: function(cell) {
+    var c = this._linkCell(cell);
+    c.read = true;
+    c.value = cell._value;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "onwritten", {
+  value: function(cell) {
+    this._linkCell(cell).written = true;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "_fire", {
+  value: function() {
+    if (this._onchange)
+      updates.later(this._onchange);
+    this._unsubscribe();
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), $__2), {});
+Action.maxCount = 0;
+var newReactive = (function(getter, handlers, sticky, isValueEqual) {
+  for (var $__3 = handlers[$traceurRuntime.toProperty(Symbol.iterator)](),
+      $__4; !($__4 = $__3.next()).done; ) {
+    var h = $__4.value;
+    if (h != null && typeof h != "function")
+      throw new Error("wrong parameters");
+  }
+  var cell = new Cell(sticky);
+  if (getter !== undefined)
+    cell._init(getter, false, true, isValueEqual);
+  for (var $__5 = handlers[$traceurRuntime.toProperty(Symbol.iterator)](),
+      $__6; !($__6 = $__5.next()).done; ) {
+    var h$__21 = $__6.value;
+    h$__21 && (h$__21.length ? runSetter : runGetter)(cell, h$__21, sticky);
+  }
+  return cell;
+});
+var ra = function() {
+  var name,
+      fun,
+      sticky,
+      isValueEqual,
+      index = 0,
+      length = arguments.length - 1;
+  if (typeof arguments[index] == "string")
+    name = arguments[index++];
+  if (typeof arguments[index] == "boolean")
+    sticky = arguments[index++];
+  fun = arguments[index++];
+  if (typeof arguments[index] == "function")
+    isValueEqual = arguments[index++];
+  return newReactive(fun, [], sticky, isValueEqual);
+};
+exports = module.exports = ra;
+exports.ra = ra;
+exports.clean = (function(getter) {
+  for (var handers = [],
+      $__9 = 1; $__9 < arguments.length; $__9++)
+    handers[$__9 - 1] = arguments[$__9];
+  return newReactive(getter, handers, false);
+});
+exports.detach = (function(fun) {
+  var old;
+  if (old = co.global[actionKey]) {
+    co.global[actionKey] = null;
+    try {
+      return fun();
+    } finally {
+      co.global[actionKey] = old;
+    }
+  } else
+    return fun();
+});
+exports.Cell = Cell;
+exports.ImmutableInterface = ImmutableInterface;
+exports.AbstractGuard = AbstractGuard;
+exports.Getter = Getter;
+exports.Type = Type;
+exports.importFrom = (function(observable) {
+  return Type((function(name) {
+    return Getter((function() {
+      return observable.live[name].valueOf();
+    }));
+  }));
+});
+exports.forceCalculations = (function() {
+  return updates.runAll();
+});
+exports.map = (function(dest, source, convert) {
+  throw new Error("message");
+  if (!(dest instanceof Cell))
+    dest = ra.clean(dest);
+  var scache = ra.clean();
+  scache.defineProperty();
+  var dcache = ra.clean();
+  dcache.defineProperty();
+  ra.clean((function() {
+    return scache.assign(getValue(source));
+  }));
+  ra.clean((function() {
+    var src = scache.valueOf();
+    updates.later((function() {
+      var i = 0;
+      var $__22 = function(k) {
+        if (src.hasOwnProperty(k)) {
+          if (dcache.live.hasOwnProperty(k))
+            return {v: (void 0)};
+          var s = scache.defineProperty(k);
+          var d = dcache.defineProperty(k);
+          !((function(i) {
+            return ra.clean((function() {
+              return convert(d, s, k, i);
+            }));
+          }))(i);
+          ++i;
+        }
+      },
+          $__23;
+      for (var k in src) {
+        $__23 = $__22(k);
+        if (typeof $__23 === "object")
+          return $__23.v;
+      }
+    }));
+  }));
+  ra.clean((function() {
+    return dest.assign(getValue(dcache));
+  }));
+  return dest;
+});
+exports.slice = (function(dest, source, keysVar) {
+  throw new Error("message");
+  if (!(dest instanceof Cell))
+    dest = ra.clean(dest);
+  var cacheHolder = ra.clean();
+  ra.clean((function() {
+    var keys = getValue(keysVar);
+    if (keys)
+      keys.sort();
+    updates.later((function() {
+      var c = ra.clean();
+      var s = c.defineProperty("source");
+      var d = c.defineProperty("dest");
+      keys && keys.forEach((function(k) {
+        var sk = s.defineProperty(k);
+        var dk = d.defineProperty(k);
+        ra.clean((function() {
+          return dk.assign(sk.valueOf());
+        }));
+      }));
+      var t = cacheHolder.valueOf();
+      cacheHolder.assign(c);
+      t && t.close();
+    }));
+  }));
+  ra.clean((function() {
+    var c = cacheHolder.valueOf();
+    c && c.source && c.source.assign(source.valueOf());
+  }));
+  ra.clean((function() {
+    var c = cacheHolder.valueOf();
+    dest.assign(c && c.dest && c.dest.valueOf());
+  }));
+  return dest;
+});
+
+//# sourceMappingURL=ra.map
+//# sourceURL=/home/vadzim/v/work/nerojs/src/ra.js
+      } )
+    }()
+
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","later":"/home/vadzim/v/work/nerojs/src/later.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/scheduler.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -24016,16 +25327,17 @@ module.exports = Scheduler;
       }( function () {
         module.exports = function() {
   "use strict";
-  var $__61 = $traceurRuntime.initGeneratorFunction(readFiles);
+  var $__62 = $traceurRuntime.initGeneratorFunction(readFiles);
   require("platform");
   var repl = true;
-  global.YAML = require("yamljs");
-  global.path = require("path");
-  global.fs = require("fs");
-  global.cfg = require("csvConfig");
-  global.HTTPStatus = require("http-status");
-  global.http = require("http");
-  global.net = require("net");
+  var YAML = require("yamljs");
+  var path = require("path");
+  var fs = require("fs");
+  var cfg = require("csvConfig");
+  var HTTPStatus = require("http-status");
+  var http = require("http");
+  var net = require("net");
+  var crypto = require("crypto");
   var glob = require("glob");
   var constants = require("constants");
   var PingPong = require("pingpong");
@@ -24034,13 +25346,31 @@ module.exports = Scheduler;
   var deviceTypes = require("deviceTypes");
   var Modem = require("modem");
   var Inc = require("inc");
+  var lodash = require("lodash");
+  var ra = require("ra");
+  var co = require("co");
   var configName = process.argv[2] || __dirname + "/../server.conf";
   var config = YAML.load(configName);
   config = lodash.merge({
     port: 80,
     modem: "/dev/ttyACM*",
-    server: "https://controller.sh.neroelectronics.com"
+    server: "https://controller.sh.neroelectronics.com",
+    auth: "./user.conf"
   }, config);
+  var authName = path.resolve(path.dirname(configName), config.auth);
+  var auth = lu.catch((function() {
+    return YAML.load(authName);
+  }), null);
+  if (auth && !auth.modem)
+    throw new Error("modem name required in user.conf");
+  if (auth && !auth.name)
+    throw new Error("name required in user.conf");
+  if (auth && !auth.key)
+    throw new Error("key required in user.conf");
+  if (auth) {
+    var s = crypto.createHash("sha256");
+    auth.hash = s.digest(JSON.stringify([String(auth.name), String(auth.key), String(auth.modem)]));
+  }
   var modem = ra({
     retryInterval: 2000,
     port: config.modem,
@@ -24110,10 +25440,9 @@ module.exports = Scheduler;
     get handle() {
       return modem.socket && new Modem(modem.socket, console.info.bind(console));
     },
-    rawcommand: $traceurRuntime.initGeneratorFunction(function $__8() {
+    rawcommand: $traceurRuntime.initGeneratorFunction(function $__9() {
       var args,
           $__2,
-          $__15,
           $__16,
           $__17,
           $__18,
@@ -24141,7 +25470,8 @@ module.exports = Scheduler;
           $__40,
           $__41,
           $__42,
-          $__43;
+          $__43,
+          $__44;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -24152,59 +25482,59 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__15 = modem.handle;
+              $__16 = modem.handle;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = ($__15) ? 5 : 9;
+              $ctx.state = ($__16) ? 5 : 9;
               break;
             case 5:
-              $__16 = modem.handle;
-              $__17 = $__16.lock;
-              $__18 = $traceurRuntime.initGeneratorFunction;
-              $__40 = $__18.call($traceurRuntime, function $__9(command) {
-                var $__10,
-                    $__11,
+              $__17 = modem.handle;
+              $__18 = $__17.lock;
+              $__19 = $traceurRuntime.initGeneratorFunction;
+              $__41 = $__19.call($traceurRuntime, function $__10(command) {
+                var $__11,
                     $__12,
                     $__13,
                     $__14,
+                    $__15,
                     error;
-                return $__19 = $traceurRuntime.createGeneratorInstance, $__39 = $__19.call($traceurRuntime, function($ctx) {
+                return $__20 = $traceurRuntime.createGeneratorInstance, $__40 = $__20.call($traceurRuntime, function($ctx) {
                   while (true)
-                    switch ($__20 = $ctx.state, $__20) {
+                    switch ($__21 = $ctx.state, $__21) {
                       case 0:
-                        $__21 = $ctx.pushTry, $__22 = $__21.call($ctx, 13, null), $__22;
+                        $__22 = $ctx.pushTry, $__23 = $__22.call($ctx, 13, null), $__23;
                         $ctx.state = 16, 16;
                         break;
                       case 16:
-                        $__23 = command.apply, $__10 = $__23, $__23;
-                        $__24 = $traceurRuntime.spread, $__11 = $__24, $__24;
-                        $__25 = $__11.call, $__26 = $__25.call($__11, $traceurRuntime, args), $__12 = $__26, $__26;
-                        $__27 = $__10.call, $__28 = $__27.call($__10, command, null, $__12), $__13 = $__28, $__28;
+                        $__24 = command.apply, $__11 = $__24, $__24;
+                        $__25 = $traceurRuntime.spread, $__12 = $__25, $__25;
+                        $__26 = $__12.call, $__27 = $__26.call($__12, $traceurRuntime, args), $__13 = $__27, $__27;
+                        $__28 = $__11.call, $__29 = $__28.call($__11, command, null, $__13), $__14 = $__29, $__29;
                         $ctx.state = 6, 6;
                         break;
                       case 6:
                         $ctx.state = 2, 2;
-                        return $__13;
+                        return $__14;
                       case 2:
-                        $__29 = $ctx.sent, $__14 = $__29, $__29;
+                        $__30 = $ctx.sent, $__15 = $__30, $__30;
                         $ctx.state = 4, 4;
                         break;
                       case 4:
-                        $ctx.returnValue = $__14, $__14;
+                        $ctx.returnValue = $__15, $__15;
                         $ctx.state = -2, -2;
                         break;
                       case 8:
-                        $__30 = $ctx.popTry, $__31 = $__30.call($ctx), $__31;
+                        $__31 = $ctx.popTry, $__32 = $__31.call($ctx), $__32;
                         $ctx.state = -2, -2;
                         break;
                       case 13:
-                        $__32 = $ctx.popTry, $__33 = $__32.call($ctx), $__33;
-                        $__34 = $ctx.storedException, error = $__34, $__34;
+                        $__33 = $ctx.popTry, $__34 = $__33.call($ctx), $__34;
+                        $__35 = $ctx.storedException, error = $__35, $__35;
                         $ctx.state = 11, 11;
                         break;
                       case 11:
-                        $__35 = console.error, $__36 = $__35.call(console, "modem error", error, "executing", args), $__36;
+                        $__36 = console.error, $__37 = $__36.call(console, "modem error", error, "executing", args), $__37;
                         $ctx.state = 12, 12;
                         break;
                       case 12:
@@ -24212,36 +25542,36 @@ module.exports = Scheduler;
                         $ctx.state = -2, -2;
                         break;
                       default:
-                        return $__37 = $ctx.end, $__38 = $__37.call($ctx), $__38;
+                        return $__38 = $ctx.end, $__39 = $__38.call($ctx), $__39;
                     }
-                }, $__9, this), $__39;
+                }, $__10, this), $__40;
               });
-              $__41 = $__17.call($__16, $__40);
+              $__42 = $__18.call($__17, $__41);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__41;
+              return $__42;
             case 2:
-              $__42 = $ctx.sent;
+              $__43 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__43 = $__42;
+              $__44 = $__43;
               $ctx.state = 8;
               break;
             case 9:
-              $__43 = $__15;
+              $__44 = $__16;
               $ctx.state = 8;
               break;
             case 8:
-              $ctx.returnValue = $__43;
+              $ctx.returnValue = $__44;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__8, this);
+      }, $__9, this);
     }),
     get version() {
       return modem.rawcommand("Version");
@@ -24253,18 +25583,18 @@ module.exports = Scheduler;
     get versionOK() {
       return modem.sversion && modem.sversion >= modem.sminVersion;
     },
-    vercommand: $traceurRuntime.initGeneratorFunction(function $__9() {
+    vercommand: $traceurRuntime.initGeneratorFunction(function $__10() {
       var $__7,
           args,
           $__3,
-          $__44,
           $__45,
           $__46,
           $__47,
           $__48,
           $__49,
           $__50,
-          $__51;
+          $__51,
+          $__52;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -24275,44 +25605,44 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__44 = modem.versionOK;
+              $__45 = modem.versionOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__44) ? 9 : 5;
+              $ctx.state = (!$__45) ? 9 : 5;
               break;
             case 9:
-              $__51 = null;
+              $__52 = null;
               $ctx.state = 10;
               break;
             case 5:
               $__7 = modem;
-              $__45 = modem.rawcommand;
-              $__46 = $__45.apply;
-              $__47 = $traceurRuntime.spread;
-              $__48 = $__47.call($traceurRuntime, args);
-              $__49 = $__46.call($__45, $__7, $__48);
+              $__46 = modem.rawcommand;
+              $__47 = $__46.apply;
+              $__48 = $traceurRuntime.spread;
+              $__49 = $__48.call($traceurRuntime, args);
+              $__50 = $__47.call($__46, $__7, $__49);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__49;
+              return $__50;
             case 2:
-              $__50 = $ctx.sent;
+              $__51 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__51 = $__50;
+              $__52 = $__51;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__51;
+              $ctx.returnValue = $__52;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__9, this);
+      }, $__10, this);
     }),
     get functions() {
       return modem.vercommand("Functions");
@@ -24323,18 +25653,18 @@ module.exports = Scheduler;
     get protocolOK() {
       return !!(modem.functions && modem.functions.PROTOCOLS && modem.initProtocols);
     },
-    sendcommand: $traceurRuntime.initGeneratorFunction(function $__52() {
+    sendcommand: $traceurRuntime.initGeneratorFunction(function $__53() {
       var $__7,
           args,
           $__4,
-          $__53,
           $__54,
           $__55,
           $__56,
           $__57,
           $__58,
           $__59,
-          $__60;
+          $__60,
+          $__61;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -24345,44 +25675,44 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__53 = modem.protocolOK;
+              $__54 = modem.protocolOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__53) ? 9 : 5;
+              $ctx.state = (!$__54) ? 9 : 5;
               break;
             case 9:
-              $__60 = null;
+              $__61 = null;
               $ctx.state = 10;
               break;
             case 5:
               $__7 = modem;
-              $__54 = modem.vercommand;
-              $__55 = $__54.apply;
-              $__56 = $traceurRuntime.spread;
-              $__57 = $__56.call($traceurRuntime, args);
-              $__58 = $__55.call($__54, $__7, $__57);
+              $__55 = modem.vercommand;
+              $__56 = $__55.apply;
+              $__57 = $traceurRuntime.spread;
+              $__58 = $__57.call($traceurRuntime, args);
+              $__59 = $__56.call($__55, $__7, $__58);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__58;
+              return $__59;
             case 2:
-              $__59 = $ctx.sent;
+              $__60 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__60 = $__59;
+              $__61 = $__60;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__60;
+              $ctx.returnValue = $__61;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__52, this);
+      }, $__53, this);
     }),
     get freeCells() {
       return modem.sendcommand("Free_Cell_Count");
@@ -24397,43 +25727,43 @@ module.exports = Scheduler;
       for (var args = [],
           $__5 = 0; $__5 < arguments.length; $__5++)
         args[$__5] = arguments[$__5];
-      return co.gocall($traceurRuntime.initGeneratorFunction(function $__61() {
+      return co.gocall($traceurRuntime.initGeneratorFunction(function $__62() {
         var $__7,
-            $__62,
             $__63,
             $__64,
             $__65,
             $__66,
             $__67,
-            $__68;
+            $__68,
+            $__69;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
                 $__7 = this;
-                $__62 = this;
-                $__63 = $__62.sendcommand;
-                $__64 = $__63.apply;
-                $__65 = $traceurRuntime.spread;
-                $__66 = $__65.call($traceurRuntime, args);
-                $__67 = $__64.call($__63, $__7, $__66);
+                $__63 = this;
+                $__64 = $__63.sendcommand;
+                $__65 = $__64.apply;
+                $__66 = $traceurRuntime.spread;
+                $__67 = $__66.call($traceurRuntime, args);
+                $__68 = $__65.call($__64, $__7, $__67);
                 $ctx.state = 6;
                 break;
               case 6:
                 $ctx.state = 2;
-                return $__67;
+                return $__68;
               case 2:
-                $__68 = $ctx.sent;
+                $__69 = $ctx.sent;
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.returnValue = $__68;
+                $ctx.returnValue = $__69;
                 $ctx.state = -2;
                 break;
               default:
                 return $ctx.end();
             }
-        }, $__61, this);
+        }, $__62, this);
       }), this);
     },
     get showModemStatus() {
@@ -24441,14 +25771,14 @@ module.exports = Scheduler;
     },
     session: function(callback) {
       return ra.detach((function() {
-        return co.go($traceurRuntime.initGeneratorFunction(function $__61() {
-          var $__69,
-              $__70,
+        return co.go($traceurRuntime.initGeneratorFunction(function $__62() {
+          var $__70,
               $__71,
               $__72,
               $__73,
               $__74,
-              $__75;
+              $__75,
+              $__76;
           return $traceurRuntime.createGeneratorInstance(function($ctx) {
             while (true)
               switch ($ctx.state) {
@@ -24456,42 +25786,42 @@ module.exports = Scheduler;
                   $ctx.state = (modem.protocolOK) ? 5 : 13;
                   break;
                 case 5:
-                  $__69 = modem.handle;
-                  $__70 = $__69.lock;
-                  $__71 = $__70.call($__69, callback);
+                  $__70 = modem.handle;
+                  $__71 = $__70.lock;
+                  $__72 = $__71.call($__70, callback);
                   $ctx.state = 6;
                   break;
                 case 6:
                   $ctx.state = 2;
-                  return $__71;
+                  return $__72;
                 case 2:
-                  $__72 = $ctx.sent;
+                  $__73 = $ctx.sent;
                   $ctx.state = 4;
                   break;
                 case 4:
-                  $ctx.returnValue = $__72;
+                  $ctx.returnValue = $__73;
                   $ctx.state = -2;
                   break;
                 case 13:
-                  $__73 = lu.returnNullPromise;
-                  $__74 = callback($__73);
+                  $__74 = lu.returnNullPromise;
+                  $__75 = callback($__74);
                   $ctx.state = 14;
                   break;
                 case 14:
                   $ctx.state = 10;
-                  return $__74;
+                  return $__75;
                 case 10:
-                  $__75 = $ctx.sent;
+                  $__76 = $ctx.sent;
                   $ctx.state = 12;
                   break;
                 case 12:
-                  $ctx.returnValue = $__75;
+                  $ctx.returnValue = $__76;
                   $ctx.state = -2;
                   break;
                 default:
                   return $ctx.end();
               }
-          }, $__61, this);
+          }, $__62, this);
         }));
       }));
     },
@@ -24503,11 +25833,11 @@ module.exports = Scheduler;
     }
   });
   function x() {
-    modem.session($traceurRuntime.initGeneratorFunction(function $__61(command) {
+    modem.session($traceurRuntime.initGeneratorFunction(function $__62(command) {
       var count,
-          $__76,
           $__77,
-          $__78;
+          $__78,
+          $__79;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
@@ -24519,25 +25849,25 @@ module.exports = Scheduler;
               $ctx.state = 4;
               break;
             case 4:
-              $__76 = command("Free_Cell_Count");
+              $__77 = command("Free_Cell_Count");
               $ctx.state = 10;
               break;
             case 10:
               $ctx.state = 6;
-              return $__76;
+              return $__77;
             case 6:
-              $__77 = $ctx.sent;
+              $__78 = $ctx.sent;
               $ctx.state = 8;
               break;
             case 8:
-              $__78 = $__77.COUNT;
-              count = $__78;
+              $__79 = $__78.COUNT;
+              count = $__79;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__61, this);
+      }, $__62, this);
     }));
   }
   require("watchStop")(configName)(__dirname + "/../templates/")(__dirname + "/../templates/locations/");
@@ -24575,7 +25905,7 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__61, this);
+    }, $__62, this);
   }
   express.application.rewrite = function rewrite(what, rewriter) {
     return this.all(what, (function(request, _, next) {
@@ -24585,50 +25915,50 @@ module.exports = Scheduler;
   };
   function staticData(value) {
     var contentType = arguments[1] !== (void 0) ? arguments[1] : "json";
-    return co.func($traceurRuntime.initGeneratorFunction(function $__79(_, response) {
-      var $__80,
-          $__81,
+    return co.func($traceurRuntime.initGeneratorFunction(function $__80(_, response) {
+      var $__81,
           $__82,
           $__83,
           $__84,
           $__85,
-          $__86;
+          $__86,
+          $__87;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__80 = response.contentType;
-              $__81 = $__80.call(response, contentType);
-              $__82 = $__81.end;
-              $__83 = value.then;
+              $__81 = response.contentType;
+              $__82 = $__81.call(response, contentType);
+              $__83 = $__82.end;
+              $__84 = value.then;
               $ctx.state = 11;
               break;
             case 11:
-              $ctx.state = ($__83) ? 1 : 7;
+              $ctx.state = ($__84) ? 1 : 7;
               break;
             case 1:
               $ctx.state = 2;
               return value;
             case 2:
-              $__84 = $ctx.sent;
+              $__85 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__85 = $__84;
+              $__86 = $__85;
               $ctx.state = 6;
               break;
             case 7:
-              $__85 = value;
+              $__86 = value;
               $ctx.state = 6;
               break;
             case 6:
-              $__86 = $__82.call($__81, $__85);
+              $__87 = $__83.call($__82, $__86);
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__79, this);
+      }, $__80, this);
     }));
   }
   function beautify(text) {
@@ -24646,6 +25976,50 @@ module.exports = Scheduler;
   logger.token("requestTime", (function(request, response) {
     return lu.formatms((new Date) - request.startTime) + "s";
   }));
+  var toBase64 = (function(str) {
+    return (new Buffer(str)).toString("base64");
+  });
+  var protect = (function(cb) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__80(response, request, next) {
+      return $traceurRuntime.createGeneratorInstance(function($ctx) {
+        while (true)
+          switch ($ctx.state) {
+            case 0:
+              $ctx.state = (auth && request.cookie.auth != auth.hash) ? 1 : 10;
+              break;
+            case 1:
+              $ctx.state = 2;
+              return co.sleep(200);
+            case 2:
+              $ctx.maybeThrow();
+              $ctx.state = 4;
+              break;
+            case 4:
+              $ctx.state = (request.headers.Authorization == toBase64((auth.name + ":" + auth.key))) ? 9 : 7;
+              break;
+            case 9:
+              response.cookie("auth", auth.hash, cookieInfinite);
+              $ctx.state = 10;
+              break;
+            case 7:
+              response.status(HTTPStatus.UNAUTHORIZED);
+              response.setHeader("WWW-Authenticate", "Basic realm=\"zjhkcgakicewc\"");
+              response.end();
+              $ctx.state = 8;
+              break;
+            case 8:
+              $ctx.state = -2;
+              break;
+            case 10:
+              cb(response, request, next);
+              $ctx.state = -2;
+              break;
+            default:
+              return $ctx.end();
+          }
+      }, $__80, this);
+    }));
+  });
   express().use(cookieParser()).use(function() {
     var timeout;
     var clearLastRequest = (function() {
@@ -24672,15 +26046,14 @@ module.exports = Scheduler;
       uid: "",
       json: null,
       get updateFile() {
-        return $traceurRuntime.initGeneratorFunction(function $__79() {
+        return $traceurRuntime.initGeneratorFunction(function $__80() {
           var file,
               obj,
-              $__87,
               $__88,
               $__89,
               $__90,
-              i,
               $__91,
+              i,
               $__92,
               $__93,
               $__94,
@@ -24688,6 +26061,7 @@ module.exports = Scheduler;
               $__96,
               $__97,
               $__98,
+              $__99,
               _;
           return $traceurRuntime.createGeneratorInstance(function($ctx) {
             while (true)
@@ -24708,24 +26082,24 @@ module.exports = Scheduler;
                   $ctx.state = 16;
                   break;
                 case 16:
-                  $__91 = JSON.parse;
-                  $__92 = co.cb;
-                  $__93 = fs.readFile;
-                  $__94 = $__92.call(co, $__93);
-                  $__95 = $__94(fn);
+                  $__92 = JSON.parse;
+                  $__93 = co.cb;
+                  $__94 = fs.readFile;
+                  $__95 = $__93.call(co, $__94);
+                  $__96 = $__95(fn);
                   $ctx.state = 10;
                   break;
                 case 10:
                   $ctx.state = 6;
-                  return $__95;
+                  return $__96;
                 case 6:
-                  $__96 = $ctx.sent;
+                  $__97 = $ctx.sent;
                   $ctx.state = 8;
                   break;
                 case 8:
-                  $__97 = String($__96);
-                  $__98 = $__91.call(JSON, $__97);
-                  file = $__98;
+                  $__98 = String($__97);
+                  $__99 = $__92.call(JSON, $__98);
+                  file = $__99;
                   $ctx.state = 12;
                   break;
                 case 12:
@@ -24745,29 +26119,29 @@ module.exports = Scheduler;
                   $ctx.state = 41;
                   break;
                 case 41:
-                  $__87 = [];
-                  $__88 = obj;
-                  for ($__89 in $__88)
-                    $__87.push($__89);
+                  $__88 = [];
+                  $__89 = obj;
+                  for ($__90 in $__89)
+                    $__88.push($__90);
                   $ctx.state = 33;
                   break;
                 case 33:
-                  $__90 = 0;
+                  $__91 = 0;
                   $ctx.state = 31;
                   break;
                 case 31:
-                  $ctx.state = ($__90 < $__87.length) ? 25 : 29;
+                  $ctx.state = ($__91 < $__88.length) ? 25 : 29;
                   break;
                 case 28:
-                  $__90++;
+                  $__91++;
                   $ctx.state = 31;
                   break;
                 case 25:
-                  i = $__87[$__90];
+                  i = $__88[$__91];
                   $ctx.state = 26;
                   break;
                 case 26:
-                  $ctx.state = (!(i in $__88)) ? 28 : 23;
+                  $ctx.state = (!(i in $__89)) ? 28 : 23;
                   break;
                 case 23:
                   if (obj.hasOwnProperty(i))
@@ -24784,7 +26158,7 @@ module.exports = Scheduler;
                 default:
                   return $ctx.end();
               }
-          }, $__79, this);
+          }, $__80, this);
         }).call(this);
       }
     });
@@ -24816,16 +26190,16 @@ module.exports = Scheduler;
           response.clearCookie(q);
       }
     response.end();
-  })).use(require("compression")({threshold: 0})).get("/debugHtml", co.func($traceurRuntime.initGeneratorFunction(function $__79(request, response) {
-    var $__99,
-        $__100,
+  })).use(require("compression")({threshold: 0})).get("/debugHtml", co.func($traceurRuntime.initGeneratorFunction(function $__80(request, response) {
+    var $__100,
         $__101,
         $__102,
         $__103,
         $__104,
         $__105,
         $__106,
-        $__107;
+        $__107,
+        $__108;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
@@ -24835,41 +26209,41 @@ module.exports = Scheduler;
             $ctx.state = 10;
             break;
           case 10:
-            $__99 = response.end;
-            $__100 = co.cb;
-            $__101 = fs.readFile;
-            $__102 = $__100.call(co, $__101);
-            $__103 = $__102(__dirname + "/../tmp/debug.html", "utf8");
+            $__100 = response.end;
+            $__101 = co.cb;
+            $__102 = fs.readFile;
+            $__103 = $__101.call(co, $__102);
+            $__104 = $__103(__dirname + "/../tmp/debug.html", "utf8");
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__103;
+            return $__104;
           case 2:
-            $__104 = $ctx.sent;
+            $__105 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__105 = $__104.replace;
-            $__106 = $__105.call($__104, /\b(script|manifest)\b/g, (function($) {
+            $__106 = $__105.replace;
+            $__107 = $__106.call($__105, /\b(script|manifest)\b/g, (function($) {
               return "no" + $;
             }));
-            $__107 = $__99.call(response, $__106);
+            $__108 = $__100.call(response, $__107);
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__79, this);
-  }))).post("/debugHtml", co.func($traceurRuntime.initGeneratorFunction(function $__108(request, response) {
-    var $__109,
-        $__110,
+    }, $__80, this);
+  }))).post("/debugHtml", co.func($traceurRuntime.initGeneratorFunction(function $__109(request, response) {
+    var $__110,
         $__111,
         $__112,
         $__113,
         $__114,
         $__115,
-        $__116;
+        $__116,
+        $__117;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
@@ -24878,28 +26252,28 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            $__109 = co.cb;
-            $__110 = fs.writeFile;
-            $__111 = $__109.call(co, $__110);
-            $__112 = lu.readStream;
-            $__113 = $__112.call(lu, request);
+            $__110 = co.cb;
+            $__111 = fs.writeFile;
+            $__112 = $__110.call(co, $__111);
+            $__113 = lu.readStream;
+            $__114 = $__113.call(lu, request);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__113;
+            return $__114;
           case 2:
-            $__114 = $ctx.sent;
+            $__115 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__115 = beautify($__114);
-            $__116 = $__111(__dirname + "/../tmp/debug.html", $__115);
+            $__116 = beautify($__115);
+            $__117 = $__112(__dirname + "/../tmp/debug.html", $__116);
             $ctx.state = 8;
             break;
           case 8:
             $ctx.state = 10;
-            return $__116;
+            return $__117;
           case 10:
             $ctx.maybeThrow();
             $ctx.state = 12;
@@ -24911,15 +26285,14 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__108, this);
-  }))).get("/templates", staticData(co.go($traceurRuntime.initGeneratorFunction(function $__117() {
+    }, $__109, this);
+  }))).get("/templates", staticData(co.go($traceurRuntime.initGeneratorFunction(function $__118() {
     var $__7,
         files,
         ret,
         $__0,
         $__1,
         f,
-        $__118,
         $__119,
         $__120,
         $__121,
@@ -24928,7 +26301,8 @@ module.exports = Scheduler;
         $__124,
         $__125,
         $__126,
-        $__127;
+        $__127,
+        $__128;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
@@ -24956,34 +26330,34 @@ module.exports = Scheduler;
             break;
           case 20:
             $__7 = ret;
-            $__118 = ret.push;
-            $__119 = $__118.apply;
-            $__120 = $traceurRuntime.spread;
-            $__121 = cfg.readTree;
-            $__122 = files[f];
+            $__119 = ret.push;
+            $__120 = $__119.apply;
+            $__121 = $traceurRuntime.spread;
+            $__122 = cfg.readTree;
+            $__123 = files[f];
             $ctx.state = 14;
             break;
           case 14:
             $ctx.state = 6;
-            return $__122;
+            return $__123;
           case 6:
-            $__123 = $ctx.sent;
+            $__124 = $ctx.sent;
             $ctx.state = 8;
             break;
           case 8:
-            $__124 = $__121.call(cfg, $__123);
+            $__125 = $__122.call(cfg, $__124);
             $ctx.state = 16;
             break;
           case 16:
             $ctx.state = 10;
-            return $__124;
+            return $__125;
           case 10:
-            $__125 = $ctx.sent;
+            $__126 = $ctx.sent;
             $ctx.state = 12;
             break;
           case 12:
-            $__126 = $__120.call($traceurRuntime, $__125);
-            $__127 = $__119.call($__118, $__7, $__126);
+            $__127 = $__121.call($traceurRuntime, $__126);
+            $__128 = $__120.call($__119, $__7, $__127);
             $ctx.state = 18;
             break;
           case 21:
@@ -24993,10 +26367,9 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__117, this);
-  })))).get("/messages", staticData(co.go($traceurRuntime.initGeneratorFunction(function $__128() {
-    var $__129,
-        $__130,
+    }, $__118, this);
+  })))).get("/messages", staticData(co.go($traceurRuntime.initGeneratorFunction(function $__129() {
+    var $__130,
         $__131,
         $__132,
         $__133,
@@ -25004,50 +26377,53 @@ module.exports = Scheduler;
         $__135,
         $__136,
         $__137,
-        $__138;
+        $__138,
+        $__139;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__129 = JSON.stringify;
-            $__130 = cfg.read;
-            $__131 = co.cb;
-            $__132 = fs.readFile;
-            $__133 = $__131.call(co, $__132);
-            $__134 = $__133(__dirname + "/../templates/messages.csv", "utf8");
+            $__130 = JSON.stringify;
+            $__131 = cfg.read;
+            $__132 = co.cb;
+            $__133 = fs.readFile;
+            $__134 = $__132.call(co, $__133);
+            $__135 = $__134(__dirname + "/../templates/messages.csv", "utf8");
             $ctx.state = 10;
             break;
           case 10:
             $ctx.state = 2;
-            return $__134;
+            return $__135;
           case 2:
-            $__135 = $ctx.sent;
+            $__136 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__136 = $__130.call(cfg, $__135, "id");
+            $__137 = $__131.call(cfg, $__136, "id");
             $ctx.state = 12;
             break;
           case 12:
             $ctx.state = 6;
-            return $__136;
+            return $__137;
           case 6:
-            $__137 = $ctx.sent;
+            $__138 = $ctx.sent;
             $ctx.state = 8;
             break;
           case 8:
-            $__138 = $__129.call(JSON, $__137);
+            $__139 = $__130.call(JSON, $__138);
             $ctx.state = 14;
             break;
           case 14:
-            $ctx.returnValue = $__138;
+            $ctx.returnValue = $__139;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__128, this);
-  })))).post("/command", co.func($traceurRuntime.initGeneratorFunction(function $__139(request, response) {
+    }, $__129, this);
+  })))).get("/login", protect((function(request, response) {
+    return response.end();
+  }))).post("/command", protect(co.func($traceurRuntime.initGeneratorFunction(function $__140(request, response) {
     var deviceId,
         device,
         deviceCommand,
@@ -25121,18 +26497,18 @@ module.exports = Scheduler;
             break;
           case 20:
             $ctx.state = 12;
-            return modem.session($traceurRuntime.initGeneratorFunction(function $__140(command) {
+            return modem.session($traceurRuntime.initGeneratorFunction(function $__141(command) {
               var $__0,
                   $__1,
                   c,
                   answer,
                   e,
-                  $__141,
                   $__142,
                   $__143,
                   $__144,
                   $__145,
-                  $__146;
+                  $__146,
+                  $__147;
               return $traceurRuntime.createGeneratorInstance(function($ctx) {
                 while (true)
                   switch ($ctx.state) {
@@ -25184,25 +26560,25 @@ module.exports = Scheduler;
                       $ctx.state = (errors.length) ? 24 : 27;
                       break;
                     case 24:
-                      $__141 = commands[0];
-                      $__142 = $__141.group;
-                      $__143 = {
+                      $__142 = commands[0];
+                      $__143 = $__142.group;
+                      $__144 = {
                         id: "Cur_Condition",
-                        group: $__142
+                        group: $__143
                       };
-                      $__144 = command($__143);
+                      $__145 = command($__144);
                       $ctx.state = 25;
                       break;
                     case 25:
                       $ctx.state = 21;
-                      return $__144;
+                      return $__145;
                     case 21:
-                      $__145 = $ctx.sent;
+                      $__146 = $ctx.sent;
                       $ctx.state = 23;
                       break;
                     case 23:
-                      $__146 = $__145.CUR_CONDITION;
-                      newstate = $__146;
+                      $__147 = $__146.CUR_CONDITION;
+                      newstate = $__147;
                       $ctx.state = 27;
                       break;
                     case 27:
@@ -25218,7 +26594,7 @@ module.exports = Scheduler;
                     default:
                       return $ctx.end();
                   }
-              }, $__140, this);
+              }, $__141, this);
             }));
           case 12:
             $ctx.maybeThrow();
@@ -25241,14 +26617,13 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__139, this);
-  }))).all("/devices", (modem.devices = new JSONservice(__dirname + "/../var/devices", {})).httpService).all("/rooms", (modem.places = new JSONservice(__dirname + "/../var/rooms", {})).httpService).post("/modem", co.func($traceurRuntime.initGeneratorFunction(function $__140(request, response, next) {
+    }, $__140, this);
+  })))).all("/devices", protect((modem.devices = new JSONservice(__dirname + "/../var/devices", {})).httpService)).all("/rooms", protect((modem.places = new JSONservice(__dirname + "/../var/rooms", {})).httpService)).post("/modem", protect(co.func($traceurRuntime.initGeneratorFunction(function $__141(request, response, next) {
     var $__7,
         ret,
-        path,
+        undefined,
         func,
         args,
-        $__147,
         $__148,
         $__149,
         $__150,
@@ -25257,6 +26632,7 @@ module.exports = Scheduler;
         $__153,
         $__154,
         $__155,
+        $__156,
         error;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
@@ -25266,32 +26642,32 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            path = JSON.parse(request.query.path);
+            path$__8 = JSON.parse(request.query.path);
             func = JSON.parse(request.query.func);
             args = JSON.parse(request.query.args);
             $ctx.state = 10;
             break;
           case 10:
-            $__147 = modem.devices;
-            $__148 = $__147[path];
-            $__7 = $__148;
-            $__149 = $__148[func];
-            $__150 = $__149.apply;
-            $__151 = $traceurRuntime.spread;
-            $__152 = $__151.call($traceurRuntime, args);
-            $__153 = $__150.call($__149, $__7, $__152);
+            $__148 = modem.devices;
+            $__149 = $__148[path$__8];
+            $__7 = $__149;
+            $__150 = $__149[func];
+            $__151 = $__150.apply;
+            $__152 = $traceurRuntime.spread;
+            $__153 = $__152.call($traceurRuntime, args);
+            $__154 = $__151.call($__150, $__7, $__153);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__153;
+            return $__154;
           case 2:
-            $__154 = $ctx.sent;
+            $__155 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__155 = {result: $__154};
-            ret = $__155;
+            $__156 = {result: $__155};
+            ret = $__156;
             $ctx.state = 8;
             break;
           case 8:
@@ -25318,26 +26694,26 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__140, this);
-  }))).rewrite(/^\/apple\-touch\-icon/, (function(url) {
+    }, $__141, this);
+  })))).rewrite(/^\/apple\-touch\-icon/, (function(url) {
     return ("/touch" + path.extname(url));
   })).rewrite(/^\/favicon.ico$/, (function() {
     return "/favicon96.ico";
-  })).get("/images", co.func($traceurRuntime.initGeneratorFunction(function $__156(request, response, next) {
+  })).get("/images", co.func($traceurRuntime.initGeneratorFunction(function $__157(request, response, next) {
     var path,
         images,
         written,
-        $__157,
         $__158,
         $__159,
         $__160,
-        name,
         $__161,
+        name,
         $__162,
         $__163,
         $__164,
         $__165,
-        $__166;
+        $__166,
+        $__167;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
@@ -25359,29 +26735,29 @@ module.exports = Scheduler;
             $ctx.state = 31;
             break;
           case 31:
-            $__157 = [];
-            $__158 = images;
-            for ($__159 in $__158)
-              $__157.push($__159);
+            $__158 = [];
+            $__159 = images;
+            for ($__160 in $__159)
+              $__158.push($__160);
             $ctx.state = 27;
             break;
           case 27:
-            $__160 = 0;
+            $__161 = 0;
             $ctx.state = 25;
             break;
           case 25:
-            $ctx.state = ($__160 < $__157.length) ? 21 : 23;
+            $ctx.state = ($__161 < $__158.length) ? 21 : 23;
             break;
           case 16:
-            $__160++;
+            $__161++;
             $ctx.state = 25;
             break;
           case 21:
-            name = $__157[$__160];
+            name = $__158[$__161];
             $ctx.state = 22;
             break;
           case 22:
-            $ctx.state = (!(name in $__158)) ? 16 : 19;
+            $ctx.state = (!(name in $__159)) ? 16 : 19;
             break;
           case 19:
             $ctx.state = (images.hasOwnProperty(name)) ? 13 : 16;
@@ -25394,21 +26770,21 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            $__161 = response.write;
-            $__162 = JSON.stringify;
-            $__163 = images[name];
+            $__162 = response.write;
+            $__163 = JSON.stringify;
+            $__164 = images[name];
             $ctx.state = 10;
             break;
           case 10:
             $ctx.state = 6;
-            return $__163;
+            return $__164;
           case 6:
-            $__164 = $ctx.sent;
+            $__165 = $ctx.sent;
             $ctx.state = 8;
             break;
           case 8:
-            $__165 = $__162.call(JSON, $__164);
-            $__166 = $__161.call(response, $__165);
+            $__166 = $__163.call(JSON, $__165);
+            $__167 = $__162.call(response, $__166);
             $ctx.state = 12;
             break;
           case 12:
@@ -25423,7 +26799,7 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__156, this);
+    }, $__157, this);
   }))).rewrite(/^\/index\d+\.html/, (function(_) {
     return "/index.html";
   })).rewrite(/^\/$/, (function(_) {
@@ -25446,43 +26822,45 @@ module.exports = Scheduler;
       useGlobal: true,
       ignoreUndefined: true
     });
+    require("modemstub");
+    modem.retryInterval = 2000000;
     global.Modem = Modem;
     global.mm = modem;
     global.c = (function() {
       for (var args = [],
           $__6 = 0; $__6 < arguments.length; $__6++)
         args[$__6] = arguments[$__6];
-      modem.session($traceurRuntime.initGeneratorFunction(function $__167(command) {
-        var $__168,
-            $__169,
+      modem.session($traceurRuntime.initGeneratorFunction(function $__168(command) {
+        var $__169,
             $__170,
             $__171,
-            $__172;
+            $__172,
+            $__173;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
-                $__168 = command.apply;
-                $__169 = $traceurRuntime.spread;
-                $__170 = $__169.call($traceurRuntime, args);
-                $__171 = $__168.call(command, null, $__170);
+                $__169 = command.apply;
+                $__170 = $traceurRuntime.spread;
+                $__171 = $__170.call($traceurRuntime, args);
+                $__172 = $__169.call(command, null, $__171);
                 $ctx.state = 6;
                 break;
               case 6:
                 $ctx.state = 2;
-                return $__171;
+                return $__172;
               case 2:
-                $__172 = $ctx.sent;
+                $__173 = $ctx.sent;
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.returnValue = $__172;
+                $ctx.returnValue = $__173;
                 $ctx.state = -2;
                 break;
               default:
                 return $ctx.end();
             }
-        }, $__167, this);
+        }, $__168, this);
       }));
     });
     c.v = c.bind(this, "Version");
@@ -25525,7 +26903,58 @@ module.exports = Scheduler;
       } )
     }()
 
-},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js","net":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","repl":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/watchStop.js":[function(require,module,exports){
+},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","modemstub":"/home/vadzim/v/work/nerojs/src/modemstub.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js","net":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
+!function () {
+      !function ( body ) {
+        var now = global.performance || Date
+        var total = 0
+        var start = now.now()
+        var oldRequire = require
+        var newRequire = function () {
+          total += now.now() - start
+          require = oldRequire
+          try {
+            return oldRequire.apply( this, arguments )
+          }
+          finally {
+            require = newRequire
+            start = now.now()
+          }
+        }
+        require = newRequire
+        try {
+          body()
+        }
+        finally {
+          require = oldRequire
+          total += now.now() - start
+          total /= 1000
+          if ( !global.__require_stats__ )
+            global.__require_stats__ = {}
+          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/uid.js" ] = total
+        }
+      }( function () {
+        "use strict";
+"use strict";
+var counter = 0;
+module.exports = function uid(obj) {
+  var i = (++counter).toString(36);
+  var r = parseInt(Math.random().toString().slice(2, 17)).toString(36);
+  var id = (r.length + 9).toString(36) + r + i;
+  if (obj == null)
+    return id;
+  else {
+    obj.uid = id;
+    return obj;
+  }
+};
+
+//# sourceMappingURL=uid.map
+//# sourceURL=/home/vadzim/v/work/nerojs/src/uid.js
+      } )
+    }()
+
+},{}],"/home/vadzim/v/work/nerojs/src/watchStop.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
