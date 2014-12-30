@@ -22359,7 +22359,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -26359,6 +26359,7 @@ module.exports = Scheduler;
   var auth = lu.catch((function() {
     return YAML.load(authName);
   }), null);
+  console.log(auth);
   if (auth && !auth.modem)
     throw new Error("modem name required in user.conf");
   if (auth && !auth.name)

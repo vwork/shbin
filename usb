@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+while true;
+do
+	date
+	echo starting usb
+	date >>/tmp/nju.log
+	echo starting usb >>/tmp/nju.log
+	./usb2tcp $1;
+	echo waiting 2 seconds before restarting...
+	sleep 2
+done
