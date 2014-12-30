@@ -1,5 +1,7 @@
 #!/bin/sh
 
+cd /home/sh/shgit
+./usb2tcp &
 sudo -u sh ./call_update
 # ./call_update
 
