@@ -21597,7 +21597,120 @@ exports.createCommandSequence = createCommandSequence;
       } )
     }()
 
-},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/co.js":[function(require,module,exports){
+},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/checkreboot.js":[function(require,module,exports){
+!function () {
+      !function ( body ) {
+        var now = global.performance || Date
+        var total = 0
+        var start = now.now()
+        var oldRequire = require
+        var newRequire = function () {
+          total += now.now() - start
+          require = oldRequire
+          try {
+            return oldRequire.apply( this, arguments )
+          }
+          finally {
+            require = newRequire
+            start = now.now()
+          }
+        }
+        require = newRequire
+        try {
+          body()
+        }
+        finally {
+          require = oldRequire
+          total += now.now() - start
+          total /= 1000
+          if ( !global.__require_stats__ )
+            global.__require_stats__ = {}
+          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/checkreboot.js" ] = total
+        }
+      }( function () {
+        "use strict";
+var co = require("co");
+var fs = require("fs");
+var exec = co.cb(require("child_process").exec);
+var currentVersion = 1;
+var file = "/etc/shver";
+co.go($traceurRuntime.initGeneratorFunction(function $__0() {
+  var saveVersion,
+      $__1,
+      $__2,
+      $__3,
+      $__4,
+      $__5,
+      $__6,
+      _ignore;
+  return $traceurRuntime.createGeneratorInstance(function($ctx) {
+    while (true)
+      switch ($ctx.state) {
+        case 0:
+          currentVersion = String(currentVersion);
+          $ctx.state = 28;
+          break;
+        case 28:
+          $ctx.pushTry(9, null);
+          $ctx.state = 12;
+          break;
+        case 12:
+          $__1 = co.cb;
+          $__2 = fs.readFile;
+          $__3 = $__1.call(co, $__2);
+          $__4 = $__3(file);
+          $ctx.state = 6;
+          break;
+        case 6:
+          $ctx.state = 2;
+          return $__4;
+        case 2:
+          $__5 = $ctx.sent;
+          $ctx.state = 4;
+          break;
+        case 4:
+          $__6 = String($__5);
+          saveVersion = $__6;
+          $ctx.state = 8;
+          break;
+        case 8:
+          $ctx.popTry();
+          $ctx.state = 14;
+          break;
+        case 9:
+          $ctx.popTry();
+          _ignore = $ctx.storedException;
+          $ctx.state = 14;
+          break;
+        case 14:
+          $ctx.state = (saveVersion != currentVersion) ? 18 : -2;
+          break;
+        case 18:
+          $ctx.state = 19;
+          return co.sleep(5000);
+        case 19:
+          $ctx.maybeThrow();
+          $ctx.state = 21;
+          break;
+        case 21:
+          $ctx.state = 23;
+          return exec("reboot");
+        case 23:
+          $ctx.maybeThrow();
+          $ctx.state = -2;
+          break;
+        default:
+          return $ctx.end();
+      }
+  }, $__0, this);
+}));
+
+//# sourceMappingURL=checkreboot.map
+//# sourceURL=/home/vadzim/v/work/nerojs/src/checkreboot.js
+      } )
+    }()
+
+},{"child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false}],"/home/vadzim/v/work/nerojs/src/co.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22359,7 +22472,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -26323,6 +26436,7 @@ module.exports = Scheduler;
         module.exports = function() {
   "use strict";
   var $__62 = $traceurRuntime.initGeneratorFunction(readFiles);
+  require("checkreboot");
   require("platform");
   var repl = false;
   var YAML = require("yamljs");
@@ -27911,7 +28025,7 @@ module.exports = Scheduler;
       } )
     }()
 
-},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","modemstub":"/home/vadzim/v/work/nerojs/src/modemstub.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js","net":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
+},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","modemstub":"/home/vadzim/v/work/nerojs/src/modemstub.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js","net":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
