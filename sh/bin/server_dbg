@@ -21649,9 +21649,9 @@ co.go($traceurRuntime.initGeneratorFunction(function $__0() {
       switch ($ctx.state) {
         case 0:
           currentVersion = String(currentVersion);
-          $ctx.state = 30;
+          $ctx.state = 34;
           break;
-        case 30:
+        case 34:
           $ctx.pushTry(9, null);
           $ctx.state = 12;
           break;
@@ -21684,23 +21684,30 @@ co.go($traceurRuntime.initGeneratorFunction(function $__0() {
           $ctx.state = 14;
           break;
         case 14:
-          $ctx.state = (saveVersion != currentVersion) ? 26 : -2;
+          $ctx.state = (saveVersion != currentVersion) ? 30 : -2;
           break;
-        case 26:
+        case 30:
           console.log("******** SERVER IS ABOUT TO REBOOT ********".red);
-          $ctx.state = 27;
+          $ctx.state = 31;
           break;
-        case 27:
+        case 31:
           $ctx.state = 19;
-          return co.sleep(5000);
+          return co.cb(fs.writeFile)(file, currentVersion);
         case 19:
           $ctx.maybeThrow();
           $ctx.state = 21;
           break;
         case 21:
           $ctx.state = 23;
-          return exec("reboot");
+          return co.sleep(5000);
         case 23:
+          $ctx.maybeThrow();
+          $ctx.state = 25;
+          break;
+        case 25:
+          $ctx.state = 27;
+          return exec("reboot");
+        case 27:
           $ctx.maybeThrow();
           $ctx.state = -2;
           break;
@@ -22477,7 +22484,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
