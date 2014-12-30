@@ -2,6 +2,7 @@
 
 while true;
 do
+	sudo -u sh git pull
 	date
 	echo starting server
 	date >>/tmp/nj.log
