@@ -16567,12 +16567,12 @@ module.exports = {DB: DB};
       }( function () {
         "use strict";
 require("platform");
+require("colors");
 var lodash = require("lodash");
 var os = require("os");
 var co = require("co");
 var dns = require("native-dns");
 var YAML = require("yamljs");
-require("colors");
 var configName = process.argv[2] || __dirname + "/../boss.conf";
 var config = YAML.load(configName).dns;
 config = lodash.merge({
