@@ -2,7 +2,6 @@
 
 while true;
 do
-	sudo -u sh git pull
 	date
 	echo starting boss
 	date >>/tmp/njb.log
