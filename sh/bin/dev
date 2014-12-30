@@ -1,0 +1,268 @@
+#!/usr/bin/node --harmony
+
+"use strict"
+
+// let debug = true
+let compress = false
+let sourceMapsWorkAround = true
+
+let path = require( "path" )
+
+let sourceDir = path.resolve( path.dirname( __filename ) + "/../src" ) + "/"
+let tmpDir = path.resolve( path.dirname( __filename ) + "/../tmp" ) + "/"
+let tmpIndex = tmpDir + "index.js"
+
+process.env.NODE_PATH = sourceDir + path.delimiter + process.env.NODE_PATH
+
+require( "../src/watchStop" )
+( require.resolve( "../src/html" ) )
+( require.resolve( "../src/loadhtml" ) )
+
+let _ = require( "lodash" )
+let browserify = require( "browserify" )
+let watchify = require( "watchify" )
+// let reactify = require( "reactify" )
+let es6ify = require( "../src/es6ify" )
+let fs = require( "fs" )
+let zlib = require( "zlib" )
+let through = require( "through" )
+let jsp = require( "uglify-js" ).parser
+let pro = require( "uglify-js" ).uglify
+let html = require( "../src/html" )
+let loadhtml = require( "../src/loadhtml" )
+
+require( "colors" )
+
+function uglify( orig_code ) {
+	let ast = jsp.parse( orig_code ) // parse code and get the initial AST
+	ast = pro.ast_mangle( ast ) // get a new AST with mangled names
+	ast = pro.ast_squeeze( ast ) // get an AST with compression optimizations
+	let final_code = pro.gen_code( ast )
+}
+
+es6ify.traceurOverrides = { asyncFunctions: true }
+
+let src = /\/src\/.*?\.js$/
+
+// let reactifyTransform = T( src, function ( file ) {
+// 	return reactify.call( this, file, { everything: true } )
+// } )
+
+let es6ifyAll = es6ify.configure( new RegExp( "" ) )
+let es6ifyTransform = T( src, function () {
+	return es6ifyAll.apply( this, arguments )
+} )
+
+try { fs.mkdirSync( tmpDir ) } catch ( _ ) {}
+fs.writeFileSync( tmpIndex, "" )
+
+createES6task( {
+	name: "INDEX",
+	source: tmpIndex,
+	dest: "./www/js/index.js",
+	debug: true,
+	saveIdents: "window",
+} )
+
+createES6task( {
+	name: "INDEX.MIN",
+	source: tmpIndex,
+	dest: "./www/js/index.min.js",
+	debug: false,
+	saveIdents: "window",
+} )
+
+createES6task( {
+	name: "SERVER",
+	external: true,
+	source: sourceDir + "server.js",
+	dest: "./bin/server_dbg",
+	debug: true,
+	saveIdents: "global",
+} )
+
+createES6task( {
+	name: "BOSS",
+	external: true,
+	source: sourceDir + "boss.js",
+	dest: "./bin/boss_dbg",
+	debug: true,
+	saveIdents: "global",
+} )
+
+createES6task( {
+	name: "SERVER.MIN",
+	external: true,
+	source: sourceDir + "server.js",
+	dest: "./bin/server",
+	debug: false,
+	saveIdents: "global",
+} )
+
+function T( src, proc ) { return function ( file ) {
+	return !src.test( file ) ? through() : proc.apply( this, arguments )
+} }
+
+function createES6task( options ) {
+	function createDest() {
+		let ret = through()
+		let chunks = []
+		ret.on( "data", function ( chunk ) { chunks.push( chunk ) } )
+		ret.on( "end", function () {
+			chunks = Buffer.concat( chunks ).toString()
+			if ( sourceMapsWorkAround && !options.external && options.debug )
+				chunks = chunks.replace( "\n", "" )
+			if ( options.saveIdents ) {
+				let r = /\.([a-zA-Z\$][a-zA-Z0-9\$_]+)/g
+				let ii = []
+				let m
+				while ( m = r.exec( chunks ) )
+					ii.push( m[ 1 ] )
+				ii.sort()
+				chunks = options.saveIdents + ".__UsedScriptIdentifiers__+=',"
+					+ ii.filter( function ( x, i, a ) { return x != a[ i - 1 ] } )
+					+ "';"
+					+ chunks
+			}
+			if ( options.external )
+				chunks = "#!/usr/bin/env node\n\n" + chunks
+			let dest
+			if ( options.external ) {
+				try { fs.unlinkSync( options.dest ) } catch ( e ) {}
+				dest = fs.createWriteStream( options.dest, { mode: parseInt( "0777", 8 ) } )
+			}
+			else if ( compress ) {
+				dest = zlib.createGzip()
+				dest.pipe( fs.createWriteStream( options.dest + ".gz" ) )
+			}
+			else
+				dest = fs.createWriteStream( options.dest )
+			dest.on( "close", function () {
+				console.log( options.name.grey + ": " + "Created".green + " '" + options.dest.cyan + "'" )
+			} )
+			dest.end( chunks )
+		} )
+		return ret
+	}
+	let cache = {}
+	let packageCache = {}
+	let opts = {
+		cache: cache,
+		packageCache: packageCache,
+		fullPaths: true,
+		debug: options.debug && !options.external,
+		detectGlobals: !options.external,
+		insertGlobals: !options.external,
+ 	}
+ 	if ( options.external )
+ 		opts.builtins = {}
+	let w
+	w = browserify( opts )
+		// .transform( reactifyTransform )
+		.transform( es6ifyTransform )
+		.add( es6ify.runtime )
+		.exclude( "express" )
+		.exclude( "compression" )
+		.exclude( "traceur" )
+		.require( require.resolve( options.source ), {
+			entry: true,
+		} )
+		.on( "file", function ( file ) {
+			console.log( options.name.grey + ": Read '" + file.yellow + "'" )
+		} )
+	if ( !options.debug )
+		w = w.transform( { global: true }, "uglifyify" )
+	w = watchify( w )
+	w.on( "update", update )
+	update()
+	function update() {
+		w
+		.bundle()
+		.pipe( createDest() )
+	}
+}
+
+let manifestSrc = path.resolve( __dirname + "/../src/index.manifest" )
+let manifestDst = path.resolve( __dirname + "/../www/index.manifest" )
+let indexSrc = path.resolve( __dirname + "/../src/index.html" )
+let indexDst = path.resolve( __dirname + "/../www/index.html" )
+
+function putTimestamp( text ) {
+	return text.replace( "###TIMESTAMP###", "!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: " + Date.now() )
+}
+
+let manifestUpdater = thread( function* self( what, filename ) {
+	if ( filename == indexDst || filename == manifestDst )
+		return
+	if ( self.running ) {
+		self.rerun = true
+		return
+	}
+
+	self.running = true
+	try {
+		do {
+			yield [ function ( cb ) { setTimeout( cb, 300 ) } ]
+			self.rerun = false
+
+			console.log( "updating " + indexDst )
+			let modules = {}
+			let text = html.stringify( yield* loadhtml.load( indexSrc, { modules: modules } ) )
+			modules = Object.keys( modules ).map( function ( n ) {
+				return "require(" + JSON.stringify( n ) + ")\n"
+			} ).join( "" )
+			+ "global.require = " + function r( name ) {
+				global.require = null
+				try {
+					return require.apply( this, arguments )
+				}
+				finally {
+					global.require = r
+				}
+			}
+			if ( String( yield [ fs.readFile, tmpIndex ] ) != modules )
+				yield [ fs.writeFile, tmpIndex, modules ]
+			yield [ fs.writeFile, indexDst, putTimestamp( text ) ]
+
+			console.log( "updating " + manifestDst )
+			let manifest = yield [ fs.readFile, manifestSrc, "utf8" ]
+			yield [ fs.writeFile, manifestDst, putTimestamp( manifest ) ]
+		} while ( self.rerun )
+	}
+	finally {
+		self.running = false
+	}
+} )
+
+manifestUpdater()
+
+function watchDir( dir, cb ) {
+	dir = path.resolve( dir )
+	if ( dir != "/" )
+		dir += "/"
+	return fs.watch( dir, function ( what, filename ) {
+		return cb( what, dir + filename )
+	} )
+}
+
+watchDir( __dirname + "/../", manifestUpdater )
+watchDir( __dirname + "/../src/", manifestUpdater )
+watchDir( __dirname + "/../www/", manifestUpdater )
+watchDir( __dirname + "/../www/js/", manifestUpdater )
+watchDir( __dirname + "/../www/images/", manifestUpdater )
+watchDir( __dirname + "/../www/images/menu/", manifestUpdater )
+watchDir( __dirname + "/../templates/", manifestUpdater )
+watchDir( __dirname + "/../templates/locations/", manifestUpdater )
+
+function thread( fun ) { return function () {
+	let f = fun.apply( this, arguments )
+	!function walk( error, result ) {
+		let i = error ? f.throw( error ) : f.next( result )
+		if ( i.done ) return i.value
+		i.value[ 0 ].apply( null, i.value.slice( 1 ).concat( [ walk ] ) )
+	}()
+} }
+
+process.on( "uncaughtException", function ( error ) {
+	console.log( error + "\n" + ( error && error.stack ) )
+} )
