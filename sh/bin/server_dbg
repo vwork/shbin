@@ -21160,6 +21160,7 @@ var Immutable = require("immutable");
 var co = require("co");
 var ra = require("ra");
 var fs = require("fs");
+var UID = require("uid");
 var MAX_CACHE_SIZE = 10000;
 var SLEEP_BETWEEN_SAVES = 300;
 var mkdir = co.cb(fs.mkdir);
@@ -21478,7 +21479,7 @@ function isDataLongerThan(maxLength, data) {
       } )
     }()
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js"}],"/home/vadzim/v/work/nerojs/src/actionToCommands.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/actionToCommands.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22358,7 +22359,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
