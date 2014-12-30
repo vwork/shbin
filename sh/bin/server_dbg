@@ -21629,6 +21629,7 @@ exports.createCommandSequence = createCommandSequence;
         }
       }( function () {
         "use strict";
+require("colors");
 var co = require("co");
 var fs = require("fs");
 var exec = co.cb(require("child_process").exec);
@@ -21648,9 +21649,9 @@ co.go($traceurRuntime.initGeneratorFunction(function $__0() {
       switch ($ctx.state) {
         case 0:
           currentVersion = String(currentVersion);
-          $ctx.state = 28;
+          $ctx.state = 30;
           break;
-        case 28:
+        case 30:
           $ctx.pushTry(9, null);
           $ctx.state = 12;
           break;
@@ -21683,9 +21684,13 @@ co.go($traceurRuntime.initGeneratorFunction(function $__0() {
           $ctx.state = 14;
           break;
         case 14:
-          $ctx.state = (saveVersion != currentVersion) ? 18 : -2;
+          $ctx.state = (saveVersion != currentVersion) ? 26 : -2;
           break;
-        case 18:
+        case 26:
+          console.log("******** SERVER IS ABOUT TO REBOOT ********".red);
+          $ctx.state = 27;
+          break;
+        case 27:
           $ctx.state = 19;
           return co.sleep(5000);
         case 19:
@@ -21710,7 +21715,7 @@ co.go($traceurRuntime.initGeneratorFunction(function $__0() {
       } )
     }()
 
-},{"child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false}],"/home/vadzim/v/work/nerojs/src/co.js":[function(require,module,exports){
+},{"child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}],"/home/vadzim/v/work/nerojs/src/co.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22472,7 +22477,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
