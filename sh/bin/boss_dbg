@@ -16752,7 +16752,7 @@ createServer("udp6");
         "use strict";
 var later = require("later");
 var EventEmitter = require("events").EventEmitter;
-module.exports = exports = new EventEmitter;
+var co = module.exports = exports = new EventEmitter;
 var threadCatcher = null;
 exports.currentThread = null;
 exports.global = null;
@@ -16840,6 +16840,11 @@ var rethrow = (function(e) {
   return setTimeout((function() {
     throw e;
   }), 1);
+});
+var constant = (function(x) {
+  return (function() {
+    return x;
+  });
 });
 function iteratorFailed(error) {
   return {

@@ -3,5 +3,5 @@
 while true;
 do
 	git pull | grep -v 'Already up-to-date'
-	sleep 60
+	sleep 600
 done
