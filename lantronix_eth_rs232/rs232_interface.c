@@ -26,6 +26,8 @@ SOCKET_DATA_T rs232_rbuf;//буфер для приема из ком порта
 //инициализация и настройка rs232 порта, запуск потока автомата порта
 int rs232_init( char* port_name )
 {
+	printf( "opening %s\n", port_name );
+
 	int thread_error;
 	struct termios options;
 

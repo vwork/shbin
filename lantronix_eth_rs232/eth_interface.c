@@ -24,8 +24,6 @@ static inline void __eth_socket_read(int sock_index);
 //инициализация ethernet сервера, возвращает 0 в случае успеха, либо код ошибки
 int eth_init( ETH_LISTEN_PORT )
 {
-	printf( "opening %s\n", port_name );
-
    	int i;
 	struct sockaddr_in6 addr;
 	int thread_error;
