@@ -1,7 +1,7 @@
 #!/bin/sh
 
 cd /home/sh/shgit
-./usb &
+./$1 &
 sudo -u sh ./call_update
 # ./call_update
 

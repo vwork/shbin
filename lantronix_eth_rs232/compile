@@ -1,1 +1,3 @@
-gcc -o nero_smarthome main.c rs232_interface.c eth_interface.c cyclic.c -lpthread
+#!/bin/sh
+
+gcc -o ../usb2tcp main.c rs232_interface.c eth_interface.c cyclic.c -lpthread

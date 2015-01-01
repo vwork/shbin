@@ -1,7 +1,6 @@
 #ifndef _ETH_INTERFACE_H_
 #define _RTH_INTERFACE_H_
 #include "typedefs.h"
-#define ETH_LISTEN_PORT 2233	//порт для прослушивания входящих соединений
 #define MAX_SOCKETS_NUM 8 //максимальное количество одновременно обслуживаемых сокетов
 #define ETH_LATENCY_MS 50 //максимальная задержка обработки запроса по сети, мс
 #define MAX_SOCKET_PACKAGE_SIZE 256//максимальное количество байт в пакете данных

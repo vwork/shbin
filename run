@@ -6,7 +6,7 @@ do
 	echo starting usb
 	date >>/tmp/nju.log
 	echo starting usb >>/tmp/nju.log
-	./usb2tcp $1;
+	./usb2tcp /dev/ttyACM* ;
 	echo waiting 2 seconds before restarting...
 	sleep 2
 done

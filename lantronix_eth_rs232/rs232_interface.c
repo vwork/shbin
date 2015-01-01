@@ -24,28 +24,28 @@ unsigned char rs232_sbuf[MAX_SOCKET_PACKAGE_SIZE];//буфер для отпра
 SOCKET_DATA_T rs232_rbuf;//буфер для приема из ком порта(сделан по прототипу сокета)
 
 //инициализация и настройка rs232 порта, запуск потока автомата порта
-int rs232_init()
+int rs232_init( char* port_name )
 {
 	int thread_error;
 	struct termios options;
 
-	tty = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NONBLOCK);
+	tty = open(port_name, O_RDWR | O_NOCTTY | O_NONBLOCK);
       	if (tty < 0)
       	{
         	printf("Error: open rs232 port\n");
-		perror("Code:");
+			perror("Code:");
         	return 1;
       	}
         tcgetattr(tty, &options); /*читает пораметры порта*/
-        
+
         cfsetispeed(&options, B4800); /*установка скорости порта*/
         cfsetospeed(&options, B4800); /*установка скорости порта*/
-     	
+
 	options.c_iflag &= (~(ICRNL | INLCR)); /* Stop \r -> \n & \n -> \r translation on input */
      	options.c_iflag |= (/*IGNCR |*/ IGNBRK);  /* Ignore \r & XON/XOFF on input & ignore break*/
  	options.c_iflag &= ~(INPCK | IGNPAR | PARMRK | ISTRIP | IXANY | ICRNL | IGNCR);
 	options.c_iflag &= ~(IXON | IXOFF);
- 	
+
 	//output
 	options.c_oflag &= ~(OPOST | OCRNL | ONLCR);/*stop \r -> \n & \n -> \r translations on output*/
 
@@ -53,10 +53,10 @@ int rs232_init()
         options.c_cflag &= ~(CSTOPB | CSIZE | PARODD | PARENB); /*выкл 2-х стобит, вкл 1 стопбит*/
         options.c_cflag |= (CS8 | CLOCAL | CREAD); /*вкл 8бит*/
 	options.c_cflag  &= ~CRTSCTS;
-	
+
 	//local
  	options.c_lflag &= ~(ICANON | ECHO | ECHOE | ECHOK | ECHONL | ISIG);
-	
+
 	//characters
  	options.c_cc[VMIN] = 1;
  	options.c_cc[VTIME] = 0;
@@ -64,7 +64,7 @@ int rs232_init()
         tcsetattr(tty, TCSANOW, &options); /*сохранение параметров порта*/
 
 	thread_error = pthread_create(&rs232_thread_id,NULL,rs232_thread,NULL);
-	
+
 	if (thread_error)
 	{
 		printf("Error: create ethernet thread\n");
@@ -106,15 +106,15 @@ void rs232_state_proc()
 		if (is_rs232_xmt_buf_empty())
 			break;
 		read_length = sizeof(int);
-		
+
 		if (!get_from_rs232_xmt_buf((unsigned char *)&msg_length,&read_length))
-		{	
+		{
 			printf("Error: cyclic buffer read message length\n");
 			return;
 		}
 		read_length = sizeof(int);
 		if (!get_from_rs232_xmt_buf((unsigned char *)&current_socket,&read_length))
-		{	
+		{
 			printf("Error: cyclic buffer read socket id\n");
 			return;
 		}
@@ -127,11 +127,11 @@ void rs232_state_proc()
 		}
 
 		if (!get_from_rs232_xmt_buf(rs232_sbuf,&read_length))
-		{	
+		{
 			printf("Error: cyclic buffer read message\n");
 			return;
 		}
-		
+
 		if (read_length != msg_length)
 		{
 			printf("Error:cyclic buffer part message,read %d,need %d\n",read_length,msg_length);
@@ -142,21 +142,21 @@ void rs232_state_proc()
 		if (write_length == -1)
 		{
 			printf("Error: rs232 write operation\n");
-			return;
-		}	
+			abort();
+		}
 		printf("ETH -> RS232: %d bytes\n",write_length);
-		rs232_state = RS232_STATE_GET;	
+		rs232_state = RS232_STATE_GET;
 		timeout = 15;
 		break;
-	
+
 	case RS232_STATE_SEND:
 		break;
 
 	case RS232_STATE_GET:
-		
+
 		if (read_length = __rs232_read())
 		{
-			//кидаем его в сокет	
+			//кидаем его в сокет
 			eth_socket_write(current_socket,rs232_rbuf.buf,read_length);
 			rs232_rbuf.buf_index = 0;
 			rs232_rbuf.staf_bytes = 0;
@@ -195,7 +195,7 @@ static inline int __rs232_read()
 		if (read_byte < 1)
 			return 0;
 		if ((data_byte != USB_bFLAG_DATA) && (rs232_rbuf.buf_index == 0))
-               	{	
+               	{
 			printf("?");
 			break;//ошибка во время начала последовательности приняли неверный айт начала последоательности. игнорируем
 		}
@@ -225,7 +225,7 @@ static inline int __rs232_read()
 				printf("\n");
 				return rs232_rbuf.buf_index;
                		}
-	}	
+	}
 	return 0;
 
 }
