@@ -22489,7 +22489,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -26709,20 +26709,11 @@ module.exports = Scheduler;
       return modem.rawcommand("Version");
     },
     get pingModem() {
-      console.log("**********".red);
       return modem.pingInterval && ra($traceurRuntime.initGeneratorFunction(function $__10() {
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
-                console.log("**********1".red);
-                $ctx.state = 15;
-                break;
-              case 15:
-                console.log("**********2".red);
-                $ctx.state = 10;
-                break;
-              case 10:
                 $ctx.state = 2;
                 return co.sleep(modem.pingInterval);
               case 2:
@@ -26730,15 +26721,11 @@ module.exports = Scheduler;
                 $ctx.state = 4;
                 break;
               case 4:
-                console.log("**********3".red);
-                $ctx.state = 12;
-                break;
-              case 12:
                 $ctx.state = 6;
                 return modem.rawcommand("Version");
               case 6:
                 $ctx.maybeThrow();
-                $ctx.state = 15;
+                $ctx.state = 0;
                 break;
               default:
                 return $ctx.end();
