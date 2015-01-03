@@ -23,6 +23,10 @@ RS232_STATE_T rs232_state = RS232_STATE_IDLE;
 unsigned char rs232_sbuf[MAX_SOCKET_PACKAGE_SIZE];//буфер для отправки в ком порт
 SOCKET_DATA_T rs232_rbuf;//буфер для приема из ком порта(сделан по прототипу сокета)
 
+void close_tty() {
+	close( tty )
+}
+
 //инициализация и настройка rs232 порта, запуск потока автомата порта
 int rs232_init( char* port_name )
 {
@@ -38,6 +42,7 @@ int rs232_init( char* port_name )
 			perror("Code:");
         	return 1;
       	}
+      	at_quick_exit( close_tty );
         tcgetattr(tty, &options); /*читает пораметры порта*/
 
         cfsetispeed(&options, B4800); /*установка скорости порта*/
@@ -144,7 +149,7 @@ void rs232_state_proc()
 		if (write_length == -1)
 		{
 			printf("Error: rs232 write operation\n");
-			abort();
+			quick_exit( EXIT_FAILURE );
 		}
 		printf("ETH -> RS232: %d bytes\n",write_length);
 		rs232_state = RS232_STATE_GET;

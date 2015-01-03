@@ -10,7 +10,7 @@
 #include "typedefs.h"
 #include "eth_interface.h"
 #include "cyclic.h"
- 
+
 int server; 	//сокет сервера
 SOCKET_DATA_T sockets[MAX_SOCKETS_NUM];//массив зарегистрированных в системе коннектов(сокетов)
 
@@ -20,6 +20,10 @@ pthread_t eth_thread_id;//id потока чтения данных с соке�
 void * eth_thread(void * args);
 //чтение данных с сокета, индекс которой sock_index номер элемента массива сокетов
 static inline void __eth_socket_read(int sock_index);
+
+void close_server() {
+	close( server )
+}
 
 //инициализация ethernet сервера, возвращает 0 в случае успеха, либо код ошибки
 int eth_init( ETH_LISTEN_PORT )
@@ -46,7 +50,8 @@ int eth_init( ETH_LISTEN_PORT )
         	perror("server socket");
         	return 2;
     	}
-    
+    	at_quick_exit( close_server );
+
     	addr.sin6_family = AF_INET6;		//протокол интернет
     	addr.sin6_port = htons(ETH_LISTEN_PORT);
     	addr.sin6_addr = in6addr_any;	//прослушиваем все сетевые интерфейсы
@@ -85,7 +90,6 @@ static inline void __eth_add_connection(int sock_num)
 	}
 }
 
-
 //удалить коннект из обслуживаемых
 static inline void __eth_del_connection(int sock_num)
 {
@@ -100,7 +104,6 @@ static inline void __eth_del_connection(int sock_num)
 	//закрытие сокета
 	close(sock_num);
 }
-
 
 //основной цикл прослушивания порта сервера(обычно кидается в поток)
 //содержит внутри цикл while
@@ -129,7 +132,6 @@ void eth_listen_loop()
 
 }
 
-
 //Поток, читающий данные с обслуживаемых сокетов в сети
 void * eth_thread(void * args)
 {
@@ -146,7 +148,6 @@ void * eth_thread(void * args)
 
 	pthread_exit(NULL);
 }
-
 
 //чтение данных с сокета, индекс которой sock_index номер элемента массива сокетов
 static inline void __eth_socket_read(int sock_index)
@@ -198,13 +199,15 @@ static inline void __eth_socket_read(int sock_index)
 					for (i = 0; i < sockets[sock_index].buf_index; i++)
 						printf(" %x",sockets[sock_index].buf[i]);
 					printf("\n");
-					//вставляем в буфер его длину(основного сообщения) и номер отправившего сокета(8 байт вначале, перед основным буфером) 
+					//вставляем в буфер его длину(основного сообщения) и номер отправившего сокета(8 байт вначале, перед основным буфером)
+
 					memmove(&(sockets[sock_index].buf)[sizeof(sockets[sock_index].buf_index) + sizeof(sock_index)],sockets[sock_index].buf,sockets[sock_index].buf_index);
 					memcpy(sockets[sock_index].buf,&sockets[sock_index].buf_index,sizeof(sockets[sock_index].buf_index));
 					memcpy(&(sockets[sock_index].buf)[sizeof(sockets[sock_index].buf_index)],&sock_index,sizeof(sock_index));
-						
+
 					if (!put_to_rs232_xmt_buf(sockets[sock_index].buf,sockets[sock_index].buf_index + sizeof(sockets[sock_index].buf_index) + sizeof(sock_index)))
-						printf("Error: put in rs232 send buffer\n");	
+						printf("Error: put in rs232 send buffer\n");
+
 					sockets[sock_index].buf_index = 0;
 					sockets[sock_index].staf_bytes = 0;
 					sockets[sock_index].staf_flag = FALSE;
@@ -212,18 +215,18 @@ static inline void __eth_socket_read(int sock_index)
 			break;
 		default:
 			exit = TRUE;
-			break; 
+			break;
+
 		}
 	}while (!exit);
 }
-
 
 //Запись в сокет с индексом socket_index массива pBuf длиной len. Возвращает FALSE(0) в случае ошибки
 BOOL eth_socket_write(int socket_index,unsigned char * pBuf, int len)
 {
 	if (sockets[socket_index].socket == -1)
 		return FALSE;//значит клиент уже отключился, ответ не высылаем
-	
+
 	printf("RS232 -> ETH: % d bytes to socket %d\n",len,sockets[socket_index].socket);
 	if (send(sockets[socket_index].socket, pBuf, len, 0) == -1)
 		if (errno == EWOULDBLOCK)
