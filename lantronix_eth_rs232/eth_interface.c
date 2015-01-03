@@ -22,7 +22,7 @@ void * eth_thread(void * args);
 static inline void __eth_socket_read(int sock_index);
 
 void close_server() {
-	close( server )
+	close( server );
 }
 
 //инициализация ethernet сервера, возвращает 0 в случае успеха, либо код ошибки

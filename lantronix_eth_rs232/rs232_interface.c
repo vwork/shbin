@@ -24,7 +24,7 @@ unsigned char rs232_sbuf[MAX_SOCKET_PACKAGE_SIZE];//буфер для отпра
 SOCKET_DATA_T rs232_rbuf;//буфер для приема из ком порта(сделан по прототипу сокета)
 
 void close_tty() {
-	close( tty )
+	close( tty );
 }
 
 //инициализация и настройка rs232 порта, запуск потока автомата порта
