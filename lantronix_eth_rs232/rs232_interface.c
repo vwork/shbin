@@ -31,7 +31,7 @@ void close_tty() {
 //инициализация и настройка rs232 порта, запуск потока автомата порта
 int rs232_init( char* port_name )
 {
-	printf( "opening %s\n", port_name );
+	fprintf( stderr, "opening %s\n", port_name );
 
 	int thread_error;
 	struct termios options;
@@ -39,7 +39,7 @@ int rs232_init( char* port_name )
 	tty = open(port_name, O_RDWR | O_NOCTTY | O_NONBLOCK);
       	if (tty < 0)
       	{
-        	printf("Error: open rs232 port\n");
+        	fprintf( stderr, "Error: open rs232 port\n");
 			perror("Code:");
         	return 1;
       	}
@@ -75,7 +75,7 @@ int rs232_init( char* port_name )
 
 	if (thread_error)
 	{
-		printf("Error: create ethernet thread\n");
+		fprintf( stderr, "Error: create ethernet thread\n");
 		return 1;
 	}
 	return 0;
@@ -109,7 +109,7 @@ void rs232_state_proc()
 	switch(rs232_state)
 	{
 	case RS232_STATE_IDLE:
-		while (read(tty,&tmp_byte,1) == 1);//(printf("!"));//очистка буфера от ненужных данных ком порта. Так как ком порт может быть лишь слейвом
+		while (read(tty,&tmp_byte,1) == 1);//(fprintf( stderr, "!"));//очистка буфера от ненужных данных ком порта. Так как ком порт может быть лишь слейвом
 
 		if (is_rs232_xmt_buf_empty())
 			break;
@@ -117,42 +117,42 @@ void rs232_state_proc()
 
 		if (!get_from_rs232_xmt_buf((unsigned char *)&msg_length,&read_length))
 		{
-			printf("Error: cyclic buffer read message length\n");
+			fprintf( stderr, "Error: cyclic buffer read message length\n");
 			return;
 		}
 		read_length = sizeof(int);
 		if (!get_from_rs232_xmt_buf((unsigned char *)&current_socket,&read_length))
 		{
-			printf("Error: cyclic buffer read socket id\n");
+			fprintf( stderr, "Error: cyclic buffer read socket id\n");
 			return;
 		}
 
 		read_length = msg_length;
 		if (read_length > MAX_SOCKET_PACKAGE_SIZE)
 		{
-			printf("Error: cyclic buffer long message");
+			fprintf( stderr, "Error: cyclic buffer long message");
 			return;
 		}
 
 		if (!get_from_rs232_xmt_buf(rs232_sbuf,&read_length))
 		{
-			printf("Error: cyclic buffer read message\n");
+			fprintf( stderr, "Error: cyclic buffer read message\n");
 			return;
 		}
 
 		if (read_length != msg_length)
 		{
-			printf("Error:cyclic buffer part message,read %d,need %d\n",read_length,msg_length);
+			fprintf( stderr, "Error:cyclic buffer part message,read %d,need %d\n",read_length,msg_length);
 			return;
 		}
 
 		write_length = write(tty,rs232_sbuf,msg_length);
 		if (write_length == -1)
 		{
-			printf("Error: rs232 write operation\n");
+			fprintf( stderr, "Error: rs232 write operation\n");
 			quick_exit( EXIT_FAILURE );
 		}
-		printf("ETH -> RS232: %d bytes\n",write_length);
+		fprintf( stderr, "ETH -> RS232: %d bytes\n",write_length);
 		rs232_state = RS232_STATE_GET;
 		timeout = 15;
 		break;
@@ -175,12 +175,12 @@ void rs232_state_proc()
 		timeout--;
 		if (timeout <= 0)
 		{	rs232_state = RS232_STATE_ERROR;
-               		printf("get %d, need %d\n",rs232_rbuf.buf_index,5 + rs232_rbuf.buf[4] + 2 + rs232_rbuf.staf_bytes);
+               		fprintf( stderr, "get %d, need %d\n",rs232_rbuf.buf_index,5 + rs232_rbuf.buf[4] + 2 + rs232_rbuf.staf_bytes);
 		}
 		break;
 
 	case RS232_STATE_ERROR:
-		printf("Error: RS232 timeout\n");
+		fprintf( stderr, "Error: RS232 timeout\n");
 		rs232_rbuf.buf_index = 0;
 		rs232_rbuf.staf_bytes = 0;
 		rs232_rbuf.staf_flag = FALSE;
@@ -204,7 +204,7 @@ static inline int __rs232_read()
 			return 0;
 		if ((data_byte != USB_bFLAG_DATA) && (rs232_rbuf.buf_index == 0))
                	{
-			printf("?");
+			fprintf( stderr, "?");
 			break;//ошибка во время начала последовательности приняли неверный айт начала последоательности. игнорируем
 		}
          	if ((data_byte == USB_bSTAF_DATA) && (!rs232_rbuf.staf_flag))//если мы получили первый стафсимвол
@@ -227,10 +227,10 @@ static inline int __rs232_read()
 			 (rs232_rbuf.buf_index >= MAX_SOCKET_PACKAGE_SIZE))//пакет превысил максимальный размер буфера
                		{
 				//Здесь постановка пакета в очередь на com порт
-				printf("Received package from modem: ");
+				fprintf( stderr, "Received package from modem: ");
 				for (i = 0; i < rs232_rbuf.buf_index; i++)
-					printf(" %x",rs232_rbuf.buf[i]);
-				printf("\n");
+					fprintf( stderr, " %x",rs232_rbuf.buf[i]);
+				fprintf( stderr, "\n");
 				return rs232_rbuf.buf_index;
                		}
 	}

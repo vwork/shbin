@@ -22,7 +22,14 @@ void * eth_thread(void * args);
 static inline void __eth_socket_read(int sock_index);
 
 void close_server() {
+	int i;
 	close( server );
+	server = -1;
+	for ( i = 0; i < MAX_SOCKETS_NUM; ++i )
+		if ( sockets[ i ].socket != -1 ) {
+			close( sockets[ i ].socket );
+			sockets[ i ].socket = -1;
+		}
 }
 
 //инициализация ethernet сервера, возвращает 0 в случае успеха, либо код ошибки
@@ -40,7 +47,7 @@ int eth_init( ETH_LISTEN_PORT )
 
 	if (thread_error)
 	{
-		printf("Error: create ethernet thread\n");
+		fprintf( stderr, "Error: create ethernet thread\n");
 		return 1;
 	}
 
@@ -60,7 +67,7 @@ int eth_init( ETH_LISTEN_PORT )
         	perror("server bind");
         	return 3;
     	}
-	printf("Listen for incoming connections on port %d\n",ETH_LISTEN_PORT);
+	fprintf( stderr, "Listen for incoming connections on port %d\n",ETH_LISTEN_PORT);
     	listen(server, 1);	//слушаем
 	return 0;
 }
@@ -77,7 +84,7 @@ static inline void __eth_add_connection(int sock_num)
 	}
 	if (i == MAX_SOCKETS_NUM)
 	{
-		printf("ERROR: too many sessions, closing new socket\n");
+		fprintf( stderr, "ERROR: too many sessions, closing new socket\n");
 		close(sock_num);
 	}
 	else
@@ -123,7 +130,7 @@ void eth_listen_loop()
             		exit(3);
         	}
 		inet_ntop( AF_INET6, ( void * )&client_addr.sin6_addr, str, INET6_ADDRSTRLEN );
-		printf( "Client %s was connected, socket %d\n", str, sock );
+		fprintf( stderr, "Client %s was connected, socket %d\n", str, sock );
 		fcntl(sock, F_SETFL, O_NONBLOCK);
 		//TODO: сделать нормальный keepalive
 		setsockopt(sock, SOL_SOCKET, SO_KEEPALIVE, (char*)&bOptVal, sizeof(bOptVal));
@@ -139,7 +146,7 @@ void * eth_thread(void * args)
 
 	while (1)
 	{
-		//printf("hihi\n");
+		//fprintf( stderr, "hihi\n");
 		for (i = 0; i < MAX_SOCKETS_NUM; i++)
 			if (sockets[i].socket != -1)
 				__eth_socket_read(i);
@@ -167,7 +174,7 @@ static inline void __eth_socket_read(int sock_index)
 			//идем дальше- на отключение
 		case 0:
 			exit = TRUE;
-			printf("Client was disconnected, socket %d\n",sockets[sock_index].socket);
+			fprintf( stderr, "Client was disconnected, socket %d\n",sockets[sock_index].socket);
 			__eth_del_connection(sockets[sock_index].socket);
 			break;
 
@@ -195,10 +202,10 @@ static inline void __eth_socket_read(int sock_index)
 				 (sockets[sock_index].buf_index >= MAX_SOCKET_PACKAGE_SIZE))//пакет превысил максимальный размер буфера
                 		{
 					//Здесь постановка пакета в очередь на com порт
-					printf("Received package from socket %d:",sockets[sock_index].socket);
+					fprintf( stderr, "Received package from socket %d:",sockets[sock_index].socket);
 					for (i = 0; i < sockets[sock_index].buf_index; i++)
-						printf(" %x",sockets[sock_index].buf[i]);
-					printf("\n");
+						fprintf( stderr, " %x",sockets[sock_index].buf[i]);
+					fprintf( stderr, "\n");
 					//вставляем в буфер его длину(основного сообщения) и номер отправившего сокета(8 байт вначале, перед основным буфером)
 
 					memmove(&(sockets[sock_index].buf)[sizeof(sockets[sock_index].buf_index) + sizeof(sock_index)],sockets[sock_index].buf,sockets[sock_index].buf_index);
@@ -206,7 +213,7 @@ static inline void __eth_socket_read(int sock_index)
 					memcpy(&(sockets[sock_index].buf)[sizeof(sockets[sock_index].buf_index)],&sock_index,sizeof(sock_index));
 
 					if (!put_to_rs232_xmt_buf(sockets[sock_index].buf,sockets[sock_index].buf_index + sizeof(sockets[sock_index].buf_index) + sizeof(sock_index)))
-						printf("Error: put in rs232 send buffer\n");
+						fprintf( stderr, "Error: put in rs232 send buffer\n");
 
 					sockets[sock_index].buf_index = 0;
 					sockets[sock_index].staf_bytes = 0;
@@ -227,13 +234,13 @@ BOOL eth_socket_write(int socket_index,unsigned char * pBuf, int len)
 	if (sockets[socket_index].socket == -1)
 		return FALSE;//значит клиент уже отключился, ответ не высылаем
 
-	printf("RS232 -> ETH: % d bytes to socket %d\n",len,sockets[socket_index].socket);
+	fprintf( stderr, "RS232 -> ETH: % d bytes to socket %d\n",len,sockets[socket_index].socket);
 	if (send(sockets[socket_index].socket, pBuf, len, 0) == -1)
 		if (errno == EWOULDBLOCK)
 			return TRUE;
 		else
 		{
-			printf("Client was disconnected, socket %d\n",sockets[socket_index].socket);
+			fprintf( stderr, "Client was disconnected, socket %d\n",sockets[socket_index].socket);
 			__eth_del_connection(sockets[socket_index].socket);
 			return FALSE;
 		}

@@ -37,4 +37,4 @@ BOOL get_from_rs232_rcv_buf(unsigned char * out_buf,unsigned int * len);
 BOOL is_rs232_rcv_buf_empty();
 
 void clear_cyclic_buf(CYC_BUF_T * pcyc_buf);//сброс циклического буфера(очистка)
-#endif // CYCLIC_H 
+#endif // CYCLIC_H
