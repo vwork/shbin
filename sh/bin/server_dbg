@@ -24102,7 +24102,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
