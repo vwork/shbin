@@ -24102,7 +24102,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -29946,7 +29946,10 @@ module.exports = Scheduler;
             return $ctx.end();
         }
     }, $__88, this);
-  }))).all("/devices", (modem.devices = new JSONservice(__dirname + "/../var/devices", {})).httpService).all("/rooms", (modem.places = new JSONservice(__dirname + "/../var/rooms", {})).httpService).post("/modem", co.func($traceurRuntime.initGeneratorFunction(function $__89(request, response, next) {
+  }))).all("/devices", (modem.devices = new JSONservice(__dirname + "/../var/devices", {})).httpService).all("/rooms", (modem.places = new JSONservice(__dirname + "/../var/rooms", {
+    main: "room",
+    room: {content: []}
+  })).httpService).post("/modem", co.func($traceurRuntime.initGeneratorFunction(function $__89(request, response, next) {
     var $__9,
         ret,
         undefined,
