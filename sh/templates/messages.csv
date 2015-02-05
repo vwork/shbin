@@ -14,4 +14,5 @@ commandTestMenu,Тестовая версия,Тэставая версія,Test
 commandLinkDevice,Привязать устройство,Прывязаць прыладу,Link device
 commandAddPlace,Добавить помещение или место,Дабавіць памяшканне альбо месца,Add room or place
 commandAddDevice,Добавить устройство,Дабавіць прыладу месца,Add device
+commandPurgeItem,Удалить,Выдаліць,Remove device
 nothingHere,Здесь устройств нет,Тут прыладаў пакуль няма,Nothing's here
