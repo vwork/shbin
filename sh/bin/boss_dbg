@@ -20288,6 +20288,7 @@ http.createServer(commonService).listen(listenUsersPort, "::");
       }( function () {
         "use strict";
 var DB = {
+  test: {password: "GDSjwW83cosWUj"},
   work: {password: "XuDaexoC1oki"},
   h: {password: "XuDaexoC1oki"},
   m1: {password: "zai3tie7aSoh"},
