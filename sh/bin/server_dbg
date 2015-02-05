@@ -24102,7 +24102,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -28950,6 +28950,7 @@ module.exports = Scheduler;
     return YAML.load(configName);
   }), (function() {}));
   var updateInterfacesInterval = 2000;
+  fs.mkdir("../var", (function() {}));
   config = lodash.merge({
     port: 80,
     serviceport: 8082,
