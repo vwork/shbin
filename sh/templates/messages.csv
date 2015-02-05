@@ -11,4 +11,5 @@ commandSearchDevices,Поиск,Пошук,Search
 commandResetToFactorySettings,Сбросить настройки к заводским,Скінуць наладкі да завадзкіх,Reset to factory defaults
 commandLanguage,Язык / Language,Мова / Language,Language
 commandTestMenu,Тестовая версия,Тэставая версія,Test version
+commandLinkDevice,Привязать устройство,Прывязаць прыладу,Link device
 nothingHere,Здесь устройств нет,Тут прыладаў пакуль няма,Nothing's here

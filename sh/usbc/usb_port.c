@@ -5,6 +5,7 @@
 #include <termios.h>
 #include <unistd.h>
 #include <fcntl.h>
+#include <errno.h>
 #include <sys/signal.h>
 #include <sys/types.h>
 #define	USB_bFLAG_DATA		0x7e
@@ -53,9 +54,11 @@ int rs232_init( char* port_name )
 
 	return tty;
 }
-typedef int( *proc )( char*, int );
 
-int read_msg( char* buf, proc read ) {
+typedef int( *READ )( char* );
+typedef int( *WRITE )( char*, int );
+
+int read_msg( char* buf, READ read ) {
 	int msg_bytes = 0;
 	int msg_len = 0;
 	int nread;
@@ -63,9 +66,14 @@ int read_msg( char* buf, proc read ) {
 	int stuff;
 	int body_len = 0;
 	while ( msg_len != body_len + 7 ) {
-		nread = read( &byte, 1 );
-		if ( nread == 0 )
+		nread = read( &byte );
+		if ( nread < 0 )
 			return -1;
+		if ( nread == 0 ) {
+			fprintf( stderr, "." );
+			usleep( 1000 * 1000 ); // 10ms
+			continue;
+		}
 		if ( msg_bytes == 0 && byte != USB_bFLAG_DATA )
 			continue;
 		*buf = byte;
@@ -81,10 +89,11 @@ int read_msg( char* buf, proc read ) {
 		}
 		++msg_bytes;
 	}
+	fprintf( stderr, "#%d\n", msg_bytes );
 	return msg_bytes;
 }
 
-int copy_msg( proc read, proc write ) {
+int copy_msg( READ read, READ clear, WRITE write ) {
 	char buf[ 256 + 7 ];
 	int rlen, wlen;
 	rlen = read_msg( buf, read );
@@ -92,6 +101,8 @@ int copy_msg( proc read, proc write ) {
 		fprintf( stderr, "cannot read message\n" );
 		return 0;
 	}
+	if ( clear )
+		while ( clear( buf ) > 0 );
 	wlen = write( buf, rlen );
 	if ( wlen != rlen ) {
 		fprintf( stderr, "cannot write message\n" );
@@ -101,15 +112,17 @@ int copy_msg( proc read, proc write ) {
 	return 1;
 }
 
-void copy_messages( proc tread, proc twrite, proc sread, proc swrite ) {
-	char tmp_byte;
+void copy_messages( READ tread, WRITE twrite, READ tclear, READ sread, WRITE swrite ) {
+	char buf[ 1 ];
+	while ( tread( buf ) > 0 );
 	while ( 1 ) {
-		while ( tread( &tmp_byte, 1 ) == 1 ); // clear the tty buffer, because tty can be only a slave
-		if ( !copy_msg( sread, twrite ) ) {
+		fprintf( stderr, "copying to tty\n" );
+		if ( !copy_msg( sread, tclear, twrite ) ) {
 			fprintf( stderr, "error while copying message to tty\n" );
 			return;
 		}
-		if ( !copy_msg( tread, swrite ) ) {
+		fprintf( stderr, "copying from tty\n" );
+		if ( !copy_msg( tread, NULL, swrite ) ) {
 			fprintf( stderr, "error while copying message from tty\n" );
 			return;
 		}
@@ -118,16 +131,39 @@ void copy_messages( proc tread, proc twrite, proc sread, proc swrite ) {
 
 int tty;
 
-int tread( char* buf, int len ) {
-	return read( tty, buf, len );
+#define WAIT_MS		200
+#define TIMEOUT_MS	9000
+
+int tread( char* buf ) {
+	int ret;
+	int t = 0;
+	while ( 1 ) {
+		errno = 0;
+		ret = read( tty, buf, 1 );
+		if ( ret < 0 && errno == 11 ) { // Resource temporarily unavailable
+			t += WAIT_MS;
+			if ( t > TIMEOUT_MS )
+				break;
+			usleep( WAIT_MS * 1000 );
+			continue;
+		}
+		break;
+	}
+	if ( ret > 0 )
+		fprintf( stderr, "%02x ", ( unsigned char )( *buf ) );
+	return ret;
+}
+
+int tclear( char* buf ) {
+	return 0; // read( tty, buf, 1 );
 }
 
 int twrite( char* buf, int len ) {
 	return write( tty, buf, len );
 }
 
-int sread( char* buf, int len ) {
-	return fread( buf, 1, len, stdin );
+int sread( char* buf ) {
+	return fread( buf, 1, 1, stdin );
 }
 
 int swrite( char* buf, int len ) {
@@ -145,5 +181,6 @@ int main(int argc, char *argv[]) //здесь в будущем можно пе�
 	tty = rs232_init( port_name );
 	if ( tty < 0 )
 		exit( 3 );
-	copy_messages( tread, twrite, sread, swrite );
+	copy_messages( tread, twrite, tclear, sread, swrite );
+	close( tty );
 }

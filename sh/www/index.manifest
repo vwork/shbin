@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1420375913270
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1423117807674
 
 CACHE:
 
@@ -19,9 +19,4 @@ CACHE:
 
 NETWORK:
 
-/images/
-
-/js/index.js
-/cookie
-/devices
-/rooms
+*
