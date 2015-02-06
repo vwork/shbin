@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,APP_DEBUG,APP_TIMEOUT,AbstractGuard,ActiveXObject,Array,BAD_REQUEST,Boolean,CLOSED,CLOSING,CONNECTING,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,Cell,DOMAIN,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Getter,Glob,GlobSync,INTERNAL_SERVER_ERROR,ImmutableInterface,Inf,Init_Device_Mode,JSONCookie,JSONCookies,JSONEqual,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,LOGOUT,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,OPEN,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,Router,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,Type,TypeError,UNAUTHORIZED,URL,USER_INFO,UTC,VERSION,Vector,WeakMap,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,addListener,address,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyDiffImm,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,auth,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,boss,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,byteLength,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cell,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,common,compact,complete,compose,concat,conf,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,core,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createServer,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,dest,destroy,detach,detect,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,elements,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,encrypted,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,exp,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,family,fd,field,filter,fin,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,flush,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,fromJS,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getAgent,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getName,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handShake,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hostname,hour,href,hrtime,html,html5rocks,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,importFrom,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interfaces,interfacesTimer,internal,interpolate,intersection,inverse,invert,invoke,io,ip,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isGetter,isLiteral,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,iteratorToArray,join,joinData,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,later,leading,leadspaces,length,level,line,lineBreaks,lines,linkName,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,log,long,lstat,lstatSync,ltrim,magenta,make,makeAbs,makeDiff,makeDiffImm,makeRe,map,mapValues,map_,mapping,maps,mark,mask,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxCount,maxIndex,maxLength,maxTicks,maxTime,maxTime1,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minTime,minimatch,minute,mixin,mkdir,mm,model,modem,modemPingInterval,modemProxy,modemkey,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,neroelectronics,networkInterfaces,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,noTouch,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,omit,on,onClick,onReject_,onResolve_,once,onclose,onerror,onload,onmessage,onopen,onread,onreadystatechange,onwritten,opcode,ope,open,options,org,origin,originalUrl,ownProp,ownerID,pairs,parallel,parent,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pathname,pattern,pause,paused,payload,pebbles,performance,pick,ping,pingInterval,pipe,places,platform,pluck,polling,polyfillAll,pong,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,proto,protocol,protocolOK,prototype,proxy,ps,pull,push,pushAll,pushTry,pushedA,pushedC,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,ra,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,renderComponentToString,replace,replaceAll,req,request,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,responseText,rest,restoreConnectionInterval,result,resume,rethrow,retryInterval,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,router,row,rowDelimiter,rtrim,runAll,runAllCount,runCount,runInContext,running,sample,save,savedUID,scheduled,scopeid,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,serviceport,session,set,setHeader,setImmediate,setIn,setKeepAlive,setLength,setName,setNoDelay,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,sh,shift,shuffle,shver,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,spawn,splice,split,spread,sqrt,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,status_,stderr,stdin,stdout,stop,storedException,str,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,tick,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLocaleString,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,totalTime,touch,trace,traceDeprecation,trailing,transform,trap,trim,trimRight,tryElse,tryStack_,txt,type,typeDescriptor,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unlink,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,updates,url,use,useColors,userAgent,userkey,utf8chr,vadzim,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,warn,wasAltered,watch,what,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,writable,write,writeFile,writeFileSync,writeHead,written,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
+global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,APP_DEBUG,APP_TIMEOUT,AbstractGuard,ActiveXObject,Array,BAD_REQUEST,Boolean,CLOSED,CLOSING,CONNECTING,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,Cell,DOMAIN,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Getter,Glob,GlobSync,INTERNAL_SERVER_ERROR,ImmutableInterface,Inf,Init_Device_Mode,JSONCookie,JSONCookies,JSONEqual,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,LOGOUT,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,OPEN,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,Router,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,Type,TypeError,UNAUTHORIZED,URL,USER_INFO,UTC,VERSION,Vector,WeakMap,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,addListener,address,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyDiffImm,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,auth,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,boss,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,byteLength,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cell,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,common,compact,complete,compose,concat,conf,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,core,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createServer,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,dest,destroy,detach,detect,deviceId,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,elements,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,encrypted,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,exp,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,family,fd,field,filter,fin,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,flush,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,fromJS,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getAgent,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getName,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handShake,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hostname,hour,href,hrtime,html,html5rocks,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,importFrom,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interfaces,interfacesTimer,internal,interpolate,intersection,inverse,invert,invoke,io,ip,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isGetter,isLiteral,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,iteratorToArray,join,joinData,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,later,leading,leadspaces,length,level,line,lineBreaks,lines,linkName,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,log,long,lstat,lstatSync,ltrim,magenta,make,makeAbs,makeDiff,makeDiffImm,makeRe,map,mapValues,map_,mapping,maps,mark,mask,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxCount,maxIndex,maxLength,maxTicks,maxTime,maxTime1,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minTime,minimatch,minute,mixin,mkdir,mm,model,modem,modemPingInterval,modemProxy,modemkey,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,neroelectronics,networkInterfaces,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,noTouch,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,oldReturnValue,omit,on,onClick,onReject_,onResolve_,once,onclose,onerror,onload,onmessage,onopen,onread,onreadystatechange,onwritten,opcode,ope,open,options,org,origin,originalUrl,ownProp,ownerID,pairs,parallel,parent,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pathname,pattern,pause,paused,payload,pebbles,performance,pick,ping,pingInterval,pipe,places,platform,pluck,polling,polyfillAll,pong,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,proto,protocol,protocolOK,prototype,proxy,ps,pull,push,pushAll,pushTry,pushedA,pushedC,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,ra,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,renderComponentToString,replace,replaceAll,req,request,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,responseText,rest,restoreConnectionInterval,result,resume,rethrow,retryInterval,return,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,router,row,rowDelimiter,rtrim,runAll,runAllCount,runCount,runInContext,running,sample,save,savedUID,scheduled,scopeid,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,serviceport,session,set,setHeader,setImmediate,setIn,setKeepAlive,setLength,setName,setNoDelay,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,sh,shift,shuffle,shver,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,spawn,splice,split,spread,sqrt,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,status_,stderr,stdin,stdout,stop,storedException,str,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,tick,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLocaleString,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,totalTime,touch,trace,traceDeprecation,trailing,transform,trap,trim,trimRight,tryElse,tryStack_,txt,type,typeDescriptor,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unlink,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,updates,url,use,useColors,userAgent,userCommand,userkey,utf8chr,vadzim,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,warn,wasAltered,watch,what,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,wrapYieldStar,writable,write,writeFile,writeFileSync,writeHead,written,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -16785,14 +16785,7 @@ function listener(event, done) {
   $defineProperty(Symbol.prototype, 'constructor', nonEnum(Symbol));
   $defineProperty(Symbol.prototype, 'toString', method(function() {
     var symbolValue = this[symbolDataProperty];
-    if (!getOption('symbols'))
-      return symbolValue[symbolInternalProperty];
-    if (!symbolValue)
-      throw TypeError('Conversion from symbol to string');
-    var desc = symbolValue[symbolDescriptionProperty];
-    if (desc === undefined)
-      desc = '';
-    return 'Symbol(' + desc + ')';
+    return symbolValue[symbolInternalProperty];
   }));
   $defineProperty(Symbol.prototype, 'valueOf', method(function() {
     var symbolValue = this[symbolDataProperty];
@@ -16982,382 +16975,6 @@ function listener(event, done) {
   };
 })(typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
 (function() {
-  'use strict';
-  var path;
-  function relativeRequire(callerPath, requiredPath) {
-    path = path || typeof require !== 'undefined' && require('path');
-    function isDirectory(path) {
-      return path.slice(-1) === '/';
-    }
-    function isAbsolute(path) {
-      return path[0] === '/';
-    }
-    function isRelative(path) {
-      return path[0] === '.';
-    }
-    if (isDirectory(requiredPath) || isAbsolute(requiredPath))
-      return ;
-    return isRelative(requiredPath) ? require(path.resolve(path.dirname(callerPath), requiredPath)) : require(requiredPath);
-  }
-  $traceurRuntime.require = relativeRequire;
-})();
-(function() {
-  'use strict';
-  function spread() {
-    var rv = [],
-        j = 0,
-        iterResult;
-    for (var i = 0; i < arguments.length; i++) {
-      var valueToSpread = $traceurRuntime.checkObjectCoercible(arguments[i]);
-      if (typeof valueToSpread[$traceurRuntime.toProperty(Symbol.iterator)] !== 'function') {
-        throw new TypeError('Cannot spread non-iterable object.');
-      }
-      var iter = valueToSpread[$traceurRuntime.toProperty(Symbol.iterator)]();
-      while (!(iterResult = iter.next()).done) {
-        rv[j++] = iterResult.value;
-      }
-    }
-    return rv;
-  }
-  $traceurRuntime.spread = spread;
-})();
-(function() {
-  'use strict';
-  function iteratorToArray(iter) {
-    var rv = [];
-    var i = 0;
-    var tmp;
-    while (!(tmp = iter.next()).done) {
-      rv[i++] = tmp.value;
-    }
-    return rv;
-  }
-  $traceurRuntime.iteratorToArray = iteratorToArray;
-})();
-(function() {
-  'use strict';
-  var $Object = Object;
-  var $TypeError = TypeError;
-  var $create = $Object.create;
-  var $defineProperties = $traceurRuntime.defineProperties;
-  var $defineProperty = $traceurRuntime.defineProperty;
-  var $getOwnPropertyDescriptor = $traceurRuntime.getOwnPropertyDescriptor;
-  var $getOwnPropertyNames = $traceurRuntime.getOwnPropertyNames;
-  var $getPrototypeOf = Object.getPrototypeOf;
-  var $__0 = Object,
-      getOwnPropertyNames = $__0.getOwnPropertyNames,
-      getOwnPropertySymbols = $__0.getOwnPropertySymbols;
-  function superDescriptor(homeObject, name) {
-    var proto = $getPrototypeOf(homeObject);
-    do {
-      var result = $getOwnPropertyDescriptor(proto, name);
-      if (result)
-        return result;
-      proto = $getPrototypeOf(proto);
-    } while (proto);
-    return undefined;
-  }
-  function superConstructor(ctor) {
-    return ctor.__proto__;
-  }
-  function superGet(self, homeObject, name) {
-    var descriptor = superDescriptor(homeObject, name);
-    if (descriptor) {
-      if (!descriptor.get)
-        return descriptor.value;
-      return descriptor.get.call(self);
-    }
-    return undefined;
-  }
-  function superSet(self, homeObject, name, value) {
-    var descriptor = superDescriptor(homeObject, name);
-    if (descriptor && descriptor.set) {
-      descriptor.set.call(self, value);
-      return value;
-    }
-    throw $TypeError(("super has no setter '" + name + "'."));
-  }
-  function getDescriptors(object) {
-    var descriptors = {};
-    var names = getOwnPropertyNames(object);
-    for (var i = 0; i < names.length; i++) {
-      var name = names[i];
-      descriptors[name] = $getOwnPropertyDescriptor(object, name);
-    }
-    var symbols = getOwnPropertySymbols(object);
-    for (var i = 0; i < symbols.length; i++) {
-      var symbol = symbols[i];
-      descriptors[$traceurRuntime.toProperty(symbol)] = $getOwnPropertyDescriptor(object, $traceurRuntime.toProperty(symbol));
-    }
-    return descriptors;
-  }
-  function createClass(ctor, object, staticObject, superClass) {
-    $defineProperty(object, 'constructor', {
-      value: ctor,
-      configurable: true,
-      enumerable: false,
-      writable: true
-    });
-    if (arguments.length > 3) {
-      if (typeof superClass === 'function')
-        ctor.__proto__ = superClass;
-      ctor.prototype = $create(getProtoParent(superClass), getDescriptors(object));
-    } else {
-      ctor.prototype = object;
-    }
-    $defineProperty(ctor, 'prototype', {
-      configurable: false,
-      writable: false
-    });
-    return $defineProperties(ctor, getDescriptors(staticObject));
-  }
-  function getProtoParent(superClass) {
-    if (typeof superClass === 'function') {
-      var prototype = superClass.prototype;
-      if ($Object(prototype) === prototype || prototype === null)
-        return superClass.prototype;
-      throw new $TypeError('super prototype must be an Object or null');
-    }
-    if (superClass === null)
-      return null;
-    throw new $TypeError(("Super expression must either be null or a function, not " + typeof superClass + "."));
-  }
-  $traceurRuntime.createClass = createClass;
-  $traceurRuntime.superConstructor = superConstructor;
-  $traceurRuntime.superGet = superGet;
-  $traceurRuntime.superSet = superSet;
-})();
-(function() {
-  'use strict';
-  if (typeof $traceurRuntime !== 'object') {
-    throw new Error('traceur runtime not found.');
-  }
-  var createPrivateName = $traceurRuntime.createPrivateName;
-  var $defineProperties = $traceurRuntime.defineProperties;
-  var $defineProperty = $traceurRuntime.defineProperty;
-  var $create = Object.create;
-  var $TypeError = TypeError;
-  function nonEnum(value) {
-    return {
-      configurable: true,
-      enumerable: false,
-      value: value,
-      writable: true
-    };
-  }
-  var ST_NEWBORN = 0;
-  var ST_EXECUTING = 1;
-  var ST_SUSPENDED = 2;
-  var ST_CLOSED = 3;
-  var END_STATE = -2;
-  var RETHROW_STATE = -3;
-  function getInternalError(state) {
-    return new Error('Traceur compiler bug: invalid state in state machine: ' + state);
-  }
-  function GeneratorContext() {
-    this.state = 0;
-    this.GState = ST_NEWBORN;
-    this.storedException = undefined;
-    this.finallyFallThrough = undefined;
-    this.sent_ = undefined;
-    this.returnValue = undefined;
-    this.tryStack_ = [];
-  }
-  GeneratorContext.prototype = {
-    pushTry: function(catchState, finallyState) {
-      if (finallyState !== null) {
-        var finallyFallThrough = null;
-        for (var i = this.tryStack_.length - 1; i >= 0; i--) {
-          if (this.tryStack_[i].catch !== undefined) {
-            finallyFallThrough = this.tryStack_[i].catch;
-            break;
-          }
-        }
-        if (finallyFallThrough === null)
-          finallyFallThrough = RETHROW_STATE;
-        this.tryStack_.push({
-          finally: finallyState,
-          finallyFallThrough: finallyFallThrough
-        });
-      }
-      if (catchState !== null) {
-        this.tryStack_.push({catch: catchState});
-      }
-    },
-    popTry: function() {
-      this.tryStack_.pop();
-    },
-    get sent() {
-      this.maybeThrow();
-      return this.sent_;
-    },
-    set sent(v) {
-      this.sent_ = v;
-    },
-    get sentIgnoreThrow() {
-      return this.sent_;
-    },
-    maybeThrow: function() {
-      if (this.action === 'throw') {
-        this.action = 'next';
-        throw this.sent_;
-      }
-    },
-    end: function() {
-      switch (this.state) {
-        case END_STATE:
-          return this;
-        case RETHROW_STATE:
-          throw this.storedException;
-        default:
-          throw getInternalError(this.state);
-      }
-    },
-    handleException: function(ex) {
-      this.GState = ST_CLOSED;
-      this.state = END_STATE;
-      throw ex;
-    }
-  };
-  function nextOrThrow(ctx, moveNext, action, x) {
-    switch (ctx.GState) {
-      case ST_EXECUTING:
-        throw new Error(("\"" + action + "\" on executing generator"));
-      case ST_CLOSED:
-        if (action == 'next') {
-          return {
-            value: undefined,
-            done: true
-          };
-        }
-        throw x;
-      case ST_NEWBORN:
-        if (action === 'throw') {
-          ctx.GState = ST_CLOSED;
-          throw x;
-        }
-        if (x !== undefined)
-          throw $TypeError('Sent value to newborn generator');
-      case ST_SUSPENDED:
-        ctx.GState = ST_EXECUTING;
-        ctx.action = action;
-        ctx.sent = x;
-        var value = moveNext(ctx);
-        var done = value === ctx;
-        if (done)
-          value = ctx.returnValue;
-        ctx.GState = done ? ST_CLOSED : ST_SUSPENDED;
-        return {
-          value: value,
-          done: done
-        };
-    }
-  }
-  var ctxName = createPrivateName();
-  var moveNextName = createPrivateName();
-  function GeneratorFunction() {}
-  function GeneratorFunctionPrototype() {}
-  GeneratorFunction.prototype = GeneratorFunctionPrototype;
-  $defineProperty(GeneratorFunctionPrototype, 'constructor', nonEnum(GeneratorFunction));
-  GeneratorFunctionPrototype.prototype = {
-    constructor: GeneratorFunctionPrototype,
-    next: function(v) {
-      return nextOrThrow(this[ctxName], this[moveNextName], 'next', v);
-    },
-    throw: function(v) {
-      return nextOrThrow(this[ctxName], this[moveNextName], 'throw', v);
-    }
-  };
-  $defineProperties(GeneratorFunctionPrototype.prototype, {
-    constructor: {enumerable: false},
-    next: {enumerable: false},
-    throw: {enumerable: false}
-  });
-  Object.defineProperty(GeneratorFunctionPrototype.prototype, Symbol.iterator, nonEnum(function() {
-    return this;
-  }));
-  function createGeneratorInstance(innerFunction, functionObject, self) {
-    var moveNext = getMoveNext(innerFunction, self);
-    var ctx = new GeneratorContext();
-    var object = $create(functionObject.prototype);
-    object[ctxName] = ctx;
-    object[moveNextName] = moveNext;
-    return object;
-  }
-  function initGeneratorFunction(functionObject) {
-    functionObject.prototype = $create(GeneratorFunctionPrototype.prototype);
-    functionObject.__proto__ = GeneratorFunctionPrototype;
-    return functionObject;
-  }
-  function AsyncFunctionContext() {
-    GeneratorContext.call(this);
-    this.err = undefined;
-    var ctx = this;
-    ctx.result = new Promise(function(resolve, reject) {
-      ctx.resolve = resolve;
-      ctx.reject = reject;
-    });
-  }
-  AsyncFunctionContext.prototype = $create(GeneratorContext.prototype);
-  AsyncFunctionContext.prototype.end = function() {
-    switch (this.state) {
-      case END_STATE:
-        this.resolve(this.returnValue);
-        break;
-      case RETHROW_STATE:
-        this.reject(this.storedException);
-        break;
-      default:
-        this.reject(getInternalError(this.state));
-    }
-  };
-  AsyncFunctionContext.prototype.handleException = function() {
-    this.state = RETHROW_STATE;
-  };
-  function asyncWrap(innerFunction, self) {
-    var moveNext = getMoveNext(innerFunction, self);
-    var ctx = new AsyncFunctionContext();
-    ctx.createCallback = function(newState) {
-      return function(value) {
-        ctx.state = newState;
-        ctx.value = value;
-        moveNext(ctx);
-      };
-    };
-    ctx.errback = function(err) {
-      handleCatch(ctx, err);
-      moveNext(ctx);
-    };
-    moveNext(ctx);
-    return ctx.result;
-  }
-  function getMoveNext(innerFunction, self) {
-    return function(ctx) {
-      while (true) {
-        try {
-          return innerFunction.call(self, ctx);
-        } catch (ex) {
-          handleCatch(ctx, ex);
-        }
-      }
-    };
-  }
-  function handleCatch(ctx, ex) {
-    ctx.storedException = ex;
-    var last = ctx.tryStack_[ctx.tryStack_.length - 1];
-    if (!last) {
-      ctx.handleException(ex);
-      return ;
-    }
-    ctx.state = last.catch !== undefined ? last.catch : last.finally;
-    if (last.finallyFallThrough !== undefined)
-      ctx.finallyFallThrough = last.finallyFallThrough;
-  }
-  $traceurRuntime.asyncWrap = asyncWrap;
-  $traceurRuntime.initGeneratorFunction = initGeneratorFunction;
-  $traceurRuntime.createGeneratorInstance = createGeneratorInstance;
-})();
-(function() {
   function buildFromEncodedParts(opt_scheme, opt_userInfo, opt_domain, opt_port, opt_path, opt_queryData, opt_fragment) {
     var out = [];
     if (opt_scheme) {
@@ -17478,100 +17095,54 @@ function listener(event, done) {
   $traceurRuntime.removeDotSegments = removeDotSegments;
   $traceurRuntime.resolveUrl = resolveUrl;
 })();
-(function() {
-  'use strict';
-  var types = {
-    any: {name: 'any'},
-    boolean: {name: 'boolean'},
-    number: {name: 'number'},
-    string: {name: 'string'},
-    symbol: {name: 'symbol'},
-    void: {name: 'void'}
-  };
-  var GenericType = function GenericType(type, argumentTypes) {
-    this.type = type;
-    this.argumentTypes = argumentTypes;
-  };
-  ($traceurRuntime.createClass)(GenericType, {}, {});
-  var typeRegister = Object.create(null);
-  function genericType(type) {
-    for (var argumentTypes = [],
-        $__1 = 1; $__1 < arguments.length; $__1++)
-      argumentTypes[$__1 - 1] = arguments[$__1];
-    var typeMap = typeRegister;
-    var key = $traceurRuntime.getOwnHashObject(type).hash;
-    if (!typeMap[key]) {
-      typeMap[key] = Object.create(null);
-    }
-    typeMap = typeMap[key];
-    for (var i = 0; i < argumentTypes.length - 1; i++) {
-      key = $traceurRuntime.getOwnHashObject(argumentTypes[i]).hash;
-      if (!typeMap[key]) {
-        typeMap[key] = Object.create(null);
-      }
-      typeMap = typeMap[key];
-    }
-    var tail = argumentTypes[argumentTypes.length - 1];
-    key = $traceurRuntime.getOwnHashObject(tail).hash;
-    if (!typeMap[key]) {
-      typeMap[key] = new GenericType(type, argumentTypes);
-    }
-    return typeMap[key];
-  }
-  $traceurRuntime.GenericType = GenericType;
-  $traceurRuntime.genericType = genericType;
-  $traceurRuntime.type = types;
-})();
 (function(global) {
   'use strict';
-  var $__2 = $traceurRuntime,
-      canonicalizeUrl = $__2.canonicalizeUrl,
-      resolveUrl = $__2.resolveUrl,
-      isAbsolute = $__2.isAbsolute;
+  var $__1 = $traceurRuntime,
+      canonicalizeUrl = $__1.canonicalizeUrl,
+      resolveUrl = $__1.resolveUrl,
+      isAbsolute = $__1.isAbsolute;
   var moduleInstantiators = Object.create(null);
   var baseURL;
   if (global.location && global.location.href)
     baseURL = resolveUrl(global.location.href, './');
   else
     baseURL = '';
-  var UncoatedModuleEntry = function UncoatedModuleEntry(url, uncoatedModule) {
+  function UncoatedModuleEntry(url, uncoatedModule) {
     this.url = url;
     this.value_ = uncoatedModule;
-  };
-  ($traceurRuntime.createClass)(UncoatedModuleEntry, {}, {});
-  var ModuleEvaluationError = function ModuleEvaluationError(erroneousModuleName, cause) {
+  }
+  function ModuleEvaluationError(erroneousModuleName, cause) {
     this.message = this.constructor.name + ': ' + this.stripCause(cause) + ' in ' + erroneousModuleName;
-    if (!(cause instanceof $ModuleEvaluationError) && cause.stack)
+    if (!(cause instanceof ModuleEvaluationError) && cause.stack)
       this.stack = this.stripStack(cause.stack);
     else
       this.stack = '';
+  }
+  ModuleEvaluationError.prototype = Object.create(Error.prototype);
+  ModuleEvaluationError.prototype.constructor = ModuleEvaluationError;
+  ModuleEvaluationError.prototype.stripError = function(message) {
+    return message.replace(/.*Error:/, this.constructor.name + ':');
   };
-  var $ModuleEvaluationError = ModuleEvaluationError;
-  ($traceurRuntime.createClass)(ModuleEvaluationError, {
-    stripError: function(message) {
-      return message.replace(/.*Error:/, this.constructor.name + ':');
-    },
-    stripCause: function(cause) {
-      if (!cause)
-        return '';
-      if (!cause.message)
-        return cause + '';
-      return this.stripError(cause.message);
-    },
-    loadedBy: function(moduleName) {
-      this.stack += '\n loaded by ' + moduleName;
-    },
-    stripStack: function(causeStack) {
-      var stack = [];
-      causeStack.split('\n').some((function(frame) {
-        if (/UncoatedModuleInstantiator/.test(frame))
-          return true;
-        stack.push(frame);
-      }));
-      stack[0] = this.stripError(stack[0]);
-      return stack.join('\n');
-    }
-  }, {}, Error);
+  ModuleEvaluationError.prototype.stripCause = function(cause) {
+    if (!cause)
+      return '';
+    if (!cause.message)
+      return cause + '';
+    return this.stripError(cause.message);
+  };
+  ModuleEvaluationError.prototype.loadedBy = function(moduleName) {
+    this.stack += '\n loaded by ' + moduleName;
+  };
+  ModuleEvaluationError.prototype.stripStack = function(causeStack) {
+    var stack = [];
+    causeStack.split('\n').some((function(frame) {
+      if (/UncoatedModuleInstantiator/.test(frame))
+        return true;
+      stack.push(frame);
+    }));
+    stack[0] = this.stripError(stack[0]);
+    return stack.join('\n');
+  };
   function beforeLines(lines, number) {
     var result = [];
     var first = number - 3;
@@ -17599,47 +17170,47 @@ function listener(event, done) {
     }
     return result;
   }
-  var UncoatedModuleInstantiator = function UncoatedModuleInstantiator(url, func) {
-    $traceurRuntime.superConstructor($UncoatedModuleInstantiator).call(this, url, null);
+  function UncoatedModuleInstantiator(url, func) {
+    UncoatedModuleEntry.call(this, url, null);
     this.func = func;
-  };
-  var $UncoatedModuleInstantiator = UncoatedModuleInstantiator;
-  ($traceurRuntime.createClass)(UncoatedModuleInstantiator, {getUncoatedModule: function() {
-      if (this.value_)
-        return this.value_;
-      try {
-        var relativeRequire;
-        if (typeof $traceurRuntime !== undefined) {
-          relativeRequire = $traceurRuntime.require.bind(null, this.url);
-        }
-        return this.value_ = this.func.call(global, relativeRequire);
-      } catch (ex) {
-        if (ex instanceof ModuleEvaluationError) {
-          ex.loadedBy(this.url);
-          throw ex;
-        }
-        if (ex.stack) {
-          var lines = this.func.toString().split('\n');
-          var evaled = [];
-          ex.stack.split('\n').some(function(frame) {
-            if (frame.indexOf('UncoatedModuleInstantiator.getUncoatedModule') > 0)
-              return true;
-            var m = /(at\s[^\s]*\s).*>:(\d*):(\d*)\)/.exec(frame);
-            if (m) {
-              var line = parseInt(m[2], 10);
-              evaled = evaled.concat(beforeLines(lines, line));
-              evaled.push(columnSpacing(m[3]) + '^');
-              evaled = evaled.concat(afterLines(lines, line));
-              evaled.push('= = = = = = = = =');
-            } else {
-              evaled.push(frame);
-            }
-          });
-          ex.stack = evaled.join('\n');
-        }
-        throw new ModuleEvaluationError(this.url, ex);
+  }
+  UncoatedModuleInstantiator.prototype = Object.create(UncoatedModuleEntry.prototype);
+  UncoatedModuleInstantiator.prototype.getUncoatedModule = function() {
+    if (this.value_)
+      return this.value_;
+    try {
+      var relativeRequire;
+      if (typeof $traceurRuntime !== undefined && $traceurRuntime.require) {
+        relativeRequire = $traceurRuntime.require.bind(null, this.url);
       }
-    }}, {}, UncoatedModuleEntry);
+      return this.value_ = this.func.call(global, relativeRequire);
+    } catch (ex) {
+      if (ex instanceof ModuleEvaluationError) {
+        ex.loadedBy(this.url);
+        throw ex;
+      }
+      if (ex.stack) {
+        var lines = this.func.toString().split('\n');
+        var evaled = [];
+        ex.stack.split('\n').some(function(frame) {
+          if (frame.indexOf('UncoatedModuleInstantiator.getUncoatedModule') > 0)
+            return true;
+          var m = /(at\s[^\s]*\s).*>:(\d*):(\d*)\)/.exec(frame);
+          if (m) {
+            var line = parseInt(m[2], 10);
+            evaled = evaled.concat(beforeLines(lines, line));
+            evaled.push(columnSpacing(m[3]) + '^');
+            evaled = evaled.concat(afterLines(lines, line));
+            evaled.push('= = = = = = = = =');
+          } else {
+            evaled.push(frame);
+          }
+        });
+        ex.stack = evaled.join('\n');
+      }
+      throw new ModuleEvaluationError(this.url, ex);
+    }
+  };
   function getUncoatedModuleInstantiator(name) {
     if (!name)
       return ;
@@ -17773,9 +17344,509 @@ function listener(event, done) {
     return instantiator && instantiator.getUncoatedModule();
   };
 })(typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : this);
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js", [], function() {
+System.registerModule("traceur-runtime@0.0.84/src/runtime/classes.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/utils.js";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/classes.js";
+  var $Object = Object;
+  var $TypeError = TypeError;
+  var $create = $Object.create;
+  var $defineProperties = $traceurRuntime.defineProperties;
+  var $defineProperty = $traceurRuntime.defineProperty;
+  var $getOwnPropertyDescriptor = $traceurRuntime.getOwnPropertyDescriptor;
+  var $getOwnPropertyNames = $traceurRuntime.getOwnPropertyNames;
+  var $getPrototypeOf = Object.getPrototypeOf;
+  var $__0 = Object,
+      getOwnPropertyNames = $__0.getOwnPropertyNames,
+      getOwnPropertySymbols = $__0.getOwnPropertySymbols;
+  function superDescriptor(homeObject, name) {
+    var proto = $getPrototypeOf(homeObject);
+    do {
+      var result = $getOwnPropertyDescriptor(proto, name);
+      if (result)
+        return result;
+      proto = $getPrototypeOf(proto);
+    } while (proto);
+    return undefined;
+  }
+  function superConstructor(ctor) {
+    return ctor.__proto__;
+  }
+  function superGet(self, homeObject, name) {
+    var descriptor = superDescriptor(homeObject, name);
+    if (descriptor) {
+      if (!descriptor.get)
+        return descriptor.value;
+      return descriptor.get.call(self);
+    }
+    return undefined;
+  }
+  function superSet(self, homeObject, name, value) {
+    var descriptor = superDescriptor(homeObject, name);
+    if (descriptor && descriptor.set) {
+      descriptor.set.call(self, value);
+      return value;
+    }
+    throw $TypeError(("super has no setter '" + name + "'."));
+  }
+  function getDescriptors(object) {
+    var descriptors = {};
+    var names = getOwnPropertyNames(object);
+    for (var i = 0; i < names.length; i++) {
+      var name = names[i];
+      descriptors[name] = $getOwnPropertyDescriptor(object, name);
+    }
+    var symbols = getOwnPropertySymbols(object);
+    for (var i = 0; i < symbols.length; i++) {
+      var symbol = symbols[i];
+      descriptors[$traceurRuntime.toProperty(symbol)] = $getOwnPropertyDescriptor(object, $traceurRuntime.toProperty(symbol));
+    }
+    return descriptors;
+  }
+  function createClass(ctor, object, staticObject, superClass) {
+    $defineProperty(object, 'constructor', {
+      value: ctor,
+      configurable: true,
+      enumerable: false,
+      writable: true
+    });
+    if (arguments.length > 3) {
+      if (typeof superClass === 'function')
+        ctor.__proto__ = superClass;
+      ctor.prototype = $create(getProtoParent(superClass), getDescriptors(object));
+    } else {
+      ctor.prototype = object;
+    }
+    $defineProperty(ctor, 'prototype', {
+      configurable: false,
+      writable: false
+    });
+    return $defineProperties(ctor, getDescriptors(staticObject));
+  }
+  function getProtoParent(superClass) {
+    if (typeof superClass === 'function') {
+      var prototype = superClass.prototype;
+      if ($Object(prototype) === prototype || prototype === null)
+        return superClass.prototype;
+      throw new $TypeError('super prototype must be an Object or null');
+    }
+    if (superClass === null)
+      return null;
+    throw new $TypeError(("Super expression must either be null or a function, not " + typeof superClass + "."));
+  }
+  $traceurRuntime.createClass = createClass;
+  $traceurRuntime.superConstructor = superConstructor;
+  $traceurRuntime.superGet = superGet;
+  $traceurRuntime.superSet = superSet;
+  return {};
+});
+System.registerModule("traceur-runtime@0.0.84/src/runtime/destructuring.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/destructuring.js";
+  function iteratorToArray(iter) {
+    var rv = [];
+    var i = 0;
+    var tmp;
+    while (!(tmp = iter.next()).done) {
+      rv[i++] = tmp.value;
+    }
+    return rv;
+  }
+  $traceurRuntime.iteratorToArray = iteratorToArray;
+  return {};
+});
+System.registerModule("traceur-runtime@0.0.84/src/runtime/generators.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/generators.js";
+  if (typeof $traceurRuntime !== 'object') {
+    throw new Error('traceur runtime not found.');
+  }
+  var createPrivateName = $traceurRuntime.createPrivateName;
+  var $defineProperties = $traceurRuntime.defineProperties;
+  var $defineProperty = $traceurRuntime.defineProperty;
+  var $create = Object.create;
+  var $TypeError = TypeError;
+  function nonEnum(value) {
+    return {
+      configurable: true,
+      enumerable: false,
+      value: value,
+      writable: true
+    };
+  }
+  var ST_NEWBORN = 0;
+  var ST_EXECUTING = 1;
+  var ST_SUSPENDED = 2;
+  var ST_CLOSED = 3;
+  var END_STATE = -2;
+  var RETHROW_STATE = -3;
+  function getInternalError(state) {
+    return new Error('Traceur compiler bug: invalid state in state machine: ' + state);
+  }
+  var RETURN_SENTINEL = {};
+  function GeneratorContext() {
+    this.state = 0;
+    this.GState = ST_NEWBORN;
+    this.storedException = undefined;
+    this.finallyFallThrough = undefined;
+    this.sent_ = undefined;
+    this.returnValue = undefined;
+    this.oldReturnValue = undefined;
+    this.tryStack_ = [];
+  }
+  GeneratorContext.prototype = {
+    pushTry: function(catchState, finallyState) {
+      if (finallyState !== null) {
+        var finallyFallThrough = null;
+        for (var i = this.tryStack_.length - 1; i >= 0; i--) {
+          if (this.tryStack_[i].catch !== undefined) {
+            finallyFallThrough = this.tryStack_[i].catch;
+            break;
+          }
+        }
+        if (finallyFallThrough === null)
+          finallyFallThrough = RETHROW_STATE;
+        this.tryStack_.push({
+          finally: finallyState,
+          finallyFallThrough: finallyFallThrough
+        });
+      }
+      if (catchState !== null) {
+        this.tryStack_.push({catch: catchState});
+      }
+    },
+    popTry: function() {
+      this.tryStack_.pop();
+    },
+    get sent() {
+      this.maybeThrow();
+      return this.sent_;
+    },
+    set sent(v) {
+      this.sent_ = v;
+    },
+    get sentIgnoreThrow() {
+      return this.sent_;
+    },
+    maybeThrow: function() {
+      if (this.action === 'throw') {
+        this.action = 'next';
+        throw this.sent_;
+      }
+    },
+    end: function() {
+      switch (this.state) {
+        case END_STATE:
+          return this;
+        case RETHROW_STATE:
+          throw this.storedException;
+        default:
+          throw getInternalError(this.state);
+      }
+    },
+    handleException: function(ex) {
+      this.GState = ST_CLOSED;
+      this.state = END_STATE;
+      throw ex;
+    },
+    wrapYieldStar: function(iterator) {
+      var ctx = this;
+      return {
+        next: function(v) {
+          return iterator.next(v);
+        },
+        throw: function(e) {
+          var result;
+          if (e === RETURN_SENTINEL) {
+            if (iterator.return) {
+              result = iterator.return(ctx.returnValue);
+              if (!result.done) {
+                ctx.returnValue = ctx.oldReturnValue;
+                return result;
+              }
+              ctx.returnValue = result.value;
+            }
+            throw e;
+          }
+          if (iterator.throw) {
+            return iterator.throw(e);
+          }
+          iterator.return && iterator.return();
+          throw $TypeError('Inner iterator does not have a throw method');
+        }
+      };
+    }
+  };
+  function nextOrThrow(ctx, moveNext, action, x) {
+    switch (ctx.GState) {
+      case ST_EXECUTING:
+        throw new Error(("\"" + action + "\" on executing generator"));
+      case ST_CLOSED:
+        if (action == 'next') {
+          return {
+            value: undefined,
+            done: true
+          };
+        }
+        if (x === RETURN_SENTINEL) {
+          return {
+            value: ctx.returnValue,
+            done: true
+          };
+        }
+        throw x;
+      case ST_NEWBORN:
+        if (action === 'throw') {
+          ctx.GState = ST_CLOSED;
+          if (x === RETURN_SENTINEL) {
+            return {
+              value: ctx.returnValue,
+              done: true
+            };
+          }
+          throw x;
+        }
+        if (x !== undefined)
+          throw $TypeError('Sent value to newborn generator');
+      case ST_SUSPENDED:
+        ctx.GState = ST_EXECUTING;
+        ctx.action = action;
+        ctx.sent = x;
+        var value;
+        try {
+          value = moveNext(ctx);
+        } catch (ex) {
+          if (ex === RETURN_SENTINEL) {
+            value = ctx;
+          } else {
+            throw ex;
+          }
+        }
+        var done = value === ctx;
+        if (done)
+          value = ctx.returnValue;
+        ctx.GState = done ? ST_CLOSED : ST_SUSPENDED;
+        return {
+          value: value,
+          done: done
+        };
+    }
+  }
+  var ctxName = createPrivateName();
+  var moveNextName = createPrivateName();
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+  GeneratorFunction.prototype = GeneratorFunctionPrototype;
+  $defineProperty(GeneratorFunctionPrototype, 'constructor', nonEnum(GeneratorFunction));
+  GeneratorFunctionPrototype.prototype = {
+    constructor: GeneratorFunctionPrototype,
+    next: function(v) {
+      return nextOrThrow(this[ctxName], this[moveNextName], 'next', v);
+    },
+    throw: function(v) {
+      return nextOrThrow(this[ctxName], this[moveNextName], 'throw', v);
+    },
+    return: function(v) {
+      this[ctxName].oldReturnValue = this[ctxName].returnValue;
+      this[ctxName].returnValue = v;
+      return nextOrThrow(this[ctxName], this[moveNextName], 'throw', RETURN_SENTINEL);
+    }
+  };
+  $defineProperties(GeneratorFunctionPrototype.prototype, {
+    constructor: {enumerable: false},
+    next: {enumerable: false},
+    throw: {enumerable: false},
+    return: {enumerable: false}
+  });
+  Object.defineProperty(GeneratorFunctionPrototype.prototype, Symbol.iterator, nonEnum(function() {
+    return this;
+  }));
+  function createGeneratorInstance(innerFunction, functionObject, self) {
+    var moveNext = getMoveNext(innerFunction, self);
+    var ctx = new GeneratorContext();
+    var object = $create(functionObject.prototype);
+    object[ctxName] = ctx;
+    object[moveNextName] = moveNext;
+    return object;
+  }
+  function initGeneratorFunction(functionObject) {
+    functionObject.prototype = $create(GeneratorFunctionPrototype.prototype);
+    functionObject.__proto__ = GeneratorFunctionPrototype;
+    return functionObject;
+  }
+  function AsyncFunctionContext() {
+    GeneratorContext.call(this);
+    this.err = undefined;
+    var ctx = this;
+    ctx.result = new Promise(function(resolve, reject) {
+      ctx.resolve = resolve;
+      ctx.reject = reject;
+    });
+  }
+  AsyncFunctionContext.prototype = $create(GeneratorContext.prototype);
+  AsyncFunctionContext.prototype.end = function() {
+    switch (this.state) {
+      case END_STATE:
+        this.resolve(this.returnValue);
+        break;
+      case RETHROW_STATE:
+        this.reject(this.storedException);
+        break;
+      default:
+        this.reject(getInternalError(this.state));
+    }
+  };
+  AsyncFunctionContext.prototype.handleException = function() {
+    this.state = RETHROW_STATE;
+  };
+  function asyncWrap(innerFunction, self) {
+    var moveNext = getMoveNext(innerFunction, self);
+    var ctx = new AsyncFunctionContext();
+    ctx.createCallback = function(newState) {
+      return function(value) {
+        ctx.state = newState;
+        ctx.value = value;
+        moveNext(ctx);
+      };
+    };
+    ctx.errback = function(err) {
+      handleCatch(ctx, err);
+      moveNext(ctx);
+    };
+    moveNext(ctx);
+    return ctx.result;
+  }
+  function getMoveNext(innerFunction, self) {
+    return function(ctx) {
+      while (true) {
+        try {
+          return innerFunction.call(self, ctx);
+        } catch (ex) {
+          handleCatch(ctx, ex);
+        }
+      }
+    };
+  }
+  function handleCatch(ctx, ex) {
+    ctx.storedException = ex;
+    var last = ctx.tryStack_[ctx.tryStack_.length - 1];
+    if (!last) {
+      ctx.handleException(ex);
+      return ;
+    }
+    ctx.state = (ex !== RETURN_SENTINEL && last.catch !== undefined) ? last.catch : last.finally;
+    if (last.finallyFallThrough !== undefined)
+      ctx.finallyFallThrough = last.finallyFallThrough;
+  }
+  $traceurRuntime.asyncWrap = asyncWrap;
+  $traceurRuntime.initGeneratorFunction = initGeneratorFunction;
+  $traceurRuntime.createGeneratorInstance = createGeneratorInstance;
+  return {};
+});
+System.registerModule("traceur-runtime@0.0.84/src/runtime/relativeRequire.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/relativeRequire.js";
+  var path;
+  function relativeRequire(callerPath, requiredPath) {
+    path = path || typeof require !== 'undefined' && require('path');
+    function isDirectory(path) {
+      return path.slice(-1) === '/';
+    }
+    function isAbsolute(path) {
+      return path[0] === '/';
+    }
+    function isRelative(path) {
+      return path[0] === '.';
+    }
+    if (isDirectory(requiredPath) || isAbsolute(requiredPath))
+      return ;
+    return isRelative(requiredPath) ? require(path.resolve(path.dirname(callerPath), requiredPath)) : require(requiredPath);
+  }
+  $traceurRuntime.require = relativeRequire;
+  return {};
+});
+System.registerModule("traceur-runtime@0.0.84/src/runtime/spread.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/spread.js";
+  function spread() {
+    var rv = [],
+        j = 0,
+        iterResult;
+    for (var i = 0; i < arguments.length; i++) {
+      var valueToSpread = $traceurRuntime.checkObjectCoercible(arguments[i]);
+      if (typeof valueToSpread[$traceurRuntime.toProperty(Symbol.iterator)] !== 'function') {
+        throw new TypeError('Cannot spread non-iterable object.');
+      }
+      var iter = valueToSpread[$traceurRuntime.toProperty(Symbol.iterator)]();
+      while (!(iterResult = iter.next()).done) {
+        rv[j++] = iterResult.value;
+      }
+    }
+    return rv;
+  }
+  $traceurRuntime.spread = spread;
+  return {};
+});
+System.registerModule("traceur-runtime@0.0.84/src/runtime/type-assertions.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/type-assertions.js";
+  var types = {
+    any: {name: 'any'},
+    boolean: {name: 'boolean'},
+    number: {name: 'number'},
+    string: {name: 'string'},
+    symbol: {name: 'symbol'},
+    void: {name: 'void'}
+  };
+  var GenericType = function GenericType(type, argumentTypes) {
+    this.type = type;
+    this.argumentTypes = argumentTypes;
+  };
+  ($traceurRuntime.createClass)(GenericType, {}, {});
+  var typeRegister = Object.create(null);
+  function genericType(type) {
+    for (var argumentTypes = [],
+        $__1 = 1; $__1 < arguments.length; $__1++)
+      argumentTypes[$__1 - 1] = arguments[$__1];
+    var typeMap = typeRegister;
+    var key = $traceurRuntime.getOwnHashObject(type).hash;
+    if (!typeMap[key]) {
+      typeMap[key] = Object.create(null);
+    }
+    typeMap = typeMap[key];
+    for (var i = 0; i < argumentTypes.length - 1; i++) {
+      key = $traceurRuntime.getOwnHashObject(argumentTypes[i]).hash;
+      if (!typeMap[key]) {
+        typeMap[key] = Object.create(null);
+      }
+      typeMap = typeMap[key];
+    }
+    var tail = argumentTypes[argumentTypes.length - 1];
+    key = $traceurRuntime.getOwnHashObject(tail).hash;
+    if (!typeMap[key]) {
+      typeMap[key] = new GenericType(type, argumentTypes);
+    }
+    return typeMap[key];
+  }
+  $traceurRuntime.GenericType = GenericType;
+  $traceurRuntime.genericType = genericType;
+  $traceurRuntime.type = types;
+  return {};
+});
+System.registerModule("traceur-runtime@0.0.84/src/runtime/runtime-modules.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/runtime-modules.js";
+  System.get("traceur-runtime@0.0.84/src/runtime/relativeRequire.js");
+  System.get("traceur-runtime@0.0.84/src/runtime/spread.js");
+  System.get("traceur-runtime@0.0.84/src/runtime/destructuring.js");
+  System.get("traceur-runtime@0.0.84/src/runtime/classes.js");
+  System.get("traceur-runtime@0.0.84/src/runtime/generators.js");
+  System.get("traceur-runtime@0.0.84/src/runtime/type-assertions.js");
+  return {};
+});
+System.get("traceur-runtime@0.0.84/src/runtime/runtime-modules.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js", [], function() {
+  "use strict";
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/utils.js";
   var $ceil = Math.ceil;
   var $floor = Math.floor;
   var $isFinite = isFinite;
@@ -17933,10 +18004,10 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js", [
     }
   };
 });
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Map.js", [], function() {
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Map.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Map.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Map.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       isObject = $__0.isObject,
       maybeAddIterator = $__0.maybeAddIterator,
       registerPolyfill = $__0.registerPolyfill;
@@ -18200,15 +18271,15 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Map.js", [],
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Map.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Set.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Map.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Set.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Set.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Set.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       isObject = $__0.isObject,
       maybeAddIterator = $__0.maybeAddIterator,
       registerPolyfill = $__0.registerPolyfill;
-  var Map = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Map.js").Map;
+  var Map = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Map.js").Map;
   var getOwnHashObject = $traceurRuntime.getOwnHashObject;
   var $hasOwnProperty = Object.prototype.hasOwnProperty;
   function initSet(set) {
@@ -18263,7 +18334,7 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Set.js", [],
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__8 = this.map_.keys()[Symbol.iterator]();
+              $__8 = $ctx.wrapYieldStar(this.map_.keys()[Symbol.iterator]());
               $ctx.sent = void 0;
               $ctx.action = 'next';
               $ctx.state = 12;
@@ -18294,7 +18365,7 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Set.js", [],
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__11 = this.map_.entries()[Symbol.iterator]();
+              $__11 = $ctx.wrapYieldStar(this.map_.entries()[Symbol.iterator]());
               $ctx.sent = void 0;
               $ctx.action = 'next';
               $ctx.state = 12;
@@ -18353,10 +18424,10 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Set.js", [],
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Set.js" + '');
-System.registerModule("traceur-runtime@0.0.82/node_modules/rsvp/lib/rsvp/asap.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Set.js" + '');
+System.registerModule("traceur-runtime@0.0.84/node_modules/rsvp/lib/rsvp/asap.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/node_modules/rsvp/lib/rsvp/asap.js";
+  var __moduleName = "traceur-runtime@0.0.84/node_modules/rsvp/lib/rsvp/asap.js";
   var len = 0;
   function asap(callback, arg) {
     queue[len] = callback;
@@ -18421,11 +18492,11 @@ System.registerModule("traceur-runtime@0.0.82/node_modules/rsvp/lib/rsvp/asap.js
       return $__default;
     }};
 });
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Promise.js", [], function() {
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Promise.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Promise.js";
-  var async = System.get("traceur-runtime@0.0.82/node_modules/rsvp/lib/rsvp/asap.js").default;
-  var registerPolyfill = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js").registerPolyfill;
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Promise.js";
+  var async = System.get("traceur-runtime@0.0.84/node_modules/rsvp/lib/rsvp/asap.js").default;
+  var registerPolyfill = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js").registerPolyfill;
   var promiseRaw = {};
   function isPromise(x) {
     return x && typeof x === 'object' && x.status_ !== undefined;
@@ -18672,12 +18743,12 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Promise.js",
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Promise.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/StringIterator.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Promise.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/StringIterator.js", [], function() {
   "use strict";
   var $__2;
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/StringIterator.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/StringIterator.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       createIteratorResultObject = $__0.createIteratorResultObject,
       isObject = $__0.isObject;
   var toProperty = $traceurRuntime.toProperty;
@@ -18738,11 +18809,11 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/StringIterat
       return createStringIterator;
     }};
 });
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/String.js", [], function() {
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/String.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/String.js";
-  var createStringIterator = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/StringIterator.js").createStringIterator;
-  var $__1 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/String.js";
+  var createStringIterator = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/StringIterator.js").createStringIterator;
+  var $__1 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       maybeAddFunctions = $__1.maybeAddFunctions,
       maybeAddIterator = $__1.maybeAddIterator,
       registerPolyfill = $__1.registerPolyfill;
@@ -18938,12 +19009,12 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/String.js", 
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/String.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/ArrayIterator.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/String.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/ArrayIterator.js", [], function() {
   "use strict";
   var $__2;
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/ArrayIterator.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/ArrayIterator.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       toObject = $__0.toObject,
       toUint32 = $__0.toUint32,
       createIteratorResultObject = $__0.createIteratorResultObject;
@@ -19012,14 +19083,14 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/ArrayIterato
     }
   };
 });
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Array.js", [], function() {
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Array.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Array.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/ArrayIterator.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Array.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/ArrayIterator.js"),
       entries = $__0.entries,
       keys = $__0.keys,
       values = $__0.values;
-  var $__1 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var $__1 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       checkIterable = $__1.checkIterable,
       isCallable = $__1.isCallable,
       isConstructor = $__1.isConstructor,
@@ -19156,11 +19227,11 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Array.js", [
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Array.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Object.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Array.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Object.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Object.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Object.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       maybeAddFunctions = $__0.maybeAddFunctions,
       registerPolyfill = $__0.registerPolyfill;
   var $__1 = $traceurRuntime,
@@ -19223,11 +19294,11 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Object.js", 
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Object.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Number.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Object.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Number.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Number.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Number.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       isNumber = $__0.isNumber,
       maybeAddConsts = $__0.maybeAddConsts,
       maybeAddFunctions = $__0.maybeAddFunctions,
@@ -19291,11 +19362,11 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Number.js", 
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Number.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Math.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Number.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/Math.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/Math.js";
-  var $__0 = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js"),
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/Math.js";
+  var $__0 = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js"),
       maybeAddFunctions = $__0.maybeAddFunctions,
       registerPolyfill = $__0.registerPolyfill,
       toUint32 = $__0.toUint32;
@@ -19579,11 +19650,11 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/Math.js", []
     }
   };
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/Math.js" + '');
-System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/polyfills.js", [], function() {
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/Math.js" + '');
+System.registerModule("traceur-runtime@0.0.84/src/runtime/polyfills/polyfills.js", [], function() {
   "use strict";
-  var __moduleName = "traceur-runtime@0.0.82/src/runtime/polyfills/polyfills.js";
-  var polyfillAll = System.get("traceur-runtime@0.0.82/src/runtime/polyfills/utils.js").polyfillAll;
+  var __moduleName = "traceur-runtime@0.0.84/src/runtime/polyfills/polyfills.js";
+  var polyfillAll = System.get("traceur-runtime@0.0.84/src/runtime/polyfills/utils.js").polyfillAll;
   polyfillAll(Reflect.global);
   var setupGlobals = $traceurRuntime.setupGlobals;
   $traceurRuntime.setupGlobals = function(global) {
@@ -19592,7 +19663,7 @@ System.registerModule("traceur-runtime@0.0.82/src/runtime/polyfills/polyfills.js
   };
   return {};
 });
-System.get("traceur-runtime@0.0.82/src/runtime/polyfills/polyfills.js" + '');
+System.get("traceur-runtime@0.0.84/src/runtime/polyfills/polyfills.js" + '');
 
 },{"path":false}],"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/draft-00.js":[function(require,module,exports){
 /***/
@@ -24102,7 +24173,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -24955,6 +25026,7 @@ module.exports = new (require("scheduler"))();
         }
       }( function () {
         "use strict";
+var $__1;
 var lodash = require("lodash");
 var ra = require("ra");
 var co = require("co");
@@ -24966,15 +25038,15 @@ if (!global.WeakMap) {
   var n = 0;
   global.WeakMap = (function() {
     var WeakMap = function WeakMap(data) {
-      var $__8,
-          $__9;
+      var $__10,
+          $__11;
       this._index = ("__WeakMap" + ++n);
       if (data)
-        for (var $__1 = data[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__2 = void 0; !($__2 = $__1.next()).done; ) {
-          var $__7 = $__2.value,
-              key = ($__8 = $__7[$traceurRuntime.toProperty(Symbol.iterator)](), ($__9 = $__8.next()).done ? void 0 : $__9.value),
-              value = ($__9 = $__8.next()).done ? void 0 : $__9.value;
+        for (var $__3 = data[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__4 = void 0; !($__4 = $__3.next()).done; ) {
+          var $__9 = $__4.value,
+              key = ($__10 = $__9[$traceurRuntime.toProperty(Symbol.iterator)](), ($__11 = $__10.next()).done ? void 0 : $__11.value),
+              value = ($__11 = $__10.next()).done ? void 0 : $__11.value;
           this.set(key, value);
         }
     };
@@ -24998,24 +25070,52 @@ if (!global.WeakMap) {
     }, {});
   }());
 }
-var lu = module.exports = {
-  dumpPromise: (function(p) {
+var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise", {
+  value: (function(p) {
     return p.then((function(result) {
       return lu.log("result:", result);
     }), (function(error) {
       return lu.error("error:", error);
     }));
   }),
-  dump: function(msg, value) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "dump", {
+  value: function(msg, value) {
     console.log(msg, value);
     return value;
   },
-  log: console.log.bind(console),
-  info: (console.info || console.log).bind(console),
-  warn: (console.warn || console.log).bind(console),
-  error: (console.error || console.log).bind(console),
-  trace: (console.trace || console.log).bind(console),
-  options: function(options, def) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "log", {
+  value: console.log.bind(console),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "info", {
+  value: (console.info || console.log).bind(console),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "warn", {
+  value: (console.warn || console.log).bind(console),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "error", {
+  value: (console.error || console.log).bind(console),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "trace", {
+  value: (console.trace || console.log).bind(console),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "options", {
+  value: function(options, def) {
     var ret = {};
     for (var i in def)
       if (def.hasOwnProperty(i))
@@ -25029,7 +25129,11 @@ var lu = module.exports = {
         }
     return ret;
   },
-  str: (function(obj, depth) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "str", {
+  value: (function(obj, depth) {
     if (depth == null)
       depth = 1;
     if (!obj || !depth || depth < 1)
@@ -25042,51 +25146,127 @@ var lu = module.exports = {
       return ("{ " + Object.keys(obj).map((function(x) {
         return x + "=" + lu.str(obj[x], depth - 1);
       })).join(" ") + " }");
-    return "" + obj;
+    return String(obj);
   }),
-  valueOf: (function(val) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "valueOf", {
+  value: (function(val) {
     return val == null ? null : val.valueOf == null ? val : val.valueOf();
   }),
-  returnThis: function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnThis", {
+  value: function() {
     return this;
   },
-  returnNull: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnNull", {
+  value: (function() {
     return null;
   }),
-  returnTrue: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnTrue", {
+  value: (function() {
     return true;
   }),
-  returnFalse: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnFalse", {
+  value: (function() {
     return false;
   }),
-  returnZero: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnZero", {
+  value: (function() {
     return 0;
   }),
-  returnOne: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnOne", {
+  value: (function() {
     return 1;
   }),
-  promiseSucceeded: Promise.resolve(),
-  promiseNull: Promise.resolve(null),
-  promiseTrue: Promise.resolve(true),
-  promiseFalse: Promise.resolve(false),
-  promiseZero: Promise.resolve(0),
-  promiseOne: Promise.resolve(1),
-  returnNullPromise: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "promiseSucceeded", {
+  value: Promise.resolve(),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "promiseNull", {
+  value: Promise.resolve(null),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "promiseTrue", {
+  value: Promise.resolve(true),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "promiseFalse", {
+  value: Promise.resolve(false),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "promiseZero", {
+  value: Promise.resolve(0),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "promiseOne", {
+  value: Promise.resolve(1),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnNullPromise", {
+  value: (function() {
     return lu.promiseNull;
   }),
-  returnTruePromise: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnTruePromise", {
+  value: (function() {
     return lu.promiseTrue;
   }),
-  returnFalsePromise: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnFalsePromise", {
+  value: (function() {
     return lu.promiseFalse;
   }),
-  returnZeroPromise: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnZeroPromise", {
+  value: (function() {
     return lu.promiseZero;
   }),
-  returnOnePromise: (function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "returnOnePromise", {
+  value: (function() {
     return lu.promiseOne;
   }),
-  waitFor: function(timeout, interval, callback) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "waitFor", {
+  value: function(timeout, interval, callback) {
     if (typeof timeout == "function") {
       interval = timeout;
       timeout = 5000;
@@ -25108,37 +25288,65 @@ var lu = module.exports = {
       }, interval);
     }));
   },
-  empty: Object.freeze(Object.create(null)),
-  JSONEqual: function(a, b) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "empty", {
+  value: Object.freeze(Object.create(null)),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "JSONEqual", {
+  value: function(a, b) {
     return JSON.stringify(a) == JSON.stringify(b);
   },
-  new: function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "new", {
+  value: function() {
     for (var descedents = [],
-        $__5 = 0; $__5 < arguments.length; $__5++)
-      descedents[$__5] = arguments[$__5];
+        $__7 = 0; $__7 < arguments.length; $__7++)
+      descedents[$__7] = arguments[$__7];
     return descedents.reduce((function(ancestor, descedent) {
       return lodash.assign(ancestor, descedent);
     }), {});
   },
-  call: function(fun) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "call", {
+  value: function(fun) {
     for (var args = [],
-        $__6 = 1; $__6 < arguments.length; $__6++)
-      args[$__6 - 1] = arguments[$__6];
+        $__8 = 1; $__8 < arguments.length; $__8++)
+      args[$__8 - 1] = arguments[$__8];
     return fun.apply((void 0), $traceurRuntime.spread(args));
   },
-  rethrow: function(e) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "rethrow", {
+  value: function(e) {
     setTimeout((function() {
       throw e;
     }), 1);
   },
-  catch: function(cb, ret) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "catch", {
+  value: function(cb, ret) {
     try {
       return cb();
     } catch (e) {
       return ret;
     }
   },
-  tryElse: function(f, g) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "tryElse", {
+  value: function(f, g) {
     var ok = false;
     try {
       var ret = f();
@@ -25149,13 +25357,17 @@ var lu = module.exports = {
         g();
     }
   },
-  try: $traceurRuntime.initGeneratorFunction(function $__10(fun) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "try", {
+  value: $traceurRuntime.initGeneratorFunction(function $__12(fun) {
     var startTimeToWait,
         maxTimeToWait,
         multiply,
         timeToWait,
-        $__11,
-        $__12,
+        $__13,
+        $__14,
         e;
     var $arguments = arguments;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -25173,18 +25385,18 @@ var lu = module.exports = {
             $ctx.state = 20;
             break;
           case 20:
-            $__11 = fun();
+            $__13 = fun();
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__11;
+            return $__13;
           case 2:
-            $__12 = $ctx.sent;
+            $__14 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__12;
+            $ctx.returnValue = $__14;
             $ctx.state = -2;
             break;
           case 8:
@@ -25214,18 +25426,28 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__10, this);
+    }, $__12, this);
   }),
-  unique: function(value, index, array) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "unique", {
+  value: function(value, index, array) {
     return index == 0 || value != array[index - 1];
   },
-  joinData: function(array) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "joinData", {
+  value: function(array) {
     return array.length == 0 ? "" : typeof array[0] == "string" ? array.join("") : Buffer.isBuffer(array[0]) ? Buffer.concat(array) : array.join("");
   },
-  readStream: $traceurRuntime.initGeneratorFunction(function $__13(stream) {
-    var $__14,
-        $__15,
-        $__16,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "readStream", {
+  value: $traceurRuntime.initGeneratorFunction(function $__15(stream) {
+    var $__16,
         $__17,
         $__18,
         $__19,
@@ -25237,78 +25459,86 @@ var lu = module.exports = {
         $__25,
         $__26,
         $__27,
-        $__28;
+        $__28,
+        $__29,
+        $__30;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__27 = {then: function(resolve, reject) {
+            $__29 = {then: function(resolve, reject) {
                 var content = [];
-                $__14 = stream.on, $__17 = function(chunk) {
-                  return $__15 = content.push, $__16 = $__15.call(content, chunk), $__16;
-                }, $__18 = $__14.call(stream, "data", $__17), $__18;
-                $__19 = stream.on, $__23 = function() {
-                  return $__20 = lu.joinData, $__21 = $__20.call(lu, content), $__22 = resolve($__21), $__22;
-                }, $__24 = $__19.call(stream, "end", $__23), $__24;
-                $__25 = stream.on, $__26 = $__25.call(stream, "error", reject), $__26;
+                $__16 = stream.on, $__19 = function(chunk) {
+                  return $__17 = content.push, $__18 = $__17.call(content, chunk), $__18;
+                }, $__20 = $__16.call(stream, "data", $__19), $__20;
+                $__21 = stream.on, $__25 = function() {
+                  return $__22 = lu.joinData, $__23 = $__22.call(lu, content), $__24 = resolve($__23), $__24;
+                }, $__26 = $__21.call(stream, "end", $__25), $__26;
+                $__27 = stream.on, $__28 = $__27.call(stream, "error", reject), $__28;
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__27;
+            return $__29;
           case 2:
-            $__28 = $ctx.sent;
+            $__30 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__28;
+            $ctx.returnValue = $__30;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__13, this);
+    }, $__15, this);
   }),
-  readJSON: $traceurRuntime.initGeneratorFunction(function $__29(stream) {
-    var $__30,
-        $__31,
-        $__32,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "readJSON", {
+  value: $traceurRuntime.initGeneratorFunction(function $__31(stream) {
+    var $__32,
         $__33,
-        $__34;
+        $__34,
+        $__35,
+        $__36;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__30 = JSON.parse;
-            $__31 = lu.readStream;
-            $__32 = $__31.call(lu, stream);
+            $__32 = JSON.parse;
+            $__33 = lu.readStream;
+            $__34 = $__33.call(lu, stream);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__32;
+            return $__34;
           case 2:
-            $__33 = $ctx.sent;
+            $__35 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__34 = $__30.call(JSON, $__33);
+            $__36 = $__32.call(JSON, $__35);
             $ctx.state = 8;
             break;
           case 8:
-            $ctx.returnValue = $__34;
+            $ctx.returnValue = $__36;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__29, this);
+    }, $__31, this);
   }),
-  readChunk: $traceurRuntime.initGeneratorFunction(function $__35(stream) {
-    var $__36,
-        $__37,
-        $__38,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "readChunk", {
+  value: $traceurRuntime.initGeneratorFunction(function $__37(stream) {
+    var $__38,
         $__39,
         $__40,
         $__41,
@@ -25325,54 +25555,62 @@ var lu = module.exports = {
         $__52,
         $__53,
         $__54,
-        $__55;
+        $__55,
+        $__56,
+        $__57;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__54 = {then: function(resolve, reject) {
-                $__36 = stream.on, $__37 = $__36.call(stream, "data", onData), $__37;
-                $__38 = stream.on, $__39 = $__38.call(stream, "end", onEnd), $__39;
-                $__40 = stream.on, $__41 = $__40.call(stream, "error", onError), $__41;
+            $__56 = {then: function(resolve, reject) {
+                $__38 = stream.on, $__39 = $__38.call(stream, "data", onData), $__39;
+                $__40 = stream.on, $__41 = $__40.call(stream, "end", onEnd), $__41;
+                $__42 = stream.on, $__43 = $__42.call(stream, "error", onError), $__43;
                 function done() {
-                  $__42 = stream.removeListener, $__43 = $__42.call(stream, "data", onData), $__43;
-                  $__44 = stream.removeListener, $__45 = $__44.call(stream, "end", onEnd), $__45;
-                  $__46 = stream.removeListener, $__47 = $__46.call(stream, "error", onError), $__47;
+                  $__44 = stream.removeListener, $__45 = $__44.call(stream, "data", onData), $__45;
+                  $__46 = stream.removeListener, $__47 = $__46.call(stream, "end", onEnd), $__47;
+                  $__48 = stream.removeListener, $__49 = $__48.call(stream, "error", onError), $__49;
                 }
                 function onData(chunk) {
-                  $__48 = done(), $__48;
-                  $__49 = resolve(chunk), $__49;
+                  $__50 = done(), $__50;
+                  $__51 = resolve(chunk), $__51;
                 }
                 function onEnd() {
-                  $__50 = done(), $__50;
-                  $__51 = resolve(null), $__51;
+                  $__52 = done(), $__52;
+                  $__53 = resolve(null), $__53;
                 }
                 function onError(error) {
-                  $__52 = done(), $__52;
-                  $__53 = reject(error), $__53;
+                  $__54 = done(), $__54;
+                  $__55 = reject(error), $__55;
                 }
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__54;
+            return $__56;
           case 2:
-            $__55 = $ctx.sent;
+            $__57 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__55;
+            $ctx.returnValue = $__57;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__35, this);
+    }, $__37, this);
   }),
-  static: function(fun) {
-    return co.func($traceurRuntime.initGeneratorFunction(function $__56(request, response) {
-      var headWritten,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "static", {
+  value: function(fun) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__58(request, response) {
+      var $__1,
+          $__2,
+          headWritten,
           responseEnded,
           body;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -25394,7 +25632,12 @@ var lu = module.exports = {
               $ctx.state = 4;
               break;
             case 4:
-              response.writeHead(200, {"Content-Type": "text/html; charset=UTF-8"});
+              response.writeHead(200, ($__1 = {}, Object.defineProperty($__1, "Content-Type", {
+                value: "text/html; charset=UTF-8",
+                configurable: true,
+                enumerable: true,
+                writable: true
+              }), $__1));
               headWritten = true;
               if (typeof body != "string")
                 body = React.renderComponentToString(body);
@@ -25409,7 +25652,12 @@ var lu = module.exports = {
               break;
             case 14:
               if (!headWritten)
-                response.writeHead(500, {"Content-Type": "text/plain"});
+                response.writeHead(500, ($__2 = {}, Object.defineProperty($__2, "Content-Type", {
+                  value: "text/plain",
+                  configurable: true,
+                  enumerable: true,
+                  writable: true
+                }), $__2));
               if (!responseEnded)
                 response.end("<<< ERROR >>>");
               $ctx.state = 12;
@@ -25420,10 +25668,14 @@ var lu = module.exports = {
             default:
               return $ctx.end();
           }
-      }, $__56, this);
+      }, $__58, this);
     }));
   },
-  property: function(obj, name, defaultValue) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "property", {
+  value: function(obj, name, defaultValue) {
     var privateName = "_" + name;
     if (arguments.length > 2)
       obj[privateName] = defaultValue;
@@ -25437,8 +25689,11 @@ var lu = module.exports = {
     };
     return obj;
   },
-  polling: function(stream) {
-    var flushing = typeof stream.flush == "function";
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "polling", {
+  value: function(stream) {
     var ret = {
       stop: function() {
         if (!ret)
@@ -25457,7 +25712,7 @@ var lu = module.exports = {
         if (!stream.write(ret._chunk))
           stream.once("drain", ret._tryToSendChunk);
         else {
-          if (flushing)
+          if (typeof stream.flush == "function")
             stream.flush();
           ret._polling = setTimeout(ret._tryToSendChunk, ret._interval);
         }
@@ -25471,7 +25726,11 @@ var lu = module.exports = {
     process.nextTick(ret._tryToSendChunk);
     return ret;
   },
-  testDiffImm: function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "testDiffImm", {
+  value: function() {
     var p = {
       a: 1,
       x: {u: 9}
@@ -25479,7 +25738,11 @@ var lu = module.exports = {
     var q = {x: {c: 2}};
     assert(Immutable.is(Immutable.fromJS(q), lu.applyDiffImm(p, lu.makeDiffImm(p, q))));
   },
-  testDiff: function() {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "testDiff", {
+  value: function() {
     var p = {
       a: 1,
       x: {u: 9}
@@ -25487,7 +25750,11 @@ var lu = module.exports = {
     var q = {x: {c: 2}};
     assert(Immutable.is(Immutable.fromJS(q), Immutable.fromJS(lu.applyDiff(p, lu.makeDiff(p, q)))));
   },
-  applyDiffImm: function(dest, diff) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "applyDiffImm", {
+  value: function(dest, diff) {
     return Immutable.fromJS(dest || Immutable.Map()).withMutations((function(dest) {
       Immutable.fromJS(diff).forEach((function(value, key) {
         if (value == null)
@@ -25499,7 +25766,11 @@ var lu = module.exports = {
       }));
     }));
   },
-  makeDiffImm: function(previous, next) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "makeDiffImm", {
+  value: function(previous, next) {
     return Immutable.Map().withMutations((function(ret) {
       function toArray(obj) {
         var ret = [];
@@ -25535,13 +25806,25 @@ var lu = module.exports = {
       }
     }));
   },
-  assignDiffImm: function(dest, src) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "assignDiffImm", {
+  value: function(dest, src) {
     return lu.applyDiffImm(dest, lu.makeDiffImm(dest, src));
   },
-  isLiteral: (function(obj) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "isLiteral", {
+  value: (function(obj) {
     return obj && typeof obj == "object" && obj.constructor == Object;
   }),
-  applyDiff: function(dest, diff) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "applyDiff", {
+  value: function(dest, diff) {
     var ret = dest;
     var cnt = 0;
     function copyDest() {
@@ -25577,7 +25860,11 @@ var lu = module.exports = {
       ret = null;
     return ret;
   },
-  makeDiff: function(previous, next) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "makeDiff", {
+  value: function(previous, next) {
     var ret = null;
     function toArray(obj) {
       var ret = [];
@@ -25627,15 +25914,23 @@ var lu = module.exports = {
     }
     return ret;
   },
-  assignDiff: function(dest, src) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "assignDiff", {
+  value: function(dest, src) {
     return lu.applyDiff(dest, lu.makeDiff(dest, src));
   },
-  cast: function(type, obj) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "cast", {
+  value: function(type, obj) {
     if (!obj || typeof obj != "object")
       return obj;
-    var $__7 = type || {},
-        constructor = $__7.constructor,
-        elements = $__7.elements;
+    var $__9 = type || {},
+        constructor = $__9.constructor,
+        elements = $__9.elements;
     if (typeof constructor == "string")
       constructor = Immutable[constructor];
     return (constructor || Immutable.Map)().withMutations((function(ret) {
@@ -25644,7 +25939,11 @@ var lu = module.exports = {
       }));
     }));
   },
-  concatString: (function(array) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "concatString", {
+  value: (function(array) {
     var ret = "";
     !function walk(array) {
       if (typeof array != "object")
@@ -25652,15 +25951,19 @@ var lu = module.exports = {
       else if (array.length != null)
         array.forEach(walk);
       else
-        for (var $__1 = array[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__2 = void 0; !($__2 = $__1.next()).done; ) {
-          var s = $__2.value;
+        for (var $__3 = array[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__4 = void 0; !($__4 = $__3.next()).done; ) {
+          var s = $__4.value;
           walk(s);
         }
     }(array);
     return ret;
   }),
-  sortedDiff: function(first, second) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "sortedDiff", {
+  value: function(first, second) {
     var fi = first[Symbol.iterator]();
     var si = second[Symbol.iterator]();
     var ret = {
@@ -25685,7 +25988,11 @@ var lu = module.exports = {
     }
     return ret;
   },
-  measure: function(fun) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "measure", {
+  value: function(fun) {
     var now = global.performance || global.Date;
     var t = now.now();
     try {
@@ -25703,22 +26010,26 @@ var lu = module.exports = {
       console.log(t);
     }
   },
-  skip: $traceurRuntime.initGeneratorFunction(function $__56(c, buf) {
-    var $__1,
-        $__2,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "skip", {
+  value: $traceurRuntime.initGeneratorFunction(function $__58(c, buf) {
+    var $__3,
+        $__4,
         b;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__1 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__2 = void 0;
+            $__3 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
             $ctx.state = 6;
             break;
           case 6:
-            $ctx.state = (!($__2 = $__1.next()).done) ? 8 : -2;
+            $ctx.state = (!($__4 = $__3.next()).done) ? 8 : -2;
             break;
           case 8:
-            b = $__2.value;
+            b = $__4.value;
             $ctx.state = 9;
             break;
           case 9:
@@ -25738,24 +26049,28 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__56, this);
+    }, $__58, this);
   }),
-  take: $traceurRuntime.initGeneratorFunction(function $__57(c, buf) {
-    var $__1,
-        $__2,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "take", {
+  value: $traceurRuntime.initGeneratorFunction(function $__59(c, buf) {
+    var $__3,
+        $__4,
         b;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__1 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__2 = void 0;
+            $__3 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.state = (!($__2 = $__1.next()).done) ? 10 : -2;
+            $ctx.state = (!($__4 = $__3.next()).done) ? 10 : -2;
             break;
           case 10:
-            b = $__2.value;
+            b = $__4.value;
             $ctx.state = 11;
             break;
           case 11:
@@ -25775,15 +26090,23 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__57, this);
+    }, $__59, this);
   }),
-  copy: function(buf) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "copy", {
+  value: function(buf) {
     var ret = lu.array(buf);
     if (ret == buf)
       ret = buf.slice();
     return ret;
   },
-  array: function(buf) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "array", {
+  value: function(buf) {
     if (Array.isArray(buf))
       return buf;
     var ret = [];
@@ -25791,52 +26114,64 @@ var lu = module.exports = {
       for (var i = 0; i < buf.length; ++i)
         ret.push(buf[i]);
     else
-      for (var $__1 = buf[$traceurRuntime.toProperty(Symbol.iterator)](),
-          $__2 = void 0; !($__2 = $__1.next()).done; ) {
-        var b = $__2.value;
+      for (var $__3 = buf[$traceurRuntime.toProperty(Symbol.iterator)](),
+          $__4 = void 0; !($__4 = $__3.next()).done; ) {
+        var b = $__4.value;
         ret.push(b);
       }
     return ret;
   },
-  buffer: function(buf) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "buffer", {
+  value: function(buf) {
     if (buf instanceof Buffer)
       return buf;
     else
       return new Buffer(lu.array(buf));
   },
-  vector: function(buf) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "vector", {
+  value: function(buf) {
     return buf instanceof Buffer ? buf : lu.array(buf);
   },
-  concat: $traceurRuntime.initGeneratorFunction(function $__58(list) {
-    var $__3,
-        $__4,
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "concat", {
+  value: $traceurRuntime.initGeneratorFunction(function $__60(list) {
+    var $__5,
+        $__6,
         l,
-        $__1,
-        $__2,
+        $__3,
+        $__4,
         x;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__3 = list[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
+            $__5 = list[$traceurRuntime.toProperty(Symbol.iterator)](), $__6 = void 0;
             $ctx.state = 7;
             break;
           case 7:
-            $ctx.state = (!($__4 = $__3.next()).done) ? 9 : -2;
+            $ctx.state = (!($__6 = $__5.next()).done) ? 9 : -2;
             break;
           case 9:
-            l = $__4.value;
+            l = $__6.value;
             $ctx.state = 10;
             break;
           case 10:
-            $__1 = l[$traceurRuntime.toProperty(Symbol.iterator)](), $__2 = void 0;
+            $__3 = l[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.state = (!($__2 = $__1.next()).done) ? 5 : 7;
+            $ctx.state = (!($__4 = $__3.next()).done) ? 5 : 7;
             break;
           case 5:
-            x = $__2.value;
+            x = $__4.value;
             $ctx.state = 6;
             break;
           case 6:
@@ -25849,30 +26184,54 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__58, this);
+    }, $__60, this);
   }),
-  word: function(w) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "word", {
+  value: function(w) {
     return [w & 0xff, (w >> 8) & 0xff];
   },
-  dword: function(w) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "dword", {
+  value: function(w) {
     return [w & 0xff, (w >> 8) & 0xff, (w >> 16) & 0xff, (w >> 24) & 0xff];
   },
-  makeWord: function(lo, hi) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "makeWord", {
+  value: function(lo, hi) {
     return (lo & 0xff) + (hi & 0xff) << 8;
   },
-  arrayEqual: function(a, b) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "arrayEqual", {
+  value: function(a, b) {
     return a && b && a.length == b.length && a.every((function(ai, i) {
       return ai == b[i];
     }));
   },
-  compare: function(a, b) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "compare", {
+  value: function(a, b) {
     if (a == b)
       return 0;
     if (a < b)
       return -1;
     return 1;
   },
-  formatms: function(value) {
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "formatms", {
+  value: function(value) {
     var ret = "";
     value = Math.round(value);
     var ms = value % 1000;
@@ -25898,8 +26257,11 @@ var lu = module.exports = {
       ret += str;
       return ret;
     }
-  }
-};
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), $__1);
 
 //# sourceMappingURL=/home/vadzim/v/work/nerojs/src/localUtils.map
 
@@ -28275,7 +28637,7 @@ var $Action = Action;
             $ctx.state = 25;
             break;
           case 25:
-            $__25 = this._generatorProxy[Symbol.iterator]();
+            $__25 = $ctx.wrapYieldStar(this._generatorProxy[Symbol.iterator]());
             $ctx.sent = void 0;
             $ctx.action = 'next';
             $ctx.state = 19;
@@ -28325,7 +28687,7 @@ var $Action = Action;
             $ctx.state = (ret && ret.next && ret.throw) ? 50 : 58;
             break;
           case 50:
-            $__27 = ret[Symbol.iterator]();
+            $__27 = $ctx.wrapYieldStar(ret[Symbol.iterator]());
             $ctx.sent = void 0;
             $ctx.action = 'next';
             $ctx.state = 51;
@@ -28917,7 +29279,7 @@ module.exports = Scheduler;
       }( function () {
         module.exports = function() {
   "use strict";
-  var $__65 = $traceurRuntime.initGeneratorFunction(readFiles);
+  var $__82 = $traceurRuntime.initGeneratorFunction(readFiles);
   require("checkreboot");
   require("platform");
   var repl = false;
@@ -28991,8 +29353,8 @@ module.exports = Scheduler;
       }), updateInterfacesInterval);
     },
     interfaces: ra.Getter((function() {
-      var $__9;
-      return service.interfacesTimer && ($__9 = []).concat.apply($__9, $traceurRuntime.spread(lodash.map(os.networkInterfaces(), (function(ni) {
+      var $__11;
+      return service.interfacesTimer && ($__11 = []).concat.apply($__11, $traceurRuntime.spread(lodash.map(os.networkInterfaces(), (function(ni) {
         return ni.filter((function(i) {
           return !i.internal && !i.scopeid;
         })).map((function(i) {
@@ -29116,11 +29478,9 @@ module.exports = Scheduler;
     get handle() {
       return modem.socket && new Modem(modem.socket, console.info.bind(console));
     },
-    rawcommand: $traceurRuntime.initGeneratorFunction(function $__12() {
+    rawcommand: $traceurRuntime.initGeneratorFunction(function $__14() {
       var args,
           $__3,
-          $__19,
-          $__20,
           $__21,
           $__22,
           $__23,
@@ -29147,7 +29507,9 @@ module.exports = Scheduler;
           $__44,
           $__45,
           $__46,
-          $__47;
+          $__47,
+          $__48,
+          $__49;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -29158,59 +29520,59 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__19 = modem.handle;
+              $__21 = modem.handle;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = ($__19) ? 5 : 9;
+              $ctx.state = ($__21) ? 5 : 9;
               break;
             case 5:
-              $__20 = modem.handle;
-              $__21 = $__20.lock;
-              $__22 = $traceurRuntime.initGeneratorFunction;
-              $__44 = $__22.call($traceurRuntime, function $__13(command) {
-                var $__14,
-                    $__15,
-                    $__16,
+              $__22 = modem.handle;
+              $__23 = $__22.lock;
+              $__24 = $traceurRuntime.initGeneratorFunction;
+              $__46 = $__24.call($traceurRuntime, function $__15(command) {
+                var $__16,
                     $__17,
                     $__18,
+                    $__19,
+                    $__20,
                     error;
-                return $__23 = $traceurRuntime.createGeneratorInstance, $__43 = $__23.call($traceurRuntime, function($ctx) {
+                return $__25 = $traceurRuntime.createGeneratorInstance, $__45 = $__25.call($traceurRuntime, function($ctx) {
                   while (true)
-                    switch ($__24 = $ctx.state, $__24) {
+                    switch ($__26 = $ctx.state, $__26) {
                       case 0:
-                        $__25 = $ctx.pushTry, $__26 = $__25.call($ctx, 13, null), $__26;
+                        $__27 = $ctx.pushTry, $__28 = $__27.call($ctx, 13, null), $__28;
                         $ctx.state = 16, 16;
                         break;
                       case 16:
-                        $__27 = command.apply, $__14 = $__27, $__27;
-                        $__28 = $traceurRuntime.spread, $__15 = $__28, $__28;
-                        $__29 = $__15.call, $__30 = $__29.call($__15, $traceurRuntime, args), $__16 = $__30, $__30;
-                        $__31 = $__14.call, $__32 = $__31.call($__14, command, (void 0), $__16), $__17 = $__32, $__32;
+                        $__29 = command.apply, $__16 = $__29, $__29;
+                        $__30 = $traceurRuntime.spread, $__17 = $__30, $__30;
+                        $__31 = $__17.call, $__32 = $__31.call($__17, $traceurRuntime, args), $__18 = $__32, $__32;
+                        $__33 = $__16.call, $__34 = $__33.call($__16, command, (void 0), $__18), $__19 = $__34, $__34;
                         $ctx.state = 6, 6;
                         break;
                       case 6:
                         $ctx.state = 2, 2;
-                        return $__17;
+                        return $__19;
                       case 2:
-                        $__33 = $ctx.sent, $__18 = $__33, $__33;
+                        $__35 = $ctx.sent, $__20 = $__35, $__35;
                         $ctx.state = 4, 4;
                         break;
                       case 4:
-                        $ctx.returnValue = $__18, $__18;
+                        $ctx.returnValue = $__20, $__20;
                         $ctx.state = -2, -2;
                         break;
                       case 8:
-                        $__34 = $ctx.popTry, $__35 = $__34.call($ctx), $__35;
+                        $__36 = $ctx.popTry, $__37 = $__36.call($ctx), $__37;
                         $ctx.state = -2, -2;
                         break;
                       case 13:
-                        $__36 = $ctx.popTry, $__37 = $__36.call($ctx), $__37;
-                        $__38 = $ctx.storedException, error = $__38, $__38;
+                        $__38 = $ctx.popTry, $__39 = $__38.call($ctx), $__39;
+                        $__40 = $ctx.storedException, error = $__40, $__40;
                         $ctx.state = 11, 11;
                         break;
                       case 11:
-                        $__39 = console.error, $__40 = $__39.call(console, "modem error", error, "executing", args), $__40;
+                        $__41 = console.error, $__42 = $__41.call(console, "modem error", error, "executing", args), $__42;
                         $ctx.state = 12, 12;
                         break;
                       case 12:
@@ -29218,42 +29580,42 @@ module.exports = Scheduler;
                         $ctx.state = -2, -2;
                         break;
                       default:
-                        return $__41 = $ctx.end, $__42 = $__41.call($ctx), $__42;
+                        return $__43 = $ctx.end, $__44 = $__43.call($ctx), $__44;
                     }
-                }, $__13, this), $__43;
+                }, $__15, this), $__45;
               });
-              $__45 = $__21.call($__20, $__44);
+              $__47 = $__23.call($__22, $__46);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__45;
+              return $__47;
             case 2:
-              $__46 = $ctx.sent;
+              $__48 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__47 = $__46;
+              $__49 = $__48;
               $ctx.state = 8;
               break;
             case 9:
-              $__47 = $__19;
+              $__49 = $__21;
               $ctx.state = 8;
               break;
             case 8:
-              $ctx.returnValue = $__47;
+              $ctx.returnValue = $__49;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__12, this);
+      }, $__14, this);
     }),
     get version() {
       return modem.rawcommand("Version");
     },
     get pingModem() {
-      return modem.pingInterval && ra($traceurRuntime.initGeneratorFunction(function $__13() {
+      return modem.pingInterval && ra($traceurRuntime.initGeneratorFunction(function $__15() {
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
@@ -29274,7 +29636,7 @@ module.exports = Scheduler;
               default:
                 return $ctx.end();
             }
-        }, $__13, this);
+        }, $__15, this);
       }));
     },
     get sversion() {
@@ -29284,18 +29646,18 @@ module.exports = Scheduler;
     get versionOK() {
       return modem.sversion && modem.sversion >= modem.sminVersion;
     },
-    vercommand: $traceurRuntime.initGeneratorFunction(function $__13() {
-      var $__9,
+    vercommand: $traceurRuntime.initGeneratorFunction(function $__15() {
+      var $__11,
           args,
           $__4,
-          $__48,
-          $__49,
           $__50,
           $__51,
           $__52,
           $__53,
           $__54,
-          $__55;
+          $__55,
+          $__56,
+          $__57;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -29306,44 +29668,44 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__48 = modem.versionOK;
+              $__50 = modem.versionOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__48) ? 9 : 5;
+              $ctx.state = (!$__50) ? 9 : 5;
               break;
             case 9:
-              $__55 = null;
+              $__57 = null;
               $ctx.state = 10;
               break;
             case 5:
-              $__9 = modem;
-              $__49 = modem.rawcommand;
-              $__50 = $__49.apply;
-              $__51 = $traceurRuntime.spread;
-              $__52 = $__51.call($traceurRuntime, args);
-              $__53 = $__50.call($__49, $__9, $__52);
+              $__11 = modem;
+              $__51 = modem.rawcommand;
+              $__52 = $__51.apply;
+              $__53 = $traceurRuntime.spread;
+              $__54 = $__53.call($traceurRuntime, args);
+              $__55 = $__52.call($__51, $__11, $__54);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__53;
+              return $__55;
             case 2:
-              $__54 = $ctx.sent;
+              $__56 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__55 = $__54;
+              $__57 = $__56;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__55;
+              $ctx.returnValue = $__57;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__13, this);
+      }, $__15, this);
     }),
     get functions() {
       return modem.vercommand("Functions");
@@ -29354,18 +29716,18 @@ module.exports = Scheduler;
     get protocolOK() {
       return !!(modem.functions && modem.functions.PROTOCOLS && modem.initProtocols);
     },
-    sendcommand: $traceurRuntime.initGeneratorFunction(function $__56() {
-      var $__9,
+    sendcommand: $traceurRuntime.initGeneratorFunction(function $__58() {
+      var $__11,
           args,
           $__5,
-          $__57,
-          $__58,
           $__59,
           $__60,
           $__61,
           $__62,
           $__63,
-          $__64;
+          $__64,
+          $__65,
+          $__66;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -29376,44 +29738,44 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__57 = modem.protocolOK;
+              $__59 = modem.protocolOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__57) ? 9 : 5;
+              $ctx.state = (!$__59) ? 9 : 5;
               break;
             case 9:
-              $__64 = null;
+              $__66 = null;
               $ctx.state = 10;
               break;
             case 5:
-              $__9 = modem;
-              $__58 = modem.vercommand;
-              $__59 = $__58.apply;
-              $__60 = $traceurRuntime.spread;
-              $__61 = $__60.call($traceurRuntime, args);
-              $__62 = $__59.call($__58, $__9, $__61);
+              $__11 = modem;
+              $__60 = modem.vercommand;
+              $__61 = $__60.apply;
+              $__62 = $traceurRuntime.spread;
+              $__63 = $__62.call($traceurRuntime, args);
+              $__64 = $__61.call($__60, $__11, $__63);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__62;
+              return $__64;
             case 2:
-              $__63 = $ctx.sent;
+              $__65 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__64 = $__63;
+              $__66 = $__65;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__64;
+              $ctx.returnValue = $__66;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__56, this);
+      }, $__58, this);
     }),
     get freeCells() {
       return modem.sendcommand("Free_Cell_Count");
@@ -29428,43 +29790,43 @@ module.exports = Scheduler;
       for (var args = [],
           $__6 = 0; $__6 < arguments.length; $__6++)
         args[$__6] = arguments[$__6];
-      return co.gocall($traceurRuntime.initGeneratorFunction(function $__65() {
-        var $__9,
-            $__66,
-            $__67,
+      return co.gocall($traceurRuntime.initGeneratorFunction(function $__67() {
+        var $__11,
             $__68,
             $__69,
             $__70,
             $__71,
-            $__72;
+            $__72,
+            $__73,
+            $__74;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
-                $__9 = this;
-                $__66 = this;
-                $__67 = $__66.sendcommand;
-                $__68 = $__67.apply;
-                $__69 = $traceurRuntime.spread;
-                $__70 = $__69.call($traceurRuntime, args);
-                $__71 = $__68.call($__67, $__9, $__70);
+                $__11 = this;
+                $__68 = this;
+                $__69 = $__68.sendcommand;
+                $__70 = $__69.apply;
+                $__71 = $traceurRuntime.spread;
+                $__72 = $__71.call($traceurRuntime, args);
+                $__73 = $__70.call($__69, $__11, $__72);
                 $ctx.state = 6;
                 break;
               case 6:
                 $ctx.state = 2;
-                return $__71;
+                return $__73;
               case 2:
-                $__72 = $ctx.sent;
+                $__74 = $ctx.sent;
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.returnValue = $__72;
+                $ctx.returnValue = $__74;
                 $ctx.state = -2;
                 break;
               default:
                 return $ctx.end();
             }
-        }, $__65, this);
+        }, $__67, this);
       }), this);
     },
     get showModemStatus() {
@@ -29472,14 +29834,14 @@ module.exports = Scheduler;
     },
     session: function(callback) {
       return ra.detach((function() {
-        return co.go($traceurRuntime.initGeneratorFunction(function $__65() {
-          var $__73,
-              $__74,
-              $__75,
+        return co.go($traceurRuntime.initGeneratorFunction(function $__67() {
+          var $__75,
               $__76,
               $__77,
               $__78,
-              $__79;
+              $__79,
+              $__80,
+              $__81;
           return $traceurRuntime.createGeneratorInstance(function($ctx) {
             while (true)
               switch ($ctx.state) {
@@ -29487,42 +29849,42 @@ module.exports = Scheduler;
                   $ctx.state = (modem.protocolOK) ? 5 : 13;
                   break;
                 case 5:
-                  $__73 = modem.handle;
-                  $__74 = $__73.lock;
-                  $__75 = $__74.call($__73, callback);
+                  $__75 = modem.handle;
+                  $__76 = $__75.lock;
+                  $__77 = $__76.call($__75, callback);
                   $ctx.state = 6;
                   break;
                 case 6:
                   $ctx.state = 2;
-                  return $__75;
+                  return $__77;
                 case 2:
-                  $__76 = $ctx.sent;
+                  $__78 = $ctx.sent;
                   $ctx.state = 4;
                   break;
                 case 4:
-                  $ctx.returnValue = $__76;
+                  $ctx.returnValue = $__78;
                   $ctx.state = -2;
                   break;
                 case 13:
-                  $__77 = lu.returnNullPromise;
-                  $__78 = callback($__77);
+                  $__79 = lu.returnNullPromise;
+                  $__80 = callback($__79);
                   $ctx.state = 14;
                   break;
                 case 14:
                   $ctx.state = 10;
-                  return $__78;
+                  return $__80;
                 case 10:
-                  $__79 = $ctx.sent;
+                  $__81 = $ctx.sent;
                   $ctx.state = 12;
                   break;
                 case 12:
-                  $ctx.returnValue = $__79;
+                  $ctx.returnValue = $__81;
                   $ctx.state = -2;
                   break;
                 default:
                   return $ctx.end();
               }
-          }, $__65, this);
+          }, $__67, this);
         }));
       }));
     },
@@ -29531,7 +29893,236 @@ module.exports = Scheduler;
       if (answer.id !== "answer_Result" || answer.RESULT !== result)
         throw new Error("unexpected modem result");
       return answer.RESULT;
-    }
+    },
+    userCommand: $traceurRuntime.initGeneratorFunction(function $__67($__9) {
+      var $__10,
+          deviceId,
+          command,
+          data,
+          socket,
+          onerror,
+          device,
+          deviceCommand,
+          groups,
+          i,
+          commands,
+          newstate,
+          passedToModem,
+          my_timestamp,
+          errors;
+      return $traceurRuntime.createGeneratorInstance(function($ctx) {
+        while (true)
+          switch ($ctx.state) {
+            case 0:
+              $__10 = $__9, deviceId = $__10.deviceId, command = $__10.command, data = $__10.data, socket = $__10.socket, onerror = $__10.onerror;
+              $ctx.state = 35;
+              break;
+            case 35:
+              $ctx.state = 2;
+              return modem.devices.waitForReady(socket);
+            case 2:
+              $ctx.maybeThrow();
+              $ctx.state = 4;
+              break;
+            case 4:
+              device = modem.devices.getState()[deviceId];
+              deviceCommand = command;
+              $ctx.state = 37;
+              break;
+            case 37:
+              $ctx.state = (!device) ? 5 : 6;
+              break;
+            case 5:
+              $ctx.returnValue = onerror && onerror(HTTPStatus.NOT_FOUND);
+              $ctx.state = -2;
+              break;
+            case 6:
+              $ctx.state = (!device.group) ? 25 : 17;
+              break;
+            case 25:
+              $ctx.state = (deviceCommand == "Link") ? 19 : 23;
+              break;
+            case 19:
+              groups = lodash.reduce(modem.devices.getState(), (function(ret, d) {
+                if (d.group)
+                  ret[d.group] = true;
+                return ret;
+              }), []);
+              $ctx.state = 20;
+              break;
+            case 20:
+              i = 2;
+              $ctx.state = 15;
+              break;
+            case 15:
+              $ctx.state = (i <= 1022) ? 12 : 13;
+              break;
+            case 9:
+              ++i;
+              $ctx.state = 15;
+              break;
+            case 12:
+              $ctx.state = (groups[i] == null) ? 10 : 9;
+              break;
+            case 10:
+              modem.devices.applyItemChanges(deviceId, {group: i});
+              $ctx.state = 13;
+              break;
+            case 13:
+              ra.forceCalculations();
+              device = modem.devices.getState()[deviceId];
+              $ctx.state = 22;
+              break;
+            case 22:
+              $ctx.state = (!device.group) ? 16 : 17;
+              break;
+            case 16:
+              $ctx.returnValue = onerror && onerror(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
+              $ctx.state = -2;
+              break;
+            case 23:
+              $ctx.returnValue = onerror && onerror(HTTPStatus.NOT_FOUND, "No group in device");
+              $ctx.state = -2;
+              break;
+            case 17:
+              newstate = deviceActions.getNewState(device, deviceCommand);
+              commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand);
+              $ctx.state = 39;
+              break;
+            case 39:
+              $ctx.state = (!commands || !commands.length) ? 27 : 28;
+              break;
+            case 27:
+              $ctx.returnValue = onerror && onerror(HTTPStatus.NOT_FOUND);
+              $ctx.state = -2;
+              break;
+            case 28:
+              passedToModem = false;
+              my_timestamp = Inc();
+              errors = [];
+              co.defer((function() {
+                if (!passedToModem && my_timestamp == modem.devices.getState()[deviceId].newstate_timestamp)
+                  modem.devices.applyItemChanges(deviceId, {
+                    newstate: null,
+                    newstate_timestamp: null
+                  });
+              }));
+              modem.devices.applyItemChanges(deviceId, {
+                newstate: newstate,
+                newstate_timestamp: my_timestamp
+              });
+              $ctx.state = 41;
+              break;
+            case 41:
+              $ctx.state = 31;
+              return modem.session($traceurRuntime.initGeneratorFunction(function $__82(command) {
+                var $__1,
+                    $__2,
+                    c,
+                    answer,
+                    e,
+                    $__83,
+                    $__84,
+                    $__85,
+                    $__86,
+                    $__87,
+                    $__88;
+                return $traceurRuntime.createGeneratorInstance(function($ctx) {
+                  while (true)
+                    switch ($ctx.state) {
+                      case 0:
+                        $__1 = commands[$traceurRuntime.toProperty(Symbol.iterator)](), $__2 = void 0;
+                        $ctx.state = 12;
+                        break;
+                      case 12:
+                        $ctx.state = (!($__2 = $__1.next()).done) ? 16 : 18;
+                        break;
+                      case 16:
+                        c = $__2.value;
+                        $ctx.state = 17;
+                        break;
+                      case 17:
+                        $ctx.pushTry(7, null);
+                        $ctx.state = 10;
+                        break;
+                      case 10:
+                        $ctx.state = 2;
+                        return command(c);
+                      case 2:
+                        answer = $ctx.sent;
+                        $ctx.state = 4;
+                        break;
+                      case 4:
+                        if (answer.RESULT != "OK")
+                          throw new Error(answer.RESULT);
+                        $ctx.state = 6;
+                        break;
+                      case 6:
+                        $ctx.popTry();
+                        $ctx.state = 12;
+                        break;
+                      case 7:
+                        $ctx.popTry();
+                        e = $ctx.storedException;
+                        $ctx.state = 13;
+                        break;
+                      case 13:
+                        console.error("modem error:".red, e);
+                        if (e instanceof Modem.ETimeout)
+                          errors.push(e);
+                        else
+                          throw e;
+                        $ctx.state = 12;
+                        break;
+                      case 18:
+                        $ctx.state = (errors.length) ? 24 : 27;
+                        break;
+                      case 24:
+                        $__83 = commands[0];
+                        $__84 = $__83.group;
+                        $__85 = {
+                          id: "Cur_Condition",
+                          group: $__84
+                        };
+                        $__86 = command($__85);
+                        $ctx.state = 25;
+                        break;
+                      case 25:
+                        $ctx.state = 21;
+                        return $__86;
+                      case 21:
+                        $__87 = $ctx.sent;
+                        $ctx.state = 23;
+                        break;
+                      case 23:
+                        $__88 = $__87.CUR_CONDITION;
+                        newstate = $__88;
+                        $ctx.state = 27;
+                        break;
+                      case 27:
+                        if (newstate != null) {
+                          modem.devices.applyItemChanges(deviceId, {
+                            state: newstate,
+                            state_timestamp: my_timestamp
+                          });
+                          passedToModem = true;
+                        }
+                        $ctx.state = -2;
+                        break;
+                      default:
+                        return $ctx.end();
+                    }
+                }, $__82, this);
+              }));
+            case 31:
+              $ctx.maybeThrow();
+              $ctx.state = -2;
+              break;
+            default:
+              return $ctx.end();
+          }
+      }, $__67, this);
+    })
   });
   require("watchStop")(configName)(authName)(__dirname + "/../templates/")(__dirname + "/../templates/locations/");
   var express = require("express");
@@ -29566,54 +30157,54 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__65, this);
+    }, $__82, this);
   }
   function staticData(value) {
     var contentType = arguments[1] !== (void 0) ? arguments[1] : "json";
-    return co.func($traceurRuntime.initGeneratorFunction(function $__80(_, response) {
-      var $__81,
-          $__82,
-          $__83,
-          $__84,
-          $__85,
-          $__86,
-          $__87;
+    return co.func($traceurRuntime.initGeneratorFunction(function $__89(_, response) {
+      var $__90,
+          $__91,
+          $__92,
+          $__93,
+          $__94,
+          $__95,
+          $__96;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__81 = response.contentType;
-              $__82 = $__81.call(response, contentType);
-              $__83 = $__82.end;
-              $__84 = value.then;
+              $__90 = response.contentType;
+              $__91 = $__90.call(response, contentType);
+              $__92 = $__91.end;
+              $__93 = value.then;
               $ctx.state = 11;
               break;
             case 11:
-              $ctx.state = ($__84) ? 1 : 7;
+              $ctx.state = ($__93) ? 1 : 7;
               break;
             case 1:
               $ctx.state = 2;
               return value;
             case 2:
-              $__85 = $ctx.sent;
+              $__94 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__86 = $__85;
+              $__95 = $__94;
               $ctx.state = 6;
               break;
             case 7:
-              $__86 = value;
+              $__95 = value;
               $ctx.state = 6;
               break;
             case 6:
-              $__87 = $__83.call($__82, $__86);
+              $__96 = $__92.call($__91, $__95);
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__80, this);
+      }, $__89, this);
     }));
   }
   function beautify(text) {
@@ -29629,7 +30220,7 @@ module.exports = Scheduler;
   var parseCookies = (function(request) {
     return cookieParser(request, null, lodash.noop);
   });
-  var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__80(request, response, next) {
+  var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__89(request, response, next) {
     var a,
         origin,
         socket;
@@ -29683,7 +30274,7 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__80, this);
+    }, $__89, this);
   }));
   var modemService = express().use(cookieParser).use(require("http_log")).use((function(request, response, next) {
     var origin = request.headers.origin || "*";
@@ -29702,18 +30293,8 @@ module.exports = Scheduler;
     }));
   })).use(checkAuthorization).all("/login", (function(request, response) {
     response.end();
-  })).post("/command", co.func($traceurRuntime.initGeneratorFunction(function $__88(request, response) {
-    var deviceId,
-        device,
-        deviceCommand,
-        groups,
-        i,
-        commands,
-        newstate,
-        passedToModem,
-        my_timestamp,
-        errors,
-        error;
+  })).post("/command", co.func($traceurRuntime.initGeneratorFunction(function $__97(request, response) {
+    var error;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
@@ -29721,224 +30302,37 @@ module.exports = Scheduler;
             co.defer((function() {
               return response.end();
             }));
-            $ctx.state = 50;
+            $ctx.state = 15;
             break;
-          case 50:
-            $ctx.pushTry(40, null);
-            $ctx.state = 43;
+          case 15:
+            $ctx.pushTry(5, null);
+            $ctx.state = 8;
             break;
-          case 43:
+          case 8:
             $ctx.state = 2;
-            return modem.devices.waitForReady(response);
+            return modem.userCommand({
+              deviceId: request.query.id,
+              command: request.query.cmd,
+              data: null,
+              socket: response,
+              onerror: (function(code, message) {
+                return response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end(message);
+              })
+            });
           case 2:
             $ctx.maybeThrow();
             $ctx.state = 4;
             break;
           case 4:
-            deviceId = request.query.id;
-            device = modem.devices.getState()[deviceId];
-            deviceCommand = request.query.cmd;
-            $ctx.state = 35;
-            break;
-          case 35:
-            $ctx.state = (!device) ? 5 : 6;
+            $ctx.popTry();
+            $ctx.state = -2;
             break;
           case 5:
-            $ctx.returnValue = response.status(HTTPStatus.NOT_FOUND).end();
-            $ctx.state = -2;
-            break;
-          case 6:
-            $ctx.state = (!device.group) ? 25 : 17;
-            break;
-          case 25:
-            $ctx.state = (deviceCommand == "Link") ? 19 : 23;
-            break;
-          case 19:
-            groups = lodash.reduce(modem.devices.getState(), (function(ret, d) {
-              if (d.group)
-                ret[d.group] = true;
-              return ret;
-            }), []);
-            $ctx.state = 20;
-            break;
-          case 20:
-            i = 2;
-            $ctx.state = 15;
-            break;
-          case 15:
-            $ctx.state = (i <= 1022) ? 12 : 13;
-            break;
-          case 9:
-            ++i;
-            $ctx.state = 15;
-            break;
-          case 12:
-            $ctx.state = (groups[i] == null) ? 10 : 9;
-            break;
-          case 10:
-            modem.devices.applyItemChanges(deviceId, {group: i});
-            $ctx.state = 13;
-            break;
-          case 13:
-            ra.forceCalculations();
-            device = modem.devices.getState()[deviceId];
-            $ctx.state = 22;
-            break;
-          case 22:
-            $ctx.state = (!device.group) ? 16 : 17;
-            break;
-          case 16:
-            $ctx.returnValue = response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end("No more group numbers for devices");
-            $ctx.state = -2;
-            break;
-          case 23:
-            $ctx.returnValue = response.status(HTTPStatus.NOT_FOUND).end("No group in device");
-            $ctx.state = -2;
-            break;
-          case 17:
-            newstate = deviceActions.getNewState(device, deviceCommand);
-            commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand);
-            $ctx.state = 37;
-            break;
-          case 37:
-            $ctx.state = (!commands || !commands.length) ? 27 : 28;
-            break;
-          case 27:
-            $ctx.returnValue = response.status(HTTPStatus.NOT_FOUND).end();
-            $ctx.state = -2;
-            break;
-          case 28:
-            passedToModem = false;
-            my_timestamp = Inc();
-            errors = [];
-            co.defer((function() {
-              if (!passedToModem && my_timestamp == modem.devices.getState()[deviceId].newstate_timestamp)
-                modem.devices.applyItemChanges(deviceId, {
-                  newstate: null,
-                  newstate_timestamp: null
-                });
-            }));
-            modem.devices.applyItemChanges(deviceId, {
-              newstate: newstate,
-              newstate_timestamp: my_timestamp
-            });
-            $ctx.state = 39;
-            break;
-          case 39:
-            $ctx.state = 31;
-            return modem.session($traceurRuntime.initGeneratorFunction(function $__89(command) {
-              var $__1,
-                  $__2,
-                  c,
-                  answer,
-                  e,
-                  $__90,
-                  $__91,
-                  $__92,
-                  $__93,
-                  $__94,
-                  $__95;
-              return $traceurRuntime.createGeneratorInstance(function($ctx) {
-                while (true)
-                  switch ($ctx.state) {
-                    case 0:
-                      $__1 = commands[$traceurRuntime.toProperty(Symbol.iterator)](), $__2 = void 0;
-                      $ctx.state = 12;
-                      break;
-                    case 12:
-                      $ctx.state = (!($__2 = $__1.next()).done) ? 16 : 18;
-                      break;
-                    case 16:
-                      c = $__2.value;
-                      $ctx.state = 17;
-                      break;
-                    case 17:
-                      $ctx.pushTry(7, null);
-                      $ctx.state = 10;
-                      break;
-                    case 10:
-                      $ctx.state = 2;
-                      return command(c);
-                    case 2:
-                      answer = $ctx.sent;
-                      $ctx.state = 4;
-                      break;
-                    case 4:
-                      if (answer.RESULT != "OK")
-                        throw new Error(answer.RESULT);
-                      $ctx.state = 6;
-                      break;
-                    case 6:
-                      $ctx.popTry();
-                      $ctx.state = 12;
-                      break;
-                    case 7:
-                      $ctx.popTry();
-                      e = $ctx.storedException;
-                      $ctx.state = 13;
-                      break;
-                    case 13:
-                      console.error("modem error:".red, e);
-                      if (e instanceof Modem.ETimeout)
-                        errors.push(e);
-                      else
-                        throw e;
-                      $ctx.state = 12;
-                      break;
-                    case 18:
-                      $ctx.state = (errors.length) ? 24 : 27;
-                      break;
-                    case 24:
-                      $__90 = commands[0];
-                      $__91 = $__90.group;
-                      $__92 = {
-                        id: "Cur_Condition",
-                        group: $__91
-                      };
-                      $__93 = command($__92);
-                      $ctx.state = 25;
-                      break;
-                    case 25:
-                      $ctx.state = 21;
-                      return $__93;
-                    case 21:
-                      $__94 = $ctx.sent;
-                      $ctx.state = 23;
-                      break;
-                    case 23:
-                      $__95 = $__94.CUR_CONDITION;
-                      newstate = $__95;
-                      $ctx.state = 27;
-                      break;
-                    case 27:
-                      if (newstate != null) {
-                        modem.devices.applyItemChanges(deviceId, {
-                          state: newstate,
-                          state_timestamp: my_timestamp
-                        });
-                        passedToModem = true;
-                      }
-                      $ctx.state = -2;
-                      break;
-                    default:
-                      return $ctx.end();
-                  }
-              }, $__89, this);
-            }));
-          case 31:
-            $ctx.maybeThrow();
-            $ctx.state = 33;
-            break;
-          case 33:
-            $ctx.popTry();
-            $ctx.state = -2;
-            break;
-          case 40:
             $ctx.popTry();
             error = $ctx.storedException;
-            $ctx.state = 46;
+            $ctx.state = 11;
             break;
-          case 46:
+          case 11:
             console.error(error);
             response.status(HTTPStatus.INTERNAL_SERVER_ERROR);
             $ctx.state = -2;
@@ -29946,25 +30340,25 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__88, this);
+    }, $__97, this);
   }))).all("/devices", (modem.devices = new JSONservice(__dirname + "/../var/devices", {})).httpService).all("/rooms", (modem.places = new JSONservice(__dirname + "/../var/rooms", {
     main: "room",
     room: {content: []}
-  })).httpService).post("/modem", co.func($traceurRuntime.initGeneratorFunction(function $__89(request, response, next) {
-    var $__9,
+  })).httpService).post("/modem", co.func($traceurRuntime.initGeneratorFunction(function $__98(request, response, next) {
+    var $__11,
         ret,
         undefined,
         func,
         args,
-        $__96,
-        $__97,
-        $__98,
         $__99,
         $__100,
         $__101,
         $__102,
         $__103,
         $__104,
+        $__105,
+        $__106,
+        $__107,
         error;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
@@ -29974,32 +30368,32 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            path$__10 = JSON.parse(request.query.path);
+            path$__12 = JSON.parse(request.query.path);
             func = JSON.parse(request.query.func);
             args = JSON.parse(request.query.args);
             $ctx.state = 10;
             break;
           case 10:
-            $__96 = modem.devices;
-            $__97 = $__96[path$__10];
-            $__9 = $__97;
-            $__98 = $__97[func];
-            $__99 = $__98.apply;
-            $__100 = $traceurRuntime.spread;
-            $__101 = $__100.call($traceurRuntime, args);
-            $__102 = $__99.call($__98, $__9, $__101);
+            $__99 = modem.devices;
+            $__100 = $__99[path$__12];
+            $__11 = $__100;
+            $__101 = $__100[func];
+            $__102 = $__101.apply;
+            $__103 = $traceurRuntime.spread;
+            $__104 = $__103.call($traceurRuntime, args);
+            $__105 = $__102.call($__101, $__11, $__104);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__102;
+            return $__105;
           case 2:
-            $__103 = $ctx.sent;
+            $__106 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__104 = {result: $__103};
-            ret = $__104;
+            $__107 = {result: $__106};
+            ret = $__107;
             $ctx.state = 8;
             break;
           case 8:
@@ -30026,7 +30420,7 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__89, this);
+    }, $__98, this);
   })));
   var WebSocket = require("websockets/lib/websockets/socket");
   var onUpgrade = (function(request, socket, head) {
@@ -30057,11 +30451,11 @@ module.exports = Scheduler;
     }));
   });
   var createModemServer = (function(Server) {
-    var $__9;
+    var $__11;
     for (var connection = [],
         $__7 = 1; $__7 < arguments.length; $__7++)
       connection[$__7 - 1] = arguments[$__7];
-    return ($__9 = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply($__9, $traceurRuntime.spread(connection));
+    return ($__11 = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply($__11, $traceurRuntime.spread(connection));
   });
   createModemServer(http, config.serviceport, "::");
   createModemServer(http, internalModemService);
@@ -30097,25 +30491,25 @@ module.exports = Scheduler;
         switch (data.what) {
           case "user data":
             var streamid = data.stream;
-            var stream$__11 = sockets[streamid];
+            var stream$__13 = sockets[streamid];
             var chunk = new Buffer(data.data, "base64");
-            if (stream$__11 == null) {
-              stream$__11 = sockets[streamid] = {
+            if (stream$__13 == null) {
+              stream$__13 = sockets[streamid] = {
                 buffer: [],
                 socket: net.connect(internalModemService, (function() {
-                  if (stream$__11.buffer.length)
-                    stream$__11.socket.write(Buffer.concat(stream$__11.buffer));
-                  stream$__11.buffer = null;
+                  if (stream$__13.buffer.length)
+                    stream$__13.socket.write(Buffer.concat(stream$__13.buffer));
+                  stream$__13.buffer = null;
                 }))
               };
-              stream$__11.socket.on("data", (function(data) {
+              stream$__13.socket.on("data", (function(data) {
                 return client.write(JSON.stringify({
                   what: "modem data",
                   stream: streamid,
                   data: data.toString("base64")
                 }));
               }));
-              stream$__11.socket.on("end", (function() {
+              stream$__13.socket.on("end", (function() {
                 delete sockets[streamid];
                 client.write(JSON.stringify({
                   what: "modem data",
@@ -30124,10 +30518,10 @@ module.exports = Scheduler;
                 }));
               }));
             }
-            if (stream$__11.socket.writable)
-              stream$__11.socket.write(chunk);
+            if (stream$__13.socket.writable)
+              stream$__13.socket.write(chunk);
             else
-              stream$__11.buffer.push(chunk);
+              stream$__13.buffer.push(chunk);
         }
       } catch (e) {
         console.error(e);
@@ -30149,37 +30543,37 @@ module.exports = Scheduler;
       for (var args = [],
           $__8 = 0; $__8 < arguments.length; $__8++)
         args[$__8] = arguments[$__8];
-      modem.session($traceurRuntime.initGeneratorFunction(function $__105(command) {
-        var $__106,
-            $__107,
-            $__108,
-            $__109,
-            $__110;
+      modem.session($traceurRuntime.initGeneratorFunction(function $__108(command) {
+        var $__109,
+            $__110,
+            $__111,
+            $__112,
+            $__113;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
-                $__106 = command.apply;
-                $__107 = $traceurRuntime.spread;
-                $__108 = $__107.call($traceurRuntime, args);
-                $__109 = $__106.call(command, (void 0), $__108);
+                $__109 = command.apply;
+                $__110 = $traceurRuntime.spread;
+                $__111 = $__110.call($traceurRuntime, args);
+                $__112 = $__109.call(command, (void 0), $__111);
                 $ctx.state = 6;
                 break;
               case 6:
                 $ctx.state = 2;
-                return $__109;
+                return $__112;
               case 2:
-                $__110 = $ctx.sent;
+                $__113 = $ctx.sent;
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.returnValue = $__110;
+                $ctx.returnValue = $__113;
                 $ctx.state = -2;
                 break;
               default:
                 return $ctx.end();
             }
-        }, $__105, this);
+        }, $__108, this);
       }));
     });
     c.v = c.bind(this, "Version");
