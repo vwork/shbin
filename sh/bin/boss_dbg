@@ -20482,52 +20482,54 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
               interfaces[f].push(intf.address);
             }));
           }));
-          $ctx.state = 26;
+          $ctx.state = 28;
           break;
-        case 26:
+        case 28:
           $__2 = request.question[$traceurRuntime.toProperty(Symbol.iterator)](), $__3 = void 0;
-          $ctx.state = 20;
-          break;
-        case 20:
-          $ctx.state = (!($__3 = $__2.next()).done) ? 21 : -2;
-          break;
-        case 21:
-          q = $__3.value;
           $ctx.state = 22;
           break;
         case 22:
-          console.log(("testing " + q.name + " for self"));
-          $ctx.state = 16;
+          $ctx.state = (!($__3 = $__2.next()).done) ? 23 : -2;
           break;
-        case 16:
-          $ctx.state = (!config.self.exec(q.name)) ? 7 : 5;
+        case 23:
+          q = $__3.value;
+          $ctx.state = 24;
           break;
-        case 7:
-          console.log(("testing " + q.name + " for client"));
+        case 24:
+          $ctx.state = (!config.self.exec(q.name)) ? 11 : 7;
+          break;
+        case 11:
+          console.log("this is not me");
           name = config.re.exec(q.name);
-          console.log(("found " + name));
-          $ctx.state = 8;
+          $ctx.state = 12;
           break;
-        case 8:
-          $ctx.state = (!name) ? 20 : 2;
+        case 12:
+          $ctx.state = (!name) ? 3 : 2;
+          break;
+        case 3:
+          console.log("this is likely not a client");
+          $ctx.state = 22;
           break;
         case 2:
           name = name[1];
-          console.log(("located " + name + " " + self.hasOwnProperty(name) + " " + DB.hasOwnProperty(name)));
-          $ctx.state = 10;
+          $ctx.state = 14;
           break;
-        case 10:
-          $ctx.state = (!self.hasOwnProperty(name) && !DB.hasOwnProperty(name)) ? 20 : 5;
+        case 14:
+          $ctx.state = (!self.hasOwnProperty(name) && !DB.hasOwnProperty(name)) ? 8 : 7;
           break;
-        case 5:
+        case 8:
+          console.log(("cannot find such a client: " + name));
+          $ctx.state = 22;
+          break;
+        case 7:
           type = dns.consts.QTYPE_TO_NAME[q.type] || q.type;
           i = interfaces[type];
-          $ctx.state = 18;
+          $ctx.state = 20;
           break;
-        case 18:
-          $ctx.state = (!i) ? 20 : 13;
+        case 20:
+          $ctx.state = (!i) ? 22 : 17;
           break;
-        case 13:
+        case 17:
           for ($__0 = i[$traceurRuntime.toProperty(Symbol.iterator)](), $__1 = void 0; !($__1 = $__0.next()).done; ) {
             a = $__1.value;
             {
@@ -20540,7 +20542,7 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
               console.log(lodash.values(ret).join("\t"));
             }
           }
-          $ctx.state = 20;
+          $ctx.state = 22;
           break;
         default:
           return $ctx.end();
