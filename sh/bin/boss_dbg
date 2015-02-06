@@ -20513,7 +20513,7 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
           break;
         case 2:
           name = name[1];
-          console.log(("located " + name + " " + server.hasOwnProperty(name) + " " + DB.hasOwnProperty(name)));
+          console.log(("located " + name + " " + self.hasOwnProperty(name) + " " + DB.hasOwnProperty(name)));
           $ctx.state = 10;
           break;
         case 10:
