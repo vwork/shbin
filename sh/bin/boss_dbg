@@ -20317,7 +20317,9 @@ var commonService = require("http_common_server")({router: require("express").Ro
       return response.status(HTTPStatus.NOT_FOUND).end("not found");
     if (!host.socket)
       return response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end("not connected");
-    response.json((host.modemLocations || []).concat([{url: (request.protocol + "://" + hostname + ":" + listenUsersDataPort)}]));
+    var longWay = [{url: (request.protocol + "://" + hostname + ":" + listenUsersDataPort)}];
+    return response.json(longWay);
+    return response.json((host.modemLocations || []).concat(longWay));
   }))});
 http.createServer(commonService).listen(listenUsersPort, "::");
 
