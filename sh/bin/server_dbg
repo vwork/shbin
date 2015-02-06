@@ -24173,7 +24173,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -29315,12 +29315,12 @@ module.exports = Scheduler;
   fs.mkdir(__dirname + "/../var", (function() {}));
   config = lodash.merge({
     port: 80,
-    serviceport: 8082,
+    serviceport: 8088,
     modem: "/dev/ttyACM*",
-    modemPingInterval: 600000,
+    modemPingInterval: 6000,
     boss: "controller.sh.neroelectronics.vadzim.info:8011",
     auth: "./user.conf",
-    restoreConnectionInterval: 12000
+    restoreConnectionInterval: 2000
   }, config);
   var internalModemService = ("/tmp/" + UID());
   var authName = path.resolve(path.dirname(configName), config.auth);

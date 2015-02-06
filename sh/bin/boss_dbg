@@ -20417,12 +20417,14 @@ var config = YAML.load(configName).dns;
 config = lodash.merge({
   port: 53,
   TTL: 180,
-  re: "(.*)\.sh\.neroelectronics\.(?:by|ru|com)"
+  re: "(.*)\.sh\.neroelectronics\.(?:by|ru|com)",
+  self: "sh\.neroelectronics\.(?:by|ru|com)"
 }, config);
 config.re = new RegExp(("^" + config.re + "$"));
+config.self = new RegExp(("^" + config.self + "$"));
 require("watchStop")(configName);
 var DB = require("boss_db").DB;
-var server = {controller: true};
+var server = {};
 var families = {
   IPv4: "A",
   IPv6: "AAAA"
@@ -20480,42 +20482,45 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
               interfaces[f].push(intf.address);
             }));
           }));
-          $ctx.state = 23;
+          $ctx.state = 24;
           break;
-        case 23:
+        case 24:
           $__2 = request.question[$traceurRuntime.toProperty(Symbol.iterator)](), $__3 = void 0;
-          $ctx.state = 17;
-          break;
-        case 17:
-          $ctx.state = (!($__3 = $__2.next()).done) ? 18 : -2;
+          $ctx.state = 18;
           break;
         case 18:
-          q = $__3.value;
-          $ctx.state = 19;
+          $ctx.state = (!($__3 = $__2.next()).done) ? 19 : -2;
           break;
         case 19:
-          name = config.re.exec(q.name);
-          $ctx.state = 11;
+          q = $__3.value;
+          $ctx.state = 20;
           break;
-        case 11:
-          $ctx.state = (!name) ? 17 : 2;
+        case 20:
+          $ctx.state = (!config.self.exec(name)) ? 7 : 5;
+          break;
+        case 7:
+          name = config.re.exec(q.name);
+          $ctx.state = 8;
+          break;
+        case 8:
+          $ctx.state = (!name) ? 18 : 2;
           break;
         case 2:
           name = name[1];
-          $ctx.state = 13;
+          $ctx.state = 10;
           break;
-        case 13:
-          $ctx.state = (!server.hasOwnProperty(name) && !DB.hasOwnProperty(name)) ? 17 : 5;
+        case 10:
+          $ctx.state = (!server.hasOwnProperty(name) && !DB.hasOwnProperty(name)) ? 18 : 5;
           break;
         case 5:
           type = dns.consts.QTYPE_TO_NAME[q.type] || q.type;
           i = interfaces[type];
-          $ctx.state = 15;
+          $ctx.state = 16;
           break;
-        case 15:
-          $ctx.state = (!i) ? 17 : 8;
+        case 16:
+          $ctx.state = (!i) ? 18 : 13;
           break;
-        case 8:
+        case 13:
           for ($__0 = i[$traceurRuntime.toProperty(Symbol.iterator)](), $__1 = void 0; !($__1 = $__0.next()).done; ) {
             a = $__1.value;
             {
@@ -20528,7 +20533,7 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
               console.log(lodash.values(ret).join("\t"));
             }
           }
-          $ctx.state = 17;
+          $ctx.state = 18;
           break;
         default:
           return $ctx.end();
