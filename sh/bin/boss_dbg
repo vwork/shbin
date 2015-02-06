@@ -20496,7 +20496,7 @@ var onRequest = co.func($traceurRuntime.initGeneratorFunction(function $__4(serv
           $ctx.state = 20;
           break;
         case 20:
-          $ctx.state = (!config.self.exec(name)) ? 7 : 5;
+          $ctx.state = (!config.self.exec(q.name)) ? 7 : 5;
           break;
         case 7:
           name = config.re.exec(q.name);
