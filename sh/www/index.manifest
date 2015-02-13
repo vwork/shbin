@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1423829932176
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1423832061387
 
 CACHE:
 
@@ -11,6 +11,8 @@ CACHE:
 /images/menu/logo.svg
 /images/menu/back.svg
 /images/room.svg
+/images/room_on.svg
+/images/room_absent.svg
 /images/bedroom.svg
 /images/device.svg
 /touch.svg
