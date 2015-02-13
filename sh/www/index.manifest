@@ -1,12 +1,12 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1423230918659
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1423829932176
 
 CACHE:
 
 /favicon.ico
 /favicon96.ico
-/js/index.min.js
+#/js/index.min.js
 /images/menu/help.svg
 /images/menu/logo.svg
 /images/menu/back.svg

@@ -61,7 +61,7 @@ createES6task( {
 	source: tmpIndex,
 	dest: "./www/js/index.js",
 	debug: true,
-	saveIdents: "window",
+	// saveIdents: "window",
 } )
 
 createES6task( {
@@ -69,7 +69,7 @@ createES6task( {
 	source: tmpIndex,
 	dest: "./www/js/index.min.js",
 	debug: false,
-	saveIdents: "window",
+	// saveIdents: "window",
 } )
 
 createES6task( {
@@ -78,7 +78,7 @@ createES6task( {
 	source: sourceDir + "server.js",
 	dest: "./bin/server_dbg",
 	debug: true,
-	saveIdents: "global",
+	// saveIdents: "global",
 } )
 
 createES6task( {
@@ -87,7 +87,7 @@ createES6task( {
 	source: sourceDir + "boss.js",
 	dest: "./bin/boss_dbg",
 	debug: true,
-	saveIdents: "global",
+	// saveIdents: "global",
 } )
 
 createES6task( {
@@ -96,7 +96,7 @@ createES6task( {
 	source: sourceDir + "server.js",
 	dest: "./bin/server",
 	debug: false,
-	saveIdents: "global",
+	// saveIdents: "global",
 } )
 
 function T( src, proc ) { return function ( file ) {
@@ -186,13 +186,15 @@ let manifestSrc = path.resolve( __dirname + "/../src/index.manifest" )
 let manifestDst = path.resolve( __dirname + "/../www/index.manifest" )
 let indexSrc = path.resolve( __dirname + "/../src/index.html" )
 let indexDst = path.resolve( __dirname + "/../www/index.html" )
+let mainSrc = path.resolve( __dirname + "/../src/main.html" )
+let mainDst = path.resolve( __dirname + "/../www/main.html" )
 
 function putTimestamp( text ) {
 	return text.replace( "###TIMESTAMP###", "!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: " + Date.now() )
 }
 
 let manifestUpdater = thread( function* self( what, filename ) {
-	if ( filename == indexDst || filename == manifestDst )
+	if ( filename == indexDst || filename == mainDst || filename == manifestDst )
 		return
 	if ( self.running ) {
 		self.rerun = true
@@ -205,24 +207,28 @@ let manifestUpdater = thread( function* self( what, filename ) {
 			yield [ function ( cb ) { setTimeout( cb, 300 ) } ]
 			self.rerun = false
 
-			console.log( "updating " + indexDst )
+			console.log( "updating " + mainDst )
 			let modules = {}
-			let text = html.stringify( yield* loadhtml.load( indexSrc, { modules: modules } ) )
-			modules = Object.keys( modules ).map( function ( n ) {
-				return "require(" + JSON.stringify( n ) + ")\n"
-			} ).join( "" )
-			+ "global.require = " + function r( name ) {
-				global.require = null
-				try {
-					return require.apply( this, arguments )
-				}
-				finally {
-					global.require = r
-				}
-			}
+			let text = html.stringify( yield* loadhtml.load( mainSrc, { modules: modules } ) )
+			modules =
+				Object.keys( modules ).map( function ( n ) {
+					return "require(" + JSON.stringify( n ) + ")\n"
+				} ).join( "" )
+				+ "global.require = " + function r( name ) {
+					global.require = null
+					try {
+						return require.apply( this, arguments )
+					}
+					finally {
+						global.require = r
+					}
+				} + "\n"
 			if ( String( yield [ fs.readFile, tmpIndex ] ) != modules )
 				yield [ fs.writeFile, tmpIndex, modules ]
-			yield [ fs.writeFile, indexDst, putTimestamp( text ) ]
+			yield [ fs.writeFile, mainDst, putTimestamp( text ) ]
+
+			console.log( "updating " + indexDst )
+			yield [ fs.writeFile, indexDst, putTimestamp( html.stringify( yield* loadhtml.load( indexSrc ) ) ) ]
 
 			console.log( "updating " + manifestDst )
 			let manifest = yield [ fs.readFile, manifestSrc, "utf8" ]

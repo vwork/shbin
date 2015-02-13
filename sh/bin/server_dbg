@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-global.__UsedScriptIdentifiers__+=',$1,$name,$traceurRuntime,ACCEPTED,APP_DEBUG,APP_TIMEOUT,AbstractGuard,ActiveXObject,Array,BAD_REQUEST,Boolean,CLOSED,CLOSING,CONNECTING,CONTEXT_MAPPING,CONTEXT_NONE,CONTEXT_SEQUENCE,COUNT,CUR_CONDITION,Cell,DOMAIN,Date,Duplex,EKill,ETimeout,Error,EventEmitter,Extended_Work_Mode,FRAGMENT,Function,GLOBSTAR,GState,Generator,GenericType,Getter,Glob,GlobSync,INTERNAL_SERVER_ERROR,ImmutableInterface,Inf,Init_Device_Mode,JSONCookie,JSONCookies,JSONEqual,LIST_ESCAPED,LIST_ESCAPEES,LOCAL_TIMEZONE_OFFSET,LOGGER,LOGOUT,MAPPING_ESCAPEES_TO_ESCAPED,METHOD_NOT_ALLOWED,MODEM_MODE,Map,Math,Minimatch,Modem,ModuleStore,MutationObserver,NOT_FOUND,NO_DEPRECATION,NaN,Number,OPEN,O_NOCTTY,O_RDWR,Object,OrderedMap,PATH,PATTERN_ANCHOR_VALUE,PATTERN_CHARACTERS_TO_ESCAPE,PATTERN_COMPACT_NOTATION,PATTERN_DATE,PATTERN_DECIMAL,PATTERN_DOCUMENT_MARKER_END,PATTERN_DOCUMENT_MARKER_START,PATTERN_ESCAPED_CHARACTER,PATTERN_FOLDED_SCALAR_ALL,PATTERN_FOLDED_SCALAR_BY_INDENTATION,PATTERN_FOLDED_SCALAR_END,PATTERN_INDENT_SPACES,PATTERN_LEADING_COMMENTS,PATTERN_MAPPING_ESCAPEES,PATTERN_MAPPING_ITEM,PATTERN_QUOTED_SCALAR,PATTERN_SCALAR_BY_DELIMITERS,PATTERN_SEQUENCE_ITEM,PATTERN_SINGLE_QUOTING,PATTERN_THOUSAND_NUMERIC_SCALAR,PATTERN_TRAILING_COMMENTS,PATTERN_TRAILING_LINES,PATTERN_YAML_HEADER,PI,PORT,PRODUCT_HARD,PRODUCT_ID,PRODUCT_VARIANT,PRODUCT_VERSION,PROTOCOLS,Parser,Promise,QUERY_DATA,REGEX_DIGITS,REGEX_HEXADECIMAL,REGEX_LEFT_TRIM_BY_CHAR,REGEX_OCTAL,REGEX_QUOTED_STRING,REGEX_RIGHT_TRIM_BY_CHAR,REGEX_SPACES,RESULT,Range,Readable,Reflect,RegExp,Repeat,Router,SCHEME,Sequence,Set,Socket,String,Stringifier,Symbol,System,TERM,TRACE_DEPRECATION,Thread,Transform,Transformer,Type,TypeError,UNAUTHORIZED,URL,USER_INFO,UTC,VERSION,Vector,WeakMap,WebKitMutationObserver,WinRTError,Work_Mode,XMLHTTP,XMLHttpRequest,YAML,abort,aborted,abs,action,add,addEventListener,addListener,address,after,age,all,alphasort,alphasorti,amd,america,any,appicon,application,apply,applyChanges,applyDiff,applyDiffImm,applyItemChanges,args,argumentTypes,argv,array,arrayIterationKind_,arrayIteratorNextIndex_,asImmutable,asMutable,ascii,assign,assignDiff,assignSocket,asyncWrap,at,auth,authorization,auto_parse,bar,basename,be,bind,bindAll,bindKey,bitmap,blue,body,bool,boss,braceExpand,buf,buffer,bufferSize,bundleStore,buttons,byteLength,ca,cache,cacheResult,calc_crc,call,callSite,callSiteToString,called,cancel,canonicalizeUrl,capitalize,captureStackTrace,cast,castSpell,catch,catchThreads,cb,ceil,cell,chain,changedCwd,charAt,charCodeAt,checkIterable,checkObjectCoercible,checkSchedule,childNodes,chrome,chunks,clean,cleanedRegex,cleanup,clear,clearCookie,clearTimeout,clone,cloneDeep,cloneNode,close,closeRe,closingQuote,cmd,cmdHi,cmdLo,code,coerce,collect,color,colors,columns,com,comfort_1,comfort_2,command,comment,commenting,common,compact,complete,compose,concat,conf,configurable,configure,connect,connection,console,constant,constructor,contains,content,contentType,cookie,cookies,copy,core,count,countBy,countWriten,count_created,count_written,create,createCallback,createClass,createCommandSequence,createGeneratorInstance,createHash,createHmac,createIteratorResultObject,createPrivateName,createServer,createSocket,createStringIterator,createTextNode,criteria,csv,csv$,curr,currentLine,currentLineNb,currentThread,currentThreadData,curry,cursor,cwd,cyan,data,day,debounce,debug,decode,default,defaultSuperCall,defaults,defer,defineProperties,defineProperty,delay,delete,deletedCount_,delimiter,deref,dest,destroy,detach,detect,deviceId,devices,diff,difference,digest,dirname,disable,documentElement,domain,done,dot,down,drop,dump,dumpObject,duration,each,eachRight,ee,elements,emit,empty,enable,enabled,encode,encodeArray,encodeCommand,encrypted,end,entries,entries_,entry,entrySeq,env,eof,equals,err,errback,error,escape,escapeWithDoubleQuotes,escapeWithSingleQuotes,evaluate,evaluateScalar,event,every,exception,exceptionOnInvalidType,exec,execute,exit,exp,expires,exports,extend,extensions,extname,extractMessage,extractMessages,fail,family,fd,field,filter,fin,finally,finallyFallThrough,find,findIndex,findKey,findLast,findLastIndex,findLastKey,findWhere,finish,finished,firebug,first,fixed_size,fixed_size_buffer,flatMap,flatten,flip,flipNegate,floatRegexp,floor,flush,fn,foldl,foldr,foo,forEach,forEachRight,forIn,forInRight,forOwn,forOwnRight,forceCalculations,format,formatArgs,formatms,formatters,found,fraction,freeze,from,fromCharCode,fromEntrySeq,fromJS,func,funcDecomp,funcNames,function,functions,generate,genericType,get,getAgent,getColumnNumber,getCurrentLineIndentation,getEvalOrigin,getFileName,getFunctionName,getIn,getLineNumber,getMethodName,getModuleImpl,getName,getNewState,getNextEmbedBlock,getOwnHashObject,getOwnPropertyDescriptor,getOwnPropertyNames,getOwnPropertySymbols,getPrototypeOf,getRealCurrentLineNb,getScriptNameOrSourceURL,getState,getStringFromFile,getThis,getTime,getTimezoneOffset,getTypeName,getUTCDate,getUTCFullYear,getUTCHours,getUTCMinutes,getUTCMonth,getUTCSeconds,getUncoatedModule,github,glob,globParts,globSet,global,go,gocall,google,gray,green,greet,grey,group,groupBy,handShake,handle,handleException,has,hasMagic,hasOwnProperty,hash,hashCode,head,header,headers,hexDec,hi,hostname,hour,href,hrtime,html,html5rocks,httpOnly,httpService,httpVersionMajor,httpVersionMinor,humanize,ico,ico$,id,identity,immediate,importFrom,imports,include,indentation,index,indexBy,indexOf,inf,info,inherits,initGeneratorFunction,initProtocols,initial,inject,input,inspect,int,interactive,interfaces,interfacesTimer,internal,interpolate,intersection,inverse,invert,invoke,io,ip,is,isAbsolute,isArguments,isArray,isBoolean,isBuffer,isCallable,isClosed,isConstructor,isCurrentLineBlank,isCurrentLineComment,isCurrentLineEmpty,isDate,isDigits,isDirectory,isElement,isEmpty,isEqual,isEval,isExtensible,isFinished,isFinite,isFunction,isGetter,isLiteral,isNaN,isNative,isNextLineIndented,isNextLineUnIndentedCollection,isNull,isNumber,isNumeric,isObject,isPlainObject,isPrivateName,isPrototypeOf,isRegExp,isString,isStringUnIndentedCollectionItem,isSymbolicLink,isTTY,isToplevel,isUndefined,iterate,iterator,iteratorFailed,iteratorObject_,iteratorToArray,join,joinData,js,json,jst,key,keys,kill,label,last,lastC,lastIndex,lastIndexOf,later,leading,leadspaces,length,level,line,lineBreaks,lines,linkName,listen,listenerCount,listeners,live,lo,load,loadedBy,localeCompare,location,lock,log,long,lstat,lstatSync,ltrim,magenta,make,makeAbs,makeDiff,makeDiffImm,makeRe,map,mapValues,map_,mapping,maps,mark,mask,match,matchBase,matchOne,matches,max,maxAge,maxBy,maxCount,maxIndex,maxLength,maxTicks,maxTime,maxTime1,maxWait,max_word_length,maybeAddConsts,maybeAddFunctions,maybeAddIterator,maybeThrow,memoize,merge,mergeDeep,mergeDeepWith,mergeWith,message,method,methods,mid,min,minBy,minTime,minimatch,minute,mixin,mkdir,mm,model,modem,modemPingInterval,modemProxy,modemkey,modifiers,month,move,moveToNextLine,moveToPreviousLine,mozilla,name,names,namespace,nan,negate,neroelectronics,networkInterfaces,newstate_timestamp,next,nextChar,nextTick,noConflict,noDeprecation,noTouch,nobrace,nocase,nocomment,node,nodeType,nodes,nodir,noext,noglobstar,nomount,nonegate,nonull,noop,noprocess,normalize,nosort,nounique,now,number,object,objectDecoder,objectIndex_,objectMode,objname,observe,octDec,offset,oldReturnValue,omit,on,onClick,onReject_,onResolve_,once,onclose,onerror,onload,onmessage,onopen,onread,onreadystatechange,onwritten,opcode,ope,open,options,org,origin,originalUrl,ownProp,ownerID,pairs,parallel,parent,parse,parseBoolean,parseFile,parseFoldedScalar,parseInt,parseMapping,parseNegate,parseQuotedScalar,parseScalar,parseSequence,parseValue,parsedLine,partial,partialRight,pass,path,pathname,pattern,pause,paused,payload,pebbles,performance,pick,ping,pingInterval,pipe,places,platform,pluck,polling,polyfillAll,pong,pop,popTry,port,port1,port2,portIndex,post,postMessage,pow,pre,prepareStackTrace,prev,preventExtensions,primitiveIndex_,processing,procs,promise,promiseFalse,promiseNull,promiseOne,promiseTrue,promiseZero,property,propertyIsEnumerable,proto,protocol,protocolOK,prototype,proxy,ps,pull,push,pushAll,pushTry,pushedA,pushedC,query,queue,quote,quoted,quotedEmpty,quotedString,quoting,ra,rainbow,random,range,raw,rawMax,rawRegex,rawcommand,reStart,read,readFile,readFileSync,readStream,readTree,readable,readdir,readdirSync,readyState,rec,receiver,red,reduce,reduceRight,ref,refs,regex,regexp,register,registerModule,registerPolyfill,reject,relative,relax,remoteAddress,remove,removeAfter,removeBefore,removeDotSegments,removeIn,removeItem,removeListener,renderComponentToString,replace,replaceAll,req,request,requestAnimationFrame,require,requiresDoubleQuoting,requiresSingleQuoting,resolve,resolveUrl,responseText,rest,restoreConnectionInterval,result,resume,rethrow,retryInterval,return,returnNullPromise,returnTrue,returnValue,reverse,rewrite,root,round,router,row,rowDelimiter,rtrim,runAll,runAllCount,runCount,runInContext,running,sample,save,savedUID,scheduled,scopeid,seal,second,secret,secure,seed,select,self,send,sendcommand,sent,sentIgnoreThrow,sent_,separator,serialize,serviceport,session,set,setHeader,setImmediate,setIn,setKeepAlive,setLength,setName,setNoDelay,setTheme,setTime,setTimeout,setopts,settings,setupGlobals,sh,shift,shuffle,shver,sign,signedCookie,signedCookies,silent,sin,size,skip,skipWhile,skip_empty_lines,skips,sleep,slice,sminVersion,snippet,socket,some,sort,sortBy,sortedIndex,source,sourceURL,spawn,splice,split,spread,sqrt,stack,stackTraceLimit,staf,start,startTime,started,stat,statCache,statSync,state,static,status,statusCode,status_,stderr,stdin,stdout,stop,storedException,str,strRepeat,stream,strict,string,stringIndex_,stringToDate,stringify,strip,stripCause,stripColors,stripError,stripStack,style,styles,stylize,subStrCount,substr,substring,superCall,superConstructor,superGet,superSet,super_,support,supportsColor,sversion,svg$,symlinks,sync,tab,table,tail,take,takeWhile,tap,template,templateSettings,test,testingPrefix_,text,themes,then,throttle,throw,tick,timeout,times,toArray,toFixed,toISOString,toInteger,toJS,toJSON,toKeyedSeq,toLength,toLocaleString,toLowerCase,toMap,toObject,toProperty,toSource,toString,toUTCString,toUint32,toUpperCase,toVector,token,totalTime,touch,trace,traceDeprecation,trailing,transform,trap,trim,trimRight,tryElse,tryStack_,txt,type,typeDescriptor,tz,tz_hour,tz_minute,tz_sign,uid,unescape,unescapeCharacter,unescapeDoubleQuotedString,unescapeSingleQuotedString,union,uniq,unique,uniqueID,uniqueId,unlink,unref,unshift,unshiftAll,unsign,unzip,up,update,updateIn,updates,url,use,useColors,userAgent,userCommand,userkey,utf8chr,vadzim,value,valueOf,valueSeq,value_,values,variable,vercommand,version,versionOK,w3,wait,waitForChange,waitForInput,waitForReady,warn,wasAltered,watch,what,where,white,wikipedia,window,withMutations,without,word,wordToNumber,wrap,wrapYieldStar,writable,write,writeFile,writeFileSync,writeHead,written,xor,yaml,year,yellow,yield,yml,zalgo,zebra,zip,zipObject';(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
+(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/colors/lib/colors.js":[function(require,module,exports){
 /*
 
 The MIT License (MIT)
@@ -22791,7 +22791,85 @@ if (typeof window !== "undefined" && window !== null) {
 
 module.exports = Yaml;
 
-},{"./Dumper":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js","./Parser":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Parser.js","./Utils":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Utils.js"}],"/home/vadzim/v/work/nerojs/src/JSONservice.js":[function(require,module,exports){
+},{"./Dumper":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js","./Parser":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Parser.js","./Utils":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Utils.js"}],"/home/vadzim/v/work/nerojs/src/JSONTransform.js":[function(require,module,exports){
+!function () {
+      !function ( body ) {
+        var now = global.performance || Date
+        var total = 0
+        var start = now.now()
+        var oldRequire = require
+        var newRequire = function () {
+          total += now.now() - start
+          require = oldRequire
+          try {
+            return oldRequire.apply( this, arguments )
+          }
+          finally {
+            require = newRequire
+            start = now.now()
+          }
+        }
+        require = newRequire
+        try {
+          body()
+        }
+        finally {
+          require = oldRequire
+          total += now.now() - start
+          total /= 1000
+          if ( !global.__require_stats__ )
+            global.__require_stats__ = {}
+          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/JSONTransform.js" ] = total
+        }
+      }( function () {
+        "use strict";
+var Duplex = require("stream").Duplex;
+exports.parse = function(stream) {
+  var ret = new Duplex;
+  var buffer = "";
+  var pushStr = (function(str) {
+    str = str.trim();
+    if (str)
+      try {
+        ret.emit("data", JSON.parse(str));
+      } catch (error) {
+        ret.emit("error", error);
+      }
+  });
+  stream.on("data", (function(chunk) {
+    buffer += String(chunk);
+    var ret = buffer.split("\n");
+    buffer = ret.pop();
+    ret.forEach(pushStr);
+  }));
+  stream.on("end", (function() {
+    pushStr(buffer);
+    buffer = "";
+    ret.push(null);
+  }));
+  stream.on("error", (function(error) {
+    return ret.emit("error", error);
+  }));
+  ret.on("end", (function() {
+    return stream.end();
+  }));
+  ret._read = (function(n) {});
+  ret._write = (function(obj) {});
+  ret.write = (function(obj) {
+    var text = JSON.stringify(obj);
+    text += "\n";
+    text = new Buffer(text);
+    stream.write(text);
+  });
+  return ret;
+};
+
+//# sourceMappingURL=/home/vadzim/v/work/nerojs/src/JSONTransform.map
+
+      } )
+    }()
+
+},{"stream":false}],"/home/vadzim/v/work/nerojs/src/JSONservice.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22963,7 +23041,7 @@ var JSONservice = function JSONservice(file, template) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            polling = lu.polling(response);
+            polling = response && lu.polling(response);
             $ctx.state = 6;
             break;
           case 6:
@@ -22974,7 +23052,7 @@ var JSONservice = function JSONservice(file, template) {
             $ctx.state = 4;
             break;
           case 4:
-            polling.stop();
+            polling && polling.stop();
             $ctx.state = -2;
             break;
           default:
@@ -22999,6 +23077,51 @@ var JSONservice = function JSONservice(file, template) {
     }
     ra.forceCalculations();
     return M.map.last();
+  });
+  this.wsService = (function(connection) {
+    var self = ra({
+      active: true,
+      id: null,
+      get sendChanges() {
+        if (!connection || !self.active || !self.id || self.id == M.last.json.uid)
+          return ;
+        var clientData = M.map.get(self.id);
+        self.id = M.last.json.uid;
+        var partial = false;
+        var text = M.last.text;
+        if (clientData) {
+          var diff = JSON.stringify(lu.makeDiff(clientData, M.last.json.valueOf()));
+          if (text.length > diff.length * 1.5) {
+            partial = true;
+            text = diff;
+          }
+        }
+        connection.send(("{\"partial\":" + partial + ",\"data\":" + text + "}"));
+      }
+    });
+    connection.on("close", (function() {
+      connection = null;
+      self.active = false;
+    }));
+    connection.on("message", (function(message) {
+      try {
+        message = JSON.parse(message);
+      } catch (error) {
+        console.log("web socket message error".red, error);
+        connection.send(JSON.stringify({error: "wrong format"}));
+        return ;
+      }
+      switch (message.what) {
+        case "init":
+          self.id = message.id || {};
+          break;
+        case "save":
+          $__0.applyChanges(message.data, !!message.partial);
+          break;
+        default:
+          connection.send(JSON.stringify({error: "unrecognised message"}));
+      }
+    }));
   });
   this.httpService = co.func($traceurRuntime.initGeneratorFunction(function $__9(request, response, next) {
     var data,
@@ -24173,7 +24296,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -24516,9 +24639,20 @@ logger.token("startTime", (function(request, response) {
 logger.token("requestTime", (function(request, response) {
   return lu.formatms((new Date) - request.startTime) + "s";
 }));
-var L = logger(":remote-addr".blue + " - :remote-user [:date] \"" + ":method".green + " " + ":url".cyan + " HTTP/:http-version\" " + ":status".green + " :res[content-length] \":referrer\" \":user-agent\" " + ":requestTime".yellow);
+logger.token("manifestHeaders", (function(request, response) {
+  if (!request.url.match(/\.manifest(\?|$)/))
+    return "";
+  var ret = ("\n" + request.method + " " + request.url);
+  request.rawHeaders.forEach((function(str, index) {
+    ret += ["\n", ": "][index % 2];
+    ret += str;
+  }));
+  return ret;
+}));
+var L = logger(":remote-addr".blue + " - :remote-user [:date] \"" + ":method".green + " " + ":url".cyan + " HTTP/:http-version\" " + ":status".green + " :res[content-length] \":referrer\" \":user-agent\" " + ":requestTime".yellow + ":manifestHeaders");
 module.exports = (function(request, response, next) {
   if (global._LOG) {
+    console.log((request.method + " " + request.url.green));
     request.startTime = new Date;
     L(request, response, next);
   } else
@@ -25038,15 +25172,15 @@ if (!global.WeakMap) {
   var n = 0;
   global.WeakMap = (function() {
     var WeakMap = function WeakMap(data) {
-      var $__10,
-          $__11;
+      var $__11,
+          $__12;
       this._index = ("__WeakMap" + ++n);
       if (data)
         for (var $__3 = data[$traceurRuntime.toProperty(Symbol.iterator)](),
             $__4 = void 0; !($__4 = $__3.next()).done; ) {
-          var $__9 = $__4.value,
-              key = ($__10 = $__9[$traceurRuntime.toProperty(Symbol.iterator)](), ($__11 = $__10.next()).done ? void 0 : $__11.value),
-              value = ($__11 = $__10.next()).done ? void 0 : $__11.value;
+          var $__10 = $__4.value,
+              key = ($__11 = $__10[$traceurRuntime.toProperty(Symbol.iterator)](), ($__12 = $__11.next()).done ? void 0 : $__12.value),
+              value = ($__12 = $__11.next()).done ? void 0 : $__12.value;
           this.set(key, value);
         }
     };
@@ -25114,6 +25248,55 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
+}), Object.defineProperty($__1, "rests", {
+  value: function(num) {
+    for (var rests = [],
+        $__7 = 1; $__7 < arguments.length; $__7++)
+      rests[$__7 - 1] = arguments[$__7];
+    var ret = [];
+    for (var $__3 = rests[$traceurRuntime.toProperty(Symbol.iterator)](),
+        $__4 = void 0; !($__4 = $__3.next()).done; ) {
+      var r = $__4.value;
+      {
+        var n = num % r;
+        num = (num - n) / r;
+        ret.push(n);
+      }
+    }
+    return ret;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "pad", {
+  value: function(s, n, p) {
+    s = String(s);
+    var x = "";
+    n -= s.length;
+    while (n > 0) {
+      x += p;
+      --n;
+    }
+    return x + s;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "time", {
+  value: function() {
+    var d = new Date();
+    return (d.getHours() + ":" + lu.pad(d.getMinutes(), 2, 0) + ":" + lu.pad(d.getSeconds(), 2, 0) + "." + lu.pad(d.getMilliseconds(), 3, 0));
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "stack", {
+  value: (function() {
+    return (new Error).stack;
+  }),
+  configurable: true,
+  enumerable: true,
+  writable: true
 }), Object.defineProperty($__1, "options", {
   value: function(options, def) {
     var ret = {};
@@ -25148,6 +25331,37 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
       })).join(" ") + " }");
     return String(obj);
   }),
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "toOneLine", {
+  value: function(obj) {
+    var ret = JSON.stringify(obj);
+    ret += "\n";
+    return ret;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "byLines", {
+  value: function(callback) {
+    var buffer = "";
+    return (function(chunk) {
+      buffer += String(chunk);
+      var ret = buffer.split("\n");
+      buffer = ret.pop();
+      ret.forEach(callback);
+    });
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__1, "byJSON", {
+  value: function(callback) {
+    return byLines((function(line) {
+      return callback(JSON.parse(line.trim()));
+    }));
+  },
   configurable: true,
   enumerable: true,
   writable: true
@@ -25306,8 +25520,8 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
 }), Object.defineProperty($__1, "new", {
   value: function() {
     for (var descedents = [],
-        $__7 = 0; $__7 < arguments.length; $__7++)
-      descedents[$__7] = arguments[$__7];
+        $__8 = 0; $__8 < arguments.length; $__8++)
+      descedents[$__8] = arguments[$__8];
     return descedents.reduce((function(ancestor, descedent) {
       return lodash.assign(ancestor, descedent);
     }), {});
@@ -25318,8 +25532,8 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
 }), Object.defineProperty($__1, "call", {
   value: function(fun) {
     for (var args = [],
-        $__8 = 1; $__8 < arguments.length; $__8++)
-      args[$__8 - 1] = arguments[$__8];
+        $__9 = 1; $__9 < arguments.length; $__9++)
+      args[$__9 - 1] = arguments[$__9];
     return fun.apply((void 0), $traceurRuntime.spread(args));
   },
   configurable: true,
@@ -25361,13 +25575,13 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "try", {
-  value: $traceurRuntime.initGeneratorFunction(function $__12(fun) {
+  value: $traceurRuntime.initGeneratorFunction(function $__13(fun) {
     var startTimeToWait,
         maxTimeToWait,
         multiply,
         timeToWait,
-        $__13,
         $__14,
+        $__15,
         e;
     var $arguments = arguments;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -25385,18 +25599,18 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
             $ctx.state = 20;
             break;
           case 20:
-            $__13 = fun();
+            $__14 = fun();
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__13;
+            return $__14;
           case 2:
-            $__14 = $ctx.sent;
+            $__15 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__14;
+            $ctx.returnValue = $__15;
             $ctx.state = -2;
             break;
           case 8:
@@ -25426,7 +25640,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__12, this);
+    }, $__13, this);
   }),
   configurable: true,
   enumerable: true,
@@ -25446,9 +25660,8 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "readStream", {
-  value: $traceurRuntime.initGeneratorFunction(function $__15(stream) {
-    var $__16,
-        $__17,
+  value: $traceurRuntime.initGeneratorFunction(function $__16(stream) {
+    var $__17,
         $__18,
         $__19,
         $__20,
@@ -25461,85 +25674,85 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
         $__27,
         $__28,
         $__29,
-        $__30;
+        $__30,
+        $__31;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__29 = {then: function(resolve, reject) {
+            $__30 = {then: function(resolve, reject) {
                 var content = [];
-                $__16 = stream.on, $__19 = function(chunk) {
-                  return $__17 = content.push, $__18 = $__17.call(content, chunk), $__18;
-                }, $__20 = $__16.call(stream, "data", $__19), $__20;
-                $__21 = stream.on, $__25 = function() {
-                  return $__22 = lu.joinData, $__23 = $__22.call(lu, content), $__24 = resolve($__23), $__24;
-                }, $__26 = $__21.call(stream, "end", $__25), $__26;
-                $__27 = stream.on, $__28 = $__27.call(stream, "error", reject), $__28;
+                $__17 = stream.on, $__20 = function(chunk) {
+                  return $__18 = content.push, $__19 = $__18.call(content, chunk), $__19;
+                }, $__21 = $__17.call(stream, "data", $__20), $__21;
+                $__22 = stream.on, $__26 = function() {
+                  return $__23 = lu.joinData, $__24 = $__23.call(lu, content), $__25 = resolve($__24), $__25;
+                }, $__27 = $__22.call(stream, "end", $__26), $__27;
+                $__28 = stream.on, $__29 = $__28.call(stream, "error", reject), $__29;
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__29;
+            return $__30;
           case 2:
-            $__30 = $ctx.sent;
+            $__31 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__30;
+            $ctx.returnValue = $__31;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__15, this);
+    }, $__16, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "readJSON", {
-  value: $traceurRuntime.initGeneratorFunction(function $__31(stream) {
-    var $__32,
-        $__33,
+  value: $traceurRuntime.initGeneratorFunction(function $__32(stream) {
+    var $__33,
         $__34,
         $__35,
-        $__36;
+        $__36,
+        $__37;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__32 = JSON.parse;
-            $__33 = lu.readStream;
-            $__34 = $__33.call(lu, stream);
+            $__33 = JSON.parse;
+            $__34 = lu.readStream;
+            $__35 = $__34.call(lu, stream);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__34;
+            return $__35;
           case 2:
-            $__35 = $ctx.sent;
+            $__36 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__36 = $__32.call(JSON, $__35);
+            $__37 = $__33.call(JSON, $__36);
             $ctx.state = 8;
             break;
           case 8:
-            $ctx.returnValue = $__36;
+            $ctx.returnValue = $__37;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__31, this);
+    }, $__32, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "readChunk", {
-  value: $traceurRuntime.initGeneratorFunction(function $__37(stream) {
-    var $__38,
-        $__39,
+  value: $traceurRuntime.initGeneratorFunction(function $__38(stream) {
+    var $__39,
         $__40,
         $__41,
         $__42,
@@ -25557,57 +25770,58 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
         $__54,
         $__55,
         $__56,
-        $__57;
+        $__57,
+        $__58;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__56 = {then: function(resolve, reject) {
-                $__38 = stream.on, $__39 = $__38.call(stream, "data", onData), $__39;
-                $__40 = stream.on, $__41 = $__40.call(stream, "end", onEnd), $__41;
-                $__42 = stream.on, $__43 = $__42.call(stream, "error", onError), $__43;
+            $__57 = {then: function(resolve, reject) {
+                $__39 = stream.on, $__40 = $__39.call(stream, "data", onData), $__40;
+                $__41 = stream.on, $__42 = $__41.call(stream, "end", onEnd), $__42;
+                $__43 = stream.on, $__44 = $__43.call(stream, "error", onError), $__44;
                 function done() {
-                  $__44 = stream.removeListener, $__45 = $__44.call(stream, "data", onData), $__45;
-                  $__46 = stream.removeListener, $__47 = $__46.call(stream, "end", onEnd), $__47;
-                  $__48 = stream.removeListener, $__49 = $__48.call(stream, "error", onError), $__49;
+                  $__45 = stream.removeListener, $__46 = $__45.call(stream, "data", onData), $__46;
+                  $__47 = stream.removeListener, $__48 = $__47.call(stream, "end", onEnd), $__48;
+                  $__49 = stream.removeListener, $__50 = $__49.call(stream, "error", onError), $__50;
                 }
                 function onData(chunk) {
-                  $__50 = done(), $__50;
-                  $__51 = resolve(chunk), $__51;
+                  $__51 = done(), $__51;
+                  $__52 = resolve(chunk), $__52;
                 }
                 function onEnd() {
-                  $__52 = done(), $__52;
-                  $__53 = resolve(null), $__53;
+                  $__53 = done(), $__53;
+                  $__54 = resolve(null), $__54;
                 }
                 function onError(error) {
-                  $__54 = done(), $__54;
-                  $__55 = reject(error), $__55;
+                  $__55 = done(), $__55;
+                  $__56 = reject(error), $__56;
                 }
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__56;
+            return $__57;
           case 2:
-            $__57 = $ctx.sent;
+            $__58 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__57;
+            $ctx.returnValue = $__58;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__37, this);
+    }, $__38, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "static", {
   value: function(fun) {
-    return co.func($traceurRuntime.initGeneratorFunction(function $__58(request, response) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__59(request, response) {
       var $__1,
           $__2,
           headWritten,
@@ -25668,7 +25882,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
             default:
               return $ctx.end();
           }
-      }, $__58, this);
+      }, $__59, this);
     }));
   },
   configurable: true,
@@ -25928,9 +26142,9 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   value: function(type, obj) {
     if (!obj || typeof obj != "object")
       return obj;
-    var $__9 = type || {},
-        constructor = $__9.constructor,
-        elements = $__9.elements;
+    var $__10 = type || {},
+        constructor = $__10.constructor,
+        elements = $__10.elements;
     if (typeof constructor == "string")
       constructor = Immutable[constructor];
     return (constructor || Immutable.Map)().withMutations((function(ret) {
@@ -26014,7 +26228,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "skip", {
-  value: $traceurRuntime.initGeneratorFunction(function $__58(c, buf) {
+  value: $traceurRuntime.initGeneratorFunction(function $__59(c, buf) {
     var $__3,
         $__4,
         b;
@@ -26049,13 +26263,13 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__58, this);
+    }, $__59, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "take", {
-  value: $traceurRuntime.initGeneratorFunction(function $__59(c, buf) {
+  value: $traceurRuntime.initGeneratorFunction(function $__60(c, buf) {
     var $__3,
         $__4,
         b;
@@ -26090,7 +26304,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__59, this);
+    }, $__60, this);
   }),
   configurable: true,
   enumerable: true,
@@ -26142,7 +26356,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__1, "concat", {
-  value: $traceurRuntime.initGeneratorFunction(function $__60(list) {
+  value: $traceurRuntime.initGeneratorFunction(function $__61(list) {
     var $__5,
         $__6,
         l,
@@ -26184,7 +26398,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__60, this);
+    }, $__61, this);
   }),
   configurable: true,
   enumerable: true,
@@ -26844,6 +27058,7 @@ function compose(t1, t2) {
     PROTOCOLS: set("PROTOCOL_NUM"),
     MODEM_FUNCTIONS: set({}),
     CUR_CONDITION: prec(0.0001),
+    DEST_CONDITION: prec(0.0001),
     ID: hex()
   };
   function registerReader(cmdLo, cmdHi, reader) {
@@ -26857,7 +27072,7 @@ function compose(t1, t2) {
   function registerWriter(id, writer, type) {
     if (Modem._commands[id]) {
       var msg = ("duplicate command identifier " + id);
-      console.error(msg);
+      console.error("registerWriter", msg);
       throw new Error(msg);
     }
     (Modem._commands[id] = function(info) {
@@ -29353,8 +29568,8 @@ module.exports = Scheduler;
       }), updateInterfacesInterval);
     },
     interfaces: ra.Getter((function() {
-      var $__11;
-      return service.interfacesTimer && ($__11 = []).concat.apply($__11, $traceurRuntime.spread(lodash.map(os.networkInterfaces(), (function(ni) {
+      var $__12;
+      return service.interfacesTimer && ($__12 = []).concat.apply($__12, $traceurRuntime.spread(lodash.map(os.networkInterfaces(), (function(ni) {
         return ni.filter((function(i) {
           return !i.internal && !i.scopeid;
         })).map((function(i) {
@@ -29366,6 +29581,12 @@ module.exports = Scheduler;
       }))));
     }), lu.JSONEqual)
   });
+  var CustomError = function CustomError(message, data) {
+    $traceurRuntime.superConstructor($CustomError).call(this, message);
+    data && lodash.assign(this, data);
+  };
+  var $CustomError = CustomError;
+  ($traceurRuntime.createClass)(CustomError, {}, {}, Error);
   var modem = ra({
     retryInterval: config.restoreConnectionInterval,
     port: config.modem,
@@ -29476,11 +29697,17 @@ module.exports = Scheduler;
       modem.createSocket();
     },
     get handle() {
-      return modem.socket && new Modem(modem.socket, console.info.bind(console));
+      return modem.socket && new Modem(modem.socket, (function() {
+        var $__12;
+        for (var args = [],
+            $__4 = 0; $__4 < arguments.length; $__4++)
+          args[$__4] = arguments[$__4];
+        return ($__12 = console).info.apply($__12, $traceurRuntime.spread([lu.time()], args));
+      }));
     },
     rawcommand: $traceurRuntime.initGeneratorFunction(function $__14() {
       var args,
-          $__3,
+          $__4,
           $__21,
           $__22,
           $__23,
@@ -29515,8 +29742,8 @@ module.exports = Scheduler;
         while (true)
           switch ($ctx.state) {
             case 0:
-              for (args = [], $__3 = 0; $__3 < $arguments.length; $__3++)
-                args[$__3] = $arguments[$__3];
+              for (args = [], $__4 = 0; $__4 < $arguments.length; $__4++)
+                args[$__4] = $arguments[$__4];
               $ctx.state = 17;
               break;
             case 17:
@@ -29647,9 +29874,9 @@ module.exports = Scheduler;
       return modem.sversion && modem.sversion >= modem.sminVersion;
     },
     vercommand: $traceurRuntime.initGeneratorFunction(function $__15() {
-      var $__11,
+      var $__12,
           args,
-          $__4,
+          $__5,
           $__50,
           $__51,
           $__52,
@@ -29663,8 +29890,8 @@ module.exports = Scheduler;
         while (true)
           switch ($ctx.state) {
             case 0:
-              for (args = [], $__4 = 0; $__4 < $arguments.length; $__4++)
-                args[$__4] = $arguments[$__4];
+              for (args = [], $__5 = 0; $__5 < $arguments.length; $__5++)
+                args[$__5] = $arguments[$__5];
               $ctx.state = 17;
               break;
             case 17:
@@ -29679,12 +29906,12 @@ module.exports = Scheduler;
               $ctx.state = 10;
               break;
             case 5:
-              $__11 = modem;
+              $__12 = modem;
               $__51 = modem.rawcommand;
               $__52 = $__51.apply;
               $__53 = $traceurRuntime.spread;
               $__54 = $__53.call($traceurRuntime, args);
-              $__55 = $__52.call($__51, $__11, $__54);
+              $__55 = $__52.call($__51, $__12, $__54);
               $ctx.state = 6;
               break;
             case 6:
@@ -29717,9 +29944,9 @@ module.exports = Scheduler;
       return !!(modem.functions && modem.functions.PROTOCOLS && modem.initProtocols);
     },
     sendcommand: $traceurRuntime.initGeneratorFunction(function $__58() {
-      var $__11,
+      var $__12,
           args,
-          $__5,
+          $__6,
           $__59,
           $__60,
           $__61,
@@ -29733,8 +29960,8 @@ module.exports = Scheduler;
         while (true)
           switch ($ctx.state) {
             case 0:
-              for (args = [], $__5 = 0; $__5 < $arguments.length; $__5++)
-                args[$__5] = $arguments[$__5];
+              for (args = [], $__6 = 0; $__6 < $arguments.length; $__6++)
+                args[$__6] = $arguments[$__6];
               $ctx.state = 17;
               break;
             case 17:
@@ -29749,12 +29976,12 @@ module.exports = Scheduler;
               $ctx.state = 10;
               break;
             case 5:
-              $__11 = modem;
+              $__12 = modem;
               $__60 = modem.vercommand;
               $__61 = $__60.apply;
               $__62 = $traceurRuntime.spread;
               $__63 = $__62.call($traceurRuntime, args);
-              $__64 = $__61.call($__60, $__11, $__63);
+              $__64 = $__61.call($__60, $__12, $__63);
               $ctx.state = 6;
               break;
             case 6:
@@ -29788,10 +30015,10 @@ module.exports = Scheduler;
     },
     command: function() {
       for (var args = [],
-          $__6 = 0; $__6 < arguments.length; $__6++)
-        args[$__6] = arguments[$__6];
+          $__7 = 0; $__7 < arguments.length; $__7++)
+        args[$__7] = arguments[$__7];
       return co.gocall($traceurRuntime.initGeneratorFunction(function $__67() {
-        var $__11,
+        var $__12,
             $__68,
             $__69,
             $__70,
@@ -29803,13 +30030,13 @@ module.exports = Scheduler;
           while (true)
             switch ($ctx.state) {
               case 0:
-                $__11 = this;
+                $__12 = this;
                 $__68 = this;
                 $__69 = $__68.sendcommand;
                 $__70 = $__69.apply;
                 $__71 = $traceurRuntime.spread;
                 $__72 = $__71.call($traceurRuntime, args);
-                $__73 = $__70.call($__69, $__11, $__72);
+                $__73 = $__70.call($__69, $__12, $__72);
                 $ctx.state = 6;
                 break;
               case 6:
@@ -29894,13 +30121,13 @@ module.exports = Scheduler;
         throw new Error("unexpected modem result");
       return answer.RESULT;
     },
-    userCommand: $traceurRuntime.initGeneratorFunction(function $__67($__9) {
-      var $__10,
+    userCommand: $traceurRuntime.initGeneratorFunction(function $__67($__10) {
+      var $__11,
           deviceId,
           command,
           data,
           socket,
-          onerror,
+          error,
           device,
           deviceCommand,
           groups,
@@ -29914,10 +30141,13 @@ module.exports = Scheduler;
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__10 = $__9, deviceId = $__10.deviceId, command = $__10.command, data = $__10.data, socket = $__10.socket, onerror = $__10.onerror;
-              $ctx.state = 35;
+              $__11 = $__10, deviceId = $__11.deviceId, command = $__11.command, data = $__11.data, socket = $__11.socket;
+              error = (function(status, message) {
+                throw new CustomError(message || HTTPStatus[status], {status: status});
+              });
+              $ctx.state = 26;
               break;
-            case 35:
+            case 26:
               $ctx.state = 2;
               return modem.devices.waitForReady(socket);
             case 2:
@@ -29927,76 +30157,58 @@ module.exports = Scheduler;
             case 4:
               device = modem.devices.getState()[deviceId];
               deviceCommand = command;
-              $ctx.state = 37;
+              if (!device)
+                error(HTTPStatus.NOT_FOUND);
+              $ctx.state = 28;
               break;
-            case 37:
-              $ctx.state = (!device) ? 5 : 6;
-              break;
-            case 5:
-              $ctx.returnValue = onerror && onerror(HTTPStatus.NOT_FOUND);
-              $ctx.state = -2;
-              break;
-            case 6:
-              $ctx.state = (!device.group) ? 25 : 17;
-              break;
-            case 25:
-              $ctx.state = (deviceCommand == "Link") ? 19 : 23;
+            case 28:
+              $ctx.state = (!device.group) ? 19 : 16;
               break;
             case 19:
+              $ctx.state = (deviceCommand == "Link") ? 13 : 17;
+              break;
+            case 13:
               groups = lodash.reduce(modem.devices.getState(), (function(ret, d) {
                 if (d.group)
                   ret[d.group] = true;
                 return ret;
               }), []);
-              $ctx.state = 20;
+              $ctx.state = 14;
               break;
-            case 20:
+            case 14:
               i = 2;
-              $ctx.state = 15;
-              break;
-            case 15:
-              $ctx.state = (i <= 1022) ? 12 : 13;
-              break;
-            case 9:
-              ++i;
-              $ctx.state = 15;
+              $ctx.state = 12;
               break;
             case 12:
-              $ctx.state = (groups[i] == null) ? 10 : 9;
+              $ctx.state = (i <= 1022) ? 9 : 10;
+              break;
+            case 6:
+              ++i;
+              $ctx.state = 12;
+              break;
+            case 9:
+              $ctx.state = (groups[i] == null) ? 7 : 6;
+              break;
+            case 7:
+              modem.devices.applyItemChanges(deviceId, {group: i});
+              $ctx.state = 10;
               break;
             case 10:
-              modem.devices.applyItemChanges(deviceId, {group: i});
-              $ctx.state = 13;
-              break;
-            case 13:
               ra.forceCalculations();
               device = modem.devices.getState()[deviceId];
-              $ctx.state = 22;
-              break;
-            case 22:
-              $ctx.state = (!device.group) ? 16 : 17;
-              break;
-            case 16:
-              $ctx.returnValue = onerror && onerror(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
-              $ctx.state = -2;
-              break;
-            case 23:
-              $ctx.returnValue = onerror && onerror(HTTPStatus.NOT_FOUND, "No group in device");
-              $ctx.state = -2;
+              if (!device.group)
+                error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
+              $ctx.state = 16;
               break;
             case 17:
+              error(HTTPStatus.NOT_FOUND, "No group in device");
+              $ctx.state = 16;
+              break;
+            case 16:
               newstate = deviceActions.getNewState(device, deviceCommand);
               commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand);
-              $ctx.state = 39;
-              break;
-            case 39:
-              $ctx.state = (!commands || !commands.length) ? 27 : 28;
-              break;
-            case 27:
-              $ctx.returnValue = onerror && onerror(HTTPStatus.NOT_FOUND);
-              $ctx.state = -2;
-              break;
-            case 28:
+              if (!commands || !commands.length)
+                error(HTTPStatus.NOT_FOUND);
               passedToModem = false;
               my_timestamp = Inc();
               errors = [];
@@ -30011,14 +30223,15 @@ module.exports = Scheduler;
                 newstate: newstate,
                 newstate_timestamp: my_timestamp
               });
-              $ctx.state = 41;
+              $ctx.state = 30;
               break;
-            case 41:
-              $ctx.state = 31;
+            case 30:
+              $ctx.state = 22;
               return modem.session($traceurRuntime.initGeneratorFunction(function $__82(command) {
-                var $__1,
-                    $__2,
+                var $__2,
+                    $__3,
                     c,
+                    acknowledgement,
                     answer,
                     e,
                     $__83,
@@ -30031,21 +30244,27 @@ module.exports = Scheduler;
                   while (true)
                     switch ($ctx.state) {
                       case 0:
-                        $__1 = commands[$traceurRuntime.toProperty(Symbol.iterator)](), $__2 = void 0;
+                        $__2 = commands[$traceurRuntime.toProperty(Symbol.iterator)](), $__3 = void 0;
+                        $ctx.state = 14;
+                        break;
+                      case 14:
+                        $ctx.state = (!($__3 = $__2.next()).done) ? 18 : 20;
+                        break;
+                      case 18:
+                        c = $__3.value;
+                        $ctx.state = 19;
+                        break;
+                      case 19:
+                        $ctx.pushTry(9, null);
                         $ctx.state = 12;
                         break;
                       case 12:
-                        $ctx.state = (!($__2 = $__1.next()).done) ? 16 : 18;
+                        acknowledgement = device.acknowledgement !== false;
+                        if (acknowledgement)
+                          c.ACK = true;
+                        $ctx.state = 6;
                         break;
-                      case 16:
-                        c = $__2.value;
-                        $ctx.state = 17;
-                        break;
-                      case 17:
-                        $ctx.pushTry(7, null);
-                        $ctx.state = 10;
-                        break;
-                      case 10:
+                      case 6:
                         $ctx.state = 2;
                         return command(c);
                       case 2:
@@ -30053,53 +30272,53 @@ module.exports = Scheduler;
                         $ctx.state = 4;
                         break;
                       case 4:
-                        if (answer.RESULT != "OK")
-                          throw new Error(answer.RESULT);
-                        $ctx.state = 6;
+                        if (!(answer.RESULT == "OK"))
+                          throw new CustomError(answer.RESULT, {answer: answer});
+                        $ctx.state = 8;
                         break;
-                      case 6:
+                      case 8:
                         $ctx.popTry();
-                        $ctx.state = 12;
+                        $ctx.state = 14;
                         break;
-                      case 7:
+                      case 9:
                         $ctx.popTry();
                         e = $ctx.storedException;
-                        $ctx.state = 13;
+                        $ctx.state = 15;
                         break;
-                      case 13:
+                      case 15:
                         console.error("modem error:".red, e);
-                        if (e instanceof Modem.ETimeout)
+                        if (e instanceof Modem.ETimeout || e.answer && e.answer.RESULT == "Connection_error")
                           errors.push(e);
                         else
                           throw e;
-                        $ctx.state = 12;
+                        $ctx.state = 14;
                         break;
-                      case 18:
-                        $ctx.state = (errors.length) ? 24 : 27;
+                      case 20:
+                        $ctx.state = (errors.length) ? 26 : 29;
                         break;
-                      case 24:
+                      case 26:
                         $__83 = commands[0];
                         $__84 = $__83.group;
                         $__85 = {
-                          id: "Cur_Condition",
+                          id: "Dest_Condition",
                           group: $__84
                         };
                         $__86 = command($__85);
-                        $ctx.state = 25;
-                        break;
-                      case 25:
-                        $ctx.state = 21;
-                        return $__86;
-                      case 21:
-                        $__87 = $ctx.sent;
-                        $ctx.state = 23;
-                        break;
-                      case 23:
-                        $__88 = $__87.CUR_CONDITION;
-                        newstate = $__88;
                         $ctx.state = 27;
                         break;
                       case 27:
+                        $ctx.state = 23;
+                        return $__86;
+                      case 23:
+                        $__87 = $ctx.sent;
+                        $ctx.state = 25;
+                        break;
+                      case 25:
+                        $__88 = $__87.DEST_CONDITION;
+                        newstate = $__88;
+                        $ctx.state = 29;
+                        break;
+                      case 29:
                         if (newstate != null) {
                           modem.devices.applyItemChanges(deviceId, {
                             state: newstate,
@@ -30114,7 +30333,7 @@ module.exports = Scheduler;
                     }
                 }, $__82, this);
               }));
-            case 31:
+            case 22:
               $ctx.maybeThrow();
               $ctx.state = -2;
               break;
@@ -30216,6 +30435,9 @@ module.exports = Scheduler;
   var toBase64 = (function(str) {
     return (new Buffer(str)).toString("base64");
   });
+  var fromBase64 = (function(str) {
+    return (new Buffer(str, "base64")).toString();
+  });
   var cookieParser = require("cookie-parser")();
   var parseCookies = (function(request) {
     return cookieParser(request, null, lodash.noop);
@@ -30314,10 +30536,7 @@ module.exports = Scheduler;
               deviceId: request.query.id,
               command: request.query.cmd,
               data: null,
-              socket: response,
-              onerror: (function(code, message) {
-                return response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end(message);
-              })
+              socket: response
             });
           case 2:
             $ctx.maybeThrow();
@@ -30333,8 +30552,8 @@ module.exports = Scheduler;
             $ctx.state = 11;
             break;
           case 11:
-            console.error(error);
-            response.status(HTTPStatus.INTERNAL_SERVER_ERROR);
+            console.error("command error", error, error.stack);
+            response.status(error.code || HTTPStatus.INTERNAL_SERVER_ERROR).end(error.message || "");
             $ctx.state = -2;
             break;
           default:
@@ -30345,7 +30564,7 @@ module.exports = Scheduler;
     main: "room",
     room: {content: []}
   })).httpService).post("/modem", co.func($traceurRuntime.initGeneratorFunction(function $__98(request, response, next) {
-    var $__11,
+    var $__12,
         ret,
         undefined,
         func,
@@ -30368,20 +30587,20 @@ module.exports = Scheduler;
             $ctx.state = 14;
             break;
           case 14:
-            path$__12 = JSON.parse(request.query.path);
+            path$__13 = JSON.parse(request.query.path);
             func = JSON.parse(request.query.func);
             args = JSON.parse(request.query.args);
             $ctx.state = 10;
             break;
           case 10:
             $__99 = modem.devices;
-            $__100 = $__99[path$__12];
-            $__11 = $__100;
+            $__100 = $__99[path$__13];
+            $__12 = $__100;
             $__101 = $__100[func];
             $__102 = $__101.apply;
             $__103 = $traceurRuntime.spread;
             $__104 = $__103.call($traceurRuntime, args);
-            $__105 = $__102.call($__101, $__11, $__104);
+            $__105 = $__102.call($__101, $__12, $__104);
             $ctx.state = 6;
             break;
           case 6:
@@ -30429,6 +30648,14 @@ module.exports = Scheduler;
     checkAuthorization(request, null, (function() {
       console.log("authorized".red);
       var connection = new WebSocket(request, socket, head, {});
+      connection.on("message", (function(message) {
+        return console.log(("<< " + request.url.red + " " + message.cyan));
+      }));
+      var oldSend = connection.send;
+      connection.send = (function(message) {
+        console.log((">> " + request.url.red + " " + message.cyan));
+        oldSend.call(connection, message);
+      });
       connection.on("open", (function() {
         return console.log("websocket open".green, request.url.red);
       }));
@@ -30438,24 +30665,82 @@ module.exports = Scheduler;
       connection.on("error", (function(error) {
         return console.log("websocket error".green, request.url.red, error);
       }));
-      connection.on("message", (function(message) {
-        console.log("websocket message".green, request.url.red, message);
-        try {
-          message = JSON.parse(message);
-        } catch (_) {
-          connection.send(JSON.stringify({error: "wrong format"}));
-          return ;
-        }
-        connection.send(JSON.stringify({echo: message.id}));
-      }));
+      switch (request.url) {
+        case "/devices":
+          modem.devices.wsService(connection);
+          break;
+        case "/places":
+          modem.places.wsService(connection);
+          break;
+        case "/commands":
+          connection.on("message", co.func($traceurRuntime.initGeneratorFunction(function $__108(message) {
+            var id,
+                error;
+            return $traceurRuntime.createGeneratorInstance(function($ctx) {
+              while (true)
+                switch ($ctx.state) {
+                  case 0:
+                    $ctx.pushTry(9, null);
+                    $ctx.state = 12;
+                    break;
+                  case 12:
+                    message = JSON.parse(message);
+                    id = message.id;
+                    message = message.question;
+                    if (!id || !message)
+                      throw new Error("wrong question");
+                    $ctx.state = 6;
+                    break;
+                  case 6:
+                    $ctx.state = 2;
+                    return modem.userCommand({
+                      deviceId: message.device,
+                      command: message.command,
+                      data: null
+                    });
+                  case 2:
+                    $ctx.maybeThrow();
+                    $ctx.state = 4;
+                    break;
+                  case 4:
+                    connection.send(JSON.stringify({
+                      id: id,
+                      answer: "done"
+                    }));
+                    $ctx.state = 8;
+                    break;
+                  case 8:
+                    $ctx.popTry();
+                    $ctx.state = -2;
+                    break;
+                  case 9:
+                    $ctx.popTry();
+                    error = $ctx.storedException;
+                    $ctx.state = 15;
+                    break;
+                  case 15:
+                    console.error("command error", error, error.stack);
+                    connection.send(JSON.stringify({
+                      id: id,
+                      error: error.message
+                    }));
+                    $ctx.state = -2;
+                    break;
+                  default:
+                    return $ctx.end();
+                }
+            }, $__108, this);
+          })));
+        default:
+      }
     }));
   });
   var createModemServer = (function(Server) {
-    var $__11;
+    var $__12;
     for (var connection = [],
-        $__7 = 1; $__7 < arguments.length; $__7++)
-      connection[$__7 - 1] = arguments[$__7];
-    return ($__11 = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply($__11, $traceurRuntime.spread(connection));
+        $__8 = 1; $__8 < arguments.length; $__8++)
+      connection[$__8 - 1] = arguments[$__8];
+    return ($__12 = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply($__12, $traceurRuntime.spread(connection));
   });
   createModemServer(http, config.serviceport, "::");
   createModemServer(http, internalModemService);
@@ -30470,61 +30755,76 @@ module.exports = Scheduler;
     var b = url.parse(u);
     var sockets = {};
     console.log(("connecting to boss " + b.hostname + ":" + b.port).green);
-    var client = net.connect(b.port, b.hostname, (function() {
+    var client = require("JSONTransform").parse(net.connect(b.port, b.hostname, (function() {
       return ra((function() {
-        return client.writable && client.write(JSON.stringify({
+        return client.writable && client.write({
           what: "login",
           client: auth.modem,
           password: auth.modemkey,
           modemLocations: service.interfaces
-        }));
+        });
       }));
-    }));
+    })));
     var reconnect = lodash.once((function() {
       return setTimeout(tellToBoss, config.restoreConnectionInterval);
     }));
+    var createStream = (function(streamid) {
+      var stream = sockets[streamid] = {
+        buffer: [],
+        socket: net.connect(internalModemService, (function() {
+          if (stream.buffer.length)
+            stream.socket.write(Buffer.concat(stream.buffer));
+          stream.buffer = null;
+        }))
+      };
+      stream.socket.on("data", (function(data) {
+        return client.write({
+          what: "modem data",
+          stream: streamid,
+          data: data.toString("base64")
+        });
+      }));
+      stream.socket.on("end", (function() {
+        client.write({
+          what: "modem data",
+          stream: streamid,
+          data: null
+        });
+        setTimeout((function() {
+          delete sockets[streamid];
+        }), 5000);
+      }));
+      return stream;
+    });
     client.on("end", reconnect);
-    client.on("error", reconnect);
+    client.on("error", (function(error) {
+      console.log("boss error: ", error);
+      reconnect();
+    }));
     client.on("data", (function(data) {
-      try {
-        data = JSON.parse(String(data));
-        switch (data.what) {
-          case "user data":
-            var streamid = data.stream;
-            var stream$__13 = sockets[streamid];
-            var chunk = new Buffer(data.data, "base64");
-            if (stream$__13 == null) {
-              stream$__13 = sockets[streamid] = {
-                buffer: [],
-                socket: net.connect(internalModemService, (function() {
-                  if (stream$__13.buffer.length)
-                    stream$__13.socket.write(Buffer.concat(stream$__13.buffer));
-                  stream$__13.buffer = null;
-                }))
-              };
-              stream$__13.socket.on("data", (function(data) {
-                return client.write(JSON.stringify({
-                  what: "modem data",
-                  stream: streamid,
-                  data: data.toString("base64")
-                }));
-              }));
-              stream$__13.socket.on("end", (function() {
-                delete sockets[streamid];
-                client.write(JSON.stringify({
-                  what: "modem data",
-                  stream: streamid,
-                  data: null
-                }));
-              }));
-            }
-            if (stream$__13.socket.writable)
-              stream$__13.socket.write(chunk);
+      if (!data)
+        return ;
+      switch (data.what) {
+        case "user data":
+          var streamid = data.stream;
+          var stream = sockets[streamid];
+          if (data.data == null) {
+            if (stream) {
+              if (stream.socket.writable)
+                stream.socket.end();
+            } else
+              console.log("STRANGE: received end of an absent stream", streamid);
+          } else {
+            var schunk = new Buffer(data.data, "base64");
+            if (!stream)
+              stream = createStream(streamid);
+            if (stream.socket.writable)
+              stream.socket.write(schunk);
+            else if (stream.buffer)
+              stream.buffer.push(schunk);
             else
-              stream$__13.buffer.push(chunk);
-        }
-      } catch (e) {
-        console.error(e);
+              console.log("STRANGE: request to write to a closed stream");
+          }
       }
     }));
   });
@@ -30541,8 +30841,8 @@ module.exports = Scheduler;
     global.mm = modem;
     global.c = (function() {
       for (var args = [],
-          $__8 = 0; $__8 < arguments.length; $__8++)
-        args[$__8] = arguments[$__8];
+          $__9 = 0; $__9 < arguments.length; $__9++)
+        args[$__9] = arguments[$__9];
       modem.session($traceurRuntime.initGeneratorFunction(function $__108(command) {
         var $__109,
             $__110,
@@ -30616,7 +30916,7 @@ module.exports = Scheduler;
       } )
     }()
 
-},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","modemstub":"/home/vadzim/v/work/nerojs/src/modemstub.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
+},{"JSONTransform":"/home/vadzim/v/work/nerojs/src/JSONTransform.js","JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","modemstub":"/home/vadzim/v/work/nerojs/src/modemstub.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
