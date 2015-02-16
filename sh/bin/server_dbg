@@ -24296,7 +24296,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -26568,10 +26568,11 @@ var Modem = function Modem(stream, slog) {
 };
 var $Modem = Modem;
 ($traceurRuntime.createClass)(Modem, {
-  lock: function(callback) {
+  lock: function(callback, silent) {
     var onready = this._onready;
     var ret = co.gocall($traceurRuntime.initGeneratorFunction(function $__8() {
       var $__0,
+          log,
           $__9,
           $__10,
           $__11,
@@ -26591,9 +26592,9 @@ var $Modem = Modem;
           switch ($ctx.state) {
             case 0:
               $__0 = this;
-              $ctx.state = 14;
+              $ctx.state = 22;
               break;
-            case 14:
+            case 22:
               $ctx.state = 2;
               return onready;
             case 2:
@@ -26601,6 +26602,16 @@ var $Modem = Modem;
               $ctx.state = 4;
               break;
             case 4:
+              log = this._log;
+              if (silent)
+                this._log = null;
+              $ctx.state = 24;
+              break;
+            case 24:
+              $ctx.pushTry(null, 14);
+              $ctx.state = 16;
+              break;
+            case 16:
               $__9 = callback.call;
               $__20 = function() {
                 var $__5;
@@ -26621,7 +26632,20 @@ var $Modem = Modem;
               break;
             case 8:
               $ctx.returnValue = $__22;
-              $ctx.state = -2;
+              $ctx.state = 14;
+              $ctx.finallyFallThrough = -2;
+              break;
+            case 14:
+              $ctx.popTry();
+              $ctx.state = 20;
+              break;
+            case 20:
+              if (silent)
+                this._log = log;
+              $ctx.state = 18;
+              break;
+            case 18:
+              $ctx.state = $ctx.finallyFallThrough;
               break;
             default:
               return $ctx.end();
@@ -27929,12 +27953,12 @@ var $PingPong = PingPong;
           switch ($ctx.state) {
             case 0:
               $__0 = this;
-              done = (function(error) {
+              done = lodash.once((function(error) {
                 t && clearTimeout(t);
                 if (error)
                   $__0.destroy();
                 return callback(error);
-              });
+              }));
               t = this.options.timeout && setTimeout((function() {
                 return done(new Error("timeout"));
               }), this.options.timeout);
@@ -29654,6 +29678,7 @@ module.exports = Scheduler;
             socket._read = (function(n) {});
             socket._write = function(chunk, encoding, callback) {
               this.ps.stdin.write(chunk, encoding);
+              console.log('**************', callback);
               callback();
             };
             socket.connect = function(path) {
@@ -29865,6 +29890,7 @@ module.exports = Scheduler;
     },
     get pingModem() {
       return modem.pingInterval && ra($traceurRuntime.initGeneratorFunction(function $__15() {
+        var error;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
@@ -29876,10 +29902,45 @@ module.exports = Scheduler;
                 $ctx.state = 4;
                 break;
               case 4:
+                $ctx.state = (modem.handle) ? 11 : 0;
+                break;
+              case 11:
+                $ctx.pushTry(9, null);
+                $ctx.state = 12;
+                break;
+              case 12:
                 $ctx.state = 6;
-                return modem.rawcommand("Version");
+                return modem.handle.lock($traceurRuntime.initGeneratorFunction(function $__50(command) {
+                  return $traceurRuntime.createGeneratorInstance(function($ctx) {
+                    while (true)
+                      switch ($ctx.state) {
+                        case 0:
+                          $ctx.state = 2;
+                          return command("Version");
+                        case 2:
+                          $ctx.maybeThrow();
+                          $ctx.state = -2;
+                          break;
+                        default:
+                          return $ctx.end();
+                      }
+                  }, $__50, this);
+                }), true);
               case 6:
                 $ctx.maybeThrow();
+                $ctx.state = 8;
+                break;
+              case 8:
+                $ctx.popTry();
+                $ctx.state = 0;
+                break;
+              case 9:
+                $ctx.popTry();
+                error = $ctx.storedException;
+                $ctx.state = 15;
+                break;
+              case 15:
+                console.error("modem ping error", error);
                 $ctx.state = 0;
                 break;
               default:
@@ -29899,14 +29960,14 @@ module.exports = Scheduler;
       var $__12,
           args,
           $__5,
-          $__50,
           $__51,
           $__52,
           $__53,
           $__54,
           $__55,
           $__56,
-          $__57;
+          $__57,
+          $__58;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
@@ -29917,38 +29978,38 @@ module.exports = Scheduler;
               $ctx.state = 17;
               break;
             case 17:
-              $__50 = modem.versionOK;
+              $__51 = modem.versionOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__50) ? 9 : 5;
+              $ctx.state = (!$__51) ? 9 : 5;
               break;
             case 9:
-              $__57 = null;
+              $__58 = null;
               $ctx.state = 10;
               break;
             case 5:
               $__12 = modem;
-              $__51 = modem.rawcommand;
-              $__52 = $__51.apply;
-              $__53 = $traceurRuntime.spread;
-              $__54 = $__53.call($traceurRuntime, args);
-              $__55 = $__52.call($__51, $__12, $__54);
+              $__52 = modem.rawcommand;
+              $__53 = $__52.apply;
+              $__54 = $traceurRuntime.spread;
+              $__55 = $__54.call($traceurRuntime, args);
+              $__56 = $__53.call($__52, $__12, $__55);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__55;
+              return $__56;
             case 2:
-              $__56 = $ctx.sent;
+              $__57 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__57 = $__56;
+              $__58 = $__57;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__57;
+              $ctx.returnValue = $__58;
               $ctx.state = -2;
               break;
             default:
@@ -29965,7 +30026,7 @@ module.exports = Scheduler;
     get protocolOK() {
       return !!(modem.functions && modem.functions.PROTOCOLS && modem.initProtocols);
     },
-    sendcommand: $traceurRuntime.initGeneratorFunction(function $__58() {
+    sendcommand: $traceurRuntime.initGeneratorFunction(function $__50() {
       var $__12,
           args,
           $__6,
@@ -30024,7 +30085,7 @@ module.exports = Scheduler;
             default:
               return $ctx.end();
           }
-      }, $__58, this);
+      }, $__50, this);
     }),
     get freeCells() {
       return modem.sendcommand("Free_Cell_Count");
