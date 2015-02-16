@@ -24296,7 +24296,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -30318,39 +30318,16 @@ module.exports = Scheduler;
                     acknowledgement,
                     answer,
                     e,
+                    $__83,
                     $__84,
                     $__85,
                     $__86,
                     $__87,
-                    $__88,
-                    $__89;
+                    $__88;
                 return $traceurRuntime.createGeneratorInstance(function($ctx) {
                   while (true)
                     switch ($ctx.state) {
                       case 0:
-                        command = $traceurRuntime.initGeneratorFunction(function $__83() {
-                          return $traceurRuntime.createGeneratorInstance(function($ctx) {
-                            while (true)
-                              switch ($ctx.state) {
-                                case 0:
-                                  $ctx.state = 2;
-                                  return co.sleep(2000);
-                                case 2:
-                                  $ctx.maybeThrow();
-                                  $ctx.state = 4;
-                                  break;
-                                case 4:
-                                  $ctx.returnValue = {RESULT: "Connection_error"};
-                                  $ctx.state = -2;
-                                  break;
-                                default:
-                                  return $ctx.end();
-                              }
-                          }, $__83, this);
-                        });
-                        $ctx.state = 32;
-                        break;
-                      case 32:
                         $__2 = commands[$traceurRuntime.toProperty(Symbol.iterator)](), $__3 = void 0;
                         $ctx.state = 14;
                         break;
@@ -30403,25 +30380,25 @@ module.exports = Scheduler;
                         $ctx.state = (errors.length) ? 26 : 29;
                         break;
                       case 26:
-                        $__84 = commands[0];
-                        $__85 = $__84.group;
-                        $__86 = {
+                        $__83 = commands[0];
+                        $__84 = $__83.group;
+                        $__85 = {
                           id: "Dest_Condition",
-                          group: $__85
+                          group: $__84
                         };
-                        $__87 = command($__86);
+                        $__86 = command($__85);
                         $ctx.state = 27;
                         break;
                       case 27:
                         $ctx.state = 23;
-                        return $__87;
+                        return $__86;
                       case 23:
-                        $__88 = $ctx.sent;
+                        $__87 = $ctx.sent;
                         $ctx.state = 25;
                         break;
                       case 25:
-                        $__89 = $__88.DEST_CONDITION;
-                        newstate = $__89;
+                        $__88 = $__87.DEST_CONDITION;
+                        newstate = $__88;
                         $ctx.state = 29;
                         break;
                       case 29:
@@ -30487,7 +30464,7 @@ module.exports = Scheduler;
   }
   function staticData(value) {
     var contentType = arguments[1] !== (void 0) ? arguments[1] : "json";
-    return co.func($traceurRuntime.initGeneratorFunction(function $__83(_, response) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__89(_, response) {
       var $__90,
           $__91,
           $__92,
@@ -30530,7 +30507,7 @@ module.exports = Scheduler;
             default:
               return $ctx.end();
           }
-      }, $__83, this);
+      }, $__89, this);
     }));
   }
   function beautify(text) {
@@ -30549,7 +30526,7 @@ module.exports = Scheduler;
   var parseCookies = (function(request) {
     return cookieParser(request, null, lodash.noop);
   });
-  var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__83(request, response, next) {
+  var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__89(request, response, next) {
     var a,
         origin,
         socket;
@@ -30603,7 +30580,7 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__83, this);
+    }, $__89, this);
   }));
   var modemService = express().use(cookieParser).use(require("http_log")).use((function(request, response, next) {
     var origin = request.headers.origin || "*";
