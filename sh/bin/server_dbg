@@ -24296,7 +24296,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -30219,7 +30219,8 @@ module.exports = Scheduler;
           newstate,
           passedToModem,
           my_timestamp,
-          errors;
+          errors,
+          errorneous;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
@@ -30295,11 +30296,13 @@ module.exports = Scheduler;
               passedToModem = false;
               my_timestamp = Inc();
               errors = [];
+              errorneous = true;
               co.defer((function() {
                 if (!passedToModem && my_timestamp == modem.devices.getState()[deviceId].newstate_timestamp)
                   modem.devices.applyItemChanges(deviceId, {
                     newstate: null,
-                    newstate_timestamp: null
+                    newstate_timestamp: null,
+                    errorneous: errorneous
                   });
               }));
               modem.devices.applyItemChanges(deviceId, {
@@ -30403,10 +30406,11 @@ module.exports = Scheduler;
                         break;
                       case 29:
                         if (newstate != null) {
+                          errorneous = null;
                           modem.devices.applyItemChanges(deviceId, {
                             state: newstate,
                             state_timestamp: my_timestamp,
-                            errorneous: newstate == null ? true : null
+                            errorneous: null
                           });
                           passedToModem = true;
                         }
