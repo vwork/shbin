@@ -23088,15 +23088,19 @@ var JSONservice = function JSONservice(file, template) {
         var clientData = M.map.get(self.id);
         self.id = M.last.json.uid;
         var partial = false;
-        var text = M.last.text;
+        var data = M.last.json.valueOf();
         if (clientData) {
-          var diff = JSON.stringify(lu.makeDiff(clientData, M.last.json.valueOf()));
-          if (text.length > diff.length * 1.5) {
+          var diff = lu.makeDiff(clientData, M.last.json.valueOf());
+          var dtext = JSON.stringify(diff);
+          if (M.last.text.length > dtext.length * 1.5) {
             partial = true;
-            text = diff;
+            data = diff;
           }
         }
-        connection.send(("{\"partial\":" + partial + ",\"data\":" + text + "}"));
+        connection.send({
+          partial: partial,
+          data: data
+        });
       }
     });
     connection.on("close", (function() {
@@ -23104,13 +23108,6 @@ var JSONservice = function JSONservice(file, template) {
       self.active = false;
     }));
     connection.on("message", (function(message) {
-      try {
-        message = JSON.parse(message);
-      } catch (error) {
-        console.log("web socket message error".red, error);
-        connection.send(JSON.stringify({error: "wrong format"}));
-        return ;
-      }
       switch (message.what) {
         case "init":
           self.id = message.id || {};
@@ -23119,7 +23116,10 @@ var JSONservice = function JSONservice(file, template) {
           $__0.applyChanges(message.data, !!message.partial);
           break;
         default:
-          connection.send(JSON.stringify({error: "unrecognised message"}));
+          connection.send({
+            error: "unrecognised message",
+            data: message
+          });
       }
     }));
   });
@@ -23585,11 +23585,15 @@ exports.gocall = (function(fun, context) {
     args[$__3 - 2] = arguments[$__3];
   return new Thread(fun.apply(context, args));
 });
-exports.func = (function(fun) {
+exports.func = function(fun) {
+  if (arguments.length >= 2)
+    fun = Array.prototype.reduceRight.call(arguments, (function(g, f) {
+      return f(g);
+    }));
   return function proc() {
     return new Thread(fun.apply(this, arguments));
   };
-});
+};
 exports.cb = (function(funWithCB) {
   return function() {
     for (var args = [],
@@ -24285,8 +24289,7 @@ var actions = {
   })
 };
 function getNewState(device, action) {
-  var fn = actions[action];
-  return fn && fn(device);
+  return actions.hasOwnProperty(action) ? actions[action](device) : null;
 }
 exports.getNewState = getNewState;
 
@@ -24296,7 +24299,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -25182,10 +25185,11 @@ module.exports = new (require("scheduler"))();
         }
       }( function () {
         "use strict";
-var $__1;
+var $__2;
 var lodash = require("lodash");
 var ra = require("ra");
 var co = require("co");
+var EventEmitter = require("events").EventEmitter || require("events");
 function assert(value, message) {
   if (!value)
     throw new Error("" + message);
@@ -25194,15 +25198,15 @@ if (!global.WeakMap) {
   var n = 0;
   global.WeakMap = (function() {
     var WeakMap = function WeakMap(data) {
-      var $__11,
-          $__12;
+      var $__12,
+          $__13;
       this._index = ("__WeakMap" + ++n);
       if (data)
-        for (var $__3 = data[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__4 = void 0; !($__4 = $__3.next()).done; ) {
-          var $__10 = $__4.value,
-              key = ($__11 = $__10[$traceurRuntime.toProperty(Symbol.iterator)](), ($__12 = $__11.next()).done ? void 0 : $__12.value),
-              value = ($__12 = $__11.next()).done ? void 0 : $__12.value;
+        for (var $__4 = data[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__5 = void 0; !($__5 = $__4.next()).done; ) {
+          var $__11 = $__5.value,
+              key = ($__12 = $__11[$traceurRuntime.toProperty(Symbol.iterator)](), ($__13 = $__12.next()).done ? void 0 : $__13.value),
+              value = ($__13 = $__12.next()).done ? void 0 : $__13.value;
           this.set(key, value);
         }
     };
@@ -25226,7 +25230,7 @@ if (!global.WeakMap) {
     }, {});
   }());
 }
-var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise", {
+var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise", {
   value: (function(p) {
     return p.then((function(result) {
       return lu.log("result:", result);
@@ -25237,7 +25241,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "dump", {
+}), Object.defineProperty($__2, "dump", {
   value: function(msg, value) {
     console.log(msg, value);
     return value;
@@ -25245,40 +25249,40 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "log", {
+}), Object.defineProperty($__2, "log", {
   value: console.log.bind(console),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "info", {
+}), Object.defineProperty($__2, "info", {
   value: (console.info || console.log).bind(console),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "warn", {
+}), Object.defineProperty($__2, "warn", {
   value: (console.warn || console.log).bind(console),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "error", {
+}), Object.defineProperty($__2, "error", {
   value: (console.error || console.log).bind(console),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "trace", {
+}), Object.defineProperty($__2, "trace", {
   value: (console.trace || console.log).bind(console),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "rests", {
+}), Object.defineProperty($__2, "rests", {
   value: function(num) {
     for (var rests = [],
-        $__7 = 1; $__7 < arguments.length; $__7++)
-      rests[$__7 - 1] = arguments[$__7];
+        $__8 = 1; $__8 < arguments.length; $__8++)
+      rests[$__8 - 1] = arguments[$__8];
     var ret = [];
-    for (var $__3 = rests[$traceurRuntime.toProperty(Symbol.iterator)](),
-        $__4 = void 0; !($__4 = $__3.next()).done; ) {
-      var r = $__4.value;
+    for (var $__4 = rests[$traceurRuntime.toProperty(Symbol.iterator)](),
+        $__5 = void 0; !($__5 = $__4.next()).done; ) {
+      var r = $__5.value;
       {
         var n = num % r;
         num = (num - n) / r;
@@ -25290,7 +25294,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "pad", {
+}), Object.defineProperty($__2, "pad", {
   value: function(s, n, p) {
     s = String(s);
     var x = "";
@@ -25304,7 +25308,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "time", {
+}), Object.defineProperty($__2, "time", {
   value: function() {
     var d = new Date();
     return (d.getHours() + ":" + lu.pad(d.getMinutes(), 2, 0) + ":" + lu.pad(d.getSeconds(), 2, 0) + "." + lu.pad(d.getMilliseconds(), 3, 0));
@@ -25312,14 +25316,14 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "stack", {
+}), Object.defineProperty($__2, "stack", {
   value: (function() {
     return (new Error).stack;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "options", {
+}), Object.defineProperty($__2, "options", {
   value: function(options, def) {
     var ret = {};
     for (var i in def)
@@ -25337,7 +25341,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "str", {
+}), Object.defineProperty($__2, "str", {
   value: (function(obj, depth) {
     if (depth == null)
       depth = 1;
@@ -25356,7 +25360,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "toOneLine", {
+}), Object.defineProperty($__2, "toOneLine", {
   value: function(obj) {
     var ret = JSON.stringify(obj);
     ret += "\n";
@@ -25365,7 +25369,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "byLines", {
+}), Object.defineProperty($__2, "byLines", {
   value: function(callback) {
     var buffer = "";
     return (function(chunk) {
@@ -25378,7 +25382,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "byJSON", {
+}), Object.defineProperty($__2, "byJSON", {
   value: function(callback) {
     return byLines((function(line) {
       return callback(JSON.parse(line.trim()));
@@ -25387,121 +25391,121 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "valueOf", {
+}), Object.defineProperty($__2, "valueOf", {
   value: (function(val) {
     return val == null ? null : val.valueOf == null ? val : val.valueOf();
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnThis", {
+}), Object.defineProperty($__2, "returnThis", {
   value: function() {
     return this;
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnNull", {
+}), Object.defineProperty($__2, "returnNull", {
   value: (function() {
     return null;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnTrue", {
+}), Object.defineProperty($__2, "returnTrue", {
   value: (function() {
     return true;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnFalse", {
+}), Object.defineProperty($__2, "returnFalse", {
   value: (function() {
     return false;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnZero", {
+}), Object.defineProperty($__2, "returnZero", {
   value: (function() {
     return 0;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnOne", {
+}), Object.defineProperty($__2, "returnOne", {
   value: (function() {
     return 1;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "promiseSucceeded", {
+}), Object.defineProperty($__2, "promiseSucceeded", {
   value: Promise.resolve(),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "promiseNull", {
+}), Object.defineProperty($__2, "promiseNull", {
   value: Promise.resolve(null),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "promiseTrue", {
+}), Object.defineProperty($__2, "promiseTrue", {
   value: Promise.resolve(true),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "promiseFalse", {
+}), Object.defineProperty($__2, "promiseFalse", {
   value: Promise.resolve(false),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "promiseZero", {
+}), Object.defineProperty($__2, "promiseZero", {
   value: Promise.resolve(0),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "promiseOne", {
+}), Object.defineProperty($__2, "promiseOne", {
   value: Promise.resolve(1),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnNullPromise", {
+}), Object.defineProperty($__2, "returnNullPromise", {
   value: (function() {
     return lu.promiseNull;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnTruePromise", {
+}), Object.defineProperty($__2, "returnTruePromise", {
   value: (function() {
     return lu.promiseTrue;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnFalsePromise", {
+}), Object.defineProperty($__2, "returnFalsePromise", {
   value: (function() {
     return lu.promiseFalse;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnZeroPromise", {
+}), Object.defineProperty($__2, "returnZeroPromise", {
   value: (function() {
     return lu.promiseZero;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "returnOnePromise", {
+}), Object.defineProperty($__2, "returnOnePromise", {
   value: (function() {
     return lu.promiseOne;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "waitFor", {
+}), Object.defineProperty($__2, "waitFor", {
   value: function(timeout, interval, callback) {
     if (typeof timeout == "function") {
       interval = timeout;
@@ -25527,23 +25531,23 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "empty", {
+}), Object.defineProperty($__2, "empty", {
   value: Object.freeze(Object.create(null)),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "JSONEqual", {
+}), Object.defineProperty($__2, "JSONEqual", {
   value: function(a, b) {
     return JSON.stringify(a) == JSON.stringify(b);
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "new", {
+}), Object.defineProperty($__2, "new", {
   value: function() {
     for (var descedents = [],
-        $__8 = 0; $__8 < arguments.length; $__8++)
-      descedents[$__8] = arguments[$__8];
+        $__9 = 0; $__9 < arguments.length; $__9++)
+      descedents[$__9] = arguments[$__9];
     return descedents.reduce((function(ancestor, descedent) {
       return lodash.assign(ancestor, descedent);
     }), {});
@@ -25551,17 +25555,17 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "call", {
+}), Object.defineProperty($__2, "call", {
   value: function(fun) {
     for (var args = [],
-        $__9 = 1; $__9 < arguments.length; $__9++)
-      args[$__9 - 1] = arguments[$__9];
+        $__10 = 1; $__10 < arguments.length; $__10++)
+      args[$__10 - 1] = arguments[$__10];
     return fun.apply((void 0), $traceurRuntime.spread(args));
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "rethrow", {
+}), Object.defineProperty($__2, "rethrow", {
   value: function(e) {
     setTimeout((function() {
       throw e;
@@ -25570,7 +25574,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "catch", {
+}), Object.defineProperty($__2, "catch", {
   value: function(cb, ret) {
     try {
       return cb();
@@ -25581,7 +25585,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "tryElse", {
+}), Object.defineProperty($__2, "tryElse", {
   value: function(f, g) {
     var ok = false;
     try {
@@ -25596,14 +25600,14 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "try", {
-  value: $traceurRuntime.initGeneratorFunction(function $__13(fun) {
+}), Object.defineProperty($__2, "try", {
+  value: $traceurRuntime.initGeneratorFunction(function $__14(fun) {
     var startTimeToWait,
         maxTimeToWait,
         multiply,
         timeToWait,
-        $__14,
         $__15,
+        $__16,
         e;
     var $arguments = arguments;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -25621,18 +25625,18 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
             $ctx.state = 20;
             break;
           case 20:
-            $__14 = fun();
+            $__15 = fun();
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__14;
+            return $__15;
           case 2:
-            $__15 = $ctx.sent;
+            $__16 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__15;
+            $ctx.returnValue = $__16;
             $ctx.state = -2;
             break;
           case 8:
@@ -25662,29 +25666,150 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__13, this);
+    }, $__14, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "unique", {
+}), Object.defineProperty($__2, "unique", {
   value: function(value, index, array) {
     return index == 0 || value != array[index - 1];
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "joinData", {
+}), Object.defineProperty($__2, "joinData", {
   value: function(array) {
     return array.length == 0 ? "" : typeof array[0] == "string" ? array.join("") : Buffer.isBuffer(array[0]) ? Buffer.concat(array) : array.join("");
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "readStream", {
-  value: $traceurRuntime.initGeneratorFunction(function $__16(stream) {
-    var $__17,
-        $__18,
+}), Object.defineProperty($__2, "on", {
+  value: function(emitter, events) {
+    lodash.forEach(events, (function(handler, event) {
+      return emitter.on(event, handler);
+    }));
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "off", {
+  value: function(emitter, events) {
+    lodash.forEach(events, (function(handler, event) {
+      return emitter.removeListener(event, handler);
+    }));
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "proxyMessage", {
+  value: function(emitter, messageType, converter) {
+    var proxyType = messageType + Math.random();
+    var ret = Object.create(emitter);
+    var proxy = function(message) {
+      message = converter.call(this, message);
+      if (message !== undefined)
+        emitter.emit(proxyType, message);
+    };
+    var initialized = 0;
+    emitter.on("newListener", (function(type) {
+      if (type != proxyType)
+        return ;
+      if ((initialized++) == 0)
+        emitter.addListener(messageType, proxy);
+    }));
+    emitter.on("removeListener", (function(type) {
+      if (type != proxyType)
+        return ;
+      if ((--initialized) == 0)
+        emitter.removeListener(messageType, proxy);
+    }));
+    var getType = (function(type) {
+      return type == messageType ? proxyType : type;
+    });
+    var proxyListenerMethod = (function(name) {
+      return (function(type, listener) {
+        return emitter[name](getType(type), listener);
+      });
+    });
+    ret.on = ret.addListener = proxyListenerMethod("on");
+    ret.once = proxyListenerMethod("once");
+    ret.removeListener = proxyListenerMethod("removeListener");
+    ret.listeners = (function(type) {
+      return emitter.listeners(getType(type));
+    });
+    return ret;
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "proxyPingPong", {
+  value: function(connection) {
+    var $__12,
+        $__13;
+    var $__11 = arguments[1] !== (void 0) ? arguments[1] : {},
+        interval = ($__12 = $__11.interval) === void 0 ? 60000 : $__12,
+        timeout = ($__13 = $__11.timeout) === void 0 ? 15000 : $__13;
+    var ptimeout = null;
+    var ontimeout = (function() {
+      clearTimeout(ptimeout);
+      ptimeout = null;
+      connection.emit(new Error("pingpong timeout"));
+      connection.close();
+    });
+    var id = null;
+    var pinterval = setInterval((function() {
+      if (ptimeout)
+        return ontimeout();
+      id = Math.random();
+      connection.send(("ping" + id));
+      ptimeout = setTimeout(ontimeout, timeout);
+    }), interval);
+    connection.once("close", (function() {
+      return clearInterval(pinterval);
+    }));
+    return lu.proxyMessage(connection, "message", (function(message) {
+      if (/^ping/.test(message))
+        connection.send(message.replace("i", "o"));
+      else if (/^pong/.test(message)) {
+        if (message == ("pong" + id)) {
+          clearTimeout(ptimeout);
+          ptimeout = null;
+        }
+      } else
+        return message;
+    }));
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "proxyJSON", {
+  value: function(connection, options) {
+    var $__0 = this;
+    return Object.create(lu.proxyMessage(connection, "message", (function(message) {
+      try {
+        return JSON.parse(message);
+      } catch (error) {
+        $__0.send({error: error.message});
+      }
+    })), {send: {value: (function(message) {
+          return connection.send(JSON.stringify(message));
+        })}});
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "proxyWebSocket", {
+  value: function(socket, options) {
+    return lu.proxyJSON(lu.proxyPingPong(socket, options), options);
+  },
+  configurable: true,
+  enumerable: true,
+  writable: true
+}), Object.defineProperty($__2, "readStream", {
+  value: $traceurRuntime.initGeneratorFunction(function $__17(stream) {
+    var $__18,
         $__19,
         $__20,
         $__21,
@@ -25697,85 +25822,85 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
         $__28,
         $__29,
         $__30,
-        $__31;
+        $__31,
+        $__32;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__30 = {then: function(resolve, reject) {
+            $__31 = {then: function(resolve, reject) {
                 var content = [];
-                $__17 = stream.on, $__20 = function(chunk) {
-                  return $__18 = content.push, $__19 = $__18.call(content, chunk), $__19;
-                }, $__21 = $__17.call(stream, "data", $__20), $__21;
-                $__22 = stream.on, $__26 = function() {
-                  return $__23 = lu.joinData, $__24 = $__23.call(lu, content), $__25 = resolve($__24), $__25;
-                }, $__27 = $__22.call(stream, "end", $__26), $__27;
-                $__28 = stream.on, $__29 = $__28.call(stream, "error", reject), $__29;
+                $__18 = stream.on, $__21 = function(chunk) {
+                  return $__19 = content.push, $__20 = $__19.call(content, chunk), $__20;
+                }, $__22 = $__18.call(stream, "data", $__21), $__22;
+                $__23 = stream.on, $__27 = function() {
+                  return $__24 = lu.joinData, $__25 = $__24.call(lu, content), $__26 = resolve($__25), $__26;
+                }, $__28 = $__23.call(stream, "end", $__27), $__28;
+                $__29 = stream.on, $__30 = $__29.call(stream, "error", reject), $__30;
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__30;
+            return $__31;
           case 2:
-            $__31 = $ctx.sent;
+            $__32 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__31;
+            $ctx.returnValue = $__32;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__16, this);
+    }, $__17, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "readJSON", {
-  value: $traceurRuntime.initGeneratorFunction(function $__32(stream) {
-    var $__33,
-        $__34,
+}), Object.defineProperty($__2, "readJSON", {
+  value: $traceurRuntime.initGeneratorFunction(function $__33(stream) {
+    var $__34,
         $__35,
         $__36,
-        $__37;
+        $__37,
+        $__38;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__33 = JSON.parse;
-            $__34 = lu.readStream;
-            $__35 = $__34.call(lu, stream);
+            $__34 = JSON.parse;
+            $__35 = lu.readStream;
+            $__36 = $__35.call(lu, stream);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__35;
+            return $__36;
           case 2:
-            $__36 = $ctx.sent;
+            $__37 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__37 = $__33.call(JSON, $__36);
+            $__38 = $__34.call(JSON, $__37);
             $ctx.state = 8;
             break;
           case 8:
-            $ctx.returnValue = $__37;
+            $ctx.returnValue = $__38;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__32, this);
+    }, $__33, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "readChunk", {
-  value: $traceurRuntime.initGeneratorFunction(function $__38(stream) {
-    var $__39,
-        $__40,
+}), Object.defineProperty($__2, "readChunk", {
+  value: $traceurRuntime.initGeneratorFunction(function $__39(stream) {
+    var $__40,
         $__41,
         $__42,
         $__43,
@@ -25793,59 +25918,60 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
         $__55,
         $__56,
         $__57,
-        $__58;
+        $__58,
+        $__59;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__57 = {then: function(resolve, reject) {
-                $__39 = stream.on, $__40 = $__39.call(stream, "data", onData), $__40;
-                $__41 = stream.on, $__42 = $__41.call(stream, "end", onEnd), $__42;
-                $__43 = stream.on, $__44 = $__43.call(stream, "error", onError), $__44;
+            $__58 = {then: function(resolve, reject) {
+                $__40 = stream.on, $__41 = $__40.call(stream, "data", onData), $__41;
+                $__42 = stream.on, $__43 = $__42.call(stream, "end", onEnd), $__43;
+                $__44 = stream.on, $__45 = $__44.call(stream, "error", onError), $__45;
                 function done() {
-                  $__45 = stream.removeListener, $__46 = $__45.call(stream, "data", onData), $__46;
-                  $__47 = stream.removeListener, $__48 = $__47.call(stream, "end", onEnd), $__48;
-                  $__49 = stream.removeListener, $__50 = $__49.call(stream, "error", onError), $__50;
+                  $__46 = stream.removeListener, $__47 = $__46.call(stream, "data", onData), $__47;
+                  $__48 = stream.removeListener, $__49 = $__48.call(stream, "end", onEnd), $__49;
+                  $__50 = stream.removeListener, $__51 = $__50.call(stream, "error", onError), $__51;
                 }
                 function onData(chunk) {
-                  $__51 = done(), $__51;
-                  $__52 = resolve(chunk), $__52;
+                  $__52 = done(), $__52;
+                  $__53 = resolve(chunk), $__53;
                 }
                 function onEnd() {
-                  $__53 = done(), $__53;
-                  $__54 = resolve(null), $__54;
+                  $__54 = done(), $__54;
+                  $__55 = resolve(null), $__55;
                 }
                 function onError(error) {
-                  $__55 = done(), $__55;
-                  $__56 = reject(error), $__56;
+                  $__56 = done(), $__56;
+                  $__57 = reject(error), $__57;
                 }
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__57;
+            return $__58;
           case 2:
-            $__58 = $ctx.sent;
+            $__59 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__58;
+            $ctx.returnValue = $__59;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__38, this);
+    }, $__39, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "static", {
+}), Object.defineProperty($__2, "static", {
   value: function(fun) {
-    return co.func($traceurRuntime.initGeneratorFunction(function $__59(request, response) {
-      var $__1,
-          $__2,
+    return co.func($traceurRuntime.initGeneratorFunction(function $__60(request, response) {
+      var $__2,
+          $__3,
           headWritten,
           responseEnded,
           body;
@@ -25868,12 +25994,12 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
               $ctx.state = 4;
               break;
             case 4:
-              response.writeHead(200, ($__1 = {}, Object.defineProperty($__1, "Content-Type", {
+              response.writeHead(200, ($__2 = {}, Object.defineProperty($__2, "Content-Type", {
                 value: "text/html; charset=UTF-8",
                 configurable: true,
                 enumerable: true,
                 writable: true
-              }), $__1));
+              }), $__2));
               headWritten = true;
               if (typeof body != "string")
                 body = React.renderComponentToString(body);
@@ -25888,12 +26014,12 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
               break;
             case 14:
               if (!headWritten)
-                response.writeHead(500, ($__2 = {}, Object.defineProperty($__2, "Content-Type", {
+                response.writeHead(500, ($__3 = {}, Object.defineProperty($__3, "Content-Type", {
                   value: "text/plain",
                   configurable: true,
                   enumerable: true,
                   writable: true
-                }), $__2));
+                }), $__3));
               if (!responseEnded)
                 response.end("<<< ERROR >>>");
               $ctx.state = 12;
@@ -25904,13 +26030,13 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
             default:
               return $ctx.end();
           }
-      }, $__59, this);
+      }, $__60, this);
     }));
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "property", {
+}), Object.defineProperty($__2, "property", {
   value: function(obj, name, defaultValue) {
     var privateName = "_" + name;
     if (arguments.length > 2)
@@ -25928,7 +26054,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "polling", {
+}), Object.defineProperty($__2, "polling", {
   value: function(stream) {
     var ret = {
       stop: function() {
@@ -25965,7 +26091,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "testDiffImm", {
+}), Object.defineProperty($__2, "testDiffImm", {
   value: function() {
     var p = {
       a: 1,
@@ -25977,7 +26103,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "testDiff", {
+}), Object.defineProperty($__2, "testDiff", {
   value: function() {
     var p = {
       a: 1,
@@ -25989,7 +26115,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "applyDiffImm", {
+}), Object.defineProperty($__2, "applyDiffImm", {
   value: function(dest, diff) {
     return Immutable.fromJS(dest || Immutable.Map()).withMutations((function(dest) {
       Immutable.fromJS(diff).forEach((function(value, key) {
@@ -26005,7 +26131,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "makeDiffImm", {
+}), Object.defineProperty($__2, "makeDiffImm", {
   value: function(previous, next) {
     return Immutable.Map().withMutations((function(ret) {
       function toArray(obj) {
@@ -26045,21 +26171,21 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "assignDiffImm", {
+}), Object.defineProperty($__2, "assignDiffImm", {
   value: function(dest, src) {
     return lu.applyDiffImm(dest, lu.makeDiffImm(dest, src));
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "isLiteral", {
+}), Object.defineProperty($__2, "isLiteral", {
   value: (function(obj) {
     return obj && typeof obj == "object" && obj.constructor == Object;
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "applyDiff", {
+}), Object.defineProperty($__2, "applyDiff", {
   value: function(dest, diff) {
     var ret = dest;
     var cnt = 0;
@@ -26099,7 +26225,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "makeDiff", {
+}), Object.defineProperty($__2, "makeDiff", {
   value: function(previous, next) {
     var ret = null;
     function toArray(obj) {
@@ -26153,20 +26279,20 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "assignDiff", {
+}), Object.defineProperty($__2, "assignDiff", {
   value: function(dest, src) {
     return lu.applyDiff(dest, lu.makeDiff(dest, src));
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "cast", {
+}), Object.defineProperty($__2, "cast", {
   value: function(type, obj) {
     if (!obj || typeof obj != "object")
       return obj;
-    var $__10 = type || {},
-        constructor = $__10.constructor,
-        elements = $__10.elements;
+    var $__11 = type || {},
+        constructor = $__11.constructor,
+        elements = $__11.elements;
     if (typeof constructor == "string")
       constructor = Immutable[constructor];
     return (constructor || Immutable.Map)().withMutations((function(ret) {
@@ -26178,7 +26304,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "concatString", {
+}), Object.defineProperty($__2, "concatString", {
   value: (function(array) {
     var ret = "";
     !function walk(array) {
@@ -26187,9 +26313,9 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
       else if (array.length != null)
         array.forEach(walk);
       else
-        for (var $__3 = array[$traceurRuntime.toProperty(Symbol.iterator)](),
-            $__4 = void 0; !($__4 = $__3.next()).done; ) {
-          var s = $__4.value;
+        for (var $__4 = array[$traceurRuntime.toProperty(Symbol.iterator)](),
+            $__5 = void 0; !($__5 = $__4.next()).done; ) {
+          var s = $__5.value;
           walk(s);
         }
     }(array);
@@ -26198,7 +26324,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "sortedDiff", {
+}), Object.defineProperty($__2, "sortedDiff", {
   value: function(first, second) {
     var fi = first[Symbol.iterator]();
     var si = second[Symbol.iterator]();
@@ -26227,7 +26353,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "measure", {
+}), Object.defineProperty($__2, "measure", {
   value: function(fun) {
     var now = global.performance || global.Date;
     var t = now.now();
@@ -26249,23 +26375,23 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "skip", {
-  value: $traceurRuntime.initGeneratorFunction(function $__59(c, buf) {
-    var $__3,
-        $__4,
+}), Object.defineProperty($__2, "skip", {
+  value: $traceurRuntime.initGeneratorFunction(function $__60(c, buf) {
+    var $__4,
+        $__5,
         b;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__3 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
+            $__4 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__5 = void 0;
             $ctx.state = 6;
             break;
           case 6:
-            $ctx.state = (!($__4 = $__3.next()).done) ? 8 : -2;
+            $ctx.state = (!($__5 = $__4.next()).done) ? 8 : -2;
             break;
           case 8:
-            b = $__4.value;
+            b = $__5.value;
             $ctx.state = 9;
             break;
           case 9:
@@ -26285,28 +26411,28 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__59, this);
+    }, $__60, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "take", {
-  value: $traceurRuntime.initGeneratorFunction(function $__60(c, buf) {
-    var $__3,
-        $__4,
+}), Object.defineProperty($__2, "take", {
+  value: $traceurRuntime.initGeneratorFunction(function $__61(c, buf) {
+    var $__4,
+        $__5,
         b;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__3 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
+            $__4 = buf[$traceurRuntime.toProperty(Symbol.iterator)](), $__5 = void 0;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.state = (!($__4 = $__3.next()).done) ? 10 : -2;
+            $ctx.state = (!($__5 = $__4.next()).done) ? 10 : -2;
             break;
           case 10:
-            b = $__4.value;
+            b = $__5.value;
             $ctx.state = 11;
             break;
           case 11:
@@ -26326,12 +26452,12 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__60, this);
+    }, $__61, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "copy", {
+}), Object.defineProperty($__2, "copy", {
   value: function(buf) {
     var ret = lu.array(buf);
     if (ret == buf)
@@ -26341,7 +26467,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "array", {
+}), Object.defineProperty($__2, "array", {
   value: function(buf) {
     if (Array.isArray(buf))
       return buf;
@@ -26350,9 +26476,9 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
       for (var i = 0; i < buf.length; ++i)
         ret.push(buf[i]);
     else
-      for (var $__3 = buf[$traceurRuntime.toProperty(Symbol.iterator)](),
-          $__4 = void 0; !($__4 = $__3.next()).done; ) {
-        var b = $__4.value;
+      for (var $__4 = buf[$traceurRuntime.toProperty(Symbol.iterator)](),
+          $__5 = void 0; !($__5 = $__4.next()).done; ) {
+        var b = $__5.value;
         ret.push(b);
       }
     return ret;
@@ -26360,7 +26486,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "buffer", {
+}), Object.defineProperty($__2, "buffer", {
   value: function(buf) {
     if (buf instanceof Buffer)
       return buf;
@@ -26370,44 +26496,44 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "vector", {
+}), Object.defineProperty($__2, "vector", {
   value: function(buf) {
     return buf instanceof Buffer ? buf : lu.array(buf);
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "concat", {
-  value: $traceurRuntime.initGeneratorFunction(function $__61(list) {
-    var $__5,
-        $__6,
+}), Object.defineProperty($__2, "concat", {
+  value: $traceurRuntime.initGeneratorFunction(function $__62(list) {
+    var $__6,
+        $__7,
         l,
-        $__3,
         $__4,
+        $__5,
         x;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__5 = list[$traceurRuntime.toProperty(Symbol.iterator)](), $__6 = void 0;
+            $__6 = list[$traceurRuntime.toProperty(Symbol.iterator)](), $__7 = void 0;
             $ctx.state = 7;
             break;
           case 7:
-            $ctx.state = (!($__6 = $__5.next()).done) ? 9 : -2;
+            $ctx.state = (!($__7 = $__6.next()).done) ? 9 : -2;
             break;
           case 9:
-            l = $__6.value;
+            l = $__7.value;
             $ctx.state = 10;
             break;
           case 10:
-            $__3 = l[$traceurRuntime.toProperty(Symbol.iterator)](), $__4 = void 0;
+            $__4 = l[$traceurRuntime.toProperty(Symbol.iterator)](), $__5 = void 0;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.state = (!($__4 = $__3.next()).done) ? 5 : 7;
+            $ctx.state = (!($__5 = $__4.next()).done) ? 5 : 7;
             break;
           case 5:
-            x = $__4.value;
+            x = $__5.value;
             $ctx.state = 6;
             break;
           case 6:
@@ -26420,33 +26546,33 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__61, this);
+    }, $__62, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "word", {
+}), Object.defineProperty($__2, "word", {
   value: function(w) {
     return [w & 0xff, (w >> 8) & 0xff];
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "dword", {
+}), Object.defineProperty($__2, "dword", {
   value: function(w) {
     return [w & 0xff, (w >> 8) & 0xff, (w >> 16) & 0xff, (w >> 24) & 0xff];
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "makeWord", {
+}), Object.defineProperty($__2, "makeWord", {
   value: function(lo, hi) {
     return (lo & 0xff) + (hi & 0xff) << 8;
   },
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "arrayEqual", {
+}), Object.defineProperty($__2, "arrayEqual", {
   value: function(a, b) {
     return a && b && a.length == b.length && a.every((function(ai, i) {
       return ai == b[i];
@@ -26455,7 +26581,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "compare", {
+}), Object.defineProperty($__2, "compare", {
   value: function(a, b) {
     if (a == b)
       return 0;
@@ -26466,7 +26592,7 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), Object.defineProperty($__1, "formatms", {
+}), Object.defineProperty($__2, "formatms", {
   value: function(value) {
     var ret = "";
     value = Math.round(value);
@@ -26497,14 +26623,14 @@ var lu = module.exports = ($__1 = {}, Object.defineProperty($__1, "dumpPromise",
   configurable: true,
   enumerable: true,
   writable: true
-}), $__1);
+}), $__2);
 
 //# sourceMappingURL=/home/vadzim/v/work/nerojs/src/localUtils.map
 
       } )
     }()
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js"}],"/home/vadzim/v/work/nerojs/src/modem.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js"}],"/home/vadzim/v/work/nerojs/src/modem.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -27758,118 +27884,7 @@ module.exports = {
       } )
     }()
 
-},{}],"/home/vadzim/v/work/nerojs/src/modemstub.js":[function(require,module,exports){
-!function () {
-      !function ( body ) {
-        var now = global.performance || Date
-        var total = 0
-        var start = now.now()
-        var oldRequire = require
-        var newRequire = function () {
-          total += now.now() - start
-          require = oldRequire
-          try {
-            return oldRequire.apply( this, arguments )
-          }
-          finally {
-            require = newRequire
-            start = now.now()
-          }
-        }
-        require = newRequire
-        try {
-          body()
-        }
-        finally {
-          require = oldRequire
-          total += now.now() - start
-          total /= 1000
-          if ( !global.__require_stats__ )
-            global.__require_stats__ = {}
-          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/modemstub.js" ] = total
-        }
-      }( function () {
-        "use strict";
-var Modem = require("modem");
-var net = require("net");
-var fs = require("fs");
-var lu = require("localUtils");
-require("colors");
-var createServer = (function(port) {
-  var server = net.createServer((function(socket) {
-    socket.on("data", (function(data) {
-      console.log(("stub: <Buffer " + lu.array(data).map((function(x) {
-        return x.toString(16);
-      })).join(" ") + ">").yellow);
-      data = Modem.extractMessage(data);
-      console.log(("stub: " + JSON.stringify(data)).yellow);
-      socket.pause();
-      setTimeout((function() {
-        socket.resume();
-        var ret = null;
-        switch (data.id) {
-          case "Version":
-            ret = {
-              PRODUCT_VERSION: 1,
-              PRODUCT_ID: 73,
-              PRODUCT_HARD: 22,
-              PRODUCT_VARIANT: 8
-            };
-            break;
-          case "Free_Cell_Count":
-            ret = {COUNT: 122};
-            break;
-          case "Functions":
-            ret = {
-              PROTOCOLS: {
-                NERO_II_SmartHome: true,
-                INTRO_II_SmartHome: true
-              },
-              MODEM_FUNCTIONS: {}
-            };
-            break;
-          case "Change_modem_work_mode":
-            if (data.MODEM_MODE == "Work_Mode")
-              ret = "OK";
-            break;
-          case "Write_Group":
-          case "Set_To_Comfort":
-          case "Set_To_Comfort_1":
-          case "Set_To_Comfort_2":
-          case "Up":
-          case "Down":
-          case "Stop":
-            ret = "OK";
-            break;
-        }
-        if (ret != null) {
-          if (typeof ret == "string")
-            ret = {
-              id: "answer_Result",
-              RESULT: ret
-            };
-          socket.write(Modem.encode(ret.id || ("answer_" + data.id), ret));
-        }
-      }), 300);
-    }));
-  }));
-  server.on("error", (function(error) {
-    return console.log("stub error:".red, error);
-  }));
-  server.listen(port);
-  return server;
-});
-createServer(2233);
-fs.unlink("/tmp/stub2233", (function() {
-  return createServer("/tmp/stub2233");
-}));
-
-//# sourceMappingURL=/home/vadzim/v/work/nerojs/src/modemstub.map
-
-      } )
-    }()
-
-},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false}],"/home/vadzim/v/work/nerojs/src/pingpong.js":[function(require,module,exports){
+},{}],"/home/vadzim/v/work/nerojs/src/pingpong.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -29262,6 +29277,22 @@ exports.detach = (function(fun) {
     }
   } else
     return fun();
+});
+exports.on = (function(emitter, event, getter) {
+  var ret = ra();
+  var handler = (function(data) {
+    return ret.assign(getter(data));
+  });
+  if (event == "string")
+    emitter.on(event, handler);
+  else
+    for (var $__3 = event[$traceurRuntime.toProperty(Symbol.iterator)](),
+        $__4 = void 0; !($__4 = $__3.next()).done; ) {
+      var e = $__4.value;
+      emitter.on(e, handler);
+    }
+  handler();
+  return ret;
 });
 exports.Cell = Cell;
 exports.ImmutableInterface = ImmutableInterface;
@@ -30744,6 +30775,7 @@ module.exports = Scheduler;
         console.log((">> " + request.url.red + " " + message.cyan));
         oldSend.call(connection, message);
       });
+      connection = lu.proxyWebSocket(connection);
       connection.on("open", (function() {
         return console.log("websocket open".green, request.url.red);
       }));
@@ -30772,7 +30804,6 @@ module.exports = Scheduler;
                     $ctx.state = 12;
                     break;
                   case 12:
-                    message = JSON.parse(message);
                     id = message.id;
                     message = message.question;
                     if (!id || !message)
@@ -30819,7 +30850,9 @@ module.exports = Scheduler;
                 }
             }, $__108, this);
           })));
+          break;
         default:
+          connection.close();
       }
     }));
   });
@@ -30923,8 +30956,6 @@ module.exports = Scheduler;
       useGlobal: true,
       ignoreUndefined: true
     });
-    require("modemstub");
-    modem.retryInterval = 2000000;
     global.Modem = Modem;
     global.mm = modem;
     global.c = (function() {
@@ -30992,9 +31023,6 @@ module.exports = Scheduler;
         return x;
       })).filter(Boolean);
     });
-    global.v = (function() {
-      return m("\n16:29:56: Поддерживаемые драйверы sql\n16:29:56: QSQLITE\n16:29:56: QMYSQL3\n16:29:56: QMYSQL\n16:29:56: QPSQL7\n16:29:56: QPSQL\n16:29:56: Поток интерфейса перезапущен\n16:29:56: Открыт порт RS232 №3\n16:29:56: Посылка команды на модем 7e ff 3 1 8 0 0 20 12 0 0 0 0 68 39\n16:29:56: Принят ответ от модема: 7e ff 3 1 8 0 0 21 12 1 49 16 8 23 34 \n16:29:56: Версия ПО модема:73.1.8.22\n16:29:56: Посылка команды на модем 7e ff 3 1 8 0 0 20 11 0 0 0 0 9f 1f\n16:29:57: Принят ответ от модема: 7e ff 3 1 8 0 0 21 11 7a 0 7e 0 17 91 \n16:29:57: Посылка команды на модем 7e ff 3 1 8 0 0 20 15 0 0 0 0 59 99\n16:29:57: Принят ответ от модема: 7e ff 3 1 8 0 0 21 15 3 0 0 0 35 52 \n16:29:57: x=1366,y=628\n16:29:57: Поддерживаемые протоколы: Nero II Smarthome; Intro II Smarthome;\n16:29:57: Дополнительные функции: 0\n16:30:17: Посылка команды на модем 7e ff 3 1 8 fe 3 1 0 1 0 0 0 12 32\n16:30:18: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 1 0 0 0 b1 1b \n16:30:28: Посылка команды на модем 7e ff 3 1 8 0 0 19 1 1 0 0 0 b 24\n16:30:28: Принят ответ от модема: 7e ff 3 1 8 0 0 21 f 1 0 0 0 96 a8 \n16:30:28: Посылка команды на модем 7e ff 3 1 8 0 0 20 11 0 0 0 0 9f 1f\n16:30:28: Принят ответ от модема: 7e ff 3 1 8 0 0 21 11 7a 0 7e 0 17 91 \n16:30:38: Посылка команды на модем 7e ff 3 1 8 fd 3 1 0 1 0 0 0 22 8c\n16:30:38: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5 \n16:30:42: Посылка команды на модем 7e ff 3 1 8 0 0 19 1 1 0 0 0 b 24\n16:30:42: Принят ответ от модема: 7e ff 3 1 8 0 0 21 f 1 0 0 0 96 a8 \n16:30:42: Посылка команды на модем 7e ff 3 1 8 0 0 20 11 0 0 0 0 9f 1f\n16:30:42: Принят ответ от модема: 7e ff 3 1 8 0 0 21 11 7a 0 7e 0 17 91 \n16:33:27: Посылка команды на модем 7e ff 3 1 8 fe 3 10 20 10 27 80 81 33 98\n16:33:28: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 1 0 0 0 b1 1b \n16:34:01: Посылка команды на модем 7e ff 3 1 8 fd 3 10 20 10 27 80 81 3 26\n16:34:02: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5 \n16:34:11: Посылка команды на модем 7e ff 3 1 8 fe 3 10 20 0 0 80 81 30 ac\n16:34:11: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 1 0 0 0 b1 1b \n16:34:18: Посылка команды на модем 7e ff 3 1 8 fd 3 10 20 0 0 80 81 0 12\n16:34:19: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5 \n\n\n00:31:52: Посылка команды на модем 7e ff 3 1 8 fd 3 10 20 0 0 80 81 0 12 00:31:52: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:31:57: Посылка команды на модем 7e ff 3 1 8 fe 3 10 20 10 27 80 81 33 98 00:31:58: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 1 0 0 0 b1 1b  00:32:10: Посылка команды на модем 7e ff 3 1 8 fe 3 10 20 0 0 80 81 30 ac 00:32:11: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 1 0 0 0 b1 1b  00:32:25: Посылка команды на модем 7e ff 3 1 8 fd 3 10 20 10 27 80 81 3 26 00:32:26: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:32:33: Посылка команды на модем 7e ff 3 1 8 fd 3 10 20 0 0 80 81 0 12 00:32:33: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:32:52: Посылка команды на модем 7e ff 3 1 8 fd 3 10 20 10 27 80 81 3 26 00:32:52: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:37:50: Посылка команды на модем 7e ff 3 1 8 fd 3 10 3 1 0 0 1 ae f2 00:37:51: Таймаут ожидания ответа от модема 00:37:52: Посылка команды на модем 7e ff 3 1 8 fd 3 10 3 9 0 0 1 dd f1 00:37:52: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:37:53: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:37:54: Посылка команды на модем 7e ff 3 1 8 fd 3 10 2 1 0 0 1 f4 c9 00:37:55: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:37:55: Посылка команды на модем 7e ff 3 1 8 fd 3 10 2 9 0 0 1 87 ca 00:37:56: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:38:04: Посылка команды на модем 7e ff 3 1 8 fd 3 10 4 1 0 60 1 9f 54 00:38:05: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:38:06: Посылка команды на модем 7e ff 3 1 8 fd 3 10 5 1 0 60 1 c5 6f 00:38:08: Таймаут ожидания ответа от модема 00:38:08: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:38:27: Посылка команды на модем 7e ff 3 1 8 fd 3 10 1 1 0 20 1 3 eb 00:38:28: Таймаут ожидания ответа от модема 00:38:28: Посылка команды на модем 7e ff 3 1 8 fd 3 10 1 9 0 20 1 70 e8 00:38:28: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:38:29: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:38:32: Посылка команды на модем 7e ff 3 1 8 fd 3 10 2 1 0 0 1 f4 c9 00:38:33: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5  00:38:33: Посылка команды на модем 7e ff 3 1 8 fd 3 10 2 9 0 0 1 87 ca 00:38:34: Принят ответ от модема: 7e ff 3 1 8 fd 3 21 f 1 0 0 0 81 a5 \n" || "\n13:00:35: Посылка команды на модем 7e ff 3 1 8 fe 3 8 3 0 0 80 0 e2 c8\n13:00:37: Таймаут ожидания ответа от модема\n13:00:37: Посылка команды на модем 7e ff 3 1 8 fe 3 8 1 0 0 0 0 4f d4\n13:00:38: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 4 0 0 0 cf 6 \n13:00:38: Модем ответил: ошибка\n13:00:38: Посылка команды на модем 7e ff 3 1 8 0 0 19 1 1 0 0 0 b 24\n13:00:39: Принят ответ от модема: 7e ff 3 1 8 fe 3 21 f 1 0 0 0 b1 1b \n13:00:40: Принят ответ от модема: 7e ff 3 1 8 0 0 21 f 1 0 0 0 96 a8 \n13:00:40: Посылка команды на модем 7e ff 3 1 8 0 0 20 11 0 0 0 0 9f 1f\n13:00:40: Принят ответ от модема: 7e ff 3 1 8 0 0 21 11 7a 0 7e 0 17 91 \n\n\t");
-    });
   }
   return {};
 }.call(Reflect.global);
@@ -31004,7 +31032,7 @@ module.exports = Scheduler;
       } )
     }()
 
-},{"JSONTransform":"/home/vadzim/v/work/nerojs/src/JSONTransform.js","JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","modemstub":"/home/vadzim/v/work/nerojs/src/modemstub.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
+},{"JSONTransform":"/home/vadzim/v/work/nerojs/src/JSONTransform.js","JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":false,"fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/uid.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
