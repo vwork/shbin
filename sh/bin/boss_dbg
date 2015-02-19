@@ -20185,6 +20185,9 @@ var getRemoteHost = (function(socket) {
     host = ("[" + host + "]");
   return (host + ":" + socket.remotePort);
 });
+var endOnError = function() {
+  this.end();
+};
 var modemproxy = net.createServer((function(socket) {
   var client = null;
   var clientname = null;
@@ -20227,8 +20230,7 @@ var modemproxy = net.createServer((function(socket) {
             s,
             $__0,
             $__1,
-            e,
-            onerror;
+            e;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
@@ -20273,11 +20275,8 @@ var modemproxy = net.createServer((function(socket) {
                 response.socket.pipe(socket);
                 socket.pipe(response.socket);
                 socket.write(Buffer.concat(response.buffer));
-                onerror = function() {
-                  this.end();
-                };
-                socket.on("error", onerror);
-                response.socket.on("error", onerror);
+                socket.on("error", endOnError);
+                response.socket.on("error", endOnError);
                 socket = null;
                 response = null;
                 $ctx.state = -2;
