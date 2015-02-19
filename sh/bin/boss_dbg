@@ -20212,7 +20212,7 @@ var modemproxy = net.createServer((function(socket) {
         return socketError("unknown client");
       if (client.password != data.password)
         return socketError("wrong password");
-      console.log(("Hello " + data.client + ".").green);
+      console.log(("Hello " + clientname + ".").green);
       if (client.socket && client.socket != socket) {
         var oldSocket = client.socket;
         client.socket = null;
@@ -20292,7 +20292,7 @@ var modemproxy = net.createServer((function(socket) {
       return socketError("unknown message from modem received");
   }));
   socket.on("end", (function() {
-    console.log("Bye.".green, clientname);
+    console.log(("Bye " + clientname + ".").green);
     socket.end();
     if (client && client.socket == socket) {
       client.socket = null;
