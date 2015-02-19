@@ -22824,27 +22824,190 @@ module.exports = Yaml;
       }( function () {
         "use strict";
 var Duplex = require("stream").Duplex;
+var skipString = (function(buffer, index) {
+  while (index < buffer.length) {
+    switch (buffer.charAt(index)) {
+      case "\"":
+        break;
+      case "\\":
+        ++index;
+    }
+    ++index;
+  }
+  return index;
+});
+var NORMAL = 0;
+var SLASH = 1;
+var STRING = 2;
+var JSONparser = function JSONparser() {
+  this._brackets = 0;
+  this._state = NORMAL;
+  this._buffer = "";
+  this._index = 0;
+};
+($traceurRuntime.createClass)(JSONparser, {push: $traceurRuntime.initGeneratorFunction(function $__5(chunk) {
+    var $__0,
+        extractJSON,
+        ch;
+    return $traceurRuntime.createGeneratorInstance(function($ctx) {
+      while (true)
+        switch ($ctx.state) {
+          case 0:
+            $__0 = this;
+            extractJSON = (function() {
+              var ret = $__0._buffer.slice(0, $__0._index + 1).trim();
+              $__0._buffer = $__0._buffer.slice($__0._index + 1);
+              $__0._index = 0;
+              return ret;
+            });
+            if (chunk != null)
+              this._buffer += String(chunk);
+            $ctx.state = 61;
+            break;
+          case 61:
+            $ctx.state = (this._index < this._buffer.length) ? 50 : 3;
+            break;
+          case 50:
+            ch = this._buffer.charAt(this._index);
+            $ctx.state = 51;
+            break;
+          case 51:
+            switch (this._state) {
+              default:
+                $ctx.state = 49;
+                break;
+              case SLASH:
+                $ctx.state = 6;
+                break;
+              case STRING:
+                $ctx.state = 23;
+                break;
+              case NORMAL:
+                $ctx.state = 42;
+                break;
+            }
+            break;
+          case 6:
+            this._state = STRING;
+            $ctx.state = 49;
+            break;
+          case 21:
+            this._state = NORMAL;
+            $ctx.state = 22;
+            break;
+          case 22:
+            $ctx.state = (!this._brackets) ? 12 : 42;
+            break;
+          case 12:
+            $ctx.state = 13;
+            return extractJSON();
+          case 13:
+            $ctx.maybeThrow();
+            $ctx.state = 61;
+            break;
+          case 10:
+            this._state = SLASH;
+            $ctx.state = 42;
+            break;
+          case 23:
+            switch (ch) {
+              default:
+                $ctx.state = 42;
+                break;
+              case "\\":
+                $ctx.state = 10;
+                break;
+              case "\"":
+                $ctx.state = 21;
+                break;
+            }
+            break;
+          case 40:
+            this._state = STRING;
+            $ctx.state = 49;
+            break;
+          case 36:
+            if (this._brackets)
+              --this._brackets;
+            $ctx.state = 37;
+            break;
+          case 37:
+            $ctx.state = (!this._brackets) ? 29 : 40;
+            break;
+          case 29:
+            $ctx.state = 30;
+            return extractJSON();
+          case 30:
+            $ctx.maybeThrow();
+            $ctx.state = 61;
+            break;
+          case 27:
+            ++this._brackets;
+            $ctx.state = 49;
+            break;
+          case 42:
+            switch (ch) {
+              default:
+                $ctx.state = 49;
+                break;
+              case "{":
+                $ctx.state = 27;
+                break;
+              case "[":
+                $ctx.state = 27;
+                break;
+              case "}":
+                $ctx.state = 36;
+                break;
+              case "]":
+                $ctx.state = 36;
+                break;
+              case "\"":
+                $ctx.state = 40;
+                break;
+            }
+            break;
+          case 49:
+            ++this._index;
+            $ctx.state = 61;
+            break;
+          case 3:
+            $ctx.state = (chunk == null) ? 55 : -2;
+            break;
+          case 55:
+            $ctx.state = 56;
+            return extractJSON();
+          case 56:
+            $ctx.maybeThrow();
+            $ctx.state = -2;
+            break;
+          default:
+            return $ctx.end();
+        }
+    }, $__5, this);
+  })}, {});
 exports.parse = function(stream) {
   var ret = new Duplex;
-  var buffer = "";
-  var pushStr = (function(str) {
-    str = str.trim();
-    if (str)
-      try {
-        ret.emit("data", JSON.parse(str));
-      } catch (error) {
-        ret.emit("error", error);
+  var buffer = new JSONparser;
+  var pushChunk = (function(chunk) {
+    for (var $__2 = buffer.push(chunk)[$traceurRuntime.toProperty(Symbol.iterator)](),
+        $__3 = void 0; !($__3 = $__2.next()).done; ) {
+      var str = $__3.value;
+      if (str) {
+        var obj = void 0;
+        try {
+          obj = JSON.parse(str);
+        } catch (error) {
+          ret.emit("error", error);
+          continue;
+        }
+        ret.emit("data", obj);
       }
+    }
   });
-  stream.on("data", (function(chunk) {
-    buffer += String(chunk);
-    var ret = buffer.split("\n");
-    buffer = ret.pop();
-    ret.forEach(pushStr);
-  }));
+  stream.on("data", pushChunk);
   stream.on("end", (function() {
-    pushStr(buffer);
-    buffer = "";
+    pushChunk(null);
     ret.push(null);
   }));
   stream.on("error", (function(error) {
@@ -23089,17 +23252,20 @@ var JSONservice = function JSONservice(file, template) {
         self.id = M.last.json.uid;
         var partial = false;
         var data = M.last.json.valueOf();
+        var previous = undefined;
         if (clientData) {
           var diff = lu.makeDiff(clientData, M.last.json.valueOf());
           var dtext = JSON.stringify(diff);
           if (M.last.text.length > dtext.length * 1.5) {
             partial = true;
             data = diff;
+            previous = clientData.uid;
           }
         }
         connection.send({
           partial: partial,
-          data: data
+          data: data,
+          previous: previous
         });
       }
     });
@@ -23110,16 +23276,22 @@ var JSONservice = function JSONservice(file, template) {
     connection.on("message", (function(message) {
       switch (message.what) {
         case "init":
-          self.id = message.id || {};
-          break;
+          {
+            self.id = message.id || {};
+            break;
+          }
         case "save":
-          $__0.applyChanges(message.data, !!message.partial);
-          break;
+          {
+            $__0.applyChanges(message.data, !!message.partial);
+            break;
+          }
         default:
-          connection.send({
-            error: "unrecognised message",
-            data: message
-          });
+          {
+            connection.send({
+              error: "unrecognised message",
+              data: message
+            });
+          }
       }
     }));
   });
@@ -24299,7 +24471,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -25601,13 +25773,13 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "try", {
-  value: $traceurRuntime.initGeneratorFunction(function $__14(fun) {
+  value: $traceurRuntime.initGeneratorFunction(function $__15(fun) {
     var startTimeToWait,
         maxTimeToWait,
         multiply,
         timeToWait,
-        $__15,
         $__16,
+        $__17,
         e;
     var $arguments = arguments;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -25625,18 +25797,18 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
             $ctx.state = 20;
             break;
           case 20:
-            $__15 = fun();
+            $__16 = fun();
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__15;
+            return $__16;
           case 2:
-            $__16 = $ctx.sent;
+            $__17 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__16;
+            $ctx.returnValue = $__17;
             $ctx.state = -2;
             break;
           case 8:
@@ -25666,7 +25838,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__14, this);
+    }, $__15, this);
   }),
   configurable: true,
   enumerable: true,
@@ -25747,39 +25919,71 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
 }), Object.defineProperty($__2, "proxyPingPong", {
   value: function(connection) {
     var $__12,
-        $__13;
+        $__13,
+        $__14;
     var $__11 = arguments[1] !== (void 0) ? arguments[1] : {},
         interval = ($__12 = $__11.interval) === void 0 ? 60000 : $__12,
-        timeout = ($__13 = $__11.timeout) === void 0 ? 15000 : $__13;
-    var ptimeout = null;
+        timeout = ($__13 = $__11.timeout) === void 0 ? 15000 : $__13,
+        maxpings = ($__14 = $__11.maxpings) === void 0 ? 1000 : $__14;
+    if (timeout > interval)
+      timeout = interval;
+    var pings = {};
+    var count = 0;
+    var pinterval = null;
     var ontimeout = (function() {
-      clearTimeout(ptimeout);
-      ptimeout = null;
-      connection.emit(new Error("pingpong timeout"));
-      connection.close();
+      clearInterval(pinterval);
+      pinterval = null;
+      lodash.forEach(pings, (function(t) {
+        return clearTimeout(t);
+      }));
+      pings = null;
+      if (connection)
+        try {
+          try {
+            connection.emit(new Error("pingpong timeout"));
+          } finally {
+            connection.close();
+          }
+        } finally {
+          connection = null;
+        }
     });
-    var id = null;
-    var pinterval = setInterval((function() {
-      if (ptimeout)
+    var makePong = (function(ping) {
+      return ping.replace("i", "o");
+    });
+    var ping = (function() {
+      if (!connection)
+        return ;
+      if (count > maxpings)
         return ontimeout();
-      id = Math.random();
-      connection.send(("ping" + id));
-      ptimeout = setTimeout(ontimeout, timeout);
-    }), interval);
+      var id = ("ping" + Math.random());
+      connection.send(id);
+      pings[makePong(id)] = setTimeout(ontimeout, timeout);
+      ++count;
+    });
+    pinterval = setInterval(ping, interval);
     connection.once("close", (function() {
-      return clearInterval(pinterval);
+      connection = null;
+      ontimeout();
     }));
-    return lu.proxyMessage(connection, "message", (function(message) {
+    var ret = lu.proxyMessage(connection, "message", (function(message) {
       if (/^ping/.test(message))
-        connection.send(message.replace("i", "o"));
+        connection.send(makePong(message));
       else if (/^pong/.test(message)) {
-        if (message == ("pong" + id)) {
-          clearTimeout(ptimeout);
-          ptimeout = null;
+        if (pings.hasOwnProperty(message)) {
+          clearTimeout(pings[message]);
+          delete pings[message];
+          --count;
         }
       } else
         return message;
     }));
+    ret.send = (function(message) {
+      var ret = connection.send(message);
+      ping();
+      return ret;
+    });
+    return ret;
   },
   configurable: true,
   enumerable: true,
@@ -25808,9 +26012,8 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "readStream", {
-  value: $traceurRuntime.initGeneratorFunction(function $__17(stream) {
-    var $__18,
-        $__19,
+  value: $traceurRuntime.initGeneratorFunction(function $__18(stream) {
+    var $__19,
         $__20,
         $__21,
         $__22,
@@ -25823,85 +26026,85 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
         $__29,
         $__30,
         $__31,
-        $__32;
+        $__32,
+        $__33;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__31 = {then: function(resolve, reject) {
+            $__32 = {then: function(resolve, reject) {
                 var content = [];
-                $__18 = stream.on, $__21 = function(chunk) {
-                  return $__19 = content.push, $__20 = $__19.call(content, chunk), $__20;
-                }, $__22 = $__18.call(stream, "data", $__21), $__22;
-                $__23 = stream.on, $__27 = function() {
-                  return $__24 = lu.joinData, $__25 = $__24.call(lu, content), $__26 = resolve($__25), $__26;
-                }, $__28 = $__23.call(stream, "end", $__27), $__28;
-                $__29 = stream.on, $__30 = $__29.call(stream, "error", reject), $__30;
+                $__19 = stream.on, $__22 = function(chunk) {
+                  return $__20 = content.push, $__21 = $__20.call(content, chunk), $__21;
+                }, $__23 = $__19.call(stream, "data", $__22), $__23;
+                $__24 = stream.on, $__28 = function() {
+                  return $__25 = lu.joinData, $__26 = $__25.call(lu, content), $__27 = resolve($__26), $__27;
+                }, $__29 = $__24.call(stream, "end", $__28), $__29;
+                $__30 = stream.on, $__31 = $__30.call(stream, "error", reject), $__31;
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__31;
+            return $__32;
           case 2:
-            $__32 = $ctx.sent;
+            $__33 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__32;
+            $ctx.returnValue = $__33;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__17, this);
+    }, $__18, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "readJSON", {
-  value: $traceurRuntime.initGeneratorFunction(function $__33(stream) {
-    var $__34,
-        $__35,
+  value: $traceurRuntime.initGeneratorFunction(function $__34(stream) {
+    var $__35,
         $__36,
         $__37,
-        $__38;
+        $__38,
+        $__39;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__34 = JSON.parse;
-            $__35 = lu.readStream;
-            $__36 = $__35.call(lu, stream);
+            $__35 = JSON.parse;
+            $__36 = lu.readStream;
+            $__37 = $__36.call(lu, stream);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__36;
+            return $__37;
           case 2:
-            $__37 = $ctx.sent;
+            $__38 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__38 = $__34.call(JSON, $__37);
+            $__39 = $__35.call(JSON, $__38);
             $ctx.state = 8;
             break;
           case 8:
-            $ctx.returnValue = $__38;
+            $ctx.returnValue = $__39;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__33, this);
+    }, $__34, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "readChunk", {
-  value: $traceurRuntime.initGeneratorFunction(function $__39(stream) {
-    var $__40,
-        $__41,
+  value: $traceurRuntime.initGeneratorFunction(function $__40(stream) {
+    var $__41,
         $__42,
         $__43,
         $__44,
@@ -25919,57 +26122,58 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
         $__56,
         $__57,
         $__58,
-        $__59;
+        $__59,
+        $__60;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__58 = {then: function(resolve, reject) {
-                $__40 = stream.on, $__41 = $__40.call(stream, "data", onData), $__41;
-                $__42 = stream.on, $__43 = $__42.call(stream, "end", onEnd), $__43;
-                $__44 = stream.on, $__45 = $__44.call(stream, "error", onError), $__45;
+            $__59 = {then: function(resolve, reject) {
+                $__41 = stream.on, $__42 = $__41.call(stream, "data", onData), $__42;
+                $__43 = stream.on, $__44 = $__43.call(stream, "end", onEnd), $__44;
+                $__45 = stream.on, $__46 = $__45.call(stream, "error", onError), $__46;
                 function done() {
-                  $__46 = stream.removeListener, $__47 = $__46.call(stream, "data", onData), $__47;
-                  $__48 = stream.removeListener, $__49 = $__48.call(stream, "end", onEnd), $__49;
-                  $__50 = stream.removeListener, $__51 = $__50.call(stream, "error", onError), $__51;
+                  $__47 = stream.removeListener, $__48 = $__47.call(stream, "data", onData), $__48;
+                  $__49 = stream.removeListener, $__50 = $__49.call(stream, "end", onEnd), $__50;
+                  $__51 = stream.removeListener, $__52 = $__51.call(stream, "error", onError), $__52;
                 }
                 function onData(chunk) {
-                  $__52 = done(), $__52;
-                  $__53 = resolve(chunk), $__53;
+                  $__53 = done(), $__53;
+                  $__54 = resolve(chunk), $__54;
                 }
                 function onEnd() {
-                  $__54 = done(), $__54;
-                  $__55 = resolve(null), $__55;
+                  $__55 = done(), $__55;
+                  $__56 = resolve(null), $__56;
                 }
                 function onError(error) {
-                  $__56 = done(), $__56;
-                  $__57 = reject(error), $__57;
+                  $__57 = done(), $__57;
+                  $__58 = reject(error), $__58;
                 }
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__58;
+            return $__59;
           case 2:
-            $__59 = $ctx.sent;
+            $__60 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__59;
+            $ctx.returnValue = $__60;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__39, this);
+    }, $__40, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "static", {
   value: function(fun) {
-    return co.func($traceurRuntime.initGeneratorFunction(function $__60(request, response) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__61(request, response) {
       var $__2,
           $__3,
           headWritten,
@@ -26030,7 +26234,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
             default:
               return $ctx.end();
           }
-      }, $__60, this);
+      }, $__61, this);
     }));
   },
   configurable: true,
@@ -26376,7 +26580,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "skip", {
-  value: $traceurRuntime.initGeneratorFunction(function $__60(c, buf) {
+  value: $traceurRuntime.initGeneratorFunction(function $__61(c, buf) {
     var $__4,
         $__5,
         b;
@@ -26411,13 +26615,13 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__60, this);
+    }, $__61, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "take", {
-  value: $traceurRuntime.initGeneratorFunction(function $__61(c, buf) {
+  value: $traceurRuntime.initGeneratorFunction(function $__62(c, buf) {
     var $__4,
         $__5,
         b;
@@ -26452,7 +26656,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__61, this);
+    }, $__62, this);
   }),
   configurable: true,
   enumerable: true,
@@ -26504,7 +26708,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "concat", {
-  value: $traceurRuntime.initGeneratorFunction(function $__62(list) {
+  value: $traceurRuntime.initGeneratorFunction(function $__63(list) {
     var $__6,
         $__7,
         l,
@@ -26546,7 +26750,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__62, this);
+    }, $__63, this);
   }),
   configurable: true,
   enumerable: true,
@@ -30623,7 +30827,7 @@ module.exports = Scheduler;
     response.setHeader("Access-Control-Allow-Credentials", true);
     next();
   })).use(require("compression")({threshold: 0})).all("/version", (function(request, response) {
-    response.end("1");
+    response.end("2");
   })).all("/logout", (function(request, response) {
     response.clearCookie("auth");
     request.on("data", (function(data) {
@@ -30792,83 +30996,95 @@ module.exports = Scheduler;
       response.json(service.interfaces);
     }))});
   http.createServer(commonService).listen(config.port, "::");
+  var waitForSocket = (function(socket) {
+    return new Promise((function(resolve, reject) {
+      socket.once("error", reject);
+      socket.once("end", reject);
+      socket.once("connect", resolve);
+    }));
+  });
   var tellToBoss = (function() {
     var u = config.boss;
     if (!u.match(/\:\/\//))
       u = ("net://" + u);
     var b = url.parse(u);
-    var sockets = {};
     console.log(("connecting to boss " + b.hostname + ":" + b.port).green);
-    var client = require("JSONTransform").parse(net.connect(b.port, b.hostname, (function() {
+    var client = net.connect(b.port, b.hostname, (function() {
       return ra((function() {
         return client.writable && client.write({
           what: "login",
           client: auth.modem,
           password: auth.modemkey,
-          modemLocations: service.interfaces
+          modemLocations: service.interfaces,
+          version: 2
         });
       }));
-    })));
+    }));
+    client.on("data", (function(data) {
+      return console.log(String(data).green);
+    }));
+    client = require("JSONTransform").parse(client);
     var reconnect = lodash.once((function() {
       return setTimeout(tellToBoss, config.restoreConnectionInterval);
     }));
-    var createStream = (function(streamid) {
-      var stream = sockets[streamid] = {
-        buffer: [],
-        socket: net.connect(internalModemService, (function() {
-          if (stream.buffer.length)
-            stream.socket.write(Buffer.concat(stream.buffer));
-          stream.buffer = null;
-        }))
-      };
-      stream.socket.on("data", (function(data) {
-        return client.write({
-          what: "modem data",
-          stream: streamid,
-          data: data.toString("base64")
-        });
-      }));
-      stream.socket.on("end", (function() {
-        client.write({
-          what: "modem data",
-          stream: streamid,
-          data: null
-        });
-        setTimeout((function() {
-          delete sockets[streamid];
-        }), 5000);
-      }));
-      return stream;
-    });
     client.on("end", reconnect);
     client.on("error", (function(error) {
       console.log("boss error: ", error);
-      reconnect();
+      client.end();
     }));
     client.on("data", (function(data) {
+      console.log("boss data".red, data);
       if (!data)
         return ;
       switch (data.what) {
-        case "user data":
-          var streamid = data.stream;
-          var stream = sockets[streamid];
-          if (data.data == null) {
-            if (stream) {
-              if (stream.socket.writable)
-                stream.socket.end();
-            } else
-              console.log("STRANGE: received end of an absent stream", streamid);
-          } else {
-            var schunk = new Buffer(data.data, "base64");
-            if (!stream)
-              stream = createStream(streamid);
-            if (stream.socket.writable)
-              stream.socket.write(schunk);
-            else if (stream.buffer)
-              stream.buffer.push(schunk);
-            else
-              console.log("STRANGE: request to write to a closed stream");
-          }
+        case "reconnect for client":
+          co.go($traceurRuntime.initGeneratorFunction(function $__97() {
+            var streamid,
+                tomodem,
+                toclient;
+            return $traceurRuntime.createGeneratorInstance(function($ctx) {
+              while (true)
+                switch ($ctx.state) {
+                  case 0:
+                    streamid = data.stream;
+                    console.log(("creating " + streamid));
+                    tomodem = net.connect(internalModemService);
+                    co.defer((function() {
+                      return tomodem && tomodem.end();
+                    }));
+                    toclient = net.connect(b.port, b.hostname);
+                    co.defer((function() {
+                      return toclient && toclient.end();
+                    }));
+                    $ctx.state = 6;
+                    break;
+                  case 6:
+                    $ctx.state = 2;
+                    return Promise.all([waitForSocket(tomodem), waitForSocket(toclient)]);
+                  case 2:
+                    $ctx.maybeThrow();
+                    $ctx.state = 4;
+                    break;
+                  case 4:
+                    toclient.write(JSON.stringify({
+                      what: "connect to client",
+                      client: auth.modem,
+                      stream: streamid
+                    }));
+                    toclient.pipe(tomodem);
+                    tomodem.pipe(toclient);
+                    toclient = null;
+                    tomodem = null;
+                    $ctx.state = -2;
+                    break;
+                  default:
+                    return $ctx.end();
+                }
+            }, $__97, this);
+          }));
+          break;
+        default:
+          console.log("unknown request from boss", data);
       }
     }));
   });

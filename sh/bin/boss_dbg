@@ -20131,85 +20131,7 @@ if (typeof window !== "undefined" && window !== null) {
 
 module.exports = Yaml;
 
-},{"./Dumper":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js","./Parser":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Parser.js","./Utils":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Utils.js"}],"/home/vadzim/v/work/nerojs/src/JSONTransform.js":[function(require,module,exports){
-!function () {
-      !function ( body ) {
-        var now = global.performance || Date
-        var total = 0
-        var start = now.now()
-        var oldRequire = require
-        var newRequire = function () {
-          total += now.now() - start
-          require = oldRequire
-          try {
-            return oldRequire.apply( this, arguments )
-          }
-          finally {
-            require = newRequire
-            start = now.now()
-          }
-        }
-        require = newRequire
-        try {
-          body()
-        }
-        finally {
-          require = oldRequire
-          total += now.now() - start
-          total /= 1000
-          if ( !global.__require_stats__ )
-            global.__require_stats__ = {}
-          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/JSONTransform.js" ] = total
-        }
-      }( function () {
-        "use strict";
-var Duplex = require("stream").Duplex;
-exports.parse = function(stream) {
-  var ret = new Duplex;
-  var buffer = "";
-  var pushStr = (function(str) {
-    str = str.trim();
-    if (str)
-      try {
-        ret.emit("data", JSON.parse(str));
-      } catch (error) {
-        ret.emit("error", error);
-      }
-  });
-  stream.on("data", (function(chunk) {
-    buffer += String(chunk);
-    var ret = buffer.split("\n");
-    buffer = ret.pop();
-    ret.forEach(pushStr);
-  }));
-  stream.on("end", (function() {
-    pushStr(buffer);
-    buffer = "";
-    ret.push(null);
-  }));
-  stream.on("error", (function(error) {
-    return ret.emit("error", error);
-  }));
-  ret.on("end", (function() {
-    return stream.end();
-  }));
-  ret._read = (function(n) {});
-  ret._write = (function(obj) {});
-  ret.write = (function(obj) {
-    var text = JSON.stringify(obj);
-    text += "\n";
-    text = new Buffer(text);
-    stream.write(text);
-  });
-  return ret;
-};
-
-//# sourceMappingURL=/home/vadzim/v/work/nerojs/src/JSONTransform.map
-
-      } )
-    }()
-
-},{"stream":false}],"/home/vadzim/v/work/nerojs/src/boss.js":[function(require,module,exports){
+},{"./Dumper":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js","./Parser":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Parser.js","./Utils":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Utils.js"}],"/home/vadzim/v/work/nerojs/src/boss.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -20251,6 +20173,7 @@ var UID = require("uid");
 var lodash = require("lodash");
 var HTTPStatus = require("http-status");
 var lu = require("localUtils");
+var co = require("co");
 require("boss_dns");
 var config = require("boss_cfg");
 var listenModemsPort = config.modems.port;
@@ -20264,39 +20187,113 @@ var getRemoteHost = (function(socket) {
 });
 var modemproxy = net.createServer((function(socket) {
   var client = null;
-  socket = require("JSONTransform").parse(socket);
+  var clientname = null;
   socket.on("data", (function(data) {
+    data = String(data);
+    var socketError = (function(message) {
+      var s = arguments[1] !== (void 0) ? arguments[1] : socket;
+      return s.emit("error", new Error((message + ": " + data)));
+    });
+    try {
+      data = JSON.parse(data);
+    } catch (error) {
+      return socketError("not a JSON");
+    }
     if (data == null)
-      return socket.emit("error", new Error("cannot accept null"));
-    if (!client || data.what == "login") {
+      return socketError("cannot accept null");
+    if (!client && data.what == "login") {
       if (data.what != "login")
-        return socket.emit("error", new Error("not logged in"));
-      client = DB[data.client];
+        return socketError("not logged in");
+      client = DB[clientname = data.client];
       if (!client)
-        return socket.emit("error", new Error("unknown client"));
+        return socketError("unknown client");
       if (client.password != data.password)
-        return socket.emit("error", new Error("wrong password"));
+        return socketError("wrong password");
+      console.log(("Hello " + data.client + ".").green);
       if (client.socket && client.socket != socket) {
         var oldSocket = client.socket;
         client.socket = null;
-        oldSocket.write({ERROR: "logged in on another socket"});
-        oldSocket.end();
+        client.modemLocations = null;
+        socketError("logged in on another socket", oldSocket);
       }
+      client.version = data.version;
       client.socket = socket;
       client.modemLocations = Array.isArray(data.modemLocations) ? data.modemLocations.slice() : data.modemLocations == null ? [] : [data.modemLocations];
-    } else if (data.what == "modem data") {
-      if (!client.users)
-        return ;
-      var response = client.users[data.stream];
-      if (!response)
-        return ;
-      if (data.data == null)
-        response.end();
-      else
-        response.write(new Buffer(data.data, "base64"));
-    }
+    } else if (!client && data.what == "connect to client")
+      co.go($traceurRuntime.initGeneratorFunction(function $__4() {
+        var response,
+            $__2,
+            $__3,
+            s,
+            $__0,
+            $__1,
+            e,
+            onerror;
+        return $traceurRuntime.createGeneratorInstance(function($ctx) {
+          while (true)
+            switch ($ctx.state) {
+              case 0:
+                co.defer((function() {
+                  return socket && socket.close();
+                }));
+                client = DB[data.client];
+                $ctx.state = 8;
+                break;
+              case 8:
+                $ctx.state = (!client) ? 1 : 2;
+                break;
+              case 1:
+                $ctx.returnValue = socketError("unknown client");
+                $ctx.state = -2;
+                break;
+              case 2:
+                response = client.users && client.users[data.stream];
+                co.defer((function() {
+                  return response && response.socket && response.socket.close();
+                }));
+                $ctx.state = 10;
+                break;
+              case 10:
+                $ctx.state = (!response) ? 4 : 5;
+                break;
+              case 4:
+                $ctx.returnValue = socketError("Cannot find client");
+                $ctx.state = -2;
+                break;
+              case 5:
+                console.log(("connected " + data.client + " with " + data.stream + "."));
+                delete client.users[data.stream];
+                for ($__2 = [socket, response.socket][$traceurRuntime.toProperty(Symbol.iterator)](), $__3 = void 0; !($__3 = $__2.next()).done; ) {
+                  s = $__3.value;
+                  for ($__0 = ["data", "end", "error"][$traceurRuntime.toProperty(Symbol.iterator)](), $__1 = void 0; !($__1 = $__0.next()).done; ) {
+                    e = $__1.value;
+                    s.removeAllListeners(e);
+                  }
+                }
+                response.socket.pipe(socket);
+                socket.pipe(response.socket);
+                socket.write(Buffer.concat(response.buffer));
+                onerror = function() {
+                  this.end();
+                };
+                socket.on("error", onerror);
+                response.socket.on("error", onerror);
+                socket = null;
+                response = null;
+                $ctx.state = -2;
+                break;
+              default:
+                return $ctx.end();
+            }
+        }, $__4, this);
+      }));
+    else if (!client)
+      return socketError("unknown modem connected");
+    else
+      return socketError("unknown message from modem received");
   }));
   socket.on("end", (function() {
+    console.log("Bye.".green, clientname);
     socket.end();
     if (client && client.socket == socket) {
       client.socket = null;
@@ -20306,7 +20303,7 @@ var modemproxy = net.createServer((function(socket) {
   socket.on("error", (function(error) {
     console.log("modem data error: ", error);
     if (socket.writable) {
-      socket.write({ERROR: error.message});
+      socket.write(JSON.stringify({ERROR: error.message}));
       socket.end();
     }
   }));
@@ -20341,53 +20338,69 @@ var getModem = (function(request) {
   return host;
 });
 var clientproxy = net.createServer((function(socket) {
-  var done = (function(status, message) {
-    host = null;
-    message = message || HTTPStatus[status];
-    socket.write(("HTTP/1.1 " + status + " " + HTTPStatus[status] + "\r\n\r\n" + message));
-    socket.end();
-  });
   var id = UID();
   var host;
-  var onError = (function() {
+  var hostname;
+  var onError;
+  var done = lodash.once((function(status, message) {
+    if (socket.writable) {
+      message = message || HTTPStatus[status];
+      console.log(("done " + status + " " + message), hostname);
+      socket.write(("HTTP/1.1 " + status + " " + HTTPStatus[status] + "\r\n\r\n" + message));
+      socket.end();
+    }
+    if (host) {
+      if (host.socket) {
+        host.socket.removeListener("error", onError);
+        host.socket.removeListener("end", onError);
+      }
+      if (host.users)
+        delete host.users[id];
+      host = null;
+    }
+  }));
+  onError = (function() {
     return done(HTTPStatus.INTERNAL_SERVER_ERROR, "unknown error");
   });
-  var sendChunk = (function(chunk) {
-    host && host.socket.write({
-      what: "user data",
-      stream: id,
-      data: chunk && (new Buffer(chunk)).toString("base64")
-    });
-  });
-  var sendNullChunk = lodash.once((function() {
-    return sendChunk(null);
+  socket.on("end", done);
+  socket.on("end", (function() {
+    return console.log(("socket ended: " + hostname));
   }));
   socket.on("data", (function(data) {
     if (!host) {
-      host = String(data).match(/(?:\r|\n|^)host:\s+(.*?)(?:\r|\n|$)/i);
+      var text = String(data);
+      host = text.match(/(?:\r|\n|^)host:\s+(.*?)(?:\r|\n|$)/i);
       if (!host)
         return done(HTTPStatus.NOT_FOUND);
-      host = getModem(host[1]);
+      hostname = host[1];
+      console.log(("asked for " + hostname));
+      host = getModem(hostname);
       if (!host)
         return done(HTTPStatus.NOT_FOUND);
       if (!host.socket)
         return done(HTTPStatus.INTERNAL_SERVER_ERROR, "not connected");
-      if (!host.users)
-        host.users = {};
-      host.users[id] = socket;
-      host.socket.on("error", onError);
-      host.socket.on("end", onError);
+      switch (host.version) {
+        case 2:
+          if (!host.users)
+            host.users = {};
+          host.users[id] = {
+            socket: socket,
+            buffer: []
+          };
+          host.socket.on("error", onError);
+          host.socket.on("end", onError);
+          host.socket.write(JSON.stringify({
+            what: "reconnect for client",
+            stream: id
+          }));
+          console.log(("waiting for " + id + " from " + hostname));
+          break;
+        default:
+          return done(HTTPStatus.INTERNAL_SERVER_ERROR, "wrong modem version");
+      }
     }
-    sendChunk(data);
+    host.users[id].buffer.push(data);
   }));
-  socket.on("end", (function() {
-    if (!host)
-      return ;
-    host.socket.removeListener("error", onError);
-    host.socket.removeListener("end", onError);
-    delete host.users[id];
-  }));
-  socket.on("end", sendNullChunk);
 }));
 clientproxy.listen(listenUsersDataPort, "::");
 var commonService = require("http_common_server")({router: require("express").Router().get("/modem_locations", (function(request, response) {
@@ -20408,7 +20421,7 @@ http.createServer(commonService).listen(listenUsersPort, "::");
       } )
     }()
 
-},{"JSONTransform":"/home/vadzim/v/work/nerojs/src/JSONTransform.js","boss_cfg":"/home/vadzim/v/work/nerojs/src/boss_cfg.js","boss_db":"/home/vadzim/v/work/nerojs/src/boss_db.js","boss_dns":"/home/vadzim/v/work/nerojs/src/boss_dns.js","express":false,"http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"util":false}],"/home/vadzim/v/work/nerojs/src/boss_cfg.js":[function(require,module,exports){
+},{"boss_cfg":"/home/vadzim/v/work/nerojs/src/boss_cfg.js","boss_db":"/home/vadzim/v/work/nerojs/src/boss_db.js","boss_dns":"/home/vadzim/v/work/nerojs/src/boss_dns.js","co":"/home/vadzim/v/work/nerojs/src/co.js","express":false,"http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"util":false}],"/home/vadzim/v/work/nerojs/src/boss_cfg.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -22636,13 +22649,13 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "try", {
-  value: $traceurRuntime.initGeneratorFunction(function $__14(fun) {
+  value: $traceurRuntime.initGeneratorFunction(function $__15(fun) {
     var startTimeToWait,
         maxTimeToWait,
         multiply,
         timeToWait,
-        $__15,
         $__16,
+        $__17,
         e;
     var $arguments = arguments;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -22660,18 +22673,18 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
             $ctx.state = 20;
             break;
           case 20:
-            $__15 = fun();
+            $__16 = fun();
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__15;
+            return $__16;
           case 2:
-            $__16 = $ctx.sent;
+            $__17 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__16;
+            $ctx.returnValue = $__17;
             $ctx.state = -2;
             break;
           case 8:
@@ -22701,7 +22714,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__14, this);
+    }, $__15, this);
   }),
   configurable: true,
   enumerable: true,
@@ -22782,39 +22795,71 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
 }), Object.defineProperty($__2, "proxyPingPong", {
   value: function(connection) {
     var $__12,
-        $__13;
+        $__13,
+        $__14;
     var $__11 = arguments[1] !== (void 0) ? arguments[1] : {},
         interval = ($__12 = $__11.interval) === void 0 ? 60000 : $__12,
-        timeout = ($__13 = $__11.timeout) === void 0 ? 15000 : $__13;
-    var ptimeout = null;
+        timeout = ($__13 = $__11.timeout) === void 0 ? 15000 : $__13,
+        maxpings = ($__14 = $__11.maxpings) === void 0 ? 1000 : $__14;
+    if (timeout > interval)
+      timeout = interval;
+    var pings = {};
+    var count = 0;
+    var pinterval = null;
     var ontimeout = (function() {
-      clearTimeout(ptimeout);
-      ptimeout = null;
-      connection.emit(new Error("pingpong timeout"));
-      connection.close();
+      clearInterval(pinterval);
+      pinterval = null;
+      lodash.forEach(pings, (function(t) {
+        return clearTimeout(t);
+      }));
+      pings = null;
+      if (connection)
+        try {
+          try {
+            connection.emit(new Error("pingpong timeout"));
+          } finally {
+            connection.close();
+          }
+        } finally {
+          connection = null;
+        }
     });
-    var id = null;
-    var pinterval = setInterval((function() {
-      if (ptimeout)
+    var makePong = (function(ping) {
+      return ping.replace("i", "o");
+    });
+    var ping = (function() {
+      if (!connection)
+        return ;
+      if (count > maxpings)
         return ontimeout();
-      id = Math.random();
-      connection.send(("ping" + id));
-      ptimeout = setTimeout(ontimeout, timeout);
-    }), interval);
+      var id = ("ping" + Math.random());
+      connection.send(id);
+      pings[makePong(id)] = setTimeout(ontimeout, timeout);
+      ++count;
+    });
+    pinterval = setInterval(ping, interval);
     connection.once("close", (function() {
-      return clearInterval(pinterval);
+      connection = null;
+      ontimeout();
     }));
-    return lu.proxyMessage(connection, "message", (function(message) {
+    var ret = lu.proxyMessage(connection, "message", (function(message) {
       if (/^ping/.test(message))
-        connection.send(message.replace("i", "o"));
+        connection.send(makePong(message));
       else if (/^pong/.test(message)) {
-        if (message == ("pong" + id)) {
-          clearTimeout(ptimeout);
-          ptimeout = null;
+        if (pings.hasOwnProperty(message)) {
+          clearTimeout(pings[message]);
+          delete pings[message];
+          --count;
         }
       } else
         return message;
     }));
+    ret.send = (function(message) {
+      var ret = connection.send(message);
+      ping();
+      return ret;
+    });
+    return ret;
   },
   configurable: true,
   enumerable: true,
@@ -22843,9 +22888,8 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "readStream", {
-  value: $traceurRuntime.initGeneratorFunction(function $__17(stream) {
-    var $__18,
-        $__19,
+  value: $traceurRuntime.initGeneratorFunction(function $__18(stream) {
+    var $__19,
         $__20,
         $__21,
         $__22,
@@ -22858,85 +22902,85 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
         $__29,
         $__30,
         $__31,
-        $__32;
+        $__32,
+        $__33;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__31 = {then: function(resolve, reject) {
+            $__32 = {then: function(resolve, reject) {
                 var content = [];
-                $__18 = stream.on, $__21 = function(chunk) {
-                  return $__19 = content.push, $__20 = $__19.call(content, chunk), $__20;
-                }, $__22 = $__18.call(stream, "data", $__21), $__22;
-                $__23 = stream.on, $__27 = function() {
-                  return $__24 = lu.joinData, $__25 = $__24.call(lu, content), $__26 = resolve($__25), $__26;
-                }, $__28 = $__23.call(stream, "end", $__27), $__28;
-                $__29 = stream.on, $__30 = $__29.call(stream, "error", reject), $__30;
+                $__19 = stream.on, $__22 = function(chunk) {
+                  return $__20 = content.push, $__21 = $__20.call(content, chunk), $__21;
+                }, $__23 = $__19.call(stream, "data", $__22), $__23;
+                $__24 = stream.on, $__28 = function() {
+                  return $__25 = lu.joinData, $__26 = $__25.call(lu, content), $__27 = resolve($__26), $__27;
+                }, $__29 = $__24.call(stream, "end", $__28), $__29;
+                $__30 = stream.on, $__31 = $__30.call(stream, "error", reject), $__31;
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__31;
+            return $__32;
           case 2:
-            $__32 = $ctx.sent;
+            $__33 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__32;
+            $ctx.returnValue = $__33;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__17, this);
+    }, $__18, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "readJSON", {
-  value: $traceurRuntime.initGeneratorFunction(function $__33(stream) {
-    var $__34,
-        $__35,
+  value: $traceurRuntime.initGeneratorFunction(function $__34(stream) {
+    var $__35,
         $__36,
         $__37,
-        $__38;
+        $__38,
+        $__39;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__34 = JSON.parse;
-            $__35 = lu.readStream;
-            $__36 = $__35.call(lu, stream);
+            $__35 = JSON.parse;
+            $__36 = lu.readStream;
+            $__37 = $__36.call(lu, stream);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__36;
+            return $__37;
           case 2:
-            $__37 = $ctx.sent;
+            $__38 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__38 = $__34.call(JSON, $__37);
+            $__39 = $__35.call(JSON, $__38);
             $ctx.state = 8;
             break;
           case 8:
-            $ctx.returnValue = $__38;
+            $ctx.returnValue = $__39;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__33, this);
+    }, $__34, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "readChunk", {
-  value: $traceurRuntime.initGeneratorFunction(function $__39(stream) {
-    var $__40,
-        $__41,
+  value: $traceurRuntime.initGeneratorFunction(function $__40(stream) {
+    var $__41,
         $__42,
         $__43,
         $__44,
@@ -22954,57 +22998,58 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
         $__56,
         $__57,
         $__58,
-        $__59;
+        $__59,
+        $__60;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__58 = {then: function(resolve, reject) {
-                $__40 = stream.on, $__41 = $__40.call(stream, "data", onData), $__41;
-                $__42 = stream.on, $__43 = $__42.call(stream, "end", onEnd), $__43;
-                $__44 = stream.on, $__45 = $__44.call(stream, "error", onError), $__45;
+            $__59 = {then: function(resolve, reject) {
+                $__41 = stream.on, $__42 = $__41.call(stream, "data", onData), $__42;
+                $__43 = stream.on, $__44 = $__43.call(stream, "end", onEnd), $__44;
+                $__45 = stream.on, $__46 = $__45.call(stream, "error", onError), $__46;
                 function done() {
-                  $__46 = stream.removeListener, $__47 = $__46.call(stream, "data", onData), $__47;
-                  $__48 = stream.removeListener, $__49 = $__48.call(stream, "end", onEnd), $__49;
-                  $__50 = stream.removeListener, $__51 = $__50.call(stream, "error", onError), $__51;
+                  $__47 = stream.removeListener, $__48 = $__47.call(stream, "data", onData), $__48;
+                  $__49 = stream.removeListener, $__50 = $__49.call(stream, "end", onEnd), $__50;
+                  $__51 = stream.removeListener, $__52 = $__51.call(stream, "error", onError), $__52;
                 }
                 function onData(chunk) {
-                  $__52 = done(), $__52;
-                  $__53 = resolve(chunk), $__53;
+                  $__53 = done(), $__53;
+                  $__54 = resolve(chunk), $__54;
                 }
                 function onEnd() {
-                  $__54 = done(), $__54;
-                  $__55 = resolve(null), $__55;
+                  $__55 = done(), $__55;
+                  $__56 = resolve(null), $__56;
                 }
                 function onError(error) {
-                  $__56 = done(), $__56;
-                  $__57 = reject(error), $__57;
+                  $__57 = done(), $__57;
+                  $__58 = reject(error), $__58;
                 }
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__58;
+            return $__59;
           case 2:
-            $__59 = $ctx.sent;
+            $__60 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__59;
+            $ctx.returnValue = $__60;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__39, this);
+    }, $__40, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "static", {
   value: function(fun) {
-    return co.func($traceurRuntime.initGeneratorFunction(function $__60(request, response) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__61(request, response) {
       var $__2,
           $__3,
           headWritten,
@@ -23065,7 +23110,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
             default:
               return $ctx.end();
           }
-      }, $__60, this);
+      }, $__61, this);
     }));
   },
   configurable: true,
@@ -23411,7 +23456,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "skip", {
-  value: $traceurRuntime.initGeneratorFunction(function $__60(c, buf) {
+  value: $traceurRuntime.initGeneratorFunction(function $__61(c, buf) {
     var $__4,
         $__5,
         b;
@@ -23446,13 +23491,13 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__60, this);
+    }, $__61, this);
   }),
   configurable: true,
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "take", {
-  value: $traceurRuntime.initGeneratorFunction(function $__61(c, buf) {
+  value: $traceurRuntime.initGeneratorFunction(function $__62(c, buf) {
     var $__4,
         $__5,
         b;
@@ -23487,7 +23532,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__61, this);
+    }, $__62, this);
   }),
   configurable: true,
   enumerable: true,
@@ -23539,7 +23584,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
   enumerable: true,
   writable: true
 }), Object.defineProperty($__2, "concat", {
-  value: $traceurRuntime.initGeneratorFunction(function $__62(list) {
+  value: $traceurRuntime.initGeneratorFunction(function $__63(list) {
     var $__6,
         $__7,
         l,
@@ -23581,7 +23626,7 @@ var lu = module.exports = ($__2 = {}, Object.defineProperty($__2, "dumpPromise",
           default:
             return $ctx.end();
         }
-    }, $__62, this);
+    }, $__63, this);
   }),
   configurable: true,
   enumerable: true,
