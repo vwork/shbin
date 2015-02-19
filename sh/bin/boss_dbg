@@ -20195,7 +20195,7 @@ var modemproxy = net.createServer((function(socket) {
     data = String(data);
     var socketError = (function(message) {
       var s = arguments[1] !== (void 0) ? arguments[1] : socket;
-      return s.emit("error", new Error((message + ": " + data)));
+      return s.emit("error", new Error((message + ": " + (typeof data == "string" ? data : JSON.stringify(data)))));
     });
     try {
       data = JSON.parse(data);
@@ -20236,7 +20236,7 @@ var modemproxy = net.createServer((function(socket) {
             switch ($ctx.state) {
               case 0:
                 co.defer((function() {
-                  return socket && socket.close();
+                  return socket && socket.end();
                 }));
                 client = DB[data.client];
                 $ctx.state = 8;
@@ -20251,7 +20251,7 @@ var modemproxy = net.createServer((function(socket) {
               case 2:
                 response = client.users && client.users[data.stream];
                 co.defer((function() {
-                  return response && response.socket && response.socket.close();
+                  return response && response.socket && response.socket.end();
                 }));
                 $ctx.state = 10;
                 break;
@@ -20301,10 +20301,9 @@ var modemproxy = net.createServer((function(socket) {
   }));
   socket.on("error", (function(error) {
     console.log("modem data error: ", error);
-    if (socket.writable) {
+    if (socket.writable)
       socket.write(JSON.stringify({ERROR: error.message}));
-      socket.end();
-    }
+    socket.end();
   }));
 }));
 modemproxy.listen(listenModemsPort, "::");
