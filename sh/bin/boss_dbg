@@ -20180,7 +20180,7 @@ var LOG = (function(msg) {
   for (var data = [],
       $__4 = 1; $__4 < arguments.length; $__4++)
     data[$__4 - 1] = arguments[$__4];
-  return ($__5 = console).log.apply($__5, $traceurRuntime.spread([(new Date + " " + msg)], data));
+  return ($__5 = console).log.apply($__5, $traceurRuntime.spread([((new Date).toISOString().replace("T", "=").replace("Z", "") + " " + msg)], data));
 });
 require("boss_dns");
 var listenModemsPort = config.modems.port;
