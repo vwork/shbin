@@ -20414,8 +20414,6 @@ var commonService = require("http_common_server")({router: require("express").Ro
     var host = getModem(hostname);
     if (!host)
       return response.status(HTTPStatus.NOT_FOUND).end("not found");
-    if (!host.socket)
-      return response.status(HTTPStatus.INTERNAL_SERVER_ERROR).end("not connected");
     var longWay = [{url: (request.protocol + "://" + hostname + ":" + listenUsersDataPort)}];
     return response.json(longWay);
     return response.json((host.modemLocations || []).concat(longWay));
