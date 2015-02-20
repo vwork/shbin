@@ -20387,7 +20387,7 @@ var clientproxy = net.createServer((function(socket) {
         case 2:
           if (!host.users)
             host.users = {};
-          host.users[id] = {
+          var response = host.users[id] = {
             socket: socket,
             buffer: [],
             head: text.match(/^.*?(?=\n|\r|$)/)[0],
@@ -20399,7 +20399,7 @@ var clientproxy = net.createServer((function(socket) {
             what: "reconnect for client",
             stream: id
           }));
-          LOG(("waiting " + id + " from " + hostname + " for " + host.head));
+          LOG(("waiting " + id + " from " + hostname + " for " + response.head));
           break;
         default:
           return done(HTTPStatus.INTERNAL_SERVER_ERROR, "wrong modem version");
