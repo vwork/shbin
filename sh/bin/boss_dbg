@@ -20348,9 +20348,9 @@ var clientproxy = net.createServer((function(socket) {
   var hostname;
   var onError;
   var done = lodash.once((function(status, message) {
+    message = message || HTTPStatus[status];
+    LOG(("done " + status + " " + message + " (" + hostname + ")"));
     if (socket.writable) {
-      message = message || HTTPStatus[status];
-      LOG(("done " + status + " " + message + " (" + hostname + ")"));
       socket.write(("HTTP/1.1 " + status + " " + HTTPStatus[status] + "\r\n\r\n" + message));
       socket.end();
     }
