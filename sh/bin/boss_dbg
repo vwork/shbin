@@ -20174,8 +20174,15 @@ var lodash = require("lodash");
 var HTTPStatus = require("http-status");
 var lu = require("localUtils");
 var co = require("co");
-require("boss_dns");
 var config = require("boss_cfg");
+var LOG = (function(msg) {
+  var $__5;
+  for (var data = [],
+      $__4 = 1; $__4 < arguments.length; $__4++)
+    data[$__4 - 1] = arguments[$__4];
+  return ($__5 = console).log.apply($__5, $traceurRuntime.spread([(new Date + " " + msg)], data));
+});
+require("boss_dns");
 var listenModemsPort = config.modems.port;
 var listenUsersDataPort = config.users.dataport;
 var listenUsersPort = config.users.port;
@@ -20212,7 +20219,7 @@ var modemproxy = net.createServer((function(socket) {
         return socketError("unknown client");
       if (client.password != data.password)
         return socketError("wrong password");
-      console.log(("Hello " + clientname + ".").green);
+      LOG(("Hello " + clientname + ".").green);
       if (client.socket && client.socket != socket) {
         var oldSocket = client.socket;
         client.socket = null;
@@ -20223,7 +20230,7 @@ var modemproxy = net.createServer((function(socket) {
       client.socket = socket;
       client.modemLocations = Array.isArray(data.modemLocations) ? data.modemLocations.slice() : data.modemLocations == null ? [] : [data.modemLocations];
     } else if (!client && data.what == "connect to client")
-      co.go($traceurRuntime.initGeneratorFunction(function $__4() {
+      co.go($traceurRuntime.initGeneratorFunction(function $__6() {
         var response,
             $__2,
             $__3,
@@ -20263,7 +20270,7 @@ var modemproxy = net.createServer((function(socket) {
                 $ctx.state = -2;
                 break;
               case 5:
-                console.log(("connected " + data.client + " with " + data.stream + "."));
+                LOG(("connected " + data.client + " with " + data.stream + "."));
                 delete client.users[data.stream];
                 for ($__2 = [socket, response.socket][$traceurRuntime.toProperty(Symbol.iterator)](), $__3 = void 0; !($__3 = $__2.next()).done; ) {
                   s = $__3.value;
@@ -20284,7 +20291,7 @@ var modemproxy = net.createServer((function(socket) {
               default:
                 return $ctx.end();
             }
-        }, $__4, this);
+        }, $__6, this);
       }));
     else if (!client)
       return socketError("unknown modem connected");
@@ -20292,7 +20299,7 @@ var modemproxy = net.createServer((function(socket) {
       return socketError("unknown message from modem received");
   }));
   socket.on("end", (function() {
-    console.log(("Bye " + clientname + ".").green);
+    LOG(("Bye " + clientname + ".").green);
     socket.end();
     if (client && client.socket == socket) {
       client.socket = null;
@@ -20300,7 +20307,7 @@ var modemproxy = net.createServer((function(socket) {
     }
   }));
   socket.on("error", (function(error) {
-    console.log("modem data error: ", error);
+    LOG("modem data error: ", error);
     if (socket.writable)
       socket.write(JSON.stringify({ERROR: error.message}));
     socket.end();
@@ -20343,7 +20350,7 @@ var clientproxy = net.createServer((function(socket) {
   var done = lodash.once((function(status, message) {
     if (socket.writable) {
       message = message || HTTPStatus[status];
-      console.log(("done " + status + " " + message), hostname);
+      LOG(("done " + status + " " + message), hostname);
       socket.write(("HTTP/1.1 " + status + " " + HTTPStatus[status] + "\r\n\r\n" + message));
       socket.end();
     }
@@ -20371,7 +20378,7 @@ var clientproxy = net.createServer((function(socket) {
       if (!host)
         return done(HTTPStatus.NOT_FOUND);
       hostname = host[1];
-      console.log(("asked for " + hostname));
+      LOG(("asked for " + hostname));
       host = getModem(hostname);
       if (!host)
         return done(HTTPStatus.NOT_FOUND);
@@ -20391,7 +20398,7 @@ var clientproxy = net.createServer((function(socket) {
             what: "reconnect for client",
             stream: id
           }));
-          console.log(("waiting for " + id + " from " + hostname));
+          LOG(("waiting for " + id + " from " + hostname));
           break;
         default:
           return done(HTTPStatus.INTERNAL_SERVER_ERROR, "wrong modem version");
