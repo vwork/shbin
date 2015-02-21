@@ -20211,7 +20211,7 @@ var modemproxy = net.createServer((function(socket) {
     }
     if (data == null)
       return socketError("cannot accept null");
-    if (!client && data.what == "login") {
+    if (data.what == "login") {
       if (data.what != "login")
         return socketError("not logged in");
       client = DB[clientname = data.client];
