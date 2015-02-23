@@ -20610,7 +20610,59 @@ if (typeof window !== "undefined" && window !== null) {
 
 module.exports = Yaml;
 
-},{"./Dumper":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js","./Parser":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Parser.js","./Utils":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Utils.js"}],"/home/vadzim/v/work/nerojs/src/PingPongJSON.js":[function(require,module,exports){
+},{"./Dumper":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Dumper.js","./Parser":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Parser.js","./Utils":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Utils.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
+!function () {
+      !function ( body ) {
+        var now = global.performance || Date
+        var total = 0
+        var start = now.now()
+        var oldRequire = require
+        var newRequire = function () {
+          total += now.now() - start
+          require = oldRequire
+          try {
+            return oldRequire.apply( this, arguments )
+          }
+          finally {
+            require = newRequire
+            start = now.now()
+          }
+        }
+        require = newRequire
+        try {
+          body()
+        }
+        finally {
+          require = oldRequire
+          total += now.now() - start
+          total /= 1000
+          if ( !global.__require_stats__ )
+            global.__require_stats__ = {}
+          global.__require_stats__[ "/home/vadzim/v/work/nerojs/src/LOG.js" ] = total
+        }
+      }( function () {
+        "use strict";
+require("colors");
+var LOG = (function(msg) {
+  var $__1;
+  for (var data = [],
+      $__0 = 1; $__0 < arguments.length; $__0++)
+    data[$__0 - 1] = arguments[$__0];
+  return ($__1 = console).log.apply($__1, $traceurRuntime.spread([((new Date).toISOString().replace("T", "=").replace("Z", "") + " " + msg)], data));
+});
+LOG.LOG = LOG;
+LOG.INFO = LOG;
+LOG.TRACE = LOG;
+LOG.ERROR = LOG;
+LOG.WARNING = LOG;
+module.exports = LOG;
+
+//# sourceMappingURL=LOG.js.map
+
+      } )
+    }()
+
+},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js"}],"/home/vadzim/v/work/nerojs/src/PingPongJSON.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -21183,14 +21235,8 @@ var lu = require("localUtils");
 var co = require("co");
 var StreamToJSON = require("StreamToJSON");
 var PingPongJSON = require("PingPongJSON");
+var LOG = require("LOG").LOG;
 var config = require("boss_cfg");
-var LOG = (function(msg) {
-  var $__17;
-  for (var data = [],
-      $__14 = 1; $__14 < arguments.length; $__14++)
-    data[$__14 - 1] = arguments[$__14];
-  return ($__17 = console).log.apply($__17, $traceurRuntime.spread([((new Date).toISOString().replace("T", "=").replace("Z", "") + " " + msg)], data));
-});
 require("boss_dns");
 var listenModemsPort = config.modems.port;
 var listenUsersDataPort = config.users.dataport;
@@ -21243,7 +21289,7 @@ var modemproxy = net.createServer((function(socket) {
       client.socket = socket;
       client.modemLocations = Array.isArray(data.modemLocations) ? data.modemLocations.slice() : data.modemLocations == null ? [] : [data.modemLocations];
     } else if (!client && data.what == "connect to client")
-      co.go($traceurRuntime.initGeneratorFunction(function $__18() {
+      co.go($traceurRuntime.initGeneratorFunction(function $__17() {
         var response,
             s,
             $__10,
@@ -21354,7 +21400,7 @@ var modemproxy = net.createServer((function(socket) {
               default:
                 return $ctx.end();
             }
-        }, $__18, this);
+        }, $__17, this);
       }));
     else if (!client)
       return socketError("unknown modem connected");
@@ -21486,7 +21532,7 @@ http.createServer(commonService).listen(listenUsersPort, "::");
       } )
     }()
 
-},{"PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","boss_cfg":"/home/vadzim/v/work/nerojs/src/boss_cfg.js","boss_db":"/home/vadzim/v/work/nerojs/src/boss_db.js","boss_dns":"/home/vadzim/v/work/nerojs/src/boss_dns.js","co":"/home/vadzim/v/work/nerojs/src/co.js","express":false,"http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"util":false}],"/home/vadzim/v/work/nerojs/src/boss_cfg.js":[function(require,module,exports){
+},{"LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","boss_cfg":"/home/vadzim/v/work/nerojs/src/boss_cfg.js","boss_db":"/home/vadzim/v/work/nerojs/src/boss_db.js","boss_dns":"/home/vadzim/v/work/nerojs/src/boss_dns.js","co":"/home/vadzim/v/work/nerojs/src/co.js","express":false,"http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"util":false}],"/home/vadzim/v/work/nerojs/src/boss_cfg.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -24912,6 +24958,7 @@ var later = require("later").push;
 var co = require("co");
 var UID = require("uid");
 var lodash = require("lodash");
+var LOG = require("LOG").LOG;
 var actionKey = "ACTION_" + UID();
 var updates = {};
 updates.scheduled = false;
@@ -24939,7 +24986,7 @@ updates.checkSchedule = (function() {
 });
 updates.tick = (function() {
   updates.scheduled = false;
-  var $__22 = function(_try) {
+  var $__23 = function(_try) {
     try {
       updates.runAll();
       return 0;
@@ -24949,12 +24996,12 @@ updates.tick = (function() {
       }), 1);
     }
   },
-      $__23;
-  $__21: for (var _try = 0; _try < 1000; ++_try) {
-    $__23 = $__22(_try);
-    switch ($__23) {
+      $__24;
+  $__22: for (var _try = 0; _try < 1000; ++_try) {
+    $__24 = $__23(_try);
+    switch ($__24) {
       case 0:
-        break $__21;
+        break $__22;
     }
   }
   updates.checkSchedule();
@@ -25002,6 +25049,8 @@ updates.runAll = (function() {
         if (updates.minTime > time)
           updates.minTime = time;
       }
+      if (time > 300)
+        LOG(("updates have been run for " + time.toString().red + " ms"));
     }
   }
 });
@@ -25262,20 +25311,20 @@ var $Cell = Cell;
     return this._readOnly || (this._readOnly = new ReadOnlyCell(this));
   },
   toString: function() {
-    var $__20;
+    var $__21;
     for (var args = [],
         $__17 = 0; $__17 < arguments.length; $__17++)
       args[$__17] = arguments[$__17];
     var v = this._read();
-    return (v == null) || !v.toString ? "" + v : ($__20 = v).toString.apply($__20, $traceurRuntime.spread(args));
+    return (v == null) || !v.toString ? "" + v : ($__21 = v).toString.apply($__21, $traceurRuntime.spread(args));
   },
   toJSON: function() {
-    var $__20;
+    var $__21;
     for (var args = [],
         $__18 = 0; $__18 < arguments.length; $__18++)
       args[$__18] = arguments[$__18];
     var v = this._read();
-    return (v == null) || !v.toJSON ? v : ($__20 = v).toJSON.apply($__20, $traceurRuntime.spread(args));
+    return (v == null) || !v.toJSON ? v : ($__21 = v).toJSON.apply($__21, $traceurRuntime.spread(args));
   },
   setName: function(name) {
     this._name = name;
@@ -25372,7 +25421,7 @@ var $Cell = Cell;
     if (recursive)
       throw new Error("wrong parameters");
     cell.defineProperty();
-    var $__25 = function(key) {
+    var $__26 = function(key) {
       var descr = Object.getOwnPropertyDescriptor(value, key);
       if (!descr)
         return 0;
@@ -25389,12 +25438,12 @@ var $Cell = Cell;
       else
         cell.defineProperty(key)._init(subValue, false, !!get);
     },
-        $__26;
-    $__24: for (var key in value) {
-      $__26 = $__25(key);
-      switch ($__26) {
+        $__27;
+    $__25: for (var key in value) {
+      $__27 = $__26(key);
+      switch ($__27) {
         case 0:
-          continue $__24;
+          continue $__25;
       }
     }
   },
@@ -25451,10 +25500,10 @@ var $Cell = Cell;
       }
       this._fire();
       if (!down) {
-        var p$__27 = this._parent;
-        while (p$__27 && !p$__27._dirty) {
-          p$__27._dirty = true;
-          p$__27._fire();
+        var p$__28 = this._parent;
+        while (p$__28 && !p$__28._dirty) {
+          p$__28._dirty = true;
+          p$__28._fire();
         }
       }
     }
@@ -25539,8 +25588,8 @@ var $Cell = Cell;
     }
     a = this._onchange;
     if (a.length) {
-      for (var i$__28 = 0; i$__28 < a.length; i$__28++)
-        updates.later(a[i$__28]);
+      for (var i$__29 = 0; i$__29 < a.length; i$__29++)
+        updates.later(a[i$__29]);
       a.length = 0;
     }
   },
@@ -25636,15 +25685,15 @@ var $Action = Action;
       writable: true
     }), $__2);
   },
-  _loop: $traceurRuntime.initGeneratorFunction(function $__34() {
+  _loop: $traceurRuntime.initGeneratorFunction(function $__35() {
     var $__0,
         next,
         errorCatched,
         ret,
-        $__35,
         $__36,
         $__37,
         $__38,
+        $__39,
         error;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
@@ -25705,25 +25754,25 @@ var $Action = Action;
             $ctx.state = 25;
             break;
           case 25:
-            $__35 = $ctx.wrapYieldStar(this._generatorProxy[Symbol.iterator]());
+            $__36 = $ctx.wrapYieldStar(this._generatorProxy[Symbol.iterator]());
             $ctx.sent = void 0;
             $ctx.action = 'next';
             $ctx.state = 19;
             break;
           case 19:
-            $__36 = $__35[$ctx.action]($ctx.sentIgnoreThrow);
+            $__37 = $__36[$ctx.action]($ctx.sentIgnoreThrow);
             $ctx.state = 16;
             break;
           case 16:
-            $ctx.state = ($__36.done) ? 10 : 9;
+            $ctx.state = ($__37.done) ? 10 : 9;
             break;
           case 10:
-            $ctx.sent = $__36.value;
+            $ctx.sent = $__37.value;
             $ctx.state = 17;
             break;
           case 9:
             $ctx.state = 19;
-            return $__36.value;
+            return $__37.value;
           case 17:
             ret = $ctx.sentIgnoreThrow;
             $ctx.state = 23;
@@ -25755,25 +25804,25 @@ var $Action = Action;
             $ctx.state = (ret && ret.next && ret.throw) ? 50 : 58;
             break;
           case 50:
-            $__37 = $ctx.wrapYieldStar(ret[Symbol.iterator]());
+            $__38 = $ctx.wrapYieldStar(ret[Symbol.iterator]());
             $ctx.sent = void 0;
             $ctx.action = 'next';
             $ctx.state = 51;
             break;
           case 51:
-            $__38 = $__37[$ctx.action]($ctx.sentIgnoreThrow);
+            $__39 = $__38[$ctx.action]($ctx.sentIgnoreThrow);
             $ctx.state = 48;
             break;
           case 48:
-            $ctx.state = ($__38.done) ? 42 : 41;
+            $ctx.state = ($__39.done) ? 42 : 41;
             break;
           case 42:
-            $ctx.sent = $__38.value;
+            $ctx.sent = $__39.value;
             $ctx.state = 49;
             break;
           case 41:
             $ctx.state = 51;
-            return $__38.value;
+            return $__39.value;
           case 49:
             ret = $ctx.sentIgnoreThrow;
             $ctx.state = 21;
@@ -25851,7 +25900,7 @@ var $Action = Action;
           default:
             return $ctx.end();
         }
-    }, $__34, this);
+    }, $__35, this);
   }),
   isClosed: function() {
     return !this._cellSet;
@@ -25871,9 +25920,9 @@ var $Action = Action;
       c.length = 0;
     }
     if (c = this._threads) {
-      for (var i$__29 = 0,
-          l$__30 = c.length; i$__29 < l$__30; ++i$__29)
-        c[i$__29].kill();
+      for (var i$__30 = 0,
+          l$__31 = c.length; i$__30 < l$__31; ++i$__30)
+        c[i$__30].kill();
       c.length = 0;
     }
   },
@@ -26005,8 +26054,8 @@ var newReactive = (function(getter, handlers, sticky, isValueEqual) {
   try {
     for (var $__11 = void 0,
         $__10 = (handlers)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__13 = ($__11 = $__10.next()).done); $__13 = true) {
-      var h$__31 = $__11.value;
-      h$__31 && (h$__31.length ? runSetter : runGetter)(cell, h$__31, sticky);
+      var h$__32 = $__11.value;
+      h$__32 && (h$__32.length ? runSetter : runGetter)(cell, h$__32, sticky);
     }
   } catch ($__16) {
     $__14 = true;
@@ -26125,7 +26174,7 @@ exports.map = (function(dest, source, convert) {
     var src = scache.valueOf();
     updates.later((function() {
       var i = 0;
-      var $__32 = function(k) {
+      var $__33 = function(k) {
         if (src.hasOwnProperty(k)) {
           if (dcache.live.hasOwnProperty(k))
             return {v: (void 0)};
@@ -26139,11 +26188,11 @@ exports.map = (function(dest, source, convert) {
           ++i;
         }
       },
-          $__33;
+          $__34;
       for (var k in src) {
-        $__33 = $__32(k);
-        if (typeof $__33 === "object")
-          return $__33.v;
+        $__34 = $__33(k);
+        if (typeof $__34 === "object")
+          return $__34.v;
       }
     }));
   }));
@@ -26193,7 +26242,7 @@ exports.slice = (function(dest, source, keysVar) {
       } )
     }()
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","later":"/home/vadzim/v/work/nerojs/src/later.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/rewriter.js":[function(require,module,exports){
+},{"LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","co":"/home/vadzim/v/work/nerojs/src/co.js","later":"/home/vadzim/v/work/nerojs/src/later.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/rewriter.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
