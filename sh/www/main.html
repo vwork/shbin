@@ -1,5 +1,5 @@
-<div id='j65efj3o0o11qsf'>
-<style type='text/css' id='j3b7t4yffal1qsg'>
+<div id='j116770g5ve6vc'>
+<style type='text/css' id='j34b5yo8euz6vd'>
 /* contextMenu */
 .contextMenu,
 .modalDialog {
@@ -16,7 +16,8 @@ background-color: black;
 .translucent .application.window_app.layout_vertical.dialogErrorNoCarrier .errorNoCarrier,
 .translucent .application.window_app.layout_vertical.dialogStateWait .stateWait,
 .translucent .application.window_app.layout_vertical.dialogStopDeviceNotification .stopDeviceNotification,
-.translucent .application.window_app.layout_vertical.dialogAskNewName .askNewName {
+.translucent .application.window_app.layout_vertical.dialogAskNewName .askNewName ,
+.translucent .application.window_app.layout_vertical.dialogServiceItem .serviceItem {
 top: 5mm;
 }
 /* startupScreen */
@@ -87,13 +88,14 @@ display: none;
 .dialogErrorNoCarrier .errorNoCarrier,
 .dialogStateWait .stateWait,
 .dialogStopDeviceNotification .stopDeviceNotification,
-.dialogAskNewName .askNewName {
+.dialogAskNewName .askNewName ,
+.dialogServiceItem .serviceItem {
 display: block;
 /*pointer-events: all;*/
 /*opacity: 1;*/
 }
 </style>
-<style type='text/css' id='j770bypif3l1qsh'>@font-face {
+<style type='text/css' id='j5723b588h86ve'>@font-face {
 font-family: "Web App";
 /*src: url("web-app.eot");*/
 src: url("web-app.eot?#iefix") format("embedded-opentype"),
@@ -318,7 +320,7 @@ font-size: 20pt;
 text-align: center;
 }
 </style>
-<style type='text/css' id='j8ea5juuolw1qsi'>.application, .application table, a, a:visited {
+<style type='text/css' id='j96j021m8l26vf'>.application, .application table, a, a:visited {
 color: #03EADC;
 }
 .top {
@@ -411,14 +413,14 @@ text-decoration: none;
 font-size: 150%;
 }
 </style>
-<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' id='j31jvnc3lbh1qsl'>
-<a class='command' href='javascript:void(0)' target='_self' id='j35jiwzk7oh1qsm'></a>
+<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' id='j5ykyj9orvs6vi'>
+<a class='command' href='javascript:void(0)' target='_self' id='j6yplu9tewc6vj'></a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j31jvnc3lbh1qsl;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__3.j5ykyj9orvs6vi;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -427,7 +429,7 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j31jvnc3lbh1qsl;
+  var $__6 = $__3.j5ykyj9orvs6vi;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -451,7 +453,7 @@ font-size: 150%;
     isVisible = $__6.getAttribute("data-isVisible") || isVisible;
   if (isVisible === undefined)
     isVisible = null;
-  var command = $__2.j35jiwzk7oh1qsm;
+  var command = $__2.j6yplu9tewc6vj;
   !function() {
     var initial = command.className.split(/\s+/);
     CS.watch((function() {
@@ -475,14 +477,14 @@ font-size: 150%;
   }.call($__0);
 }();
 </script>
-</template><template class='ContextMenu' id='j1jh03xcavs1qsn'>
-<div class='contextMenu' id='j47osecj25o1qso'></div>
+</template><template class='ContextMenu' id='j2359tvb8d26vk'>
+<div class='contextMenu' id='j8tyi6shtox6vl'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j1jh03xcavs1qsn;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__3.j2359tvb8d26vk;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -491,12 +493,12 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Command = $__3.j31jvnc3lbh1qsl;
-  var $__6 = $__3.j1jh03xcavs1qsn;
+  var Command = $__3.j5ykyj9orvs6vi;
+  var $__6 = $__3.j2359tvb8d26vk;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var contextMenu = $__2.j47osecj25o1qso;
+  var contextMenu = $__2.j8tyi6shtox6vl;
   !function() {
     CS.content(contextMenu, (function() {
       return [CS.importTemplate(Command, {msg: "commandSearchDevices"}), CS.importTemplate(Command, {
@@ -536,28 +538,33 @@ font-size: 150%;
         callback: function() {
           app.purgeItem(app.activePlace);
         }
+      }), CS.importTemplate(Command, {
+        msg: "commandServiceItem",
+        callback: function() {
+          app.dialog = "ServiceItem";
+        }
       })];
     }));
   }.call($__0);
 }();
 </script>
-</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j3n4buydknr1qsv'>
-<li class='houseTemplate' id='j4cfr4citz01qsw'></li>
+</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j2cu7sv10506vs'>
+<li class='houseTemplate' id='j426on2t5jh6vt'></li>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
   var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j3n4buydknr1qsv;
-  var $__5 = window.irz6iqypol1qsk;
+  var $__0 = $__3.j2cu7sv10506vs;
+  var $__5 = window.j7boeevkfmf6vh;
   var $__6 = $__4.$__DATASET__$;
   if ($__6 === undefined)
     $__6 = $__4.$__DATASET__$ = {};
-  var $__7 = $__4.j3qm10ms0td1qsp;
+  var $__7 = $__4.j72yl0hgm1o6vm;
   var $__8 = $__3.$__DATASET__$;
   if ($__8 === undefined)
     $__8 = $__3.$__DATASET__$ = {};
-  var $__9 = $__3.j3n4buydknr1qsv;
+  var $__9 = $__3.j2cu7sv10506vs;
   var $__10 = $__2.$__DATASET__$;
   if ($__10 === undefined)
     $__10 = $__2.$__DATASET__$ = {};
@@ -566,7 +573,7 @@ font-size: 150%;
     text = $__9.getAttribute("data-text") || text;
   if (text === undefined)
     text = null;
-  var houseTemplate = $__2.j4cfr4citz01qsw;
+  var houseTemplate = $__2.j426on2t5jh6vt;
   !function() {
     CS.content(houseTemplate, (function() {
       return text;
@@ -574,19 +581,19 @@ font-size: 150%;
   }.call($__0);
 }();
 </script>
-</template><template class='StartupScreen' id='j3qm10ms0td1qsp'>
-<div class='startupScreen' id='j21x2z419li1qsq'>
-<p id='j51px8nbub01qsr'>Добро пожаловать в Ваш<br id='j6x8g8ys92y1qss'/>Умный Дом!</p>
-<div class='templates' id='inu1cx2dzp1qst'>
-<p id='j6tze6vuwew1qsu'>Пожалуйста, выберите место, где используется этот пульт:</p>
-<noscript data-template-reference='j3n4buydknr1qsv'></noscript>
-<ul class='houseTemplates' id='j2fews39phk1qsx'></ul>
+</template><template class='StartupScreen' id='j72yl0hgm1o6vm'>
+<div class='startupScreen' id='j4f3w6br43t6vn'>
+<p id='itf7nq5i8e6vo'>Добро пожаловать в Ваш<br id='j6dq927clgh6vp'/>Умный Дом!</p>
+<div class='templates' id='j50am5fzg7j6vq'>
+<p id='j24mk438wda6vr'>Пожалуйста, выберите место, где используется этот пульт:</p>
+<noscript data-template-reference='j2cu7sv10506vs'></noscript>
+<ul class='houseTemplates' id='j89efboo0dc6vu'></ul>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.inu1cx2dzp1qst;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j50am5fzg7j6vq;
+  var $__4 = window.j7boeevkfmf6vh;
   var template = $__6;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
@@ -596,13 +603,13 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j3qm10ms0td1qsp;
+  var $__6 = $__3.j72yl0hgm1o6vm;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var templates = $__2.inu1cx2dzp1qst;
-  var HouseTemplate = $__2.j3n4buydknr1qsv;
-  var houseTemplates = $__2.j2fews39phk1qsx;
+  var templates = $__2.j50am5fzg7j6vq;
+  var HouseTemplate = $__2.j2cu7sv10506vs;
+  var houseTemplates = $__2.j89efboo0dc6vu;
   !function() {
     CS.content(houseTemplates, (function() {
       return app.templates && app.templates.map((function(houseTemplate, index) {
@@ -617,18 +624,18 @@ font-size: 150%;
 }();
 </script>
 </div>
-<div class='loading' id='j1x8nygg1551qsy'></div>
+<div class='loading' id='j9ib4ddz3xv6vv'></div>
 </div>
-</template><template class='AskToLinkDevice' id='j2vtnkc52wg1qsz'>
-<div class='askToLinkDevice modalDialog' id='irrg6ek0sl1qt0'>
-<p id='i20gflpcjl1qt1'>Пожалуйста,<br id='j7bu3kvz8b11qt2'/>переведите устройство в режим<br id='j7dybsma6rf1qt3'/>программирования и нажмите</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j9m398oppeu1qt4'>здесь</a>
+</template><template class='AskToLinkDevice' id='j1ke0okvima6vw'>
+<div class='askToLinkDevice modalDialog' id='i2t75f5j6d6vx'>
+<p id='j7f8zbfw0yj6vy'>Пожалуйста,<br id='j6s59gicau36vz'/>переведите устройство в режим<br id='j7hugn05mma6w0'/>программирования и нажмите</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j713wx20igs6w1'>здесь</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.irrg6ek0sl1qt0;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.i2t75f5j6d6vx;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -637,11 +644,11 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j2vtnkc52wg1qsz;
+  var $__6 = $__3.j1ke0okvima6vw;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j9m398oppeu1qt4;
+  var button = $__2.j713wx20igs6w1;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
@@ -681,19 +688,19 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='AskNewName' id='ibf27tjp641qt5'>
-<div class='askNewName modalDialog' id='j8k6ahu48321qt6'>
-<p id='j2q4cg4j4ji1qt7'>Название:</p>
-<form id='j11yph0o95i1qt8'>
-<input name='string' type='text' autofocus='autofocus' size='20' id='j8hwgcbtqor1qt9'/>
-<p id='j1vxptl3sd31qta'><a class='button' href='javascript:void(0)' target='_self' id='j2n2m3yy5yn1qtb'>Закрыть</a></p>
+</template><template class='ServiceItem' id='j7mii94eszl6w2'>
+<div class='serviceItem modalDialog' id='j3eo6wmn07s6w3'>
+<p id='j99iwdb0dxe6w4'>***</p>
+<form id='j231ixyu0pe6w5'>
+<textarea name='text' id='j6jjby4g7is6w6'></textarea>
+<p id='hgz6fokvu6w7'><a class='button' href='javascript:void(0)' target='_self' id='j4d0hb986y96w8'>Закрыть</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j8k6ahu48321qt6;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j3eo6wmn07s6w3;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -702,13 +709,66 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.ibf27tjp641qt5;
+  var $__6 = $__3.j7mii94eszl6w2;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.j11yph0o95i1qt8;
-  var string = $__2.j8hwgcbtqor1qt9;
-  var button = $__2.j2n2m3yy5yn1qtb;
+  var form = $__2.j231ixyu0pe6w5;
+  var text = $__2.j6jjby4g7is6w6;
+  var button = $__2.j4d0hb986y96w8;
+  !function() {
+    ra((function() {
+      form.text.value = JSON.stringify(app.getDevice(app.activeDevice), null, 3);
+    }));
+    var submit = (function() {
+      var data = form.text.value.trim();
+      if (data) {
+        try {
+          data = JSON.parse(data);
+        } catch (error) {
+          return alert(error);
+        }
+        app.saveDevice(app.activeDevice, data);
+      }
+      app.dialog = "";
+    });
+    CS.onTap(button, (function(event) {
+      event.preventDefault();
+      submit();
+    }));
+    form.onsubmit = submit;
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='AskNewName' id='j9mo499dopy6w9'>
+<div class='askNewName modalDialog' id='j7oq7ws6bul6wa'>
+<p id='j4ikh768fo76wb'>Название:</p>
+<form id='j5e14fg1d0m6wc'>
+<input name='string' type='text' autofocus='autofocus' size='20' id='j3p9democwo6wd'/>
+<p id='j59y8vk0j9c6we'><a class='button' href='javascript:void(0)' target='_self' id='j16fis48mat6wf'>Закрыть</a></p>
+</form>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j7oq7ws6bul6wa;
+  var $__4 = window.j7boeevkfmf6vh;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j9mo499dopy6w9;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var form = $__2.j5e14fg1d0m6wc;
+  var string = $__2.j3p9democwo6wd;
+  var button = $__2.j16fis48mat6wf;
   !function() {
     var submit = (function() {
       var name = form.string.value.trim();
@@ -726,21 +786,21 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='AskCredentials' id='j99b28g755k1qtc'>
-<div class='askCredentials' id='id4oxj27kv1qtd'>
-<form id='j9j0c5f2fth1qte'>
-<p id='j1spuo91ng61qtf'>Пользователь:</p>
-<p id='j3wsu88fbq01qtg'><input name='user' type='text' size='20' value='' id='j14mlyha7ms1qth'/></p>
-<p id='icn75mjmps1qti'>Ключ:</p>
-<p id='iyfulz92op1qtj'><input name='key' type='password' size='20' value='' id='j3nhddr9kkq1qtk'/></p>
-<p id='j9ex2r0fivy1qtl'><a class='button' href='javascript:void(0)' target='_self' id='j210yofuniv1qtm'>Подключиться</a></p>
+</template><template class='AskCredentials' id='j2ee3npmwtm6wg'>
+<div class='askCredentials' id='j40lueqwhfx6wh'>
+<form id='j4665y7jcbx6wi'>
+<p id='j3qev9gwggd6wj'>Пользователь:</p>
+<p id='j8rs5ud70ab6wk'><input name='user' type='text' size='20' value='' id='j6okwwczanv6wl'/></p>
+<p id='ijbtz1787m6wm'>Ключ:</p>
+<p id='j47b87ge4f06wn'><input name='key' type='password' size='20' value='' id='j13v989cspz6wo'/></p>
+<p id='j38uj84fsdl6wp'><a class='button' href='javascript:void(0)' target='_self' id='j4k4yoafpkh6wq'>Подключиться</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.id4oxj27kv1qtd;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j40lueqwhfx6wh;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -749,14 +809,14 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j99b28g755k1qtc;
+  var $__6 = $__3.j2ee3npmwtm6wg;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.j9j0c5f2fth1qte;
-  var user = $__2.j14mlyha7ms1qth;
-  var key = $__2.j3nhddr9kkq1qtk;
-  var button = $__2.j210yofuniv1qtm;
+  var form = $__2.j4665y7jcbx6wi;
+  var user = $__2.j6okwwczanv6wl;
+  var key = $__2.j13v989cspz6wo;
+  var button = $__2.j4k4yoafpkh6wq;
   !function() {
     var submit = (function() {
       var user = form.user.value.trim();
@@ -775,17 +835,17 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='AskIfDeviceHasBeenLinked' id='j6kl32y0dm51qtn'>
-<div class='askIfDeviceHasBeenLinked modalDialog' id='j803e7wys8f1qto'>
-<p id='j4iz1i8achc1qtp'>Устройство было успешно привязано?</p>
-<a class='button yes' href='javascript:void(0)' target='_self' id='j4lxjg7wxbp1qtq'>да</a>
-<a class='button no' href='javascript:void(0)' target='_self' id='j8q6ijhszow1qtr'>нет</a>
+</template><template class='AskIfDeviceHasBeenLinked' id='j2rg0xs18hi6wr'>
+<div class='askIfDeviceHasBeenLinked modalDialog' id='j30cctjr4jo6ws'>
+<p id='j9241303ril6wt'>Устройство было успешно привязано?</p>
+<a class='button yes' href='javascript:void(0)' target='_self' id='j96p3ufpfja6wu'>да</a>
+<a class='button no' href='javascript:void(0)' target='_self' id='j5dubuov6of6wv'>нет</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j803e7wys8f1qto;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j30cctjr4jo6ws;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -794,13 +854,13 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var AskToLinkDevice = $__3.j2vtnkc52wg1qsz;
-  var $__6 = $__3.j6kl32y0dm51qtn;
+  var AskToLinkDevice = $__3.j1ke0okvima6vw;
+  var $__6 = $__3.j2rg0xs18hi6wr;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var yes = $__2.j4lxjg7wxbp1qtq;
-  var no = $__2.j8q6ijhszow1qtr;
+  var yes = $__2.j96p3ufpfja6wu;
+  var no = $__2.j5dubuov6of6wv;
   !function() {
     CS.onTap(yes, (function(event) {
       event.preventDefault();
@@ -814,17 +874,17 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='ErrorNoCarrier' id='j1ou7frunjq1qts'>
-<div class='errorNoCarrier modalDialog errorDialog' id='j4iaa6yzcmm1qtt'>
-<p id='j8nhhyjxix61qtu'>Ошибка</p>
-<p id='icn7pswnwp1qtv'>Произошла ошибка при попытке связаться с модемом</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j8fk01oza8e1qtw'>закрыть</a>
+</template><template class='ErrorNoCarrier' id='j7dmfycc0ea6ww'>
+<div class='errorNoCarrier modalDialog errorDialog' id='j8znalthkp46wx'>
+<p id='j1vzhyrczgo6wy'>Ошибка</p>
+<p id='j7slebphyib6wz'>Произошла ошибка при попытке связаться с модемом</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j5w51ayb3w16x0'>закрыть</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j4iaa6yzcmm1qtt;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j8znalthkp46wx;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -833,11 +893,11 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j1ou7frunjq1qts;
+  var $__6 = $__3.j7dmfycc0ea6ww;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j8fk01oza8e1qtw;
+  var button = $__2.j5w51ayb3w16x0;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
@@ -847,16 +907,16 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='StopDeviceNotification' id='j1lhskuitcw1qtx'>
-<div class='stopDeviceNotification modalDialog' id='j8fyn8vrqjk1qty'>
-<p id='j12qcty6f0c1qtz'>Пожалуйста,<br id='j630oj7trvp1qu0'/>переведите устройство в рабочий режим</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j4dn25bhoqv1qu1'>закрыть</a>
+</template><template class='StopDeviceNotification' id='j9k7bvngn7s6x1'>
+<div class='stopDeviceNotification modalDialog' id='j6p6548seuz6x2'>
+<p id='j4m4sj4wyir6x3'>Пожалуйста,<br id='j2lp929kw646x4'/>переведите устройство в рабочий режим</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j1xknmy7hsk6x5'>закрыть</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j8fyn8vrqjk1qty;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j6p6548seuz6x2;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -865,11 +925,11 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j1lhskuitcw1qtx;
+  var $__6 = $__3.j9k7bvngn7s6x1;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j4dn25bhoqv1qu1;
+  var button = $__2.j1xknmy7hsk6x5;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
@@ -879,27 +939,27 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='StateWait' id='j4uwyd6fvmc1qu2'>
-<div class='stateWait modalDialog' id='i318y0s2l21qu3'>
-<p id='j5hpsfos6hf1qu4'>Подождите...</p>
+</template><template class='StateWait' id='j5rc6u5ddhq6x6'>
+<div class='stateWait modalDialog' id='j228zmqa1ww6x7'>
+<p id='j5ox9o716u46x8'>Подождите...</p>
 </div>
-</template><template class='LoadingScreen' id='j19wjc2yg9u1qu5'>
-<div class='loadingScreen' id='j2iaodzowne1qu6'></div>
-</template><template class='Centered' data-content='' id='j73r1bq8p3q1qu7'>
-<table style='width: 100%; height: 100%;' id='j9mp21usorx1qu8'>
-<tr style='width: 100%; height: 100%;' id='j2hhqpgvsmj1qu9'>
-<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='j42iqs6901b1qua'>
-<span class='self' id='j19zntef4jc1qub'></span>
+</template><template class='LoadingScreen' id='j8g11fkf6636x9'>
+<div class='loadingScreen' id='j8d9xb3yvgh6xa'></div>
+</template><template class='Centered' data-content='' id='i2bn0u29jb6xb'>
+<table style='width: 100%; height: 100%;' id='j8e5rj1bsta6xc'>
+<tr style='width: 100%; height: 100%;' id='j253u7byz316xd'>
+<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='iuwdgbifwn6xe'>
+<span class='self' id='j48qahgxvop6xf'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j42iqs6901b1qua;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.iuwdgbifwn6xe;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
-  var $__6 = $__3.j73r1bq8p3q1qu7;
+  var $__6 = $__3.i2bn0u29jb6xb;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -908,7 +968,7 @@ font-size: 150%;
     content = $__6.getAttribute("data-content") || content;
   if (content === undefined)
     content = null;
-  var self = $__2.j19zntef4jc1qub;
+  var self = $__2.j48qahgxvop6xf;
   !function() {
     CS.content(self, content);
   }.call($__0);
@@ -917,20 +977,20 @@ font-size: 150%;
 </td>
 </tr>
 </table>
-</template><template class='Icon' data-iconId='' data-iconDescr='' data-index='' id='j6nhvt06inm1quc'>
-<div class='icon' id='irhdwnskwi1qud'>
-<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j8sbpchf96c1que'/>
-<img class='error off' src='/images/room.svg' id='j4p2qhkxal31quf'/>
-<img class='error on' src='/images/room_on.svg' id='i1a6zgizip1qug'/>
-<img class='error absent' src='/images/room_absent.svg' id='j23y6bmlb4d1quh'/>
-<span class='iconLabel' id='j9ioazp53yf1qui'></span>
+</template><template class='Icon' data-iconId='' data-iconDescr='' data-index='' id='j3v0gmf0i9a6xg'>
+<div class='icon' id='j1oygqjzueb6xh'>
+<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j4gzont49v86xi'/>
+<img class='error off' src='/images/room.svg' id='j9golfg66bi6xj'/>
+<img class='error on' src='/images/room_on.svg' id='j18l8zh737h6xk'/>
+<img class='error absent' src='/images/room_absent.svg' id='j8s4k0exxng6xl'/>
+<span class='iconLabel' id='j1pnwniai616xm'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.irhdwnskwi1qud;
-  var style = window.j8ea5juuolw1qsi;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j1oygqjzueb6xh;
+  var style = window.j96j021m8l26vf;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -944,8 +1004,8 @@ font-size: 150%;
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Command = $__3.j31jvnc3lbh1qsl;
-  var $__6 = $__3.j6nhvt06inm1quc;
+  var Command = $__3.j5ykyj9orvs6vi;
+  var $__6 = $__3.j3v0gmf0i9a6xg;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -964,14 +1024,14 @@ font-size: 150%;
     index = $__6.getAttribute("data-index") || index;
   if (index === undefined)
     index = null;
-  var icon = $__2.irhdwnskwi1qud;
-  var img = $__2.j23y6bmlb4d1quh;
-  var error = $__2.j23y6bmlb4d1quh;
-  var wait = $__2.j8sbpchf96c1que;
-  var off = $__2.j4p2qhkxal31quf;
-  var on = $__2.i1a6zgizip1qug;
-  var absent = $__2.j23y6bmlb4d1quh;
-  var iconLabel = $__2.j9ioazp53yf1qui;
+  var icon = $__2.j1oygqjzueb6xh;
+  var img = $__2.j8s4k0exxng6xl;
+  var error = $__2.j8s4k0exxng6xl;
+  var wait = $__2.j4gzont49v86xi;
+  var off = $__2.j9golfg66bi6xj;
+  var on = $__2.j18l8zh737h6xk;
+  var absent = $__2.j8s4k0exxng6xl;
+  var iconLabel = $__2.j1pnwniai616xm;
   !function() {
     lodash.assign(wait, app.imgProps);
     lodash.assign(on, app.imgProps);
@@ -1089,16 +1149,16 @@ font-size: 150%;
 }();
 </script>
 </div>
-</template><template class='Place' data-placeId='' data-placeDescr='' id='j9axzfneac51quj'>
-<div class='place' id='j4ari3kord81quk'></div>
-<style class='style' id='j2gqvwcqte41qul'></style>
+</template><template class='Place' data-placeId='' data-placeDescr='' id='j89ylrpngfs6xn'>
+<div class='place' id='j8tx62fpv3o6xo'></div>
+<style class='style' id='j9a6nva56v66xp'></style>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j9axzfneac51quj;
-  var style = $__2.j2gqvwcqte41qul;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__3.j89ylrpngfs6xn;
+  var style = $__2.j9a6nva56v66xp;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1107,8 +1167,8 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Icon = $__3.j6nhvt06inm1quc;
-  var $__6 = $__3.j9axzfneac51quj;
+  var Icon = $__3.j3v0gmf0i9a6xg;
+  var $__6 = $__3.j89ylrpngfs6xn;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1122,7 +1182,7 @@ font-size: 150%;
     placeDescr = $__6.getAttribute("data-placeDescr") || placeDescr;
   if (placeDescr === undefined)
     placeDescr = null;
-  var place = $__2.j4ari3kord81quk;
+  var place = $__2.j8tx62fpv3o6xo;
   !function() {
     CS.updateClassX(place, placeId);
     style.innerHTML = ("." + placeId + " .place." + placeId + " { display: initial }");
@@ -1150,15 +1210,15 @@ font-size: 150%;
   }.call($__0);
 }();
 </script>
-</template><template class='Main' id='j7q5g4x6iei1qum'>
-<div class='top' id='j5rv6bojz7x1qun'>
-<span class='self' id='j6vii0lewut1quo'></span>
+</template><template class='Main' id='j3rc10ryt0k6xq'>
+<div class='top' id='j719gn6w8qe6xr'>
+<span class='self' id='j7fgis90v3o6xs'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j5rv6bojz7x1qun;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j719gn6w8qe6xr;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1167,12 +1227,12 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Centered = $__3.j73r1bq8p3q1qu7;
-  var $__6 = $__3.j7q5g4x6iei1qum;
+  var Centered = $__3.i2bn0u29jb6xb;
+  var $__6 = $__3.j3rc10ryt0k6xq;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var self = $__2.j6vii0lewut1quo;
+  var self = $__2.j7fgis90v3o6xs;
   !function() {
     CS.content(self, CS.importTemplate(Centered, {content: (function() {
         return app.caption;
@@ -1181,17 +1241,17 @@ font-size: 150%;
 }();
 </script>
 </div>
-<div class='menu' id='j45ixac6fms1qup'>
+<div class='menu' id='j4qiwq0q7e96xt'>
 
-<span class='self' id='hgb3ev7p11quq'></span>
-<style class='style' id='j2k5swwhkep1qur'></style>
+<span class='self' id='j6skostiovf6xu'></span>
+<style class='style' id='j9rbaww6gkg6xv'></style>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j45ixac6fms1qup;
-  var style = $__2.j2k5swwhkep1qur;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j4qiwq0q7e96xt;
+  var style = $__2.j9rbaww6gkg6xv;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1200,13 +1260,13 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Place = $__3.j9axzfneac51quj;
-  var $__6 = $__3.j7q5g4x6iei1qum;
+  var Place = $__3.j89ylrpngfs6xn;
+  var $__6 = $__3.j3rc10ryt0k6xq;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var self = $__2.hgb3ev7p11quq;
-  var menu = $__2.j45ixac6fms1qup;
+  var self = $__2.j6skostiovf6xu;
+  var menu = $__2.j4qiwq0q7e96xt;
   !function() {
     var UID = require("uid");
     var id = UID();
@@ -1241,18 +1301,18 @@ font-size: 150%;
 }();
 </script>
 </div>
-<div class='bottom' id='j8nxapvcsqq1qus'>
-<div class='help' id='j8b6yqtea6h1qut'>
+<div class='bottom' id='j3jcbsc91xm6xw'>
+<div class='help' id='j660bnch5w06xx'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j8b6yqtea6h1qut;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j660bnch5w06xx;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
-  var $__6 = $__3.j7q5g4x6iei1qum;
+  var $__6 = $__3.j3rc10ryt0k6xq;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1260,13 +1320,13 @@ font-size: 150%;
 }();
 </script>
 </div>
-<div class='logo' id='j6jxhnlnpy11quu'>
+<div class='logo' id='j46pwefi0p96xy'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j6jxhnlnpy11quu;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j46pwefi0p96xy;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1275,7 +1335,7 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j7q5g4x6iei1qum;
+  var $__6 = $__3.j3rc10ryt0k6xq;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1291,13 +1351,13 @@ font-size: 150%;
 }();
 </script>
 </div>
-<div class='back' id='j2ho2z5ae4s1quv'>
+<div class='back' id='j5x4z7q8b2t6xz'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j2ho2z5ae4s1quv;
-  var $__4 = window.irz6iqypol1qsk;
+  var $__0 = $__2.j5x4z7q8b2t6xz;
+  var $__4 = window.j7boeevkfmf6vh;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1306,11 +1366,11 @@ font-size: 150%;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j7q5g4x6iei1qum;
+  var $__6 = $__3.j3rc10ryt0k6xq;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var back = $__2.j2ho2z5ae4s1quv;
+  var back = $__2.j5x4z7q8b2t6xz;
   !function() {
     CS.onTouch(this, (function() {
       if (app.dialog)
@@ -1323,12 +1383,12 @@ font-size: 150%;
 </script>
 </div>
 </div>
-</template><template class='App' data-app='' data-local='' data-appid='state' id='irz6iqypol1qsk'>
+</template><template class='App' data-app='' data-local='' data-appid='state' id='j7boeevkfmf6vh'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.irz6iqypol1qsk;
-  var $__3 = window.irz6iqypol1qsk;
+  var $__0 = window.j7boeevkfmf6vh;
+  var $__3 = window.j7boeevkfmf6vh;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -1352,8 +1412,8 @@ font-size: 150%;
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.irz6iqypol1qsk;
-  var $__3 = window.irz6iqypol1qsk;
+  var $__0 = window.j7boeevkfmf6vh;
+  var $__3 = window.j7boeevkfmf6vh;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -1376,8 +1436,8 @@ font-size: 150%;
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.irz6iqypol1qsk;
-  var $__3 = window.irz6iqypol1qsk;
+  var $__0 = window.j7boeevkfmf6vh;
+  var $__3 = window.j7boeevkfmf6vh;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -1411,28 +1471,29 @@ font-size: 150%;
   }.call($__0);
 }();
 </script>
-<noscript data-template-reference='j31jvnc3lbh1qsl'></noscript>
-<noscript data-template-reference='j1jh03xcavs1qsn'></noscript>
-<noscript data-template-reference='j3qm10ms0td1qsp'></noscript>
+<noscript data-template-reference='j5ykyj9orvs6vi'></noscript>
+<noscript data-template-reference='j2359tvb8d26vk'></noscript>
+<noscript data-template-reference='j72yl0hgm1o6vm'></noscript>
 
-<noscript data-template-reference='j2vtnkc52wg1qsz'></noscript>
-<noscript data-template-reference='ibf27tjp641qt5'></noscript>
-<noscript data-template-reference='j99b28g755k1qtc'></noscript>
-<noscript data-template-reference='j6kl32y0dm51qtn'></noscript>
-<noscript data-template-reference='j1ou7frunjq1qts'></noscript>
-<noscript data-template-reference='j1lhskuitcw1qtx'></noscript>
-<noscript data-template-reference='j4uwyd6fvmc1qu2'></noscript>
-<noscript data-template-reference='j19wjc2yg9u1qu5'></noscript>
-<noscript data-template-reference='j73r1bq8p3q1qu7'></noscript>
-<noscript data-template-reference='j6nhvt06inm1quc'></noscript>
-<noscript data-template-reference='j9axzfneac51quj'></noscript>
-<noscript data-template-reference='j7q5g4x6iei1qum'></noscript>
-<div class='application' id='j56ya19h2ut1quw'></div>
+<noscript data-template-reference='j1ke0okvima6vw'></noscript>
+<noscript data-template-reference='j7mii94eszl6w2'></noscript>
+<noscript data-template-reference='j9mo499dopy6w9'></noscript>
+<noscript data-template-reference='j2ee3npmwtm6wg'></noscript>
+<noscript data-template-reference='j2rg0xs18hi6wr'></noscript>
+<noscript data-template-reference='j7dmfycc0ea6ww'></noscript>
+<noscript data-template-reference='j9k7bvngn7s6x1'></noscript>
+<noscript data-template-reference='j5rc6u5ddhq6x6'></noscript>
+<noscript data-template-reference='j8g11fkf6636x9'></noscript>
+<noscript data-template-reference='i2bn0u29jb6xb'></noscript>
+<noscript data-template-reference='j3v0gmf0i9a6xg'></noscript>
+<noscript data-template-reference='j89ylrpngfs6xn'></noscript>
+<noscript data-template-reference='j3rc10ryt0k6xq'></noscript>
+<div class='application' id='j1p4v11bcd46y0'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.irz6iqypol1qsk;
-  var $__3 = window.irz6iqypol1qsk;
+  var $__0 = window.j7boeevkfmf6vh;
+  var $__3 = window.j7boeevkfmf6vh;
   var template = $__3;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
@@ -1442,7 +1503,7 @@ font-size: 150%;
     app = $__3.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var application = $__2.j56ya19h2ut1quw;
+  var application = $__2.j1p4v11bcd46y0;
   !function() {
     var initial = application.className.split(/\s+/);
     CS.watch((function() {
@@ -1454,8 +1515,8 @@ font-size: 150%;
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.irz6iqypol1qsk;
-  var $__3 = window.irz6iqypol1qsk;
+  var $__0 = window.j7boeevkfmf6vh;
+  var $__3 = window.j7boeevkfmf6vh;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -1464,21 +1525,22 @@ font-size: 150%;
     app = $__3.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var ContextMenu = $__2.j1jh03xcavs1qsn;
-  var StartupScreen = $__2.j3qm10ms0td1qsp;
-  var AskToLinkDevice = $__2.j2vtnkc52wg1qsz;
-  var AskNewName = $__2.ibf27tjp641qt5;
-  var AskCredentials = $__2.j99b28g755k1qtc;
-  var AskIfDeviceHasBeenLinked = $__2.j6kl32y0dm51qtn;
-  var ErrorNoCarrier = $__2.j1ou7frunjq1qts;
-  var StopDeviceNotification = $__2.j1lhskuitcw1qtx;
-  var StateWait = $__2.j4uwyd6fvmc1qu2;
-  var LoadingScreen = $__2.j19wjc2yg9u1qu5;
-  var Place = $__2.j9axzfneac51quj;
-  var Main = $__2.j7q5g4x6iei1qum;
-  var application = $__2.j56ya19h2ut1quw;
+  var ContextMenu = $__2.j2359tvb8d26vk;
+  var StartupScreen = $__2.j72yl0hgm1o6vm;
+  var AskToLinkDevice = $__2.j1ke0okvima6vw;
+  var ServiceItem = $__2.j7mii94eszl6w2;
+  var AskNewName = $__2.j9mo499dopy6w9;
+  var AskCredentials = $__2.j2ee3npmwtm6wg;
+  var AskIfDeviceHasBeenLinked = $__2.j2rg0xs18hi6wr;
+  var ErrorNoCarrier = $__2.j7dmfycc0ea6ww;
+  var StopDeviceNotification = $__2.j9k7bvngn7s6x1;
+  var StateWait = $__2.j5rc6u5ddhq6x6;
+  var LoadingScreen = $__2.j8g11fkf6636x9;
+  var Place = $__2.j89ylrpngfs6xn;
+  var Main = $__2.j3rc10ryt0k6xq;
+  var application = $__2.j1p4v11bcd46y0;
   !function() {
-    CS.content(application, [CS.importTemplate(Main), CS.importTemplate(ContextMenu), CS.importTemplate(AskToLinkDevice), CS.importTemplate(AskIfDeviceHasBeenLinked), CS.importTemplate(StopDeviceNotification), CS.importTemplate(ErrorNoCarrier), CS.importTemplate(StateWait), CS.importTemplate(AskNewName), CS.importTemplate(StartupScreen), CS.importTemplate(LoadingScreen), CS.importTemplate(AskCredentials)]);
+    CS.content(application, [CS.importTemplate(Main), CS.importTemplate(ContextMenu), CS.importTemplate(AskToLinkDevice), CS.importTemplate(AskIfDeviceHasBeenLinked), CS.importTemplate(StopDeviceNotification), CS.importTemplate(ErrorNoCarrier), CS.importTemplate(StateWait), CS.importTemplate(AskNewName), CS.importTemplate(ServiceItem), CS.importTemplate(StartupScreen), CS.importTemplate(LoadingScreen), CS.importTemplate(AskCredentials)]);
     setTimeout((function() {
       return app.pageStarting = false;
     }), 1);
@@ -1487,8 +1549,8 @@ font-size: 150%;
 </script>
 </template>
 
-<template class='TwoApp' id='j3bvc1alph41qux'>
-<style id='j3y8rmdddwq1quz'>
+<template class='TwoApp' id='j4a4yjengy76y1'>
+<style id='j1uihqxwv166y3'>
 .app1 .application, .app2 .application {
 position: fixed;
 left: 20;
@@ -1501,19 +1563,19 @@ left: 400;
 width: 950;
 }
 </style>
-<div class='app1' id='j68a158pvwj1qv0'></div>
-<div class='app2' id='j5cgdqe9bwl1qv1'></div>
+<div class='app1' id='j8rdfyfoj3y6y4'></div>
+<div class='app2' id='j4a30dbktlg6y5'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j3bvc1alph41qux;
-  var App = window.irz6iqypol1qsk;
-  var $__3 = window.j3bvc1alph41qux;
+  var $__0 = window.j4a4yjengy76y1;
+  var App = window.j7boeevkfmf6vh;
+  var $__3 = window.j4a4yjengy76y1;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
-  var app1 = $__2.j68a158pvwj1qv0;
-  var app2 = $__2.j5cgdqe9bwl1qv1;
+  var app1 = $__2.j8rdfyfoj3y6y4;
+  var app2 = $__2.j4a30dbktlg6y5;
   !function() {
     app2.appendChild(CS.importTemplate(App, {appid: "state2"}));
     app1.appendChild(CS.importTemplate(App, {appid: "state1"}));
@@ -1522,19 +1584,19 @@ width: 950;
 </script>
 
 </template>
-<template class='OneApp' id='i2t0up4mdn1qv2'>
-<style id='j5qcna0jxfu1qv3'> .application { position: fixed !important; } } </style>
-<span class='self' id='j41otxr97321qv4'></span>
+<template class='OneApp' id='j10kfyt9opc6y6'>
+<style id='j9jzvoc2xfp6y7'> .application { position: fixed !important; } } </style>
+<span class='self' id='j9bo04sdjxv6y8'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.i2t0up4mdn1qv2;
-  var App = window.irz6iqypol1qsk;
-  var $__3 = window.i2t0up4mdn1qv2;
+  var $__0 = window.j10kfyt9opc6y6;
+  var App = window.j7boeevkfmf6vh;
+  var $__3 = window.j10kfyt9opc6y6;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
-  var self = $__2.j41otxr97321qv4;
+  var self = $__2.j9bo04sdjxv6y8;
   !function() {
     CS.content(self, CS.importTemplate(App));
   }.call($__0);
@@ -1611,10 +1673,10 @@ window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
 </script>
 <script>"use strict";
 !function $__1() {
-  var $__0 = window.j65efj3o0o11qsf;
-  var App = window.irz6iqypol1qsk;
-  var TwoApp = window.j3bvc1alph41qux;
-  var OneApp = window.i2t0up4mdn1qv2;
+  var $__0 = window.j116770g5ve6vc;
+  var App = window.j7boeevkfmf6vh;
+  var TwoApp = window.j4a4yjengy76y1;
+  var OneApp = window.j10kfyt9opc6y6;
   !function() {
     onAppOrientationLocked((function() {
       setTimeout(start, 200);
@@ -1634,7 +1696,7 @@ window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
 }();
 </script>
 
-<style id='j2qmljvncwm1qv6'>
+<style id='j2qceoo1si76ya'>
 #RELOAD {
 position: fixed;
 left: 0;
