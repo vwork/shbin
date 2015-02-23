@@ -23307,6 +23307,7 @@ var Immutable = require("immutable");
 var co = require("co");
 var ra = require("ra");
 var fs = require("fs");
+var lodash = require("lodash");
 var UID = require("uid");
 var lu = require("localUtils");
 var HTTPStatus = require("http-status");
@@ -23315,6 +23316,7 @@ var SLEEP_BETWEEN_SAVES = 300;
 var mkdir = co.cb(fs.mkdir);
 var writeFile = co.cb(fs.writeFile);
 var readFile = co.cb(fs.readFile);
+var rename = co.cb(fs.rename);
 var JSONservice = function JSONservice(file, template) {
   var $__0 = this;
   var M = ra.clean({
@@ -23398,7 +23400,10 @@ var JSONservice = function JSONservice(file, template) {
         };
       },
       text: null,
-      json: {uid: null}
+      json: {
+        uid: null,
+        makeBackups: null
+      }
     },
     get writeFile() {
       return $traceurRuntime.initGeneratorFunction(function $__10() {
@@ -23413,16 +23418,23 @@ var JSONservice = function JSONservice(file, template) {
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.state = (M.savedUID != M.last.json.uid) ? 9 : -2;
+                $ctx.state = (M.savedUID != M.last.json.uid) ? 13 : -2;
                 break;
-              case 9:
+              case 13:
                 M.savedUID = M.last.json.uid;
-                $ctx.state = 10;
+                $ctx.state = 14;
                 break;
-              case 10:
+              case 14:
                 $ctx.state = 6;
-                return writeFile(file, M.last.text).catch(lu.rethrow);
+                return rename(file, (file + "." + M.savedUID)).catch(lodash.noop);
               case 6:
+                $ctx.maybeThrow();
+                $ctx.state = 8;
+                break;
+              case 8:
+                $ctx.state = 10;
+                return writeFile(file, M.last.text).catch(lu.rethrow);
+              case 10:
                 $ctx.maybeThrow();
                 $ctx.state = -2;
                 break;
@@ -23696,7 +23708,7 @@ function isDataLongerThan(maxLength, data) {
       } )
     }()
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -25384,7 +25396,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
