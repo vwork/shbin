@@ -10,7 +10,7 @@
 	<polygon fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"/>
 	<g clip-path = "url( #internal )">
 	<g transform = "translate( 0 -420 )">
-		<animateTransform
+		<!--animateTransform
 			attributeName = "transform"
 			attributeType = "XML"
 			type = "translate"
@@ -18,7 +18,7 @@
 			to = "0 -420"
 			dur = "1s"
 			repeatCount = "1"
-		/>
+		/-->
 		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "386" x2 = "690" y2 = "386"/>
 		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "316" x2 = "690" y2 = "316"/>
 		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "458" x2 = "690" y2 = "458"/>
