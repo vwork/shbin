@@ -10,7 +10,6 @@
 >
 	<!-- <rect fill = "black" x = "0" y = "0" width = "1000" height = "675" /> -->
 	<g transform = "translate( -100 -175 )">
-
 	<g transform = "matrix(1.25,0,0,-1.25,0,937.5)">
 		<path
 			d = "m 589.5,169.5 -214,0 0,286 214,0 0,-286 z"
