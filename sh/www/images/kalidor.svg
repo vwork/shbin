@@ -4,10 +4,13 @@
 	xmlns:svg = "http://www.w3.org/2000/svg"
 	xmlns = "http://www.w3.org/2000/svg"
 	version = "1.1"
-	width = "12cm"
-	height = "9.375cm"
-	viewBox = "0 0 1200 937.5"
+	width = "10cm"
+	height = "6.75cm"
+	viewBox = "0 0 1000 675"
 >
+	<!-- <rect fill = "black" x = "0" y = "0" width = "1000" height = "675" /> -->
+	<g transform = "translate( -100 -175 )">
+
 	<g transform = "matrix(1.25,0,0,-1.25,0,937.5)">
 		<path
 			d = "m 589.5,169.5 -214,0 0,286 214,0 0,-286 z"
@@ -91,5 +94,6 @@
 				style = "fill:none;stroke:#02eadc;stroke-opacity:1;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none"
 			/>
 		</g>
+	</g>
 	</g>
 </svg>
