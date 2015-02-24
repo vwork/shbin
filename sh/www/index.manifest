@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1424789640873
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1424795170787
 
 CACHE:
 
@@ -19,6 +19,12 @@ CACHE:
 
 /images/roller_on.svg
 /images/roller_off.svg
+/images/tarser_on.svg
+/images/tarser_off.svg
+/images/slahbaum_on.svg
+/images/slahbaum_off.svg
+/images/pierahavornaja.svg
+/images/kalidor.svg
 
 /touch.svg
 /messages
