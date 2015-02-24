@@ -6,15 +6,12 @@
 	x="0px"
 	y="0px"
 	viewBox="0 0 950 760"
-	xml:space="preserve"
 >
 <g stroke-width="6">
 	<g>
 		<line fill="#FFFFFF" stroke="#FFFFFF" _stroke-width="3" _stroke-miterlimit="10" x1="155" y1="312" x2="155" y2="347"/>
 		<g>
-			<path fill="#FFFFFF" stroke="#FFFFFF" _stroke-width="3" _stroke-miterlimit="10" d="M112.5,408.3c-0.3-1.5-0.5-12.3-0.6-13.9
-				c-0.1-1.2-0.1-2.3-0.1-3.5c0-11.8,4.6-23,12.9-31.4c8.3-8.4,19.4-13,31.2-13c11.8,0,22.9,4.6,31.2,13
-				c8.3,8.4,12.9,19.5,12.9,31.4c0,0.8,0,1.6-0.1,2.4c-0.1,1.6-0.3,13.3-0.5,14.9"/>
+			<path fill="#FFFFFF" stroke="#FFFFFF" _stroke-width="3" _stroke-miterlimit="10" d="M112.5,408.3c-0.3-1.5-0.5-12.3-0.6-13.9c-0.1-1.2-0.1-2.3-0.1-3.5c0-11.8,4.6-23,12.9-31.4c8.3-8.4,19.4-13,31.2-13c11.8,0,22.9,4.6,31.2,13c8.3,8.4,12.9,19.5,12.9,31.4c0,0.8,0,1.6-0.1,2.4c-0.1,1.6-0.3,13.3-0.5,14.9"/>
 			<line fill="#FFFFFF" stroke="#FFFFFF" _stroke-width="3" _stroke-miterlimit="10" x1="111" y1="410" x2="201" y2="410"/>
 		</g>
 	</g>
