@@ -14,20 +14,10 @@
 	>
 	<g transform = "translate( -100 -175 )">
 	<g transform = "matrix(1.25,0,0,-1.25,0,937.5)">
-<!-- 		<g
-			transform = "translate(81.6428,75.6761)">
-			<path
-				d = "M 0,0 293.014,95.256"
-				style = "fill:none;stroke:#02eadc;stroke-opacity:1;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none"
-			/>
-		</g>
- -->		<g
-			transform = "translate(879.6563,75.6761)">
-<!-- 			<path
-				d = "M 0,0 -293.014,95.256"
-				style = "fill:none;stroke:#02eadc;stroke-opacity:1;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none"
-			/>
- -->			<g transform = "translate( -150 0 )" >
+		<g
+			transform = "translate(879.6563,75.6761)"
+		>
+			<g transform = "translate( -150 0 )" >
 			<g transform = "scale( -1 1 )" >
 			<rect
 				width = "50"
