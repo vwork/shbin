@@ -11,8 +11,8 @@
 		<rect x = "124" y = "246" width = "566" height = "432" />
 	</clipPath>
 </defs>
-<g>
-	<polygon fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"/>
+<g fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" >
+	<polygon points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"/>
 	<!-- <g clip-path = "url( #internal )"> -->
 	<!-- <g transform = "translate( 0 0 )"> -->
 		<!--animateTransform
@@ -24,12 +24,12 @@
 			dur = "1s"
 			repeatCount = "1"
 		/-->
-		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "386" x2 = "690" y2 = "386"/>
-		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "316" x2 = "690" y2 = "316"/>
-		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "458" x2 = "690" y2 = "458"/>
-		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "123" y1 = "530" x2 = "690" y2 = "530"/>
-		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "124" y1 = "605" x2 = "691" y2 = "605"/>
-		<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "124" y1 = "676" x2 = "691" y2 = "676"/>
+		<line x1 = "123" y1 = "386" x2 = "690" y2 = "386"/>
+		<line x1 = "123" y1 = "316" x2 = "690" y2 = "316"/>
+		<line x1 = "123" y1 = "458" x2 = "690" y2 = "458"/>
+		<line x1 = "123" y1 = "530" x2 = "690" y2 = "530"/>
+		<line x1 = "124" y1 = "605" x2 = "691" y2 = "605"/>
+		<line x1 = "124" y1 = "676" x2 = "691" y2 = "676"/>
 	<!-- </g> -->
 	<!-- </g> -->
 </g>

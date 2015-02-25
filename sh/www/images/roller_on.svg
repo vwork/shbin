@@ -11,8 +11,9 @@
 		<rect x = "124" y = "246" width = "566" height = "432" />
 	</clipPath>
 </defs>
-<g>
-	<polygon fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"/>
-	<line fill = "none" stroke = "#03EADC" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" x1 = "124" y1 = "256" x2 = "691" y2 = "256"/>
+<g fill = "none" stroke = "white" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"
+>
+	<polygon points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"/>
+	<line x1 = "124" y1 = "256" x2 = "691" y2 = "256"/>
 </g>
 </svg>
