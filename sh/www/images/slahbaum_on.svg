@@ -10,7 +10,7 @@
 >
 	<!-- <rect fill = "black" x = "0" y = "0" width = "1000" height = "675" /> -->
 	<g
-		style = "fill:#000;stroke:#02eadc;stroke-opacity:1;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none"
+		style = "fill:#000;stroke:white;stroke-opacity:1;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-dasharray:none"
 	>
 	<g transform = "translate( -100 -175 )">
 	<g transform = "matrix(1.25,0,0,-1.25,0,937.5)">
