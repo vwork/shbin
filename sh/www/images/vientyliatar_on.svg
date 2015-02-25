@@ -14,7 +14,7 @@
 	/>
 </defs>
 	<!-- <rect width = "99999" height = "99999" fill = "black" /> -->
-	<g style = "fill:black;stroke:#02eadc;stroke-width:21.11116028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none">
+	<g style = "fill:white;stroke:white;stroke-width:21.11116028;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none">
 		<g transform = "translate( 750 750 )">
 			<g>
 			<use xlink:href = "#path" />
@@ -26,7 +26,7 @@
 				type = "rotate"
 				from = "0"
 				to = "120"
-				dur = "0.8s"
+				dur = "0.5s"
 				repeatCount = "indefinite"
 			/>
 			</g>
