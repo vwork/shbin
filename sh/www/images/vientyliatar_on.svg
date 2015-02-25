@@ -20,7 +20,7 @@
 			<use xlink:href = "#path" />
 			<use xlink:href = "#path" transform = "rotate( 120 )" />
 			<use xlink:href = "#path" transform = "rotate( 240 )" />
-			<circle r = "150" />
+			<circle r = "150" style = "fill:black" />
 			<animateTransform attributeName = "transform"
 				attributeType = "XML"
 				type = "rotate"
