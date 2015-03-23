@@ -196,6 +196,7 @@ function putTimestamp( text ) {
 let manifestUpdater = thread( function* self( what, filename ) {
 	if ( filename == indexDst || filename == mainDst || filename == manifestDst )
 		return
+	console.log( "triggered: " + what + " " + filename )
 	if ( self.running ) {
 		self.rerun = true
 		return
@@ -223,8 +224,13 @@ let manifestUpdater = thread( function* self( what, filename ) {
 						global.require = r
 					}
 				} + "\n"
-			if ( String( yield [ fs.readFile, tmpIndex ] ) != modules )
+			if ( String( yield [ fs.readFile, tmpIndex ] ) != modules ) {
+				console.log( "updating " + tmpIndex )
+				// console.log( "**1** " + String( yield [ fs.readFile, tmpIndex ] ) )
+				// console.log( "**2** " + modules )
 				yield [ fs.writeFile, tmpIndex, modules ]
+				// console.log( "**3** " + String( yield [ fs.readFile, tmpIndex ] ) )
+			}
 			yield [ fs.writeFile, mainDst, putTimestamp( text ) ]
 
 			console.log( "updating " + indexDst )
