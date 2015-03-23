@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -25638,7 +25638,13 @@ var All = {
   Comfort_1: _(press, RL, {id: "Set_To_Comfort_1"}),
   Comfort_2: _(press, RL, {id: "Set_To_Comfort_2"}),
   Stop: _(click, ROL, {id: "Stop"}),
-  Link: _(press, {id: "Write_Group"})
+  Link: _(press, {id: "Write_Group"}),
+  Set: _({
+    id: "Set_To_Comfort",
+    COMFORT: (function(data) {
+      return data;
+    })
+  })
 };
 var RollShutter = _(All, {
   Up: _(click, RL, {id: "Up"}),
@@ -25677,15 +25683,20 @@ function find(obj) {
     return obj && obj[name];
   }), obj);
 }
-function createCommandSequence(group, deviceType, action) {
+function createCommandSequence(group, deviceType, action, data) {
   var name,
       id;
   var seq = find(deviceTypes, deviceType, action);
   if (!seq)
     throw new Error(("wrong action specified: " + deviceType + "." + action));
-  return seq.map((function(c) {
-    return _(c, {group: group});
+  if (!Array.isArray(seq))
+    seq = [seq];
+  seq = seq.map((function(c) {
+    return lodash.mapValues(_(c, {group: group}), (function(value) {
+      return typeof value == "function" ? value(data) : value;
+    }));
   }));
+  return seq;
 }
 exports.createCommandSequence = createCommandSequence;
 //# sourceMappingURL=actionToCommands.js.map
@@ -26639,10 +26650,13 @@ var actions = {
   }),
   Link: (function(device) {
     return null;
+  }),
+  Set: (function(_, data) {
+    return data;
   })
 };
-function getNewState(device, action) {
-  return device && actions.hasOwnProperty(action) ? actions[action](device) : null;
+function getNewState(device, action, data) {
+  return device && actions.hasOwnProperty(action) ? actions[action](device, data) : null;
 }
 exports.getNewState = getNewState;
 //# sourceMappingURL=deviceActions.js.map
@@ -26651,7 +26665,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -27840,6 +27854,10 @@ var lu = module.exports = {
   returnOnePromise: (function() {
     return lu.promiseOne;
   }),
+  when: function(promise, cb) {
+    promise.then(cb, cb);
+    return promise;
+  },
   waitFor: function(timeout, interval, callback) {
     if (typeof timeout == "function") {
       interval = timeout;
@@ -33108,8 +33126,8 @@ module.exports = Scheduler;
               $ctx.state = 16;
               break;
             case 16:
-              newstate = deviceActions.getNewState(device, deviceCommand);
-              commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand);
+              newstate = deviceActions.getNewState(device, deviceCommand, data);
+              commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand, data);
               if (!commands || !commands.length)
                 error(HTTPStatus.NOT_FOUND);
               passedToModem = false;
@@ -33499,7 +33517,7 @@ module.exports = Scheduler;
             return modem.userCommand({
               deviceId: request.query.id,
               command: request.query.cmd,
-              data: null,
+              data: request.query.data,
               socket: response
             });
           case 2:
@@ -33590,7 +33608,7 @@ module.exports = Scheduler;
                     return modem.userCommand({
                       deviceId: message.device,
                       command: message.command,
-                      data: null
+                      data: message.data
                     });
                   case 2:
                     $ctx.maybeThrow();
