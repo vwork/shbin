@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -24652,6 +24652,9 @@ var JSONservice = function JSONservice(file, template) {
   this.getState = (function() {
     return lu.valueOf(M.last.json);
   });
+  this.setState = (function(value) {
+    return $__0.applyChanges(value, false);
+  });
   this.waitForChange = $traceurRuntime.initGeneratorFunction(function $__10(response) {
     var polling;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -26665,7 +26668,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -31047,7 +31050,7 @@ var $ImmutableInterface = ImmutableInterface;
   },
   map: function(fun) {
     var m = this.valueOf();
-    return m && lodash.mapValues(m, fun);
+    return m && (Array.isArray(m) ? lodash.map(m, fun) : lodash.mapValues(m, fun));
   },
   keys: function() {
     var m = this.valueOf();
@@ -31091,7 +31094,7 @@ var Getter = (function(fun, isValueEqual) {
     return fun.apply(this, arguments);
   } : function() {
     var ret = fun.apply(this, arguments);
-    if (!Object.is(last, ret) && !isValueEqual(last, ret))
+    if (!is(last, ret, isValueEqual))
       last = ret;
     return last;
   };
@@ -31113,13 +31116,16 @@ var runSetter = (function(cell, setter, sticky) {
     return setter(cell.valueOf());
   }), null, sticky)).linkName(cell, ":setter");
 });
+function is(a, b, isEqual) {
+  return Object.is(a, b) || b && typeof b.isEqualTo == "function" && b.isEqualTo(a) || a && typeof a.isEqualTo == "function" && a.isEqualTo(b) || typeof isEqual == "function" && isEqual(a, b);
+}
 var Cell = function Cell(sticky) {
   var $__0;
   $traceurRuntime.superConstructor($Cell).call(this);
   this._id = UID();
   this._value = null;
   this._error = null;
-  this._isValueEqual = Object.is;
+  this._isValueEqual = is;
   this._initialized = false;
   this._frozen = false;
   this._closed = false;
@@ -31332,13 +31338,22 @@ var $Cell = Cell;
     if (typeof value == "function" && value.typeDescriptor)
       value = value(cell._key);
     if (typeof value == "function" && (isGetter || value.isGetter)) {
-      runGetter(cell, value, this._sticky);
+      runGetter(cell, (function() {
+        return value.call(cell._parent);
+      }), this._sticky);
       return ;
     }
     if (!isLiteral(value)) {
-      if (value == null || typeof value != "object" || value.valueOf == Object.prototype.valueOf)
+      if (value == null || typeof value != "object" || value.valueOf == Object.prototype.valueOf) {
+        if (typeof value == "function") {
+          var f = value;
+          value = function() {
+            return f.apply(cell._parent, arguments);
+          };
+          value.unbinded = f;
+        }
         cell._value = value;
-      else
+      } else
         cell._init((function() {
           return getValue(value);
         }), true, true);
@@ -31347,30 +31362,20 @@ var $Cell = Cell;
     if (recursive)
       throw new Error("wrong parameters");
     cell.defineProperty();
-    var $__26 = function(key) {
+    for (var key in value) {
       var descr = Object.getOwnPropertyDescriptor(value, key);
       if (!descr)
-        return 0;
+        continue;
       var get = descr.get;
       var subValue = descr.value;
       if (descr.set)
         throw new Error("wrong parameters");
       else if (get)
-        subValue = get.length == 0 ? get : (function() {
-          return get();
-        });
+        subValue = get;
       if (key == "$")
         cell._init(subValue, true, !!get);
       else
         cell.defineProperty(key)._init(subValue, false, !!get);
-    },
-        $__27;
-    $__25: for (var key in value) {
-      $__27 = $__26(key);
-      switch ($__27) {
-        case 0:
-          continue $__25;
-      }
     }
   },
   _read: function() {
@@ -31429,10 +31434,11 @@ var $Cell = Cell;
       }
       this._fire();
       if (!down) {
-        var p$__28 = this._parent;
-        while (p$__28 && !p$__28._dirty) {
-          p$__28._dirty = true;
-          p$__28._fire();
+        var p$__25 = this._parent;
+        while (p$__25 && !p$__25._dirty) {
+          p$__25._dirty = true;
+          p$__25._fire();
+          p$__25 = p$__25._parent;
         }
       }
     }
@@ -31517,8 +31523,8 @@ var $Cell = Cell;
     }
     a = this._onchange;
     if (a.length) {
-      for (var i$__29 = 0; i$__29 < a.length; i$__29++)
-        updates.later(a[i$__29]);
+      for (var i$__26 = 0; i$__26 < a.length; i$__26++)
+        updates.later(a[i$__26]);
       a.length = 0;
     }
   },
@@ -31614,15 +31620,15 @@ var $Action = Action;
       writable: true
     }), $__2);
   },
-  _loop: $traceurRuntime.initGeneratorFunction(function $__35() {
+  _loop: $traceurRuntime.initGeneratorFunction(function $__30() {
     var $__0,
         next,
         errorCatched,
         ret,
-        $__36,
-        $__37,
-        $__38,
-        $__39,
+        $__31,
+        $__32,
+        $__33,
+        $__34,
         error;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
@@ -31683,25 +31689,25 @@ var $Action = Action;
             $ctx.state = 25;
             break;
           case 25:
-            $__36 = $ctx.wrapYieldStar(this._generatorProxy[Symbol.iterator]());
+            $__31 = $ctx.wrapYieldStar(this._generatorProxy[Symbol.iterator]());
             $ctx.sent = void 0;
             $ctx.action = 'next';
             $ctx.state = 19;
             break;
           case 19:
-            $__37 = $__36[$ctx.action]($ctx.sentIgnoreThrow);
+            $__32 = $__31[$ctx.action]($ctx.sentIgnoreThrow);
             $ctx.state = 16;
             break;
           case 16:
-            $ctx.state = ($__37.done) ? 10 : 9;
+            $ctx.state = ($__32.done) ? 10 : 9;
             break;
           case 10:
-            $ctx.sent = $__37.value;
+            $ctx.sent = $__32.value;
             $ctx.state = 17;
             break;
           case 9:
             $ctx.state = 19;
-            return $__37.value;
+            return $__32.value;
           case 17:
             ret = $ctx.sentIgnoreThrow;
             $ctx.state = 23;
@@ -31733,25 +31739,25 @@ var $Action = Action;
             $ctx.state = (ret && ret.next && ret.throw) ? 50 : 58;
             break;
           case 50:
-            $__38 = $ctx.wrapYieldStar(ret[Symbol.iterator]());
+            $__33 = $ctx.wrapYieldStar(ret[Symbol.iterator]());
             $ctx.sent = void 0;
             $ctx.action = 'next';
             $ctx.state = 51;
             break;
           case 51:
-            $__39 = $__38[$ctx.action]($ctx.sentIgnoreThrow);
+            $__34 = $__33[$ctx.action]($ctx.sentIgnoreThrow);
             $ctx.state = 48;
             break;
           case 48:
-            $ctx.state = ($__39.done) ? 42 : 41;
+            $ctx.state = ($__34.done) ? 42 : 41;
             break;
           case 42:
-            $ctx.sent = $__39.value;
+            $ctx.sent = $__34.value;
             $ctx.state = 49;
             break;
           case 41:
             $ctx.state = 51;
-            return $__39.value;
+            return $__34.value;
           case 49:
             ret = $ctx.sentIgnoreThrow;
             $ctx.state = 21;
@@ -31829,7 +31835,7 @@ var $Action = Action;
           default:
             return $ctx.end();
         }
-    }, $__35, this);
+    }, $__30, this);
   }),
   isClosed: function() {
     return !this._cellSet;
@@ -31849,9 +31855,9 @@ var $Action = Action;
       c.length = 0;
     }
     if (c = this._threads) {
-      for (var i$__30 = 0,
-          l$__31 = c.length; i$__30 < l$__31; ++i$__30)
-        c[i$__30].kill();
+      for (var i$__27 = 0,
+          l$__28 = c.length; i$__27 < l$__28; ++i$__27)
+        c[i$__27].kill();
       c.length = 0;
     }
   },
@@ -31903,7 +31909,7 @@ var $Action = Action;
           c.cell._actionsArr.push(c);
           c.pushedC = true;
         }
-        if (!Object.is(c.value, c.cell._value) || !Object.is(c.error, c.cell._error))
+        if (!is(c.value, c.cell._value) || c.error != c.cell._error)
           return null;
         c.action = this;
         ret = true;
@@ -31985,8 +31991,8 @@ var newReactive = (function(getter, handlers, sticky, isValueEqual) {
   try {
     for (var $__11 = void 0,
         $__10 = (handlers)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__13 = ($__11 = $__10.next()).done); $__13 = true) {
-      var h$__32 = $__11.value;
-      h$__32 && (h$__32.length ? runSetter : runGetter)(cell, h$__32, sticky);
+      var h$__29 = $__11.value;
+      h$__29 && (h$__29.length ? runSetter : runGetter)(cell, h$__29, sticky);
     }
   } catch ($__16) {
     $__14 = true;
@@ -32020,8 +32026,18 @@ var ra = function() {
     isValueEqual = arguments[index++];
   return newReactive(fun, [], sticky, isValueEqual);
 };
+function ArrayIsEqualTo(a) {
+  return (this == a) || Array.isArray(a) && this.length == a.length && this.every((function(e, i) {
+    return is(e, a[i]);
+  }));
+}
 exports = module.exports = ra;
 exports.ra = ra;
+exports.is = is;
+exports.Array = (function(array) {
+  array.isEqualTo = ArrayIsEqualTo;
+  return array;
+});
 exports.clean = (function(getter) {
   for (var handers = [],
       $__19 = 1; $__19 < arguments.length; $__19++)
@@ -32090,47 +32106,77 @@ exports.importFrom = (function(observable) {
 exports.forceCalculations = (function() {
   return updates.runAll();
 });
-exports.map = (function(dest, source, convert) {
-  throw new Error("message");
-  if (!(dest instanceof Cell))
-    dest = ra.clean(dest);
-  var scache = ra.clean();
-  scache.defineProperty();
-  var dcache = ra.clean();
-  dcache.defineProperty();
-  ra.clean((function() {
-    return scache.assign(getValue(source));
-  }));
-  ra.clean((function() {
-    var src = scache.valueOf();
-    updates.later((function() {
-      var i = 0;
-      var $__33 = function(k) {
-        if (src.hasOwnProperty(k)) {
-          if (dcache.live.hasOwnProperty(k))
-            return {v: (void 0)};
-          var s = scache.defineProperty(k);
-          var d = dcache.defineProperty(k);
-          !((function(i) {
-            return ra.clean((function() {
-              return convert(d, s, k, i);
-            }));
-          }))(i);
-          ++i;
+function toKey(obj) {
+  if (!toKey.Keys)
+    toKey.Keys = typeof WeakMap != "undefined" ? new WeakMap : function() {
+      var id = ("_to_key_" + UID());
+      return {
+        set: function(obj, value) {
+          Object.defineProperty(obj, id, {
+            enumerable: false,
+            configurable: true,
+            writable: false,
+            value: value
+          });
+        },
+        get: function(obj) {
+          return obj[id];
+        },
+        has: function(obj) {
+          return obj.hasOwnProperty(id);
         }
-      },
-          $__34;
-      for (var k in src) {
-        $__34 = $__33(k);
-        if (typeof $__34 === "object")
-          return $__34.v;
-      }
+      };
+    }();
+  if (obj && (typeof obj == "object" || typeof obj == "function")) {
+    if (!toKey.Keys.has(obj))
+      toKey.Keys.set(obj, UID());
+    return toKey.Keys.get(obj);
+  }
+  return typeof obj + obj;
+}
+exports.map = (function(array, mapper) {
+  if (!(array instanceof Cell))
+    throw new Error("ra.map: first argument must be a cell");
+  var cache = Object.create(null);
+  var ret = ra();
+  ra.detach((function() {
+    return ra((function() {
+      var a = array.valueOf();
+      ra.detach((function() {
+        var retarr = [];
+        var index = 0;
+        lodash.forEach(cache, (function(c) {
+          return c.abandoned = true;
+        }));
+        a && a.forEach((function(value) {
+          var key = toKey(value);
+          var c;
+          if (!(c = cache[key]))
+            c = cache[key] = {
+              value: value,
+              index: ra()
+            };
+          c.abandoned = false;
+          c.index.assign(index++);
+          if (!c.proc)
+            c.proc = ra((function() {
+              return mapper(value, c.index);
+            }));
+          retarr.push(c.proc);
+        }));
+        lodash.keys(cache).forEach((function(key) {
+          var c = cache[key];
+          if (c.abandoned) {
+            delete cache[key];
+            c.index.close();
+            c.proc.close();
+          }
+        }));
+        ret.assign(ra.Array(retarr));
+      }));
     }));
   }));
-  ra.clean((function() {
-    return dest.assign(getValue(dcache));
-  }));
-  return dest;
+  return ret;
 });
 exports.slice = (function(dest, source, keysVar) {
   throw new Error("message");
@@ -33546,7 +33592,23 @@ module.exports = Scheduler;
   }))).all("/devices", (modem.devices = new JSONservice(config.var + "/devices", {})).httpService).all("/rooms", (modem.places = new JSONservice(config.var + "/rooms", {
     main: "room",
     room: {content: []}
-  })).httpService);
+  }), ra((function() {
+    var places = modem.places.getState();
+    ra.detach((function() {
+      var ret = {};
+      lodash.forEach(places, (function(place, placeId) {
+        if (!place || !place.content)
+          return ;
+        var p = ret[placeId] = {content: {}};
+        lodash.keys(place.content).sort((function(a, b) {
+          return (place.content[a].index || 0) - (place.content[b].index || 0);
+        })).forEach((function(key, index) {
+          p.content[key] = {index: index};
+        }));
+      }));
+      modem.places.applyChanges(ret);
+    }));
+  })), modem.places).httpService);
   var WebSocket = require("websockets/lib/websockets/socket");
   var NodeWebSocketToJSON = require("NodeWebSocketToJSON");
   var StreamToJSON = require("StreamToJSON");
