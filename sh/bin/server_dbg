@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -26673,7 +26673,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -27653,8 +27653,8 @@ if (!global.WeakMap) {
   var n = 0;
   global.WeakMap = (function() {
     var WeakMap = function WeakMap(data) {
-      var $__21,
-          $__22;
+      var $__22,
+          $__23;
       this._index = ("__WeakMap" + ++n);
       if (data) {
         var $__6 = true;
@@ -27663,9 +27663,9 @@ if (!global.WeakMap) {
         try {
           for (var $__4 = void 0,
               $__3 = (data)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__6 = ($__4 = $__3.next()).done); $__6 = true) {
-            var $__20 = $__4.value,
-                key = ($__21 = $__20[$traceurRuntime.toProperty(Symbol.iterator)](), ($__22 = $__21.next()).done ? void 0 : $__22.value),
-                value = ($__22 = $__21.next()).done ? void 0 : $__22.value;
+            var $__21 = $__4.value,
+                key = ($__22 = $__21[$traceurRuntime.toProperty(Symbol.iterator)](), ($__23 = $__22.next()).done ? void 0 : $__23.value),
+                value = ($__23 = $__22.next()).done ? void 0 : $__23.value;
             this.set(key, value);
           }
         } catch ($__9) {
@@ -27951,13 +27951,13 @@ var lu = module.exports = {
         g();
     }
   },
-  try: $traceurRuntime.initGeneratorFunction(function $__23(fun) {
+  try: $traceurRuntime.initGeneratorFunction(function $__24(fun) {
     var startTimeToWait,
         maxTimeToWait,
         multiply,
         timeToWait,
-        $__24,
         $__25,
+        $__26,
         e;
     var $arguments = arguments;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -27975,18 +27975,18 @@ var lu = module.exports = {
             $ctx.state = 20;
             break;
           case 20:
-            $__24 = fun();
+            $__25 = fun();
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__24;
+            return $__25;
           case 2:
-            $__25 = $ctx.sent;
+            $__26 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__25;
+            $ctx.returnValue = $__26;
             $ctx.state = -2;
             break;
           case 8:
@@ -28017,7 +28017,7 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__23, this);
+    }, $__24, this);
   }),
   unique: function(value, index, array) {
     return index == 0 || value != array[index - 1];
@@ -28035,9 +28035,8 @@ var lu = module.exports = {
       return emitter.removeListener(event, handler);
     }));
   },
-  readStream: $traceurRuntime.initGeneratorFunction(function $__26(stream) {
-    var $__27,
-        $__28,
+  readStream: $traceurRuntime.initGeneratorFunction(function $__27(stream) {
+    var $__28,
         $__29,
         $__30,
         $__31,
@@ -28050,77 +28049,77 @@ var lu = module.exports = {
         $__38,
         $__39,
         $__40,
-        $__41;
+        $__41,
+        $__42;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__40 = {then: function(resolve, reject) {
+            $__41 = {then: function(resolve, reject) {
                 var content = [];
-                $__27 = stream.on, $__30 = function(chunk) {
-                  return $__28 = content.push, $__29 = $__28.call(content, chunk), $__29;
-                }, $__31 = $__27.call(stream, "data", $__30), $__31;
-                $__32 = stream.on, $__36 = function() {
-                  return $__33 = lu.joinData, $__34 = $__33.call(lu, content), $__35 = resolve($__34), $__35;
-                }, $__37 = $__32.call(stream, "end", $__36), $__37;
-                $__38 = stream.on, $__39 = $__38.call(stream, "error", reject), $__39;
+                $__28 = stream.on, $__31 = function(chunk) {
+                  return $__29 = content.push, $__30 = $__29.call(content, chunk), $__30;
+                }, $__32 = $__28.call(stream, "data", $__31), $__32;
+                $__33 = stream.on, $__37 = function() {
+                  return $__34 = lu.joinData, $__35 = $__34.call(lu, content), $__36 = resolve($__35), $__36;
+                }, $__38 = $__33.call(stream, "end", $__37), $__38;
+                $__39 = stream.on, $__40 = $__39.call(stream, "error", reject), $__40;
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__40;
+            return $__41;
           case 2:
-            $__41 = $ctx.sent;
+            $__42 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__41;
+            $ctx.returnValue = $__42;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__26, this);
+    }, $__27, this);
   }),
-  readJSON: $traceurRuntime.initGeneratorFunction(function $__42(stream) {
-    var $__43,
-        $__44,
+  readJSON: $traceurRuntime.initGeneratorFunction(function $__43(stream) {
+    var $__44,
         $__45,
         $__46,
-        $__47;
+        $__47,
+        $__48;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__43 = JSON.parse;
-            $__44 = lu.readStream;
-            $__45 = $__44.call(lu, stream);
+            $__44 = JSON.parse;
+            $__45 = lu.readStream;
+            $__46 = $__45.call(lu, stream);
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__45;
+            return $__46;
           case 2:
-            $__46 = $ctx.sent;
+            $__47 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $__47 = $__43.call(JSON, $__46);
+            $__48 = $__44.call(JSON, $__47);
             $ctx.state = 8;
             break;
           case 8:
-            $ctx.returnValue = $__47;
+            $ctx.returnValue = $__48;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__42, this);
+    }, $__43, this);
   }),
-  readChunk: $traceurRuntime.initGeneratorFunction(function $__48(stream) {
-    var $__49,
-        $__50,
+  readChunk: $traceurRuntime.initGeneratorFunction(function $__49(stream) {
+    var $__50,
         $__51,
         $__52,
         $__53,
@@ -28138,53 +28137,54 @@ var lu = module.exports = {
         $__65,
         $__66,
         $__67,
-        $__68;
+        $__68,
+        $__69;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
         switch ($ctx.state) {
           case 0:
-            $__67 = {then: function(resolve, reject) {
-                $__49 = stream.on, $__50 = $__49.call(stream, "data", onData), $__50;
-                $__51 = stream.on, $__52 = $__51.call(stream, "end", onEnd), $__52;
-                $__53 = stream.on, $__54 = $__53.call(stream, "error", onError), $__54;
+            $__68 = {then: function(resolve, reject) {
+                $__50 = stream.on, $__51 = $__50.call(stream, "data", onData), $__51;
+                $__52 = stream.on, $__53 = $__52.call(stream, "end", onEnd), $__53;
+                $__54 = stream.on, $__55 = $__54.call(stream, "error", onError), $__55;
                 function done() {
-                  $__55 = stream.removeListener, $__56 = $__55.call(stream, "data", onData), $__56;
-                  $__57 = stream.removeListener, $__58 = $__57.call(stream, "end", onEnd), $__58;
-                  $__59 = stream.removeListener, $__60 = $__59.call(stream, "error", onError), $__60;
+                  $__56 = stream.removeListener, $__57 = $__56.call(stream, "data", onData), $__57;
+                  $__58 = stream.removeListener, $__59 = $__58.call(stream, "end", onEnd), $__59;
+                  $__60 = stream.removeListener, $__61 = $__60.call(stream, "error", onError), $__61;
                 }
                 function onData(chunk) {
-                  $__61 = done(), $__61;
-                  $__62 = resolve(chunk), $__62;
+                  $__62 = done(), $__62;
+                  $__63 = resolve(chunk), $__63;
                 }
                 function onEnd() {
-                  $__63 = done(), $__63;
-                  $__64 = resolve(null), $__64;
+                  $__64 = done(), $__64;
+                  $__65 = resolve(null), $__65;
                 }
                 function onError(error) {
-                  $__65 = done(), $__65;
-                  $__66 = reject(error), $__66;
+                  $__66 = done(), $__66;
+                  $__67 = reject(error), $__67;
                 }
               }};
             $ctx.state = 6;
             break;
           case 6:
             $ctx.state = 2;
-            return $__67;
+            return $__68;
           case 2:
-            $__68 = $ctx.sent;
+            $__69 = $ctx.sent;
             $ctx.state = 4;
             break;
           case 4:
-            $ctx.returnValue = $__68;
+            $ctx.returnValue = $__69;
             $ctx.state = -2;
             break;
           default:
             return $ctx.end();
         }
-    }, $__48, this);
+    }, $__49, this);
   }),
   static: function(fun) {
-    return co.func($traceurRuntime.initGeneratorFunction(function $__69(request, response) {
+    return co.func($traceurRuntime.initGeneratorFunction(function $__70(request, response) {
       var $__1,
           $__2,
           headWritten,
@@ -28245,7 +28245,7 @@ var lu = module.exports = {
             default:
               return $ctx.end();
           }
-      }, $__69, this);
+      }, $__70, this);
     }));
   },
   property: function(obj, name, defaultValue) {
@@ -28457,9 +28457,9 @@ var lu = module.exports = {
   cast: function(type, obj) {
     if (!obj || typeof obj != "object")
       return obj;
-    var $__20 = type || {},
-        constructor = $__20.constructor,
-        elements = $__20.elements;
+    var $__21 = type || {},
+        constructor = $__21.constructor,
+        elements = $__21.elements;
     if (typeof constructor == "string")
       constructor = Immutable[constructor];
     return (constructor || Immutable.Map)().withMutations((function(ret) {
@@ -28546,7 +28546,7 @@ var lu = module.exports = {
       console.log(t);
     }
   },
-  skip: $traceurRuntime.initGeneratorFunction(function $__69(c, buf) {
+  skip: $traceurRuntime.initGeneratorFunction(function $__70(c, buf) {
     var $__6,
         $__7,
         $__8,
@@ -28635,9 +28635,9 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__69, this);
+    }, $__70, this);
   }),
-  take: $traceurRuntime.initGeneratorFunction(function $__70(c, buf) {
+  take: $traceurRuntime.initGeneratorFunction(function $__71(c, buf) {
     var $__6,
         $__7,
         $__8,
@@ -28726,7 +28726,7 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__70, this);
+    }, $__71, this);
   }),
   copy: function(buf) {
     var ret = lu.array(buf);
@@ -28777,7 +28777,7 @@ var lu = module.exports = {
   vector: function(buf) {
     return buf instanceof Buffer ? buf : lu.array(buf);
   },
-  concat: $traceurRuntime.initGeneratorFunction(function $__71(list) {
+  concat: $traceurRuntime.initGeneratorFunction(function $__72(list) {
     var $__13,
         $__14,
         $__15,
@@ -28956,7 +28956,7 @@ var lu = module.exports = {
           default:
             return $ctx.end();
         }
-    }, $__71, this);
+    }, $__72, this);
   }),
   word: function(w) {
     return [w & 0xff, (w >> 8) & 0xff];
@@ -29005,6 +29005,38 @@ var lu = module.exports = {
       ret += str;
       return ret;
     }
+  },
+  get: function(obj) {
+    for (var path = [],
+        $__20 = 1; $__20 < arguments.length; $__20++)
+      path[$__20 - 1] = arguments[$__20];
+    var $__6 = true;
+    var $__7 = false;
+    var $__8 = undefined;
+    try {
+      for (var $__4 = void 0,
+          $__3 = (path)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__6 = ($__4 = $__3.next()).done); $__6 = true) {
+        var p = $__4.value;
+        if (obj == null)
+          break;
+        else
+          obj = obj[p];
+      }
+    } catch ($__9) {
+      $__7 = true;
+      $__8 = $__9;
+    } finally {
+      try {
+        if (!$__6 && $__3.return != null) {
+          $__3.return();
+        }
+      } finally {
+        if ($__7) {
+          throw $__8;
+        }
+      }
+    }
+    return obj;
   }
 };
 //# sourceMappingURL=localUtils.js.map
@@ -32061,6 +32093,20 @@ exports.detach = (function(fun) {
   } else
     return fun();
 });
+exports.detached = (function(fun) {
+  return function() {
+    var old;
+    if (old = co.global[actionKey]) {
+      co.global[actionKey] = null;
+      try {
+        return fun.apply(this, arguments);
+      } finally {
+        co.global[actionKey] = old;
+      }
+    } else
+      return fun.apply(this, arguments);
+  };
+});
 exports.on = (function(emitter, event, getter) {
   var ret = ra();
   var handler = (function(data) {
@@ -32110,6 +32156,92 @@ exports.importFrom = (function(observable) {
 });
 exports.forceCalculations = (function() {
   return updates.runAll();
+});
+function createActual() {
+  var ret = ra();
+  ret.assign(ret);
+  ra((function() {
+    var value = ret.valueOf();
+    ra.detach((function() {
+      return ret.assign(value);
+    }));
+  }));
+  return ret;
+}
+var _DBChunk_Getter = UID();
+var DBChunk = function DBChunk(getter, save, initial, previous) {
+  this._previous = previous;
+  this._getter = getter;
+  this._save = save;
+  var chunk = this._chunk = ra();
+  chunk.assign(initial);
+  var actual = this._actual = createActual();
+  actual[_DBChunk_Getter] = ra((function() {
+    return lu.applyDiff(getter.valueOf(), chunk.valueOf());
+  }));
+  this._summary = ra((function() {
+    return actual.valueOf()[_DBChunk_Getter].valueOf();
+  }));
+};
+var $DBChunk = DBChunk;
+($traceurRuntime.createClass)(DBChunk, {
+  createNext: function() {
+    var initial = arguments[0] !== (void 0) ? arguments[0] : null;
+    return new $DBChunk(this._summary, this._save, initial, this._actual);
+  },
+  get before() {
+    return this._getter.valueOf();
+  },
+  get summary() {
+    return this._summary.valueOf();
+  },
+  get chunk() {
+    return this._chunk.valueOf();
+  },
+  set chunk(value) {
+    this._chunk.assign(value);
+  },
+  valueOf: function() {
+    return this.chunk;
+  },
+  assign: function(value) {
+    this.chunk = value;
+  },
+  save: function() {
+    return this._save(this.chunk);
+  },
+  close: function() {
+    this._chunk.assign(null);
+    if (this._previous) {
+      this._actual.assign(this._previous);
+      this._previous = null;
+    }
+  }
+}, {});
+var DB = function DB(getter, save) {
+  var $__0 = this;
+  this._head = ra();
+  this._head.assign(new DBChunk(getter, save));
+  this._value = ra((function() {
+    return $__0._head.valueOf().summary;
+  }));
+};
+($traceurRuntime.createClass)(DB, {
+  get data() {
+    return this.valueOf();
+  },
+  valueOf: function() {
+    return this._value.valueOf();
+  },
+  createRecord: function() {
+    var initial = arguments[0] !== (void 0) ? arguments[0] : null;
+    var ret = this._head.valueOf().createNext();
+    this._head.assign(ret);
+    return ret;
+  }
+}, {});
+exports.db = (function(getter, save) {
+  return new DB(getter, save);
 });
 function toKey(obj) {
   if (!toKey.Keys)
