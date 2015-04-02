@@ -1,9 +1,8 @@
 #!/bin/sh
 
 cd /home/sh/shgit
-./$1 &
+./run &
 sudo -u sh ./call_update
-# ./call_update
 
 cd ./sh
-./$1
+./run
