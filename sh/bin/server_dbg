@@ -25938,6 +25938,56 @@ exports.catchThreads = (function(cb, onThread) {
     threadCatcher = oldCatcher;
   }
 });
+exports.receive = (function(emitter, events) {
+  return new Promise((function(resolve, reject) {
+    var handlers = Object.create(null);
+    var timer;
+    var rejecter = co.defer((function() {
+      clear();
+      reject();
+    }));
+    var $__7 = function(event) {
+      if (events.hasOwnProperty(event)) {
+        var predicate = events[event];
+        if (predicate == null)
+          return 0;
+        if (event == "timeout")
+          timer = setTimeout((function() {
+            return done("timeout", null);
+          }), predicate);
+        else
+          emitter.addListener(event, handlers[event] = (function(data) {
+            if (typeof predicate != "function" || predicate(data))
+              done(event, data);
+          }));
+      }
+    },
+        $__8;
+    $__6: for (var event in events) {
+      $__8 = $__7(event);
+      switch ($__8) {
+        case 0:
+          continue $__6;
+      }
+    }
+    function clear() {
+      if (!handlers)
+        return ;
+      clearTimeout(timer);
+      for (var event in handlers)
+        emitter.removeListener(event, handlers[event]);
+      rejecter.close();
+      handlers = null;
+    }
+    function done(event, data) {
+      clear();
+      resolve({
+        event: event,
+        data: data
+      });
+    }
+  }));
+});
 exports.wait = (function(funWithCB) {
   return ({then: funWithCB});
 });
@@ -26052,11 +26102,20 @@ var IteratorProxy = function IteratorProxy(iterator) {
 var $IteratorProxy = IteratorProxy;
 ($traceurRuntime.createClass)(IteratorProxy, {
   defer: function(proc) {
+    var $__0 = this;
     if (typeof proc != "function")
       throw new Error("type error: only functions can be deferred");
     if (!this._deferred)
       this._deferred = [];
     this._deferred.push(proc);
+    return {close: (function() {
+        if ($__0._deferred)
+          for (var i = $__0._deferred.length - 1; i >= 0; --i)
+            if ($__0._deferred[i] == proc) {
+              $__0._deferred.splice(i, 1);
+              return ;
+            }
+      })};
   },
   save: function(result) {
     if (!this._result)
@@ -26132,7 +26191,7 @@ IteratorProxy._iterator = null;
 exports.defer = (function(proc) {
   if (!IteratorProxy._iterator)
     throw new Error("defer: not in a co-thread");
-  IteratorProxy._iterator.defer(proc);
+  return IteratorProxy._iterator.defer(proc);
 });
 var Thread = function Thread(iterator) {
   var $__0 = this;
@@ -26724,6 +26783,7 @@ var co = require("co");
 var lu = require("localUtils");
 var UID = require("uid");
 var express = require("express");
+var YAML = require("yamljs");
 require("rewriter");
 var userAgents = [/\((iPhone);/, /\s(Android)\s([\d\.]+).*\s(Chrome\/\d+)/, /\s(Chrome\/\d+)/];
 function getUserAgentName(ua) {
@@ -26764,17 +26824,58 @@ function getUserAgentName(ua) {
   }
   return ua;
 }
+var cookieInfinite = {expires: new Date("Fri, 31-Dec-9999 23:59:59 GMT")};
+var clientNamesPath = path.resolve("./clients");
+require("watchStop")(clientNamesPath);
+var clientNames = Object.create(null);
+var clientFile = lu.catch((function() {
+  return YAML.load(clientNamesPath);
+}), lu.returnNull);
+var clientDebug = clientFile.debug && clientFile.debug.split(/\s+/);
+delete clientFile.debug;
+lodash.forEach(clientFile, (function(ids, name) {
+  return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
+    return clientNames[id] = name;
+  }));
+}));
 module.exports = function(router) {
   var app = express();
+  var clients = Object.create(null);
+  app.clients = clients;
+  var timeout = 3600000;
+  setInterval((function() {
+    var now = Date.now();
+    lodash.forEach(clients, (function(date, instanceID) {
+      if (now - date > timeout)
+        delete clients[instanceID];
+    }));
+  }), timeout);
   app.set("views", __dirname + "/../www");
   app.use(require("cookie-parser")());
+  app.use((function(request, response, next) {
+    var instanceID = request.cookies.instanceID;
+    if (!instanceID) {
+      instanceID = request.cookies.instanceID = UID();
+      console.log(("new client connected: " + instanceID).red);
+      response.cookie("instanceID", instanceID, cookieInfinite);
+    }
+    clients[instanceID] = Date.now();
+    var name = clientNames[instanceID];
+    var debug = clientDebug.indexOf(instanceID) >= 0 || name && clientDebug.indexOf(name) >= 0;
+    if (!!debug != !!request.cookies.instanceDebug)
+      if (debug)
+        response.cookie("instanceDebug", "debug", cookieInfinite);
+      else
+        response.clearCookie("instanceDebug");
+    next();
+  }));
   app.post("/log", (function(request, response, next) {
     lu.log(decodeURIComponent(request.url.slice(5)).replace(/<span\s+style\=`color\:(\w+);`>(.*?)<\/span>/g, (function(_, color, text) {
       return text[color];
     })) + (" " + getUserAgentName(request.headers["user-agent"])));
     response.status(200).end();
   }));
-  app.use(require("http_log"));
+  app.use(require("http_log")(clientNames));
   app.post("/info", function() {
     var fn = path.resolve(__dirname + "/../log/clients.json");
     var clients = ra.clean({
@@ -27018,7 +27119,7 @@ module.exports = function(router) {
       } )
     }()
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","express":false,"fs":false,"http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","http_static":"/home/vadzim/v/work/nerojs/src/http_static.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/http_log.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","express":false,"fs":false,"http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","http_static":"/home/vadzim/v/work/nerojs/src/http_static.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/http_log.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -27053,14 +27154,17 @@ module.exports = function(router) {
 global._LOG = true;
 var logger = require("morgan");
 var lu = require("localUtils");
-logger.token("cookie", (function(request, response) {
+logger.token("cookie", (function(request) {
   return request.headers.cookie;
 }));
-logger.token("startTime", (function(request, response) {
+logger.token("startTime", (function(request) {
   return request.startTime;
 }));
-logger.token("requestTime", (function(request, response) {
+logger.token("requestTime", (function(request) {
   return lu.formatms((new Date) - request.startTime) + "s";
+}));
+logger.token("instanceID", (function(request) {
+  return request.clientID;
 }));
 logger.token("manifestHeaders", (function(request, response) {
   if (!request.url.match(/\.manifest(\?|$)/))
@@ -27072,14 +27176,18 @@ logger.token("manifestHeaders", (function(request, response) {
   }));
   return ret;
 }));
-var L = logger(":remote-addr".blue + " - :remote-user [:date] \"" + ":method".green + " " + ":url".cyan + " HTTP/:http-version\" " + ":status".green + " :res[content-length] \":referrer\" \":user-agent\" " + ":requestTime".yellow + ":manifestHeaders");
-module.exports = (function(request, response, next) {
-  if (global._LOG) {
-    console.log((request.method + " " + request.url.green));
-    request.startTime = new Date;
-    L(request, response, next);
-  } else
-    next();
+var L = logger(":remote-addr".blue + " :instanceID".blue + " :remote-user [:date] \"" + ":method".green + " " + ":url".cyan + " HTTP/:http-version\" " + ":status".green + " :res[content-length] \":referrer\" \":user-agent\" " + ":requestTime".yellow + ":manifestHeaders");
+module.exports = (function(clients) {
+  return (function(request, response, next) {
+    if (global._LOG) {
+      console.log((request.method + " " + request.url.green));
+      request.startTime = new Date;
+      var instanceID = request.cookies.instanceID;
+      request.clientID = instanceID && (clients && clients[instanceID] || instanceID) || '?';
+      L(request, response, next);
+    } else
+      next();
+  });
 });
 //# sourceMappingURL=http_log.js.map
 
@@ -30890,7 +30998,8 @@ var co = require("co");
 var UID = require("uid");
 var lodash = require("lodash");
 var LOG = require("LOG").LOG;
-var actionKey = "ACTION_" + UID();
+var actionKey = ("_RA_ACTION_" + UID());
+var raValue = ("_RA_VALUE_" + UID());
 var updates = {};
 updates.scheduled = false;
 updates.procs = [];
@@ -31001,7 +31110,7 @@ var returnThis = function() {
   return this;
 };
 var isLiteral = (function(value) {
-  return value && typeof value == "object" && value.constructor == Object;
+  return value && typeof value == "object" && value.constructor == Object && !value[raValue];
 });
 var getValue = (function(value) {
   return value == null || value.valueOf == null ? value : value.valueOf();
@@ -31156,10 +31265,52 @@ var runSetter = (function(cell, setter, sticky) {
 function is(a, b, isEqual) {
   return Object.is(a, b) || b && typeof b.isEqualTo == "function" && b.isEqualTo(a) || a && typeof a.isEqualTo == "function" && a.isEqualTo(b) || typeof isEqual == "function" && isEqual(a, b);
 }
+var This = function This() {
+  ;
+};
+var $This = This;
+($traceurRuntime.createClass)(This, {_defineThatProperty: function(key, that) {
+    Object.defineProperty(this, key, {
+      configurable: true,
+      enumerable: true,
+      get: function() {
+        return that[key];
+      },
+      set: function(value) {
+        that[key] = value;
+      }
+    });
+  }}, {create: function(parent, that) {
+    var ret = null;
+    if (!parent)
+      ret = new $This;
+    else
+      ret = Object.create(parent);
+    ret.valueOf = (function() {
+      return that.valueOf();
+    });
+    ret.toString = (function() {
+      return that.toString();
+    });
+    ret.toJSON = (function() {
+      return that.toJSON();
+    });
+    ret.assign = (function(value) {
+      return that.assign(value);
+    });
+    ret.throw = (function(value) {
+      return that.throw(value);
+    });
+    Object.defineProperty(ret, "live", {get: (function() {
+        return that.live;
+      })});
+    return ret;
+  }});
 var Cell = function Cell(sticky) {
   var $__0;
   $traceurRuntime.superConstructor($Cell).call(this);
   this._id = UID();
+  this._that = null;
   this._value = null;
   this._error = null;
   this._isValueEqual = is;
@@ -31185,6 +31336,9 @@ var $Cell = Cell;
   },
   assign: function(value) {
     return this._write(value, false, null);
+  },
+  update: function(diff) {
+    return this.assign(lu.applyDiff(this.noTouch(), diff));
   },
   throw: function(value) {
     return this._write(null, false, value);
@@ -31295,6 +31449,9 @@ var $Cell = Cell;
     var v = this._read();
     return (v == null) || !v.toJSON ? v : ($__21 = v).toJSON.apply($__21, $traceurRuntime.spread(args));
   },
+  with: function(cb) {
+    return cb.call(this._getThat());
+  },
   setName: function(name) {
     this._name = name;
     return this;
@@ -31308,18 +31465,30 @@ var $Cell = Cell;
     }
     return ret;
   },
+  _getThat: function() {
+    if (!this._that) {
+      this._that = This.create(this._parent && this._parent._getThat(), this);
+      if (this._live)
+        for (var i in this._live)
+          this._that._defineThatProperty(i, this);
+    }
+    return this._that;
+  },
   defineProperty: function(key) {
+    var inheritParent = arguments[1] !== (void 0) ? arguments[1] : false;
     if (!this._live) {
-      this._live = {};
+      this._live = Object.create(null);
       this._liveArray = [];
     }
     if (!key)
       return ;
     guardProp(key);
     var c = this._live[key];
-    if (this._live.hasOwnProperty(key))
+    if (c)
       return c;
-    this._liveArray.push(c = this._live[key] = new $Cell(this._sticky));
+    c = new $Cell(this._sticky);
+    this._live[key] = c;
+    this._liveArray.push(c);
     c._key = key;
     c._parent = this;
     c._level = (this._level || 0) + 1;
@@ -31336,6 +31505,8 @@ var $Cell = Cell;
         return c._write(value, false);
       })
     });
+    if (this._that)
+      this._that._defineThatProperty(key, this);
     if (this._value != null)
       c._write(this._value[key], true);
     return c;
@@ -31376,16 +31547,16 @@ var $Cell = Cell;
       value = value(cell._key);
     if (typeof value == "function" && (isGetter || value.isGetter)) {
       runGetter(cell, (function() {
-        return value.call(cell._parent);
+        return value.call(cell._parent && cell._parent._getThat());
       }), this._sticky);
       return ;
     }
     if (!isLiteral(value)) {
       if (value == null || typeof value != "object" || value.valueOf == Object.prototype.valueOf) {
-        if (typeof value == "function") {
+        if (typeof value == "function" && !value[raValue]) {
           var f = value;
           value = function() {
-            return f.apply(cell._parent, arguments);
+            return f.apply(cell._parent && cell._parent._getThat(), arguments);
           };
           value.unbinded = f;
         }
@@ -31412,7 +31583,7 @@ var $Cell = Cell;
       if (key == "$")
         cell._init(subValue, true, !!get);
       else
-        cell.defineProperty(key)._init(subValue, false, !!get);
+        cell.defineProperty(key, true)._init(subValue, false, !!get);
     }
   },
   _read: function() {
@@ -32068,12 +32239,23 @@ function ArrayIsEqualTo(a) {
     return is(e, a[i]);
   }));
 }
+function JsonIsEqualTo(a) {
+  return (this == a) || JSON.stringify(this) == JSON.stringify(a);
+}
 exports = module.exports = ra;
 exports.ra = ra;
 exports.is = is;
 exports.Array = (function(array) {
   array.isEqualTo = ArrayIsEqualTo;
   return array;
+});
+exports.JSON = (function(obj) {
+  obj.isEqualTo = JsonIsEqualTo;
+  return obj;
+});
+exports.Value = (function(obj) {
+  obj && obj.defineProperty(raValue, {value: true});
+  return obj;
 });
 exports.clean = (function(getter) {
   for (var handers = [],
@@ -32210,6 +32392,15 @@ var $DBChunk = DBChunk;
   save: function() {
     return this._save(this.chunk);
   },
+  update: function(diff) {
+    return this._chunk.update(diff);
+  },
+  set: function(name, value) {
+    return this._chunk.set(name, value);
+  },
+  get: function(name) {
+    return this._chunk.get(name);
+  },
   close: function() {
     this._chunk.assign(null);
     if (this._previous) {
@@ -32271,6 +32462,11 @@ function toKey(obj) {
   }
   return typeof obj + obj;
 }
+exports.makeKey = (function(obj, key) {
+  return ra((function() {
+    return obj.get(key);
+  }));
+});
 exports.map = (function(array, mapper) {
   if (!(array instanceof Cell))
     throw new Error("ra.map: first argument must be a cell");
@@ -32314,6 +32510,12 @@ exports.map = (function(array, mapper) {
     }));
   }));
   return ret;
+});
+exports.keymap = (function(array, mapper) {
+  var mapped = ra.map(array, mapper);
+  return ra((function() {
+    return lodash.zipObject(array.valueOf(), mapped.valueOf());
+  }));
 });
 exports.slice = (function(dest, source, keysVar) {
   throw new Error("message");
@@ -32565,7 +32767,7 @@ module.exports = Scheduler;
   var configName = process.argv[2] || __dirname + "/../server.conf";
   var config = lu.tryElse((function() {
     return YAML.load(configName);
-  }), (function() {}));
+  }), lodash.noop);
   var updateInterfacesInterval = 2000;
   config = lodash.merge({
     port: 80,
@@ -32600,7 +32802,8 @@ module.exports = Scheduler;
       }
     }
   }
-  fs.mkdir(config.var, (function() {}));
+  fs.mkdir(config.var, lodash.noop);
+  require("watchStop")(configName)(config.auth)(__dirname + "/../templates/")(__dirname + "/../templates/locations/");
   var internalModemService = ("/tmp/" + UID());
   var auth = lu.catch((function() {
     return YAML.load(config.auth);
@@ -33506,7 +33709,6 @@ module.exports = Scheduler;
       }, $__83, this);
     })
   });
-  require("watchStop")(configName)(config.auth)(__dirname + "/../templates/")(__dirname + "/../templates/locations/");
   var express = require("express");
   require("rewriter");
   var JSONservice = require("JSONservice");
@@ -33756,13 +33958,19 @@ module.exports = Scheduler;
     checkAuthorization(request, null, (function() {
       LOG("authorized".red);
       var connection = new WebSocket(request, socket, head, {});
+      var isDataSilent = (function(data) {
+        return String(data).match(/^\{"what":"p[io]ng","p[io]ng":"/);
+      });
       connection.on("message", (function(message) {
-        return LOG(("<< " + request.url.red + " " + message.cyan));
+        return !isDataSilent(message) && LOG(("<< " + request.url.red + " " + message.cyan));
+      }));
+      connection.on("dbg_send", (function(message) {
+        return !isDataSilent(message) && LOG((">> " + request.url.red + " " + message.cyan));
       }));
       var oldSend = connection.send;
       connection.send = function(message) {
-        LOG((">> " + request.url.red + " " + message.cyan));
-        oldSend.call(this, message);
+        this.emit("dbg_send", message);
+        oldSend.apply(this, arguments);
       };
       connection.on("open", (function() {
         return LOG("websocket open".green, request.url.red);
@@ -34265,12 +34473,23 @@ var fs = require("fs");
 var pn = process.argv[1];
 watch(pn);
 function watch(fn) {
-  fs.watch(fn, function() {
+  function restart() {
     setTimeout(function() {
       process.stderr.write("\n" + "Aborting process".red + " " + pn.yellow + ". Changed " + fn + "\n");
       process.exit(1);
     }, 300);
-  });
+  }
+  var exceptionCatched = false;
+  !function watch() {
+    try {
+      fs.watch(fn, restart);
+      if (exceptionCatched)
+        restart();
+    } catch (error) {
+      exceptionCatched = true;
+      setTimeout(watch, 10000);
+    }
+  }();
   return module.exports;
 }
 module.exports = watch;

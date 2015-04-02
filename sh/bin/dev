@@ -103,6 +103,11 @@ function T( src, proc ) { return function ( file ) {
 	return !src.test( file ) ? through() : proc.apply( this, arguments )
 } }
 
+function createWriteStream( fn ) {
+	try { fs.mkdirSync( path.dirname( path.resolve( fn ) ) ) } catch ( error ) {}
+	return fs.createWriteStream.apply( null, arguments )
+}
+
 function createES6task( options ) {
 	function createDest() {
 		let ret = through()
@@ -129,14 +134,14 @@ function createES6task( options ) {
 			let dest
 			if ( options.external ) {
 				try { fs.unlinkSync( options.dest ) } catch ( e ) {}
-				dest = fs.createWriteStream( options.dest, { mode: parseInt( "0777", 8 ) } )
+				dest = createWriteStream( options.dest, { mode: parseInt( "0777", 8 ) } )
 			}
 			else if ( compress ) {
 				dest = zlib.createGzip()
-				dest.pipe( fs.createWriteStream( options.dest + ".gz" ) )
+				dest.pipe( createWriteStream( options.dest + ".gz" ) )
 			}
 			else
-				dest = fs.createWriteStream( options.dest )
+				dest = createWriteStream( options.dest )
 			dest.on( "close", function () {
 				console.log( options.name.grey + ": " + "Created".green + " '" + options.dest.cyan + "'" )
 			} )
@@ -250,6 +255,7 @@ manifestUpdater()
 
 function watchDir( dir, cb ) {
 	dir = path.resolve( dir )
+	try { fs.mkdirSync( dir ) } catch ( error ) {}
 	if ( dir != "/" )
 		dir += "/"
 	return fs.watch( dir, function ( what, filename ) {
