@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -26732,7 +26732,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -26831,13 +26831,15 @@ var clientNames = Object.create(null);
 var clientFile = lu.catch((function() {
   return YAML.load(clientNamesPath);
 }), lu.returnNull);
-var clientDebug = clientFile.debug && clientFile.debug.split(/\s+/);
-delete clientFile.debug;
-lodash.forEach(clientFile, (function(ids, name) {
-  return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
-    return clientNames[id] = name;
+var clientDebug = (clientFile && clientFile.debug && clientFile.debug.split(/\s+/)) || [];
+if (clientFile) {
+  delete clientFile.debug;
+  lodash.forEach(clientFile, (function(ids, name) {
+    return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
+      return clientNames[id] = name;
+    }));
   }));
-}));
+}
 module.exports = function(router) {
   var app = express();
   var clients = Object.create(null);
@@ -32765,9 +32767,9 @@ module.exports = Scheduler;
   var LOG = require("LOG").LOG;
   require("modemstub");
   var configName = process.argv[2] || __dirname + "/../server.conf";
-  var config = lu.tryElse((function() {
+  var config = lu.catch((function() {
     return YAML.load(configName);
-  }), lodash.noop);
+  }), lu.returnNull);
   var updateInterfacesInterval = 2000;
   config = lodash.merge({
     port: 80,

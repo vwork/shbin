@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -23767,13 +23767,15 @@ var clientNames = Object.create(null);
 var clientFile = lu.catch((function() {
   return YAML.load(clientNamesPath);
 }), lu.returnNull);
-var clientDebug = clientFile.debug && clientFile.debug.split(/\s+/);
-delete clientFile.debug;
-lodash.forEach(clientFile, (function(ids, name) {
-  return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
-    return clientNames[id] = name;
+var clientDebug = (clientFile && clientFile.debug && clientFile.debug.split(/\s+/)) || [];
+if (clientFile) {
+  delete clientFile.debug;
+  lodash.forEach(clientFile, (function(ids, name) {
+    return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
+      return clientNames[id] = name;
+    }));
   }));
-}));
+}
 module.exports = function(router) {
   var app = express();
   var clients = Object.create(null);
