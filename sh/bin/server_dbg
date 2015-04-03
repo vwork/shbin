@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -26732,7 +26732,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -26783,7 +26783,6 @@ var co = require("co");
 var lu = require("localUtils");
 var UID = require("uid");
 var express = require("express");
-var YAML = require("yamljs");
 require("rewriter");
 var userAgents = [/\((iPhone);/, /\s(Android)\s([\d\.]+).*\s(Chrome\/\d+)/, /\s(Chrome\/\d+)/];
 function getUserAgentName(ua) {
@@ -26824,60 +26823,17 @@ function getUserAgentName(ua) {
   }
   return ua;
 }
-var cookieInfinite = {expires: new Date("Fri, 31-Dec-9999 23:59:59 GMT")};
-var clientNamesPath = path.resolve("./clients");
-require("watchStop")(clientNamesPath);
-var clientNames = Object.create(null);
-var clientFile = lu.catch((function() {
-  return YAML.load(clientNamesPath);
-}), lu.returnNull);
-var clientDebug = (clientFile && clientFile.debug && clientFile.debug.split(/\s+/)) || [];
-if (clientFile) {
-  delete clientFile.debug;
-  lodash.forEach(clientFile, (function(ids, name) {
-    return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
-      return clientNames[id] = name;
-    }));
-  }));
-}
 module.exports = function(router) {
   var app = express();
-  var clients = Object.create(null);
-  app.clients = clients;
-  var timeout = 3600000;
-  setInterval((function() {
-    var now = Date.now();
-    lodash.forEach(clients, (function(date, instanceID) {
-      if (now - date > timeout)
-        delete clients[instanceID];
-    }));
-  }), timeout);
   app.set("views", __dirname + "/../www");
   app.use(require("cookie-parser")());
-  app.use((function(request, response, next) {
-    var instanceID = request.cookies.instanceID;
-    if (!instanceID) {
-      instanceID = request.cookies.instanceID = UID();
-      console.log(("new client connected: " + instanceID).red);
-      response.cookie("instanceID", instanceID, cookieInfinite);
-    }
-    clients[instanceID] = Date.now();
-    var name = clientNames[instanceID];
-    var debug = clientDebug.indexOf(instanceID) >= 0 || name && clientDebug.indexOf(name) >= 0;
-    if (!!debug != !!request.cookies.instanceDebug)
-      if (debug)
-        response.cookie("instanceDebug", "debug", cookieInfinite);
-      else
-        response.clearCookie("instanceDebug");
-    next();
-  }));
   app.post("/log", (function(request, response, next) {
     lu.log(decodeURIComponent(request.url.slice(5)).replace(/<span\s+style\=`color\:(\w+);`>(.*?)<\/span>/g, (function(_, color, text) {
       return text[color];
     })) + (" " + getUserAgentName(request.headers["user-agent"])));
     response.status(200).end();
   }));
-  app.use(require("http_log")(clientNames));
+  app.use(require("http_log"));
   app.post("/info", function() {
     var fn = path.resolve(__dirname + "/../log/clients.json");
     var clients = ra.clean({
@@ -27121,7 +27077,7 @@ module.exports = function(router) {
       } )
     }()
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","express":false,"fs":false,"http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","http_static":"/home/vadzim/v/work/nerojs/src/http_static.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/http_log.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","express":false,"fs":false,"http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","http_static":"/home/vadzim/v/work/nerojs/src/http_static.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/http_log.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
@@ -27154,8 +27110,36 @@ module.exports = function(router) {
       }( function () {
         "use strict";
 global._LOG = true;
+var path = require("path");
+var lodash = require("lodash");
+var YAML = require("yamljs");
 var logger = require("morgan");
 var lu = require("localUtils");
+var UID = require("uid");
+var clientNamesPath = path.resolve("./clients");
+require("watchStop")(clientNamesPath);
+var clientNames = Object.create(null);
+var clientFile = lu.catch((function() {
+  return YAML.load(clientNamesPath);
+}), lu.returnNull);
+var clientDebug = (clientFile && clientFile.debug && clientFile.debug.split(/\s+/)) || [];
+if (clientFile) {
+  delete clientFile.debug;
+  lodash.forEach(clientFile, (function(ids, name) {
+    return ids.split(/\s+/).filter(Boolean).forEach((function(id) {
+      return clientNames[id] = name;
+    }));
+  }));
+}
+var clients = Object.create(null);
+var timeout = 3600000;
+setInterval((function() {
+  var now = Date.now();
+  lodash.forEach(clients, (function(date, instanceID) {
+    if (now - date > timeout)
+      delete clients[instanceID];
+  }));
+}), timeout);
 logger.token("cookie", (function(request) {
   return request.headers.cookie;
 }));
@@ -27179,24 +27163,39 @@ logger.token("manifestHeaders", (function(request, response) {
   return ret;
 }));
 var L = logger(":remote-addr".blue + " :instanceID".blue + " :remote-user [:date] \"" + ":method".green + " " + ":url".cyan + " HTTP/:http-version\" " + ":status".green + " :res[content-length] \":referrer\" \":user-agent\" " + ":requestTime".yellow + ":manifestHeaders");
-module.exports = (function(clients) {
-  return (function(request, response, next) {
-    if (global._LOG) {
-      console.log((request.method + " " + request.url.green));
-      request.startTime = new Date;
-      var instanceID = request.cookies.instanceID;
-      request.clientID = instanceID && (clients && clients[instanceID] || instanceID) || '?';
-      L(request, response, next);
-    } else
-      next();
-  });
+var cookieInfinite = {expires: new Date("Fri, 31-Dec-9999 23:59:59 GMT")};
+module.exports = (function(request, response, next) {
+  var instanceID;
+  if (request.cookies) {
+    instanceID = request.cookies.instanceID;
+    if (!instanceID) {
+      instanceID = request.cookies.instanceID = UID();
+      console.log(("new client connected: " + instanceID).red);
+      response.cookie("instanceID", instanceID, cookieInfinite);
+    }
+    clients[instanceID] = Date.now();
+    var name = clientNames[instanceID];
+    var debug = clientDebug.indexOf(instanceID) >= 0 || name && clientDebug.indexOf(name) >= 0;
+    if (!!debug != !!request.cookies.instanceDebug)
+      if (debug)
+        response.cookie("instanceDebug", "debug", cookieInfinite);
+      else
+        response.clearCookie("instanceDebug");
+  }
+  if (global._LOG) {
+    console.log((request.method + " " + request.url.green));
+    request.startTime = new Date;
+    request.clientID = (instanceID && (clients[instanceID] || instanceID)) || '?';
+    L(request, response, next);
+  } else
+    next();
 });
 //# sourceMappingURL=http_log.js.map
 
       } )
     }()
 
-},{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js"}],"/home/vadzim/v/work/nerojs/src/http_static.js":[function(require,module,exports){
+},{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js","path":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/http_static.js":[function(require,module,exports){
 !function () {
       !function ( body ) {
         var now = global.performance || Date
