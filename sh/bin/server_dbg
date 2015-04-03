@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -26732,7 +26732,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -28048,17 +28048,6 @@ var lu = module.exports = {
         ok: false,
         error: error
       };
-    }
-  },
-  tryElse: function(f, g) {
-    var ok = false;
-    try {
-      var ret = f();
-      ok = true;
-      return ret;
-    } finally {
-      if (!ok)
-        g();
     }
   },
   try: $traceurRuntime.initGeneratorFunction(function $__24(fun) {
@@ -30712,7 +30701,7 @@ var createServer = (function(port) {
   return server;
 });
 createServer("/tmp/ne_modem_stub");
-createServer(2233);
+createServer(2234);
 //# sourceMappingURL=modemstub.js.map
 
       } )
@@ -31112,7 +31101,7 @@ var returnThis = function() {
   return this;
 };
 var isLiteral = (function(value) {
-  return value && typeof value == "object" && value.constructor == Object && !value[raValue];
+  return value && typeof value == "object" && value.constructor == Object;
 });
 var getValue = (function(value) {
   return value == null || value.valueOf == null ? value : value.valueOf();
@@ -31504,7 +31493,9 @@ var $Cell = Cell;
           return c._read();
       }),
       set: (function(value) {
-        return c._write(value, false);
+        if (c._live)
+          value = getValue(value);
+        c._write(value, false);
       })
     });
     if (this._that)
@@ -31543,32 +31534,25 @@ var $Cell = Cell;
     if (isValueEqual)
       this._isValueEqual = isValueEqual;
     value = checkNull(value);
-    if (value == null)
-      return ;
     if (typeof value == "function" && value.typeDescriptor)
       value = value(cell._key);
-    if (typeof value == "function" && (isGetter || value.isGetter)) {
-      runGetter(cell, (function() {
-        return value.call(cell._parent && cell._parent._getThat());
-      }), this._sticky);
+    if (value == null)
+      return ;
+    if (value[raValue])
+      return cell._value = value;
+    if (typeof value == "function") {
+      if (isGetter || value.isGetter)
+        runGetter(cell, (function() {
+          return value.call(cell._parent && cell._parent._getThat());
+        }), this._sticky);
+      else
+        cell._value = function() {
+          return value.apply(cell._parent && cell._parent._getThat(), arguments);
+        };
       return ;
     }
-    if (!isLiteral(value)) {
-      if (value == null || typeof value != "object" || value.valueOf == Object.prototype.valueOf) {
-        if (typeof value == "function" && !value[raValue]) {
-          var f = value;
-          value = function() {
-            return f.apply(cell._parent && cell._parent._getThat(), arguments);
-          };
-          value.unbinded = f;
-        }
-        cell._value = value;
-      } else
-        cell._init((function() {
-          return getValue(value);
-        }), true, true);
-      return ;
-    }
+    if (!isLiteral(value))
+      return cell._value = value;
     if (recursive)
       throw new Error("wrong parameters");
     cell.defineProperty();
@@ -32256,7 +32240,12 @@ exports.JSON = (function(obj) {
   return obj;
 });
 exports.Value = (function(obj) {
-  obj && obj.defineProperty(raValue, {value: true});
+  obj && obj.defineProperty(raValue, {
+    value: true,
+    configurable: true,
+    enumerable: false,
+    writable: false
+  });
   return obj;
 });
 exports.clean = (function(getter) {
