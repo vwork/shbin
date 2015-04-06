@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -22437,6 +22437,9 @@ var getModem = (function(request) {
   return host;
 });
 var clientproxy = net.createServer((function(socket) {
+  socket.setTimeout(0);
+  socket.setNoDelay();
+  socket.setKeepAlive(true, 30000);
   var id = UID();
   var host;
   var hostname;
