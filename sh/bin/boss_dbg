@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -23178,9 +23178,13 @@ var $IteratorProxy = IteratorProxy;
   throw: function(value) {
     return iteratorCheck(this.call(iteratorThrow, value));
   },
-  return: function() {
+  return: function(value) {
     if (!this._iterator)
       return ;
+    this.save({
+      done: true,
+      value: value
+    });
     var old = $IteratorProxy._iterator;
     $IteratorProxy._iterator = this;
     try {
@@ -23381,7 +23385,9 @@ var Thread = function Thread(iterator) {
   this._stopCount = 0;
   this._stack = [];
   this._global = {};
-  this._current = null;
+  this._currentPromise = null;
+  this._running = false;
+  this._killing = null;
   this.$name = {toString: (function() {
       return "<Thread>";
     })};
@@ -23438,7 +23444,7 @@ var Thread = function Thread(iterator) {
     return this._attachPromise(this._promise.catch(onRejected));
   },
   isFinished: function() {
-    return !this._step;
+    return !this._step || this._killing;
   },
   isPaused: function() {
     return this._stopCount > 0;
@@ -23457,25 +23463,25 @@ var Thread = function Thread(iterator) {
     this._attachedToStack = true;
   },
   kill: function(reason) {
-    var safe = arguments[1] !== (void 0) ? arguments[1] : true;
     if (this.isFinished())
       return ;
     this._reject(reason);
-    if (safe) {
-      killIterator(this._iterator);
-      for (var a = this._stack,
-          i = a.length - 1; i >= 0; --i)
-        killIterator(a[i]);
+    if (this._running) {
+      this._killing = {reason: reason};
+      throw new EKill;
     }
-    if (this._current)
+    killIterator(this._iterator);
+    for (var a = this._stack,
+        i = a.length - 1; i >= 0; --i)
+      killIterator(a[i]);
+    if (this._currentPromise) {
       try {
-        this._current.kill(reason, safe);
+        this._currentPromise.kill(reason);
       } catch (e) {
         rethrow(e);
       }
+    }
     this._done();
-    if (this == exports.currentThread)
-      throw new EKill;
   },
   pause: function() {
     this._checkFinished();
@@ -23490,6 +23496,8 @@ var Thread = function Thread(iterator) {
     }
   },
   _tick: function(step, imethod, result) {
+    if (this._running)
+      throw new Error("FATAL: reentering thread tick");
     if (step !== this._step)
       return ;
     if (this._stopCount > 0) {
@@ -23497,13 +23505,21 @@ var Thread = function Thread(iterator) {
       return ;
     }
     for (; ; ) {
-      this._current = null;
+      this._currentPromise = null;
+      this._running = true;
       var previosThread = exports.currentThread;
       exports.currentThread = this;
       global.currentThreadData = exports.global = this._global;
       var v = this._iterator.call(imethod, result);
       exports.currentThread = previosThread;
       global.currentThreadData = exports.global = previosThread && previosThread._global;
+      this._running = false;
+      if (this._killing) {
+        var reason = this._killing.reason;
+        this._killing = null;
+        this.kill(reason);
+        return ;
+      }
       if (v.done) {
         if (this.isFinished())
           return ;
@@ -23522,7 +23538,7 @@ var Thread = function Thread(iterator) {
       else if (v.value.then) {
         var p = v.value.then(step.next, step.fail);
         if (p && p.kill)
-          this._current = p;
+          this._currentPromise = p;
       } else if (v.value.next) {
         this._stack.push(this._iterator);
         this._iterator = new IteratorProxy(v.value);
@@ -23543,7 +23559,8 @@ var Thread = function Thread(iterator) {
     this._stack = null;
     this._resolve = null;
     this._reject = null;
-    this._current = null;
+    this._currentPromise = null;
+    this._killing = null;
   },
   _newStep: function() {
     var step = this._step = {resume: null};
