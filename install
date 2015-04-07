@@ -1,5 +1,0 @@
-#!/bin/sh
-
-wget http://nodejs.org/dist/v0.11.14/node-v0.11.14-linux-x86.tar.gz
-cd lantronix_eth_rs232
-gcc -o nero_smarthome main.c rs232_interface.c eth_interface.c cyclic.c -lpthread

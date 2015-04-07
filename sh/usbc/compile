@@ -1,3 +1,0 @@
-#!/bin/sh
-
-gcc -o ../usb_port usb_port.c
