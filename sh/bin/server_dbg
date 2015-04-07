@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -25869,6 +25869,7 @@ co.go($traceurRuntime.initGeneratorFunction(function $__0() {
         }
       }( function () {
         "use strict";
+var $__10 = $traceurRuntime.initGeneratorFunction(_IteratorProxy);
 var later = require("later");
 var EventEmitter = require("events").EventEmitter;
 var co = module.exports = exports = new EventEmitter;
@@ -26014,12 +26015,6 @@ var rethrow = (function(e) {
     throw e;
   }), 1);
 });
-var constant = (function(x) {
-  return (function() {
-    return x;
-  });
-});
-var RETURN = {};
 function iteratorFailed(error) {
   return {
     done: true,
@@ -26044,14 +26039,21 @@ function iteratorThrow(iterator, result) {
   }
 }
 var DONE = {done: true};
+var EKill = function EKill() {
+  var message = arguments[0] !== (void 0) ? arguments[0] : "kill";
+  $traceurRuntime.superConstructor($EKill).call(this, message);
+};
+var $EKill = EKill;
+($traceurRuntime.createClass)(EKill, {}, {}, Error);
+exports.EKill = EKill;
 function iteratorReturn(iterator) {
-  if (iterator.return)
+  if (iterator.return) {
     try {
       iterator.return();
     } catch (error) {
       return iteratorFailed(error);
     }
-  else if (iterator.throw) {
+  } else if (iterator.throw) {
     var e = new EKill;
     var v = iteratorThrow(iterator, e);
     if (!v.done || !v.iteratorFailed)
@@ -26076,13 +26078,6 @@ function killIterator(iterator) {
 }
 var _private = {writable: true};
 var notEnumerable = {enumerable: false};
-var EKill = function EKill() {
-  var message = arguments[0] !== (void 0) ? arguments[0] : "kill";
-  $traceurRuntime.superConstructor($EKill).call(this, message);
-};
-var $EKill = EKill;
-($traceurRuntime.createClass)(EKill, {}, {}, Error);
-exports.EKill = EKill;
 var catchDefer = (function(func) {
   try {
     return func();
@@ -26176,8 +26171,12 @@ var $IteratorProxy = IteratorProxy;
       this.save(ret);
       while (this._deferred.length) {
         var def = catchDefer(this._deferred.pop());
-        if (def != null && typeof def.next == "function")
-          this.save(iteratorReturn(def));
+        if (def != null && typeof def.next == "function") {
+          var ret$__9 = iteratorNext(def);
+          if (!ret$__9.done)
+            ret$__9 = iteratorReturn(def);
+          this.save(ret$__9);
+        }
       }
       ret = this._result;
       this._result = null;
@@ -26188,10 +26187,170 @@ var $IteratorProxy = IteratorProxy;
   }
 }, {});
 IteratorProxy._iterator = null;
+function _IteratorProxy(iterator) {
+  function save(it) {
+    if (ret == null || it.iteratorFailed) {
+      if (ret && ret.iteratorFailed)
+        rethrow(ret.value);
+      ret = it;
+    }
+  }
+  var deffered,
+      ret,
+      step,
+      it,
+      yieldResult,
+      error;
+  return $traceurRuntime.createGeneratorInstance(function($ctx) {
+    while (true)
+      switch ($ctx.state) {
+        case 0:
+          deffered = [];
+          ret = null;
+          step = iteratorNext;
+          it = null;
+          $ctx.state = 55;
+          break;
+        case 55:
+          $ctx.pushTry(null, 49);
+          $ctx.state = 51;
+          break;
+        case 51:
+          if (true) {
+            $ctx.state = 31;
+            break;
+          } else {
+            $ctx.state = 49;
+            $ctx.finallyFallThrough = -2;
+            break;
+          }
+        case 31:
+          yieldResult = void 0;
+          step = iteratorNext;
+          $ctx.state = 32;
+          break;
+        case 32:
+          $ctx.state = (it != null) ? 10 : 17;
+          break;
+        case 10:
+          $ctx.pushTry(8, null);
+          $ctx.state = 11;
+          break;
+        case 11:
+          $ctx.state = 5;
+          return it.value;
+        case 5:
+          yieldResult = $ctx.sent;
+          $ctx.state = 7;
+          break;
+        case 7:
+          $ctx.popTry();
+          $ctx.state = 13;
+          break;
+        case 8:
+          $ctx.popTry();
+          $ctx.maybeUncatchable();
+          error = $ctx.storedException;
+          $ctx.state = 14;
+          break;
+        case 14:
+          yieldResult = error;
+          step = iteratorThrow;
+          $ctx.state = 13;
+          break;
+        case 17:
+          yieldResult = undefined;
+          $ctx.state = 13;
+          break;
+        case 13:
+          _IteratorProxy.deferred = deferred;
+          it = step(iterator, yieldResult);
+          _IteratorProxy.deferred = null;
+          $ctx.state = 34;
+          break;
+        case 34:
+          $ctx.state = (!it.done) ? 51 : 27;
+          break;
+        case 27:
+          save(it);
+          it = undefined;
+          $ctx.state = 36;
+          break;
+        case 36:
+          $ctx.state = (deffered.length) ? 23 : 25;
+          break;
+        case 23:
+          iterator = catchDefer(deffered.shift());
+          $ctx.state = 24;
+          break;
+        case 24:
+          $ctx.state = (iterator != null && typeof iterator.next == "function") ? 51 : 36;
+          break;
+        case 25:
+          iterator = null;
+          $ctx.state = 49;
+          $ctx.finallyFallThrough = -2;
+          break;
+        case 49:
+          $ctx.popTry();
+          $ctx.state = 53;
+          break;
+        case 53:
+          if (iterator)
+            save(iteratorReturn(iterator));
+          while (deffered.length) {
+            iterator = catchDefer(deffered.shift());
+            if (iterator != null && typeof iterator.next == "function") {
+              it = iteratorNext(iterator, undefined);
+              if (!it.done)
+                it = iteratorReturn(iterator);
+              save(it);
+            }
+          }
+          $ctx.state = 47;
+          break;
+        case 47:
+          $ctx.state = (ret) ? 44 : 43;
+          break;
+        case 44:
+          $ctx.state = (ret.iteratorFailed) ? 42 : 40;
+          break;
+        case 42:
+          throw ret.value;
+          $ctx.state = 43;
+          break;
+        case 40:
+          $ctx.returnValue = ret.value;
+          $ctx.state = -2;
+          break;
+        case 43:
+          $ctx.state = $ctx.finallyFallThrough;
+          break;
+        default:
+          return $ctx.end();
+      }
+  }, $__10, this);
+}
 exports.defer = (function(proc) {
   if (!IteratorProxy._iterator)
     throw new Error("defer: not in a co-thread");
   return IteratorProxy._iterator.defer(proc);
+});
+exports._defer = (function(proc) {
+  if (typeof proc != "function")
+    throw new Error("type error: only functions can be deferred");
+  var deferred = _IteratorProxy.deferred;
+  if (deferred)
+    throw new Error("defer: not in a co-thread");
+  deferred.push(proc);
+  return {close: (function() {
+      if (deferred)
+        for (var i = deferred.length - 1; i >= 0; --i)
+          if (deferred[i] == proc) {
+            deferred.splice(i, 1);
+            return ;
+          }
+    })};
 });
 var Thread = function Thread(iterator) {
   var $__0 = this;
@@ -26732,7 +26891,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -31782,6 +31941,9 @@ var $Action = Action;
     var _throw = (function() {
       return $__0._generator.throw(_value);
     });
+    var _return = (function() {
+      return $__0._generator.return(_value);
+    });
     this._generatorProxy = ($__2 = {}, Object.defineProperty($__2, Symbol.iterator, {
       value: returnThis,
       configurable: true,
@@ -31811,6 +31973,18 @@ var $Action = Action;
       configurable: true,
       enumerable: true,
       writable: true
+    }), Object.defineProperty($__2, "return", {
+      value: (function(v) {
+        _value = v;
+        try {
+          return co.catchThreads(_return, $__0._onthread);
+        } finally {
+          _value = null;
+        }
+      }),
+      configurable: true,
+      enumerable: true,
+      writable: true
     }), $__2);
   },
   _loop: $traceurRuntime.initGeneratorFunction(function $__30() {
@@ -31828,9 +32002,9 @@ var $Action = Action;
         switch ($ctx.state) {
           case 0:
             $__0 = this;
-            $ctx.state = 99;
+            $ctx.state = 96;
             break;
-          case 99:
+          case 96:
             $ctx.state = 2;
             return updates.later;
           case 2:
@@ -31843,13 +32017,13 @@ var $Action = Action;
               })};
             co.global[actionKey] = this;
             errorCatched = false;
-            $ctx.state = 101;
+            $ctx.state = 98;
             break;
-          case 101:
-            $ctx.pushTry(90, null);
-            $ctx.state = 93;
+          case 98:
+            $ctx.pushTry(85, null);
+            $ctx.state = 88;
             break;
-          case 93:
+          case 88:
             $ctx.state = (!errorCatched) ? 65 : 69;
             break;
           case 65:
@@ -31980,7 +32154,7 @@ var $Action = Action;
           case 80:
             switch (this._end()) {
               default:
-                $ctx.state = 93;
+                $ctx.state = 88;
                 break;
               case false:
                 $ctx.state = 7;
@@ -31992,30 +32166,27 @@ var $Action = Action;
             break;
           case 74:
             $ctx.maybeThrow();
-            $ctx.state = 93;
+            $ctx.state = 88;
             break;
           case 73:
             $ctx.state = 74;
             return next;
           case 84:
             $ctx.popTry();
-            $ctx.state = 101;
+            $ctx.state = 98;
             break;
-          case 90:
+          case 85:
             $ctx.popTry();
             $ctx.maybeUncatchable();
             error = $ctx.storedException;
-            $ctx.state = 89;
+            $ctx.state = 91;
             break;
-          case 89:
-            $ctx.state = (error instanceof co.EKill) ? 7 : 87;
-            break;
-          case 87:
+          case 91:
             if (errorCatched)
               this._dest.throw(error);
             else
               rethrow(error);
-            $ctx.state = 101;
+            $ctx.state = 98;
             break;
           case 7:
             co.global[actionKey] = null;
