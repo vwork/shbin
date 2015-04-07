@@ -1,0 +1,91 @@
+{
+	"uid": "j4jflww80ij3f",
+	"irdghzzk2a5r": {
+		"model": "Nero II 8421",
+		"state": 1,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 2,
+		"state_timestamp": 1423213414830,
+		"newstate": 1,
+		"newstate_timestamp": 1423213414830
+	},
+	"j6z2ekqymbj6d": {
+		"model": "Nero II 8421",
+		"state": 1,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 3,
+		"state_timestamp": 1423213409040,
+		"newstate": 1,
+		"newstate_timestamp": 1423213409040
+	},
+	"iuyg72t7c0ai": {
+		"model": "Nero II 8421",
+		"state": 0,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 4,
+		"state_timestamp": 1423146841082,
+		"newstate": 0,
+		"newstate_timestamp": 1423146841082
+	},
+	"j4u5fcvhycsde": {
+		"model": "Nero II 8421",
+		"state": 0,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 5,
+		"state_timestamp": 1423156589460,
+		"newstate": 0,
+		"newstate_timestamp": 1423156589460
+	},
+	"j9ihk9ld857gp": {
+		"model": "Nero II 8421",
+		"state": 0,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 6,
+		"state_timestamp": 1423146997253,
+		"newstate": 0,
+		"newstate_timestamp": 1423146997253
+	},
+	"j56ex30cvmykm": {
+		"model": "Nero II 8421",
+		"state": 0,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 7,
+		"state_timestamp": 1423146995938,
+		"newstate": 0,
+		"newstate_timestamp": 1423146995938
+	},
+	"j6ba5n3m6baql": {
+		"model": "Nero II 8421",
+		"state": 0,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 8,
+		"state_timestamp": 1423141359536,
+		"newstate": 0,
+		"newstate_timestamp": 1423141359536
+	},
+	"j8esh02co8org": {
+		"model": "Nero II 8421",
+		"state": 1,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 9,
+		"state_timestamp": 1423140598140
+	},
+	"j523yx0bbryud": {
+		"model": "Nero II 8421",
+		"state": 0.8,
+		"comfort_1": 0.8,
+		"comfort_2": 0.2,
+		"group": 10,
+		"newstate": 0.8,
+		"newstate_timestamp": 1423141042687,
+		"state_timestamp": 1423141042687
+	}
+}

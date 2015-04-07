@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+while true;
+do
+	git pull | grep -v 'Already up-to-date'
+	sleep 600
+done

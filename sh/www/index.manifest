@@ -1,0 +1,37 @@
+CACHE MANIFEST
+
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1428408746449
+
+CACHE:
+
+/favicon.ico
+/favicon96.ico
+#/js/index.min.js
+/images/menu/help.svg
+/images/menu/logo.svg
+/images/menu/back.svg
+/images/wait.svg
+/images/room.svg
+/images/room_on.svg
+/images/room_absent.svg
+/images/bedroom.svg
+/images/device.svg
+
+/images/vientyliatar_on.svg
+/images/vientyliatar_off.svg
+/images/roller_on.svg
+/images/roller_off.svg
+/images/tarser_on.svg
+/images/tarser_off.svg
+/images/slahbaum_on.svg
+/images/slahbaum_off.svg
+/images/pierahavornaja.svg
+/images/kalidor.svg
+
+/touch.svg
+/messages
+/templates
+
+NETWORK:
+
+*

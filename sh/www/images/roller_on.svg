@@ -1,0 +1,19 @@
+<svg
+	version = "1.1"
+	xmlns = "http://www.w3.org/2000/svg"
+	xmlns:xlink = "http://www.w3.org/1999/xlink"
+	width = "800px"
+	height = "800px"
+	viewBox = "0 0 800 800"
+>
+<defs>
+	<clipPath id = "internal">
+		<rect x = "124" y = "246" width = "566" height = "432" />
+	</clipPath>
+</defs>
+<g fill = "none" stroke = "white" stroke-width = "6" stroke-linecap = "round" stroke-linejoin = "round" stroke-miterlimit = "10" points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"
+>
+	<polygon points = "60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163"/>
+	<line x1 = "124" y1 = "256" x2 = "691" y2 = "256"/>
+</g>
+</svg>
