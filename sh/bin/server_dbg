@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -26908,7 +26908,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -27361,7 +27361,7 @@ module.exports = (function(request, response, next) {
   if (global._LOG) {
     console.log((request.method + " " + request.url.green));
     request.startTime = new Date;
-    request.clientID = (instanceID && (clients[instanceID] || instanceID)) || '?';
+    request.clientID = (instanceID && (clientNames[instanceID] || instanceID)) || '?';
     L(request, response, next);
   } else
     next();
@@ -27799,6 +27799,10 @@ module.exports = (function(app) {
     response.clearCookie("icon");
     response.clearCookie("room");
     next();
+  }));
+  app.engine("html", ejs.renderFile);
+  app.get("/unsupported.html", (function(request, response, next) {
+    response.render(request.url.match(/^\/(.*)$/)[1], {request: request});
   }));
   app.use(express.static(__dirname + "/../www", {
     lastModified: true,
