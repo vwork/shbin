@@ -1,0 +1,217 @@
+<html manifest='/index.manifest' id='j8nxyg3t5eohsh'>
+
+<noscript id='j7wrcixuhbrhsi'>
+!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1428586225901
+</noscript>
+<head id='j4rtqcc11jihsj'>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' id='j648kexdulyhsk'/>
+<title id='j2sy0bg55nnhsl'>Smart home</title>
+<script>"use strict";
+function checkBrowserFunctions() {
+  return true && typeof Promise == "function";
+}
+</script>
+<script>"use strict";
+if (!checkBrowserFunctions())
+  window.location.href = "/unsupported.html";
+</script>
+
+<meta name='mobile-web-app-capable' content='yes' id='j8td3907rhmhsn'/>
+<meta name='apple-mobile-web-app-capable' content='yes' id='j29kbngdb8shso'/>
+
+<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' id='j8zr12i4um5hsp'/>
+
+<meta name='format-detection' content='telephone=no' id='j3e6b8lyu3rhsq'/>
+
+
+<meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=0' id='j387jwq89rahsr'/>
+
+<style id='j663r125d30hss'> html { -webkit-text-size-adjust: 100%; } </style>
+<script>"use strict";
+!function() {
+  var bind = (function(obj, name) {
+    return obj && obj[name] && obj[name].bind(obj);
+  });
+  var lockOrientation = null || bind(screen.orientation, "lock") || bind(screen, "lockOrientation") || bind(screen.orientation, "webkitLock") || bind(screen, "webkitLockOrientation") || bind(screen.orientation, "mozLock") || bind(screen, "mozLockOrientation") || bind(screen.orientation, "msLock") || bind(screen, "msLockOrientation") || ((function(_) {
+    return null;
+  }));
+  var locked = bind(lockOrientation("portrait-primary"), "then");
+  window.onAppOrientationLocked = locked ? (function(cb) {
+    return locked(cb, cb);
+  }) : setTimeout;
+}();
+</script>
+
+<link rel='shortcut icon' href='/favicon96.ico' id='j4aac5u7qc6hst'/>
+
+
+
+
+
+
+
+
+
+ 
+
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 480px) and
+		(-webkit-device-pixel-ratio: 1)' href='apple-touch-startup-image-320x460.png' id='j44mswvwrw9hsv'/>
+
+ 
+
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 480px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x920.png' id='j9ll2vj4usjhsw'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 568px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x1096.png' id='i3avyu8iadhsx'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 375px) and
+		(device-height: 667px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-750x1294.png' id='j3hmb1vz107hsy'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 414px) and
+		(device-height: 736px) and
+		(-webkit-device-pixel-ratio: 3)' href='apple-touch-startup-image-1242×2148.png' id='j6rdf704vukhsz'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(orientation: portrait) and
+		(device-width: 768px) and
+		(device-height: 1024px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1536x2008.png' id='j7nsqoen5xfht0'/>
+<link rel='apple-touch-startup-image' media='
+		(orientation: landscape) and
+		(device-width: 768px) and
+		(device-height: 1024px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1496x2048.png' id='j44rgqrmkf8ht1'/>
+
+
+
+
+
+
+
+
+
+<meta id='screenTitle' name='apple-mobile-web-app-title' content='My home'/>
+</head>
+<body class='translucent' style='background-color: black;' id='j6zg41fluayht2'>
+<script>"use strict";
+function getCookie(name) {
+  return ((("; " + document.cookie)).split(("; " + name + "="))[1] || "").split(";")[0];
+}
+window._getCookie = getCookie;
+function cacheUrlResource(url, debugUrl) {
+  if (localStorage.getItem("debug") || getCookie("instanceDebug"))
+    return new Promise((function(resolve) {
+      var xhr = new XMLHttpRequest;
+      xhr.open("get", debugUrl || url, false);
+      xhr.send();
+      resolve(xhr.responseText);
+    }));
+  var resources = window.cachedUrlResources || (window.cachedUrlResources = Object.create(null));
+  return resources[url] || (resources[url] = new Promise((function(resolve) {
+    function save(ret) {
+      if (localStorage.getItem(url) != ret) {
+        localStorage.setItem(url, ret);
+        postMessage({
+          what: "urlResourceUpdated",
+          url: url
+        }, "*");
+      }
+      if (!resolve)
+        return ;
+      resolve(ret);
+      resolve = null;
+    }
+    function loadUrl(initial) {
+      function onerror() {
+        if (initial && resolve)
+          setTimeout(loadUrl, 2000, true);
+      }
+      var xhr = new XMLHttpRequest;
+      xhr.onload = (function() {
+        if (xhr.status >= 200 && xhr.status <= 299) {
+          console.log(("got " + url + ", received " + (xhr.response && xhr.response.length) + " character(s)"));
+          save(xhr.response == null ? null : xhr.response);
+        } else
+          onerror();
+      });
+      xhr.ontimeout = onerror;
+      xhr.onerror = onerror;
+      xhr.open("get", url);
+      xhr.responseType = "text";
+      xhr.send();
+    }
+    function startLoading() {
+      loadUrl(true);
+      setInterval(loadUrl, 30 * 60 * 1000);
+    }
+    var res = localStorage.getItem(url);
+    if (res != null) {
+      console.log(("fecthing " + url + " from the cache"));
+      save(res);
+      setTimeout(startLoading, 2000);
+    } else {
+      console.log(("fecthing " + url + " from the server"));
+      startLoading();
+    }
+  })));
+}
+if (typeof module != "undefined")
+  module.exports = cacheUrlResource;
+</script>
+<script>"use strict";
+</script>
+<script>"use strict";
+!function() {
+  var LOADED = false;
+  function ON_START_ERROR(error) {
+    if (LOADED && window.onerror == ON_START_ERROR)
+      return window.onerror = null;
+    console.log(error);
+  }
+  window.onerror = ON_START_ERROR;
+  var timer = window.performance || Date;
+  var startTime = timer.now();
+  function say(msg) {
+    var ms = timer.now() - startTime;
+    console.log((msg + " for " + ms / 1000 + "s"));
+    startTime = timer.now();
+  }
+  function script(text) {
+    var script = document.createElement("script");
+    script.appendChild(document.createTextNode(text));
+    return script;
+  }
+  var code = cacheUrlResource("/js/index.min.js", "/js/index.js");
+  cacheUrlResource("./main.html");
+  code.then((function(code) {
+    return onAppOrientationLocked((function() {
+      say("getting script");
+      document.body.appendChild(script(("window.SHModules = function () { " + code + " }")));
+      say("script has been compiled");
+      if (!window.SHModules)
+        (0, eval)(("(function(){ " + code + " })"));
+      window.SHModules();
+      say("script has been run");
+      LOADED = true;
+      if (window.onerror == ON_START_ERROR)
+        window.onerror = null;
+    }));
+  }));
+}();
+</script>
+</body>
+</html>
