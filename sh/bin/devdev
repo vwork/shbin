@@ -4,7 +4,7 @@ while true;
 do
 	date
 	echo starting dev
-	./bin/node/11.14/bin/node --harmony ./bin/dev;
+	./bin/dev;
 	echo waiting 1 second before restarting...
 	sleep 1
 done

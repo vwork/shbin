@@ -1,5 +1,5 @@
-<div id='j714zyb1n1qhp0'>
-<style type='text/css' id='j4j9d96pbzahp1'>
+<div id='j6u4zsyuod0dy'>
+<style type='text/css' id='j7i5py8ueeldz'>
 /* contextMenu */
 .contextMenu,
 .modalDialog {
@@ -10,7 +10,7 @@ right: 0;
 bottom: 17mm;
 background-color: black;
 }
-.translucent .application.window_app.layout_vertical.dialogContext .contextMenu,
+.translucent .applicationMenu.window_app.layout_vertical.dialogContextMenu .contextMenu,
 .translucent .application.window_app.layout_vertical.dialogSearchItems .searchItems ,
 .translucent .application.window_app.layout_vertical.dialogAskToLinkDevice .askToLinkDevice ,
 .translucent .application.window_app.layout_vertical.dialogAskIfDeviceHasBeenLinked .askIfDeviceHasBeenLinked,
@@ -84,7 +84,7 @@ display: none;
 }
 .JSONloading .loadingScreen,
 .firstRun .startupScreen,
-.dialogContext .contextMenu,
+.dialogContextMenu .contextMenu,
 .dialogSearchItems .searchItems,
 .dialogAskToLinkDevice .askToLinkDevice,
 .dialogAskIfDeviceHasBeenLinked .askIfDeviceHasBeenLinked,
@@ -98,8 +98,26 @@ display: block;
 /*pointer-events: all;*/
 /*opacity: 1;*/
 }
+.searchItem {
+text-align: left;
+margin-bottom: 0.5em;
+}
+.searchItem .cmdDeleteFromProgram, .searchItem .cmdAppend {
+display: block;
+float: right;
+width: 1em;
+height: 1em;
+}
+.searchItem .cmdDeleteFromProgram {
+background-color: red;
+display: none;
+}
+.searchItem .cmdAppend {
+background-color: yellow;
+display: none;
+}
 </style>
-<style type='text/css' id='j25dj2iuea0hp2'>@font-face {
+<style type='text/css' id='j6q82ue4yvae0'>@font-face {
 font-family: "Web App";
 /*src: url("web-app.eot");*/
 src: url("web-app.eot?#iefix") format("embedded-opentype"),
@@ -246,6 +264,13 @@ top: 0;
 right: 0;
 bottom: 0;
 }
+.icon svg {
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+}
 .icon .iconLabel {
 position: absolute;
 width: 100%;
@@ -338,9 +363,25 @@ opacity: 1;
 .modalDialog {
 font-size: 20pt;
 text-align: center;
+overflow: hidden;
+}
+.deviceIcon svg {
+width: 100%;
+height: 100%;
+}
+.iconControl .smoothing .colored, .iconControl .smoothing .moving {
+-webkit-transition-duration: 0.4s;
+-webkit-transition-property: stroke transform -webkit-transform;
+transition-duration: 0.4s;
+transition-property: stroke transform -webkit-transform;
+}
+.iconControl .stateAbsent .colored {
+stroke-dasharray: 17,23;
+stroke-linecap: round;
+stroke: #02756E;
 }
 </style>
-<style type='text/css' id='j6xf1c4drethp3'>.application, .application table, a, a:visited {
+<style type='text/css' id='j7628c6hmy9e1'>.application, .application table, a, a:visited {
 color: #03EADC;
 }
 .top {
@@ -483,14 +524,217 @@ opacity: 0;
 transform: scale( 0.001 );
 }
 </style>
-<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' data-isEnabled='' id='j5vchm592yjhp6'>
-<a class='command' href='javascript:void(0)' target='_self' id='j7wi4qqqt7chp7'></a>
+<style type='text/css' id='j2f5r6owxz0e2'>.iconControl .state000 .moving { -webkit-transform: translate( 0px, -0% ); transform: translate( 0px, -0% ); }
+.iconControl .state001 .moving { -webkit-transform: translate( 0px, -1% ); transform: translate( 0px, -1% ); }
+.iconControl .state002 .moving { -webkit-transform: translate( 0px, -2% ); transform: translate( 0px, -2% ); }
+.iconControl .state003 .moving { -webkit-transform: translate( 0px, -3% ); transform: translate( 0px, -3% ); }
+.iconControl .state004 .moving { -webkit-transform: translate( 0px, -4% ); transform: translate( 0px, -4% ); }
+.iconControl .state005 .moving { -webkit-transform: translate( 0px, -5% ); transform: translate( 0px, -5% ); }
+.iconControl .state006 .moving { -webkit-transform: translate( 0px, -6% ); transform: translate( 0px, -6% ); }
+.iconControl .state007 .moving { -webkit-transform: translate( 0px, -7% ); transform: translate( 0px, -7% ); }
+.iconControl .state008 .moving { -webkit-transform: translate( 0px, -8% ); transform: translate( 0px, -8% ); }
+.iconControl .state009 .moving { -webkit-transform: translate( 0px, -9% ); transform: translate( 0px, -9% ); }
+.iconControl .state010 .moving { -webkit-transform: translate( 0px, -10% ); transform: translate( 0px, -10% ); }
+.iconControl .state011 .moving { -webkit-transform: translate( 0px, -11% ); transform: translate( 0px, -11% ); }
+.iconControl .state012 .moving { -webkit-transform: translate( 0px, -12% ); transform: translate( 0px, -12% ); }
+.iconControl .state013 .moving { -webkit-transform: translate( 0px, -13% ); transform: translate( 0px, -13% ); }
+.iconControl .state014 .moving { -webkit-transform: translate( 0px, -14% ); transform: translate( 0px, -14% ); }
+.iconControl .state015 .moving { -webkit-transform: translate( 0px, -15% ); transform: translate( 0px, -15% ); }
+.iconControl .state016 .moving { -webkit-transform: translate( 0px, -16% ); transform: translate( 0px, -16% ); }
+.iconControl .state017 .moving { -webkit-transform: translate( 0px, -17% ); transform: translate( 0px, -17% ); }
+.iconControl .state018 .moving { -webkit-transform: translate( 0px, -18% ); transform: translate( 0px, -18% ); }
+.iconControl .state019 .moving { -webkit-transform: translate( 0px, -19% ); transform: translate( 0px, -19% ); }
+.iconControl .state020 .moving { -webkit-transform: translate( 0px, -20% ); transform: translate( 0px, -20% ); }
+.iconControl .state021 .moving { -webkit-transform: translate( 0px, -21% ); transform: translate( 0px, -21% ); }
+.iconControl .state022 .moving { -webkit-transform: translate( 0px, -22% ); transform: translate( 0px, -22% ); }
+.iconControl .state023 .moving { -webkit-transform: translate( 0px, -23% ); transform: translate( 0px, -23% ); }
+.iconControl .state024 .moving { -webkit-transform: translate( 0px, -24% ); transform: translate( 0px, -24% ); }
+.iconControl .state025 .moving { -webkit-transform: translate( 0px, -25% ); transform: translate( 0px, -25% ); }
+.iconControl .state026 .moving { -webkit-transform: translate( 0px, -26% ); transform: translate( 0px, -26% ); }
+.iconControl .state027 .moving { -webkit-transform: translate( 0px, -27% ); transform: translate( 0px, -27% ); }
+.iconControl .state028 .moving { -webkit-transform: translate( 0px, -28% ); transform: translate( 0px, -28% ); }
+.iconControl .state029 .moving { -webkit-transform: translate( 0px, -29% ); transform: translate( 0px, -29% ); }
+.iconControl .state030 .moving { -webkit-transform: translate( 0px, -30% ); transform: translate( 0px, -30% ); }
+.iconControl .state031 .moving { -webkit-transform: translate( 0px, -31% ); transform: translate( 0px, -31% ); }
+.iconControl .state032 .moving { -webkit-transform: translate( 0px, -32% ); transform: translate( 0px, -32% ); }
+.iconControl .state033 .moving { -webkit-transform: translate( 0px, -33% ); transform: translate( 0px, -33% ); }
+.iconControl .state034 .moving { -webkit-transform: translate( 0px, -34% ); transform: translate( 0px, -34% ); }
+.iconControl .state035 .moving { -webkit-transform: translate( 0px, -35% ); transform: translate( 0px, -35% ); }
+.iconControl .state036 .moving { -webkit-transform: translate( 0px, -36% ); transform: translate( 0px, -36% ); }
+.iconControl .state037 .moving { -webkit-transform: translate( 0px, -37% ); transform: translate( 0px, -37% ); }
+.iconControl .state038 .moving { -webkit-transform: translate( 0px, -38% ); transform: translate( 0px, -38% ); }
+.iconControl .state039 .moving { -webkit-transform: translate( 0px, -39% ); transform: translate( 0px, -39% ); }
+.iconControl .state040 .moving { -webkit-transform: translate( 0px, -40% ); transform: translate( 0px, -40% ); }
+.iconControl .state041 .moving { -webkit-transform: translate( 0px, -41% ); transform: translate( 0px, -41% ); }
+.iconControl .state042 .moving { -webkit-transform: translate( 0px, -42% ); transform: translate( 0px, -42% ); }
+.iconControl .state043 .moving { -webkit-transform: translate( 0px, -43% ); transform: translate( 0px, -43% ); }
+.iconControl .state044 .moving { -webkit-transform: translate( 0px, -44% ); transform: translate( 0px, -44% ); }
+.iconControl .state045 .moving { -webkit-transform: translate( 0px, -45% ); transform: translate( 0px, -45% ); }
+.iconControl .state046 .moving { -webkit-transform: translate( 0px, -46% ); transform: translate( 0px, -46% ); }
+.iconControl .state047 .moving { -webkit-transform: translate( 0px, -47% ); transform: translate( 0px, -47% ); }
+.iconControl .state048 .moving { -webkit-transform: translate( 0px, -48% ); transform: translate( 0px, -48% ); }
+.iconControl .state049 .moving { -webkit-transform: translate( 0px, -49% ); transform: translate( 0px, -49% ); }
+.iconControl .state050 .moving { -webkit-transform: translate( 0px, -50% ); transform: translate( 0px, -50% ); }
+.iconControl .state051 .moving { -webkit-transform: translate( 0px, -51% ); transform: translate( 0px, -51% ); }
+.iconControl .state052 .moving { -webkit-transform: translate( 0px, -52% ); transform: translate( 0px, -52% ); }
+.iconControl .state053 .moving { -webkit-transform: translate( 0px, -53% ); transform: translate( 0px, -53% ); }
+.iconControl .state054 .moving { -webkit-transform: translate( 0px, -54% ); transform: translate( 0px, -54% ); }
+.iconControl .state055 .moving { -webkit-transform: translate( 0px, -55% ); transform: translate( 0px, -55% ); }
+.iconControl .state056 .moving { -webkit-transform: translate( 0px, -56% ); transform: translate( 0px, -56% ); }
+.iconControl .state057 .moving { -webkit-transform: translate( 0px, -57% ); transform: translate( 0px, -57% ); }
+.iconControl .state058 .moving { -webkit-transform: translate( 0px, -58% ); transform: translate( 0px, -58% ); }
+.iconControl .state059 .moving { -webkit-transform: translate( 0px, -59% ); transform: translate( 0px, -59% ); }
+.iconControl .state060 .moving { -webkit-transform: translate( 0px, -60% ); transform: translate( 0px, -60% ); }
+.iconControl .state061 .moving { -webkit-transform: translate( 0px, -61% ); transform: translate( 0px, -61% ); }
+.iconControl .state062 .moving { -webkit-transform: translate( 0px, -62% ); transform: translate( 0px, -62% ); }
+.iconControl .state063 .moving { -webkit-transform: translate( 0px, -63% ); transform: translate( 0px, -63% ); }
+.iconControl .state064 .moving { -webkit-transform: translate( 0px, -64% ); transform: translate( 0px, -64% ); }
+.iconControl .state065 .moving { -webkit-transform: translate( 0px, -65% ); transform: translate( 0px, -65% ); }
+.iconControl .state066 .moving { -webkit-transform: translate( 0px, -66% ); transform: translate( 0px, -66% ); }
+.iconControl .state067 .moving { -webkit-transform: translate( 0px, -67% ); transform: translate( 0px, -67% ); }
+.iconControl .state068 .moving { -webkit-transform: translate( 0px, -68% ); transform: translate( 0px, -68% ); }
+.iconControl .state069 .moving { -webkit-transform: translate( 0px, -69% ); transform: translate( 0px, -69% ); }
+.iconControl .state070 .moving { -webkit-transform: translate( 0px, -70% ); transform: translate( 0px, -70% ); }
+.iconControl .state071 .moving { -webkit-transform: translate( 0px, -71% ); transform: translate( 0px, -71% ); }
+.iconControl .state072 .moving { -webkit-transform: translate( 0px, -72% ); transform: translate( 0px, -72% ); }
+.iconControl .state073 .moving { -webkit-transform: translate( 0px, -73% ); transform: translate( 0px, -73% ); }
+.iconControl .state074 .moving { -webkit-transform: translate( 0px, -74% ); transform: translate( 0px, -74% ); }
+.iconControl .state075 .moving { -webkit-transform: translate( 0px, -75% ); transform: translate( 0px, -75% ); }
+.iconControl .state076 .moving { -webkit-transform: translate( 0px, -76% ); transform: translate( 0px, -76% ); }
+.iconControl .state077 .moving { -webkit-transform: translate( 0px, -77% ); transform: translate( 0px, -77% ); }
+.iconControl .state078 .moving { -webkit-transform: translate( 0px, -78% ); transform: translate( 0px, -78% ); }
+.iconControl .state079 .moving { -webkit-transform: translate( 0px, -79% ); transform: translate( 0px, -79% ); }
+.iconControl .state080 .moving { -webkit-transform: translate( 0px, -80% ); transform: translate( 0px, -80% ); }
+.iconControl .state081 .moving { -webkit-transform: translate( 0px, -81% ); transform: translate( 0px, -81% ); }
+.iconControl .state082 .moving { -webkit-transform: translate( 0px, -82% ); transform: translate( 0px, -82% ); }
+.iconControl .state083 .moving { -webkit-transform: translate( 0px, -83% ); transform: translate( 0px, -83% ); }
+.iconControl .state084 .moving { -webkit-transform: translate( 0px, -84% ); transform: translate( 0px, -84% ); }
+.iconControl .state085 .moving { -webkit-transform: translate( 0px, -85% ); transform: translate( 0px, -85% ); }
+.iconControl .state086 .moving { -webkit-transform: translate( 0px, -86% ); transform: translate( 0px, -86% ); }
+.iconControl .state087 .moving { -webkit-transform: translate( 0px, -87% ); transform: translate( 0px, -87% ); }
+.iconControl .state088 .moving { -webkit-transform: translate( 0px, -88% ); transform: translate( 0px, -88% ); }
+.iconControl .state089 .moving { -webkit-transform: translate( 0px, -89% ); transform: translate( 0px, -89% ); }
+.iconControl .state090 .moving { -webkit-transform: translate( 0px, -90% ); transform: translate( 0px, -90% ); }
+.iconControl .state091 .moving { -webkit-transform: translate( 0px, -91% ); transform: translate( 0px, -91% ); }
+.iconControl .state092 .moving { -webkit-transform: translate( 0px, -92% ); transform: translate( 0px, -92% ); }
+.iconControl .state093 .moving { -webkit-transform: translate( 0px, -93% ); transform: translate( 0px, -93% ); }
+.iconControl .state094 .moving { -webkit-transform: translate( 0px, -94% ); transform: translate( 0px, -94% ); }
+.iconControl .state095 .moving { -webkit-transform: translate( 0px, -95% ); transform: translate( 0px, -95% ); }
+.iconControl .state096 .moving { -webkit-transform: translate( 0px, -96% ); transform: translate( 0px, -96% ); }
+.iconControl .state097 .moving { -webkit-transform: translate( 0px, -97% ); transform: translate( 0px, -97% ); }
+.iconControl .state098 .moving { -webkit-transform: translate( 0px, -98% ); transform: translate( 0px, -98% ); }
+.iconControl .state099 .moving { -webkit-transform: translate( 0px, -99% ); transform: translate( 0px, -99% ); }
+.iconControl .state100 .moving { -webkit-transform: translate( 0px, -100% ); transform: translate( 0px, -100% ); }
+.iconControl .state000 .colored { stroke: #03EADC; }
+.iconControl .state001 .colored { stroke: #06EADC; }
+.iconControl .state002 .colored { stroke: #08EADD; }
+.iconControl .state003 .colored { stroke: #0BEBDD; }
+.iconControl .state004 .colored { stroke: #0DEBDD; }
+.iconControl .state005 .colored { stroke: #10EBDE; }
+.iconControl .state006 .colored { stroke: #12EBDE; }
+.iconControl .state007 .colored { stroke: #15EBDE; }
+.iconControl .state008 .colored { stroke: #17ECDF; }
+.iconControl .state009 .colored { stroke: #1AECDF; }
+.iconControl .state010 .colored { stroke: #1CECE0; }
+.iconControl .state011 .colored { stroke: #1FECE0; }
+.iconControl .state012 .colored { stroke: #21EDE0; }
+.iconControl .state013 .colored { stroke: #24EDE1; }
+.iconControl .state014 .colored { stroke: #26EDE1; }
+.iconControl .state015 .colored { stroke: #29EDE1; }
+.iconControl .state016 .colored { stroke: #2BEDE2; }
+.iconControl .state017 .colored { stroke: #2EEEE2; }
+.iconControl .state018 .colored { stroke: #30EEE2; }
+.iconControl .state019 .colored { stroke: #33EEE3; }
+.iconControl .state020 .colored { stroke: #35EEE3; }
+.iconControl .state021 .colored { stroke: #38EEE3; }
+.iconControl .state022 .colored { stroke: #3AEFE4; }
+.iconControl .state023 .colored { stroke: #3DEFE4; }
+.iconControl .state024 .colored { stroke: #3FEFE4; }
+.iconControl .state025 .colored { stroke: #42EFE5; }
+.iconControl .state026 .colored { stroke: #45EFE5; }
+.iconControl .state027 .colored { stroke: #47F0E5; }
+.iconControl .state028 .colored { stroke: #4AF0E6; }
+.iconControl .state029 .colored { stroke: #4CF0E6; }
+.iconControl .state030 .colored { stroke: #4FF0E7; }
+.iconControl .state031 .colored { stroke: #51F1E7; }
+.iconControl .state032 .colored { stroke: #54F1E7; }
+.iconControl .state033 .colored { stroke: #56F1E8; }
+.iconControl .state034 .colored { stroke: #59F1E8; }
+.iconControl .state035 .colored { stroke: #5BF1E8; }
+.iconControl .state036 .colored { stroke: #5EF2E9; }
+.iconControl .state037 .colored { stroke: #60F2E9; }
+.iconControl .state038 .colored { stroke: #63F2E9; }
+.iconControl .state039 .colored { stroke: #65F2EA; }
+.iconControl .state040 .colored { stroke: #68F2EA; }
+.iconControl .state041 .colored { stroke: #6AF3EA; }
+.iconControl .state042 .colored { stroke: #6DF3EB; }
+.iconControl .state043 .colored { stroke: #6FF3EB; }
+.iconControl .state044 .colored { stroke: #72F3EB; }
+.iconControl .state045 .colored { stroke: #74F3EC; }
+.iconControl .state046 .colored { stroke: #77F4EC; }
+.iconControl .state047 .colored { stroke: #79F4EC; }
+.iconControl .state048 .colored { stroke: #7CF4ED; }
+.iconControl .state049 .colored { stroke: #7EF4ED; }
+.iconControl .state050 .colored { stroke: #81F5EE; }
+.iconControl .state051 .colored { stroke: #84F5EE; }
+.iconControl .state052 .colored { stroke: #86F5EE; }
+.iconControl .state053 .colored { stroke: #89F5EF; }
+.iconControl .state054 .colored { stroke: #8BF5EF; }
+.iconControl .state055 .colored { stroke: #8EF6EF; }
+.iconControl .state056 .colored { stroke: #90F6F0; }
+.iconControl .state057 .colored { stroke: #93F6F0; }
+.iconControl .state058 .colored { stroke: #95F6F0; }
+.iconControl .state059 .colored { stroke: #98F6F1; }
+.iconControl .state060 .colored { stroke: #9AF7F1; }
+.iconControl .state061 .colored { stroke: #9DF7F1; }
+.iconControl .state062 .colored { stroke: #9FF7F2; }
+.iconControl .state063 .colored { stroke: #A2F7F2; }
+.iconControl .state064 .colored { stroke: #A4F7F2; }
+.iconControl .state065 .colored { stroke: #A7F8F3; }
+.iconControl .state066 .colored { stroke: #A9F8F3; }
+.iconControl .state067 .colored { stroke: #ACF8F3; }
+.iconControl .state068 .colored { stroke: #AEF8F4; }
+.iconControl .state069 .colored { stroke: #B1F8F4; }
+.iconControl .state070 .colored { stroke: #B3F9F5; }
+.iconControl .state071 .colored { stroke: #B6F9F5; }
+.iconControl .state072 .colored { stroke: #B8F9F5; }
+.iconControl .state073 .colored { stroke: #BBF9F6; }
+.iconControl .state074 .colored { stroke: #BDFAF6; }
+.iconControl .state075 .colored { stroke: #C0FAF6; }
+.iconControl .state076 .colored { stroke: #C3FAF7; }
+.iconControl .state077 .colored { stroke: #C5FAF7; }
+.iconControl .state078 .colored { stroke: #C8FAF7; }
+.iconControl .state079 .colored { stroke: #CAFBF8; }
+.iconControl .state080 .colored { stroke: #CDFBF8; }
+.iconControl .state081 .colored { stroke: #CFFBF8; }
+.iconControl .state082 .colored { stroke: #D2FBF9; }
+.iconControl .state083 .colored { stroke: #D4FBF9; }
+.iconControl .state084 .colored { stroke: #D7FCF9; }
+.iconControl .state085 .colored { stroke: #D9FCFA; }
+.iconControl .state086 .colored { stroke: #DCFCFA; }
+.iconControl .state087 .colored { stroke: #DEFCFA; }
+.iconControl .state088 .colored { stroke: #E1FCFB; }
+.iconControl .state089 .colored { stroke: #E3FDFB; }
+.iconControl .state090 .colored { stroke: #E6FDFC; }
+.iconControl .state091 .colored { stroke: #E8FDFC; }
+.iconControl .state092 .colored { stroke: #EBFDFC; }
+.iconControl .state093 .colored { stroke: #EDFEFD; }
+.iconControl .state094 .colored { stroke: #F0FEFD; }
+.iconControl .state095 .colored { stroke: #F2FEFD; }
+.iconControl .state096 .colored { stroke: #F5FEFE; }
+.iconControl .state097 .colored { stroke: #F7FEFE; }
+.iconControl .state098 .colored { stroke: #FAFFFE; }
+.iconControl .state099 .colored { stroke: #FCFFFF; }
+.iconControl .state100 .colored { stroke: #FFFFFF; }
+</style>
+<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' data-isEnabled='' id='im4s7xjypze5'>
+<a class='command' href='javascript:void(0)' target='_self' id='j7vw3hm63nwe6'></a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j5vchm592yjhp6;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__3.im4s7xjypze5;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -499,7 +743,7 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j5vchm592yjhp6;
+  var $__6 = $__3.im4s7xjypze5;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -528,7 +772,7 @@ transform: scale( 0.001 );
     isEnabled = $__6.getAttribute("data-isEnabled") || isEnabled;
   if (isEnabled === undefined)
     isEnabled = null;
-  var command = $__2.j7wi4qqqt7chp7;
+  var command = $__2.j7vw3hm63nwe6;
   !function() {
     var initial = command.className.split(/\s+/);
     var enabled = (url || callback) && (!isEnabled || isEnabled());
@@ -553,14 +797,14 @@ transform: scale( 0.001 );
   }.call($__0);
 }();
 </script>
-</template><template class='ContextMenu' id='j2ynhhyr2r9hp8'>
-<div class='contextMenu' id='ippgu5nqmghp9'></div>
+</template><template class='ContextMenu' id='j1t1v9d2izke7'>
+<div class='contextMenu' id='ie7f368r8je8'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j2ynhhyr2r9hp8;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__3.j1t1v9d2izke7;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -574,12 +818,12 @@ transform: scale( 0.001 );
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Command = $__3.j5vchm592yjhp6;
-  var $__6 = $__3.j2ynhhyr2r9hp8;
+  var Command = $__3.im4s7xjypze5;
+  var $__6 = $__3.j1t1v9d2izke7;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var contextMenu = $__2.ippgu5nqmghp9;
+  var contextMenu = $__2.ie7f368r8je8;
   !function() {
     CS.content(contextMenu, (function() {
       return [CS.importTemplate(Command, {
@@ -679,23 +923,23 @@ transform: scale( 0.001 );
   }.call($__0);
 }();
 </script>
-</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j73odekew3chpg'>
-<li class='houseTemplate' id='j1lmrcdd0h5hph'></li>
+</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='ilh9y99htfef'>
+<li class='houseTemplate' id='j7drzanfbr6eg'></li>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
   var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j73odekew3chpg;
-  var $__5 = window.j1e3mv5rieqhp5;
+  var $__0 = $__3.ilh9y99htfef;
+  var $__5 = window.j1zk1sdxyvze4;
   var $__6 = $__4.$__DATASET__$;
   if ($__6 === undefined)
     $__6 = $__4.$__DATASET__$ = {};
-  var $__7 = $__4.ijfti6ux00hpa;
+  var $__7 = $__4.j4z0j2gs33me9;
   var $__8 = $__3.$__DATASET__$;
   if ($__8 === undefined)
     $__8 = $__3.$__DATASET__$ = {};
-  var $__9 = $__3.j73odekew3chpg;
+  var $__9 = $__3.ilh9y99htfef;
   var $__10 = $__2.$__DATASET__$;
   if ($__10 === undefined)
     $__10 = $__2.$__DATASET__$ = {};
@@ -704,7 +948,7 @@ transform: scale( 0.001 );
     text = $__9.getAttribute("data-text") || text;
   if (text === undefined)
     text = null;
-  var houseTemplate = $__2.j1lmrcdd0h5hph;
+  var houseTemplate = $__2.j7drzanfbr6eg;
   !function() {
     CS.content(houseTemplate, (function() {
       return text;
@@ -712,20 +956,19 @@ transform: scale( 0.001 );
   }.call($__0);
 }();
 </script>
-</template><template class='StartupScreen' id='ijfti6ux00hpa'>
-<div class='startupScreen' id='j143zb3zmijhpb'>
-<p id='j4v5yzjbgu2hpc'>Добро пожаловать в Ваш<br id='j7b0q00woj5hpd'/>Умный Дом!</p>
-<div class='templates' id='j7pxlobumg6hpe'>
-<p id='j5m8ru8xegkhpf'>Пожалуйста, выберите место, где используется этот пульт:</p>
-<noscript data-template-reference='j73odekew3chpg'></noscript>
-<ul class='houseTemplates' id='iojyupd6gchpi'></ul>
+</template><template class='StartupScreen' id='j4z0j2gs33me9'>
+<div class='startupScreen' id='j55t1h74mn2ea'>
+<p id='j931lkz9s3beb'>Добро пожаловать в Ваш<br id='ib1ag3t5mpec'/>Умный Дом!</p>
+<div class='templates' id='j4tu1yho7zred'>
+<p id='j9gihyjv8e5ee'>Пожалуйста, выберите место, где используется этот пульт:</p>
+<noscript data-template-reference='ilh9y99htfef'></noscript>
+<ul class='houseTemplates' id='j6jqk2kdgy9eh'></ul>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j7pxlobumg6hpe;
-  var $__4 = window.j1e3mv5rieqhp5;
-  var template = $__6;
+  var $__0 = $__2.j4tu1yho7zred;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -734,13 +977,14 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.ijfti6ux00hpa;
+  var $__6 = $__3.j4z0j2gs33me9;
+  var template = $__6;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var templates = $__2.j7pxlobumg6hpe;
-  var HouseTemplate = $__2.j73odekew3chpg;
-  var houseTemplates = $__2.iojyupd6gchpi;
+  var templates = $__2.j4tu1yho7zred;
+  var HouseTemplate = $__2.ilh9y99htfef;
+  var houseTemplates = $__2.j6jqk2kdgy9eh;
   !function() {
     CS.content(houseTemplates, (function() {
       return app.templates && app.templates.concat([{
@@ -760,18 +1004,18 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-<div class='loading' id='j666kh2dt6ohpj'></div>
+<div class='loading' id='j8h1o23kvh8ei'></div>
 </div>
-</template><template class='AskToLinkDevice' id='j5ddcn5edayhpk'>
-<div class='askToLinkDevice modalDialog' id='j400x0dr36ghpl'>
-<p id='j6msdbu1im7hpm'>Пожалуйста,<br id='j66v88lha9uhpn'/>переведите устройство в режим<br id='j8btsdri66zhpo'/>программирования и нажмите</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j258sr3mkiahpp'>здесь</a>
+</template><template class='AskToLinkDevice' id='j1peueyahd4ej'>
+<div class='askToLinkDevice modalDialog' id='j8w8tsvm2wvek'>
+<p id='j14cgareuyuel'>Пожалуйста,<br id='j3c0aru8cnuem'/>переведите устройство в режим<br id='iadm97ji7cen'/>программирования и нажмите</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j7jdft47uaieo'>здесь</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j400x0dr36ghpl;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j8w8tsvm2wvek;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -780,14 +1024,15 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j5ddcn5edayhpk;
+  var $__6 = $__3.j1peueyahd4ej;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j258sr3mkiahpp;
+  var button = $__2.j7jdft47uaieo;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
+      var placeId = app.linkingPlaceId || app.activePlaceId;
       app.dialog = "StateWait";
       co.go($traceurRuntime.initGeneratorFunction(function $__0() {
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -795,20 +1040,21 @@ transform: scale( 0.001 );
             switch ($ctx.state) {
               case 0:
                 $ctx.state = 2;
-                return app.createDevice(app.activePlaceId);
+                return app.createDevice(placeId);
               case 2:
                 $ctx.maybeThrow();
                 $ctx.state = 4;
                 break;
               case 4:
                 $ctx.state = 6;
-                return app.command(app.activeDeviceId, "Link");
+                return app.command(app.getPlace(placeId).device, "Link");
               case 6:
                 $ctx.maybeThrow();
                 $ctx.state = 8;
                 break;
               case 8:
                 app.dialog = "AskIfDeviceHasBeenLinked";
+                app.linkingPlaceId = placeId;
                 $ctx.state = -2;
                 break;
               default:
@@ -824,19 +1070,19 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='ServiceItem' id='j16a7b9wae4hpq'>
-<div class='serviceItem modalDialog' id='j666v2gev22hpr'>
-<p id='j895gzbgcbuhps'>***</p>
-<form id='j1yqq104n1mhpt'>
-<textarea name='json' cols='35' rows='25' id='j9k5qmn2qchhpu'></textarea>
-<p id='j3c0az2u8tghpv'><a class='button' href='javascript:void(0)' target='_self' id='j59tv0n9v8ohpw'>Закрыть</a></p>
+</template><template class='ServiceItem' id='j18s4une2p0ep'>
+<div class='serviceItem modalDialog' id='j8ti7hemivieq'>
+<p id='j62r1a06c1eer'>***</p>
+<form id='j7hwye2uxdhes'>
+<textarea name='json' cols='35' rows='25' id='j2rwtadfq2cet'></textarea>
+<p id='j1hr2hbqi9qeu'><a class='button' href='javascript:void(0)' target='_self' id='j8wrkhz65usev'>Закрыть</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j666v2gev22hpr;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j8ti7hemivieq;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -845,13 +1091,13 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j16a7b9wae4hpq;
+  var $__6 = $__3.j18s4une2p0ep;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.j1yqq104n1mhpt;
-  var json = $__2.j9k5qmn2qchhpu;
-  var button = $__2.j59tv0n9v8ohpw;
+  var form = $__2.j7hwye2uxdhes;
+  var json = $__2.j2rwtadfq2cet;
+  var button = $__2.j8wrkhz65usev;
   !function() {
     ra((function() {
       form.json.value = JSON.stringify({
@@ -882,19 +1128,19 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='AskNewName' id='j6utvcb0aadhpx'>
-<div class='askNewName modalDialog' id='j9tenjzoev6hpy'>
-<p id='j2m8e7vf24vhpz'>Название:</p>
-<form id='j9bqlff6spvhq0'>
-<input name='string' type='text' autofocus='autofocus' size='20' id='j28x824wsmrhq1'/>
-<p id='j7d1w8mtd0uhq2'><a class='button' href='javascript:void(0)' target='_self' id='j5e5dcjnrs7hq3'>Закрыть</a></p>
+</template><template class='AskNewName' id='j53yyifrwt5ew'>
+<div class='askNewName modalDialog' id='j7kcomq82nnex'>
+<p id='ik87khtg88ey'>Название:</p>
+<form id='j8kdtores9sez'>
+<input name='string' type='text' autofocus='autofocus' size='20' id='j7er2jtrw86f0'/>
+<p id='iehelzumfuf1'><a class='button' href='javascript:void(0)' target='_self' id='j9pyomm5fccf2'>Закрыть</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j9tenjzoev6hpy;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j7kcomq82nnex;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -903,13 +1149,13 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j6utvcb0aadhpx;
+  var $__6 = $__3.j53yyifrwt5ew;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.j9bqlff6spvhq0;
-  var string = $__2.j28x824wsmrhq1;
-  var button = $__2.j5e5dcjnrs7hq3;
+  var form = $__2.j8kdtores9sez;
+  var string = $__2.j7er2jtrw86f0;
+  var button = $__2.j9pyomm5fccf2;
   !function() {
     var submit = (function() {
       var name = form.string.value.trim();
@@ -927,30 +1173,32 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='SearchItem' data-placeId='' id='j6ovq3dsc3lhq6'>
-<div class='searchItem' id='j5avrfcj3lohq7'>
-<div class='caption' id='j1lfyj1m9y5hq8'></div>
-<div class='places' id='j2jz1mbxvfyhq9'></div>
+</template><template class='SearchItem' data-placeId='' id='j5ad03du7ilf5'>
+<div class='searchItem' id='j5js3s807iaf6'>
+<span class='caption' id='j86lh8y0dcbf7'></span>
+<span class='places' id='j648cfnje2kf8'></span>
+<span class='cmdDeleteFromProgram' id='j18h4r8tasif9'></span>
+<span class='cmdAppend' id='j1ptrzmxqc0fa'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
   var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j5avrfcj3lohq7;
-  var $__5 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j5js3s807iaf6;
+  var $__5 = window.j1zk1sdxyvze4;
   var $__6 = $__4.$__DATASET__$;
   if ($__6 === undefined)
     $__6 = $__4.$__DATASET__$ = {};
-  var app = $__6 == null ? undefined : $__6.app;
-  if (app === undefined)
-    app = $__5.getAttribute("data-app") || app;
-  if (app === undefined)
-    app = null;
-  var $__7 = $__4.j5tdn5zajpghq4;
+  var $__7 = $__4.j6jyrflno94f3;
   var $__8 = $__3.$__DATASET__$;
   if ($__8 === undefined)
     $__8 = $__3.$__DATASET__$ = {};
-  var $__9 = $__3.j6ovq3dsc3lhq6;
+  var opts = $__8 == null ? undefined : $__8.opts;
+  if (opts === undefined)
+    opts = $__7.getAttribute("data-opts") || opts;
+  if (opts === undefined)
+    opts = null;
+  var $__9 = $__3.j5ad03du7ilf5;
   var $__10 = $__2.$__DATASET__$;
   if ($__10 === undefined)
     $__10 = $__2.$__DATASET__$ = {};
@@ -959,39 +1207,33 @@ transform: scale( 0.001 );
     placeId = $__9.getAttribute("data-placeId") || placeId;
   if (placeId === undefined)
     placeId = null;
-  var caption = $__2.j1lfyj1m9y5hq8;
-  var places = $__2.j2jz1mbxvfyhq9;
+  var caption = $__2.j86lh8y0dcbf7;
+  var places = $__2.j648cfnje2kf8;
   !function() {
     this.classList.add(placeId);
     CS.content(caption, (function() {
-      return app.getMessage(app.getPlace(placeId));
+      return opts.placeInfos[placeId].caption;
     }));
     CS.content(places, (function() {
-      return app.placeIds.map((function(id) {
-        return app.getPlace(id);
-      })).filter((function(place) {
-        return place.content && place.content[placeId];
-      })).map(app.getMessage).sort((function(a, b) {
-        return lu.compare(a.toUpperCase(), b.toUpperCase());
-      })).join(", ");
+      return opts.placeInfos[placeId].ptext;
     }));
   }.call($__0);
 }();
 </script>
 </div>
-</template><template class='SearchItems' id='j5tdn5zajpghq4'>
-<div class='searchItems modalDialog' id='j46b9bez4jhhq5'>
-<noscript data-template-reference='j6ovq3dsc3lhq6'></noscript>
-<form id='j1mtzklztlbhqa'>
-<input name='mask' type='text' autofocus='autofocus' size='20' id='j89jeo92kmthqb'/>
+</template><template class='SearchItems' data-opts='' id='j6jyrflno94f3'>
+<div class='searchItems modalDialog' id='j4qf889cj52f4'>
+<noscript data-template-reference='j5ad03du7ilf5'></noscript>
+<form id='j608dx2nldcfb'>
+<input name='mask' type='text' autofocus='autofocus' size='20' id='j68rpxfzwkwfc'/>
 </form>
-<div class='items' id='j1fw58cso5phqc'></div>
+<div class='items' id='j8qe5gs5h8ifd'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j46b9bez4jhhq5;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j4qf889cj52f4;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1000,14 +1242,20 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j5tdn5zajpghq4;
+  var $__6 = $__3.j6jyrflno94f3;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var SearchItem = $__2.j6ovq3dsc3lhq6;
-  var form = $__2.j1mtzklztlbhqa;
-  var mask = $__2.j89jeo92kmthqb;
-  var items = $__2.j1fw58cso5phqc;
+  var dataset = $__7;
+  var opts = $__7 == null ? undefined : $__7.opts;
+  if (opts === undefined)
+    opts = $__6.getAttribute("data-opts") || opts;
+  if (opts === undefined)
+    opts = null;
+  var SearchItem = $__2.j5ad03du7ilf5;
+  var form = $__2.j608dx2nldcfb;
+  var mask = $__2.j68rpxfzwkwfc;
+  var items = $__2.j8qe5gs5h8ifd;
   !function() {
     var DL = require("DamerauLevenshtein");
     var notAChar = (function(char) {
@@ -1025,48 +1273,195 @@ transform: scale( 0.001 );
         transpose: 1
       });
     });
-    var labels = ra.keymap(app.live.placeIds, (function(placeId) {
-      return CS.importNode(SearchItem, {placeId: placeId});
-    }));
-    var v = ra({get items() {
-        return ra.Array(app.placeIds.map((function(id) {
-          var caption = app.getMessage(app.getPlace(id));
-          var cost = form.mask.raValue && fuzzy(form.mask.raValue, caption);
-          return {
-            id: id,
-            cost: cost,
-            caption: caption
-          };
-        })).filter((function(a) {
-          return a.cost != Infinity;
-        })).sort((function(a, b) {
-          return lu.compare(a.cost, b.cost) || lu.compare(a.caption.toUpperCase(), b.caption.toUpperCase());
-        })).map((function(a) {
-          return labels.get(a.id);
+    opts = dataset.opts = ra({
+      get placeIds() {
+        return ra.Array(app.placeIds.filter((function(id) {
+          return id != app.main;
         })));
-      }});
+      },
+      get placeInfos() {
+        var cache = Object.create(null);
+        var $__4 = true;
+        var $__5 = false;
+        var $__6 = undefined;
+        try {
+          for (var $__2 = void 0,
+              $__1 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__4 = ($__2 = $__1.next()).done); $__4 = true) {
+            var id = $__2.value;
+            {
+              var info = app.getPlace(id);
+              cache[id] = {
+                info: info,
+                caption: app.getMessage(info),
+                places: []
+              };
+            }
+          }
+        } catch ($__7) {
+          $__5 = true;
+          $__6 = $__7;
+        } finally {
+          try {
+            if (!$__4 && $__1.return != null) {
+              $__1.return();
+            }
+          } finally {
+            if ($__5) {
+              throw $__6;
+            }
+          }
+        }
+        var $__11 = true;
+        var $__12 = false;
+        var $__13 = undefined;
+        try {
+          var $__23 = function() {
+            var id = $__9.value;
+            lodash.forEach(cache[id].info.content, (function(_, key) {
+              return cache[key] && (cache[key].places.push(id));
+            }));
+          };
+          for (var $__9 = void 0,
+              $__8 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__11 = ($__9 = $__8.next()).done); $__11 = true) {
+            $__23();
+          }
+        } catch ($__14) {
+          $__12 = true;
+          $__13 = $__14;
+        } finally {
+          try {
+            if (!$__11 && $__8.return != null) {
+              $__8.return();
+            }
+          } finally {
+            if ($__12) {
+              throw $__13;
+            }
+          }
+        }
+        var ret = Object.create(null);
+        var $__18 = true;
+        var $__19 = false;
+        var $__20 = undefined;
+        try {
+          var $__24 = function() {
+            var id = $__16.value;
+            {
+              var c = cache[id];
+              var ptext = c.places.map((function(id) {
+                return cache[id].caption;
+              })).join(", ");
+              if (ptext)
+                ptext = ("(" + ptext + ")");
+              ret[id] = {
+                id: id,
+                caption: c.caption,
+                places: c.places,
+                ptext: ptext
+              };
+            }
+          };
+          for (var $__16 = void 0,
+              $__15 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__18 = ($__16 = $__15.next()).done); $__18 = true) {
+            $__24();
+          }
+        } catch ($__21) {
+          $__19 = true;
+          $__20 = $__21;
+        } finally {
+          try {
+            if (!$__18 && $__15.return != null) {
+              $__15.return();
+            }
+          } finally {
+            if ($__19) {
+              throw $__20;
+            }
+          }
+        }
+        return ra.JSON(ret);
+      },
+      get labels() {
+        return ra.keymap(opts.live.placeIds, (function(placeId) {
+          return CS.importNode(SearchItem, {placeId: placeId});
+        }));
+      },
+      get items() {
+        var $__0 = this;
+        var value = form.mask.raValue;
+        var arr = [];
+        var $__4 = true;
+        var $__5 = false;
+        var $__6 = undefined;
+        try {
+          for (var $__2 = void 0,
+              $__1 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__4 = ($__2 = $__1.next()).done); $__4 = true) {
+            var id = $__2.value;
+            {
+              var i = opts.placeInfos[id];
+              var key = [];
+              if (value) {
+                key.push(fuzzy(value, i.caption), fuzzy(value, i.caption + " " + i.ptext));
+                if (key.every((function(k) {
+                  return Math.abs(k) == Infinity;
+                })))
+                  continue;
+              }
+              key.push(i.caption.toUpperCase());
+              arr.push({
+                id: id,
+                key: key
+              });
+            }
+          }
+        } catch ($__7) {
+          $__5 = true;
+          $__6 = $__7;
+        } finally {
+          try {
+            if (!$__4 && $__1.return != null) {
+              $__1.return();
+            }
+          } finally {
+            if ($__5) {
+              throw $__6;
+            }
+          }
+        }
+        return ra.Array(arr.sort((function(a, b) {
+          return lodash.zip(a.key, b.key).map((function(pair) {
+            var $__22;
+            return ($__22 = lu).compare.apply($__22, $traceurRuntime.spread(pair));
+          })).reduce((function(a, b) {
+            return a || b;
+          }));
+        })).map((function(a) {
+          return $__0.labels.get(a.id);
+        })));
+      }
+    });
     CS.content(items, (function() {
-      return v.items;
+      return opts.items;
     }));
   }.call($__0);
 }();
 </script>
 </div>
-</template><template class='AskCredentials' id='j2nql4rvkaxhqd'>
-<div class='askCredentials' id='j271uvv1xg9hqe'>
-<form id='iugb7owvaahqf'>
-<p id='j89xbeqfz3bhqg'>Пользователь:</p>
-<p id='j92bb67m0tnhqh'><input name='user' type='text' size='20' value='' id='j6o3ti865dnhqi'/></p>
-<p id='j56k627qeyyhqj'>Ключ:</p>
-<p id='j3r47np13b6hqk'><input name='key' type='password' size='20' value='' id='j4dvsw5gj4shql'/></p>
-<p id='j9lg0ufhqxuhqm'><a class='button' href='javascript:void(0)' target='_self' id='j7jxtlxd04ehqn'>Подключиться</a></p>
+</template><template class='AskCredentials' id='j5kbpbaa011fe'>
+<div class='askCredentials' id='j4blj1sdvy8ff'>
+<form id='j43mz560qykfg'>
+<p id='j41psrjw5f9fh'>Пользователь:</p>
+<p id='j79uyki9pfifi'><input name='user' type='text' size='20' value='' id='j2z6p6qg7ztfj'/></p>
+<p id='j1qicesv9prfk'>Ключ:</p>
+<p id='j5w4jmwk0ppfl'><input name='key' type='password' size='20' value='' id='j5dps0rxarxfm'/></p>
+<p id='j4d100l414pfn'><a class='button' href='javascript:void(0)' target='_self' id='ievu964g7gfo'>Подключиться</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j271uvv1xg9hqe;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j4blj1sdvy8ff;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1075,14 +1470,14 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j2nql4rvkaxhqd;
+  var $__6 = $__3.j5kbpbaa011fe;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.iugb7owvaahqf;
-  var user = $__2.j6o3ti865dnhqi;
-  var key = $__2.j4dvsw5gj4shql;
-  var button = $__2.j7jxtlxd04ehqn;
+  var form = $__2.j43mz560qykfg;
+  var user = $__2.j2z6p6qg7ztfj;
+  var key = $__2.j5dps0rxarxfm;
+  var button = $__2.ievu964g7gfo;
   !function() {
     var submit = (function() {
       var user = form.user.value.trim();
@@ -1101,17 +1496,17 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='AskIfDeviceHasBeenLinked' id='j6vm4ikr4f8hqo'>
-<div class='askIfDeviceHasBeenLinked modalDialog' id='j7kwbgt29nphqp'>
-<p id='j9l1xbpx7wbhqq'>Устройство было успешно привязано?</p>
-<a class='button yes' href='javascript:void(0)' target='_self' id='j4yh6dipluhhqr'>да</a>
-<a class='button no' href='javascript:void(0)' target='_self' id='j64ic3hgq93hqs'>нет</a>
+</template><template class='AskIfDeviceHasBeenLinked' id='j9idrdoe4y5fp'>
+<div class='askIfDeviceHasBeenLinked modalDialog' id='j1956d6arkpfq'>
+<p id='j3rz4fu0zehfr'>Устройство было успешно привязано?</p>
+<a class='button yes' href='javascript:void(0)' target='_self' id='j1q5e0hxvv5fs'>да</a>
+<a class='button no' href='javascript:void(0)' target='_self' id='j1umxq9lea6ft'>нет</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j7kwbgt29nphqp;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j1956d6arkpfq;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1120,13 +1515,13 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var AskToLinkDevice = $__3.j5ddcn5edayhpk;
-  var $__6 = $__3.j6vm4ikr4f8hqo;
+  var AskToLinkDevice = $__3.j1peueyahd4ej;
+  var $__6 = $__3.j9idrdoe4y5fp;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var yes = $__2.j4yh6dipluhhqr;
-  var no = $__2.j64ic3hgq93hqs;
+  var yes = $__2.j1q5e0hxvv5fs;
+  var no = $__2.j1umxq9lea6ft;
   !function() {
     CS.onTap(yes, (function(event) {
       event.preventDefault();
@@ -1140,17 +1535,17 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='AskReset' id='j29ygzn727uhqt'>
-<div class='askReset modalDialog' id='j8zg1gvzku8hqu'>
-<p id='j4g834xsvl5hqv'>Будет удалить вся информация о приборах и их местоположении</p>
-<a class='button yes' href='javascript:void(0)' target='_self' id='j8ei69iqm3thqw'>Удалить</a>
-<a class='button no' href='javascript:void(0)' target='_self' id='j1u3du39bachqx'>Вернуться</a>
+</template><template class='AskReset' id='j4p2azn3u2xfu'>
+<div class='askReset modalDialog' id='j3glcq3mzh2fv'>
+<p id='j47jiuosompfw'>Будет удалить вся информация о приборах и их местоположении</p>
+<a class='button yes' href='javascript:void(0)' target='_self' id='i7cp73h4p6fx'>Удалить</a>
+<a class='button no' href='javascript:void(0)' target='_self' id='h2uzh7p69fy'>Вернуться</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j8zg1gvzku8hqu;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j3glcq3mzh2fv;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1159,13 +1554,13 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var AskToLinkDevice = $__3.j5ddcn5edayhpk;
-  var $__6 = $__3.j29ygzn727uhqt;
+  var AskToLinkDevice = $__3.j1peueyahd4ej;
+  var $__6 = $__3.j4p2azn3u2xfu;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var yes = $__2.j8ei69iqm3thqw;
-  var no = $__2.j1u3du39bachqx;
+  var yes = $__2.i7cp73h4p6fx;
+  var no = $__2.h2uzh7p69fy;
   !function() {
     CS.onTap(yes, (function(event) {
       event.preventDefault();
@@ -1179,17 +1574,17 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='ErrorNoCarrier' id='j1u59q7czqhhqy'>
-<div class='errorNoCarrier modalDialog errorDialog' id='j7rmv90aapjhqz'>
-<p id='j2ex11qbe6ohr0'>Ошибка</p>
-<p id='j6b0tj5z1i8hr1'>Произошла ошибка при попытке связаться с модемом</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j8hy0ufiyh4hr2'>закрыть</a>
+</template><template class='ErrorNoCarrier' id='j8fwf22dd4ufz'>
+<div class='errorNoCarrier modalDialog errorDialog' id='j6jzs3sojnmg0'>
+<p id='j82vrswbqhug1'>Ошибка</p>
+<p id='j6cjez5g6qlg2'>Произошла ошибка при попытке связаться с модемом</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j6wdokhvyiyg3'>закрыть</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j7rmv90aapjhqz;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j6jzs3sojnmg0;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1198,11 +1593,11 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j1u59q7czqhhqy;
+  var $__6 = $__3.j8fwf22dd4ufz;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j8hy0ufiyh4hr2;
+  var button = $__2.j6wdokhvyiyg3;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
@@ -1212,16 +1607,16 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='StopDeviceNotification' id='j5mdyk29ij4hr3'>
-<div class='stopDeviceNotification modalDialog' id='j2o9gvoawxzhr4'>
-<p id='j3taewa4qfphr5'>Пожалуйста,<br id='j1srzjug86bhr6'/>переведите устройство в рабочий режим</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j2z7n2olu1uhr7'>закрыть</a>
+</template><template class='StopDeviceNotification' id='j7no1fa0jz0g4'>
+<div class='stopDeviceNotification modalDialog' id='j7eys58xxf5g5'>
+<p id='j13yj9g8ji2g6'>Пожалуйста,<br id='j4ta8dtys0cg7'/>переведите устройство в рабочий режим</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j92jvh098w5g8'>закрыть</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j2o9gvoawxzhr4;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j7eys58xxf5g5;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1230,11 +1625,11 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j5mdyk29ij4hr3;
+  var $__6 = $__3.j7no1fa0jz0g4;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j2z7n2olu1uhr7;
+  var button = $__2.j92jvh098w5g8;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
@@ -1244,27 +1639,27 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='StateWait' id='j63927dyuvphr8'>
-<div class='stateWait modalDialog' id='j4szkgs1kv7hr9'>
-<p id='j538biqs14xhra'>Подождите...</p>
+</template><template class='StateWait' id='j9pghfow19bg9'>
+<div class='stateWait modalDialog' id='j26bd4ef8g1ga'>
+<p id='j6ndp2riuy7gb'>Подождите...</p>
 </div>
-</template><template class='LoadingScreen' id='j5n2ruh0jl8hrb'>
-<div class='loadingScreen' id='j5rlojps6d0hrc'></div>
-</template><template class='Centered' data-content='' id='j9m9g1klj0uhrd'>
-<table style='width: 100%; height: 100%;' id='j8y3n59mjmohre'>
-<tr style='width: 100%; height: 100%;' id='j51clz6vwydhrf'>
-<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='j6hrscq4028hrg'>
-<span class='self' id='j8yesi1lnkhhrh'></span>
+</template><template class='LoadingScreen' id='j8jq254t42vgc'>
+<div class='loadingScreen' id='j3j2k6s5o6vgd'></div>
+</template><template class='Centered' data-content='' id='j5asjj0j46hge'>
+<table style='width: 100%; height: 100%;' id='j5b54ol5x30gf'>
+<tr style='width: 100%; height: 100%;' id='j4n1cgryg9vgg'>
+<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='j2r4g8ylwuxgh'>
+<span class='self' id='j8wqpl2ys4ugi'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j6hrscq4028hrg;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j2r4g8ylwuxgh;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
-  var $__6 = $__3.j9m9g1klj0uhrd;
+  var $__6 = $__3.j5asjj0j46hge;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1273,7 +1668,7 @@ transform: scale( 0.001 );
     content = $__6.getAttribute("data-content") || content;
   if (content === undefined)
     content = null;
-  var self = $__2.j8yesi1lnkhhrh;
+  var self = $__2.j8wqpl2ys4ugi;
   !function() {
     CS.content(self, content);
   }.call($__0);
@@ -1282,27 +1677,28 @@ transform: scale( 0.001 );
 </td>
 </tr>
 </table>
-</template><template class='Icon' data-placeId='' data-iconId='' data-iconDescr='' data-deviceDescr='' data-index='' id='j341f2loa53hri'>
-<div class='icon' id='j7zfqzeg4w8hrj'>
-<div class='iconControl' id='j3eeeqxozi2hrk'>
-<div class='image' id='j77502saphwhrl'>
-<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j5dwvx0f9knhrm'/>
-<img class='error off' src='/images/room.svg' id='j34n0j90w5xhrn'/>
-<img class='error on' src='/images/room_on.svg' id='j6howhn3ct7hro'/>
-<img class='error absent' src='/images/room_absent.svg' id='j6mlx58xd6ohrp'/>
+</template><template class='Icon' data-placeId='' data-iconId='' data-iconDescr='' data-deviceDescr='' data-index='' id='j4gug15sbv1gj'>
+<div class='icon' id='j3o0ogjgj4bgk'>
+<div class='iconControl' id='j1j2i514voxgl'>
+<div class='image' id='iklpxu7ca1gm'>
+<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j9g3r8422bmgn'/>
+<img class='error off' src='/images/room.svg' id='ibn97664qggo'/>
+<img class='error on' src='/images/room_on.svg' id='j5snqq3uxdvgp'/>
+<img class='error absent' src='/images/room_absent.svg' id='j1jwd1qy0q1gq'/>
+<div class='svg' id='j22kc9oudnlgr'></div>
 </div>
-<span class='iconLabel' id='j4wjt5icaxkhrq'></span>
-<span class='iconPercentage' id='j2q7lv44ejhhrr'></span>
+<span class='iconLabel' id='j539cr1olxsgs'></span>
+<span class='iconPercentage' id='j2kunt2p48igt'></span>
 </div>
-<div class='deleteSign' id='j7bkptksm0ahrs'></div>
+<div class='deleteSign' id='j7piw7ipbojgu'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j7zfqzeg4w8hrj;
-  var style = window.j6xf1c4drethp3;
-  var App = window.j1e3mv5rieqhp5;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j3o0ogjgj4bgk;
+  var style = window.j2f5r6owxz0e2;
+  var App = window.j1zk1sdxyvze4;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1316,9 +1712,9 @@ transform: scale( 0.001 );
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Command = $__3.j5vchm592yjhp6;
-  var Icon = $__3.j341f2loa53hri;
-  var $__6 = $__3.j341f2loa53hri;
+  var Command = $__3.im4s7xjypze5;
+  var Icon = $__3.j4gug15sbv1gj;
+  var $__6 = $__3.j4gug15sbv1gj;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1347,19 +1743,33 @@ transform: scale( 0.001 );
     index = $__6.getAttribute("data-index") || index;
   if (index === undefined)
     index = null;
-  var icon = $__2.j7zfqzeg4w8hrj;
-  var iconControl = $__2.j3eeeqxozi2hrk;
-  var image = $__2.j77502saphwhrl;
-  var img = $__2.j6mlx58xd6ohrp;
-  var error = $__2.j6mlx58xd6ohrp;
-  var wait = $__2.j5dwvx0f9knhrm;
-  var off = $__2.j34n0j90w5xhrn;
-  var on = $__2.j6howhn3ct7hro;
-  var absent = $__2.j6mlx58xd6ohrp;
-  var iconLabel = $__2.j4wjt5icaxkhrq;
-  var deleteSign = $__2.j7bkptksm0ahrs;
+  var icon = $__2.j3o0ogjgj4bgk;
+  var iconControl = $__2.j1j2i514voxgl;
+  var image = $__2.iklpxu7ca1gm;
+  var wait = $__2.j9g3r8422bmgn;
+  var off = $__2.ibn97664qggo;
+  var on = $__2.j5snqq3uxdvgp;
+  var img = $__2.j1jwd1qy0q1gq;
+  var error = $__2.j1jwd1qy0q1gq;
+  var absent = $__2.j1jwd1qy0q1gq;
+  var svg = $__2.j22kc9oudnlgr;
+  var iconLabel = $__2.j539cr1olxsgs;
+  var iconPercentage = $__2.j2kunt2p48igt;
+  var deleteSign = $__2.j7piw7ipbojgu;
   !function() {
+    function getIcon(descr) {
+      var icon = iconDescr && iconDescr.valueOf() && iconDescr.valueOf().icon || null;
+      if (icon)
+        icon = ("icon" + icon.slice(0, 1).toUpperCase() + icon.slice(1));
+      return icon;
+    }
     var opts = ra({
+      get iconName() {
+        return getIcon(iconDescr) || getIcon(deviceDescr);
+      },
+      get iconTemplate() {
+        return this.iconName && app.icons && app.icons.hasOwnProperty(this.iconName) && app.icons[this.iconName] || null;
+      },
       get dimmering() {
         var d = deviceDescr && deviceDescr.valueOf();
         var i = iconDescr && iconDescr.valueOf();
@@ -1544,7 +1954,11 @@ transform: scale( 0.001 );
         }
       },
       get updateOpacity() {
-        if (!this.present) {
+        if (this.iconTemplate) {
+          on.style.visibility = "hidden";
+          off.style.visibility = "hidden";
+          absent.style.visibility = "hidden";
+        } else if (!this.present) {
           this.setOpacity(on, 0);
           this.setOpacity(off, 0);
           this.setOpacity(absent, 0.7);
@@ -1560,6 +1974,16 @@ transform: scale( 0.001 );
         }
       }
     });
+    window._opts = opts;
+    CS.content(svg, (function() {
+      return opts.iconTemplate && CS.importTemplate(opts.iconTemplate) || null;
+    }));
+    CS.updateClassX(svg, (function() {
+      return "state" + (!opts.present ? "Absent" : (Math.round(opts.state * 100) + 1000).toString().slice(1));
+    }));
+    CS.updateClassX(svg, (function() {
+      return !opts.isDimmering && "smoothing";
+    }));
     ![].slice.call(icon.getElementsByTagName("img")).forEach((function(img) {
       return lodash.assign(img, app.imgProps);
     }));
@@ -1618,6 +2042,9 @@ transform: scale( 0.001 );
     }));
     CS.contentX(iconLabel, (function() {
       return iconDescr.get(local.language) || iconDescr.get("ru") || iconDescr.get("en");
+    }));
+    CS.contentX(iconPercentage, (function() {
+      return opts.isDimmering && (Math.round(deviceDescr.get("state") * 100) + "%");
     }));
     function logGesture(gesture) {
       LOG(((logGesture.c = logGesture.c || 0, ++logGesture.c) + " ") + gesture.yellow);
@@ -1847,16 +2274,15 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-</template><template class='Place' data-placeId='' data-placeDescr='' id='j1lzhmva9vthrt'>
-<div class='place' id='j1yjq7lte7phru'></div>
-<style class='style' id='j7c4jl2yxiihrv'></style>
+</template><template class='Place' data-placeId='' data-placeDescr='' id='j9th7gf5891gv'>
+<div class='place' id='j5uko3hshwpgw'></div>
+<style class='style' id='j80k1qb9zbxgx'></style>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j1lzhmva9vthrt;
-  var style = $__2.j7c4jl2yxiihrv;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__3.j9th7gf5891gv;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1870,9 +2296,9 @@ transform: scale( 0.001 );
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Icon = $__3.j341f2loa53hri;
-  var Place = $__3.j1lzhmva9vthrt;
-  var $__6 = $__3.j1lzhmva9vthrt;
+  var Icon = $__3.j4gug15sbv1gj;
+  var Place = $__3.j9th7gf5891gv;
+  var $__6 = $__3.j9th7gf5891gv;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1886,7 +2312,8 @@ transform: scale( 0.001 );
     placeDescr = $__6.getAttribute("data-placeDescr") || placeDescr;
   if (placeDescr === undefined)
     placeDescr = null;
-  var place = $__2.j1yjq7lte7phru;
+  var place = $__2.j5uko3hshwpgw;
+  var style = $__2.j80k1qb9zbxgx;
   !function() {
     CS.updateClassX(place, placeId);
     style.innerHTML = ("." + placeId + " .place." + placeId + " { display: initial }");
@@ -1927,15 +2354,15 @@ transform: scale( 0.001 );
   }.call($__0);
 }();
 </script>
-</template><template class='Main' id='j5q93zm2mk3hrw'>
-<div class='top' id='j351g6ganfphrx'>
-<span class='self' id='j2z11ndipzjhry'></span>
+</template><template class='Main' id='j3796qbrll9gy'>
+<div class='top' id='j3w0b4bo142gz'>
+<span class='self' id='j4l9tncka76h0'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j351g6ganfphrx;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j3w0b4bo142gz;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1944,12 +2371,12 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Centered = $__3.j9m9g1klj0uhrd;
-  var $__6 = $__3.j5q93zm2mk3hrw;
+  var Centered = $__3.j5asjj0j46hge;
+  var $__6 = $__3.j3796qbrll9gy;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var self = $__2.j2z11ndipzjhry;
+  var self = $__2.j4l9tncka76h0;
   !function() {
     CS.content(self, CS.importTemplate(Centered, {content: (function() {
         return app.caption;
@@ -1958,17 +2385,16 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-<div class='menu' id='j1qk4ia4pdhhrz'>
+<div class='menu' id='j5fpv3d6rxkh1'>
 
-<span class='self' id='j9gljfpbgiwhs0'></span>
-<style class='style' id='j8izba42pz8hs1'></style>
+<span class='self' id='j1yq63ggebeh2'></span>
+<style class='style' id='j5lfy7eaxgkh3'></style>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j1qk4ia4pdhhrz;
-  var style = $__2.j8izba42pz8hs1;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j5fpv3d6rxkh1;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1982,13 +2408,14 @@ transform: scale( 0.001 );
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Place = $__3.j1lzhmva9vthrt;
-  var $__6 = $__3.j5q93zm2mk3hrw;
+  var Place = $__3.j9th7gf5891gv;
+  var $__6 = $__3.j3796qbrll9gy;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var self = $__2.j9gljfpbgiwhs0;
-  var menu = $__2.j1qk4ia4pdhhrz;
+  var menu = $__2.j5fpv3d6rxkh1;
+  var self = $__2.j1yq63ggebeh2;
+  var style = $__2.j5lfy7eaxgkh3;
   !function() {
     app.menuElement = this;
     var UID = require("uid");
@@ -2047,18 +2474,18 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-<div class='bottom' id='j90klid7lbxhs2'>
-<div class='help' id='j8w5nmbxjxlhs3'>
+<div class='bottom' id='j1yhecs7792h4'>
+<div class='help' id='j1w8pn84zk9h5'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j8w5nmbxjxlhs3;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j1w8pn84zk9h5;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
-  var $__6 = $__3.j5q93zm2mk3hrw;
+  var $__6 = $__3.j3796qbrll9gy;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -2066,13 +2493,13 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-<div class='logo' id='j3wncaubnm1hs4'>
+<div class='logo' id='j91bc4q6n7uh6'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j3wncaubnm1hs4;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j91bc4q6n7uh6;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2081,13 +2508,14 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j5q93zm2mk3hrw;
+  var ContextMenu = $__3.j1t1v9d2izke7;
+  var $__6 = $__3.j3796qbrll9gy;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
   !function() {
     CS.onPress(this, (function() {
-      return app.dialog = "Context";
+      return app.dialog = "ContextMenu";
     }));
     CS.onTap(this, (function() {
       app.editing = false;
@@ -2098,13 +2526,13 @@ transform: scale( 0.001 );
 }();
 </script>
 </div>
-<div class='back' id='j508m26ut34hs5'>
+<div class='back' id='j8w08zwjbqhh7'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j508m26ut34hs5;
-  var $__4 = window.j1e3mv5rieqhp5;
+  var $__0 = $__2.j8w08zwjbqhh7;
+  var $__4 = window.j1zk1sdxyvze4;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2113,11 +2541,11 @@ transform: scale( 0.001 );
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j5q93zm2mk3hrw;
+  var $__6 = $__3.j3796qbrll9gy;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var back = $__2.j508m26ut34hs5;
+  var back = $__2.j8w08zwjbqhh7;
   !function() {
     CS.onTouch(this, (function() {
       if (app.editing)
@@ -2132,12 +2560,33 @@ transform: scale( 0.001 );
 </script>
 </div>
 </div>
-</template><template class='App' data-app='' data-local='' data-appid='state' id='j1e3mv5rieqhp5'>
+</template><template class='iconRoller' id='j23p1bpbtx1h8'><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='800px' height='800px' viewBox='0 0 800 800' id='j432t0th39uha'>
+<defs id='i51kk3igbfhb'>
+<clipPath id='internal'>
+<rect x='124' y='246' width='566' height='432' id='j5547kudhkkhc'></rect>
+</clipPath>
+</defs>
+<g class='colored' fill='none' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='j8cjm5672onhd'>
+<polygon points='60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163' id='j2c6ipd1wfrhe'></polygon>
+<g clip-path='url( #internal )' id='j8hxf1hpa4yhf'>
+<g class='moving colored' id='j8uuu14jxxghg'>
+<rect stroke='none' fill='none' x='123' y='270' width='1' height='1' id='j5w956qt0kqhh'></rect>
+<line x1='123' y1='321' x2='690' y2='321' id='j3ffzoc5zb0hi'></line>
+<line x1='123' y1='392' x2='690' y2='392' id='j8hbjenql0thj'></line>
+<line x1='123' y1='463' x2='690' y2='463' id='j8afcabhzurhk'></line>
+<line x1='123' y1='534' x2='690' y2='534' id='j4s14u7agd9hl'></line>
+<line x1='123' y1='605' x2='690' y2='605' id='j2wjuagzl4rhm'></line>
+<line x1='123' y1='676' x2='690' y2='676' id='j8dba183epahn'></line>
+</g>
+</g>
+</g>
+</svg>
+</template><template class='App' data-app='' data-local='' data-appid='state' id='j1zk1sdxyvze4'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j1e3mv5rieqhp5;
-  var $__3 = window.j1e3mv5rieqhp5;
+  var $__0 = window.j1zk1sdxyvze4;
+  var $__3 = window.j1zk1sdxyvze4;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2161,8 +2610,8 @@ transform: scale( 0.001 );
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j1e3mv5rieqhp5;
-  var $__3 = window.j1e3mv5rieqhp5;
+  var $__0 = window.j1zk1sdxyvze4;
+  var $__3 = window.j1zk1sdxyvze4;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2185,8 +2634,8 @@ transform: scale( 0.001 );
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j1e3mv5rieqhp5;
-  var $__3 = window.j1e3mv5rieqhp5;
+  var $__0 = window.j1zk1sdxyvze4;
+  var $__3 = window.j1zk1sdxyvze4;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2220,31 +2669,52 @@ transform: scale( 0.001 );
   }.call($__0);
 }();
 </script>
-<noscript data-template-reference='j5vchm592yjhp6'></noscript>
-<noscript data-template-reference='j2ynhhyr2r9hp8'></noscript>
-<noscript data-template-reference='ijfti6ux00hpa'></noscript>
+<noscript data-template-reference='im4s7xjypze5'></noscript>
+<noscript data-template-reference='j1t1v9d2izke7'></noscript>
+<noscript data-template-reference='j4z0j2gs33me9'></noscript>
 
-<noscript data-template-reference='j5ddcn5edayhpk'></noscript>
-<noscript data-template-reference='j16a7b9wae4hpq'></noscript>
-<noscript data-template-reference='j6utvcb0aadhpx'></noscript>
-<noscript data-template-reference='j5tdn5zajpghq4'></noscript>
-<noscript data-template-reference='j2nql4rvkaxhqd'></noscript>
-<noscript data-template-reference='j6vm4ikr4f8hqo'></noscript>
-<noscript data-template-reference='j29ygzn727uhqt'></noscript>
-<noscript data-template-reference='j1u59q7czqhhqy'></noscript>
-<noscript data-template-reference='j5mdyk29ij4hr3'></noscript>
-<noscript data-template-reference='j63927dyuvphr8'></noscript>
-<noscript data-template-reference='j5n2ruh0jl8hrb'></noscript>
-<noscript data-template-reference='j9m9g1klj0uhrd'></noscript>
-<noscript data-template-reference='j341f2loa53hri'></noscript>
-<noscript data-template-reference='j1lzhmva9vthrt'></noscript>
-<noscript data-template-reference='j5q93zm2mk3hrw'></noscript>
-<div class='application' id='j3iuprt6q9khs6'></div>
+<noscript data-template-reference='j1peueyahd4ej'></noscript>
+<noscript data-template-reference='j18s4une2p0ep'></noscript>
+<noscript data-template-reference='j53yyifrwt5ew'></noscript>
+<noscript data-template-reference='j6jyrflno94f3'></noscript>
+<noscript data-template-reference='j5kbpbaa011fe'></noscript>
+<noscript data-template-reference='j9idrdoe4y5fp'></noscript>
+<noscript data-template-reference='j4p2azn3u2xfu'></noscript>
+<noscript data-template-reference='j8fwf22dd4ufz'></noscript>
+<noscript data-template-reference='j7no1fa0jz0g4'></noscript>
+<noscript data-template-reference='j9pghfow19bg9'></noscript>
+<noscript data-template-reference='j8jq254t42vgc'></noscript>
+<noscript data-template-reference='j5asjj0j46hge'></noscript>
+<noscript data-template-reference='j4gug15sbv1gj'></noscript>
+<noscript data-template-reference='j9th7gf5891gv'></noscript>
+<noscript data-template-reference='j3796qbrll9gy'></noscript>
+
+<noscript data-template-reference='j23p1bpbtx1h8'></noscript>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j1e3mv5rieqhp5;
-  var $__3 = window.j1e3mv5rieqhp5;
+  var $__0 = window.j1zk1sdxyvze4;
+  var $__3 = window.j1zk1sdxyvze4;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var iconRoller = $__2.j23p1bpbtx1h8;
+  !function() {
+    app.icons = {iconRoller: iconRoller};
+  }.call($__0);
+}();
+</script>
+<div class='application' id='j2dko1c08qdho'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j1zk1sdxyvze4;
+  var $__3 = window.j1zk1sdxyvze4;
   var template = $__3;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
@@ -2259,7 +2729,7 @@ transform: scale( 0.001 );
     local = $__3.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var application = $__2.j3iuprt6q9khs6;
+  var application = $__2.j2dko1c08qdho;
   !function() {
     var initial = application.className.split(/\s+/);
     CS.watch((function() {
@@ -2271,8 +2741,9 @@ transform: scale( 0.001 );
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j1e3mv5rieqhp5;
-  var $__3 = window.j1e3mv5rieqhp5;
+  var $__0 = window.j1zk1sdxyvze4;
+  var $__3 = window.j1zk1sdxyvze4;
+  var template = $__3;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2281,33 +2752,53 @@ transform: scale( 0.001 );
     app = $__3.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var ContextMenu = $__2.j2ynhhyr2r9hp8;
-  var StartupScreen = $__2.ijfti6ux00hpa;
-  var AskToLinkDevice = $__2.j5ddcn5edayhpk;
-  var ServiceItem = $__2.j16a7b9wae4hpq;
-  var AskNewName = $__2.j6utvcb0aadhpx;
-  var SearchItems = $__2.j5tdn5zajpghq4;
-  var AskCredentials = $__2.j2nql4rvkaxhqd;
-  var AskIfDeviceHasBeenLinked = $__2.j6vm4ikr4f8hqo;
-  var ErrorNoCarrier = $__2.j1u59q7czqhhqy;
-  var StopDeviceNotification = $__2.j5mdyk29ij4hr3;
-  var StateWait = $__2.j63927dyuvphr8;
-  var LoadingScreen = $__2.j5n2ruh0jl8hrb;
-  var Place = $__2.j1lzhmva9vthrt;
-  var Main = $__2.j5q93zm2mk3hrw;
-  var application = $__2.j3iuprt6q9khs6;
+  var ContextMenu = $__2.j1t1v9d2izke7;
+  var StartupScreen = $__2.j4z0j2gs33me9;
+  var AskToLinkDevice = $__2.j1peueyahd4ej;
+  var ServiceItem = $__2.j18s4une2p0ep;
+  var AskNewName = $__2.j53yyifrwt5ew;
+  var SearchItems = $__2.j6jyrflno94f3;
+  var AskCredentials = $__2.j5kbpbaa011fe;
+  var AskIfDeviceHasBeenLinked = $__2.j9idrdoe4y5fp;
+  var ErrorNoCarrier = $__2.j8fwf22dd4ufz;
+  var StopDeviceNotification = $__2.j7no1fa0jz0g4;
+  var StateWait = $__2.j9pghfow19bg9;
+  var LoadingScreen = $__2.j8jq254t42vgc;
+  var Place = $__2.j9th7gf5891gv;
+  var Main = $__2.j3796qbrll9gy;
+  var application = $__2.j2dko1c08qdho;
   !function() {
-    CS.content(application, [CS.importTemplate(Main), CS.importTemplate(ContextMenu), CS.importTemplate(SearchItems), CS.importTemplate(AskToLinkDevice), CS.importTemplate(AskIfDeviceHasBeenLinked), CS.importTemplate(StopDeviceNotification), CS.importTemplate(ErrorNoCarrier), CS.importTemplate(StateWait), CS.importTemplate(AskNewName), CS.importTemplate(ServiceItem), CS.importTemplate(StartupScreen), CS.importTemplate(LoadingScreen), CS.importTemplate(AskCredentials)]);
+    CS.content(application, [CS.importTemplate(Main), CS.importTemplate(StartupScreen), CS.importTemplate(LoadingScreen), CS.importTemplate(AskCredentials)]);
+    var dialogTemplates = {
+      ContextMenu: ContextMenu,
+      SearchItems: SearchItems,
+      AskToLinkDevice: AskToLinkDevice,
+      AskIfDeviceHasBeenLinked: AskIfDeviceHasBeenLinked,
+      StopDeviceNotification: StopDeviceNotification,
+      ErrorNoCarrier: ErrorNoCarrier,
+      StateWait: StateWait,
+      AskNewName: AskNewName,
+      ServiceItem: ServiceItem
+    };
+    ra((function() {
+      var dialogName = app.dialog;
+      if (!dialogName || !dialogTemplates.hasOwnProperty(dialogName))
+        return ;
+      var template = dialogTemplates[dialogName];
+      delete dialogTemplates[dialogName];
+      application.appendChild(CS.importTemplate(template));
+    }));
     setTimeout((function() {
       return app.pageStarting = false;
     }), 1);
   }.call($__0);
 }();
 </script>
+
 </template>
 
-<template class='TwoApp' id='j3wxj81g93ohs7'>
-<style id='j1c88zvu6imhs9'>
+<template class='TwoApp' id='j8b0w1b8tnbhp'>
+<style id='j83372vxt6nhr'>
 .app1 .application, .app2 .application {
 position: fixed;
 left: 20;
@@ -2320,19 +2811,19 @@ left: 400;
 width: 950;
 }
 </style>
-<div class='app1' id='iaxsv1ffr8hsa'></div>
-<div class='app2' id='j82l3nsynbdhsb'></div>
+<div class='app1' id='iqjcvoftejhs'></div>
+<div class='app2' id='j9axar3yqnfht'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j3wxj81g93ohs7;
-  var App = window.j1e3mv5rieqhp5;
-  var $__3 = window.j3wxj81g93ohs7;
+  var $__0 = window.j8b0w1b8tnbhp;
+  var App = window.j1zk1sdxyvze4;
+  var $__3 = window.j8b0w1b8tnbhp;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
-  var app1 = $__2.iaxsv1ffr8hsa;
-  var app2 = $__2.j82l3nsynbdhsb;
+  var app1 = $__2.iqjcvoftejhs;
+  var app2 = $__2.j9axar3yqnfht;
   !function() {
     app2.appendChild(CS.importTemplate(App, {appid: "state2"}));
     app1.appendChild(CS.importTemplate(App, {appid: "state1"}));
@@ -2341,19 +2832,19 @@ width: 950;
 </script>
 
 </template>
-<template class='OneApp' id='j5buz9pvh77hsc'>
-<style id='j3u1p8b5qgahsd'> .application { position: fixed !important; } } </style>
-<span class='self' id='j2vyjfutf2shse'></span>
+<template class='OneApp' id='j7edpyxdmvqhu'>
+<style id='j4e5t9o4mb3hv'> .application { position: fixed !important; } } </style>
+<span class='self' id='j8lcw4gm2xfhw'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j5buz9pvh77hsc;
-  var App = window.j1e3mv5rieqhp5;
-  var $__3 = window.j5buz9pvh77hsc;
+  var $__0 = window.j7edpyxdmvqhu;
+  var App = window.j1zk1sdxyvze4;
+  var $__3 = window.j7edpyxdmvqhu;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
-  var self = $__2.j2vyjfutf2shse;
+  var self = $__2.j8lcw4gm2xfhw;
   !function() {
     CS.content(self, CS.importTemplate(App));
   }.call($__0);
@@ -2430,10 +2921,10 @@ window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
 </script>
 <script>"use strict";
 !function $__1() {
-  var $__0 = window.j714zyb1n1qhp0;
-  var App = window.j1e3mv5rieqhp5;
-  var TwoApp = window.j3wxj81g93ohs7;
-  var OneApp = window.j5buz9pvh77hsc;
+  var $__0 = window.j6u4zsyuod0dy;
+  var App = window.j1zk1sdxyvze4;
+  var TwoApp = window.j8b0w1b8tnbhp;
+  var OneApp = window.j7edpyxdmvqhu;
   !function() {
     onAppOrientationLocked((function() {
       setTimeout(start, 200);
@@ -2453,7 +2944,7 @@ window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
 }();
 </script>
 
-<style id='j6wa5mbj2shhsg'>
+<style id='j9nyhexvuczhy'>
 #RELOAD {
 position: fixed;
 left: 0;
