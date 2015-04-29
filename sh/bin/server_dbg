@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -25778,7 +25778,9 @@ function find(obj) {
 function createCommandSequence(group, deviceType, action, data) {
   return asArray(call(find(deviceTypes, deviceType, action), data, group) || function() {
     throw new Error(("wrong action specified: " + deviceType + "." + action));
-  }());
+  }()).map((function(cmd) {
+    return lodash.assign({group: group}, cmd);
+  }));
 }
 exports.createCommandSequence = createCommandSequence;
 //# sourceMappingURL=actionToCommands.js.map
@@ -26986,7 +26988,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
