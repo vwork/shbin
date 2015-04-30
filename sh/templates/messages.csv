@@ -13,7 +13,9 @@ commandLanguage,Язык / Language,Мова / Language,Language
 commandTestMenu,Тестовая версия,Тэставая версія,Test version
 commandLinkDevice,Привязать устройство,Прывязаць прыладу,Link device
 commandAddPlace,Добавить помещение или место,Дабавіць памяшканне альбо месца,Add room or place
-commandAddDevice,Добавить устройство,Дабавіць прыладу месца,Add device
+commandAddDevice,Добавить устройство,Дабавіць прыладу,Add device
+commandAddNewDevice,Добавить новое устройство,Дабавіць новую прыладу,Add new device
+commandAddExistingDevice,Выбрать из списка,Выбраць са спісу,Choose existing device
 commandPurgeItem,Удалить из программы,Выдаліць з праграмы,Remove from program
 commandRenameItem,Изменить название,Змяніць назву,Rename device
 nothingHere,Здесь устройств нет,Тут прыладаў пакуль няма,Nothing's here
