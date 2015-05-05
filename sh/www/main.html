@@ -1,0 +1,2948 @@
+<div id='j38zhrerl531nz'>
+<style type='text/css' id='j24kmcmdoue1o0'>
+.modalDialog {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 17mm;
+background-color: black;
+}
+.translucent .applicationMenu.window_app.layout_vertical.dialogContextMenu .contextMenu,
+.translucent .applicationMenu.window_app.layout_vertical.dialogAddMenu .addMenu,
+.translucent .application.window_app.layout_vertical.dialogSearchItems .searchItems ,
+.translucent .application.window_app.layout_vertical.dialogAskToLinkDevice .askToLinkDevice ,
+.translucent .application.window_app.layout_vertical.dialogAskIfDeviceHasBeenLinked .askIfDeviceHasBeenLinked,
+.translucent .application.window_app.layout_vertical.dialogAskReset .askReset,
+.translucent .application.window_app.layout_vertical.dialogErrorNoCarrier .errorNoCarrier,
+.translucent .application.window_app.layout_vertical.dialogStateWait .stateWait,
+.translucent .application.window_app.layout_vertical.dialogStopDeviceNotification .stopDeviceNotification,
+.translucent .application.window_app.layout_vertical.dialogAskNewName .askNewName ,
+.translucent .application.window_app.layout_vertical.dialogServiceItem .serviceItem {
+top: 5mm;
+}
+/* startupScreen */
+.startupScreen {
+padding-top: 15mm;
+background-color: black;
+position: absolute;
+left: 0;
+right: 0;
+top: 0;
+bottom: 0;
+font-size: 17pt;
+text-align: center;
+}
+.loadingScreen {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+background-color: black;
+padding-top: 50%;
+text-align: center;
+font-size: 10mm;
+background-image: url( /touch.svg );
+background-repeat: no-repeat;
+background-position: center;
+}
+.askCredentials {
+display: none;
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+background-color: black;
+text-align: center;
+font-size: 150%;
+}
+input {
+font-size: 10mm;
+}
+.pageRunning .startupScreen,
+.pageRunning .loadingScreen,
+.pageRunning .modalDialog {
+-webkit-transition-duration: 0.5s;
+-webkit-transition-property: opacity;
+transition-duration: 0.5s;
+transition-property: opacity;
+}
+.showLogin .askCredentials {
+display: initial;
+}
+.JSONloaded .loadingScreen,
+.alreadyRun .startupScreen,
+.application .modalDialog {
+display: none;
+/*pointer-events: none;*/
+/*opacity: 0;*/
+}
+.JSONloading .loadingScreen,
+.firstRun .startupScreen,
+.dialogContextMenu .contextMenu,
+.dialogAddMenu .addMenu,
+.dialogSearchItems .searchItems,
+.dialogAskToLinkDevice .askToLinkDevice,
+.dialogAskIfDeviceHasBeenLinked .askIfDeviceHasBeenLinked,
+.dialogAskReset .askReset,
+.dialogErrorNoCarrier .errorNoCarrier,
+.dialogStateWait .stateWait,
+.dialogStopDeviceNotification .stopDeviceNotification,
+.dialogAskNewName .askNewName ,
+.dialogServiceItem .serviceItem {
+display: block;
+/*pointer-events: all;*/
+/*opacity: 1;*/
+}
+.searchItem {
+text-align: left;
+margin-bottom: 0.5em;
+}
+.searchItem .cmdDeleteFromProgram, .searchItem .cmdAppend {
+display: block;
+float: right;
+width: 1em;
+height: 1em;
+}
+.searchItem .cmdDeleteFromProgram {
+background-color: red;
+display: none;
+}
+.searchItem .cmdAppend {
+background-color: yellow;
+display: none;
+}
+</style>
+<style type='text/css' id='j8xp3o3tuuc1o1'>@font-face {
+font-family: "Web App";
+/*src: url("web-app.eot");*/
+src: url("web-app.eot?#iefix") format("embedded-opentype"),
+url("web-app.woff") format("woff"),
+url("web-app.ttf") format("truetype"),
+url("web-app.svg#JosefinSansLight") format("svg"),
+url("web-app.otf") format("opentype");
+/*font-weight: normal;*/
+/*font-style: normal;*/
+}
+/* no spaces by default. do not change this section. do change next ones. */
+body { margin: 0; padding: 0; }
+table { border-spacing: 0; border-collapse: collapse; }
+td { padding: 0; }
+/* custom settings */
+body {
+font-family: 'Myriad Set Pro', 'Lucida Grande', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+/*font-family: 'Helvetica Neue';*/
+/*font-size: 22px;*/
+font-style: normal;
+font-weight: 200;
+background-color: #131313;
+color: white;
+}
+.application, .top, .menu, .bottom, .help, .logo, .back, .icon {
+overflow: hidden;
+}
+.application {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+}
+.marginTop, .marginBottom {
+display: none;
+}
+.top, .bottom, .menu {
+position: absolute;
+left: 0;
+width: 100%;
+}
+.top {
+top: 0;
+}
+.bottom {
+bottom: 0;
+}
+/*.translucent .application.window_app.layout_vertical .menu {
+height: 74.5%;
+}
+.translucent .application.window_app.layout_vertical .marginTop {
+display: block;
+height: 1.5%;
+}*/
+.top, .menu, .bottom {
+/*-webkit-transition-delay: 0s;*/
+/*-webkit-transition-duration: 0.2s;*/
+/*-webkit-transition-timing-function: linear;*/
+/*-webkit-transition-property: display, height;*/
+/*background-color: blue;*/
+}
+/*.layout_horizontal .top {
+display: none;
+height: 0%;
+}
+.layout_horizontal .bottom {
+height: 0%;
+}
+.layout_horizontal .menu {
+height: 100%;
+}*/
+.menu img {
+height: 100%;
+width: 100%;
+}
+.help, .logo, .back {
+position: absolute;
+width: 33.333%;
+top: 0;
+bottom: 0;
+text-align: center;
+background-repeat: no-repeat;
+background-position: center;
+}
+.help {
+left: 0%;
+}
+.logo {
+left: 33.333%;
+}
+.back {
+left: 66.666%;
+}
+.command {
+display: block;
+font-size: 20pt;
+margin-top: 7mm;
+text-align: center;
+text-decoration: none;
+}
+.startupScreen .houseTemplate {
+text-align: left;
+margin-top: 1em;
+margin-right: 1em;
+cursor: pointer;
+}
+.place {
+position: absolute;
+top: 0;
+bottom: 0;
+left: 0;
+right: 0;
+display: none;
+overflow: visible;
+}
+.placeContent {
+position: absolute;
+/*width: 100%;*/
+/*height: 100%;*/
+-webkit-transition-duration: 0.10s;
+-webkit-transition-timing-function: linear;
+-webkit-transition-property: -webkit-transform;
+transition: transform 0.10s linear;
+}
+.placeContent.panning {
+-webkit-transition-duration: 0.02s;
+transition-duration: 0.02s;
+}
+.icon {
+position: absolute;
+}
+.icon .image {
+position: absolute;
+left: 0.5em;
+top: 0.5em;
+right: 0.5em;
+bottom: 2.5em;
+}
+.icon img {
+position: absolute;
+left: 0;
+top: 0;
+right: 0;
+bottom: 0;
+}
+.icon svg {
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+}
+.icon .iconLabel {
+position: absolute;
+width: 100%;
+height: 1.5em;
+/*height: 5mm;*/
+bottom: 0.5em;
+text-align: center;
+}
+.icon .deleteSign {
+position: absolute;
+}
+.app_labels_false .icon .iconLabel { display: none; }
+.app_labels_false .icon .image { bottom: 0.5em; }
+.app_editing_true .icon.icon_moving_false .image { left: 1em; right: 1em; }
+.deleteSign {
+width: 2em;
+height: 2em;
+top: 0;
+right: 0;
+}
+@media screen and ( orientation: landscape ) {
+.room { display: none !important; }
+}
+img.error {
+visibility: hidden;
+}
+img.errorneous {
+background-color: #444;
+}
+.icon.onning {
+/*background-color: green;*/
+}
+.icon.offing {
+/*background-color: green;*/
+}
+/*
+.icon.onning img.on, .icon.offing img.on, .icon.onning img.off, .icon.offing img.off {
+-moz-animation-duration: 1.5s;
+-webkit-animation-duration: 1.5s;
+animation-duration: 1.5s;
+-moz-animation-name: onning;
+-webkit-animation-name: onning;
+animation-name: onning;
+-moz-animation-iteration-count: infinite;
+-webkit-animation-iteration-count: infinite;
+animation-iteration-count: infinite;
+}
+.icon.offing img.on {
+-moz-animation-name: offing;
+-webkit-animation-name: offing;
+animation-name: offing;
+}
+.icon.onning img.off {
+-moz-animation-name: onning_off;
+-webkit-animation-name: onning_off;
+animation-name: onning_off;
+}
+.icon.offing img.off {
+-moz-animation-name: offing_off;
+-webkit-animation-name: offing_off;
+animation-name: offing_off;
+}
+@-moz-keyframes onning { from { opacity: 0; } to { opacity: 1; } }
+@-webkit-keyframes onning { from { opacity: 0; } to { opacity: 1; } }
+@keyframes onning { from { opacity: 0; } to { opacity: 1; } }
+@-moz-keyframes offing { from { opacity: 1; } to { opacity: 0; } }
+@-webkit-keyframes offing { from { opacity: 1; } to { opacity: 0; } }
+@keyframes offing { from { opacity: 1; } to { opacity: 0; } }
+@-moz-keyframes onning_off { from { opacity: 0.333; } to { opacity: 0; } }
+@-webkit-keyframes onning_off { from { opacity: 0.333; } to { opacity: 0; } }
+@keyframes onning_off { from { opacity: 0.333; } to { opacity: 0; } }
+@-moz-keyframes offing_off { from { opacity: 0; } to { opacity: 0.333; } }
+@-webkit-keyframes offing_off { from { opacity: 0; } to { opacity: 0.333; } }
+@keyframes offing_off { from { opacity: 0; } to { opacity: 0.333; } }
+*/
+img.on, img.off {
+-webkit-transition: opacity 0.4s;
+transition: opacity 0.4s;
+}
+img.wait {
+-webkit-transition: opacity 1s;
+transition: opacity 1s;
+visibility: hidden;
+opacity: 0;
+}
+.icon.onning img.wait, .icon.offing img.wait {
+visibility: visible;
+opacity: 1;
+}
+.modalDialog {
+font-size: 20pt;
+text-align: center;
+overflow: hidden;
+}
+.deviceIcon svg {
+width: 100%;
+height: 100%;
+}
+.iconControl .smoothing .colored, .iconControl .smoothing .moving , .iconControl .smoothing .transition {
+-webkit-transition-duration: 0.4s;
+-webkit-transition-property: all;
+transition-duration: 0.4s;
+transition-property: all;
+}
+.iconControl .colored {
+stroke-width: 4;
+}
+.iconControl .stateAbsent .colored {
+stroke-dasharray: 17,23;
+stroke-linecap: round;
+stroke: #02756E;
+stroke-width: 6;
+}
+</style>
+<style type='text/css' id='j8fnsi2h8ta1o2'>.application, .application table, a, a:visited {
+color: #03EADC;
+}
+.top {
+height: 17mm;
+}
+.bottom {
+height: 17mm;
+}
+.menu {
+top: 17mm;
+bottom: 17mm;
+}
+.top, .top table {
+font-size: 20pt;
+font-variant: small-caps;
+}
+.top, .contextMenu, .menu {
+/*border-bottom: 1px solid #03EADC;*/
+}
+.top, .bottom {
+background-color: #212121;
+/*background-color: rgba( 3, 234, 220, 0.3 );*/
+/*background-color: rgba( 255, 255, 255, 1 );*/
+}
+.top, .bottom, .top table, .bottom table {
+color: #03EADC;
+-webkit-transition: color 0.3s;
+transition: color 0.3s;
+}
+.appDisconnected .top .self .self {
+position: relative;
+}
+.appDisconnected .top .self .self::before {
+content: "";
+color: yellow;
+background-color: red;
+display: block;
+position: absolute;
+width: 2mm;
+left: -3mm;
+height: 2mm;
+bottom: 50%;
+border-radius: 1mm;
+}
+/*
+.top .self .self {
+background-image: url( /images/menu/logo.svg );
+background-repeat: no-repeat;
+background-position: center;
+}
+.top .self .self {
+position: relative;
+}
+.top .self .self::before {
+content: "";
+color: yellow;
+display: block;
+position: absolute;
+width: 20mm;
+left: -20mm;
+height: 20mm;
+background-image: url( /images/wait.0.svg );
+background-repeat: no-repeat;
+background-position: center;
+background-size: 100%;
+}
+*/
+.icon.errorneous {
+color: red;
+}
+.help {
+background-image: url( /images/menu/help.svg );
+}
+.logo {
+background-image: url( /images/menu/logo.svg );
+}
+.back {
+background-image: url( /images/menu/back.svg );
+}
+.command.disabled {
+color: #777;
+}
+.command.itemHidden {
+display: none;
+}
+.button {
+display: block;
+margin-top: 1em;
+text-decoration: none;
+font-size: 150%;
+}
+.place {
+-webkit-transition: -webkit-transform 0.2s;
+transition: transform 0.2s;
+}
+.icon {
+-webkit-transition-duration: 0.3s;
+transition-duration: 0.3s;
+-webkit-transition-property: -webkit-transform, transform, left, top, width, height, color;
+transition-property: -webkit-transform, transform, left, top, width, height, color;
+}
+.icon.icon_moving_true {
+-webkit-transform: scale( 1.3 );
+transform: scale( 1.3 );
+}
+.icon.icon_moving_true.icon_moved_true {
+-webkit-transition-property: none;
+transition-property: none;
+}
+.icon .deleteSign {
+margin-right: 0.4em;
+margin-top: 0.4em;
+background-color: #03EADC;
+opacity: 0.7;
+border-radius: 50%;
+-webkit-transition-duration: 0.3s;
+-webkit-transition-property: -webkit-transform, transform, opacity;
+transition-duration: 0.3s;
+transition-property: -webkit-transform, transform, opacity;
+}
+.icon .deleteSign:before, .icon .deleteSign:after {
+content: " ";
+position: absolute;
+width: 74%;
+height: 16%;
+left: 14%;
+top: 42%;
+background-color: white;
+-webkit-transform: rotate( 45deg );
+transform: rotate( 45deg );
+}
+.icon .deleteSign:after {
+-webkit-transform: rotate( -45deg );
+transform: rotate( -45deg );
+}
+.app_editing_false .icon .deleteSign, .icon.icon_moving_true .deleteSign {
+pointer-events: none;
+opacity: 0;
+-webkit-transform: scale( 0.001 );
+transform: scale( 0.001 );
+}
+</style>
+<style type='text/css' id='j7z7vtzpbl51o3'>.iconControl .state000 .colored { stroke: #03EADC; }
+.iconControl .state001 .colored { stroke: #06EADC; }
+.iconControl .state002 .colored { stroke: #08EADD; }
+.iconControl .state003 .colored { stroke: #0BEBDD; }
+.iconControl .state004 .colored { stroke: #0DEBDD; }
+.iconControl .state005 .colored { stroke: #10EBDE; }
+.iconControl .state006 .colored { stroke: #12EBDE; }
+.iconControl .state007 .colored { stroke: #15EBDE; }
+.iconControl .state008 .colored { stroke: #17ECDF; }
+.iconControl .state009 .colored { stroke: #1AECDF; }
+.iconControl .state010 .colored { stroke: #1CECE0; }
+.iconControl .state011 .colored { stroke: #1FECE0; }
+.iconControl .state012 .colored { stroke: #21EDE0; }
+.iconControl .state013 .colored { stroke: #24EDE1; }
+.iconControl .state014 .colored { stroke: #26EDE1; }
+.iconControl .state015 .colored { stroke: #29EDE1; }
+.iconControl .state016 .colored { stroke: #2BEDE2; }
+.iconControl .state017 .colored { stroke: #2EEEE2; }
+.iconControl .state018 .colored { stroke: #30EEE2; }
+.iconControl .state019 .colored { stroke: #33EEE3; }
+.iconControl .state020 .colored { stroke: #35EEE3; }
+.iconControl .state021 .colored { stroke: #38EEE3; }
+.iconControl .state022 .colored { stroke: #3AEFE4; }
+.iconControl .state023 .colored { stroke: #3DEFE4; }
+.iconControl .state024 .colored { stroke: #3FEFE4; }
+.iconControl .state025 .colored { stroke: #42EFE5; }
+.iconControl .state026 .colored { stroke: #45EFE5; }
+.iconControl .state027 .colored { stroke: #47F0E5; }
+.iconControl .state028 .colored { stroke: #4AF0E6; }
+.iconControl .state029 .colored { stroke: #4CF0E6; }
+.iconControl .state030 .colored { stroke: #4FF0E7; }
+.iconControl .state031 .colored { stroke: #51F1E7; }
+.iconControl .state032 .colored { stroke: #54F1E7; }
+.iconControl .state033 .colored { stroke: #56F1E8; }
+.iconControl .state034 .colored { stroke: #59F1E8; }
+.iconControl .state035 .colored { stroke: #5BF1E8; }
+.iconControl .state036 .colored { stroke: #5EF2E9; }
+.iconControl .state037 .colored { stroke: #60F2E9; }
+.iconControl .state038 .colored { stroke: #63F2E9; }
+.iconControl .state039 .colored { stroke: #65F2EA; }
+.iconControl .state040 .colored { stroke: #68F2EA; }
+.iconControl .state041 .colored { stroke: #6AF3EA; }
+.iconControl .state042 .colored { stroke: #6DF3EB; }
+.iconControl .state043 .colored { stroke: #6FF3EB; }
+.iconControl .state044 .colored { stroke: #72F3EB; }
+.iconControl .state045 .colored { stroke: #74F3EC; }
+.iconControl .state046 .colored { stroke: #77F4EC; }
+.iconControl .state047 .colored { stroke: #79F4EC; }
+.iconControl .state048 .colored { stroke: #7CF4ED; }
+.iconControl .state049 .colored { stroke: #7EF4ED; }
+.iconControl .state050 .colored { stroke: #81F5EE; }
+.iconControl .state051 .colored { stroke: #84F5EE; }
+.iconControl .state052 .colored { stroke: #86F5EE; }
+.iconControl .state053 .colored { stroke: #89F5EF; }
+.iconControl .state054 .colored { stroke: #8BF5EF; }
+.iconControl .state055 .colored { stroke: #8EF6EF; }
+.iconControl .state056 .colored { stroke: #90F6F0; }
+.iconControl .state057 .colored { stroke: #93F6F0; }
+.iconControl .state058 .colored { stroke: #95F6F0; }
+.iconControl .state059 .colored { stroke: #98F6F1; }
+.iconControl .state060 .colored { stroke: #9AF7F1; }
+.iconControl .state061 .colored { stroke: #9DF7F1; }
+.iconControl .state062 .colored { stroke: #9FF7F2; }
+.iconControl .state063 .colored { stroke: #A2F7F2; }
+.iconControl .state064 .colored { stroke: #A4F7F2; }
+.iconControl .state065 .colored { stroke: #A7F8F3; }
+.iconControl .state066 .colored { stroke: #A9F8F3; }
+.iconControl .state067 .colored { stroke: #ACF8F3; }
+.iconControl .state068 .colored { stroke: #AEF8F4; }
+.iconControl .state069 .colored { stroke: #B1F8F4; }
+.iconControl .state070 .colored { stroke: #B3F9F5; }
+.iconControl .state071 .colored { stroke: #B6F9F5; }
+.iconControl .state072 .colored { stroke: #B8F9F5; }
+.iconControl .state073 .colored { stroke: #BBF9F6; }
+.iconControl .state074 .colored { stroke: #BDFAF6; }
+.iconControl .state075 .colored { stroke: #C0FAF6; }
+.iconControl .state076 .colored { stroke: #C3FAF7; }
+.iconControl .state077 .colored { stroke: #C5FAF7; }
+.iconControl .state078 .colored { stroke: #C8FAF7; }
+.iconControl .state079 .colored { stroke: #CAFBF8; }
+.iconControl .state080 .colored { stroke: #CDFBF8; }
+.iconControl .state081 .colored { stroke: #CFFBF8; }
+.iconControl .state082 .colored { stroke: #D2FBF9; }
+.iconControl .state083 .colored { stroke: #D4FBF9; }
+.iconControl .state084 .colored { stroke: #D7FCF9; }
+.iconControl .state085 .colored { stroke: #D9FCFA; }
+.iconControl .state086 .colored { stroke: #DCFCFA; }
+.iconControl .state087 .colored { stroke: #DEFCFA; }
+.iconControl .state088 .colored { stroke: #E1FCFB; }
+.iconControl .state089 .colored { stroke: #E3FDFB; }
+.iconControl .state090 .colored { stroke: #E6FDFC; }
+.iconControl .state091 .colored { stroke: #E8FDFC; }
+.iconControl .state092 .colored { stroke: #EBFDFC; }
+.iconControl .state093 .colored { stroke: #EDFEFD; }
+.iconControl .state094 .colored { stroke: #F0FEFD; }
+.iconControl .state095 .colored { stroke: #F2FEFD; }
+.iconControl .state096 .colored { stroke: #F5FEFE; }
+.iconControl .state097 .colored { stroke: #F7FEFE; }
+.iconControl .state098 .colored { stroke: #FAFFFE; }
+.iconControl .state099 .colored { stroke: #FCFFFF; }
+.iconControl .state100 .colored { stroke: #FFFFFF; }
+</style>
+<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' data-isEnabled='' id='j4jnsptwhq21o6'>
+<a class='command' href='javascript:void(0)' target='_self' id='j6vjxnbgslu1o7'></a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j4jnsptwhq21o6;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j4jnsptwhq21o6;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var callback = $__7 == null ? undefined : $__7.callback;
+  if (callback === undefined)
+    callback = $__6.getAttribute("data-callback") || callback;
+  if (callback === undefined)
+    callback = null;
+  var msg = $__7 == null ? undefined : $__7.msg;
+  if (msg === undefined)
+    msg = $__6.getAttribute("data-msg") || msg;
+  if (msg === undefined)
+    msg = null;
+  var url = $__7 == null ? undefined : $__7.url;
+  if (url === undefined)
+    url = $__6.getAttribute("data-url") || url;
+  if (url === undefined)
+    url = null;
+  var isVisible = $__7 == null ? undefined : $__7.isVisible;
+  if (isVisible === undefined)
+    isVisible = $__6.getAttribute("data-isVisible") || isVisible;
+  if (isVisible === undefined)
+    isVisible = null;
+  var isEnabled = $__7 == null ? undefined : $__7.isEnabled;
+  if (isEnabled === undefined)
+    isEnabled = $__6.getAttribute("data-isEnabled") || isEnabled;
+  if (isEnabled === undefined)
+    isEnabled = null;
+  var command = $__2.j6vjxnbgslu1o7;
+  !function() {
+    var initial = command.className.split(/\s+/);
+    var enabled = (url || callback) && (!isEnabled || isEnabled());
+    CS.watch((function() {
+      return command.className = initial.concat([enabled ? "enabled" : "disabled", msg, isVisible == null || isVisible() ? "itemVisible" : "itemHidden"]).join(" ");
+    }));
+    if (url && !callback) {
+      command.setAttribute("href", url);
+      command.setAttribute("rel", "external");
+      command.setAttribute("target", "_blank");
+    } else
+      CS.onTouch(command, (function(event) {
+        event.preventDefault();
+        if (callback && enabled) {
+          app.dialog = "";
+          callback();
+        }
+      }));
+    CS.content(command, (function() {
+      return app.message(msg);
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='ContextMenu' id='j68xxvcc57t1o8'>
+<div class='contextMenu modalDialog' id='j71fj618d3n1o9'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j68xxvcc57t1o8;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__5 == null ? undefined : $__5.local;
+  if (local === undefined)
+    local = $__4.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var Command = $__3.j4jnsptwhq21o6;
+  var $__6 = $__3.j68xxvcc57t1o8;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var modalDialog = $__2.j71fj618d3n1o9;
+  !function() {
+    CS.content(modalDialog, (function() {
+      return [CS.importTemplate(Command, {
+        msg: "commandSearchDevices",
+        isVisible: (function() {
+          return app.placeType == "place";
+        }),
+        callback: function() {
+          app.dialog = "SearchItems";
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandToFavourites",
+        isVisible: (function() {
+          return !app.editing && app.activePlaceId != app.main;
+        }),
+        callback: function() {
+          app.linkActiveToFavourites();
+          app.notification("Добавлено в избранное");
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandLinkDevice",
+        isVisible: (function() {
+          return app.placeType == "device";
+        }),
+        callback: function() {
+          app.dialog = "AskToLinkDevice";
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandAddPlace",
+        isVisible: (function() {
+          return !app.editing && app.placeType == "place";
+        }),
+        callback: function() {
+          app.addPlace(app.activePlaceId);
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandAddDevice",
+        isVisible: (function() {
+          return !app.editing && app.placeType == "place";
+        }),
+        callback: function() {
+          app.dialog = "AddMenu";
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandMoveIcons",
+        isVisible: (function() {
+          return app.placeType == "place";
+        }),
+        callback: function() {
+          app.editing = true;
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandRenameItem",
+        isVisible: (function() {
+          return !app.editing;
+        }),
+        callback: function() {
+          app.dialog = "AskNewName";
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandPurgeItem",
+        isVisible: (function() {
+          return !app.editing && app.activePlaceId != app.main;
+        }),
+        callback: function() {
+          app.purgeItem(app.activePlaceId);
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandShowLabels",
+        isVisible: (function() {
+          return !local.labels && app.activePlaceId == app.main;
+        }),
+        callback: function() {
+          local.labels = true;
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandHideLabels",
+        isVisible: (function() {
+          return local.labels && app.activePlaceId == app.main;
+        }),
+        callback: function() {
+          local.labels = false;
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandResetToFactorySettings",
+        isVisible: (function() {
+          return app.activePlaceId == app.main;
+        }),
+        isEnabled: (function() {
+          return window.location.hostname != "test.sh.neroelectronics.by";
+        }),
+        callback: function() {
+          app.reset();
+        }
+      })];
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='AddMenu' id='j77wg4jv3ys1oa'>
+<div class='addMenu modalDialog' id='j7tgaqwq7lk1ob'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j77wg4jv3ys1oa;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var Command = $__3.j4jnsptwhq21o6;
+  var $__6 = $__3.j77wg4jv3ys1oa;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var modalDialog = $__2.j7tgaqwq7lk1ob;
+  !function() {
+    CS.content(modalDialog, (function() {
+      return [CS.importTemplate(Command, {
+        msg: "commandAddNewDevice",
+        callback: function() {
+          app.addDevice(app.activePlaceId);
+        }
+      }), CS.importTemplate(Command, {
+        msg: "commandAddExistingDevice",
+        callback: function() {
+          app.dialog = "SearchItems";
+          app.searchFilter = (function(itemId) {
+            var place = app.getPlace(itemId);
+            return place.type != "content";
+          });
+          app.searchAction = (function(itemId) {
+            app.linkItem(app.activePlaceId, itemId);
+            app.dialog = "";
+          });
+        }
+      })];
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j92kdc6qhxl1oi'>
+<li class='houseTemplate' id='j5pnsowqp4f1oj'></li>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j92kdc6qhxl1oi;
+  var $__5 = window.j8kiip7v31y1o5;
+  var $__6 = $__4.$__DATASET__$;
+  if ($__6 === undefined)
+    $__6 = $__4.$__DATASET__$ = {};
+  var $__7 = $__4.j1c9hivhpp71oc;
+  var $__8 = $__3.$__DATASET__$;
+  if ($__8 === undefined)
+    $__8 = $__3.$__DATASET__$ = {};
+  var $__9 = $__3.j92kdc6qhxl1oi;
+  var $__10 = $__2.$__DATASET__$;
+  if ($__10 === undefined)
+    $__10 = $__2.$__DATASET__$ = {};
+  var text = $__10 == null ? undefined : $__10.text;
+  if (text === undefined)
+    text = $__9.getAttribute("data-text") || text;
+  if (text === undefined)
+    text = null;
+  var houseTemplate = $__2.j5pnsowqp4f1oj;
+  !function() {
+    CS.content(houseTemplate, (function() {
+      return text;
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='StartupScreen' id='j1c9hivhpp71oc'>
+<div class='startupScreen' id='irq5rsfmt01od'>
+<p id='j2rxf7x1vpw1oe'>Добро пожаловать в Ваш<br id='j7rog7fvo171of'/>Умный Дом!</p>
+<div class='templates' id='j7mckcljoi41og'>
+<p id='j6e3iz7dq041oh'>Пожалуйста, выберите место, где используется этот пульт:</p>
+<noscript data-template-reference='j92kdc6qhxl1oi'></noscript>
+<ul class='houseTemplates' id='j9q5ykup49t1ok'></ul>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j7mckcljoi41og;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j1c9hivhpp71oc;
+  var template = $__6;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var templates = $__2.j7mckcljoi41og;
+  var HouseTemplate = $__2.j92kdc6qhxl1oi;
+  var houseTemplates = $__2.j9q5ykup49t1ok;
+  !function() {
+    CS.content(houseTemplates, (function() {
+      return app.templates && app.templates.concat([{
+        menu: "начать с чистого листа",
+        ru: "Мой дом",
+        en: "Home",
+        type: "content"
+      }]).map((function(houseTemplate, index) {
+        var ret = CS.importTemplate(HouseTemplate, {text: houseTemplate.menu || app.getMessage(houseTemplate)});
+        CS.onTouch(ret, (function() {
+          return app.setTemplate(houseTemplate);
+        }));
+        return ret;
+      }));
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='loading' id='j1nawj9ayz61ol'></div>
+</div>
+</template><template class='AskToLinkDevice' id='j6c0dvta6201om'>
+<div class='askToLinkDevice modalDialog' id='j5id58ao27p1on'>
+<p id='j7ogp3aee6f1oo'>Пожалуйста,<br id='j1jfdoo02ab1op'/>переведите устройство в режим<br id='j38898hypnd1oq'/>программирования и нажмите</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j78ia9a24x71or'>здесь</a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j5id58ao27p1on;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j6c0dvta6201om;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var button = $__2.j78ia9a24x71or;
+  !function() {
+    CS.onTap(button, (function(event) {
+      event.preventDefault();
+      var placeId = app.linkingPlaceId || app.activePlaceId;
+      app.dialog = "StateWait";
+      co.go($traceurRuntime.initGeneratorFunction(function $__0() {
+        return $traceurRuntime.createGeneratorInstance(function($ctx) {
+          while (true)
+            switch ($ctx.state) {
+              case 0:
+                $ctx.state = 2;
+                return app.createDevice(placeId);
+              case 2:
+                $ctx.maybeThrow();
+                $ctx.state = 4;
+                break;
+              case 4:
+                $ctx.state = 6;
+                return app.command(app.getPlace(placeId).device, "Link");
+              case 6:
+                $ctx.maybeThrow();
+                $ctx.state = 8;
+                break;
+              case 8:
+                app.dialog = "AskIfDeviceHasBeenLinked";
+                app.linkingPlaceId = placeId;
+                $ctx.state = -2;
+                break;
+              default:
+                return $ctx.end();
+            }
+        }, $__0, this);
+      })).catch((function(error) {
+        console.log(error);
+        app.dialog = "ErrorNoCarrier";
+      }));
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='ServiceItem' id='j4xf088j9gm1os'>
+<div class='serviceItem modalDialog' id='j2rm0uunwbc1ot'>
+<p id='j6mok18i5hg1ou'>***</p>
+<form id='j3vwpb5lr8v1ov'>
+<textarea name='json' cols='35' rows='25' id='j3ap0jbordg1ow'></textarea>
+<p id='j2ht5atq1j31ox'><a class='button' href='javascript:void(0)' target='_self' id='j15p8o4zvi91oy'>Закрыть</a></p>
+</form>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j2rm0uunwbc1ot;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j4xf088j9gm1os;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var form = $__2.j3vwpb5lr8v1ov;
+  var json = $__2.j3ap0jbordg1ow;
+  var button = $__2.j15p8o4zvi91oy;
+  !function() {
+    ra((function() {
+      form.json.value = JSON.stringify({
+        icon: app.getPlace(app.activePlaceId),
+        device: app.getDevice(app.activeDeviceId)
+      }, null, 3);
+    }));
+    var submit = (function(event) {
+      event && event.preventDefault();
+      form.json.blur();
+      var json = form.json.value.trim() || null;
+      try {
+        json = json && JSON.parse(json);
+      } catch (error) {
+        return alert(error);
+      }
+      if (json && json.icon) {
+        app.savePlace(app.activePlaceId, json.icon);
+        if (json.icon.device && json.device)
+          app.saveDevice(json.icon.device, json.device);
+      }
+      app.dialog = "";
+    });
+    CS.onTap(button, submit);
+    form.onsubmit = submit;
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='AskNewName' id='j98qpu1gx161oz'>
+<div class='askNewName modalDialog' id='j62hv1my0qq1p0'>
+<p id='j8arer5lh6l1p1'>Название:</p>
+<form id='j4of0bguruk1p2'>
+<input name='string' type='text' autofocus='autofocus' size='20' id='j53irjp2u1f1p3'/>
+<p id='j8121r069vf1p4'><a class='button' href='javascript:void(0)' target='_self' id='j8rgfcay22n1p5'>Закрыть</a></p>
+</form>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j62hv1my0qq1p0;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j98qpu1gx161oz;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var form = $__2.j4of0bguruk1p2;
+  var string = $__2.j53irjp2u1f1p3;
+  var button = $__2.j8rgfcay22n1p5;
+  !function() {
+    var submit = (function(event) {
+      event && event.preventDefault();
+      form.string.blur();
+      var name = form.string.value.trim();
+      form.string.value = "";
+      app.dialog = "";
+      if (name)
+        app.renameItem(app.activePlaceId, name);
+    });
+    CS.onTap(button, submit);
+    form.onsubmit = submit;
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='SearchItem' data-placeId='' id='j74nvt53acq1p8'>
+<div class='searchItem' id='j35mgspy59c1p9'>
+<span class='caption' id='j5imd8pb7481pa'></span>
+<span class='places' id='j64c65o96ke1pb'></span>
+<span class='cmdDeleteFromProgram' id='j5g4jp021sg1pc'></span>
+<span class='cmdAppend' id='j8mi7fljq8o1pd'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j35mgspy59c1p9;
+  var $__5 = window.j8kiip7v31y1o5;
+  var $__6 = $__4.$__DATASET__$;
+  if ($__6 === undefined)
+    $__6 = $__4.$__DATASET__$ = {};
+  var $__7 = $__4.j5ama8983561p6;
+  var $__8 = $__3.$__DATASET__$;
+  if ($__8 === undefined)
+    $__8 = $__3.$__DATASET__$ = {};
+  var opts = $__8 == null ? undefined : $__8.opts;
+  if (opts === undefined)
+    opts = $__7.getAttribute("data-opts") || opts;
+  if (opts === undefined)
+    opts = null;
+  var $__9 = $__3.j74nvt53acq1p8;
+  var $__10 = $__2.$__DATASET__$;
+  if ($__10 === undefined)
+    $__10 = $__2.$__DATASET__$ = {};
+  var placeId = $__10 == null ? undefined : $__10.placeId;
+  if (placeId === undefined)
+    placeId = $__9.getAttribute("data-placeId") || placeId;
+  if (placeId === undefined)
+    placeId = null;
+  var caption = $__2.j5imd8pb7481pa;
+  var places = $__2.j64c65o96ke1pb;
+  !function() {
+    this.classList.add(placeId);
+    CS.content(caption, (function() {
+      return opts.placeInfos[placeId].caption;
+    }));
+    CS.content(places, (function() {
+      return opts.placeInfos[placeId].ptext;
+    }));
+    CS.onTap(this, (function() {
+      return opts.goto(placeId);
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='SearchItems' data-opts='' id='j5ama8983561p6'>
+<div class='searchItems modalDialog' id='j8ojurko8661p7'>
+<noscript data-template-reference='j74nvt53acq1p8'></noscript>
+<form id='j78d7pgav711pe'>
+<input name='mask' type='text' autofocus='autofocus' size='20' id='j4wmjemj4aa1pf'/>
+</form>
+<div class='items' id='j14ehfy8m5e1pg'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j8ojurko8661p7;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var SearchItems = $__3.j5ama8983561p6;
+  var $__6 = $__3.j5ama8983561p6;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var dataset = $__7;
+  var opts = $__7 == null ? undefined : $__7.opts;
+  if (opts === undefined)
+    opts = $__6.getAttribute("data-opts") || opts;
+  if (opts === undefined)
+    opts = null;
+  var SearchItem = $__2.j74nvt53acq1p8;
+  var form = $__2.j78d7pgav711pe;
+  var mask = $__2.j4wmjemj4aa1pf;
+  var items = $__2.j14ehfy8m5e1pg;
+  !function() {
+    app.onshow("SearchItems", (function() {
+      form.mask.raValue = "";
+      app.focus(form.mask);
+    }));
+    form.onsubmit = (function(event) {
+      event && event.preventDefault();
+      opts.goto(opts.filtered[0]);
+    });
+    var DL = require("DamerauLevenshtein");
+    var notAChar = (function(char) {
+      return char <= " " || char == "-";
+    });
+    var fuzzy = (function(mask, text) {
+      return DL(mask.toUpperCase(), text.toUpperCase(), {
+        replace: Infinity,
+        delete: (function(char) {
+          return notAChar(char) ? 1e-2 : Infinity;
+        }),
+        insert: (function(char) {
+          return notAChar(char) ? 1e-2 : 1;
+        }),
+        transpose: 1
+      });
+    });
+    opts = dataset.opts = ra({
+      goto: function(id) {
+        form.mask.blur();
+        if (!id)
+          return ;
+        var placeInfo = opts.placeInfos[id];
+        ~(app.searchAction || app.go)(id, placeInfo && placeInfo.places);
+      },
+      get placeIds() {
+        return ra.Array(app.placeIds.filter((function(id) {
+          return id != app.main;
+        })));
+      },
+      get placeInfos() {
+        var cache = Object.create(null);
+        var $__4 = true;
+        var $__5 = false;
+        var $__6 = undefined;
+        try {
+          for (var $__2 = void 0,
+              $__1 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__4 = ($__2 = $__1.next()).done); $__4 = true) {
+            var id = $__2.value;
+            {
+              var info = app.getPlace(id);
+              cache[id] = {
+                info: info,
+                caption: app.getMessage(info),
+                places: []
+              };
+            }
+          }
+        } catch ($__7) {
+          $__5 = true;
+          $__6 = $__7;
+        } finally {
+          try {
+            if (!$__4 && $__1.return != null) {
+              $__1.return();
+            }
+          } finally {
+            if ($__5) {
+              throw $__6;
+            }
+          }
+        }
+        var $__11 = true;
+        var $__12 = false;
+        var $__13 = undefined;
+        try {
+          var $__23 = function() {
+            var id = $__9.value;
+            lodash.forEach(cache[id].info.content, (function(_, key) {
+              return cache[key] && (cache[key].places.push(id));
+            }));
+          };
+          for (var $__9 = void 0,
+              $__8 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__11 = ($__9 = $__8.next()).done); $__11 = true) {
+            $__23();
+          }
+        } catch ($__14) {
+          $__12 = true;
+          $__13 = $__14;
+        } finally {
+          try {
+            if (!$__11 && $__8.return != null) {
+              $__8.return();
+            }
+          } finally {
+            if ($__12) {
+              throw $__13;
+            }
+          }
+        }
+        var ret = Object.create(null);
+        var $__18 = true;
+        var $__19 = false;
+        var $__20 = undefined;
+        try {
+          var $__24 = function() {
+            var id = $__16.value;
+            {
+              var c = cache[id];
+              var ptext = c.places.map((function(id) {
+                return cache[id].caption;
+              })).join(", ");
+              if (ptext)
+                ptext = ("(" + ptext + ")");
+              ret[id] = {
+                id: id,
+                caption: c.caption,
+                places: c.places,
+                ptext: ptext
+              };
+            }
+          };
+          for (var $__16 = void 0,
+              $__15 = (this.placeIds)[$traceurRuntime.toProperty(Symbol.iterator)](); !($__18 = ($__16 = $__15.next()).done); $__18 = true) {
+            $__24();
+          }
+        } catch ($__21) {
+          $__19 = true;
+          $__20 = $__21;
+        } finally {
+          try {
+            if (!$__18 && $__15.return != null) {
+              $__15.return();
+            }
+          } finally {
+            if ($__19) {
+              throw $__20;
+            }
+          }
+        }
+        return ra.JSON(ret);
+      },
+      get labels() {
+        return ra.keymap(opts.live.placeIds, (function(placeId) {
+          return CS.importNode(SearchItem, {placeId: placeId});
+        }));
+      },
+      get filtered() {
+        var value = form.mask.raValue;
+        var arr = [];
+        var $__4 = true;
+        var $__5 = false;
+        var $__6 = undefined;
+        try {
+          for (var $__2 = void 0,
+              $__1 = (this.placeIds.filter(app.searchFilter || Boolean))[$traceurRuntime.toProperty(Symbol.iterator)](); !($__4 = ($__2 = $__1.next()).done); $__4 = true) {
+            var id = $__2.value;
+            {
+              var i = opts.placeInfos[id];
+              var key = [];
+              if (value) {
+                key.push(fuzzy(value, i.caption), fuzzy(value, i.caption + " " + i.ptext));
+                if (key.every((function(k) {
+                  return Math.abs(k) == Infinity;
+                })))
+                  continue;
+              }
+              key.push(i.caption.toUpperCase());
+              arr.push({
+                id: id,
+                key: key
+              });
+            }
+          }
+        } catch ($__7) {
+          $__5 = true;
+          $__6 = $__7;
+        } finally {
+          try {
+            if (!$__4 && $__1.return != null) {
+              $__1.return();
+            }
+          } finally {
+            if ($__5) {
+              throw $__6;
+            }
+          }
+        }
+        return ra.Array(arr.sort((function(a, b) {
+          return lodash.zip(a.key, b.key).map((function(pair) {
+            var $__22;
+            return ($__22 = lu).compare.apply($__22, $traceurRuntime.spread(pair));
+          })).reduce((function(a, b) {
+            return a || b;
+          }));
+        })).map((function(a) {
+          return a.id;
+        })));
+      },
+      get items() {
+        var $__0 = this;
+        return ra.Array(this.filtered.map((function(id) {
+          return $__0.labels.get(id);
+        })));
+      }
+    });
+    CS.content(items, (function() {
+      return opts.items;
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='AskCredentials' id='j9mrbz075e21ph'>
+<div class='askCredentials' id='j71si0gkf7l1pi'>
+<form id='j2kciaz3l9w1pj'>
+<p id='j2ha8tvduu21pk'>Пользователь:</p>
+<p id='j41o2wxjgvh1pl'><input name='user' type='text' size='20' value='' id='j25251f0hxz1pm'/></p>
+<p id='j6so6mpwbcw1pn'>Ключ:</p>
+<p id='j95useykxe21po'><input name='key' type='password' size='20' value='' id='j1clt8gtw1m1pp'/></p>
+<p id='j4eu2ihxi071pq'><a class='button' href='javascript:void(0)' target='_self' id='ix1d94mgxn1pr'>Подключиться</a></p>
+</form>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j71si0gkf7l1pi;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j9mrbz075e21ph;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var form = $__2.j2kciaz3l9w1pj;
+  var user = $__2.j25251f0hxz1pm;
+  var key = $__2.j1clt8gtw1m1pp;
+  var button = $__2.ix1d94mgxn1pr;
+  !function() {
+    var submit = (function() {
+      var user = form.user.value.trim();
+      var key = form.key.value.trim();
+      app.credentials = {
+        user: user,
+        key: key
+      };
+    });
+    CS.onTap(button, (function(event) {
+      event.preventDefault();
+      submit();
+    }));
+    form.onsubmit = submit;
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='AskIfDeviceHasBeenLinked' id='j58ft58pydg1ps'>
+<div class='askIfDeviceHasBeenLinked modalDialog' id='j7sbiu5ypml1pt'>
+<p id='j30l8nkhrt61pu'>Устройство было успешно привязано?</p>
+<a class='button yes' href='javascript:void(0)' target='_self' id='j4dztzwfo3h1pv'>да</a>
+<a class='button no' href='javascript:void(0)' target='_self' id='j26ksmen1cw1pw'>нет</a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j7sbiu5ypml1pt;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var AskToLinkDevice = $__3.j6c0dvta6201om;
+  var $__6 = $__3.j58ft58pydg1ps;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var yes = $__2.j4dztzwfo3h1pv;
+  var no = $__2.j26ksmen1cw1pw;
+  !function() {
+    CS.onTap(yes, (function(event) {
+      event.preventDefault();
+      app.dialog = "StopDeviceNotification";
+    }));
+    CS.onTap(no, (function(event) {
+      event.preventDefault();
+      app.dialog = "AskToLinkDevice";
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='AskReset' id='j77kg25efos1px'>
+<div class='askReset modalDialog' id='j8mljltet4e1py'>
+<p id='j4jbd0hevoo1pz'>Будет удалить вся информация о приборах и их местоположении</p>
+<a class='button yes' href='javascript:void(0)' target='_self' id='iwt7snmru51q0'>Удалить</a>
+<a class='button no' href='javascript:void(0)' target='_self' id='j9ngf372acd1q1'>Вернуться</a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j8mljltet4e1py;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var AskToLinkDevice = $__3.j6c0dvta6201om;
+  var $__6 = $__3.j77kg25efos1px;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var yes = $__2.iwt7snmru51q0;
+  var no = $__2.j9ngf372acd1q1;
+  !function() {
+    CS.onTap(yes, (function(event) {
+      event.preventDefault();
+      app.dialog = "StopDeviceNotification";
+    }));
+    CS.onTap(no, (function(event) {
+      event.preventDefault();
+      app.dialog = "AskToLinkDevice";
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='ErrorNoCarrier' id='j1ywv3nc54m1q2'>
+<div class='errorNoCarrier modalDialog errorDialog' id='ie6hhopz4l1q3'>
+<p id='j1bhx55cenn1q4'>Ошибка</p>
+<p id='j7x3uxwswty1q5'>Произошла ошибка при попытке связаться с модемом</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j6n4a1qwka81q6'>закрыть</a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.ie6hhopz4l1q3;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j1ywv3nc54m1q2;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var button = $__2.j6n4a1qwka81q6;
+  !function() {
+    CS.onTap(button, (function(event) {
+      event.preventDefault();
+      app.dialog = "";
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='StopDeviceNotification' id='it6adqvbne1q7'>
+<div class='stopDeviceNotification modalDialog' id='j6jz51spkp81q8'>
+<p id='j9pg769k23z1q9'>Пожалуйста,<br id='j5wtrm41ean1qa'/>переведите устройство в рабочий режим</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j59dyza4uzh1qb'>закрыть</a>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j6jz51spkp81q8;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.it6adqvbne1q7;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var button = $__2.j59dyza4uzh1qb;
+  !function() {
+    CS.onTap(button, (function(event) {
+      event.preventDefault();
+      app.dialog = "";
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='StateWait' id='iqtd0re0961qc'>
+<div class='stateWait modalDialog' id='j8twhthac7t1qd'>
+<p id='j9gwyep0lo91qe'>Подождите...</p>
+</div>
+</template><template class='LoadingScreen' id='j5883pl2i4r1qf'>
+<div class='loadingScreen' id='i8wmlbbjtd1qg'></div>
+</template><template class='Centered' data-content='' id='j9purgo1lv31qh'>
+<table style='width: 100%; height: 100%;' id='ikiiykon6e1qi'>
+<tr style='width: 100%; height: 100%;' id='j518ejnwi721qj'>
+<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='j37s3f6yzrj1qk'>
+<span class='self' id='j9tqi2ccgks1ql'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j37s3f6yzrj1qk;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var $__6 = $__3.j9purgo1lv31qh;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var content = $__7 == null ? undefined : $__7.content;
+  if (content === undefined)
+    content = $__6.getAttribute("data-content") || content;
+  if (content === undefined)
+    content = null;
+  var self = $__2.j9tqi2ccgks1ql;
+  !function() {
+    CS.content(self, content);
+  }.call($__0);
+}();
+</script>
+</td>
+</tr>
+</table>
+</template><template class='Icon' data-placeId='' data-iconId='' data-iconDescr='' data-deviceDescr='' data-index='' id='j6mxsqw84k91qm'>
+<div class='icon' id='j7uoqnxy2x31qn'>
+<div class='iconControl' id='j8c03obolu61qo'>
+<div class='image' id='j56mlv33b861qp'>
+<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j87ooke5mym1qq'/>
+<img class='error off' src='/images/room.svg' id='j8ycsl1vco41qr'/>
+<img class='error on' src='/images/room_on.svg' id='j5tg2us9m3s1qs'/>
+<img class='error absent' src='/images/room_absent.svg' id='j5kjt0uw0vz1qt'/>
+<div class='svg' id='j8zes0nh7aa1qu'></div>
+</div>
+<span class='iconLabel' id='j1md2vudyib1qv'></span>
+<span class='iconPercentage' id='j7enz0h895e1qw'></span>
+</div>
+<div class='deleteSign' id='j802nyah0r51qx'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j7uoqnxy2x31qn;
+  var style = window.j7z7vtzpbl51o3;
+  var App = window.j8kiip7v31y1o5;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__5 == null ? undefined : $__5.local;
+  if (local === undefined)
+    local = $__4.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var Command = $__3.j4jnsptwhq21o6;
+  var Icon = $__3.j6mxsqw84k91qm;
+  var $__6 = $__3.j6mxsqw84k91qm;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var placeId = $__7 == null ? undefined : $__7.placeId;
+  if (placeId === undefined)
+    placeId = $__6.getAttribute("data-placeId") || placeId;
+  if (placeId === undefined)
+    placeId = null;
+  var iconId = $__7 == null ? undefined : $__7.iconId;
+  if (iconId === undefined)
+    iconId = $__6.getAttribute("data-iconId") || iconId;
+  if (iconId === undefined)
+    iconId = null;
+  var iconDescr = $__7 == null ? undefined : $__7.iconDescr;
+  if (iconDescr === undefined)
+    iconDescr = $__6.getAttribute("data-iconDescr") || iconDescr;
+  if (iconDescr === undefined)
+    iconDescr = null;
+  var deviceDescr = $__7 == null ? undefined : $__7.deviceDescr;
+  if (deviceDescr === undefined)
+    deviceDescr = $__6.getAttribute("data-deviceDescr") || deviceDescr;
+  if (deviceDescr === undefined)
+    deviceDescr = null;
+  var index = $__7 == null ? undefined : $__7.index;
+  if (index === undefined)
+    index = $__6.getAttribute("data-index") || index;
+  if (index === undefined)
+    index = null;
+  var icon = $__2.j7uoqnxy2x31qn;
+  var iconControl = $__2.j8c03obolu61qo;
+  var image = $__2.j56mlv33b861qp;
+  var wait = $__2.j87ooke5mym1qq;
+  var off = $__2.j8ycsl1vco41qr;
+  var on = $__2.j5tg2us9m3s1qs;
+  var img = $__2.j5kjt0uw0vz1qt;
+  var error = $__2.j5kjt0uw0vz1qt;
+  var absent = $__2.j5kjt0uw0vz1qt;
+  var svg = $__2.j8zes0nh7aa1qu;
+  var iconLabel = $__2.j1md2vudyib1qv;
+  var iconPercentage = $__2.j7enz0h895e1qw;
+  var deleteSign = $__2.j802nyah0r51qx;
+  !function() {
+    function getIcon(descr) {
+      var icon = iconDescr && iconDescr.valueOf() && iconDescr.valueOf().icon || null;
+      if (icon)
+        icon = ("icon" + icon.slice(0, 1).toUpperCase() + icon.slice(1));
+      return icon;
+    }
+    var opts = ra({
+      get iconName() {
+        return getIcon(iconDescr) || getIcon(deviceDescr);
+      },
+      get iconTemplate() {
+        return this.iconName && app.icons && app.icons.hasOwnProperty(this.iconName) && app.icons[this.iconName] || null;
+      },
+      iconData: null,
+      get dimmering() {
+        var d = deviceDescr && deviceDescr.valueOf();
+        var i = iconDescr && iconDescr.valueOf();
+        if (d && d.dimmering === false || i && i.dimmering === false)
+          return false;
+        else
+          return true;
+      },
+      get image_on() {
+        var d = deviceDescr && deviceDescr.valueOf();
+        var i = iconDescr && iconDescr.valueOf();
+        var file = "" || d && d.image_on || i && i.image_on || d && d.image || i && i.image;
+        return file && ("/images/" + file);
+      },
+      get update_image_on() {
+        if (opts.image_on)
+          on.src = opts.image_on;
+      },
+      get image_off() {
+        var d = deviceDescr && deviceDescr.valueOf();
+        var i = iconDescr && iconDescr.valueOf();
+        var file = "" || d && d.image_off || i && i.image_off || d && d.image || i && i.image;
+        return file && ("/images/" + file);
+      },
+      get update_image_off() {
+        if (opts.image_off)
+          off.src = opts.image_off;
+      },
+      iconCommand: function(cmd, data) {
+        return co.gocall($traceurRuntime.initGeneratorFunction(function $__3() {
+          var dimmChanges;
+          return $traceurRuntime.createGeneratorInstance(function($ctx) {
+            while (true)
+              switch ($ctx.state) {
+                case 0:
+                  dimmChanges = this.dimmChanges;
+                  dimmChanges && (this.dimmChanges = null);
+                  this.isDimmering = false;
+                  $ctx.state = 14;
+                  break;
+                case 14:
+                  $ctx.pushTry(null, 6);
+                  $ctx.state = 8;
+                  break;
+                case 8:
+                  $ctx.state = 2;
+                  return app.iconCommand(iconDescr, iconId, cmd, data);
+                case 2:
+                  $ctx.maybeThrow();
+                  $ctx.state = 6;
+                  $ctx.finallyFallThrough = -2;
+                  break;
+                case 6:
+                  $ctx.popTry();
+                  $ctx.state = 12;
+                  break;
+                case 12:
+                  dimmChanges && dimmChanges.close();
+                  $ctx.state = 10;
+                  break;
+                case 10:
+                  $ctx.state = $ctx.finallyFallThrough;
+                  break;
+                default:
+                  return $ctx.end();
+              }
+          }, $__3, this);
+        }), this);
+      },
+      isDimmering: false,
+      dimmChanges: null,
+      readyToSaveDimmering: function() {
+        return !this.isDimmering && !!this.dimmChanges;
+      },
+      saveDimmering: function() {
+        if (this.readyToSaveDimmering() && deviceDescr)
+          opts.iconCommand("Set", deviceDescr.get("state"));
+      },
+      get onDimmering() {
+        if (this.readyToSaveDimmering())
+          setTimeout(this.saveDimmering);
+      },
+      isMoving: false,
+      moved: false,
+      newIndex: null,
+      x: null,
+      y: null,
+      dx: null,
+      dy: null,
+      changes: null,
+      oldMoving: false,
+      get checkAppMoving() {
+        var isMoving = !!this.isMoving;
+        var oldMoving = !!this.oldMoving;
+        this.oldMoving = isMoving;
+        if (isMoving != oldMoving)
+          if (isMoving)
+            ++app.moving;
+          else
+            --app.moving;
+      },
+      oldDimmering: false,
+      get checkAppDimmering() {
+        var isDimmering = !!this.isDimmering;
+        var oldDimmering = !!this.oldDimmering;
+        this.oldDimmering = isDimmering;
+        if (isDimmering != oldDimmering)
+          if (isDimmering)
+            ++app.dimmering;
+          else
+            --app.dimmering;
+      },
+      get updateChanges() {
+        var $__0,
+            $__1;
+        if (!app.editing || !this.isMoving || !this.changes) {
+          if (this.changes) {
+            this.changes.close();
+            this.changes = null;
+          }
+          this.moved = false;
+        } else {
+          var ret = null;
+          var place = lu.get(this, "changes", "before", placeId, "content");
+          if (place && place[iconId]) {
+            var keys = lodash.keys(place).filter((function(key) {
+              return key != iconId;
+            })).sort((function(a, b) {
+              return place[a].index - place[b].index;
+            })).map((function(key) {
+              return place[key].index;
+            }));
+            ret = ($__1 = {}, Object.defineProperty($__1, placeId, {
+              value: {content: ($__0 = {}, Object.defineProperty($__0, iconId, {
+                  value: {index: keys.length == 0 ? 0 : this.newIndex <= 0 ? keys[0] - 1 : this.newIndex >= keys.length ? keys[keys.length - 1] + 1 : (keys[this.newIndex - 1] + keys[this.newIndex]) / 2},
+                  configurable: true,
+                  enumerable: true,
+                  writable: true
+                }), $__0)},
+              configurable: true,
+              enumerable: true,
+              writable: true
+            }), $__1);
+          }
+          this.changes.assign(ret);
+        }
+      },
+      get present() {
+        return !!(iconDescr.get("content") || iconDescr.get("device"));
+      },
+      state: 0,
+      onning: false,
+      offing: false,
+      final: false,
+      errorneous: false,
+      get updateState() {
+        var d = deviceDescr && deviceDescr.valueOf();
+        if (!d)
+          return 0;
+        if (d.newstate_timestamp && (!d.state_timestamp || d.newstate_timestamp > d.state_timestamp)) {
+          var fonning = d.newstate >= d.state;
+          this.onning = fonning;
+          this.offing = !fonning;
+          this.final = false;
+          this.state = d.newstate;
+        } else {
+          this.onning = false;
+          this.offing = false;
+          this.final = true;
+          this.state = d.state;
+        }
+        this.errorneous = !!d.errorneous;
+      },
+      get updateWait() {
+        wait.style.visibility = this.final ? "hidden" : null;
+      },
+      setOpacity: function(node, opacity) {
+        if (opacity == null) {
+          delete node.style.opacity;
+        } else {
+          node.style.opacity = opacity;
+        }
+      },
+      get updateOpacity() {
+        if (this.iconTemplate) {
+          on.style.visibility = "hidden";
+          off.style.visibility = "hidden";
+          absent.style.visibility = "hidden";
+        } else if (!this.present) {
+          this.setOpacity(on, 0);
+          this.setOpacity(off, 0);
+          this.setOpacity(absent, 0.7);
+        } else {
+          this.setOpacity(absent, 0);
+          if (this.dimmering) {
+            this.setOpacity(on, this.state);
+            this.setOpacity(off, (1 - this.state) * 0.333);
+          } else {
+            this.setOpacity(on, +!!this.state);
+            this.setOpacity(off, +!this.state);
+          }
+        }
+      }
+    });
+    CS.content(svg, (function() {
+      var data = opts.iconTemplate && CS.importNode(opts.iconTemplate) || null;
+      if (data) {
+        var init = data.getElementsByClassName("init")[0];
+        if (init && init.type == "init") {
+          var finit = new Function([].slice.call(init.childNodes).map((function(x) {
+            return x.data || "";
+          })).join(""));
+          finit.call(data);
+        }
+      }
+      opts.iconData = data;
+      return data;
+    }));
+    ra((function() {
+      var state = opts.state;
+      var data = opts.iconData;
+      if (!data)
+        return ;
+      if (data.setDeviceState)
+        data.setDeviceState(state);
+    }));
+    CS.updateClassX(svg, (function() {
+      return "state" + (!opts.present ? "Absent" : (Math.round(opts.state * 100) + 1000).toString().slice(1));
+    }));
+    CS.updateClassX(svg, (function() {
+      return !opts.isDimmering && "smoothing";
+    }));
+    ![].slice.call(icon.getElementsByTagName("img")).forEach((function(img) {
+      return lodash.assign(img, app.imgProps);
+    }));
+    CS.updateClassX(icon, (function() {
+      return opts.onning && "onning";
+    }));
+    CS.updateClassX(icon, (function() {
+      return opts.offing && "offing";
+    }));
+    CS.updateClassX(icon, (function() {
+      return opts.final && "final";
+    }));
+    CS.updateClassX(icon, (function() {
+      return opts.errorneous && "errorneous";
+    }));
+    CS.updateClassX(icon, (function() {
+      return opts.dimmering.valueOf() ? "dimmering" : "switching";
+    }));
+    CS.updateClassX(icon, iconId);
+    CS.updateClassX(icon, (function() {
+      return ("icon_moving_" + !!opts.isMoving);
+    }));
+    CS.updateClassX(icon, (function() {
+      return ("icon_moved_" + (!!opts.isMoving && !!opts.moved));
+    }));
+    CS.watchX((function() {
+      var pt;
+      if (opts.isMoving)
+        pt = {
+          x: opts.x,
+          y: opts.y
+        };
+      else {
+        var i = lu.valueOf(index);
+        var ph = app.pageHeight || 1;
+        var pw = app.pageWidth || 1;
+        var ps = pw * ph;
+        var pi = i % ps;
+        var p = (i - pi) / ps;
+        var w = pi % pw;
+        var h = (pi - w) / pw;
+        w += pw * p;
+        pt = {
+          x: w * 100 / pw,
+          y: h * 100 / ph
+        };
+      }
+      var moveIt = (function() {
+        icon.style.left = (pt.x + "%");
+        icon.style.top = (pt.y + "%");
+      });
+      if (app.editing)
+        setTimeout(moveIt);
+      else
+        moveIt();
+    }));
+    CS.contentX(iconLabel, (function() {
+      return iconDescr.get(local.language) || iconDescr.get("ru") || iconDescr.get("en");
+    }));
+    CS.contentX(iconPercentage, (function() {
+      return opts.dimmering && (Math.round(deviceDescr.get("state") * 100) + "%");
+    }));
+    function logGesture(gesture) {
+      LOG(((logGesture.c = logGesture.c || 0, ++logGesture.c) + " ") + gesture.yellow);
+    }
+    var deleteIcon = (function() {
+      return app.deleteItem(placeId, iconId);
+    });
+    CS.onTouchStart(deleteSign, deleteIcon);
+    CS.onTap(deleteSign, deleteIcon);
+    CS.onPress(deleteSign, deleteIcon);
+    CS.onTouchStart(iconControl, (function() {
+      logGesture("\nTouchStart");
+    }));
+    function makeIndexUpdate(index) {
+      var $__0,
+          $__1;
+      return ($__1 = {}, Object.defineProperty($__1, placeId, {
+        value: {content: ($__0 = {}, Object.defineProperty($__0, iconId, {
+            value: {index: index},
+            configurable: true,
+            enumerable: true,
+            writable: true
+          }), $__0)},
+        configurable: true,
+        enumerable: true,
+        writable: true
+      }), $__1);
+    }
+    function stopActivity() {
+      opts.isDimmering = false;
+      opts.isMoving && opts.changes && setTimeout(co.func($traceurRuntime.initGeneratorFunction(function $__3() {
+        var changes,
+            oldIndex;
+        return $traceurRuntime.createGeneratorInstance(function($ctx) {
+          while (true)
+            switch ($ctx.state) {
+              case 0:
+                changes = opts.changes;
+                opts.changes = null;
+                opts.isMoving = false;
+                $ctx.state = 22;
+                break;
+              case 22:
+                $ctx.state = (!changes) ? 1 : 2;
+                break;
+              case 1:
+                $ctx.state = -2;
+                break;
+              case 2:
+                $ctx.pushTry(null, 14);
+                $ctx.state = 16;
+                break;
+              case 16:
+                oldIndex = lu.get(changes, "before", placeId, "content", iconId, "index");
+                $ctx.state = 12;
+                break;
+              case 12:
+                $ctx.state = (oldIndex == opts.newIndex) ? 4 : 5;
+                break;
+              case 4:
+                $ctx.state = 14;
+                $ctx.finallyFallThrough = -2;
+                break;
+              case 5:
+                $ctx.state = 8;
+                return changes.save();
+              case 8:
+                $ctx.maybeThrow();
+                $ctx.state = 14;
+                $ctx.finallyFallThrough = -2;
+                break;
+              case 14:
+                $ctx.popTry();
+                $ctx.state = 20;
+                break;
+              case 20:
+                changes.close();
+                $ctx.state = 18;
+                break;
+              case 18:
+                $ctx.state = $ctx.finallyFallThrough;
+                break;
+              default:
+                return $ctx.end();
+            }
+        }, $__3, this);
+      })));
+    }
+    CS.onTouchEnd(iconControl, (function() {
+      logGesture("TouchEnd");
+      stopActivity();
+    }));
+    CS.onTouchCancel(iconControl, (function() {
+      logGesture("TouchCancel");
+      stopActivity();
+    }));
+    CS.onMouseUp(iconControl, (function() {
+      logGesture("MouseUp");
+      stopActivity();
+    }));
+    CS.onTap(iconControl, (function() {
+      logGesture("Tap");
+      !app.editing && opts.iconCommand("Short");
+    }));
+    function placeRect() {
+      var x = icon.parentNode;
+      var r;
+      while (r = x.getBoundingClientRect(), !r.width || !r.height)
+        x = x.parentNode;
+      return r;
+    }
+    function relPoint(p) {
+      var r = placeRect();
+      return {
+        x: (p.x - r.left) / r.width * 100,
+        y: (p.y - r.top) / r.height * 100
+      };
+    }
+    function getPoint(data) {
+      var p = data.changedPointers[Object.keys(data.changedPointers)[0]];
+      return relPoint({
+        x: p.screenX,
+        y: p.screenY
+      });
+    }
+    function getLeftTop(data) {
+      var p = data.getBoundingClientRect();
+      return relPoint({
+        x: p.left,
+        y: p.top
+      });
+    }
+    function iconsCount() {
+      var place = app.getPlace(placeId);
+      return lodash.keys(place && place.content).length;
+    }
+    CS.onPress(iconControl, (function(data) {
+      logGesture("Press");
+      if (app.editing) {
+        var p = getPoint(data);
+        var r = getLeftTop(icon);
+        opts.isMoving = true;
+        opts.moved = false;
+        opts.dx = r.x - p.x;
+        opts.dy = r.y - p.y;
+        opts.x = r.x;
+        opts.y = r.y;
+        opts.newIndex = index.valueOf();
+        opts.changes = app.localPlaces.createRecord();
+      } else
+        opts.iconCommand("Long");
+    }));
+    CS.onSwipeUp(iconControl, (function() {
+      logGesture("SwipeUp");
+      !app.editing && opts.iconCommand("Up");
+    }));
+    CS.onSwipeDown(iconControl, (function() {
+      logGesture("SwipeDown");
+      !app.editing && opts.iconCommand("Down");
+    }));
+    function Dimmering(data) {
+      var $__0;
+      var isDimmering = opts.isDimmering;
+      opts.isDimmering = opts.dimmering && !data.isFinal;
+      if (opts.dimmering && (isDimmering || opts.isDimmering)) {
+        if (!opts.dimmChanges) {
+          opts.dimmChanges = app.localDevices.createRecord();
+          var state$__2 = deviceDescr && deviceDescr.get("state");
+          opts.dimmChanges.assign({initialDimmeringState: state$__2});
+        }
+        var delta = -data.deltaY / (icon.getBoundingClientRect().height * 2 / 3);
+        var state = Math.min(1, Math.max(0, opts.dimmChanges.get("initialDimmeringState") + delta));
+        if (state == 0 || state == 1)
+          opts.dimmChanges.assign({initialDimmeringState: state - delta});
+        opts.dimmChanges.update(($__0 = {}, Object.defineProperty($__0, iconDescr.get("device"), {
+          value: {state: state},
+          configurable: true,
+          enumerable: true,
+          writable: true
+        }), $__0));
+      }
+    }
+    function Moving(data) {
+      if (!opts.isMoving)
+        return ;
+      var p = getPoint(data);
+      var q = {
+        x: p.x + opts.dx,
+        y: p.y + opts.dy
+      };
+      opts.x = q.x;
+      opts.y = q.y;
+      q = {
+        x: Math.min(app.pageWidth - 1, Math.max(0, Math.round(q.x / (100 / app.pageWidth)))),
+        y: Math.min(app.pageHeight - 1, Math.max(0, Math.round(q.y / (100 / app.pageHeight))))
+      };
+      opts.newIndex = q.x + q.y * app.pageWidth;
+      opts.moved = true;
+    }
+    CS.onPanUp(iconControl, (function(data) {
+      logGesture(("PanUp " + JSON.stringify(data.isFinal)));
+      app.editing ? Moving(data) : Dimmering(data);
+    }));
+    CS.onPanDown(iconControl, (function(data) {
+      logGesture(("PanDown " + JSON.stringify(data.isFinal)));
+      app.editing ? Moving(data) : Dimmering(data);
+    }));
+    CS.onPanLeft(iconControl, (function(data) {
+      !app.dimmering && (opts.isMoving ? Moving(data) : app.pan(data));
+    }));
+    CS.onPanRight(iconControl, (function(data) {
+      !app.dimmering && (opts.isMoving ? Moving(data) : app.pan(data));
+    }));
+    CS.onTouchEnd(iconControl, (function(data) {
+      app.pan({
+        deltaX: 0,
+        isFinal: true
+      });
+    }));
+    CS.onTouchCancel(iconControl, (function(data) {
+      app.pan({
+        deltaX: 0,
+        isFinal: true
+      });
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</template><template class='Place' data-placeId='' data-placeDescr='' id='j8p4d7xnaxk1qy'>
+<div class='place' id='j9h07p8wz3n1qz'></div>
+<style class='style' id='j20eia90a131r0'></style>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__3.j8p4d7xnaxk1qy;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__5 == null ? undefined : $__5.local;
+  if (local === undefined)
+    local = $__4.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var Icon = $__3.j6mxsqw84k91qm;
+  var Place = $__3.j8p4d7xnaxk1qy;
+  var $__6 = $__3.j8p4d7xnaxk1qy;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var placeId = $__7 == null ? undefined : $__7.placeId;
+  if (placeId === undefined)
+    placeId = $__6.getAttribute("data-placeId") || placeId;
+  if (placeId === undefined)
+    placeId = null;
+  var placeDescr = $__7 == null ? undefined : $__7.placeDescr;
+  if (placeDescr === undefined)
+    placeDescr = $__6.getAttribute("data-placeDescr") || placeDescr;
+  if (placeDescr === undefined)
+    placeDescr = null;
+  var place = $__2.j9h07p8wz3n1qz;
+  var style = $__2.j20eia90a131r0;
+  !function() {
+    CS.updateClassX(place, placeId);
+    style.innerHTML = ("." + placeId + " .place." + placeId + " { display: initial }");
+    var ids = ra((function() {
+      var content = placeDescr.get("content");
+      return ra.Array(lodash.keys(content).sort((function(a, b) {
+        return lu.compare(content[a].index, content[b].index);
+      })));
+    }));
+    var content = ra.map(ids, (function(iconId, index) {
+      var iconDescr = ra((function() {
+        return app.getPlace(iconId);
+      }));
+      var deviceDescr = ra((function() {
+        var deviceId = iconDescr.get("device");
+        if (!deviceId)
+          return null;
+        return app.getDevice(deviceId);
+      }));
+      return CS.importNode(Icon, {
+        placeId: placeId,
+        iconId: iconId,
+        index: index,
+        iconDescr: iconDescr,
+        deviceDescr: deviceDescr
+      });
+    }));
+    CS.content(place, (function() {
+      return content;
+    }));
+    ra((function() {
+      var translate = ("translateX( " + (-(local.placesPages[placeId] || 0) * app.menuElement.getBoundingClientRect().width + app.placesShifts[placeId] || 0) + "px )");
+      if ("transform" in place.style)
+        place.style.transform = translate;
+      if ("webkitTransform" in place.style)
+        place.style.webkitTransform = translate;
+    }));
+  }.call($__0);
+}();
+</script>
+</template><template class='Main' id='j9irvdql9n71r1'>
+<div class='top' id='j9nia4pji7w1r2'>
+<span class='self' id='j90xgyw7jqe1r3'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j9nia4pji7w1r2;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var Centered = $__3.j9purgo1lv31qh;
+  var $__6 = $__3.j9irvdql9n71r1;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var self = $__2.j90xgyw7jqe1r3;
+  !function() {
+    CS.content(self, CS.importTemplate(Centered, {content: (function() {
+        return app.caption;
+      })}));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='menu' id='j5rtlnmente1r4'>
+
+<span class='self' id='ibowez3z1y1r5'></span>
+<style class='style' id='j6rhlix9d0z1r6'></style>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j5rtlnmente1r4;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__5 == null ? undefined : $__5.local;
+  if (local === undefined)
+    local = $__4.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var Place = $__3.j8p4d7xnaxk1qy;
+  var $__6 = $__3.j9irvdql9n71r1;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var menu = $__2.j5rtlnmente1r4;
+  var self = $__2.ibowez3z1y1r5;
+  var style = $__2.j6rhlix9d0z1r6;
+  !function() {
+    app.menuElement = this;
+    var UID = require("uid");
+    var id = UID();
+    this.classList.add(id);
+    CS.watch((function() {
+      style.innerHTML = ("." + id + " .icon {\n\t\t\twidth: " + 100 / app.pageWidth + "%;\n\t\t\theight: " + 100 / app.pageHeight + "%;\n\t\t}");
+    }));
+    CS.updateClass(this, (function() {
+      return app.activePlaceId;
+    }));
+    var shown = {};
+    var first = true;
+    ra((function() {
+      var id = app.activePlaceId;
+      if (!id || shown[id])
+        return ;
+      app.placesShifts.defineProperty(id);
+      local.placesPages.defineProperty(id);
+      shown[id] = true;
+      var place = ra((function() {
+        return app.getPlace(id);
+      }));
+      var placeControl = CS.importTemplate(Place, {
+        placeId: id,
+        placeDescr: place
+      });
+      if (first) {
+        CS.content(self, placeControl);
+        first = false;
+      } else
+        CS.appendChild(self, placeControl);
+    }));
+    function logGesture(gesture) {}
+    CS.onPanLeft(this, (function(data) {
+      logGesture("PanLeft");
+      !app.moving && !app.dimmering && app.pan(data);
+    }));
+    CS.onPanRight(this, (function(data) {
+      logGesture("PanRight");
+      !app.moving && !app.dimmering && app.pan(data);
+    }));
+    CS.onTouchEnd(this, (function(data) {
+      app.pan({
+        deltaX: 0,
+        isFinal: true
+      });
+    }));
+    CS.onTouchCancel(this, (function(data) {
+      app.pan({
+        deltaX: 0,
+        isFinal: true
+      });
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='bottom' id='j8wmxa1bhoo1r7'>
+<div class='help' id='imi7cqsttx1r8'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.imi7cqsttx1r8;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var $__6 = $__3.j9irvdql9n71r1;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  !function() {}.call($__0);
+}();
+</script>
+</div>
+<div class='logo' id='j777w2evzm01r9'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j777w2evzm01r9;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var ContextMenu = $__3.j68xxvcc57t1o8;
+  var $__6 = $__3.j9irvdql9n71r1;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  !function() {
+    CS.onPress(this, (function() {
+      return app.dialog = "ContextMenu";
+    }));
+    CS.onTap(this, (function() {
+      app.editing = false;
+      app.dialog = "";
+      app.go(app.main);
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+<div class='back' id='j9ct3of7b0u1ra'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
+  var $__0 = $__2.j9ct3of7b0u1ra;
+  var $__4 = window.j8kiip7v31y1o5;
+  var $__5 = $__3.$__DATASET__$;
+  if ($__5 === undefined)
+    $__5 = $__3.$__DATASET__$ = {};
+  var app = $__5 == null ? undefined : $__5.app;
+  if (app === undefined)
+    app = $__4.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var $__6 = $__3.j9irvdql9n71r1;
+  var $__7 = $__2.$__DATASET__$;
+  if ($__7 === undefined)
+    $__7 = $__2.$__DATASET__$ = {};
+  var back = $__2.j9ct3of7b0u1ra;
+  !function() {
+    CS.onTouch(this, (function() {
+      if (app.editing)
+        app.editing = false;
+      else if (app.dialog)
+        app.dialog = "";
+      else
+        app.back();
+    }));
+  }.call($__0);
+}();
+</script>
+</div>
+</div>
+</template><template class='iconRoller' id='j6mcrwsc8o71rb'><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='800px' height='800px' viewBox='0 0 800 800' name='svg' id='j1j8ui88oaj1rd'>
+<script type='init' class='init'>this.setDeviceState = function(state) {
+  this.getElementsByClassName("g")[0].style.transform = ("translate( 0px, -" + state * 410 + "px )");
+};</script>
+<defs id='ij88k23gbb1re'>
+<clipPath id='internal'>
+<rect x='124' y='246' width='566' height='432' id='iseswc3lhy1rf'></rect>
+</clipPath>
+</defs>
+<g class='colored' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='j93iykseb4l1rg'>
+<polygon points='60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163' id='j3vrl2j0kbe1rh'></polygon>
+<g clip-path='url( #internal )' id='j2gwa8cm4va1ri'>
+<g class='g transition colored' id='j6anc5gsztg1rj'>
+<line x1='123' y1='321' x2='690' y2='321' id='j2hszuh063v1rk'></line>
+<line x1='123' y1='392' x2='690' y2='392' id='j94ck9qgadp1rl'></line>
+<line x1='123' y1='463' x2='690' y2='463' id='j2k0cskj60s1rm'></line>
+<line x1='123' y1='534' x2='690' y2='534' id='j2hirlnoo851rn'></line>
+<line x1='123' y1='605' x2='690' y2='605' id='j52tvz3gdu61ro'></line>
+<line x1='123' y1='676' x2='690' y2='676' id='j5b72etj7wn1rp'></line>
+</g>
+</g>
+</g>
+</svg>
+</template><template class='App' data-app='' data-local='' data-appid='state' id='j8kiip7v31y1o5'>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j8kiip7v31y1o5;
+  var $__3 = window.j8kiip7v31y1o5;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var dataset = $__4;
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var appid = $__4 == null ? undefined : $__4.appid;
+  if (appid === undefined)
+    appid = $__3.getAttribute("data-appid") || appid;
+  if (appid === undefined)
+    appid = null;
+  !function() {
+    lodash.assign(dataset, require("app")(appid));
+    dataset.app.pageStarting = true;
+  }.call($__0);
+}();
+</script>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j8kiip7v31y1o5;
+  var $__3 = window.j8kiip7v31y1o5;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__4 == null ? undefined : $__4.local;
+  if (local === undefined)
+    local = $__3.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  !function() {
+    window._app = app;
+    window._local = local;
+  }.call($__0);
+}();
+</script>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j8kiip7v31y1o5;
+  var $__3 = window.j8kiip7v31y1o5;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__4 == null ? undefined : $__4.local;
+  if (local === undefined)
+    local = $__3.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  !function() {
+    var httpClient = require("httpClient");
+    if (navigator.standalone)
+      void 0;
+    else {
+      ra((function() {
+        if (local.activePlaceId && local.activePlaceId.valueOf()) {
+          var title = ("TITLE_" + local.activePlaceId);
+          var icon = ("ICON_" + local.activePlaceId);
+          screenTitle.setAttribute("content", title);
+          if (local.activePlaceId && local.activePlaceId != "main")
+            history.replaceState(null, title, ("?appicon=" + icon));
+          else
+            history.replaceState(null, title, "?");
+        }
+      }));
+    }
+  }.call($__0);
+}();
+</script>
+<noscript data-template-reference='j4jnsptwhq21o6'></noscript>
+<noscript data-template-reference='j68xxvcc57t1o8'></noscript>
+<noscript data-template-reference='j77wg4jv3ys1oa'></noscript>
+<noscript data-template-reference='j1c9hivhpp71oc'></noscript>
+
+<noscript data-template-reference='j6c0dvta6201om'></noscript>
+<noscript data-template-reference='j4xf088j9gm1os'></noscript>
+<noscript data-template-reference='j98qpu1gx161oz'></noscript>
+<noscript data-template-reference='j5ama8983561p6'></noscript>
+<noscript data-template-reference='j9mrbz075e21ph'></noscript>
+<noscript data-template-reference='j58ft58pydg1ps'></noscript>
+<noscript data-template-reference='j77kg25efos1px'></noscript>
+<noscript data-template-reference='j1ywv3nc54m1q2'></noscript>
+<noscript data-template-reference='it6adqvbne1q7'></noscript>
+<noscript data-template-reference='iqtd0re0961qc'></noscript>
+<noscript data-template-reference='j5883pl2i4r1qf'></noscript>
+<noscript data-template-reference='j9purgo1lv31qh'></noscript>
+<noscript data-template-reference='j6mxsqw84k91qm'></noscript>
+<noscript data-template-reference='j8p4d7xnaxk1qy'></noscript>
+<noscript data-template-reference='j9irvdql9n71r1'></noscript>
+
+<noscript data-template-reference='j6mcrwsc8o71rb'></noscript>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j8kiip7v31y1o5;
+  var $__3 = window.j8kiip7v31y1o5;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var iconRoller = $__2.j6mcrwsc8o71rb;
+  !function() {
+    app.icons = {iconRoller: iconRoller};
+  }.call($__0);
+}();
+</script>
+<div class='application' id='j24mz7vrqqq1rq'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j8kiip7v31y1o5;
+  var $__3 = window.j8kiip7v31y1o5;
+  var template = $__3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var local = $__4 == null ? undefined : $__4.local;
+  if (local === undefined)
+    local = $__3.getAttribute("data-local") || local;
+  if (local === undefined)
+    local = null;
+  var application = $__2.j24mz7vrqqq1rq;
+  !function() {
+    var initial = application.className.split(/\s+/);
+    CS.watch((function() {
+      return application.className = initial.concat([app.pageStarting ? "pageStarting" : "pageRunning", app.initialLoading ? "JSONloading" : "JSONloaded", app.initialized ? "alreadyRun" : "firstRun", app.connectedToServer ? "appConnected" : "appDisconnected", app.templates ? "templatesLoaded" : "templatesLoading", app.dialog ? ("dialog" + app.dialog) : "", app.dialog ? "dialogIsPresent" : "dialogIsAbsent", ("app_labels_" + !!local.labels), ("app_editing_" + !!app.editing)]).join(" ");
+    }));
+  }.call($__0);
+}();
+</script>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j8kiip7v31y1o5;
+  var $__3 = window.j8kiip7v31y1o5;
+  var template = $__3;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app = $__4 == null ? undefined : $__4.app;
+  if (app === undefined)
+    app = $__3.getAttribute("data-app") || app;
+  if (app === undefined)
+    app = null;
+  var ContextMenu = $__2.j68xxvcc57t1o8;
+  var AddMenu = $__2.j77wg4jv3ys1oa;
+  var StartupScreen = $__2.j1c9hivhpp71oc;
+  var AskToLinkDevice = $__2.j6c0dvta6201om;
+  var ServiceItem = $__2.j4xf088j9gm1os;
+  var AskNewName = $__2.j98qpu1gx161oz;
+  var SearchItems = $__2.j5ama8983561p6;
+  var AskCredentials = $__2.j9mrbz075e21ph;
+  var AskIfDeviceHasBeenLinked = $__2.j58ft58pydg1ps;
+  var ErrorNoCarrier = $__2.j1ywv3nc54m1q2;
+  var StopDeviceNotification = $__2.it6adqvbne1q7;
+  var StateWait = $__2.iqtd0re0961qc;
+  var LoadingScreen = $__2.j5883pl2i4r1qf;
+  var Place = $__2.j8p4d7xnaxk1qy;
+  var Main = $__2.j9irvdql9n71r1;
+  var application = $__2.j24mz7vrqqq1rq;
+  !function() {
+    CS.content(application, [CS.importTemplate(Main), CS.importTemplate(StartupScreen), CS.importTemplate(LoadingScreen), CS.importTemplate(AskCredentials)]);
+    var dialogTemplates = {
+      ContextMenu: ContextMenu,
+      AddMenu: AddMenu,
+      SearchItems: SearchItems,
+      AskToLinkDevice: AskToLinkDevice,
+      AskIfDeviceHasBeenLinked: AskIfDeviceHasBeenLinked,
+      StopDeviceNotification: StopDeviceNotification,
+      ErrorNoCarrier: ErrorNoCarrier,
+      StateWait: StateWait,
+      AskNewName: AskNewName,
+      ServiceItem: ServiceItem
+    };
+    ra((function() {
+      var dialogName = app.dialog;
+      if (!dialogName || !dialogTemplates.hasOwnProperty(dialogName))
+        return ;
+      var template = dialogTemplates[dialogName];
+      delete dialogTemplates[dialogName];
+      application.appendChild(CS.importTemplate(template));
+    }));
+    setTimeout((function() {
+      return app.pageStarting = false;
+    }), 1);
+  }.call($__0);
+}();
+</script>
+
+</template>
+
+<template class='TwoApp' id='j2mh6p3lu6h1rr'>
+<style id='j6ecwlhxw331rt'>
+.app1 .application, .app2 .application {
+position: fixed;
+left: 20;
+top: 10;
+width: 350;
+height: 600;
+}
+.app2 .application {
+left: 400;
+width: 950;
+}
+</style>
+<div class='app1' id='ij81o71f1f1ru'></div>
+<div class='app2' id='j99jcr1patq1rv'></div>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.j2mh6p3lu6h1rr;
+  var App = window.j8kiip7v31y1o5;
+  var $__3 = window.j2mh6p3lu6h1rr;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var app1 = $__2.ij81o71f1f1ru;
+  var app2 = $__2.j99jcr1patq1rv;
+  !function() {
+    app2.appendChild(CS.importTemplate(App, {appid: "state2"}));
+    app1.appendChild(CS.importTemplate(App, {appid: "state1"}));
+  }.call($__0);
+}();
+</script>
+
+</template>
+<template class='OneApp' id='iejcuza0s11rw'>
+<style id='j4vmn3r731e1rx'> .application { position: fixed !important; } } </style>
+<span class='self' id='j2yztyiaudb1ry'></span>
+<script data-want-template-instance=''>"use strict";
+!function $__1() {
+  var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
+  var $__0 = window.iejcuza0s11rw;
+  var App = window.j8kiip7v31y1o5;
+  var $__3 = window.iejcuza0s11rw;
+  var $__4 = $__2.$__DATASET__$;
+  if ($__4 === undefined)
+    $__4 = $__2.$__DATASET__$ = {};
+  var self = $__2.j2yztyiaudb1ry;
+  !function() {
+    CS.content(self, CS.importTemplate(App));
+  }.call($__0);
+}();
+</script>
+</template>
+<script>"use strict";
+!function(global) {
+  "use strict";
+  function storeChildren(store, childNodes, owner, scripts) {
+    if (!childNodes)
+      return ;
+    var $__0 = function(i, l) {
+      var c = childNodes.item(i);
+      var id;
+      if (c.tagName == "NOSCRIPT" && (id = c.getAttribute("data-template-reference"))) {
+        c = global[id];
+      }
+      if (c instanceof HTMLTemplateElement && c.id)
+        store[c.id] = {
+          content: c.content,
+          id: c.id,
+          $__PARENT_INSTANCE__$: store,
+          getAttribute: (function(n) {
+            return c.getAttribute(n);
+          })
+        };
+      else if (c instanceof HTMLScriptElement) {
+        if (c.getAttribute("data-want-template-instance") != null) {
+          c.$__TEMPLATE_INSTANCE__$ = store;
+          scripts.push(c);
+        }
+      } else {
+        if (c.id)
+          store[c.id] = c;
+        storeChildren(store, c.childNodes, c, scripts);
+      }
+    };
+    for (var i = 0,
+        l = childNodes.length; i < l; ++i) {
+      $__0(i, l);
+    }
+  }
+  global.$__IMPORT_TEMPLATE__$ = (function(template, dataset) {
+    var ret = document.importNode(template.content, true);
+    var instance = Object.create(null);
+    var scripts = [];
+    storeChildren(instance, ret.childNodes, ret, scripts);
+    instance.$__TEMPLATE_INSTANCE__$ = template.$__PARENT_INSTANCE__$;
+    instance.$__DATASET__$ = dataset;
+    if (scripts.length) {
+      var s = document.createDocumentFragment();
+      scripts.forEach((function(c) {
+        return s.appendChild(c);
+      }));
+      document.body.appendChild(s);
+    }
+    return ret;
+  });
+  global.$__GET_TEMPLATE_INSTANCE__$ = (function() {
+    var c = document.currentScript;
+    c.parentNode.removeChild(c);
+    var ret = c.$__TEMPLATE_INSTANCE__$;
+    delete c.$__TEMPLATE_INSTANCE__$;
+    return ret;
+  });
+}(typeof window != "undefined" ? window : global);
+</script>
+<span id='appHolder'></span>
+<span id='dynamicStyleHolder'></span>
+<script>"use strict";
+window.APP_DEBUG = 0;
+window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
+</script>
+<script>"use strict";
+!function $__1() {
+  var $__0 = window.j38zhrerl531nz;
+  var App = window.j8kiip7v31y1o5;
+  var TwoApp = window.j2mh6p3lu6h1rr;
+  var OneApp = window.iejcuza0s11rw;
+  !function() {
+    onAppOrientationLocked((function() {
+      setTimeout(start, 200);
+    }));
+    function start() {
+      try {
+        require("webpage");
+        var A = OneApp;
+        var t = CS.importTemplate(A);
+        CS.content(appHolder, t);
+        ra.forceCalculations();
+      } catch (e) {
+        alert(e.message);
+      }
+    }
+  }.call($__0);
+}();
+</script>
+
+<script>"use strict";
+!function() {
+  var x = new XMLHttpRequest();
+  x.open("POST", "/info?" + encodeURIComponent((screen.width + "x" + screen.height + "x" + (window.devicePixelRatio || "-") + " " + navigator.vendor + " " + navigator.userAgent)));
+  x.send();
+}();
+</script>
+</div>

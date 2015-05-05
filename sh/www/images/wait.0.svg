@@ -1,0 +1,73 @@
+<svg version = "1.1"
+	xmlns = "http://www.w3.org/2000/svg"
+	xmlns:xlink = "http://www.w3.org/1999/xlink"
+	viewBox = "0 0 800 800"
+	width = "5cm"
+	height = "5cm"
+>
+<defs>
+	<rect id = "rect" fill = "#03EADC" x = "150" y = "-10" width = "150" height = "20" />
+</defs>
+<g transform = "translate( 400 400 )">
+	<use xlink:href = "#rect" transform = "rotate( 0 )" opacity = "0" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0s"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 30 )"  >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.08333s"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 60 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.16666"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 90 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.25"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 120 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.33333s"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 150 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.41666"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 180 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.5"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 210 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.58333s"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 240 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.66666"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 270 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.75"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 300 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.83333s"
+		/>
+	</use>
+	<use xlink:href = "#rect" transform = "rotate( 330 )" >
+		<animate repeatCount = "indefinite" attributeName = "opacity" values = "0;1;0" keyTimes = "0;0.5;1" dur = "1s"
+			begin = "0.91666"
+		/>
+	</use>
+</g>
+</svg>
