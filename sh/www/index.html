@@ -1,47 +1,134 @@
-<html manifest='/index.manifest' id='j20rb4wf1ln1rz'>
+<html manifest='/index.manifest' id='j2n0isfvcwti1'>
 
-<noscript id='j6krbinc2zq1s0'>
-!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1430410092700
+<noscript id='j7qotde25rbi2'>
+!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1430844417852
 </noscript>
-<head id='j49bx08s4s21s1'>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' id='j1oohtmw6y81s2'/>
-<title id='j3n4nxhxoby1s3'>Smart home</title>
-<script>"use strict";
-function checkBrowserFunctions() {
-  return true && typeof Promise == "function";
-}
-</script>
-<script>"use strict";
-if (!checkBrowserFunctions())
-  window.location.href = "/unsupported.html";
-</script>
+<head id='j469ob952wai3'>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' id='j4t0fwsn4qyi4'/>
+<title id='j2gzpiujdkui5'>Smart home</title>
+
+<meta name='mobile-web-app-capable' content='yes' id='j60d7tc061ti7'/>
+<meta name='apple-mobile-web-app-capable' content='yes' id='j3j5ne10l0yi8'/>
+
+<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' id='j8k3p8lhhski9'/>
+
+<meta name='format-detection' content='telephone=no' id='j57p1if03z8ia'/>
+
+
+<meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=0' id='idknbugqdiib'/>
+
+<style id='j41wzdtjwxoic'> html { -webkit-text-size-adjust: 100%; } </style>
+
+<link rel='shortcut icon' href='/favicon96.ico' id='j80j0ns0z4uid'/>
+
+
+
+
+
+
+
+
+
+ 
+
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 480px) and
+		(-webkit-device-pixel-ratio: 1)' href='apple-touch-startup-image-320x460.png' id='j87o7287tzlif'/>
+
+ 
+
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 480px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x920.png' id='j4joi2ujt9yig'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 320px) and
+		(device-height: 568px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x1096.png' id='j523zna9lpyih'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 375px) and
+		(device-height: 667px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-750x1294.png' id='i2b6f5t6w5ii'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(device-width: 414px) and
+		(device-height: 736px) and
+		(-webkit-device-pixel-ratio: 3)' href='apple-touch-startup-image-1242×2148.png' id='j62az3zr7upij'/>
+
+ 
+<link rel='apple-touch-startup-image' media='
+		(orientation: portrait) and
+		(device-width: 768px) and
+		(device-height: 1024px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1536x2008.png' id='j9fcfjjzg37ik'/>
+<link rel='apple-touch-startup-image' media='
+		(orientation: landscape) and
+		(device-width: 768px) and
+		(device-height: 1024px) and
+		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1496x2048.png' id='j6liqxvouhzil'/>
+
+
+
+
+
+
+
+
+
+<meta id='screenTitle' name='apple-mobile-web-app-title' content='My home'/>
+</head>
+<body class='translucent' style='background-color: black;' id='j48pmpqp9juim'>
+<div id='checkingBrowser' style='position: fixed; left: 0; top: 0; right: 0; bottom: 0; background-color: black; display: none; z-order: 9999;'>
+
+<div class='checkingBrowser' style='position: absolute; left: 0; top: 0; right: 0; bottom: 0;' id='j2cjd6o7xzpio'></div>
+</div>
 <script>"use strict";
 !function() {
-  var style = document.createElement("div").style;
-  if (!("transform" in style) && ("webkitTransform" in style)) {
-    Object.defineProperty(CSSStyleDeclaration.prototype, "transform", {
-      get: function() {
-        return this.webkitTransform;
-      },
-      set: function(value) {
-        this.webkitTransform = value;
-      }
-    });
+  function checkBasicBrowserFunctions() {
+    var ret = true && typeof window != "undefined" && window && typeof Promise != "undefined" && Promise && typeof applicationCache != "undefined" && applicationCache && applicationCache.addEventListener && applicationCache.swapCache && (typeof XMLHttpRequest != "undefined" && XMLHttpRequest || typeof fetch != "undefined" && fetch) && typeof postMessage != "undefined" && postMessage && typeof Object != "undefined" && Object && Object.create && typeof localStorage != "undefined" && localStorage && localStorage.getItem && typeof document != "undefined" && document && typeof document.cookie == "string" && typeof screen != "undefined" && screen && typeof Function != "undefined" && Function && Function.prototype && Function.prototype.bind;
+    return !!ret;
   }
+  window.__UNSUPPORTED__ = (function() {
+    var unsupported = (function() {
+      return window.location.href = "/unsupported.html";
+    });
+    var timeout;
+    timeout = setTimeout(unsupported, 200);
+    var wait = (function() {
+      return clearTimeout(timeout);
+    });
+    document.getElementById("checkingBrowser").style.display = "block";
+    if (!(true && typeof applicationCache != "undefined" && applicationCache && applicationCache.addEventListener))
+      return unsupported();
+    clearTimeout(timeout);
+    timeout = setTimeout(unsupported, 3000);
+    var addEventListener = (function(event, handler) {
+      applicationCache.addEventListener(event, hander);
+      var EVENT = event.toUpperCase();
+      if (applicationCache[EVENT] != null && applicationCache.status != null && applicationCache.status >= applicationCache[EVENT])
+        setTimeout(hander, 0);
+    });
+    addEventListener("checking", wait);
+    addEventListener("downloading", wait);
+    addEventListener("updateready", (function() {
+      wait();
+      applicationCache.swapCache();
+    }));
+    addEventListener("noupdate", unsupported);
+    addEventListener("error", unsupported);
+    addEventListener("obsolete", unsupported);
+  });
+  if (!checkBasicBrowserFunctions())
+    window.__UNSUPPORTED__();
 }();
 </script>
 
-<meta name='mobile-web-app-capable' content='yes' id='iy33oke4n41s5'/>
-<meta name='apple-mobile-web-app-capable' content='yes' id='j6twy2kslxk1s6'/>
-
-<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' id='j1pmuk77h771s7'/>
-
-<meta name='format-detection' content='telephone=no' id='j1co3ldlxig1s8'/>
-
-
-<meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=0' id='j5bvllkbv451s9'/>
-
-<style id='j7nbf7m01831sa'> html { -webkit-text-size-adjust: 100%; } </style>
 <script>"use strict";
 !function() {
   var bind = (function(obj, name) {
@@ -56,77 +143,10 @@ if (!checkBrowserFunctions())
   }) : setTimeout;
 }();
 </script>
-
-<link rel='shortcut icon' href='/favicon96.ico' id='j8522cykjf41sb'/>
-
-
-
-
-
-
-
-
-
- 
-
-<link rel='apple-touch-startup-image' media='
-		(device-width: 320px) and
-		(device-height: 480px) and
-		(-webkit-device-pixel-ratio: 1)' href='apple-touch-startup-image-320x460.png' id='j9jcph3dc5l1sd'/>
-
- 
-
-<link rel='apple-touch-startup-image' media='
-		(device-width: 320px) and
-		(device-height: 480px) and
-		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x920.png' id='j4aobww5kis1se'/>
-
- 
-<link rel='apple-touch-startup-image' media='
-		(device-width: 320px) and
-		(device-height: 568px) and
-		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-640x1096.png' id='j7gm22vzehv1sf'/>
-
- 
-<link rel='apple-touch-startup-image' media='
-		(device-width: 375px) and
-		(device-height: 667px) and
-		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-750x1294.png' id='j95dewjhy2v1sg'/>
-
- 
-<link rel='apple-touch-startup-image' media='
-		(device-width: 414px) and
-		(device-height: 736px) and
-		(-webkit-device-pixel-ratio: 3)' href='apple-touch-startup-image-1242×2148.png' id='j3w41knf79w1sh'/>
-
- 
-<link rel='apple-touch-startup-image' media='
-		(orientation: portrait) and
-		(device-width: 768px) and
-		(device-height: 1024px) and
-		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1536x2008.png' id='j8gpx41hxkb1si'/>
-<link rel='apple-touch-startup-image' media='
-		(orientation: landscape) and
-		(device-width: 768px) and
-		(device-height: 1024px) and
-		(-webkit-device-pixel-ratio: 2)' href='apple-touch-startup-image-1496x2048.png' id='j34cpz65nvl1sj'/>
-
-
-
-
-
-
-
-
-
-<meta id='screenTitle' name='apple-mobile-web-app-title' content='My home'/>
-</head>
-<body class='translucent' style='background-color: black;' id='j9b3oox2xov1sk'>
 <script>"use strict";
 function getCookie(name) {
   return ((("; " + document.cookie)).split(("; " + name + "="))[1] || "").split(";")[0];
 }
-window._getCookie = getCookie;
 function cacheUrlResource(url, debugUrl) {
   if (localStorage.getItem("debug") || getCookie("instanceDebug"))
     return new Promise((function(resolve) {
@@ -186,8 +206,6 @@ function cacheUrlResource(url, debugUrl) {
 }
 if (typeof module != "undefined")
   module.exports = cacheUrlResource;
-</script>
-<script>"use strict";
 </script>
 <script>"use strict";
 !function() {

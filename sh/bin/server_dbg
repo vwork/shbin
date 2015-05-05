@@ -25709,12 +25709,23 @@ var All = Object.create(null);
 All.Comfort_1 = concat(press, RL, {id: "Set_To_Comfort_1"});
 All.Comfort_2 = concat(press, RL, {id: "Set_To_Comfort_2"});
 All.Stop = concat(click, ROL, {id: "Stop"});
-All.Link = concat(press, {id: "Write_Group"});
 All.Set = (function(COMFORT) {
   return ({
     id: "Set_To_Comfort",
     COMFORT: COMFORT
   });
+});
+var link = concat(press, {id: "Write_Group"});
+All.Link = (function(_, GROUP) {
+  return $traceurRuntime.spread([{
+    id: "Delete_Group_In_Idle_Mode",
+    ACK: false,
+    GROUP: GROUP
+  }], link);
+});
+All.Unlink = concat({
+  id: "Delete_Group_In_Idle_Mode",
+  GROUP: 0
 });
 All.AppendTo = (function(GROUP) {
   return ({
@@ -25722,20 +25733,11 @@ All.AppendTo = (function(GROUP) {
     GROUP: GROUP
   });
 });
-All.Delete = (function(_, GROUP) {
+All.RemoveFrom = (function(GROUP) {
   return ({
     id: "Delete_Group_In_Idle_Mode",
-    ACK: false,
     GROUP: GROUP
   });
-});
-All.Clear = (function(groups) {
-  return groups.map((function(GROUP) {
-    return ({
-      id: "Delete_Group_In_Idle_Mode",
-      GROUP: GROUP
-    });
-  }));
 });
 All.Reset = {
   id: "Clear_Device_Memory_In_Idle_Mode",
@@ -29395,6 +29397,21 @@ var lu = module.exports = {
       }
     }
     return obj;
+  },
+  limitCalls: function(limit, period, message) {
+    var calls = 0;
+    return (function() {
+      if (calls >= limit)
+        if (message)
+          throw new Error.create(message);
+        else
+          return false;
+      ++calls;
+      setTimeout((function() {
+        return --calls;
+      }), period);
+      return true;
+    });
   }
 };
 //# sourceMappingURL=localUtils.js.map
@@ -30840,12 +30857,12 @@ var ondata = co.func($traceurRuntime.initGeneratorFunction(function $__0(data) {
           log && console.log(("stub: " + JSON.stringify(data)).yellow);
           ret = "Packet_Error";
           pause = 0;
-          $ctx.state = 45;
+          $ctx.state = 49;
           break;
-        case 45:
+        case 49:
           switch (data.id) {
             default:
-              $ctx.state = 22;
+              $ctx.state = 26;
               break;
             case "Version":
               $ctx.state = 3;
@@ -30880,6 +30897,9 @@ var ondata = co.func($traceurRuntime.initGeneratorFunction(function $__0(data) {
             case "Stop":
               $ctx.state = 19;
               break;
+            case "Delete_Group_In_Idle_Mode":
+              $ctx.state = 23;
+              break;
           }
           break;
         case 3:
@@ -30889,11 +30909,11 @@ var ondata = co.func($traceurRuntime.initGeneratorFunction(function $__0(data) {
             PRODUCT_HARD: 22,
             PRODUCT_VARIANT: 8
           };
-          $ctx.state = 22;
+          $ctx.state = 26;
           break;
         case 7:
           ret = {COUNT: 122};
-          $ctx.state = 22;
+          $ctx.state = 26;
           break;
         case 11:
           ret = {
@@ -30903,45 +30923,50 @@ var ondata = co.func($traceurRuntime.initGeneratorFunction(function $__0(data) {
             },
             MODEM_FUNCTIONS: {}
           };
-          $ctx.state = 22;
+          $ctx.state = 26;
           break;
         case 15:
           if (data.MODEM_MODE == "Work_Mode")
             ret = "OK";
-          $ctx.state = 22;
+          $ctx.state = 26;
           break;
         case 19:
           pause = 600;
           ret = "OK";
-          $ctx.state = 22;
+          $ctx.state = 26;
           break;
-        case 22:
+        case 23:
+          pause = 300;
+          ret = "OK";
+          $ctx.state = 26;
+          break;
+        case 26:
           if (typeof ret == "string")
             ret = {
               id: "answer_Result",
               RESULT: ret
             };
-          $ctx.state = 47;
+          $ctx.state = 51;
           break;
-        case 47:
-          $ctx.state = (pause) ? 39 : 42;
+        case 51:
+          $ctx.state = (pause) ? 43 : 46;
           break;
-        case 39:
+        case 43:
           this.pause();
+          $ctx.state = 44;
+          break;
+        case 44:
           $ctx.state = 40;
-          break;
-        case 40:
-          $ctx.state = 36;
           return co.sleep(pause);
-        case 36:
+        case 40:
           $ctx.maybeThrow();
-          $ctx.state = 38;
-          break;
-        case 38:
-          this.resume();
           $ctx.state = 42;
           break;
         case 42:
+          this.resume();
+          $ctx.state = 46;
+          break;
+        case 46:
           this.write(Modem.encode(ret.id || ("answer_" + data.id), ret));
           $ctx.state = -2;
           break;
@@ -34217,6 +34242,7 @@ module.exports = Scheduler;
   var parseCookies = (function(request) {
     return cookieParser(request, null, lodash.noop);
   });
+  var authLimit = lu.limitCalls(10, 200);
   var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__105(request, response, next) {
     var a,
         origin,
@@ -34226,12 +34252,16 @@ module.exports = Scheduler;
         switch ($ctx.state) {
           case 0:
             parseCookies(request);
-            $ctx.state = 16;
+            $ctx.state = 20;
             break;
-          case 16:
-            $ctx.state = (auth && request.cookies.auth != auth.hash) ? 1 : 10;
+          case 20:
+            $ctx.state = (auth && request.cookies.auth != auth.hash) ? 12 : 11;
             break;
-          case 1:
+          case 12:
+            console.log("Trying to log in...");
+            $ctx.state = 13;
+            break;
+          case 13:
             $ctx.state = 2;
             return co.sleep(200);
           case 2:
@@ -34244,27 +34274,30 @@ module.exports = Scheduler;
               a = a.match(/^Basic\s+(.*)$/);
             if (a)
               a = a[1];
-            $ctx.state = 13;
+            $ctx.state = 15;
             break;
-          case 13:
-            $ctx.state = (a == toBase64((auth.name + ":" + auth.userkey))) ? 9 : 7;
-            break;
-          case 9:
-            response && response.cookie("auth", auth.hash, cookieInfinite);
-            $ctx.state = 10;
+          case 15:
+            $ctx.state = (a == toBase64((auth.name + ":" + auth.userkey)) && authLimit()) ? 7 : 6;
             break;
           case 7:
-            origin = request.headers.origin || "*";
-            socket = request.socket;
-            socket.write(("HTTP/1.1 " + HTTPStatus.UNAUTHORIZED + " " + HTTPStatus[HTTPStatus.UNAUTHORIZED] + "\r\nAccess-Control-Allow-Origin: " + origin + "\r\nAccess-Control-Allow-Credentials: true\r\nWWW-Authenticate: Basic realm=" + JSON.stringify(authMessage) + "\r\n\r\nunauthorized"));
-            socket.end();
-            response && response.status(HTTPStatus.UNAUTHORIZED).end();
+            response && response.cookie("auth", auth.hash, cookieInfinite);
             $ctx.state = 8;
             break;
           case 8:
             $ctx.state = -2;
             break;
-          case 10:
+          case 6:
+            origin = request.headers.origin || "*";
+            socket = request.socket;
+            socket.write(("HTTP/1.1 " + HTTPStatus.UNAUTHORIZED + " " + HTTPStatus[HTTPStatus.UNAUTHORIZED] + "\r\nAccess-Control-Allow-Origin: " + origin + "\r\nAccess-Control-Allow-Credentials: true\r\nWWW-Authenticate: Basic realm=" + JSON.stringify(authMessage) + "\r\n\r\nunauthorized"));
+            socket.end();
+            response && response.status(HTTPStatus.UNAUTHORIZED).end();
+            $ctx.state = 17;
+            break;
+          case 17:
+            $ctx.state = -2;
+            break;
+          case 11:
             next();
             $ctx.state = -2;
             break;

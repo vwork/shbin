@@ -26257,6 +26257,21 @@ var lu = module.exports = {
       }
     }
     return obj;
+  },
+  limitCalls: function(limit, period, message) {
+    var calls = 0;
+    return (function() {
+      if (calls >= limit)
+        if (message)
+          throw new Error.create(message);
+        else
+          return false;
+      ++calls;
+      setTimeout((function() {
+        return --calls;
+      }), period);
+      return true;
+    });
   }
 };
 //# sourceMappingURL=localUtils.js.map
