@@ -1,5 +1,5 @@
-<div id='j7lpfxqb2nw1b3'>
-<style type='text/css' id='j155s5dt37q1b4'>
+<div id='j7jdotv9k5e2aw'>
+<style type='text/css' id='j448i20myx62ax'>
 .modalDialog {
 position: absolute;
 left: 0;
@@ -48,9 +48,6 @@ background-color: black;
 text-align: center;
 font-size: 150%;
 }
-input {
-font-size: 10mm;
-}
 .pageRunning .startupScreen,
 .pageRunning .loadingScreen,
 .pageRunning .modalDialog {
@@ -95,7 +92,7 @@ background-color: yellow;
 display: none;
 }
 </style>
-<style type='text/css' id='j5lzm82kkze1b5'>@font-face {
+<style type='text/css' id='idr63s1ehh2ay'>@font-face {
 font-family: "Web App";
 /*src: url("web-app.eot");*/
 src: url("web-app.eot?#iefix") format("embedded-opentype"),
@@ -363,8 +360,15 @@ stroke: #02756E;
 stroke-width: 6;
 }
 </style>
-<style type='text/css' id='j9h7op6e4d21b6'>.application, .application table, a, a:visited {
+<style type='text/css' id='j78iqlvpwg72az'>.application, .application table, a, a:visited {
 color: #03EADC;
+}
+.body {
+font-size: 5mm;
+}
+input {
+font-size: 120%;
+width: 100%;
 }
 .top {
 height: 17mm;
@@ -508,8 +512,23 @@ transform: scale( 0.001 );
 .AskToReset .button {
 color: red;
 }
+.SearchItems .mask {
+z-index: 10;
+}
+.SearchItems .scroll {
+position: absolute;
+left: 0;
+right: 0;
+top: 2.2em;
+bottom: 0;
+overflow: hidden;
+}
+.scrollAreaBottomFiller {
+height: 50%;
+width: 100%;
+}
 </style>
-<style type='text/css' id='j8cf9qra3r81b7'>.iconControl .state000 .colored { stroke: #03EADC; }
+<style type='text/css' id='j2fbfzxso1v2b0'>.iconControl .state000 .colored { stroke: #03EADC; }
 .iconControl .state001 .colored { stroke: #06EADC; }
 .iconControl .state002 .colored { stroke: #08EADD; }
 .iconControl .state003 .colored { stroke: #0BEBDD; }
@@ -611,14 +630,14 @@ color: red;
 .iconControl .state099 .colored { stroke: #FCFFFF; }
 .iconControl .state100 .colored { stroke: #FFFFFF; }
 </style>
-<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' data-isEnabled='' id='j6xi2by1bt41ba'>
-<a class='command' href='javascript:void(0)' target='_self' id='j6lyomgtq451bb'></a>
+<template class='Command' data-callback='' data-msg='' data-url='' data-isVisible='' data-isEnabled='' id='ildle9wdme2b3'>
+<a class='command' href='javascript:void(0)' target='_self' id='j3u2zs630782b4'></a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j6xi2by1bt41ba;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__3.ildle9wdme2b3;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -627,7 +646,7 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j6xi2by1bt41ba;
+  var $__6 = $__3.ildle9wdme2b3;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -656,7 +675,7 @@ color: red;
     isEnabled = $__6.getAttribute("data-isEnabled") || isEnabled;
   if (isEnabled === undefined)
     isEnabled = null;
-  var command = $__2.j6lyomgtq451bb;
+  var command = $__2.j3u2zs630782b4;
   !function() {
     var initial = command.className.split(/\s+/);
     var enabled = (url || callback) && (!isEnabled || isEnabled());
@@ -685,19 +704,19 @@ color: red;
   }.call($__0);
 }();
 </script>
-</template><template class='Menu' data-menu='' id='j92bnawdrdb1bc'>
-<div class='dialog' id='j4qkhdztqfd1bd'></div>
+</template><template class='Menu' data-menu='' id='j4g9aq6au602b5'>
+<div class='dialog' id='j53o0nygq4e2b6'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j92bnawdrdb1bc;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__3.j4g9aq6au602b5;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
-  var Command = $__3.j6xi2by1bt41ba;
-  var $__6 = $__3.j92bnawdrdb1bc;
+  var Command = $__3.ildle9wdme2b3;
+  var $__6 = $__3.j4g9aq6au602b5;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -706,7 +725,7 @@ color: red;
     menu = $__6.getAttribute("data-menu") || menu;
   if (menu === undefined)
     menu = null;
-  var dialog = $__2.j4qkhdztqfd1bd;
+  var dialog = $__2.j53o0nygq4e2b6;
   !function() {
     CS.content(dialog, (function() {
       return menu.map((function(data) {
@@ -716,23 +735,23 @@ color: red;
   }.call($__0);
 }();
 </script>
-</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j8p06517b9d1bk'>
-<li class='houseTemplate' id='j8m4wrko70k1bl'></li>
+</template><template data-text='&lt;&lt; ... &gt;&gt;' class='HouseTemplate' id='j6wiyc5tb7l2bd'>
+<li class='houseTemplate' id='j1s6qa35udc2be'></li>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
   var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j8p06517b9d1bk;
-  var $__5 = window.j4d744fgkx31b9;
+  var $__0 = $__3.j6wiyc5tb7l2bd;
+  var $__5 = window.j4p3ger47dj2b2;
   var $__6 = $__4.$__DATASET__$;
   if ($__6 === undefined)
     $__6 = $__4.$__DATASET__$ = {};
-  var $__7 = $__4.icibjx29481be;
+  var $__7 = $__4.j2c3t5tg4ha2b7;
   var $__8 = $__3.$__DATASET__$;
   if ($__8 === undefined)
     $__8 = $__3.$__DATASET__$ = {};
-  var $__9 = $__3.j8p06517b9d1bk;
+  var $__9 = $__3.j6wiyc5tb7l2bd;
   var $__10 = $__2.$__DATASET__$;
   if ($__10 === undefined)
     $__10 = $__2.$__DATASET__$ = {};
@@ -741,7 +760,7 @@ color: red;
     text = $__9.getAttribute("data-text") || text;
   if (text === undefined)
     text = null;
-  var houseTemplate = $__2.j8m4wrko70k1bl;
+  var houseTemplate = $__2.j1s6qa35udc2be;
   !function() {
     CS.content(houseTemplate, (function() {
       return text;
@@ -749,21 +768,21 @@ color: red;
   }.call($__0);
 }();
 </script>
-</template><template class='StartupScreen' id='icibjx29481be'>
-<div class='startupScreen' id='j1z2nalhglk1bf'>
-<p id='ibvloumhun1bg'>Добро пожаловать в Ваш<br id='j22dlasvgq31bh'/>Умный Дом!</p>
-<div class='templates' id='j19ongcvghl1bi'>
-<p id='j6rl4f4s5xu1bj'>Пожалуйста, выберите место, где используется этот пульт:</p>
-<noscript data-template-reference='j8p06517b9d1bk'></noscript>
-<ul class='houseTemplates' id='j15libatz7l1bm'></ul>
+</template><template class='StartupScreen' id='j2c3t5tg4ha2b7'>
+<div class='startupScreen' id='j92ddrz69tc2b8'>
+<p id='j5jgpk36vy42b9'>Добро пожаловать в Ваш<br id='j6xtyzo5uf02ba'/>Умный Дом!</p>
+<div class='templates' id='j7hv4x14h432bb'>
+<p id='j5go46tkzu92bc'>Пожалуйста, выберите место, где используется этот пульт:</p>
+<noscript data-template-reference='j6wiyc5tb7l2bd'></noscript>
+<ul class='houseTemplates' id='j9sdd44251n2bf'></ul>
 </div>
-<div class='loading' id='j8otgtlto6y1bn'></div>
+<div class='loading' id='iaj1tl0to32bg'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j1z2nalhglk1bf;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j92ddrz69tc2b8;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -772,14 +791,14 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.icibjx29481be;
+  var $__6 = $__3.j2c3t5tg4ha2b7;
   var template = $__6;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var templates = $__2.j19ongcvghl1bi;
-  var HouseTemplate = $__2.j8p06517b9d1bk;
-  var houseTemplates = $__2.j15libatz7l1bm;
+  var templates = $__2.j7hv4x14h432bb;
+  var HouseTemplate = $__2.j6wiyc5tb7l2bd;
+  var houseTemplates = $__2.j9sdd44251n2bf;
   !function() {
     CS.content(houseTemplates, (function() {
       return (app.templates || []).concat([{
@@ -799,16 +818,16 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='Ask' data-message='' data-action='' data-callback='' id='j3l3rhpwhdj1bo'>
-<div id='j9pfpfjqn7r1bp'>
-<div class='info' id='j9iuvd6tt7m1bq'></div>
-<a class='button' href='javascript:void(0)' target='_self' id='j366dg12tqj1br'></a>
+</template><template class='Ask' data-message='' data-action='' data-callback='' id='j6e3zn5f42u2bh'>
+<div id='j2mjwbuem0c2bi'>
+<div class='info' id='j4qfkn60ph52bj'></div>
+<a class='button' href='javascript:void(0)' target='_self' id='j9mhufyw0h42bk'></a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j9pfpfjqn7r1bp;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j2mjwbuem0c2bi;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -817,7 +836,7 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j3l3rhpwhdj1bo;
+  var $__6 = $__3.j6e3zn5f42u2bh;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -836,8 +855,8 @@ color: red;
     callback = $__6.getAttribute("data-callback") || callback;
   if (callback === undefined)
     callback = null;
-  var info = $__2.j9iuvd6tt7m1bq;
-  var button = $__2.j366dg12tqj1br;
+  var info = $__2.j4qfkn60ph52bj;
+  var button = $__2.j9mhufyw0h42bk;
   !function() {
     CS.content(info, message);
     CS.content(button, action);
@@ -850,19 +869,19 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='ServiceItem' id='j6s8tyhgm661bs'>
-<div id='j4xclllppz11bt'>
-<p id='j9irtcg2l7w1bu'>***</p>
-<form id='ilwq2zvrz91bv'>
-<textarea name='json' cols='35' rows='23' autofocus='autofocus' id='j4s64ndahwb1bw'></textarea>
-<p id='j2apq3gzmap1bx'><a class='save' href='javascript:void(0)' target='_self' id='j21df175pgz1by'>Save</a></p>
+</template><template class='ServiceItem' id='j3b6e3w9cv52bl'>
+<div id='j1pq4b7uo112bm'>
+<p id='j71rqn8wof02bn'>***</p>
+<form id='j98sdbequ332bo'>
+<textarea name='json' cols='35' rows='23' autofocus='autofocus' id='j2j41hw9vek2bp'></textarea>
+<p id='j5rzma2ev2j2bq'><a class='save' href='javascript:void(0)' target='_self' id='j117u04ypwq2br'>Save</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j4xclllppz11bt;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j1pq4b7uo112bm;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -871,13 +890,13 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j6s8tyhgm661bs;
+  var $__6 = $__3.j3b6e3w9cv52bl;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.ilwq2zvrz91bv;
-  var json = $__2.j4s64ndahwb1bw;
-  var save = $__2.j21df175pgz1by;
+  var form = $__2.j98sdbequ332bo;
+  var json = $__2.j2j41hw9vek2bp;
+  var save = $__2.j117u04ypwq2br;
   !function() {
     this.addEventListener("dialogshow", (function() {
       return form.json.value = JSON.stringify({
@@ -906,19 +925,19 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='AskNewName' id='i4csq6b51j1bz'>
-<div id='j567g2e2gft1c0'>
-<p id='j1fml6qp39o1c1'>Название:</p>
-<form id='j18tcjf56za1c2'>
-<input name='string' type='text' autofocus='autofocus' size='20' id='j3p8cix79ys1c3'/>
-<p id='j6t1b59etw41c4'><a class='button' href='javascript:void(0)' target='_self' id='j6prkp2ptwt1c5'>Закрыть</a></p>
+</template><template class='AskNewName' id='j9g1akfv7iw2bs'>
+<div id='j7buse6gw4t2bt'>
+<p id='j9k6wo3s6wd2bu'>Название:</p>
+<form id='j2278v2a0yp2bv'>
+<input name='string' type='text' autofocus='autofocus' size='20' id='j31645o5wtp2bw'/>
+<p id='j74c2sngin72bx'><a class='button' href='javascript:void(0)' target='_self' id='j3qx1azzdu72by'>Закрыть</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j567g2e2gft1c0;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j7buse6gw4t2bt;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -927,13 +946,13 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.i4csq6b51j1bz;
+  var $__6 = $__3.j9g1akfv7iw2bs;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.j18tcjf56za1c2;
-  var string = $__2.j3p8cix79ys1c3;
-  var button = $__2.j6prkp2ptwt1c5;
+  var form = $__2.j2278v2a0yp2bv;
+  var string = $__2.j31645o5wtp2bw;
+  var button = $__2.j3qx1azzdu72by;
   !function() {
     this.addEventListener("dialogshow", (function() {
       return form.string.value = "";
@@ -951,23 +970,23 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='SearchItem' data-placeId='' id='j65baimf9pk1c8'>
-<div class='searchItem' id='j117vxbaozg1c9'>
-<span class='caption' id='j2er2jzsbt71ca'></span>
-<span class='places' id='j61ln1jt40m1cb'></span>
-<span class='cmdDeleteFromProgram' id='j2jdngytq231cc'></span>
-<span class='cmdAppend' id='j9molc0f1mw1cd'></span>
+</template><template class='SearchItem' data-placeId='' id='j84367l459w2c1'>
+<div class='searchItem' id='j8122v50vya2c2'>
+<span class='caption' id='j9lbm2i7nqv2c3'></span>
+<span class='places' id='j763ndpfjfc2c4'></span>
+<span class='cmdDeleteFromProgram' id='j2h85f2r7t32c5'></span>
+<span class='cmdAppend' id='j51yc7mou5v2c6'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
   var $__4 = $__3.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j117vxbaozg1c9;
-  var $__5 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j8122v50vya2c2;
+  var $__5 = window.j4p3ger47dj2b2;
   var $__6 = $__4.$__DATASET__$;
   if ($__6 === undefined)
     $__6 = $__4.$__DATASET__$ = {};
-  var $__7 = $__4.j36qa50ibdz1c6;
+  var $__7 = $__4.j6t5w6gggll2bz;
   var $__8 = $__3.$__DATASET__$;
   if ($__8 === undefined)
     $__8 = $__3.$__DATASET__$ = {};
@@ -976,7 +995,7 @@ color: red;
     opts = $__7.getAttribute("data-opts") || opts;
   if (opts === undefined)
     opts = null;
-  var $__9 = $__3.j65baimf9pk1c8;
+  var $__9 = $__3.j84367l459w2c1;
   var $__10 = $__2.$__DATASET__$;
   if ($__10 === undefined)
     $__10 = $__2.$__DATASET__$ = {};
@@ -985,8 +1004,8 @@ color: red;
     placeId = $__9.getAttribute("data-placeId") || placeId;
   if (placeId === undefined)
     placeId = null;
-  var caption = $__2.j2er2jzsbt71ca;
-  var places = $__2.j61ln1jt40m1cb;
+  var caption = $__2.j9lbm2i7nqv2c3;
+  var places = $__2.j763ndpfjfc2c4;
   !function() {
     this.classList.add(placeId);
     CS.content(caption, (function() {
@@ -995,26 +1014,31 @@ color: red;
     CS.content(places, (function() {
       return opts.placeInfos[placeId].ptext;
     }));
-    CS.onTap(this, (function() {
+    this.addEventListener("scrollTap", (function() {
       return opts.goto(placeId);
-    }));
+    }), false);
   }.call($__0);
 }();
 </script>
 </div>
-</template><template class='SearchItems' data-opts='' id='j36qa50ibdz1c6'>
-<div id='j6mckh4mpww1c7'>
-<noscript data-template-reference='j65baimf9pk1c8'></noscript>
-<form id='j8wevfiirak1ce'>
-<input name='mask' type='text' autofocus='autofocus' size='20' id='j8i78vwag121cf'/>
+</template><template class='SearchItems' data-opts='' id='j6t5w6gggll2bz'>
+<div id='i3wq0agqb22c0'>
+<noscript data-template-reference='j84367l459w2c1'></noscript>
+<form id='j9jyzmmcncq2c7'>
+<input name='mask' type='text' autofocus='autofocus' id='j8iz4hps0nf2c8'/>
+<div class='scroll' id='j1ydha1fdao2c9'>
+<div id='j7lotxuerth2ca'>
+<div class='items' id='j930hlig8ii2cb'></div>
+<div class='scrollAreaBottomFiller' id='j4f12wxj4ob2cc'></div>
+</div>
+</div>
 </form>
-<div class='items' id='j89aap73vj61cg'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j6mckh4mpww1c7;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.i3wq0agqb22c0;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1023,7 +1047,7 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j36qa50ibdz1c6;
+  var $__6 = $__3.j6t5w6gggll2bz;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1033,10 +1057,11 @@ color: red;
     opts = $__6.getAttribute("data-opts") || opts;
   if (opts === undefined)
     opts = null;
-  var SearchItem = $__2.j65baimf9pk1c8;
-  var form = $__2.j8wevfiirak1ce;
-  var mask = $__2.j8i78vwag121cf;
-  var items = $__2.j89aap73vj61cg;
+  var SearchItem = $__2.j84367l459w2c1;
+  var form = $__2.j9jyzmmcncq2c7;
+  var mask = $__2.j8iz4hps0nf2c8;
+  var scroll = $__2.j1ydha1fdao2c9;
+  var items = $__2.j930hlig8ii2cb;
   !function() {
     this.addEventListener("dialogshow", (function() {
       return form.mask.raValue = "";
@@ -1239,28 +1264,40 @@ color: red;
         })));
       }
     });
+    var scroller;
     CS.content(items, (function() {
       return opts.items;
+    }), (function() {
+      return setTimeout((function() {
+        if (!scroller)
+          scroller = new (require("iscroll"))(scroll, {
+            mouseWheel: true,
+            scrollbars: true,
+            tap: "scrollTap"
+          });
+        else
+          scroller.refresh();
+      }), 100);
     }));
   }.call($__0);
 }();
 </script>
 </div>
-</template><template class='AskCredentials' id='j4aqlotl3ap1ch'>
-<div class='askCredentials' id='j7d95k7pq331ci'>
-<form id='it55v9iu8j1cj'>
-<p id='j584balc32s1ck'>Пользователь:</p>
-<p id='j5h2c6ga0vg1cl'><input name='user' type='text' size='20' value='' id='j73mfu4e4521cm'/></p>
-<p id='j1bbzqah3e71cn'>Ключ:</p>
-<p id='j79oi5ulqqi1co'><input name='key' type='password' size='20' value='' id='j1g6j5ytx3d1cp'/></p>
-<p id='j2fhwrglgc31cq'><a class='button' href='javascript:void(0)' target='_self' id='j345ar7ligo1cr'>Подключиться</a></p>
+</template><template class='AskCredentials' id='j23o1z4cv942cd'>
+<div class='askCredentials' id='j73go87t5tc2ce'>
+<form id='illr7t3emj2cf'>
+<p id='i42369z4k62cg'>Пользователь:</p>
+<p id='j3he86l2ajb2ch'><input name='user' type='text' size='20' value='' id='i5vvxqnji42ci'/></p>
+<p id='j464b4nb8gs2cj'>Ключ:</p>
+<p id='j5n5j96lbm32ck'><input name='key' type='password' size='20' value='' id='j1xv9f71t2k2cl'/></p>
+<p id='j86fkf4ffx22cm'><a class='button' href='javascript:void(0)' target='_self' id='j9rl5iyhfxi2cn'>Подключиться</a></p>
 </form>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j7d95k7pq331ci;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j73go87t5tc2ce;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1269,14 +1306,14 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j4aqlotl3ap1ch;
+  var $__6 = $__3.j23o1z4cv942cd;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var form = $__2.it55v9iu8j1cj;
-  var user = $__2.j73mfu4e4521cm;
-  var key = $__2.j1g6j5ytx3d1cp;
-  var button = $__2.j345ar7ligo1cr;
+  var form = $__2.illr7t3emj2cf;
+  var user = $__2.i5vvxqnji42ci;
+  var key = $__2.j1xv9f71t2k2cl;
+  var button = $__2.j9rl5iyhfxi2cn;
   !function() {
     var submit = (function() {
       var user = form.user.value.trim();
@@ -1295,17 +1332,17 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='AskIfDeviceHasBeenLinked' id='j369mymp2i91cs'>
-<div id='j1u9nzr01um1ct'>
-<p id='j7yya0izg3n1cu'>Устройство было успешно привязано?</p>
-<a class='button yes' href='javascript:void(0)' target='_self' id='j4yjr5rgul21cv'>да</a>
-<a class='button no' href='javascript:void(0)' target='_self' id='j7vup2r5id11cw'>нет</a>
+</template><template class='AskIfDeviceHasBeenLinked' id='j5tqki2thro2co'>
+<div id='j4dn3ewmnv22cp'>
+<p id='j441hzq3z0y2cq'>Устройство было успешно привязано?</p>
+<a class='button yes' href='javascript:void(0)' target='_self' id='igfpi0sdqf2cr'>да</a>
+<a class='button no' href='javascript:void(0)' target='_self' id='j914k2bokdv2cs'>нет</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j1u9nzr01um1ct;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j4dn3ewmnv22cp;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1314,13 +1351,13 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Ask = $__3.j3l3rhpwhdj1bo;
-  var $__6 = $__3.j369mymp2i91cs;
+  var Ask = $__3.j6e3zn5f42u2bh;
+  var $__6 = $__3.j5tqki2thro2co;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var yes = $__2.j4yjr5rgul21cv;
-  var no = $__2.j7vup2r5id11cw;
+  var yes = $__2.igfpi0sdqf2cr;
+  var no = $__2.j914k2bokdv2cs;
   !function() {
     CS.onTap(yes, (function(event) {
       event.preventDefault();
@@ -1334,17 +1371,17 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='ErrorNoCarrier' id='j9cj7pxvfdz1cx'>
-<div class='errorDialog' id='j6i69l96da51cy'>
-<p id='j409ganun8x1cz'>Ошибка</p>
-<p id='j7vgxswma0k1d0'>Произошла ошибка при попытке связаться с модемом</p>
-<a class='button' href='javascript:void(0)' target='_self' id='j6jlo1gf47y1d1'>закрыть</a>
+</template><template class='ErrorNoCarrier' id='j2artkqh32m2ct'>
+<div class='errorDialog' id='j3groldbmff2cu'>
+<p id='j1m7xpnaqbz2cv'>Ошибка</p>
+<p id='j4drz0ihsid2cw'>Произошла ошибка при попытке связаться с модемом</p>
+<a class='button' href='javascript:void(0)' target='_self' id='j1r2rx0bv092cx'>закрыть</a>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j6i69l96da51cy;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j3groldbmff2cu;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1353,11 +1390,11 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j9cj7pxvfdz1cx;
+  var $__6 = $__3.j2artkqh32m2ct;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var button = $__2.j6jlo1gf47y1d1;
+  var button = $__2.j1r2rx0bv092cx;
   !function() {
     CS.onTap(button, (function(event) {
       event.preventDefault();
@@ -1367,27 +1404,27 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='StateWait' id='j9t74y5c4cu1d2'>
-<div id='j2ik7m751he1d3'>
-<p id='j5bompmhxl31d4'>Подождите...</p>
+</template><template class='StateWait' id='j2gj15no78v2cy'>
+<div id='j8l3f0ia7vz2cz'>
+<p id='j8bsdu4vi4z2d0'>Подождите...</p>
 </div>
-</template><template class='LoadingScreen' id='j8wt4oj59h01d5'>
-<div class='loadingScreen' id='j8553fqopj51d6'></div>
-</template><template class='Centered' data-content='' id='j6zc0u8hf2x1d7'>
-<table style='width: 100%; height: 100%;' id='iel06mu8df1d8'>
-<tr style='width: 100%; height: 100%;' id='j8xrgxd3we61d9'>
-<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='j12z2ipqh4h1da'>
-<span class='self' id='j4j5l0qhju61db'></span>
+</template><template class='LoadingScreen' id='j81rlvtp2sb2d1'>
+<div class='loadingScreen' id='i77tmv8jx92d2'></div>
+</template><template class='Centered' data-content='' id='j29e2ftchcz2d3'>
+<table style='width: 100%; height: 100%;' id='j6ngstobl232d4'>
+<tr style='width: 100%; height: 100%;' id='j2ojo5gq0n22d5'>
+<td style='width: 100%; height: 100%; vertical-align: middle; text-align: center;' id='j7712smoezl2d6'>
+<span class='self' id='j3q70s17ofm2d7'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j12z2ipqh4h1da;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j7712smoezl2d6;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
-  var $__6 = $__3.j6zc0u8hf2x1d7;
+  var $__6 = $__3.j29e2ftchcz2d3;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1396,7 +1433,7 @@ color: red;
     content = $__6.getAttribute("data-content") || content;
   if (content === undefined)
     content = null;
-  var self = $__2.j4j5l0qhju61db;
+  var self = $__2.j3q70s17ofm2d7;
   !function() {
     CS.content(self, content);
   }.call($__0);
@@ -1405,28 +1442,28 @@ color: red;
 </td>
 </tr>
 </table>
-</template><template class='Icon' data-placeId='' data-iconId='' data-iconDescr='' data-deviceDescr='' data-index='' id='j66pa6ayl6l1dc'>
-<div class='icon' id='j7ed2zhg9p71dd'>
-<div class='iconControl' id='j59712kosx01de'>
-<div class='image' id='j4t165ki0ur1df'>
-<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j11sib6bu9u1dg'/>
-<img class='error off' src='/images/room.svg' id='j3mzyx2gb4f1dh'/>
-<img class='error on' src='/images/room_on.svg' id='imb46f31x01di'/>
-<img class='error absent' src='/images/room_absent.svg' id='j6p0dq0m95w1dj'/>
-<div class='svg' id='j8ygdlp0z2v1dk'></div>
+</template><template class='Icon' data-placeId='' data-iconId='' data-iconDescr='' data-deviceDescr='' data-index='' id='j85kd0v7bhh2d8'>
+<div class='icon' id='i88o4pbn8u2d9'>
+<div class='iconControl' id='j29c7wx8opw2da'>
+<div class='image' id='j1z02ktv0wy2db'>
+<img class='error wait' src='/images/wait.svg' style='visibility: hidden;' id='j50xj2ty3ah2dc'/>
+<img class='error off' src='/images/room.svg' id='j9g1oifdmaq2dd'/>
+<img class='error on' src='/images/room_on.svg' id='j3zyl9rnd8u2de'/>
+<img class='error absent' src='/images/room_absent.svg' id='j7e13i224t32df'/>
+<div class='svg' id='j439elds2222dg'></div>
 </div>
-<span class='iconLabel' id='j4xf77ubxpw1dl'></span>
-<span class='iconPercentage' id='j5y68auwifz1dm'></span>
+<span class='iconLabel' id='j524ghkh5332dh'></span>
+<span class='iconPercentage' id='j5cu6qe04g42di'></span>
 </div>
-<div class='deleteSign' id='j8wo1lypv9c1dn'></div>
+<div class='deleteSign' id='j5o3rko1i4x2dj'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j7ed2zhg9p71dd;
-  var style = window.j8cf9qra3r81b7;
-  var App = window.j4d744fgkx31b9;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.i88o4pbn8u2d9;
+  var style = window.j2fbfzxso1v2b0;
+  var App = window.j4p3ger47dj2b2;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -1440,9 +1477,9 @@ color: red;
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Command = $__3.j6xi2by1bt41ba;
-  var Icon = $__3.j66pa6ayl6l1dc;
-  var $__6 = $__3.j66pa6ayl6l1dc;
+  var Command = $__3.ildle9wdme2b3;
+  var Icon = $__3.j85kd0v7bhh2d8;
+  var $__6 = $__3.j85kd0v7bhh2d8;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -1471,19 +1508,19 @@ color: red;
     index = $__6.getAttribute("data-index") || index;
   if (index === undefined)
     index = null;
-  var icon = $__2.j7ed2zhg9p71dd;
-  var iconControl = $__2.j59712kosx01de;
-  var image = $__2.j4t165ki0ur1df;
-  var wait = $__2.j11sib6bu9u1dg;
-  var off = $__2.j3mzyx2gb4f1dh;
-  var on = $__2.imb46f31x01di;
-  var img = $__2.j6p0dq0m95w1dj;
-  var error = $__2.j6p0dq0m95w1dj;
-  var absent = $__2.j6p0dq0m95w1dj;
-  var svg = $__2.j8ygdlp0z2v1dk;
-  var iconLabel = $__2.j4xf77ubxpw1dl;
-  var iconPercentage = $__2.j5y68auwifz1dm;
-  var deleteSign = $__2.j8wo1lypv9c1dn;
+  var icon = $__2.i88o4pbn8u2d9;
+  var iconControl = $__2.j29c7wx8opw2da;
+  var image = $__2.j1z02ktv0wy2db;
+  var wait = $__2.j50xj2ty3ah2dc;
+  var off = $__2.j9g1oifdmaq2dd;
+  var on = $__2.j3zyl9rnd8u2de;
+  var img = $__2.j7e13i224t32df;
+  var error = $__2.j7e13i224t32df;
+  var absent = $__2.j7e13i224t32df;
+  var svg = $__2.j439elds2222dg;
+  var iconLabel = $__2.j524ghkh5332dh;
+  var iconPercentage = $__2.j5cu6qe04g42di;
+  var deleteSign = $__2.j5o3rko1i4x2dj;
   !function() {
     function getIcon(descr) {
       var icon = iconDescr && iconDescr.valueOf() && iconDescr.valueOf().icon || null;
@@ -2021,15 +2058,15 @@ color: red;
 }();
 </script>
 </div>
-</template><template class='Place' data-placeId='' data-placeDescr='' id='j6t3bfrubfr1do'>
-<div class='place' id='j5p4g8ru6k61dp'></div>
-<style class='style' id='j6rxe1mb7601dq'></style>
+</template><template class='Place' data-placeId='' data-placeDescr='' id='j6en3vgvjhi2dk'>
+<div class='place' id='j6fmszpahli2dl'></div>
+<style class='style' id='i76uuifzwr2dm'></style>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__3.j6t3bfrubfr1do;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__3.j6en3vgvjhi2dk;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2043,9 +2080,9 @@ color: red;
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Icon = $__3.j66pa6ayl6l1dc;
-  var Place = $__3.j6t3bfrubfr1do;
-  var $__6 = $__3.j6t3bfrubfr1do;
+  var Icon = $__3.j85kd0v7bhh2d8;
+  var Place = $__3.j6en3vgvjhi2dk;
+  var $__6 = $__3.j6en3vgvjhi2dk;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -2059,8 +2096,8 @@ color: red;
     placeDescr = $__6.getAttribute("data-placeDescr") || placeDescr;
   if (placeDescr === undefined)
     placeDescr = null;
-  var place = $__2.j5p4g8ru6k61dp;
-  var style = $__2.j6rxe1mb7601dq;
+  var place = $__2.j6fmszpahli2dl;
+  var style = $__2.i76uuifzwr2dm;
   !function() {
     CS.updateClassX(place, placeId);
     style.innerHTML = ("." + placeId + " .place." + placeId + " { display: initial }");
@@ -2101,15 +2138,15 @@ color: red;
   }.call($__0);
 }();
 </script>
-</template><template class='Main' id='j3c6xc8oogy1dr'>
-<div class='top' id='j5bukrr718l1ds'>
-<span class='self' id='j1sc864lw6k1dt'></span>
+</template><template class='Main' id='j7yqb1o0fid2dn'>
+<div class='top' id='j4gnaohyhqd2do'>
+<span class='self' id='j4cmpgnsurf2dp'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j5bukrr718l1ds;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j4gnaohyhqd2do;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2118,12 +2155,12 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Centered = $__3.j6zc0u8hf2x1d7;
-  var $__6 = $__3.j3c6xc8oogy1dr;
+  var Centered = $__3.j29e2ftchcz2d3;
+  var $__6 = $__3.j7yqb1o0fid2dn;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var self = $__2.j1sc864lw6k1dt;
+  var self = $__2.j4cmpgnsurf2dp;
   !function() {
     CS.content(self, CS.importTemplate(Centered, {content: (function() {
         return app.caption;
@@ -2132,16 +2169,16 @@ color: red;
 }();
 </script>
 </div>
-<div class='menu' id='j6fl5uxg2el1du'>
+<div class='menu' id='j96o49zj58c2dq'>
 
-<span class='self' id='j435yzecjmo1dv'></span>
-<style class='style' id='j59mncru5un1dw'></style>
+<span class='self' id='j3b63yy06tl2dr'></span>
+<style class='style' id='j60sxz2diou2ds'></style>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j6fl5uxg2el1du;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j96o49zj58c2dq;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2155,14 +2192,14 @@ color: red;
     local = $__4.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Place = $__3.j6t3bfrubfr1do;
-  var $__6 = $__3.j3c6xc8oogy1dr;
+  var Place = $__3.j6en3vgvjhi2dk;
+  var $__6 = $__3.j7yqb1o0fid2dn;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var menu = $__2.j6fl5uxg2el1du;
-  var self = $__2.j435yzecjmo1dv;
-  var style = $__2.j59mncru5un1dw;
+  var menu = $__2.j96o49zj58c2dq;
+  var self = $__2.j3b63yy06tl2dr;
+  var style = $__2.j60sxz2diou2ds;
   !function() {
     app.menuElement = this;
     var UID = require("uid");
@@ -2221,14 +2258,14 @@ color: red;
 }();
 </script>
 </div>
-<div class='bottom' id='j3zitikcrhh1dx'>
-<div class='help' id='j3fu3sf320r1dy'>
+<div class='bottom' id='j5kk23iezgp2dt'>
+<div class='help' id='j1whez6n2vy2du'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j3fu3sf320r1dy;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j1whez6n2vy2du;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2237,8 +2274,8 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var ServiceItem = $__3.j6s8tyhgm661bs;
-  var $__6 = $__3.j3c6xc8oogy1dr;
+  var ServiceItem = $__3.j3b6e3w9cv52bl;
+  var $__6 = $__3.j7yqb1o0fid2dn;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -2250,13 +2287,13 @@ color: red;
 }();
 </script>
 </div>
-<div class='logo' id='j8rzt7sd51t1dz'>
+<div class='logo' id='j3xejk6jilo2dv'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j8rzt7sd51t1dz;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j3xejk6jilo2dv;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2265,8 +2302,8 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var Menu = $__3.j92bnawdrdb1bc;
-  var $__6 = $__3.j3c6xc8oogy1dr;
+  var Menu = $__3.j4g9aq6au602b5;
+  var $__6 = $__3.j7yqb1o0fid2dn;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
@@ -2283,13 +2320,13 @@ color: red;
 }();
 </script>
 </div>
-<div class='back' id='j92icyctb9k1e0'>
+<div class='back' id='j41agbqheam2dw'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
   var $__3 = $__2.$__TEMPLATE_INSTANCE__$;
-  var $__0 = $__2.j92icyctb9k1e0;
-  var $__4 = window.j4d744fgkx31b9;
+  var $__0 = $__2.j41agbqheam2dw;
+  var $__4 = window.j4p3ger47dj2b2;
   var $__5 = $__3.$__DATASET__$;
   if ($__5 === undefined)
     $__5 = $__3.$__DATASET__$ = {};
@@ -2298,11 +2335,11 @@ color: red;
     app = $__4.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var $__6 = $__3.j3c6xc8oogy1dr;
+  var $__6 = $__3.j7yqb1o0fid2dn;
   var $__7 = $__2.$__DATASET__$;
   if ($__7 === undefined)
     $__7 = $__2.$__DATASET__$ = {};
-  var back = $__2.j92icyctb9k1e0;
+  var back = $__2.j41agbqheam2dw;
   !function() {
     CS.onTouch(this, (function() {
       if (app.editing)
@@ -2317,35 +2354,35 @@ color: red;
 </script>
 </div>
 </div>
-</template><template class='iconRoller' id='j8ti07nk88n1e1'><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='800px' height='800px' viewBox='0 0 800 800' name='svg' id='j8722lufen01e3'>
+</template><template class='iconRoller' id='j9udixvdkmq2dx'><svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' width='800px' height='800px' viewBox='0 0 800 800' name='svg' id='j9k7qfcdrhx2dz'>
 <script type='init' class='init'>this.setDeviceState = function(state) {
   this.getElementsByClassName("g")[0].style.transform = ("translate( 0px, -" + state * 410 + "px )");
 };</script>
-<defs id='i1w75ctthz1e4'>
+<defs id='j1gw0dq2iex2e0'>
 <clipPath id='internal'>
-<rect x='124' y='246' width='566' height='432' id='j546mqw3fb91e5'></rect>
+<rect x='124' y='246' width='566' height='432' id='j3gg1d3s16q2e1'></rect>
 </clipPath>
 </defs>
-<g class='colored' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='j2gr25ncatp1e6'>
-<polygon points='60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163' id='j2f3q14n4f81e7'></polygon>
-<g clip-path='url( #internal )' id='j5a53hni9il1e8'>
-<g class='g transition colored' id='j4v7oybxpj71e9'>
-<line x1='123' y1='321' x2='690' y2='321' id='j2i3xadctuf1ea'></line>
-<line x1='123' y1='392' x2='690' y2='392' id='j2vtir7v3c41eb'></line>
-<line x1='123' y1='463' x2='690' y2='463' id='j6cx2wd45ng1ec'></line>
-<line x1='123' y1='534' x2='690' y2='534' id='j80es55wbzj1ed'></line>
-<line x1='123' y1='605' x2='690' y2='605' id='j8z0ddqfoti1ee'></line>
-<line x1='123' y1='676' x2='690' y2='676' id='j8lwb3fbexe1ef'></line>
+<g class='colored' fill='none' stroke-linecap='round' stroke-linejoin='round' stroke-miterlimit='10' id='j8yaflzssn52e2'>
+<polygon points='60,163 60,678 124,678 124,246 690,246 690,678 752,678 752,163' id='j1ji5e4vxk52e3'></polygon>
+<g clip-path='url( #internal )' id='j248oy76y322e4'>
+<g class='g transition colored' id='j7wigz7x2kl2e5'>
+<line x1='123' y1='321' x2='690' y2='321' id='j49vwxuhxi12e6'></line>
+<line x1='123' y1='392' x2='690' y2='392' id='j5d92qj4sqg2e7'></line>
+<line x1='123' y1='463' x2='690' y2='463' id='j79j80wamlo2e8'></line>
+<line x1='123' y1='534' x2='690' y2='534' id='j8718ybbk562e9'></line>
+<line x1='123' y1='605' x2='690' y2='605' id='j9e13usritr2ea'></line>
+<line x1='123' y1='676' x2='690' y2='676' id='j8mo4smfmjm2eb'></line>
 </g>
 </g>
 </g>
 </svg>
-</template><template class='App' data-app='' data-local='' data-appid='state' id='j4d744fgkx31b9'>
+</template><template class='App' data-app='' data-local='' data-appid='state' id='j4p3ger47dj2b2'>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j4d744fgkx31b9;
-  var $__3 = window.j4d744fgkx31b9;
+  var $__0 = window.j4p3ger47dj2b2;
+  var $__3 = window.j4p3ger47dj2b2;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2369,8 +2406,8 @@ color: red;
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j4d744fgkx31b9;
-  var $__3 = window.j4d744fgkx31b9;
+  var $__0 = window.j4p3ger47dj2b2;
+  var $__3 = window.j4p3ger47dj2b2;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2393,8 +2430,8 @@ color: red;
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j4d744fgkx31b9;
-  var $__3 = window.j4d744fgkx31b9;
+  var $__0 = window.j4p3ger47dj2b2;
+  var $__3 = window.j4p3ger47dj2b2;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2428,30 +2465,30 @@ color: red;
   }.call($__0);
 }();
 </script>
-<noscript data-template-reference='j6xi2by1bt41ba'></noscript>
-<noscript data-template-reference='j92bnawdrdb1bc'></noscript>
-<noscript data-template-reference='icibjx29481be'></noscript>
+<noscript data-template-reference='ildle9wdme2b3'></noscript>
+<noscript data-template-reference='j4g9aq6au602b5'></noscript>
+<noscript data-template-reference='j2c3t5tg4ha2b7'></noscript>
 
-<noscript data-template-reference='j3l3rhpwhdj1bo'></noscript>
-<noscript data-template-reference='j6s8tyhgm661bs'></noscript>
-<noscript data-template-reference='i4csq6b51j1bz'></noscript>
-<noscript data-template-reference='j36qa50ibdz1c6'></noscript>
-<noscript data-template-reference='j4aqlotl3ap1ch'></noscript>
-<noscript data-template-reference='j369mymp2i91cs'></noscript>
-<noscript data-template-reference='j9cj7pxvfdz1cx'></noscript>
-<noscript data-template-reference='j9t74y5c4cu1d2'></noscript>
-<noscript data-template-reference='j8wt4oj59h01d5'></noscript>
-<noscript data-template-reference='j6zc0u8hf2x1d7'></noscript>
-<noscript data-template-reference='j66pa6ayl6l1dc'></noscript>
-<noscript data-template-reference='j6t3bfrubfr1do'></noscript>
-<noscript data-template-reference='j3c6xc8oogy1dr'></noscript>
+<noscript data-template-reference='j6e3zn5f42u2bh'></noscript>
+<noscript data-template-reference='j3b6e3w9cv52bl'></noscript>
+<noscript data-template-reference='j9g1akfv7iw2bs'></noscript>
+<noscript data-template-reference='j6t5w6gggll2bz'></noscript>
+<noscript data-template-reference='j23o1z4cv942cd'></noscript>
+<noscript data-template-reference='j5tqki2thro2co'></noscript>
+<noscript data-template-reference='j2artkqh32m2ct'></noscript>
+<noscript data-template-reference='j2gj15no78v2cy'></noscript>
+<noscript data-template-reference='j81rlvtp2sb2d1'></noscript>
+<noscript data-template-reference='j29e2ftchcz2d3'></noscript>
+<noscript data-template-reference='j85kd0v7bhh2d8'></noscript>
+<noscript data-template-reference='j6en3vgvjhi2dk'></noscript>
+<noscript data-template-reference='j7yqb1o0fid2dn'></noscript>
 
-<noscript data-template-reference='j8ti07nk88n1e1'></noscript>
+<noscript data-template-reference='j9udixvdkmq2dx'></noscript>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j4d744fgkx31b9;
-  var $__3 = window.j4d744fgkx31b9;
+  var $__0 = window.j4p3ger47dj2b2;
+  var $__3 = window.j4p3ger47dj2b2;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2460,18 +2497,18 @@ color: red;
     app = $__3.getAttribute("data-app") || app;
   if (app === undefined)
     app = null;
-  var iconRoller = $__2.j8ti07nk88n1e1;
+  var iconRoller = $__2.j9udixvdkmq2dx;
   !function() {
     app.icons = {iconRoller: iconRoller};
   }.call($__0);
 }();
 </script>
-<div class='application' id='i739wk1nhh1eg'></div>
+<div class='application' id='j3ob1fsppjg2ec'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j4d744fgkx31b9;
-  var $__3 = window.j4d744fgkx31b9;
+  var $__0 = window.j4p3ger47dj2b2;
+  var $__3 = window.j4p3ger47dj2b2;
   var template = $__3;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
@@ -2486,7 +2523,7 @@ color: red;
     local = $__3.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var application = $__2.i739wk1nhh1eg;
+  var application = $__2.j3ob1fsppjg2ec;
   !function() {
     var initial = application.className.split(/\s+/);
     CS.watch((function() {
@@ -2498,8 +2535,8 @@ color: red;
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j4d744fgkx31b9;
-  var $__3 = window.j4d744fgkx31b9;
+  var $__0 = window.j4p3ger47dj2b2;
+  var $__3 = window.j4p3ger47dj2b2;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
@@ -2513,21 +2550,21 @@ color: red;
     local = $__3.getAttribute("data-local") || local;
   if (local === undefined)
     local = null;
-  var Menu = $__2.j92bnawdrdb1bc;
-  var StartupScreen = $__2.icibjx29481be;
-  var Ask = $__2.j3l3rhpwhdj1bo;
-  var ServiceItem = $__2.j6s8tyhgm661bs;
-  var AskNewName = $__2.i4csq6b51j1bz;
-  var SearchItems = $__2.j36qa50ibdz1c6;
-  var AskCredentials = $__2.j4aqlotl3ap1ch;
-  var AskIfDeviceHasBeenLinked = $__2.j369mymp2i91cs;
-  var ErrorNoCarrier = $__2.j9cj7pxvfdz1cx;
-  var StateWait = $__2.j9t74y5c4cu1d2;
-  var LoadingScreen = $__2.j8wt4oj59h01d5;
-  var Icon = $__2.j66pa6ayl6l1dc;
-  var Place = $__2.j6t3bfrubfr1do;
-  var Main = $__2.j3c6xc8oogy1dr;
-  var application = $__2.i739wk1nhh1eg;
+  var Menu = $__2.j4g9aq6au602b5;
+  var StartupScreen = $__2.j2c3t5tg4ha2b7;
+  var Ask = $__2.j6e3zn5f42u2bh;
+  var ServiceItem = $__2.j3b6e3w9cv52bl;
+  var AskNewName = $__2.j9g1akfv7iw2bs;
+  var SearchItems = $__2.j6t5w6gggll2bz;
+  var AskCredentials = $__2.j23o1z4cv942cd;
+  var AskIfDeviceHasBeenLinked = $__2.j5tqki2thro2co;
+  var ErrorNoCarrier = $__2.j2artkqh32m2ct;
+  var StateWait = $__2.j2gj15no78v2cy;
+  var LoadingScreen = $__2.j81rlvtp2sb2d1;
+  var Icon = $__2.j85kd0v7bhh2d8;
+  var Place = $__2.j6en3vgvjhi2dk;
+  var Main = $__2.j7yqb1o0fid2dn;
+  var application = $__2.j3ob1fsppjg2ec;
   !function() {
     CS.content(application, [CS.importTemplate(Main), CS.importTemplate(StartupScreen), CS.importTemplate(LoadingScreen), CS.importTemplate(AskCredentials)]);
     var dialogTemplates = {
@@ -2756,8 +2793,8 @@ color: red;
 </script>
 </template>
 
-<template class='TwoApp' id='j918wkig3it1eh'>
-<style id='j51kv07r2m91ej'>
+<template class='TwoApp' id='j8eadc3fqm42ed'>
+<style id='j6kbuqtek562ef'>
 .app1 .application, .app2 .application {
 position: fixed;
 left: 20;
@@ -2770,19 +2807,19 @@ left: 400;
 width: 950;
 }
 </style>
-<div class='app1' id='iozwq6rt311ek'></div>
-<div class='app2' id='j4g5kw8ho531el'></div>
+<div class='app1' id='j8fzl9av61u2eg'></div>
+<div class='app2' id='j2gyq8qk8be2eh'></div>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j918wkig3it1eh;
-  var App = window.j4d744fgkx31b9;
-  var $__3 = window.j918wkig3it1eh;
+  var $__0 = window.j8eadc3fqm42ed;
+  var App = window.j4p3ger47dj2b2;
+  var $__3 = window.j8eadc3fqm42ed;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
-  var app1 = $__2.iozwq6rt311ek;
-  var app2 = $__2.j4g5kw8ho531el;
+  var app1 = $__2.j8fzl9av61u2eg;
+  var app2 = $__2.j2gyq8qk8be2eh;
   !function() {
     app2.appendChild(CS.importTemplate(App, {appid: "state2"}));
     app1.appendChild(CS.importTemplate(App, {appid: "state1"}));
@@ -2791,19 +2828,19 @@ width: 950;
 </script>
 
 </template>
-<template class='OneApp' id='j200q1sjm1w1em'>
-<style id='j2w0330u0gi1en'> .application { position: fixed !important; } } </style>
-<span class='self' id='j9peixb74zz1eo'></span>
+<template class='OneApp' id='j3dplzwrh0y2ei'>
+<style id='j768so2nc3j2ej'> .application { position: fixed !important; } } </style>
+<span class='self' id='j4zgrlorw3l2ek'></span>
 <script data-want-template-instance=''>"use strict";
 !function $__1() {
   var $__2 = $__GET_TEMPLATE_INSTANCE__$($__1);
-  var $__0 = window.j200q1sjm1w1em;
-  var App = window.j4d744fgkx31b9;
-  var $__3 = window.j200q1sjm1w1em;
+  var $__0 = window.j3dplzwrh0y2ei;
+  var App = window.j4p3ger47dj2b2;
+  var $__3 = window.j3dplzwrh0y2ei;
   var $__4 = $__2.$__DATASET__$;
   if ($__4 === undefined)
     $__4 = $__2.$__DATASET__$ = {};
-  var self = $__2.j9peixb74zz1eo;
+  var self = $__2.j4zgrlorw3l2ek;
   !function() {
     CS.content(self, CS.importTemplate(App));
   }.call($__0);
@@ -2881,10 +2918,10 @@ window.APP_DEBUG = /Linux x86_64/.test(navigator.userAgent);
 </script>
 <script>"use strict";
 !function $__1() {
-  var $__0 = window.j7lpfxqb2nw1b3;
-  var App = window.j4d744fgkx31b9;
-  var TwoApp = window.j918wkig3it1eh;
-  var OneApp = window.j200q1sjm1w1em;
+  var $__0 = window.j7jdotv9k5e2aw;
+  var App = window.j4p3ger47dj2b2;
+  var TwoApp = window.j8eadc3fqm42ed;
+  var OneApp = window.j3dplzwrh0y2ei;
   !function() {
     onAppOrientationLocked((function() {
       setTimeout(start, 200);
