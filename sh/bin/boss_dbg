@@ -23066,6 +23066,32 @@ exports.sleep = (function(milliseconds) {
         }};
     })});
 });
+exports.timeout = (function(milliseconds) {
+  return ({then: (function(_, reject) {
+      var timer = setTimeout(reject, milliseconds);
+      return {kill: function() {
+          clearTimout(timer);
+        }};
+    })});
+});
+exports.promise = (function(value) {
+  return Promise.all([co.go($traceurRuntime.initGeneratorFunction(function $__10() {
+    return $traceurRuntime.createGeneratorInstance(function($ctx) {
+      while (true)
+        switch ($ctx.state) {
+          case 0:
+            $ctx.state = 2;
+            return value;
+          case 2:
+            $ctx.maybeThrow();
+            $ctx.state = -2;
+            break;
+          default:
+            return $ctx.end();
+        }
+    }, $__10, this);
+  }))]);
+});
 exports.yield = exports.sleep(1);
 exports.requestAnimationFrame = {then: (function(resolve) {
     if (typeof cancelAnimationFrame == "function") {
