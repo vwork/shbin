@@ -2838,7 +2838,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -27016,7 +27016,7 @@ exports.getNewState = getNewState;
     }()
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports=module.exports=module.exports=module.exports={
+module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
@@ -33191,7 +33191,7 @@ module.exports = Scheduler;
       }( function () {
         module.exports = function() {
   "use strict";
-  var $__98 = $traceurRuntime.initGeneratorFunction(readFiles);
+  var $__123 = $traceurRuntime.initGeneratorFunction(readFiles);
   require("checkreboot");
   require("platform");
   var repl = false;
@@ -33292,8 +33292,8 @@ module.exports = Scheduler;
       }), updateInterfacesInterval);
     },
     interfaces: ra.Getter((function() {
-      var $__26;
-      return service.interfacesTimer && ($__26 = []).concat.apply($__26, $traceurRuntime.spread(lodash.map(os.networkInterfaces(), (function(ni) {
+      var $__47;
+      return service.interfacesTimer && ($__47 = []).concat.apply($__47, $traceurRuntime.spread(lodash.map(os.networkInterfaces(), (function(ni) {
         return ni.filter((function(i) {
           return !i.internal && !i.scopeid;
         })).map((function(i) {
@@ -33423,111 +33423,111 @@ module.exports = Scheduler;
     },
     get handle() {
       return modem.socket && new Modem(modem.socket, (function() {
-        var $__26;
+        var $__47;
         for (var args = [],
-            $__16 = 0; $__16 < arguments.length; $__16++)
-          args[$__16] = arguments[$__16];
-        return ($__26 = console).info.apply($__26, $traceurRuntime.spread([lu.time()], args));
+            $__37 = 0; $__37 < arguments.length; $__37++)
+          args[$__37] = arguments[$__37];
+        return ($__47 = console).info.apply($__47, $traceurRuntime.spread([lu.time()], args));
       }));
     },
-    rawcommand: $traceurRuntime.initGeneratorFunction(function $__28() {
+    rawcommand: $traceurRuntime.initGeneratorFunction(function $__53() {
       var args,
-          $__16,
-          $__35,
-          $__36,
           $__37,
-          $__38,
-          $__39,
-          $__40,
-          $__41,
-          $__42,
-          $__43,
-          $__44,
-          $__45,
-          $__46,
-          $__47,
-          $__48,
-          $__49,
-          $__50,
-          $__51,
-          $__52,
-          $__53,
-          $__54,
-          $__55,
-          $__56,
-          $__57,
-          $__58,
-          $__59,
           $__60,
           $__61,
           $__62,
           $__63,
           $__64,
-          $__65;
+          $__65,
+          $__66,
+          $__67,
+          $__68,
+          $__69,
+          $__70,
+          $__71,
+          $__72,
+          $__73,
+          $__74,
+          $__75,
+          $__76,
+          $__77,
+          $__78,
+          $__79,
+          $__80,
+          $__81,
+          $__82,
+          $__83,
+          $__84,
+          $__85,
+          $__86,
+          $__87,
+          $__88,
+          $__89,
+          $__90;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
             case 0:
-              for (args = [], $__16 = 0; $__16 < $arguments.length; $__16++)
-                args[$__16] = $arguments[$__16];
+              for (args = [], $__37 = 0; $__37 < $arguments.length; $__37++)
+                args[$__37] = $arguments[$__37];
               $ctx.state = 17;
               break;
             case 17:
-              $__35 = modem.handle;
+              $__60 = modem.handle;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = ($__35) ? 5 : 9;
+              $ctx.state = ($__60) ? 5 : 9;
               break;
             case 5:
-              $__36 = modem.handle;
-              $__37 = $__36.lock;
-              $__38 = $traceurRuntime.initGeneratorFunction;
-              $__62 = $__38.call($traceurRuntime, function $__29(command) {
-                var $__30,
-                    $__31,
-                    $__32,
-                    $__33,
-                    $__34,
+              $__61 = modem.handle;
+              $__62 = $__61.lock;
+              $__63 = $traceurRuntime.initGeneratorFunction;
+              $__87 = $__63.call($traceurRuntime, function $__54(command) {
+                var $__55,
+                    $__56,
+                    $__57,
+                    $__58,
+                    $__59,
                     error;
-                return $__39 = $traceurRuntime.createGeneratorInstance, $__61 = $__39.call($traceurRuntime, function($ctx) {
+                return $__64 = $traceurRuntime.createGeneratorInstance, $__86 = $__64.call($traceurRuntime, function($ctx) {
                   while (true)
-                    switch ($__40 = $ctx.state, $__40) {
+                    switch ($__65 = $ctx.state, $__65) {
                       case 0:
-                        $__41 = $ctx.pushTry, $__42 = $__41.call($ctx, 13, null), $__42;
+                        $__66 = $ctx.pushTry, $__67 = $__66.call($ctx, 13, null), $__67;
                         $ctx.state = 16, 16;
                         break;
                       case 16:
-                        $__43 = command.apply, $__30 = $__43, $__43;
-                        $__44 = $traceurRuntime.spread, $__31 = $__44, $__44;
-                        $__45 = $__31.call, $__46 = $__45.call($__31, $traceurRuntime, args), $__32 = $__46, $__46;
-                        $__47 = $__30.call, $__48 = $__47.call($__30, command, (void 0), $__32), $__33 = $__48, $__48;
+                        $__68 = command.apply, $__55 = $__68, $__68;
+                        $__69 = $traceurRuntime.spread, $__56 = $__69, $__69;
+                        $__70 = $__56.call, $__71 = $__70.call($__56, $traceurRuntime, args), $__57 = $__71, $__71;
+                        $__72 = $__55.call, $__73 = $__72.call($__55, command, (void 0), $__57), $__58 = $__73, $__73;
                         $ctx.state = 6, 6;
                         break;
                       case 6:
                         $ctx.state = 2, 2;
-                        return $__33;
+                        return $__58;
                       case 2:
-                        $__49 = $ctx.sent, $__34 = $__49, $__49;
+                        $__74 = $ctx.sent, $__59 = $__74, $__74;
                         $ctx.state = 4, 4;
                         break;
                       case 4:
-                        $ctx.returnValue = $__34, $__34;
+                        $ctx.returnValue = $__59, $__59;
                         $ctx.state = -2, -2;
                         break;
                       case 8:
-                        $__50 = $ctx.popTry, $__51 = $__50.call($ctx), $__51;
+                        $__75 = $ctx.popTry, $__76 = $__75.call($ctx), $__76;
                         $ctx.state = -2, -2;
                         break;
                       case 13:
-                        $__52 = $ctx.popTry, $__53 = $__52.call($ctx), $__53;
-                        $__54 = $ctx.maybeUncatchable, $__55 = $__54.call($ctx), $__55;
-                        $__56 = $ctx.storedException, error = $__56, $__56;
+                        $__77 = $ctx.popTry, $__78 = $__77.call($ctx), $__78;
+                        $__79 = $ctx.maybeUncatchable, $__80 = $__79.call($ctx), $__80;
+                        $__81 = $ctx.storedException, error = $__81, $__81;
                         $ctx.state = 11, 11;
                         break;
                       case 11:
-                        $__57 = console.error, $__58 = $__57.call(console, "modem error", error, "executing", args), $__58;
+                        $__82 = console.error, $__83 = $__82.call(console, "modem error", error, "executing", args), $__83;
                         $ctx.state = 12, 12;
                         break;
                       case 12:
@@ -33535,42 +33535,42 @@ module.exports = Scheduler;
                         $ctx.state = -2, -2;
                         break;
                       default:
-                        return $__59 = $ctx.end, $__60 = $__59.call($ctx), $__60;
+                        return $__84 = $ctx.end, $__85 = $__84.call($ctx), $__85;
                     }
-                }, $__29, this), $__61;
+                }, $__54, this), $__86;
               });
-              $__63 = $__37.call($__36, $__62);
+              $__88 = $__62.call($__61, $__87);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__63;
+              return $__88;
             case 2:
-              $__64 = $ctx.sent;
+              $__89 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__65 = $__64;
+              $__90 = $__89;
               $ctx.state = 8;
               break;
             case 9:
-              $__65 = $__35;
+              $__90 = $__60;
               $ctx.state = 8;
               break;
             case 8:
-              $ctx.returnValue = $__65;
+              $ctx.returnValue = $__90;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__28, this);
+      }, $__53, this);
     }),
     get version() {
       return modem.rawcommand("Version");
     },
     get pingModem() {
-      return modem.pingInterval && ra($traceurRuntime.initGeneratorFunction(function $__29() {
+      return modem.pingInterval && ra($traceurRuntime.initGeneratorFunction(function $__54() {
         var error;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
@@ -33591,7 +33591,7 @@ module.exports = Scheduler;
                 break;
               case 12:
                 $ctx.state = 6;
-                return modem.handle.lock($traceurRuntime.initGeneratorFunction(function $__66(command) {
+                return modem.handle.lock($traceurRuntime.initGeneratorFunction(function $__91(command) {
                   return $traceurRuntime.createGeneratorInstance(function($ctx) {
                     while (true)
                       switch ($ctx.state) {
@@ -33605,7 +33605,7 @@ module.exports = Scheduler;
                         default:
                           return $ctx.end();
                       }
-                  }, $__66, this);
+                  }, $__91, this);
                 }), true);
               case 6:
                 $ctx.maybeThrow();
@@ -33628,7 +33628,7 @@ module.exports = Scheduler;
               default:
                 return $ctx.end();
             }
-        }, $__29, this);
+        }, $__54, this);
       }));
     },
     get sversion() {
@@ -33638,66 +33638,66 @@ module.exports = Scheduler;
     get versionOK() {
       return modem.sversion && modem.sversion >= modem.sminVersion;
     },
-    vercommand: $traceurRuntime.initGeneratorFunction(function $__29() {
-      var $__26,
+    vercommand: $traceurRuntime.initGeneratorFunction(function $__54() {
+      var $__47,
           args,
-          $__17,
-          $__67,
-          $__68,
-          $__69,
-          $__70,
-          $__71,
-          $__72,
-          $__73,
-          $__74;
+          $__38,
+          $__92,
+          $__93,
+          $__94,
+          $__95,
+          $__96,
+          $__97,
+          $__98,
+          $__99;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
             case 0:
-              for (args = [], $__17 = 0; $__17 < $arguments.length; $__17++)
-                args[$__17] = $arguments[$__17];
+              for (args = [], $__38 = 0; $__38 < $arguments.length; $__38++)
+                args[$__38] = $arguments[$__38];
               $ctx.state = 17;
               break;
             case 17:
-              $__67 = modem.versionOK;
+              $__92 = modem.versionOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__67) ? 9 : 5;
+              $ctx.state = (!$__92) ? 9 : 5;
               break;
             case 9:
-              $__74 = null;
+              $__99 = null;
               $ctx.state = 10;
               break;
             case 5:
-              $__26 = modem;
-              $__68 = modem.rawcommand;
-              $__69 = $__68.apply;
-              $__70 = $traceurRuntime.spread;
-              $__71 = $__70.call($traceurRuntime, args);
-              $__72 = $__69.call($__68, $__26, $__71);
+              $__47 = modem;
+              $__93 = modem.rawcommand;
+              $__94 = $__93.apply;
+              $__95 = $traceurRuntime.spread;
+              $__96 = $__95.call($traceurRuntime, args);
+              $__97 = $__94.call($__93, $__47, $__96);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__72;
+              return $__97;
             case 2:
-              $__73 = $ctx.sent;
+              $__98 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__74 = $__73;
+              $__99 = $__98;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__74;
+              $ctx.returnValue = $__99;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__29, this);
+      }, $__54, this);
     }),
     get functions() {
       return modem.vercommand("Functions");
@@ -33708,66 +33708,66 @@ module.exports = Scheduler;
     get protocolOK() {
       return !!(modem.functions && modem.functions.PROTOCOLS && modem.initProtocols);
     },
-    sendcommand: $traceurRuntime.initGeneratorFunction(function $__66() {
-      var $__26,
+    sendcommand: $traceurRuntime.initGeneratorFunction(function $__91() {
+      var $__47,
           args,
-          $__18,
-          $__75,
-          $__76,
-          $__77,
-          $__78,
-          $__79,
-          $__80,
-          $__81,
-          $__82;
+          $__39,
+          $__100,
+          $__101,
+          $__102,
+          $__103,
+          $__104,
+          $__105,
+          $__106,
+          $__107;
       var $arguments = arguments;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
             case 0:
-              for (args = [], $__18 = 0; $__18 < $arguments.length; $__18++)
-                args[$__18] = $arguments[$__18];
+              for (args = [], $__39 = 0; $__39 < $arguments.length; $__39++)
+                args[$__39] = $arguments[$__39];
               $ctx.state = 17;
               break;
             case 17:
-              $__75 = modem.protocolOK;
+              $__100 = modem.protocolOK;
               $ctx.state = 13;
               break;
             case 13:
-              $ctx.state = (!$__75) ? 9 : 5;
+              $ctx.state = (!$__100) ? 9 : 5;
               break;
             case 9:
-              $__82 = null;
+              $__107 = null;
               $ctx.state = 10;
               break;
             case 5:
-              $__26 = modem;
-              $__76 = modem.vercommand;
-              $__77 = $__76.apply;
-              $__78 = $traceurRuntime.spread;
-              $__79 = $__78.call($traceurRuntime, args);
-              $__80 = $__77.call($__76, $__26, $__79);
+              $__47 = modem;
+              $__101 = modem.vercommand;
+              $__102 = $__101.apply;
+              $__103 = $traceurRuntime.spread;
+              $__104 = $__103.call($traceurRuntime, args);
+              $__105 = $__102.call($__101, $__47, $__104);
               $ctx.state = 6;
               break;
             case 6:
               $ctx.state = 2;
-              return $__80;
+              return $__105;
             case 2:
-              $__81 = $ctx.sent;
+              $__106 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__82 = $__81;
+              $__107 = $__106;
               $ctx.state = 10;
               break;
             case 10:
-              $ctx.returnValue = $__82;
+              $ctx.returnValue = $__107;
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__66, this);
+      }, $__91, this);
     }),
     get freeCells() {
       return modem.sendcommand("Free_Cell_Count");
@@ -33780,45 +33780,45 @@ module.exports = Scheduler;
     },
     command: function() {
       for (var args = [],
-          $__19 = 0; $__19 < arguments.length; $__19++)
-        args[$__19] = arguments[$__19];
-      return co.gocall($traceurRuntime.initGeneratorFunction(function $__83() {
-        var $__26,
-            $__84,
-            $__85,
-            $__86,
-            $__87,
-            $__88,
-            $__89,
-            $__90;
+          $__40 = 0; $__40 < arguments.length; $__40++)
+        args[$__40] = arguments[$__40];
+      return co.gocall($traceurRuntime.initGeneratorFunction(function $__108() {
+        var $__47,
+            $__109,
+            $__110,
+            $__111,
+            $__112,
+            $__113,
+            $__114,
+            $__115;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
-                $__26 = this;
-                $__84 = this;
-                $__85 = $__84.sendcommand;
-                $__86 = $__85.apply;
-                $__87 = $traceurRuntime.spread;
-                $__88 = $__87.call($traceurRuntime, args);
-                $__89 = $__86.call($__85, $__26, $__88);
+                $__47 = this;
+                $__109 = this;
+                $__110 = $__109.sendcommand;
+                $__111 = $__110.apply;
+                $__112 = $traceurRuntime.spread;
+                $__113 = $__112.call($traceurRuntime, args);
+                $__114 = $__111.call($__110, $__47, $__113);
                 $ctx.state = 6;
                 break;
               case 6:
                 $ctx.state = 2;
-                return $__89;
+                return $__114;
               case 2:
-                $__90 = $ctx.sent;
+                $__115 = $ctx.sent;
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.returnValue = $__90;
+                $ctx.returnValue = $__115;
                 $ctx.state = -2;
                 break;
               default:
                 return $ctx.end();
             }
-        }, $__83, this);
+        }, $__108, this);
       }), this);
     },
     get showModemStatus() {
@@ -33826,14 +33826,14 @@ module.exports = Scheduler;
     },
     session: function(callback) {
       return ra.detach((function() {
-        return co.go($traceurRuntime.initGeneratorFunction(function $__83() {
-          var $__91,
-              $__92,
-              $__93,
-              $__94,
-              $__95,
-              $__96,
-              $__97;
+        return co.go($traceurRuntime.initGeneratorFunction(function $__108() {
+          var $__116,
+              $__117,
+              $__118,
+              $__119,
+              $__120,
+              $__121,
+              $__122;
           return $traceurRuntime.createGeneratorInstance(function($ctx) {
             while (true)
               switch ($ctx.state) {
@@ -33841,42 +33841,42 @@ module.exports = Scheduler;
                   $ctx.state = (modem.protocolOK) ? 5 : 13;
                   break;
                 case 5:
-                  $__91 = modem.handle;
-                  $__92 = $__91.lock;
-                  $__93 = $__92.call($__91, callback);
+                  $__116 = modem.handle;
+                  $__117 = $__116.lock;
+                  $__118 = $__117.call($__116, callback);
                   $ctx.state = 6;
                   break;
                 case 6:
                   $ctx.state = 2;
-                  return $__93;
+                  return $__118;
                 case 2:
-                  $__94 = $ctx.sent;
+                  $__119 = $ctx.sent;
                   $ctx.state = 4;
                   break;
                 case 4:
-                  $ctx.returnValue = $__94;
+                  $ctx.returnValue = $__119;
                   $ctx.state = -2;
                   break;
                 case 13:
-                  $__95 = lu.returnNullPromise;
-                  $__96 = callback($__95);
+                  $__120 = lu.returnNullPromise;
+                  $__121 = callback($__120);
                   $ctx.state = 14;
                   break;
                 case 14:
                   $ctx.state = 10;
-                  return $__96;
+                  return $__121;
                 case 10:
-                  $__97 = $ctx.sent;
+                  $__122 = $ctx.sent;
                   $ctx.state = 12;
                   break;
                 case 12:
-                  $ctx.returnValue = $__97;
+                  $ctx.returnValue = $__122;
                   $ctx.state = -2;
                   break;
                 default:
                   return $ctx.end();
               }
-          }, $__83, this);
+          }, $__108, this);
         }));
       }));
     },
@@ -33886,8 +33886,8 @@ module.exports = Scheduler;
         throw new Error("unexpected modem result");
       return answer.RESULT;
     },
-    userCommand: $traceurRuntime.initGeneratorFunction(function $__83($__23) {
-      var $__24,
+    userCommand: $traceurRuntime.initGeneratorFunction(function $__108($__44) {
+      var $__45,
           deviceId,
           command,
           data,
@@ -33899,6 +33899,7 @@ module.exports = Scheduler;
           i,
           commands,
           newstate,
+          info,
           passedToModem,
           my_timestamp,
           errors,
@@ -33907,7 +33908,7 @@ module.exports = Scheduler;
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__24 = $__23, deviceId = $__24.deviceId, command = $__24.command, data = $__24.data, socket = $__24.socket;
+              $__45 = $__44, deviceId = $__45.deviceId, command = $__45.command, data = $__45.data, socket = $__45.socket;
               error = (function(status, message) {
                 throw new CustomError(message || HTTPStatus[status], {status: status});
               });
@@ -33972,7 +33973,8 @@ module.exports = Scheduler;
               break;
             case 16:
               newstate = deviceActions.getNewState(device, deviceCommand, data);
-              commands = actionToCommands.createCommandSequence(device.group, deviceTypes[device.model].buttons, deviceCommand, data);
+              info = deviceTypes[device.model];
+              commands = actionToCommands.createCommandSequence(device.group, (info && info.buttons) || "Dimeer", deviceCommand, data);
               if (!commands || !commands.length)
                 error(HTTPStatus.NOT_FOUND);
               passedToModem = false;
@@ -33996,23 +33998,22 @@ module.exports = Scheduler;
               break;
             case 30:
               $ctx.state = 22;
-              return modem.session($traceurRuntime.initGeneratorFunction(function $__98(command) {
+              return modem.session($traceurRuntime.initGeneratorFunction(function $__123(command) {
                 var $__12,
                     $__13,
                     $__14,
                     $__10,
                     $__9,
                     c,
-                    acknowledgement,
                     answer,
                     e,
                     $__15,
-                    $__99,
-                    $__100,
-                    $__101,
-                    $__102,
-                    $__103,
-                    $__104;
+                    $__124,
+                    $__125,
+                    $__126,
+                    $__127,
+                    $__128,
+                    $__129;
                 return $traceurRuntime.createGeneratorInstance(function($ctx) {
                   while (true)
                     switch ($ctx.state) {
@@ -34046,9 +34047,11 @@ module.exports = Scheduler;
                         $ctx.state = 12;
                         break;
                       case 12:
-                        if (c.ACK == null) {
-                          acknowledgement = device.acknowledgement !== false;
-                          c.ACK = !!acknowledgement;
+                        if (device.type == "group") {
+                          if (c.ACK)
+                            c.ACK = false;
+                        } else if (c.ACK == null) {
+                          c.ACK = device.acknowledgement !== false;
                         }
                         $ctx.state = 6;
                         break;
@@ -34119,25 +34122,25 @@ module.exports = Scheduler;
                         $ctx.state = (errors.length) ? 40 : 43;
                         break;
                       case 40:
-                        $__99 = commands[0];
-                        $__100 = $__99.group;
-                        $__101 = {
+                        $__124 = commands[0];
+                        $__125 = $__124.group;
+                        $__126 = {
                           id: "Dest_Condition",
-                          group: $__100
+                          group: $__125
                         };
-                        $__102 = command($__101);
+                        $__127 = command($__126);
                         $ctx.state = 41;
                         break;
                       case 41:
                         $ctx.state = 37;
-                        return $__102;
+                        return $__127;
                       case 37:
-                        $__103 = $ctx.sent;
+                        $__128 = $ctx.sent;
                         $ctx.state = 39;
                         break;
                       case 39:
-                        $__104 = $__103.DEST_CONDITION;
-                        newstate = $__104;
+                        $__129 = $__128.DEST_CONDITION;
+                        newstate = $__129;
                         $ctx.state = 43;
                         break;
                       case 43:
@@ -34158,7 +34161,7 @@ module.exports = Scheduler;
                       default:
                         return $ctx.end();
                     }
-                }, $__98, this);
+                }, $__123, this);
               }));
             case 22:
               $ctx.maybeThrow();
@@ -34167,7 +34170,7 @@ module.exports = Scheduler;
             default:
               return $ctx.end();
           }
-      }, $__83, this);
+      }, $__108, this);
     })
   });
   var express = require("express");
@@ -34202,54 +34205,54 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__98, this);
+    }, $__123, this);
   }
   function staticData(value) {
     var contentType = arguments[1] !== (void 0) ? arguments[1] : "json";
-    return co.func($traceurRuntime.initGeneratorFunction(function $__105(_, response) {
-      var $__106,
-          $__107,
-          $__108,
-          $__109,
-          $__110,
-          $__111,
-          $__112;
+    return co.func($traceurRuntime.initGeneratorFunction(function $__130(_, response) {
+      var $__131,
+          $__132,
+          $__133,
+          $__134,
+          $__135,
+          $__136,
+          $__137;
       return $traceurRuntime.createGeneratorInstance(function($ctx) {
         while (true)
           switch ($ctx.state) {
             case 0:
-              $__106 = response.contentType;
-              $__107 = $__106.call(response, contentType);
-              $__108 = $__107.end;
-              $__109 = value.then;
+              $__131 = response.contentType;
+              $__132 = $__131.call(response, contentType);
+              $__133 = $__132.end;
+              $__134 = value.then;
               $ctx.state = 11;
               break;
             case 11:
-              $ctx.state = ($__109) ? 1 : 7;
+              $ctx.state = ($__134) ? 1 : 7;
               break;
             case 1:
               $ctx.state = 2;
               return value;
             case 2:
-              $__110 = $ctx.sent;
+              $__135 = $ctx.sent;
               $ctx.state = 4;
               break;
             case 4:
-              $__111 = $__110;
+              $__136 = $__135;
               $ctx.state = 6;
               break;
             case 7:
-              $__111 = value;
+              $__136 = value;
               $ctx.state = 6;
               break;
             case 6:
-              $__112 = $__108.call($__107, $__111);
+              $__137 = $__133.call($__132, $__136);
               $ctx.state = -2;
               break;
             default:
               return $ctx.end();
           }
-      }, $__105, this);
+      }, $__130, this);
     }));
   }
   function beautify(text) {
@@ -34269,7 +34272,7 @@ module.exports = Scheduler;
     return cookieParser(request, null, lodash.noop);
   });
   var authLimit = lu.limitCalls(10, 200);
-  var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__105(request, response, next) {
+  var checkAuthorization = co.func($traceurRuntime.initGeneratorFunction(function $__130(request, response, next) {
     var limit,
         secret,
         a,
@@ -34332,7 +34335,7 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__105, this);
+    }, $__130, this);
   }));
   var modemService = express().use(cookieParser).use(require("http_log")).use((function(request, response, next) {
     var origin = request.headers.origin || "*";
@@ -34353,7 +34356,7 @@ module.exports = Scheduler;
     }));
   })).use(checkAuthorization).all("/login", (function(request, response) {
     response.end();
-  })).post("/command", co.func($traceurRuntime.initGeneratorFunction(function $__113(request, response) {
+  })).post("/command", co.func($traceurRuntime.initGeneratorFunction(function $__138(request, response) {
     var error;
     return $traceurRuntime.createGeneratorInstance(function($ctx) {
       while (true)
@@ -34398,15 +34401,15 @@ module.exports = Scheduler;
           default:
             return $ctx.end();
         }
-    }, $__113, this);
-  }))).all("/devices", (modem.devices = new JSONservice(config.var + "/devices", {})).httpService).all("/rooms", (modem.places = new JSONservice(config.var + "/rooms", {
+    }, $__138, this);
+  }))).all(/^\/(rooms|devices|database)$/, (modem.devices = modem.places = new JSONservice(config.var + "/database", {
     main: "room",
     room: {content: []}
   }), ra((function() {
-    var places = modem.places.getState();
+    var devices = modem.devices.getState();
     ra.detach((function() {
       var ret = {};
-      lodash.forEach(places, (function(place, placeId) {
+      lodash.forEach(devices, (function(place, placeId) {
         if (!place || !place.content)
           return ;
         var p = ret[placeId] = {content: {}};
@@ -34416,9 +34419,440 @@ module.exports = Scheduler;
           p.content[key] = {index: index};
         }));
       }));
-      modem.places.applyChanges(ret);
+      modem.devices.applyChanges(ret);
     }));
-  })), modem.places).httpService);
+  })), co.go($traceurRuntime.initGeneratorFunction(function $__139() {
+    var files,
+        $__12,
+        $__13,
+        $__14,
+        $__10,
+        $__9,
+        i,
+        $__19,
+        $__20,
+        $__21,
+        $__17,
+        $__16,
+        i$__48,
+        r,
+        d,
+        $__26,
+        $__27,
+        $__28,
+        $__24,
+        $__23,
+        i$__49,
+        r$__50,
+        $__33,
+        $__34,
+        $__35,
+        $__31,
+        $__30,
+        i$__51,
+        $__140,
+        $__141,
+        $__142,
+        $__143,
+        $__144,
+        $__145,
+        $__146,
+        $__147,
+        $__148,
+        $__149,
+        $__150,
+        _,
+        $__15,
+        $__22,
+        $__29,
+        $__36,
+        e;
+    return $traceurRuntime.createGeneratorInstance(function($ctx) {
+      while (true)
+        switch ($ctx.state) {
+          case 0:
+            $ctx.pushTry(139, null);
+            $ctx.state = 142;
+            break;
+          case 142:
+            files = {
+              rooms: {},
+              devices: {}
+            };
+            $__12 = true;
+            $__13 = false;
+            $__14 = undefined;
+            $ctx.state = 130;
+            break;
+          case 130:
+            $ctx.pushTry(23, 24);
+            $ctx.state = 26;
+            break;
+          case 26:
+            $__10 = void 0, $__9 = (Object.keys(files))[$traceurRuntime.toProperty(Symbol.iterator)]();
+            $ctx.state = 22;
+            break;
+          case 22:
+            $ctx.state = (!($__12 = ($__10 = $__9.next()).done)) ? 18 : 20;
+            break;
+          case 14:
+            $__12 = true;
+            $ctx.state = 22;
+            break;
+          case 18:
+            i = $__10.value;
+            $ctx.state = 19;
+            break;
+          case 19:
+            $ctx.pushTry(9, null);
+            $ctx.state = 12;
+            break;
+          case 12:
+            $__140 = JSON.parse;
+            $__141 = co.cb;
+            $__142 = fs.readFile;
+            $__143 = $__141.call(co, $__142);
+            $__144 = config.var;
+            $__145 = $__144 + "/" + i;
+            $__146 = $__143($__145);
+            $ctx.state = 6;
+            break;
+          case 6:
+            $ctx.state = 2;
+            return $__146;
+          case 2:
+            $__147 = $ctx.sent;
+            $ctx.state = 4;
+            break;
+          case 4:
+            $__148 = $__147.toString;
+            $__149 = $__148.call($__147);
+            $__150 = $__140.call(JSON, $__149);
+            files[i] = $__150;
+            $ctx.state = 8;
+            break;
+          case 8:
+            $ctx.popTry();
+            $ctx.state = 14;
+            break;
+          case 9:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            _ = $ctx.storedException;
+            $ctx.state = 14;
+            break;
+          case 20:
+            $ctx.popTry();
+            $ctx.state = 24;
+            $ctx.finallyFallThrough = 28;
+            break;
+          case 23:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            $__15 = $ctx.storedException;
+            $ctx.state = 29;
+            break;
+          case 29:
+            $__13 = true;
+            $__14 = $__15;
+            $ctx.state = 24;
+            $ctx.finallyFallThrough = 28;
+            break;
+          case 24:
+            $ctx.popTry();
+            $ctx.state = 35;
+            break;
+          case 35:
+            try {
+              if (!$__12 && $__9.return != null) {
+                $__9.return();
+              }
+            } finally {
+              if ($__13) {
+                throw $__14;
+              }
+            }
+            $ctx.state = 33;
+            break;
+          case 28:
+            files.rooms.uid = UID();
+            $__19 = true;
+            $__20 = false;
+            $__21 = undefined;
+            $ctx.state = 132;
+            break;
+          case 132:
+            $ctx.pushTry(60, 61);
+            $ctx.state = 63;
+            break;
+          case 63:
+            $__17 = void 0, $__16 = (Object.keys(files.rooms))[$traceurRuntime.toProperty(Symbol.iterator)]();
+            $ctx.state = 59;
+            break;
+          case 59:
+            $ctx.state = (!($__19 = ($__17 = $__16.next()).done)) ? 55 : 57;
+            break;
+          case 54:
+            $__19 = true;
+            $ctx.state = 59;
+            break;
+          case 55:
+            i$__48 = $__17.value;
+            $ctx.state = 56;
+            break;
+          case 56:
+            r = files.rooms[i$__48];
+            $ctx.state = 50;
+            break;
+          case 50:
+            $ctx.state = (!r || typeof r != "object") ? 38 : 37;
+            break;
+          case 38:
+            if (i$__48 != "uid" && i$__48 != "main")
+              delete files.rooms[i$__48];
+            $ctx.state = 54;
+            break;
+          case 37:
+            $ctx.state = (r.type == "content") ? 43 : 42;
+            break;
+          case 43:
+            r.type = "place";
+            $ctx.state = 54;
+            break;
+          case 42:
+            r.type = "device";
+            d = void 0;
+            d = files.devices[r.device];
+            delete files.devices[r.device];
+            r.device = i$__48;
+            $ctx.state = 52;
+            break;
+          case 52:
+            $ctx.state = (!d) ? 54 : 47;
+            break;
+          case 47:
+            lodash.assign(r, d);
+            $ctx.state = 54;
+            break;
+          case 57:
+            $ctx.popTry();
+            $ctx.state = 61;
+            $ctx.finallyFallThrough = 65;
+            break;
+          case 60:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            $__22 = $ctx.storedException;
+            $ctx.state = 66;
+            break;
+          case 66:
+            $__20 = true;
+            $__21 = $__22;
+            $ctx.state = 61;
+            $ctx.finallyFallThrough = 65;
+            break;
+          case 61:
+            $ctx.popTry();
+            $ctx.state = 72;
+            break;
+          case 72:
+            try {
+              if (!$__19 && $__16.return != null) {
+                $__16.return();
+              }
+            } finally {
+              if ($__20) {
+                throw $__21;
+              }
+            }
+            $ctx.state = 70;
+            break;
+          case 65:
+            $__26 = true;
+            $__27 = false;
+            $__28 = undefined;
+            $ctx.state = 134;
+            break;
+          case 134:
+            $ctx.pushTry(85, 86);
+            $ctx.state = 88;
+            break;
+          case 88:
+            $__24 = void 0, $__23 = (Object.keys(files.devices))[$traceurRuntime.toProperty(Symbol.iterator)]();
+            $ctx.state = 84;
+            break;
+          case 84:
+            $ctx.state = (!($__26 = ($__24 = $__23.next()).done)) ? 80 : 82;
+            break;
+          case 79:
+            $__26 = true;
+            $ctx.state = 84;
+            break;
+          case 80:
+            i$__49 = $__24.value;
+            $ctx.state = 81;
+            break;
+          case 81:
+            r$__50 = files.devices[i$__49];
+            $ctx.state = 77;
+            break;
+          case 77:
+            $ctx.state = (!r$__50 || typeof r$__50 != "object") ? 79 : 74;
+            break;
+          case 74:
+            files.rooms[i$__49] = r$__50;
+            r$__50.type = "device";
+            $ctx.state = 79;
+            break;
+          case 82:
+            $ctx.popTry();
+            $ctx.state = 86;
+            $ctx.finallyFallThrough = 90;
+            break;
+          case 85:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            $__29 = $ctx.storedException;
+            $ctx.state = 91;
+            break;
+          case 91:
+            $__27 = true;
+            $__28 = $__29;
+            $ctx.state = 86;
+            $ctx.finallyFallThrough = 90;
+            break;
+          case 86:
+            $ctx.popTry();
+            $ctx.state = 97;
+            break;
+          case 97:
+            try {
+              if (!$__26 && $__23.return != null) {
+                $__23.return();
+              }
+            } finally {
+              if ($__27) {
+                throw $__28;
+              }
+            }
+            $ctx.state = 95;
+            break;
+          case 90:
+            $__33 = true;
+            $__34 = false;
+            $__35 = undefined;
+            $ctx.state = 136;
+            break;
+          case 136:
+            $ctx.pushTry(116, 117);
+            $ctx.state = 119;
+            break;
+          case 119:
+            $__31 = void 0, $__30 = (Object.keys(files))[$traceurRuntime.toProperty(Symbol.iterator)]();
+            $ctx.state = 115;
+            break;
+          case 115:
+            $ctx.state = (!($__33 = ($__31 = $__30.next()).done)) ? 111 : 113;
+            break;
+          case 107:
+            $__33 = true;
+            $ctx.state = 115;
+            break;
+          case 111:
+            i$__51 = $__31.value;
+            $ctx.state = 112;
+            break;
+          case 112:
+            $ctx.pushTry(102, null);
+            $ctx.state = 105;
+            break;
+          case 105:
+            $ctx.state = 99;
+            return co.cb(fs.unlink)((config.var + "/" + i$__51));
+          case 99:
+            $ctx.maybeThrow();
+            $ctx.state = 101;
+            break;
+          case 101:
+            $ctx.popTry();
+            $ctx.state = 107;
+            break;
+          case 102:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            _ = $ctx.storedException;
+            $ctx.state = 107;
+            break;
+          case 113:
+            $ctx.popTry();
+            $ctx.state = 117;
+            $ctx.finallyFallThrough = 121;
+            break;
+          case 116:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            $__36 = $ctx.storedException;
+            $ctx.state = 122;
+            break;
+          case 122:
+            $__34 = true;
+            $__35 = $__36;
+            $ctx.state = 117;
+            $ctx.finallyFallThrough = 121;
+            break;
+          case 117:
+            $ctx.popTry();
+            $ctx.state = 128;
+            break;
+          case 128:
+            try {
+              if (!$__33 && $__30.return != null) {
+                $__30.return();
+              }
+            } finally {
+              if ($__34) {
+                throw $__35;
+              }
+            }
+            $ctx.state = 126;
+            break;
+          case 121:
+            if (Object.keys(files.rooms).length > 2)
+              modem.devices.applyChanges(files.rooms, false);
+            $ctx.state = 138;
+            break;
+          case 138:
+            $ctx.popTry();
+            $ctx.state = -2;
+            break;
+          case 139:
+            $ctx.popTry();
+            $ctx.maybeUncatchable();
+            e = $ctx.storedException;
+            $ctx.state = 145;
+            break;
+          case 145:
+            console.log("ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".red);
+            console.log(e);
+            $ctx.state = -2;
+            break;
+          case 33:
+            $ctx.state = $ctx.finallyFallThrough;
+            break;
+          case 70:
+            $ctx.state = $ctx.finallyFallThrough;
+            break;
+          case 95:
+            $ctx.state = $ctx.finallyFallThrough;
+            break;
+          case 126:
+            $ctx.state = $ctx.finallyFallThrough;
+            break;
+          default:
+            return $ctx.end();
+        }
+    }, $__139, this);
+  })), modem.devices).httpService);
   var WebSocket = require("websockets/lib/websockets/socket");
   var NodeWebSocketToJSON = require("NodeWebSocketToJSON");
   var StreamToJSON = require("StreamToJSON");
@@ -34457,14 +34891,13 @@ module.exports = Scheduler;
         return connection.close();
       });
       switch (request.url) {
+        case "/database":
         case "/devices":
+        case "/places":
           modem.devices.wsService(connection);
           break;
-        case "/places":
-          modem.places.wsService(connection);
-          break;
         case "/commands":
-          connection.onmessage = co.func($traceurRuntime.initGeneratorFunction(function $__114(message) {
+          connection.onmessage = co.func($traceurRuntime.initGeneratorFunction(function $__151(message) {
             var id,
                 error;
             return $traceurRuntime.createGeneratorInstance(function($ctx) {
@@ -34520,7 +34953,7 @@ module.exports = Scheduler;
                   default:
                     return $ctx.end();
                 }
-            }, $__114, this);
+            }, $__151, this);
           }));
           break;
         default:
@@ -34529,11 +34962,11 @@ module.exports = Scheduler;
     }));
   });
   var createModemServer = (function(Server) {
-    var $__26;
+    var $__47;
     for (var connection = [],
-        $__20 = 1; $__20 < arguments.length; $__20++)
-      connection[$__20 - 1] = arguments[$__20];
-    return ($__26 = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply($__26, $traceurRuntime.spread(connection));
+        $__41 = 1; $__41 < arguments.length; $__41++)
+      connection[$__41 - 1] = arguments[$__41];
+    return ($__47 = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply($__47, $traceurRuntime.spread(connection));
   });
   createModemServer(http, config.serviceport, "::");
   createModemServer(http, internalModemService);
@@ -34606,9 +35039,9 @@ module.exports = Scheduler;
         return ;
       switch (data.what) {
         case "reconnect for client":
-          co.go($traceurRuntime.initGeneratorFunction(function $__114() {
-            var $__24,
-                $__25,
+          co.go($traceurRuntime.initGeneratorFunction(function $__151() {
+            var $__45,
+                $__46,
                 streamid,
                 tomodem,
                 toclient,
@@ -34617,11 +35050,11 @@ module.exports = Scheduler;
                 $__12,
                 $__13,
                 $__14,
-                $__27,
+                $__52,
                 $__10,
                 $__9,
-                $__116,
-                $__117,
+                $__153,
+                $__154,
                 $__15;
             return $traceurRuntime.createGeneratorInstance(function($ctx) {
               while (true)
@@ -34650,15 +35083,15 @@ module.exports = Scheduler;
                     $ctx.state = 21;
                     break;
                   case 21:
-                    $__27 = $traceurRuntime.initGeneratorFunction(function $__115() {
-                      var $__23,
+                    $__52 = $traceurRuntime.initGeneratorFunction(function $__152() {
+                      var $__44,
                           psocket,
                           name;
                       return $traceurRuntime.createGeneratorInstance(function($ctx) {
                         while (true)
                           switch ($ctx.state) {
                             case 0:
-                              $__23 = $__10.value, psocket = ($__24 = $__23[$traceurRuntime.toProperty(Symbol.iterator)](), ($__25 = $__24.next()).done ? void 0 : $__25.value), name = ($__25 = $__24.next()).done ? void 0 : $__25.value;
+                              $__44 = $__10.value, psocket = ($__45 = $__44[$traceurRuntime.toProperty(Symbol.iterator)](), ($__46 = $__45.next()).done ? void 0 : $__46.value), name = ($__46 = $__45.next()).done ? void 0 : $__46.value;
                               psocket.then((function() {
                                 return LOG1((name + " is ready for " + streamid));
                               }), (function() {
@@ -34669,7 +35102,7 @@ module.exports = Scheduler;
                             default:
                               return $ctx.end();
                           }
-                      }, $__115, this);
+                      }, $__152, this);
                     });
                     $ctx.state = 17;
                     break;
@@ -34685,25 +35118,25 @@ module.exports = Scheduler;
                     $ctx.state = 15;
                     break;
                   case 11:
-                    $__116 = $ctx.wrapYieldStar($__27()[Symbol.iterator]());
+                    $__153 = $ctx.wrapYieldStar($__52()[Symbol.iterator]());
                     $ctx.sent = void 0;
                     $ctx.action = 'next';
                     $ctx.state = 12;
                     break;
                   case 12:
-                    $__117 = $__116[$ctx.action]($ctx.sentIgnoreThrow);
+                    $__154 = $__153[$ctx.action]($ctx.sentIgnoreThrow);
                     $ctx.state = 9;
                     break;
                   case 9:
-                    $ctx.state = ($__117.done) ? 3 : 2;
+                    $ctx.state = ($__154.done) ? 3 : 2;
                     break;
                   case 3:
-                    $ctx.sent = $__117.value;
+                    $ctx.sent = $__154.value;
                     $ctx.state = 10;
                     break;
                   case 2:
                     $ctx.state = 12;
-                    return $__117.value;
+                    return $__154.value;
                   case 13:
                     $ctx.popTry();
                     $ctx.state = 19;
@@ -34769,7 +35202,7 @@ module.exports = Scheduler;
                   default:
                     return $ctx.end();
                 }
-            }, $__114, this);
+            }, $__151, this);
           }));
           break;
         default:
@@ -34788,39 +35221,39 @@ module.exports = Scheduler;
     global.mm = modem;
     global.c = (function() {
       for (var args = [],
-          $__21 = 0; $__21 < arguments.length; $__21++)
-        args[$__21] = arguments[$__21];
-      modem.session($traceurRuntime.initGeneratorFunction(function $__114(command) {
-        var $__118,
-            $__119,
-            $__120,
-            $__121,
-            $__122;
+          $__42 = 0; $__42 < arguments.length; $__42++)
+        args[$__42] = arguments[$__42];
+      modem.session($traceurRuntime.initGeneratorFunction(function $__151(command) {
+        var $__155,
+            $__156,
+            $__157,
+            $__158,
+            $__159;
         return $traceurRuntime.createGeneratorInstance(function($ctx) {
           while (true)
             switch ($ctx.state) {
               case 0:
-                $__118 = command.apply;
-                $__119 = $traceurRuntime.spread;
-                $__120 = $__119.call($traceurRuntime, args);
-                $__121 = $__118.call(command, (void 0), $__120);
+                $__155 = command.apply;
+                $__156 = $traceurRuntime.spread;
+                $__157 = $__156.call($traceurRuntime, args);
+                $__158 = $__155.call(command, (void 0), $__157);
                 $ctx.state = 6;
                 break;
               case 6:
                 $ctx.state = 2;
-                return $__121;
+                return $__158;
               case 2:
-                $__122 = $ctx.sent;
+                $__159 = $ctx.sent;
                 $ctx.state = 4;
                 break;
               case 4:
-                $ctx.returnValue = $__122;
+                $ctx.returnValue = $__159;
                 $ctx.state = -2;
                 break;
               default:
                 return $ctx.end();
             }
-        }, $__114, this);
+        }, $__151, this);
       }));
     });
     c.v = c.bind(this, "Version");
