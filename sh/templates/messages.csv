@@ -1,0 +1,26 @@
+id,ru,by,en
+
+ru,Русский,Руская,Russian
+by,Белорусский,Беларуская,Belarusian
+en,Английский,Ангельская,English
+
+favorites,мой дом,мой дом,my house
+commandMoveIcons,Упорядочить значки,Упарадкаваць цэтлікі,Order icons
+commandAddToHomeScreen,Добавить на главный экран,Дабавіць на галоўны экран,Add to home screen
+commandSearchDevices,Поиск,Пошук,Search
+commandResetToFactorySettings,Сбросить настройки к заводским,Скінуць наладкі да завадзкіх,Reset to factory defaults
+commandLanguage,Язык / Language,Мова / Language,Language
+commandTestMenu,Тестовая версия,Тэставая версія,Test version
+commandLinkDevice,Привязать устройство,Прывязаць прыладу,Link device
+commandAdd,Добавить,Дабавіць,Add
+commandAddPlace,Добавить помещение или место,Дабавіць памяшканне альбо месца,Add room or place
+commandAddNewDevice,Добавить новое устройство,Дабавіць новую прыладу,Add new device
+commandCreateNewGroup,Создать группу устройств,Стварыць групу прыладаў,Create device group
+commandAddExistingItem,Выбрать из списка,Выбраць са спісу,Choose existing item
+commandPurgeItem,Удалить из программы,Выдаліць з праграмы,Remove from program
+commandRenameItem,Изменить название,Змяніць назву,Rename device
+nothingHere,Здесь устройств нет,Тут прыладаў пакуль няма,Nothing's here
+commandShowLabels,Показать подписи,Паказаць подпісы,Show labels
+commandHideLabels,Спрятать подписи,Схаваць подпісы,Hide labels
+commandToFavourites,В избранное,У абаранае,To favourites
+commandMoveIcons,Упорядочить,Упарадкаваць,Move icons
