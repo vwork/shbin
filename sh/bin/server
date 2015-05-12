@@ -45,7 +45,7 @@ var Transformer,stream,util,__slice=[].slice;stream=require("stream"),util=requi
 },{"../package.json":"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json","./utils":"/home/vadzim/v/work/nerojs/node_modules/ejs/lib/utils.js","fs":false,"path":false}],"/home/vadzim/v/work/nerojs/node_modules/ejs/lib/utils.js":[function(require,module,exports){
 "use strict";var regExpChars=/[|\\{}()[\]^$+*?.]/g;exports.escapeRegExpChars=function(t){return t?String(t).replace(regExpChars,"\\$&"):""};var _ENCODE_HTML_RULES={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&#34;","'":"&#39;"},_MATCH_HTML=/[&<>\'"]/g,escapeFuncStr='var _ENCODE_HTML_RULES = {\n      "&": "&amp;"\n    , "<": "&lt;"\n    , ">": "&gt;"\n    , \'"\': "&#34;"\n    , "\'": "&#39;"\n    }\n  , _MATCH_HTML = /[&<>\'"]/g;\n';exports.escapeXML=function(t){return void 0==t?"":String(t).replace(_MATCH_HTML,function(t){return _ENCODE_HTML_RULES[t]||t})},exports.escapeXML.toString=function(){return Function.prototype.toString.call(this)+";\n"+escapeFuncStr},exports.shallowCopy=function(t,n){n=n||{};for(var r in n)t[r]=n[r];return t},exports.cache={_data:{},set:function(t,n){this._data[t]=n},get:function(t){return this._data[t]},reset:function(){this._data={}}};
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -232,7 +232,7 @@ var Dumper,Parser,Utils,Yaml;Parser=require("./Parser"),Dumper=require("./Dumper
 //# sourceMappingURL=out.js.map
 
 },{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports=module.exports=module.exports={
 	"Nero II 8713-50": {
 		"buttons": "RollShutter"
 	},
