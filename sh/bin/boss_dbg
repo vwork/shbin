@@ -6272,7 +6272,7 @@ exports.cache = {
 
 
 },{}],"/home/vadzim/v/work/nerojs/node_modules/ejs/package.json":[function(require,module,exports){
-module.exports={
+module.exports=module.exports={
   "name": "ejs",
   "description": "Embedded JavaScript templates",
   "keywords": [
@@ -22467,9 +22467,9 @@ var formatQuestion = function formatQuestion(question) {
 
 	try {
 		for (var _iterator = question[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-			var _q = _step.value;
+			var q = _step.value;
 
-			msg += " [ " + _q.name + " " + (dns.consts.QTYPE_TO_NAME[_q.type] || _q.type) + " " + (dns.consts.QCLASS_TO_NAME[_q["class"]] || _q["class"]) + " ]";
+			msg += " [ " + q.name + " " + (dns.consts.QTYPE_TO_NAME[q.type] || q.type) + " " + (dns.consts.QCLASS_TO_NAME[q["class"]] || q["class"]) + " ]";
 		}
 	} catch (err) {
 		_didIteratorError = true;
@@ -22496,7 +22496,7 @@ var formatAddress = function formatAddress(a) {
 };
 
 var onRequest = co.func(regeneratorRuntime.mark(function callee$0$0(server, request, response) {
-	var send, interfaces, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _q2, _name, type;
+	var interfaces, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _loop, _iterator2, _step2, _ret;
 
 	return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
 		while (1) switch (context$1$0.prev = context$1$0.next) {
@@ -22507,17 +22507,6 @@ var onRequest = co.func(regeneratorRuntime.mark(function callee$0$0(server, requ
 				});
 
 				console.log(formatAddress(request.address).green, formatQuestion(request.question));
-
-				send = function send(intf, type) {
-					return lodash.forEach(intf, function (address) {
-						var ret = dns[type]({
-							name: q.name,
-							address: address,
-							ttl: config.TTL });
-						response.answer.push(ret);
-						console.log(lodash.values(ret).join("\t"));
-					});
-				};
 
 				interfaces = {};
 
@@ -22534,90 +22523,101 @@ var onRequest = co.func(regeneratorRuntime.mark(function callee$0$0(server, requ
 				_iteratorNormalCompletion2 = true;
 				_didIteratorError2 = false;
 				_iteratorError2 = undefined;
-				context$1$0.prev = 8;
+				context$1$0.prev = 7;
+
+				_loop = function () {
+					var q = _step2.value;
+
+					var send = function send(intf, type) {
+						return lodash.forEach(intf, function (address) {
+							var ret = dns[type]({
+								name: q.name,
+								address: address,
+								ttl: config.TTL });
+							response.answer.push(ret);
+							console.log(lodash.values(ret).join("\t"));
+						});
+					};
+
+					// console.log( `testing ${ q.name }` )
+					if (!config.self.exec(q.name)) {
+						// console.log( `this is not me` )
+						var _name = config.re.exec(q.name);
+						if (!_name) {
+							// console.log( `this is likely not a client` )
+							return "continue";
+						}
+						_name = _name[1];
+						if (!Object.prototype.hasOwnProperty.call(self, _name) && !Object.prototype.hasOwnProperty.call(DB, _name)) {
+							// console.log( `cannot find such a client: ${ name }` )
+							return "continue";
+						}
+					}
+					var type = dns.consts.QTYPE_TO_NAME[q.type] || q.type;
+					if (type == "ANY") lodash.forEach(interfaces, send);else send(interfaces[type], type);
+				};
+
 				_iterator2 = request.question[Symbol.iterator]();
 
 			case 10:
 				if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-					context$1$0.next = 24;
+					context$1$0.next = 17;
 					break;
 				}
 
-				_q2 = _step2.value;
+				_ret = _loop();
 
-				if (config.self.exec(_q2.name)) {
-					context$1$0.next = 19;
+				if (!(_ret === "continue")) {
+					context$1$0.next = 14;
 					break;
 				}
 
-				_name = config.re.exec(_q2.name);
+				return context$1$0.abrupt("continue", 14);
 
-				if (_name) {
-					context$1$0.next = 16;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 21);
-
-			case 16:
-				_name = _name[1];
-
-				if (!(!Object.prototype.hasOwnProperty.call(self, _name) && !Object.prototype.hasOwnProperty.call(DB, _name))) {
-					context$1$0.next = 19;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 21);
-
-			case 19:
-				type = dns.consts.QTYPE_TO_NAME[_q2.type] || _q2.type;
-
-				if (type == "ANY") lodash.forEach(interfaces, send);else send(interfaces[type], type);
-
-			case 21:
+			case 14:
 				_iteratorNormalCompletion2 = true;
 				context$1$0.next = 10;
 				break;
 
-			case 24:
-				context$1$0.next = 30;
+			case 17:
+				context$1$0.next = 23;
 				break;
 
-			case 26:
-				context$1$0.prev = 26;
-				context$1$0.t0 = context$1$0["catch"](8);
+			case 19:
+				context$1$0.prev = 19;
+				context$1$0.t0 = context$1$0["catch"](7);
 				_didIteratorError2 = true;
 				_iteratorError2 = context$1$0.t0;
 
-			case 30:
-				context$1$0.prev = 30;
-				context$1$0.prev = 31;
+			case 23:
+				context$1$0.prev = 23;
+				context$1$0.prev = 24;
 
 				if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
 					_iterator2["return"]();
 				}
 
-			case 33:
-				context$1$0.prev = 33;
+			case 26:
+				context$1$0.prev = 26;
 
 				if (!_didIteratorError2) {
-					context$1$0.next = 36;
+					context$1$0.next = 29;
 					break;
 				}
 
 				throw _iteratorError2;
 
-			case 36:
-				return context$1$0.finish(33);
+			case 29:
+				return context$1$0.finish(26);
 
-			case 37:
-				return context$1$0.finish(30);
+			case 30:
+				return context$1$0.finish(23);
 
-			case 38:
+			case 31:
 			case "end":
 				return context$1$0.stop();
 		}
-	}, callee$0$0, this, [[8, 26, 30, 38], [31,, 33, 37]]);
+	}, callee$0$0, this, [[7, 19, 23, 31], [24,, 26, 30]]);
 }));
 
 var onError = function onError(server, err, buff, req, res) {
@@ -22639,14 +22639,6 @@ var createServer = function createServer(dgram_type) {
 
 createServer("udp4");
 createServer("udp6");
-
-// console.log( `testing ${ q.name }` )
-
-// console.log( `this is not me` )
-
-// console.log( `this is likely not a client` )
-
-// console.log( `cannot find such a client: ${ name }` )
 
 },{"boss_cfg":"/home/vadzim/v/work/nerojs/src/boss_cfg.js","boss_db":"/home/vadzim/v/work/nerojs/src/boss_db.js","co":"/home/vadzim/v/work/nerojs/src/co.js","colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","native-dns":"/home/vadzim/v/work/nerojs/node_modules/native-dns/dns.js","os":false,"platform":"/home/vadzim/v/work/nerojs/src/platform.js"}],"/home/vadzim/v/work/nerojs/src/co.js":[function(require,module,exports){
 "use strict";
