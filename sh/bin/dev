@@ -2,9 +2,12 @@
 
 'use strict'
 
+// global.ESCOMPILER = `traceur`
+global.ESCOMPILER = `babel`
+
 // let debug = true
 let compress = false
-let sourceMapsWorkAround = true
+let sourceMapsWorkAround = !true
 
 let path = require( `path` )
 
@@ -22,7 +25,8 @@ let _ = require( `lodash` )
 let browserify = require( `browserify` )
 let watchify = require( `watchify` )
 // let reactify = require( `reactify` )
-let es6ify = require( `../src/es6ify` )
+let es6ify = global.ESCOMPILER == `traceur` && require( `../src/es6ify` )
+let babelify = global.ESCOMPILER == `babel` && require( `babelify` )
 let fs = require( `fs` )
 let zlib = require( `zlib` )
 let through = require( `through` )
@@ -40,7 +44,8 @@ function uglify( orig_code ) {
 	let final_code = pro.gen_code( ast )
 }
 
-es6ify.traceurOverrides = { asyncFunctions: true }
+if ( es6ify )
+	es6ify.traceurOverrides = { asyncFunctions: true }
 
 let src = /\/src\/.*?\.js$/
 
@@ -48,10 +53,8 @@ let src = /\/src\/.*?\.js$/
 // 	return reactify.call( this, file, { everything: true } )
 // } )
 
-let es6ifyAll = es6ify.configure( new RegExp( `` ) )
-let es6ifyTransform = T( src, function () {
-	return es6ifyAll.apply( this, arguments )
-} )
+let es6ifyTransform = T( src, ESCOMPILER == `traceur` ? es6ify.configure( new RegExp( `` ) ) : babelify )
+let es6ifyPolyfill = ESCOMPILER == `traceur` ? es6ify.runtime : require.resolve( `babelify/polyfill` )
 
 try { fs.mkdirSync( tmpDir ) } catch ( _ ) {}
 fs.writeFileSync( tmpIndex, `` )
@@ -61,7 +64,6 @@ createES6task( {
 	source: tmpIndex,
 	dest: `./www/js/index.js`,
 	debug: true,
-	// saveIdents: `window`,
 } )
 
 createES6task( {
@@ -69,7 +71,6 @@ createES6task( {
 	source: tmpIndex,
 	dest: `./www/js/index.min.js`,
 	debug: false,
-	// saveIdents: `window`,
 } )
 
 createES6task( {
@@ -78,7 +79,6 @@ createES6task( {
 	source: sourceDir + `server.js`,
 	dest: `./bin/server_dbg`,
 	debug: true,
-	// saveIdents: `global`,
 } )
 
 createES6task( {
@@ -87,7 +87,6 @@ createES6task( {
 	source: sourceDir + `boss.js`,
 	dest: `./bin/boss_dbg`,
 	debug: true,
-	// saveIdents: `global`,
 } )
 
 createES6task( {
@@ -96,7 +95,6 @@ createES6task( {
 	source: sourceDir + `server.js`,
 	dest: `./bin/server`,
 	debug: false,
-	// saveIdents: `global`,
 } )
 
 function T( src, proc ) { return function ( file ) {
@@ -111,26 +109,13 @@ function createWriteStream( fn ) {
 function createES6task( options ) {
 	function createDest() {
 		let ret = through()
-		let chunks = []
-		ret.on( `data`, function ( chunk ) { chunks.push( chunk ) } )
-		ret.on( `end`, function () {
-			chunks = Buffer.concat( chunks ).toString()
+		let chunks = ``
+		ret.on( `data`, chunk => chunks += chunk )
+		ret.on( `end`, () => {
 			if ( sourceMapsWorkAround && !options.external && options.debug )
 				chunks = chunks.replace( `\n`, `` )
-			if ( options.saveIdents ) {
-				let r = /\.([a-zA-Z\$][a-zA-Z0-9\$_]+)/g
-				let ii = []
-				let m
-				while ( m = r.exec( chunks ) )
-					ii.push( m[ 1 ] )
-				ii.sort()
-				chunks = options.saveIdents + `.__UsedScriptIdentifiers__+=',`
-					+ ii.filter( function ( x, i, a ) { return x != a[ i - 1 ] } )
-					+ `';`
-					+ chunks
-			}
 			if ( options.external )
-				chunks = `#!/usr/bin/env node\n\n` + chunks
+				chunks = `#!/usr/bin/env node\n\n${ chunks }`
 			let dest
 			if ( options.external ) {
 				try { fs.unlinkSync( options.dest ) } catch ( e ) {}
@@ -138,13 +123,11 @@ function createES6task( options ) {
 			}
 			else if ( compress ) {
 				dest = zlib.createGzip()
-				dest.pipe( createWriteStream( options.dest + `.gz` ) )
+				dest.pipe( createWriteStream( `${ options.dest }.gz` ) )
 			}
 			else
 				dest = createWriteStream( options.dest )
-			dest.on( `close`, function () {
-				console.log( options.name.grey + `: ` + `Created`.green + ` '` + options.dest.cyan + `'` )
-			} )
+			dest.on( `close`, () => console.log( `${ options.name.grey }: ${ `Created`.green } '${ options.dest.cyan }'` ) )
 			dest.end( chunks )
 		} )
 		return ret
@@ -165,16 +148,14 @@ function createES6task( options ) {
 	w = browserify( opts )
 		// .transform( reactifyTransform )
 		.transform( es6ifyTransform )
-		.add( es6ify.runtime )
+		.add( es6ifyPolyfill )
 		.exclude( `express` )
 		.exclude( `compression` )
 		.exclude( `traceur` )
 		.require( require.resolve( options.source ), {
 			entry: true,
 		} )
-		.on( `file`, function ( file ) {
-			console.log( options.name.grey + `: Read '` + file.yellow + `'` )
-		} )
+		.on( `file`, file => console.log( `${ options.name.grey }: Read '${ file.yellow }'` ) )
 	if ( !options.debug )
 		w = w.transform( { global: true }, `uglifyify` )
 	w = watchify( w )
@@ -195,7 +176,7 @@ let mainSrc = path.resolve( `${ __dirname }/../src/main.html` )
 let mainDst = path.resolve( `${ __dirname }/../www/main.html` )
 
 function putTimestamp( text ) {
-	return text.replace( `###TIMESTAMP###`, `!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: ` + Date.now() )
+	return text.replace( `###TIMESTAMP###`, `!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: ${ Date.now() }` )
 }
 
 let manifestUpdater = thread( function* self( what, filename ) {
@@ -210,16 +191,14 @@ let manifestUpdater = thread( function* self( what, filename ) {
 	self.running = true
 	try {
 		do {
-			yield [ function ( cb ) { setTimeout( cb, 300 ) } ]
+			yield [ cb => setTimeout( cb, 300 ) ]
 			self.rerun = false
 
 			console.log( `updating ` + mainDst )
 			let modules = {}
 			let text = html.stringify( yield* loadhtml.load( mainSrc, { modules: modules } ) )
 			modules =
-				Object.keys( modules ).map( function ( n ) {
-					return `require(` + JSON.stringify( n ) + `)\n`
-				} ).join( `` )
+				Object.keys( modules ).map( n => `require( ${ JSON.stringify( n ) } )\n` ).join( `` )
 				+ `global.require = ` + function r( name ) {
 					global.require = null
 					try {
@@ -258,9 +237,7 @@ function watchDir( dir, cb ) {
 	try { fs.mkdirSync( dir ) } catch ( error ) {}
 	if ( dir != `/` )
 		dir += `/`
-	return fs.watch( dir, function ( what, filename ) {
-		return cb( what, dir + filename )
-	} )
+	return fs.watch( dir, ( what, filename ) => cb( what, dir + filename ) )
 }
 
 watchDir( `${ __dirname }/../`, manifestUpdater )
@@ -281,6 +258,4 @@ function thread( fun ) { return function () {
 	}()
 } }
 
-process.on( `uncaughtException`, function ( error ) {
-	console.log( error + `\n` + ( error && error.stack ) )
-} )
+process.on( `uncaughtException`, error => console.log( error + `\n` + ( error && error.stack ) ) )
