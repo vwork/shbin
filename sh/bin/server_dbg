@@ -39981,7 +39981,7 @@ var JSONservice = (function () {
 									json = undefined;
 									context$4$0.prev = 1;
 									context$4$0.next = 4;
-									return co.wait(fs.readFile(file.co.cb));
+									return co.wait(fs.readFile(file, co.cb));
 
 								case 4:
 									context$4$0.t0 = context$4$0.sent;
@@ -40042,41 +40042,44 @@ var JSONservice = (function () {
 
 								case 2:
 									if (!(M.savedUID != M.last.json.uid)) {
-										context$4$0.next = 19;
+										context$4$0.next = 21;
 										break;
 									}
 
+									console.log("************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************SAVING************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************".green);
+									console.log(M.savedUID, M.last.json.uid, M.last.text);
+
 									M.savedUID = M.last.json.uid;
-									context$4$0.prev = 4;
-									context$4$0.next = 7;
+									context$4$0.prev = 6;
+									context$4$0.next = 9;
 									return co.wait(fs.rename(file, "" + file + "." + M.savedUID, co.cb));
 
-								case 7:
-									context$4$0.next = 11;
-									break;
-
 								case 9:
-									context$4$0.prev = 9;
-									context$4$0.t0 = context$4$0["catch"](4);
+									context$4$0.next = 13;
+									break;
 
 								case 11:
 									context$4$0.prev = 11;
-									context$4$0.next = 14;
+									context$4$0.t0 = context$4$0["catch"](6);
+
+								case 13:
+									context$4$0.prev = 13;
+									context$4$0.next = 16;
 									return co.wait(fs.writeFile(file, M.last.text, co.cb));
 
-								case 14:
-									context$4$0.next = 19;
+								case 16:
+									context$4$0.next = 21;
 									break;
 
-								case 16:
-									context$4$0.prev = 16;
-									context$4$0.t1 = context$4$0["catch"](11);
+								case 18:
+									context$4$0.prev = 18;
+									context$4$0.t1 = context$4$0["catch"](13);
 									lu.rethrow(context$4$0.t1);
-								case 19:
+								case 21:
 								case "end":
 									return context$4$0.stop();
 							}
-						}, callee$3$0, this, [[4, 9], [11, 16]]);
+						}, callee$3$0, this, [[6, 11], [13, 18]]);
 					})();
 				},
 				configurable: true,
