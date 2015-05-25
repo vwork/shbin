@@ -2,12 +2,15 @@
 
 'use strict'
 
+let Injections = {
+	[ `websockets/lib/websockets/socket` ]: [ `./rfc6455`, ],
+}
+
 // global.ESCOMPILER = `traceur`
 global.ESCOMPILER = `babel`
 
 // let debug = true
 let compress = false
-let sourceMapsWorkAround = !true
 
 let path = require( `path` )
 
@@ -26,10 +29,14 @@ let browserify = require( `browserify` )
 let watchify = require( `watchify` )
 // let reactify = require( `reactify` )
 let es6ify = global.ESCOMPILER == `traceur` && require( `../src/es6ify` )
-let babelify = global.ESCOMPILER == `babel` && require( `babelify` )
+let babelify = global.ESCOMPILER == `babel` && require( `babelify` ).configure( { optional: [
+	`es7.exponentiationOperator`,
+	`es7.functionBind`,
+	`es7.trailingFunctionCommas`,
+] } )
 let fs = require( `fs` )
 let zlib = require( `zlib` )
-let through = require( `through` )
+let through = require( `through2` )
 let jsp = require( `uglify-js` ).parser
 let pro = require( `uglify-js` ).uglify
 let html = require( `../src/html` )
@@ -55,6 +62,18 @@ let src = /\/src\/.*?\.js$/
 
 let es6ifyTransform = T( src, ESCOMPILER == `traceur` ? es6ify.configure( new RegExp( `` ) ) : babelify )
 let es6ifyPolyfill = ESCOMPILER == `traceur` ? es6ify.runtime : require.resolve( `babelify/polyfill` )
+
+function InjectModules( opts ) {
+	let o = {}
+	for ( let m in opts ) if ( Object.prototype.hasOwnProperty.call( opts, m ) )
+		o[ require.resolve( m ) ] = typeof opts[ m ] == `string` ? [ opts[ m ] ] : opts[ m ]
+	return filename => {
+		let ret = through()
+		if ( Object.prototype.hasOwnProperty.call( o, filename ) )
+			ret.push( `;!function(){ ${ o[ filename ].map( fn => `require( ${ JSON.stringify( fn ) } )` ) } };` )
+		return ret
+	}
+}
 
 try { fs.mkdirSync( tmpDir ) } catch ( _ ) {}
 fs.writeFileSync( tmpIndex, `` )
@@ -90,6 +109,14 @@ createES6task( {
 } )
 
 createES6task( {
+	name: `MODEMSTUB`,
+	external: true,
+	source: sourceDir + `modemstub.js`,
+	dest: `./bin/modemstub`,
+	debug: true,
+} )
+
+createES6task( {
 	name: `SERVER.MIN`,
 	external: true,
 	source: sourceDir + `server.js`,
@@ -108,36 +135,38 @@ function createWriteStream( fn ) {
 
 function createES6task( options ) {
 	function createDest() {
-		let ret = through()
 		let chunks = ``
-		ret.on( `data`, chunk => chunks += chunk )
-		ret.on( `end`, () => {
-			if ( sourceMapsWorkAround && !options.external && options.debug )
-				chunks = chunks.replace( `\n`, `` )
-			if ( options.external )
-				chunks = `#!/usr/bin/env node\n\n${ chunks }`
-			let dest
-			if ( options.external ) {
-				try { fs.unlinkSync( options.dest ) } catch ( e ) {}
-				dest = createWriteStream( options.dest, { mode: 0o777, } )
+		return through(
+			( chunk, enc, callback) => {
+				chunks += chunk
+				callback()
+			},
+			callback => {
+				if ( options.external )
+					chunks = `#!/usr/bin/env node\n\n${ chunks }`
+				let dest
+				if ( options.external ) {
+					try { fs.unlinkSync( options.dest ) } catch ( e ) {}
+					dest = createWriteStream( options.dest, { mode: 0o777, } )
+				}
+				else if ( compress ) {
+					dest = zlib.createGzip()
+					dest.pipe( createWriteStream( `${ options.dest }.gz` ) )
+				}
+				else
+					dest = createWriteStream( options.dest )
+				dest.on( `close`, () => console.log( `${ options.name.grey }: ${ `Created`.green } '${ options.dest.cyan }'` ) )
+				dest.end( chunks )
+				callback()
 			}
-			else if ( compress ) {
-				dest = zlib.createGzip()
-				dest.pipe( createWriteStream( `${ options.dest }.gz` ) )
-			}
-			else
-				dest = createWriteStream( options.dest )
-			dest.on( `close`, () => console.log( `${ options.name.grey }: ${ `Created`.green } '${ options.dest.cyan }'` ) )
-			dest.end( chunks )
-		} )
-		return ret
+		)
 	}
 	let cache = {}
 	let packageCache = {}
 	let opts = {
 		cache: cache,
 		packageCache: packageCache,
-		fullPaths: true,
+		fullPaths: options.external,
 		debug: options.debug && !options.external,
 		detectGlobals: !options.external,
 		insertGlobals: !options.external,
@@ -147,11 +176,10 @@ function createES6task( options ) {
 	let w
 	w = browserify( opts )
 		// .transform( reactifyTransform )
+		.transform( InjectModules( Injections ) )
 		.transform( es6ifyTransform )
 		.add( es6ifyPolyfill )
-		.exclude( `express` )
-		.exclude( `compression` )
-		.exclude( `traceur` )
+		// .exclude( `express` )
 		.require( require.resolve( options.source ), {
 			entry: true,
 		} )
