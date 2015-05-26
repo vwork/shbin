@@ -40980,18 +40980,22 @@ All.Comfort_1 = concat(press, RL, { id: "Set_To_Comfort_1" });
 All.Comfort_2 = concat(press, RL, { id: "Set_To_Comfort_2" });
 All.Stop = concat(click, ROL, { id: "Stop" });
 All.Set = function (COMFORT) {
-	return { id: "Set_To_Comfort", COMFORT: COMFORT };
+	return [{ id: "Set_To_Comfort", COMFORT: COMFORT }];
 };
 var link = concat(press, { id: "Write_Group" });
-All.Link = function (_, GROUP) {
-	return [{ id: "Delete_Group_In_Idle_Mode", ACK: false, GROUP: GROUP }].concat(_toConsumableArray(link));
+All.Clear = All.Reserve = function (_, GROUP) {
+	return [{ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: GROUP }];
 };
-All.Unlink = concat({ id: "Delete_Group_In_Idle_Mode", GROUP: 0 });
+All.Link = function (_, GROUP) {
+	return [].concat(_toConsumableArray(All.Reserve(_, GROUP)), _toConsumableArray(link));
+};
+All.Unlink = concat({ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: "Any_Group" });
+// All.AppendTo = GROUP => ( { id: `Write_Group_In_Idle`, GROUP, } )
 All.AppendTo = function (GROUP) {
-	return { id: "Write_Group_In_Idle", GROUP: GROUP };
+	return [{ id: "GoTo_Mode", To_MODE: 7 }].concat(_toConsumableArray(concat(link, { group: GROUP })), [{ id: "GoTo_Mode", To_MODE: 1 }]);
 };
 All.RemoveFrom = function (GROUP) {
-	return { id: "Delete_Group_In_Idle_Mode", GROUP: GROUP };
+	return [{ id: "Delete_Group_In_Programming_Mode", GROUP: GROUP }];
 };
 All.Reset = { id: "Clear_Device_Memory_In_Idle_Mode", ACK: false };
 
@@ -42067,7 +42071,32 @@ function parseArrays(csv) {
 	}));
 }
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","csv":"/home/vadzim/v/work/nerojs/node_modules/csv/lib/index.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","csv":"/home/vadzim/v/work/nerojs/node_modules/csv/lib/index.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/devdb.js":[function(require,module,exports){
+"use strict";
+
+function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+
+var lodash = require("lodash");
+
+exports.Clear = exports.Unlink = function (devices, deviceId) {
+	return lodash.reduce(devices, function (ret, q, index) {
+		if (q) if (index == deviceId) ret[index] = null;else if (q.content && q.content[deviceId]) ret[index] = { content: _defineProperty({}, deviceId, null) };
+		return ret;
+	}, {});
+};
+
+exports.Set = function (devices, deviceId, data) {
+	var device = devices[deviceId];
+	if (!device || !device.group) return;
+	var ret = _defineProperty({}, deviceId, data);
+	if (device.type == "group") ret = lodash.reduce(device.content, function (ret, q, index) {
+		if (q) ret[index] = data;
+		return ret;
+	}, ret);
+	return ret;
+};
+
+},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
 "use strict";
 
 var deviceTypes = require("deviceTypes");
@@ -42916,7 +42945,7 @@ var lu = module.exports = {
 	},
 
 	when: function when(promise, cb) {
-		promise.then(cb, cb);
+		if (promise != null) promise.then(cb, cb);else process.nextTick(cb);
 		return promise;
 	},
 
@@ -43619,6 +43648,10 @@ var lu = module.exports = {
 		var ret = lu.array(buf);
 		if (ret == buf) ret = buf.slice();
 		return ret;
+	},
+
+	array1: function array1(value) {
+		if (Array.isArray(value)) return value;else return [value];
 	},
 
 	array: function array(buf) {
@@ -46928,9 +46961,16 @@ module.exports = Scheduler;
 },{}],"/home/vadzim/v/work/nerojs/src/server.js":[function(require,module,exports){
 // window.webkitRTCPeerConnection
 
+// TODO:
+// - паведамленьні на экране - пра памылкі розныя.
+// - абнаўленьне статусу прылады пасьля групавой аперацыі
+// - статус прылады "...усё добра..."
+// - статус прылады "...усё добра, у працэсе абнаўленьня..."
+// - статус прылады "..памылка, у працэсе абнаўленьня...""
+
 "use strict";
 
-var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }
 
@@ -46962,6 +47002,7 @@ var constants = require("constants");
 var PingPong = require("pingpong");
 var SubConnections = require("subconnections");
 
+var devdb = require("devdb");
 var actionToCommands = require("actionToCommands");
 var deviceActions = require("deviceActions");
 var deviceTypes = require("deviceTypes");
@@ -47362,228 +47403,273 @@ var modem = ra(Object.defineProperties({
 		return answer.RESULT;
 	},
 
-	userCommand: regeneratorRuntime.mark(function userCommand(_ref2) {
+	userCommand: function userCommand(_ref2) {
 		var deviceId = _ref2.deviceId;
 		var command = _ref2.command;
+		var ack = _ref2.ack;
 		var data = _ref2.data;
 		var socket = _ref2.socket;
-		var error, device, deviceCommand, groups, i, commands, newstate, info, passedToModem, my_timestamp, errors, errorneous;
-		return regeneratorRuntime.wrap(function userCommand$(context$1$0) {
-			while (1) switch (context$1$0.prev = context$1$0.next) {
-				case 0:
-					error = function error(status, message) {
-						throw new CustomError(message || HTTPStatus[status], { status: status });
-					};
 
-					context$1$0.next = 3;
-					return modem.devices.waitForReady(socket);
+		if (typeof arguments[0] != "object") {
+			deviceId = arguments[0];
+			command = arguments[1];
+			ack = arguments[2];
+			data = arguments[3];
+			socket = arguments[4];
+		}
+		return co.go(regeneratorRuntime.mark(function callee$1$0() {
+			var error, deviceCommand, group, device, commands, newstate, info, groups, i, passedToModem, my_timestamp, errors, errorneous;
+			return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
+				while (1) switch (context$2$0.prev = context$2$0.next) {
+					case 0:
+						error = function error(status, message) {
+							throw new CustomError(message || HTTPStatus[status], { status: status });
+						};
 
-				case 3:
-					device = modem.devices.getState()[deviceId];
-					deviceCommand = command;
+						context$2$0.next = 3;
+						return modem.devices.waitForReady(socket);
 
-					if (!device) error(HTTPStatus.NOT_FOUND);
+					case 3:
+						deviceCommand = command;
+						group = undefined;
+						device = undefined;
+						commands = undefined;
+						newstate = undefined;
+						info = undefined;
 
-					if (device.group) {
-						context$1$0.next = 23;
+						if (!(typeof deviceId == "number")) {
+							context$2$0.next = 13;
+							break;
+						}
+
+						group = deviceId;
+						context$2$0.next = 35;
 						break;
-					}
 
-					if (!(deviceCommand == "Link")) {
-						context$1$0.next = 22;
+					case 13:
+						device = modem.devices.getState()[deviceId];
+						if (!device) error(HTTPStatus.NOT_FOUND);
+
+						if (device.group) {
+							context$2$0.next = 32;
+							break;
+						}
+
+						if (!(deviceCommand == "Link" || deviceCommand == "Reserve")) {
+							context$2$0.next = 31;
+							break;
+						}
+
+						groups = lodash.reduce(modem.devices.getState(), function (ret, d) {
+							if (d.group) ret[d.group] = true;
+							return ret;
+						}, []);
+						i = 2;
+
+					case 19:
+						if (!(i <= 1022)) {
+							context$2$0.next = 26;
+							break;
+						}
+
+						if (!(groups[i] == null)) {
+							context$2$0.next = 23;
+							break;
+						}
+
+						modem.devices.applyItemChanges(deviceId, { group: i });
+						return context$2$0.abrupt("break", 26);
+
+					case 23:
+						++i;
+						context$2$0.next = 19;
 						break;
-					}
 
-					groups = lodash.reduce(modem.devices.getState(), function (ret, d) {
-						if (d.group) ret[d.group] = true;
-						return ret;
-					}, []);
-					i = 2;
-
-				case 10:
-					if (!(i <= 1022)) {
-						context$1$0.next = 17;
+					case 26:
+						ra.forceCalculations();
+						device = modem.devices.getState()[deviceId];
+						if (!device.group) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
+						context$2$0.next = 32;
 						break;
-					}
 
-					if (!(groups[i] == null)) {
-						context$1$0.next = 14;
-						break;
-					}
+					case 31:
+						error(HTTPStatus.NOT_FOUND, "No group in device");
 
-					modem.devices.applyItemChanges(deviceId, { group: i });
-					return context$1$0.abrupt("break", 17);
+					case 32:
+						newstate = deviceActions.getNewState(device, deviceCommand, data);
+						info = deviceTypes[device.model];
+						group = device.group;
 
-				case 14:
-					++i;
-					context$1$0.next = 10;
-					break;
+					case 35:
 
-				case 17:
-					ra.forceCalculations();
-					device = modem.devices.getState()[deviceId];
-					if (!device.group) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
-					context$1$0.next = 23;
-					break;
+						commands = actionToCommands.createCommandSequence(group, info && info.buttons || "Dimeer", deviceCommand, data);
+						if (!commands || !commands.length) error(HTTPStatus.NOT_FOUND);
 
-				case 22:
-					error(HTTPStatus.NOT_FOUND, "No group in device");
+						passedToModem = false;
+						my_timestamp = Inc();
+						errors = [];
+						errorneous = device ? device.errorneous : null;
 
-				case 23:
-					commands = undefined;
-					newstate = deviceActions.getNewState(device, deviceCommand, data);
-					info = deviceTypes[device.model];
+						// first notify clients about things to change
+						if (device) {
+							co.defer(function () {
+								var device = modem.devices.getState()[deviceId];
+								if (!passedToModem && device && my_timestamp == device.newstate_timestamp) modem.devices.applyItemChanges(deviceId, { newstate: null, newstate_timestamp: null, errorneous: errorneous });
+							});
+							modem.devices.applyItemChanges(deviceId, { newstate: newstate, newstate_timestamp: my_timestamp, errorneous: null });
+						}
+						context$2$0.next = 44;
+						return modem.session(regeneratorRuntime.mark(function callee$2$0(command) {
+							var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, c, answer;
 
-					commands = actionToCommands.createCommandSequence(device.group, info && info.buttons || "Dimeer", deviceCommand, data);
-					if (!commands || !commands.length) error(HTTPStatus.NOT_FOUND);
+							return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
+								while (1) switch (context$3$0.prev = context$3$0.next) {
+									case 0:
+										_iteratorNormalCompletion = true;
+										_didIteratorError = false;
+										_iteratorError = undefined;
+										context$3$0.prev = 3;
+										_iterator = commands[Symbol.iterator]();
 
-					passedToModem = false;
-					my_timestamp = Inc();
-					errors = [];
-					errorneous = true;
+									case 5:
+										if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+											context$3$0.next = 28;
+											break;
+										}
 
-					co.defer(function () {
-						if (!passedToModem && my_timestamp == modem.devices.getState()[deviceId].newstate_timestamp) modem.devices.applyItemChanges(deviceId, { newstate: null, newstate_timestamp: null, errorneous: errorneous });
-					});
+										c = _step.value;
+										context$3$0.prev = 7;
 
-					// first notify clients about things to change
-					modem.devices.applyItemChanges(deviceId, { newstate: newstate, newstate_timestamp: my_timestamp, errorneous: null });
-					context$1$0.next = 36;
-					return modem.session(regeneratorRuntime.mark(function callee$1$0(command) {
-						var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, _c, answer;
+										if (device) {
+											if (device.type == "group") {
+												// no ACK on groups. ever.
+												if (c.ACK) // leave "null" if it's already there
+													c.ACK = false;
+											} else if (c.ACK == null) {
+												c.ACK = ack != null ? ack : device.acknowledgement !== false // if acknowledgement is not set on a device then default it to true
+												;
+											}
+										} else if (c.ACK == null && ack != null) c.ACK = ack;
+										context$3$0.next = 11;
+										return command(c);
 
-						return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
-							while (1) switch (context$2$0.prev = context$2$0.next) {
-								case 0:
-									_iteratorNormalCompletion = true;
-									_didIteratorError = false;
-									_iteratorError = undefined;
-									context$2$0.prev = 3;
-									_iterator = commands[Symbol.iterator]();
+									case 11:
+										answer = context$3$0.sent;
 
-								case 5:
-									if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-										context$2$0.next = 27;
+										if (answer.RESULT == "OK") {
+											context$3$0.next = 14;
+											break;
+										}
+
+										throw new CustomError(answer.RESULT, { answer: answer });
+
+									case 14:
+										context$3$0.next = 25;
 										break;
-									}
 
-									_c = _step.value;
-									context$2$0.prev = 7;
+									case 16:
+										context$3$0.prev = 16;
+										context$3$0.t0 = context$3$0["catch"](7);
 
-									if (device.type == "group") {
-										if (_c.ACK) // leave "null" if it's already there
-											_c.ACK = false;
-									} else if (_c.ACK == null) {
-										_c.ACK = device.acknowledgement !== false // if acknowledgement is not set on a device then default it to true
-										;
-									}
-									context$2$0.next = 11;
-									return command(_c);
+										console.error("modem error:".red, context$3$0.t0);
+										errorneous = true;
 
-								case 11:
-									answer = context$2$0.sent;
+										if (!(context$3$0.t0 instanceof Modem.ETimeout || context$3$0.t0.answer && context$3$0.t0.answer.RESULT == "Connection_error")) {
+											context$3$0.next = 24;
+											break;
+										}
 
-									if (answer.RESULT == "OK") {
-										context$2$0.next = 14;
+										errors.push(context$3$0.t0);
+										context$3$0.next = 25;
 										break;
-									}
 
-									throw new CustomError(answer.RESULT, { answer: answer });
+									case 24:
+										throw context$3$0.t0;
 
-								case 14:
-									context$2$0.next = 24;
-									break;
-
-								case 16:
-									context$2$0.prev = 16;
-									context$2$0.t0 = context$2$0["catch"](7);
-
-									console.error("modem error:".red, context$2$0.t0);
-
-									if (!(context$2$0.t0 instanceof Modem.ETimeout || context$2$0.t0.answer && context$2$0.t0.answer.RESULT == "Connection_error")) {
-										context$2$0.next = 23;
+									case 25:
+										_iteratorNormalCompletion = true;
+										context$3$0.next = 5;
 										break;
-									}
 
-									errors.push(context$2$0.t0);
-									context$2$0.next = 24;
-									break;
-
-								case 23:
-									throw context$2$0.t0;
-
-								case 24:
-									_iteratorNormalCompletion = true;
-									context$2$0.next = 5;
-									break;
-
-								case 27:
-									context$2$0.next = 33;
-									break;
-
-								case 29:
-									context$2$0.prev = 29;
-									context$2$0.t1 = context$2$0["catch"](3);
-									_didIteratorError = true;
-									_iteratorError = context$2$0.t1;
-
-								case 33:
-									context$2$0.prev = 33;
-									context$2$0.prev = 34;
-
-									if (!_iteratorNormalCompletion && _iterator["return"]) {
-										_iterator["return"]();
-									}
-
-								case 36:
-									context$2$0.prev = 36;
-
-									if (!_didIteratorError) {
-										context$2$0.next = 39;
+									case 28:
+										context$3$0.next = 34;
 										break;
-									}
 
-									throw _iteratorError;
+									case 30:
+										context$3$0.prev = 30;
+										context$3$0.t1 = context$3$0["catch"](3);
+										_didIteratorError = true;
+										_iteratorError = context$3$0.t1;
 
-								case 39:
-									return context$2$0.finish(36);
+									case 34:
+										context$3$0.prev = 34;
+										context$3$0.prev = 35;
 
-								case 40:
-									return context$2$0.finish(33);
+										if (!_iteratorNormalCompletion && _iterator["return"]) {
+											_iterator["return"]();
+										}
 
-								case 41:
-									if (!errors.length) {
-										context$2$0.next = 45;
-										break;
-									}
+									case 37:
+										context$3$0.prev = 37;
 
-									context$2$0.next = 44;
-									return command({ id: "Dest_Condition", group: commands[0].group });
+										if (!_didIteratorError) {
+											context$3$0.next = 40;
+											break;
+										}
 
-								case 44:
-									newstate = context$2$0.sent.DEST_CONDITION;
+										throw _iteratorError;
 
-								case 45:
-									// here newstate can become null if device has not answered
-									if (newstate != null) {
-										errorneous = null;
-										modem.devices.applyItemChanges(deviceId, { state: newstate, state_timestamp: my_timestamp, errorneous: null });
-										passedToModem = true;
-									}
+									case 40:
+										return context$3$0.finish(37);
 
-								case 46:
-								case "end":
-									return context$2$0.stop();
-							}
-						}, callee$1$0, this, [[3, 29, 33, 41], [7, 16], [34,, 36, 40]]);
-					}));
+									case 41:
+										return context$3$0.finish(34);
 
-				case 36:
-				case "end":
-					return context$1$0.stop();
-			}
-		}, userCommand, this);
-	}) }, {
+									case 42:
+										if (!errors.length) {
+											context$3$0.next = 46;
+											break;
+										}
+
+										context$3$0.next = 45;
+										return command({ id: "Dest_Condition", group: commands[0].group });
+
+									case 45:
+										newstate = context$3$0.sent.DEST_CONDITION;
+
+									case 46:
+										// here newstate can become null if device has not answered
+										if (device && newstate != null) {
+											errorneous = null;
+											modem.devices.applyItemChanges(deviceId, { state: newstate, state_timestamp: my_timestamp, errorneous: null });
+											passedToModem = true;
+										}
+
+									case 47:
+									case "end":
+										return context$3$0.stop();
+								}
+							}, callee$2$0, this, [[3, 30, 34, 42], [7, 16], [35,, 37, 41]]);
+						}));
+
+					case 44:
+
+						if (device) if (deviceCommand == "Unlink" || deviceCommand == "Clear") {
+							modem.devices.applyChanges(devdb[deviceCommand](modem.devices.getState(), deviceId));
+							ra.forceCalculations();
+						}
+						if (deviceCommand == "Set" || device.type == "group") {
+							if (!errorneous) modem.devices.applyChanges(devdb.Set(modem.devices.getState(), deviceId, { state: newstate }));else modem.devices.applyChanges(devdb.Set(modem.devices.getState(), deviceId, { errorneous: true }));
+							ra.forceCalculations();
+						}
+
+					case 46:
+					case "end":
+						return context$2$0.stop();
+				}
+			}, callee$1$0, this);
+		}));
+	} }, {
 	initializeSocket: {
 		get: function () {
 			modem.createSocket();
@@ -48491,61 +48577,35 @@ var tellToBoss = function tellToBoss() {
 };
 tellToBoss();
 
-if (repl) {
-	global.r = require;
-	require("repl").start({ useGlobal: true, ignoreUndefined: true });
-	//
+var modemREPL = function modemREPL() {
+	return net.createServer(function (socket) {
+		Object.assign(require("repl").start({
+			prompt: "modem > ",
+			input: socket,
+			output: socket,
+			terminal: true,
+			ignoreUndefined: true,
+			replMode: repl.REPL_MODE_STRICT }).on("exit", function () {
+			return socket.end();
+		}).context, {
+			socket: socket,
+			service: service,
+			modem: modem,
+			config: config,
+			require: require,
+			lu: lu,
+			lodash: lodash,
+			co: co,
+			ra: ra,
+			modemREPL: modemREPL });
+	}).on("error", function (error) {
+		return console.log(error);
+	});
+};
 
-	global.Modem = Modem;
-	global.mm = modem;
-	global.c = function () {
-		for (var _len7 = arguments.length, args = Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-			args[_key7] = arguments[_key7];
-		}
+modemREPL().listen("/tmp/modem" + process.pid);
 
-		modem.session(regeneratorRuntime.mark(function callee$1$0(command) {
-			return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
-				while (1) switch (context$2$0.prev = context$2$0.next) {
-					case 0:
-						context$2$0.next = 2;
-						return command.apply(undefined, args);
-
-					case 2:
-						return context$2$0.abrupt("return", context$2$0.sent);
-
-					case 3:
-					case "end":
-						return context$2$0.stop();
-				}
-			}, callee$1$0, this);
-		}));
-	};
-	c.v = c.bind(undefined, "Version");
-	c.c = function () {
-		var COMFORT = arguments[0] === undefined ? 1 : arguments[0];
-		return c("Set_To_Comfort", { group: 1021, COMFORT: COMFORT });
-	};
-	global.m = function (text) {
-		return Modem.extractMessages(text).map(function (x) {
-			switch (x.id) {
-				case "Change_modem_work_mode":
-					return { Change_modem_work_mode: x.MODEM_MODE };
-				case "Free_Cell_Count":
-					return null;
-				case "answer_Result":
-					return x.RESULT;
-				case "answer_Free_Cell_Count":
-					return { Free_Cell_Count: x.COUNT };
-				case "Change_modem_work_mode":
-				case "Functions":
-				case "answer_Functions":
-					delete x.cmdLo;
-					delete x.cmdHi;
-			}
-			return x;
-		}).filter(Boolean);
-	};
-}
+// repl: [],
 
 // response
 // then lock the modem
@@ -48559,8 +48619,10 @@ if (repl) {
 // будзем ветлівымі, і ўсё пазакрываем, і логеру ўсё скажам
 
 // TODO: delete this code later
+// if ( config.repl )
+// 	lu.array1( config.repl ).filter( Boolean ).forEach( p => modemREPL().listen( p ) )
 
-},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","NodeWebSocketToJSON":"/home/vadzim/v/work/nerojs/src/NodeWebSocketToJSON.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":"/home/vadzim/v/work/nerojs/node_modules/compression/index.js","constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js","fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"subconnections":"/home/vadzim/v/work/nerojs/src/subconnections.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/subconnections.js":[function(require,module,exports){
+},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","NodeWebSocketToJSON":"/home/vadzim/v/work/nerojs/src/NodeWebSocketToJSON.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":"/home/vadzim/v/work/nerojs/node_modules/compression/index.js","constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","devdb":"/home/vadzim/v/work/nerojs/src/devdb.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js","fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"subconnections":"/home/vadzim/v/work/nerojs/src/subconnections.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/subconnections.js":[function(require,module,exports){
 /*
 Only hard linked subconnections are implemented for now - closing subconnection closes the whole connection.
 */

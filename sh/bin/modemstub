@@ -11858,7 +11858,7 @@ var lu = module.exports = {
 	},
 
 	when: function when(promise, cb) {
-		promise.then(cb, cb);
+		if (promise != null) promise.then(cb, cb);else process.nextTick(cb);
 		return promise;
 	},
 
@@ -12561,6 +12561,10 @@ var lu = module.exports = {
 		var ret = lu.array(buf);
 		if (ret == buf) ret = buf.slice();
 		return ret;
+	},
+
+	array1: function array1(value) {
+		if (Array.isArray(value)) return value;else return [value];
 	},
 
 	array: function array(buf) {
