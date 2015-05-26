@@ -42188,7 +42188,7 @@ exports.cleanDatabase = function (devices) {
 		lodash.keys(place.content).sort(function (a, b) {
 			return (place.content[a].index || 0) - (place.content[b].index || 0);
 		}).forEach(function (ckey, index) {
-			if (place.content[ckey].index != index) assign(key, "content", ckey, index);
+			if (place.content[ckey].index != index) assign(key, "content", ckey, "index", index);
 		});
 	});
 
