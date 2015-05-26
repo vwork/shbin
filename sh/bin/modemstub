@@ -11710,6 +11710,14 @@ var lu = module.exports = {
 	error: (console.error || console.log).bind(console),
 	trace: (console.trace || console.log).bind(console),
 
+	mapObj: function mapObj(obj, props) {
+		var ret = Object.assign({}, obj);
+		lodash.forEach(props, function (fun, key) {
+			return ret[key] = typeof fun == "function" ? fun(obj[key]) : fun;
+		});
+		return ret;
+	},
+
 	rests: function rests(num) {
 		for (var _len = arguments.length, _rests = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
 			_rests[_key - 1] = arguments[_key];
