@@ -40799,59 +40799,10 @@ var lu = module.exports = {
 		return ret;
 	},
 
-	testDiffImm: function testDiffImm() {
-		var p = { a: 1, x: { u: 9 } };
-		var q = { x: { c: 2 } };
-		assert(Immutable.is(Immutable.fromJS(q), lu.applyDiffImm(p, lu.makeDiffImm(p, q))));
-	},
-
 	testDiff: function testDiff() {
 		var p = { a: 1, x: { u: 9 } };
 		var q = { x: { c: 2 } };
-		assert(Immutable.is(Immutable.fromJS(q), Immutable.fromJS(lu.applyDiff(p, lu.makeDiff(p, q)))));
-	},
-
-	applyDiffImm: function applyDiffImm(dest, diff) {
-		return Immutable.fromJS(dest || Immutable.Map()).withMutations(function (dest) {
-			Immutable.fromJS(diff).forEach(function (value, key) {
-				if (value == null) dest["delete"](key);else if (!(value instanceof Immutable.Map)) dest.set(key, value);else dest.set(key, lu.applyDiffImm(dest.get(key), value));
-			});
-		});
-	},
-
-	makeDiffImm: function makeDiffImm(previous, next) {
-		return Immutable.Map().withMutations(function (ret) {
-			function toArray(obj) {
-				var ret = [];
-				obj && Immutable.fromJS(obj).forEach(function (value, key) {
-					ret.push({ key: key, value: value });
-				});
-				return ret.sort(function (v1, v2) {
-					return v1.key < v2.key ? -1 : v1.key > v2.key ? 1 : 0;
-				});
-			}
-			var pa = toArray(previous);
-			var na = toArray(next);
-			var p = pa.pop();
-			var n = na.pop();
-			while (p || n) {
-				if (!n || p && p.key > n.key) {
-					ret.set(p.key, null); // deleting
-					p = pa.pop();
-				} else if (!p || p.key < n.key) {
-					ret.set(n.key, n.value);
-					n = na.pop();
-				} else {
-					if (p.value instanceof Immutable.Map && n.value instanceof Immutable.Map) ret.set(n.key, lu.makeDiffImm(p.value, n.value));else ret.set(n.key, n.value);
-					p = pa.pop();
-					n = na.pop();
-				}
-			}
-		});
-	},
-
-	assignDiffImm: function assignDiffImm(dest, src) {
-		return lu.applyDiffImm(dest, lu.makeDiffImm(dest, src));
+		assert(JSON.stringify(q) == JSON.stringify(lu.applyDiff(p, lu.makeDiff(p, q))));
 	},
 
 	isLiteral: function isLiteral(obj) {
@@ -40896,6 +40847,7 @@ var lu = module.exports = {
 	},
 
 	makeDiff: function makeDiff(previous, next) {
+		if (previous === next) return null;
 		var ret = null;
 		function toArray(obj) {
 			var ret = [];
@@ -40941,22 +40893,6 @@ var lu = module.exports = {
 
 	assignDiff: function assignDiff(dest, src) {
 		return lu.applyDiff(dest, lu.makeDiff(dest, src));
-	},
-
-	cast: function cast(type, obj) {
-		if (!obj || typeof obj != "object") return obj;
-
-		var _ref = type || {};
-
-		var constructor = _ref.constructor;
-		var elements = _ref.elements;
-
-		if (typeof constructor == "string") constructor = Immutable[constructor];
-		return (constructor || Immutable.Map)().withMutations(function (ret) {
-			return Object.keys(obj).forEach(function (k) {
-				return ret.set(k, lu.cast(elements && elements[k], obj[k]));
-			});
-		});
 	},
 
 	concatString: function concatString(array) {

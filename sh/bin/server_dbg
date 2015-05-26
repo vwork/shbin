@@ -42077,6 +42077,8 @@ function parseArrays(csv) {
 function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
 
 var lodash = require("lodash");
+var UID = require("uid");
+var lu = require("localUtils");
 
 exports.Clear = exports.Unlink = function (devices, deviceId) {
 	return lodash.reduce(devices, function (ret, q, index) {
@@ -42096,7 +42098,104 @@ exports.Set = function (devices, deviceId, data) {
 	return ret;
 };
 
-},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
+exports.cleanDatabase = function (devices) {
+	var ret = devices;
+	function save(diff) {
+		ret = lu.applyDiff(ret, diff);
+	}
+	function change(path, value) {
+		save(path.reduceRight(function (ret, key) {
+			return _defineProperty({}, key, ret);
+		}, value));
+	}
+	function assign() {
+		for (var _len = arguments.length, path = Array(_len), _key = 0; _key < _len; _key++) {
+			path[_key] = arguments[_key];
+		}
+
+		change(path, path.pop());
+	}
+	function remove() {
+		for (var _len2 = arguments.length, path = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+			path[_key2] = arguments[_key2];
+		}
+
+		change(path, null);
+	}
+
+	// remove items with wrong type & remove group from places
+	lodash.forEach(devices, function (place, placeId) {
+		if (place != null && typeof place != "object") return;
+		if (place == null) return remove(placeId);
+		if (place.type == "device") // TODO: remove later
+			assign(placeId, "type", "single");
+		if (place.device == placeId) remove(placeId, "device");else if (!(place.type || "").match(/^(place|group|single)$/)) return remove(placeId);
+		if (place.group != null && (!Number.isFinite(place.group) || place.type == "place")) remove(placeId, "group");
+	});
+
+	// create main
+	if (ret && typeof ret.main != "string") {
+		(function () {
+			assign("main", UID());
+			var i = 0;
+			lodash.forEach(ret, function (place, key) {
+				if (typeof place == "object" && key != ret.main) assign(ret.main, "content", key, ++i);
+			});
+		})();
+	}
+
+	// build reachable items
+	var reachable = Object.create(null);
+	var reachableKeys = [];
+	function push(key) {
+		if (!(key in reachable) && ret.hasOwnProperty(key) && typeof ret[key] == "object") {
+			reachable[key] = true;
+			reachableKeys.push(key);
+		}
+		return key;
+	}
+	push(ret.main);
+	for (var i = 0; i < reachableKeys.length; ++i) {
+		var place = ret[reachableKeys[i]];
+		if (place && place.content) Object.keys(place.content).forEach(push);
+	}
+
+	function groupIndex(key) {
+		var i = 0;
+		if (ret[key].type == "group") i += 2;
+		if (key in reachable) i += 1;
+	}
+
+	// remove items with duplicate group
+	var groups = Object.create(null);
+	lodash.forEach(ret, function (place, key) {
+		if (!place || place.group == null) return;
+		if (!groups[place.group]) groups[place.group] = key;else {
+			if (groupIndex(groups[place.group]) < groupIndex(key)) {
+				remove(groups[place.group]);
+				groups[place.group] = key;
+			} else remove(key);
+		}
+	});
+
+	// check content
+	lodash.forEach(ret, function (place, key) {
+		if (!place || place.content == null) return;
+		if (typeof place.content != "object") return remove(key, "content");
+		lodash.forEach(place.content, function (_, ckey) {
+			if (!ret[ckey] || typeof ret[ckey] != "object") remove(key, "content", ckey);
+		});
+		lodash.keys(place.content).sort(function (a, b) {
+			return (place.content[a].index || 0) - (place.content[b].index || 0);
+		}).forEach(function (ckey, index) {
+			if (place.content[ckey].index != index) assign(key, "content", ckey, index);
+		});
+	});
+
+	return lu.makeDiff(devices, ret);
+};
+
+},{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
 "use strict";
 
 var deviceTypes = require("deviceTypes");
@@ -43246,59 +43345,10 @@ var lu = module.exports = {
 		return ret;
 	},
 
-	testDiffImm: function testDiffImm() {
-		var p = { a: 1, x: { u: 9 } };
-		var q = { x: { c: 2 } };
-		assert(Immutable.is(Immutable.fromJS(q), lu.applyDiffImm(p, lu.makeDiffImm(p, q))));
-	},
-
 	testDiff: function testDiff() {
 		var p = { a: 1, x: { u: 9 } };
 		var q = { x: { c: 2 } };
-		assert(Immutable.is(Immutable.fromJS(q), Immutable.fromJS(lu.applyDiff(p, lu.makeDiff(p, q)))));
-	},
-
-	applyDiffImm: function applyDiffImm(dest, diff) {
-		return Immutable.fromJS(dest || Immutable.Map()).withMutations(function (dest) {
-			Immutable.fromJS(diff).forEach(function (value, key) {
-				if (value == null) dest["delete"](key);else if (!(value instanceof Immutable.Map)) dest.set(key, value);else dest.set(key, lu.applyDiffImm(dest.get(key), value));
-			});
-		});
-	},
-
-	makeDiffImm: function makeDiffImm(previous, next) {
-		return Immutable.Map().withMutations(function (ret) {
-			function toArray(obj) {
-				var ret = [];
-				obj && Immutable.fromJS(obj).forEach(function (value, key) {
-					ret.push({ key: key, value: value });
-				});
-				return ret.sort(function (v1, v2) {
-					return v1.key < v2.key ? -1 : v1.key > v2.key ? 1 : 0;
-				});
-			}
-			var pa = toArray(previous);
-			var na = toArray(next);
-			var p = pa.pop();
-			var n = na.pop();
-			while (p || n) {
-				if (!n || p && p.key > n.key) {
-					ret.set(p.key, null); // deleting
-					p = pa.pop();
-				} else if (!p || p.key < n.key) {
-					ret.set(n.key, n.value);
-					n = na.pop();
-				} else {
-					if (p.value instanceof Immutable.Map && n.value instanceof Immutable.Map) ret.set(n.key, lu.makeDiffImm(p.value, n.value));else ret.set(n.key, n.value);
-					p = pa.pop();
-					n = na.pop();
-				}
-			}
-		});
-	},
-
-	assignDiffImm: function assignDiffImm(dest, src) {
-		return lu.applyDiffImm(dest, lu.makeDiffImm(dest, src));
+		assert(JSON.stringify(q) == JSON.stringify(lu.applyDiff(p, lu.makeDiff(p, q))));
 	},
 
 	isLiteral: function isLiteral(obj) {
@@ -43343,6 +43393,7 @@ var lu = module.exports = {
 	},
 
 	makeDiff: function makeDiff(previous, next) {
+		if (previous === next) return null;
 		var ret = null;
 		function toArray(obj) {
 			var ret = [];
@@ -43388,22 +43439,6 @@ var lu = module.exports = {
 
 	assignDiff: function assignDiff(dest, src) {
 		return lu.applyDiff(dest, lu.makeDiff(dest, src));
-	},
-
-	cast: function cast(type, obj) {
-		if (!obj || typeof obj != "object") return obj;
-
-		var _ref = type || {};
-
-		var constructor = _ref.constructor;
-		var elements = _ref.elements;
-
-		if (typeof constructor == "string") constructor = Immutable[constructor];
-		return (constructor || Immutable.Map)().withMutations(function (ret) {
-			return Object.keys(obj).forEach(function (k) {
-				return ret.set(k, lu.cast(elements && elements[k], obj[k]));
-			});
-		});
 	},
 
 	concatString: function concatString(array) {
@@ -46967,6 +47002,7 @@ module.exports = Scheduler;
 // - статус прылады "...усё добра..."
 // - статус прылады "...усё добра, у працэсе абнаўленьня..."
 // - статус прылады "..памылка, у працэсе абнаўленьня...""
+// - усе аперацыі праводзіць праз драйвер БД, якому перадаецца драйвер мадэма. Драйвер БД для аперацыі вяртае абнаўленьне да БД, якое прымяняецца на баку кліента для адлюстраваньня часовых зьменеаў і на баку сервера для адлюстраваньня пастаянных зьменаў
 
 "use strict";
 
@@ -47953,335 +47989,30 @@ var modemService = express().use(cookieParser).use(require("http_log")).use(func
 				return context$1$0.stop();
 		}
 	}, callee$0$0, this, [[1, 6]]);
-}))).all(/^\/(rooms|devices|database)$/, (modem.devices = new JSONservice(config["var"] + "/database", { main: "room", room: { content: [] } }), ra(function () {
-	// force correct indices after changes
-	var devices = modem.devices.getState();
-	ra.detach(function () {
-		var ret = {};
-		lodash.forEach(devices, function (place, placeId) {
-			if (!place || !place.content) return;
-			var p = ret[placeId] = { content: {} };
-			lodash.keys(place.content).sort(function (a, b) {
-				return (place.content[a].index || 0) - (place.content[b].index || 0);
-			}).forEach(function (key, index) {
-				p.content[key] = { index: index };
-			});
-		});
-		modem.devices.applyChanges(ret);
-	});
-}), co.go(regeneratorRuntime.mark(function callee$0$0() {
-	var files, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, i, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, r, d, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5;
-
+}))).all(/^\/(rooms|devices|database)$/, (modem.devices = new JSONservice(config["var"] + "/database", { main: "room", room: { content: [] } }), ra(regeneratorRuntime.mark(function callee$0$0() {
+	var devices;
 	return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
 		while (1) switch (context$1$0.prev = context$1$0.next) {
 			case 0:
-				context$1$0.prev = 0;
-				files = { rooms: {}, devices: {} };
-				_iteratorNormalCompletion2 = true;
-				_didIteratorError2 = false;
-				_iteratorError2 = undefined;
-				context$1$0.prev = 5;
-				_iterator2 = Object.keys(files)[Symbol.iterator]();
-
-			case 7:
-				if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-					context$1$0.next = 21;
-					break;
-				}
-
-				i = _step2.value;
-				context$1$0.prev = 9;
-				context$1$0.next = 12;
-				return co.wait(fs.readFile("" + config["var"] + "/" + i, co.cb));
-
-			case 12:
-				context$1$0.t0 = context$1$0.sent.toString();
-				files[i] = JSON.parse(context$1$0.t0);
-				context$1$0.next = 18;
-				break;
-
-			case 16:
-				context$1$0.prev = 16;
-				context$1$0.t1 = context$1$0["catch"](9);
-
-			case 18:
-				_iteratorNormalCompletion2 = true;
-				context$1$0.next = 7;
-				break;
-
-			case 21:
-				context$1$0.next = 27;
-				break;
-
-			case 23:
-				context$1$0.prev = 23;
-				context$1$0.t2 = context$1$0["catch"](5);
-				_didIteratorError2 = true;
-				_iteratorError2 = context$1$0.t2;
-
-			case 27:
-				context$1$0.prev = 27;
-				context$1$0.prev = 28;
-
-				if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
-					_iterator2["return"]();
-				}
-
-			case 30:
-				context$1$0.prev = 30;
-
-				if (!_didIteratorError2) {
-					context$1$0.next = 33;
-					break;
-				}
-
-				throw _iteratorError2;
-
-			case 33:
-				return context$1$0.finish(30);
-
-			case 34:
-				return context$1$0.finish(27);
-
-			case 35:
-				files.rooms.uid = UID();
-				_iteratorNormalCompletion3 = true;
-				_didIteratorError3 = false;
-				_iteratorError3 = undefined;
-				context$1$0.prev = 39;
-				_iterator3 = Object.keys(files.rooms)[Symbol.iterator]();
-
-			case 41:
-				if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
-					context$1$0.next = 61;
-					break;
-				}
-
-				i = _step3.value;
-				r = files.rooms[i];
-
-				if (!(!r || typeof r != "object")) {
-					context$1$0.next = 47;
-					break;
-				}
-
-				if (i != "uid" && i != "main") delete files.rooms[i];
-				return context$1$0.abrupt("continue", 58);
-
-			case 47:
-				if (!(r.type == "content")) {
-					context$1$0.next = 50;
-					break;
-				}
-
-				r.type = "place";
-				return context$1$0.abrupt("continue", 58);
-
-			case 50:
-				r.type = "device";
-				d = undefined;
-
-				d = files.devices[r.device];
-				delete files.devices[r.device];
-				r.device = i;
-
-				if (d) {
-					context$1$0.next = 57;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 58);
-
-			case 57:
-				Object.assign(r, d);
-
-			case 58:
-				_iteratorNormalCompletion3 = true;
-				context$1$0.next = 41;
-				break;
-
-			case 61:
-				context$1$0.next = 67;
-				break;
-
-			case 63:
-				context$1$0.prev = 63;
-				context$1$0.t3 = context$1$0["catch"](39);
-				_didIteratorError3 = true;
-				_iteratorError3 = context$1$0.t3;
-
-			case 67:
-				context$1$0.prev = 67;
-				context$1$0.prev = 68;
-
-				if (!_iteratorNormalCompletion3 && _iterator3["return"]) {
-					_iterator3["return"]();
-				}
-
-			case 70:
-				context$1$0.prev = 70;
-
-				if (!_didIteratorError3) {
-					context$1$0.next = 73;
-					break;
-				}
-
-				throw _iteratorError3;
-
-			case 73:
-				return context$1$0.finish(70);
-
-			case 74:
-				return context$1$0.finish(67);
-
-			case 75:
-				_iteratorNormalCompletion4 = true;
-				_didIteratorError4 = false;
-				_iteratorError4 = undefined;
-				context$1$0.prev = 78;
-				_iterator4 = Object.keys(files.devices)[Symbol.iterator]();
-
-			case 80:
-				if (_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done) {
-					context$1$0.next = 90;
-					break;
-				}
-
-				i = _step4.value;
-				r = files.devices[i];
-
-				if (!(!r || typeof r != "object")) {
-					context$1$0.next = 85;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 87);
-
-			case 85:
-				files.rooms[i] = r;
-				r.type = "device";
-
-			case 87:
-				_iteratorNormalCompletion4 = true;
-				context$1$0.next = 80;
-				break;
-
-			case 90:
-				context$1$0.next = 96;
-				break;
-
-			case 92:
-				context$1$0.prev = 92;
-				context$1$0.t4 = context$1$0["catch"](78);
-				_didIteratorError4 = true;
-				_iteratorError4 = context$1$0.t4;
-
-			case 96:
-				context$1$0.prev = 96;
-				context$1$0.prev = 97;
-
-				if (!_iteratorNormalCompletion4 && _iterator4["return"]) {
-					_iterator4["return"]();
-				}
-
-			case 99:
-				context$1$0.prev = 99;
-
-				if (!_didIteratorError4) {
-					context$1$0.next = 102;
-					break;
-				}
-
-				throw _iteratorError4;
-
-			case 102:
-				return context$1$0.finish(99);
-
-			case 103:
-				return context$1$0.finish(96);
-
-			case 104:
-				_iteratorNormalCompletion5 = true;
-				_didIteratorError5 = false;
-				_iteratorError5 = undefined;
-				context$1$0.prev = 107;
-				_iterator5 = Object.keys(files)[Symbol.iterator]();
-
-			case 109:
-				if (_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done) {
-					context$1$0.next = 121;
-					break;
-				}
-
-				i = _step5.value;
-				context$1$0.prev = 111;
-				context$1$0.next = 114;
-				return co.wait(fs.unlink("" + config["var"] + "/" + i, co.cb));
-
-			case 114:
-				context$1$0.next = 118;
-				break;
-
-			case 116:
-				context$1$0.prev = 116;
-				context$1$0.t5 = context$1$0["catch"](111);
-
-			case 118:
-				_iteratorNormalCompletion5 = true;
-				context$1$0.next = 109;
-				break;
-
-			case 121:
-				context$1$0.next = 127;
-				break;
-
-			case 123:
-				context$1$0.prev = 123;
-				context$1$0.t6 = context$1$0["catch"](107);
-				_didIteratorError5 = true;
-				_iteratorError5 = context$1$0.t6;
-
-			case 127:
-				context$1$0.prev = 127;
-				context$1$0.prev = 128;
-
-				if (!_iteratorNormalCompletion5 && _iterator5["return"]) {
-					_iterator5["return"]();
-				}
-
-			case 130:
-				context$1$0.prev = 130;
-
-				if (!_didIteratorError5) {
-					context$1$0.next = 133;
-					break;
-				}
-
-				throw _iteratorError5;
-
-			case 133:
-				return context$1$0.finish(130);
-
-			case 134:
-				return context$1$0.finish(127);
-
-			case 135:
-				if (Object.keys(files.rooms).length > 2) modem.devices.applyChanges(files.rooms, false);
-				context$1$0.next = 142;
-				break;
-
-			case 138:
-				context$1$0.prev = 138;
-				context$1$0.t7 = context$1$0["catch"](0);
-
-				console.log("ERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERRORERROR".red);
-				console.log(context$1$0.t7);
-
-			case 142:
+				context$1$0.next = 2;
+				return co.sleep(5000);
+
+			case 2:
+				devices = modem.devices.getState();
+
+				ra.detach(function () {
+					var ret = devdb.cleanDatabase(devices);
+					if (ret) {
+						console.log(JSON.stringify(ret).yellow);
+						modem.devices.applyChanges(ret);
+					}
+				});
+
+			case 4:
 			case "end":
 				return context$1$0.stop();
 		}
-	}, callee$0$0, this, [[0, 138], [5, 23, 27, 35], [9, 16], [28,, 30, 34], [39, 63, 67, 75], [68,, 70, 74], [78, 92, 96, 104], [97,, 99, 103], [107, 123, 127, 135], [111, 116], [128,, 130, 134]]);
+	}, callee$0$0, this);
 })), modem.devices).httpService);
 
 var WebSocket = require("websockets/lib/websockets/socket");
@@ -48618,7 +48349,9 @@ modemREPL().listen("/tmp/modem" + process.pid);
 /* calculate limits at the begin */
 // будзем ветлівымі, і ўсё пазакрываем, і логеру ўсё скажам
 
-// TODO: delete this code later
+// let's be lazy
+
+// force correct indices after changes
 // if ( config.repl )
 // 	lu.array1( config.repl ).filter( Boolean ).forEach( p => modemREPL().listen( p ) )
 
