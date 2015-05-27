@@ -40825,6 +40825,8 @@ var lu = module.exports = {
 			ret = {};
 			for (var key in dest) {
 				if (Object.prototype.hasOwnProperty.call(dest, key)) {
+					var value = dest[key];
+					if (value === undefined) continue;
 					ret[key] = dest[key];
 					++cnt;
 				}
@@ -40834,6 +40836,7 @@ var lu = module.exports = {
 		for (var key in diff) {
 			if (Object.prototype.hasOwnProperty.call(diff, key)) {
 				var value = diff[key];
+				if (value === undefined) continue;
 				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value);
 				if (value == null) {
 					if (ret != null && Object.prototype.hasOwnProperty.call(ret, key)) {
@@ -40855,8 +40858,8 @@ var lu = module.exports = {
 	},
 
 	makeDiff: function makeDiff(previous, next) {
-		if (previous === next) return null;
-		var ret = null;
+		if (previous === next) return undefined;
+		var ret = undefined;
 		function toArray(obj) {
 			var ret = [];
 			lodash.forEach(obj, function (value, key) {
@@ -40872,23 +40875,23 @@ var lu = module.exports = {
 		var n = na.pop();
 		while (p || n) {
 			if (!n || p && p.key > n.key) {
-				if (ret == null) ret = {};
+				if (!ret) ret = {};
 				ret[p.key] = null; // deleting
 				p = pa.pop();
 			} else if (!p || p.key < n.key) {
-				if (ret == null) ret = {};
+				if (!ret) ret = {};
 				ret[n.key] = n.value;
 				n = na.pop();
 			} else {
 				if (p.value !== n.value) {
 					if (lu.isLiteral(p.value) && lu.isLiteral(n.value)) {
 						var diff = lu.makeDiff(p.value, n.value);
-						if (diff != null) {
-							if (ret == null) ret = {};
+						if (diff) {
+							if (!ret) ret = {};
 							ret[n.key] = diff;
 						}
 					} else {
-						if (ret == null) ret = {};
+						if (!ret) ret = {};
 						ret[n.key] = n.value;
 					}
 				}
@@ -40896,7 +40899,7 @@ var lu = module.exports = {
 				n = na.pop();
 			}
 		}
-		return ret;
+		return ret ? ret : undefined;
 	},
 
 	assignDiff: function assignDiff(dest, src) {
