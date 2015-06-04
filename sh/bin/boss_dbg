@@ -31253,7 +31253,75 @@ arguments[4]["/home/vadzim/v/work/nerojs/node_modules/express/node_modules/depd/
 },{"./buffer-concat":"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/depd/lib/compat/buffer-concat.js","./callsite-tostring":"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/depd/lib/compat/callsite-tostring.js"}],"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/on-finished/index.js":[function(require,module,exports){
 arguments[4]["/home/vadzim/v/work/nerojs/node_modules/express/node_modules/on-finished/index.js"][0].apply(exports,arguments)
 },{"ee-first":"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/on-finished/node_modules/ee-first/index.js"}],"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/on-finished/node_modules/ee-first/index.js":[function(require,module,exports){
-arguments[4]["/home/vadzim/v/work/nerojs/node_modules/express/node_modules/on-finished/node_modules/ee-first/index.js"][0].apply(exports,arguments)
+
+module.exports = function first(stuff, done) {
+  if (!Array.isArray(stuff))
+    throw new TypeError('arg must be an array of [ee, events...] arrays')
+
+  var cleanups = []
+
+  for (var i = 0; i < stuff.length; i++) {
+    var arr = stuff[i]
+
+    if (!Array.isArray(arr) || arr.length < 2)
+      throw new TypeError('each array member must be [ee, events...]')
+
+    var ee = arr[0]
+
+    for (var j = 1; j < arr.length; j++) {
+      var event = arr[j]
+      var fn = listener(event, callback)
+
+      // listen to the event
+      ee.on(event, fn)
+      // push this listener to the list of cleanups
+      cleanups.push({
+        ee: ee,
+        event: event,
+        fn: fn,
+      })
+    }
+  }
+
+  function callback() {
+    cleanup()
+    done.apply(null, arguments)
+  }
+
+  function cleanup() {
+    var x
+    for (var i = 0; i < cleanups.length; i++) {
+      x = cleanups[i]
+      x.ee.removeListener(x.event, x.fn)
+    }
+  }
+
+  function thunk(fn) {
+    done = fn
+  }
+
+  thunk.cancel = cleanup
+
+  return thunk
+}
+
+function listener(event, done) {
+  return function onevent(arg1) {
+    var args = new Array(arguments.length)
+    var ee = this
+    var err = event === 'error'
+      ? arg1
+      : null
+
+    // copy args to prevent arguments escaping scope
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i]
+    }
+
+    done(err, ee, event, args)
+  }
+}
+
 },{}],"/home/vadzim/v/work/nerojs/node_modules/native-dns/dns.js":[function(require,module,exports){
 // Copyright 2011 Timothy J Fontaine <tjfontaine@gmail.com>
 //
@@ -38815,6 +38883,14 @@ exports.func = function (fun) {
 	};
 };
 
+exports.eventHandler = function (fun) {
+	return function proc() {
+		var ret = new Thread(fun.apply(this, arguments));
+		ret.waitForInput();
+		return ret;
+	};
+};
+
 // the first argument is an error, the second one is a result
 exports.cbfunc = function (funWithCB) {
 	return function () {
@@ -38859,11 +38935,11 @@ exports.receive = function (emitter, events) {
 						//
 						// allow simpler events defining like
 						//
-						// yield co.receive( obj, { data: true, timeout: getTimeout( ... ), } )
+						// yield co.receive( obj, { data: true, timeout: getTimeout( ... ) } )
 						//
 						// instead of
 						//
-						// let events = { data: true, }
+						// let events = { data: true }
 						// if ( getTimeout( ... ) != null ) events.timeout = getTimeout( ... )
 						// yield co.receive( obj, events )
 						//
@@ -39491,6 +39567,16 @@ var Thread = (function () {
 				} else if ("onload" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
 					v.value.onload = step.next;
 					v.value.onerror = step.fail;
+				} else if ("onsuccess" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
+					if (!step.success_error) step.success_error = {
+						onsuccess: function onsuccess(event) {
+							step.next(event.target.result);
+						},
+						onerror: function onerror(event) {
+							step.fail(event.target.error || event);
+						} };
+					v.value.onsuccess = step.success_error.onsuccess;
+					v.value.onerror = step.success_error.onerror;
 				} else throw new Error("thread type error");
 				break;
 			}
@@ -40329,6 +40415,8 @@ function assert(value, message) {
 	if (!value) throw new Error("" + message);
 }
 
+var LiteralPrototype = Object.getPrototypeOf({});
+
 var lu = module.exports = {
 
 	dumpPromise: function dumpPromise(p) {
@@ -40351,7 +40439,7 @@ var lu = module.exports = {
 	trace: (console.trace || console.log).bind(console),
 
 	mapObj: function mapObj(obj, props) {
-		var ret = Object.assign({}, obj);
+		var ret = Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
 		lodash.forEach(props, function (fun, key) {
 			return ret[key] = typeof fun == "function" ? fun(obj[key]) : fun;
 		});
@@ -40813,8 +40901,10 @@ var lu = module.exports = {
 		assert(JSON.stringify(q) == JSON.stringify(lu.applyDiff(p, lu.makeDiff(p, q))));
 	},
 
-	isLiteral: function isLiteral(obj) {
-		return obj && typeof obj == "object" && obj.constructor == Object;
+	isSet: function isSet(obj) {
+		if (obj == null) return false;
+		var proto = Object.getPrototypeOf(obj);
+		return proto === LiteralPrototype || proto === null;
 	},
 
 	applyDiff: function applyDiff(dest, diff) {
@@ -40822,7 +40912,7 @@ var lu = module.exports = {
 		var cnt = 0;
 
 		function copyDest() {
-			ret = {};
+			ret = Object.create(null);
 			for (var key in dest) {
 				if (Object.prototype.hasOwnProperty.call(dest, key)) {
 					var value = dest[key];
@@ -40863,7 +40953,7 @@ var lu = module.exports = {
 		function toArray(obj) {
 			var ret = [];
 			lodash.forEach(obj, function (value, key) {
-				ret.push({ key: key, value: value });
+				return ret.push({ value: value, key: key });
 			});
 			return ret.sort(function (v1, v2) {
 				return v1.key < v2.key ? -1 : v1.key > v2.key ? 1 : 0;
@@ -40875,23 +40965,23 @@ var lu = module.exports = {
 		var n = na.pop();
 		while (p || n) {
 			if (!n || p && p.key > n.key) {
-				if (!ret) ret = {};
+				if (!ret) ret = Object.create(null);
 				ret[p.key] = null; // deleting
 				p = pa.pop();
 			} else if (!p || p.key < n.key) {
-				if (!ret) ret = {};
+				if (!ret) ret = Object.create(null);
 				ret[n.key] = n.value;
 				n = na.pop();
 			} else {
 				if (p.value !== n.value) {
-					if (lu.isLiteral(p.value) && lu.isLiteral(n.value)) {
+					if (lu.isSet(p.value) && lu.isSet(n.value)) {
 						var diff = lu.makeDiff(p.value, n.value);
 						if (diff) {
-							if (!ret) ret = {};
+							if (!ret) ret = Object.create(null);
 							ret[n.key] = diff;
 						}
 					} else {
-						if (!ret) ret = {};
+						if (!ret) ret = Object.create(null);
 						ret[n.key] = n.value;
 					}
 				}

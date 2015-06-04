@@ -37467,7 +37467,75 @@ arguments[4]["/home/vadzim/v/work/nerojs/node_modules/express/node_modules/depd/
 },{"./buffer-concat":"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/depd/lib/compat/buffer-concat.js","./callsite-tostring":"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/depd/lib/compat/callsite-tostring.js"}],"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/on-finished/index.js":[function(require,module,exports){
 arguments[4]["/home/vadzim/v/work/nerojs/node_modules/express/node_modules/on-finished/index.js"][0].apply(exports,arguments)
 },{"ee-first":"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/on-finished/node_modules/ee-first/index.js"}],"/home/vadzim/v/work/nerojs/node_modules/morgan/node_modules/on-finished/node_modules/ee-first/index.js":[function(require,module,exports){
-arguments[4]["/home/vadzim/v/work/nerojs/node_modules/express/node_modules/on-finished/node_modules/ee-first/index.js"][0].apply(exports,arguments)
+
+module.exports = function first(stuff, done) {
+  if (!Array.isArray(stuff))
+    throw new TypeError('arg must be an array of [ee, events...] arrays')
+
+  var cleanups = []
+
+  for (var i = 0; i < stuff.length; i++) {
+    var arr = stuff[i]
+
+    if (!Array.isArray(arr) || arr.length < 2)
+      throw new TypeError('each array member must be [ee, events...]')
+
+    var ee = arr[0]
+
+    for (var j = 1; j < arr.length; j++) {
+      var event = arr[j]
+      var fn = listener(event, callback)
+
+      // listen to the event
+      ee.on(event, fn)
+      // push this listener to the list of cleanups
+      cleanups.push({
+        ee: ee,
+        event: event,
+        fn: fn,
+      })
+    }
+  }
+
+  function callback() {
+    cleanup()
+    done.apply(null, arguments)
+  }
+
+  function cleanup() {
+    var x
+    for (var i = 0; i < cleanups.length; i++) {
+      x = cleanups[i]
+      x.ee.removeListener(x.event, x.fn)
+    }
+  }
+
+  function thunk(fn) {
+    done = fn
+  }
+
+  thunk.cancel = cleanup
+
+  return thunk
+}
+
+function listener(event, done) {
+  return function onevent(arg1) {
+    var args = new Array(arguments.length)
+    var ee = this
+    var err = event === 'error'
+      ? arg1
+      : null
+
+    // copy args to prevent arguments escaping scope
+    for (var i = 0; i < args.length; i++) {
+      args[i] = arguments[i]
+    }
+
+    done(err, ee, event, args)
+  }
+}
+
 },{}],"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/rfc6455.js":[function(require,module,exports){
 /***/
 var util = require('util'), events = require('events'), crypto = require('crypto');
@@ -40266,7 +40334,7 @@ var JSONservice = (function () {
 			var partial = arguments[2] === undefined ? true : arguments[2];
 
 			if (!partial) throw new Error("not implemented: replacing an item"); // TODO
-			return this.applyChanges(_defineProperty({}, item, changes), true)[item];
+			return this.applyChanges({ content: _defineProperty({}, item, changes) }, true).content[item];
 		}
 	}]);
 
@@ -40990,7 +41058,7 @@ All.Link = function (_, GROUP) {
 	return [].concat(_toConsumableArray(All.Reserve(_, GROUP)), _toConsumableArray(link));
 };
 All.Unlink = concat({ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: "Any_Group" });
-// All.AppendTo = GROUP => ( { id: `Write_Group_In_Idle`, GROUP, } )
+// All.AppendTo = GROUP => ( { id: `Write_Group_In_Idle`, GROUP } )
 All.AppendTo = function (GROUP) {
 	return [{ id: "GoTo_Mode", To_MODE: 7 }].concat(_toConsumableArray(concat(link, { group: GROUP })), [{ id: "GoTo_Mode", To_MODE: 1 }]);
 };
@@ -41172,6 +41240,14 @@ exports.func = function (fun) {
 	};
 };
 
+exports.eventHandler = function (fun) {
+	return function proc() {
+		var ret = new Thread(fun.apply(this, arguments));
+		ret.waitForInput();
+		return ret;
+	};
+};
+
 // the first argument is an error, the second one is a result
 exports.cbfunc = function (funWithCB) {
 	return function () {
@@ -41216,11 +41292,11 @@ exports.receive = function (emitter, events) {
 						//
 						// allow simpler events defining like
 						//
-						// yield co.receive( obj, { data: true, timeout: getTimeout( ... ), } )
+						// yield co.receive( obj, { data: true, timeout: getTimeout( ... ) } )
 						//
 						// instead of
 						//
-						// let events = { data: true, }
+						// let events = { data: true }
 						// if ( getTimeout( ... ) != null ) events.timeout = getTimeout( ... )
 						// yield co.receive( obj, events )
 						//
@@ -41848,6 +41924,16 @@ var Thread = (function () {
 				} else if ("onload" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
 					v.value.onload = step.next;
 					v.value.onerror = step.fail;
+				} else if ("onsuccess" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
+					if (!step.success_error) step.success_error = {
+						onsuccess: function onsuccess(event) {
+							step.next(event.target.result);
+						},
+						onerror: function onerror(event) {
+							step.fail(event.target.error || event);
+						} };
+					v.value.onsuccess = step.success_error.onsuccess;
+					v.value.onerror = step.success_error.onerror;
 				} else throw new Error("thread type error");
 				break;
 			}
@@ -42081,18 +42167,18 @@ var UID = require("uid");
 var lu = require("localUtils");
 
 exports.Clear = exports.Unlink = function (devices, deviceId) {
-	return lodash.reduce(devices, function (ret, q, index) {
-		if (q) if (index == deviceId) ret[index] = null;else if (q.content && q.content[deviceId]) ret[index] = { content: _defineProperty({}, deviceId, null) };
+	return lodash.reduce(devices.content, function (ret, q, index) {
+		if (q) if (index == deviceId) ret.content[index] = null;else if (q.content && q.content[deviceId]) ret.content[index] = { content: _defineProperty({}, deviceId, null) };
 		return ret;
-	}, {});
+	}, { content: {} });
 };
 
 exports.Set = function (devices, deviceId, data) {
-	var device = devices[deviceId];
+	var device = devices.content[deviceId];
 	if (!device || !device.group) return;
-	var ret = _defineProperty({}, deviceId, data);
+	var ret = { content: _defineProperty({}, deviceId, data) };
 	if (device.type == "group") ret = lodash.reduce(device.content, function (ret, q, index) {
-		if (q) ret[index] = data;
+		if (q) ret.content[index] = data;
 		return ret;
 	}, ret);
 	return ret;
@@ -42102,7 +42188,7 @@ exports.findFreeGroup = function (devices) {
 	var groups = [];
 	for (var i = 1; i <= 1022; ++i) {
 		groups[i] = i;
-	}lodash.forEach(devices, function (device) {
+	}lodash.forEach(devices.content, function (device) {
 		return device && Number.isFinite(device.group) && (groups[device.group] = false);
 	});
 	groups = groups.filter(Boolean);
@@ -42110,12 +42196,12 @@ exports.findFreeGroup = function (devices) {
 };
 
 exports.cleanDatabase = function (devices) {
-	var ret = devices;
-	function save(diff) {
+	var ret = devices || {};
+	function _save(diff) {
 		ret = lu.applyDiff(ret, diff);
 	}
-	function change(path, value) {
-		save(path.reduceRight(function (ret, key) {
+	function _change(path, value) {
+		_save(path.reduceRight(function (ret, key) {
 			return _defineProperty({}, key, ret);
 		}, value));
 	}
@@ -42124,82 +42210,100 @@ exports.cleanDatabase = function (devices) {
 			path[_key] = arguments[_key];
 		}
 
-		change(path, path.pop());
+		_change(path, path.pop());
 	}
 	function remove() {
 		for (var _len2 = arguments.length, path = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
 			path[_key2] = arguments[_key2];
 		}
 
-		change(path, null);
+		_change(path, null);
 	}
 
-	// remove items with wrong type & remove group from places
-	lodash.forEach(devices, function (place, placeId) {
+	// move root items to content
+	if (!ret.content) lodash.forEach(ret, function (place, placeId) {
 		if (place != null && typeof place != "object") return;
-		if (place == null) return remove(placeId);
+		remove(placeId);
+		assign("content", placeId, place);
+	});else // TODO delete later
+		lodash.forEach(ret, function (place, placeId) {
+			if (place != null && typeof place != "object") return;
+			if (placeId == "content") return;
+			remove(placeId);
+		});
+
+	// remove items with wrong type & remove group from places
+	lodash.forEach(ret.content, function (place, placeId) {
+		if (place == null || typeof place != "object") return remove("content", placeId);
 		if (place.type == "device") // TODO: remove later
-			assign(placeId, "type", "single");
-		if (place.device == placeId) remove(placeId, "device");else if (!(place.type || "").match(/^(place|group|single)$/)) return remove(placeId);
-		if (place.group != null && (!Number.isFinite(place.group) || place.type == "place")) remove(placeId, "group");
+			assign("content", placeId, "type", "single");
+		if (place.device == placeId) remove("content", placeId, "device");else if (!(place.type || "").match(/^(place|group|single)$/)) return remove("content", placeId);
+		if (place.group != null && (!Number.isFinite(place.group) || place.type == "place")) remove("content", placeId, "group");
 	});
 
 	// create main
 	if (ret && typeof ret.main != "string") {
 		(function () {
-			assign("main", UID());
+			var main = UID();
 			var i = 0;
-			lodash.forEach(ret, function (place, key) {
-				if (typeof place == "object" && key != ret.main) assign(ret.main, "content", key, ++i);
+			lodash.forEach(ret.content, function (place, key) {
+				return assign("content", main, "content", key, ++i);
 			});
+			if (ret.content && ret.content[main]) assign("main", main);
 		})();
 	}
 
-	// build reachable items
-	var reachable = Object.create(null);
-	var reachableKeys = [];
-	function push(key) {
-		if (!(key in reachable) && ret.hasOwnProperty(key) && typeof ret[key] == "object") {
-			reachable[key] = true;
-			reachableKeys.push(key);
-		}
-		return key;
-	}
-	push(ret.main);
-	for (var i = 0; i < reachableKeys.length; ++i) {
-		var place = ret[reachableKeys[i]];
-		if (place && place.content) Object.keys(place.content).forEach(push);
-	}
-
+	// remove items with duplicate group
+	var reachable = undefined;
 	function groupIndex(key) {
+		if (!reachable) {
+			(function () {
+				var push = function (key) {
+					if (!(key in reachable) && ret.content.hasOwnProperty(key)) {
+						reachable[key] = true;
+						reachableKeys.push(key);
+					}
+					return key;
+				};
+
+				reachable = Object.create(null);
+				var reachableKeys = [];
+
+				push(ret.main);
+				for (var _i = 0; _i < reachableKeys.length; ++_i) {
+					var place = ret.content[reachableKeys[_i]];
+					if (place && place.content) Object.keys(place.content).forEach(push);
+				}
+			})();
+		}
 		var i = 0;
-		if (ret[key].type == "group") i += 2;
+		if (ret.content[key].type == "group") i += 2;
 		if (key in reachable) i += 1;
 	}
 
-	// remove items with duplicate group
 	var groups = Object.create(null);
-	lodash.forEach(ret, function (place, key) {
+	lodash.forEach(ret.content, function (place, key) {
 		if (!place || place.group == null) return;
 		if (!groups[place.group]) groups[place.group] = key;else {
 			if (groupIndex(groups[place.group]) < groupIndex(key)) {
-				remove(groups[place.group]);
+				remove("content", groups[place.group]);
 				groups[place.group] = key;
-			} else remove(key);
+			} else remove("content", key);
 		}
 	});
 
 	// check content
-	lodash.forEach(ret, function (place, key) {
+	lodash.forEach(ret.content, function (place, key) {
 		if (!place || place.content == null) return;
-		if (typeof place.content != "object") return remove(key, "content");
+		if (typeof place.content != "object") return remove("content", key, "content");
 		lodash.forEach(place.content, function (_, ckey) {
-			if (!ret[ckey] || typeof ret[ckey] != "object") remove(key, "content", ckey);
+			if (!ret.content[ckey] || typeof ret.content[ckey] != "object") remove("content", key, "content", ckey);
 		});
+		place = ret.content[key]; // reassign place cause it could change in previous forEach
 		lodash.keys(place.content).sort(function (a, b) {
 			return (place.content[a].index || 0) - (place.content[b].index || 0);
 		}).forEach(function (ckey, index) {
-			if (place.content[ckey].index != index) assign(key, "content", ckey, "index", index);
+			if (place.content[ckey].index != index) assign("content", key, "content", ckey, "index", index);
 		});
 	});
 
@@ -42886,6 +42990,8 @@ function assert(value, message) {
 	if (!value) throw new Error("" + message);
 }
 
+var LiteralPrototype = Object.getPrototypeOf({});
+
 var lu = module.exports = {
 
 	dumpPromise: function dumpPromise(p) {
@@ -42908,7 +43014,7 @@ var lu = module.exports = {
 	trace: (console.trace || console.log).bind(console),
 
 	mapObj: function mapObj(obj, props) {
-		var ret = Object.assign({}, obj);
+		var ret = Object.assign(Object.create(Object.getPrototypeOf(obj)), obj);
 		lodash.forEach(props, function (fun, key) {
 			return ret[key] = typeof fun == "function" ? fun(obj[key]) : fun;
 		});
@@ -43370,8 +43476,10 @@ var lu = module.exports = {
 		assert(JSON.stringify(q) == JSON.stringify(lu.applyDiff(p, lu.makeDiff(p, q))));
 	},
 
-	isLiteral: function isLiteral(obj) {
-		return obj && typeof obj == "object" && obj.constructor == Object;
+	isSet: function isSet(obj) {
+		if (obj == null) return false;
+		var proto = Object.getPrototypeOf(obj);
+		return proto === LiteralPrototype || proto === null;
 	},
 
 	applyDiff: function applyDiff(dest, diff) {
@@ -43379,7 +43487,7 @@ var lu = module.exports = {
 		var cnt = 0;
 
 		function copyDest() {
-			ret = {};
+			ret = Object.create(null);
 			for (var key in dest) {
 				if (Object.prototype.hasOwnProperty.call(dest, key)) {
 					var value = dest[key];
@@ -43420,7 +43528,7 @@ var lu = module.exports = {
 		function toArray(obj) {
 			var ret = [];
 			lodash.forEach(obj, function (value, key) {
-				ret.push({ key: key, value: value });
+				return ret.push({ value: value, key: key });
 			});
 			return ret.sort(function (v1, v2) {
 				return v1.key < v2.key ? -1 : v1.key > v2.key ? 1 : 0;
@@ -43432,23 +43540,23 @@ var lu = module.exports = {
 		var n = na.pop();
 		while (p || n) {
 			if (!n || p && p.key > n.key) {
-				if (!ret) ret = {};
+				if (!ret) ret = Object.create(null);
 				ret[p.key] = null; // deleting
 				p = pa.pop();
 			} else if (!p || p.key < n.key) {
-				if (!ret) ret = {};
+				if (!ret) ret = Object.create(null);
 				ret[n.key] = n.value;
 				n = na.pop();
 			} else {
 				if (p.value !== n.value) {
-					if (lu.isLiteral(p.value) && lu.isLiteral(n.value)) {
+					if (lu.isSet(p.value) && lu.isSet(n.value)) {
 						var diff = lu.makeDiff(p.value, n.value);
 						if (diff) {
-							if (!ret) ret = {};
+							if (!ret) ret = Object.create(null);
 							ret[n.key] = diff;
 						}
 					} else {
-						if (!ret) ret = {};
+						if (!ret) ret = Object.create(null);
 						ret[n.key] = n.value;
 					}
 				}
@@ -47497,7 +47605,7 @@ var modem = ra(Object.defineProperties({
 						info = undefined;
 
 						if (typeof deviceId == "number") group = deviceId;else {
-							device = modem.devices.getState()[deviceId];
+							device = modem.devices.getState().content[deviceId];
 							if (!device) error(HTTPStatus.NOT_FOUND);
 							if (!device.group) {
 								if (deviceCommand == "Link" || deviceCommand == "Reserve") {
@@ -47506,7 +47614,7 @@ var modem = ra(Object.defineProperties({
 									if (_group == null) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
 									modem.devices.applyItemChanges(deviceId, { group: _group });
 									ra.forceCalculations();
-									device = modem.devices.getState()[deviceId];
+									device = modem.devices.getState().content[deviceId];
 								} else error(HTTPStatus.NOT_FOUND, "No group in device");
 							}
 							newstate = deviceActions.getNewState(device, deviceCommand, data);
@@ -47525,7 +47633,7 @@ var modem = ra(Object.defineProperties({
 						// first notify clients about things to change
 						if (device) {
 							co.defer(function () {
-								var device = modem.devices.getState()[deviceId];
+								var device = modem.devices.getState().content[deviceId];
 								if (!passedToModem && device && my_timestamp == device.newstate_timestamp) modem.devices.applyItemChanges(deviceId, { newstate: null, newstate_timestamp: null, errorneous: errorneous });
 							});
 							modem.devices.applyItemChanges(deviceId, { newstate: newstate, newstate_timestamp: my_timestamp, errorneous: null });
@@ -47967,7 +48075,7 @@ var modemService = express().use(cookieParser).use(require("http_log")).use(func
 				return context$1$0.stop();
 		}
 	}, callee$0$0, this, [[1, 6]]);
-}))).all(/^\/(rooms|devices|database)$/, (modem.devices = new JSONservice(config["var"] + "/database", { main: "room", room: { content: [] } }), ra(regeneratorRuntime.mark(function callee$0$0() {
+}))).all(/^\/(rooms|devices|database)$/, (modem.devices = new JSONservice(config["var"] + "/database", {}), ra(regeneratorRuntime.mark(function callee$0$0() {
 	var devices;
 	return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
 		while (1) switch (context$1$0.prev = context$1$0.next) {
@@ -48333,6 +48441,12 @@ var modemREPL = function modemREPL() {
 			co: co,
 			ra: ra,
 			modemREPL: modemREPL,
+			db: function db() {
+				return modem.devices.getState();
+			},
+			cdb: function cdb() {
+				return lu.applyDiff(modem.devices.getState(), devdb.cleanDatabase(modem.devices.getState()));
+			},
 			m: function m(str) {
 				str = (str + "").split(/\r|\n|\s/).filter(Boolean);
 				co.go(regeneratorRuntime.mark(function callee$3$0() {
@@ -48391,7 +48505,7 @@ modemREPL().listen("/tmp/modem" + process.pid);
 
 // command = function* () {
 // 	yield co.sleep( 2000 )
-// 	return { RESULT: `Connection_error`, }
+// 	return { RESULT: `Connection_error` }
 // }
 
 /* calculate limits at the begin */
