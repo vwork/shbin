@@ -1,0 +1,50 @@
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1.0" />
+	<title>Neroelectronics</title>
+	<style type="text/css">
+	body {
+		font-size: 130%;
+	}
+	img {
+		width: 1em;
+		bottom: -0.2em;
+		position: relative;
+	}
+	a {
+		white-space: nowrap;
+	}
+	</style>
+</head>
+<body>
+	<!-- <h1>Ошибка подключения</h1> -->
+	<%
+	var UA = request.headers[ "user-agent" ]
+	var WhereAmI = ""
+	if ( !!UA.match( /Mac OS/ ) )
+		WhereAmI = "apple"
+	else if ( !!UA.match( /Android/ ) )
+		WhereAmI = "android"
+	%>
+	<p>
+	Для подключения к "Умному дому" необходимо использовать
+
+	<% if ( WhereAmI == "apple" ) { %>
+
+	браузер <a href = "https://www.apple.com/safari/"><img src = "./Safari.png" />Safari</a> актуальной версии.
+
+	<% } else if ( WhereAmI == "TODO ") { %>
+
+	браузеры <a href = "http://www.google.com/chrome/"><img src = "./GoogleChrome.png" />Chrome</a> либо <a href = "https://www.mozilla.org/firefox/"><img src = "./Firefox.png" />Firefox</a> актуальных версий.
+
+	<% } else { %>
+
+	браузер <a href = "http://www.google.com/chrome/"><img src = "./GoogleChrome.png" />Chrome</a> актуальной версии.
+
+	<% } %>
+	</p>
+	<p>Пожалуйста, убедитесь, что Вы используете совместимый с "Умным домом" браузер и что Ваш браузер обновлён.<p>
+	<p><a href = "/" >Вернуться</a></p>
+
+</body>
+</html>

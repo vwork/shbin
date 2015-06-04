@@ -1,0 +1,12 @@
+#!/bin/sh
+
+while true;
+do
+	date
+	echo starting boss
+	date >>/tmp/njb.log
+	echo starting boss >>/tmp/njb.log
+	./bin/boss_dbg $1;
+	echo waiting 1 second before restarting...
+	sleep 1
+done
