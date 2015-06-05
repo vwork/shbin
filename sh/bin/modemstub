@@ -12814,6 +12814,8 @@ var USB_bFLAG_DATA = 126;
 var USB_bSTAF_DATA = 125;
 var PROTOCOL_NUMBER = 1;
 
+var MODEM_TIMEOUT = 9000;
+
 var ModemError = (function (_Error) {
 	function ModemError() {
 		_classCallCheck(this, ModemError);
@@ -12918,7 +12920,7 @@ var Modem = (function () {
 				timeout = setTimeout(function () {
 					_this2._log && _this2._log("timeout");
 					reject(new ModemTimeout());
-				}, 3000);
+				}, MODEM_TIMEOUT);
 				_this2._current = { resolve: resolve, reject: reject, buffer: [] };
 				_this2._log && _this2._log("writing buffer");
 				var w = _this2._stream.write(buffer);
@@ -13232,6 +13234,12 @@ function compose(t1, t2) {
 				if (Object.prototype.hasOwnProperty.call(enumeration, i)) r[enumeration[i]] = i;
 			}
 		}
+		function getValue(value) {
+			if (typeof value == "number") return value;
+			var ret = enumeration[value];
+			if (ret == null) throw new Error("wrong constant " + value);
+			return ret;
+		}
 		return {
 			read: function read(value) {
 				if (value == null) return null;
@@ -13242,10 +13250,9 @@ function compose(t1, t2) {
 			write: function write(value) {
 				if (value == null) return null;
 				var ret = value;
-				if (typeof value == "string") {
-					ret = enumeration[value];
-					if (ret == null) throw new Error("wrong constant " + value);
-				}
+				if (Array.isArray(value)) ret = value.map(getValue).reduce(function (a, b) {
+					return a | b;
+				});else if (typeof value == "string") ret = getValue(value);
 				return ret;
 			}
 		};
@@ -13396,8 +13403,7 @@ function compose(t1, t2) {
 		// SCEN_GRP_SETTING: ...,
 		PROTOCOL_NUM: enumeration({
 			NERO_II_SmartHome: 0,
-			INTRO_II_SmartHome: 1,
-			All_protocols: 255 }),
+			INTRO_II_SmartHome: 1 }),
 		PROTOCOLS: set("PROTOCOL_NUM"),
 		MODEM_FUNCTIONS: set({}),
 
@@ -13543,7 +13549,7 @@ function compose(t1, t2) {
 	command("Change_modem_work_mode", { cmdLo: 25, cmdHi: 1, MODEM_MODE: _9 });
 	command("Do_id_nx_substitution", { cmdLo: 25, cmdHi: 2, DEV_NUM: _9_10 }); // 0xffff - modem
 	command("Delete_id_nx_of_device", { cmdLo: 25, cmdHi: 3, DEV_NUM: _9_10 }); // 0xffff - all
-	command("Change_protocol", { cmdLo: 25, cmdHi: 4, PROTOCOL_NUM: _9 });
+	command("Change_protocol", { cmdLo: 25, cmdHi: 4, PROTOCOLS: _9 });
 })();
 
 },{"co":"/home/vadzim/v/work/nerojs/src/co.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modemcrc":"/home/vadzim/v/work/nerojs/src/modemcrc.js"}],"/home/vadzim/v/work/nerojs/src/modemcrc.js":[function(require,module,exports){

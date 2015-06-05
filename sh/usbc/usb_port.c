@@ -112,12 +112,12 @@ int copy_msg( READ read, READ clear, WRITE write ) {
 void copy_messages( READ tread, WRITE twrite, READ tclear, READ sread, WRITE swrite ) {
 	char buf[ 1 ];
 	while ( 1 ) {
-		fprintf( stderr, "copying to tty\n" );
+		fprintf( stderr, "\n> " );
 		if ( !copy_msg( sread, tclear, twrite ) ) {
 			fprintf( stderr, "error while copying message to tty\n" );
 			return;
 		}
-		fprintf( stderr, "copying from tty\n" );
+		fprintf( stderr, "< " );
 		if ( !copy_msg( tread, NULL, swrite ) ) {
 			fprintf( stderr, "error while copying message from tty\n" );
 			return;
@@ -159,7 +159,9 @@ int twrite( char* buf, int len ) {
 }
 
 int sread( char* buf ) {
-	return fread( buf, 1, 1, stdin ) == 1 ? 1 : -1;
+	int ret = fread( buf, 1, 1, stdin ) == 1 ? 1 : -1;
+	fprintf( stderr, "%02x ", ( unsigned char )( *buf ) );
+	return ret;
 }
 
 int swrite( char* buf, int len ) {

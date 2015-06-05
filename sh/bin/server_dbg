@@ -44097,6 +44097,8 @@ var USB_bFLAG_DATA = 126;
 var USB_bSTAF_DATA = 125;
 var PROTOCOL_NUMBER = 1;
 
+var MODEM_TIMEOUT = 9000;
+
 var ModemError = (function (_Error) {
 	function ModemError() {
 		_classCallCheck(this, ModemError);
@@ -44201,7 +44203,7 @@ var Modem = (function () {
 				timeout = setTimeout(function () {
 					_this2._log && _this2._log("timeout");
 					reject(new ModemTimeout());
-				}, 3000);
+				}, MODEM_TIMEOUT);
 				_this2._current = { resolve: resolve, reject: reject, buffer: [] };
 				_this2._log && _this2._log("writing buffer");
 				var w = _this2._stream.write(buffer);
@@ -44515,6 +44517,12 @@ function compose(t1, t2) {
 				if (Object.prototype.hasOwnProperty.call(enumeration, i)) r[enumeration[i]] = i;
 			}
 		}
+		function getValue(value) {
+			if (typeof value == "number") return value;
+			var ret = enumeration[value];
+			if (ret == null) throw new Error("wrong constant " + value);
+			return ret;
+		}
 		return {
 			read: function read(value) {
 				if (value == null) return null;
@@ -44525,10 +44533,9 @@ function compose(t1, t2) {
 			write: function write(value) {
 				if (value == null) return null;
 				var ret = value;
-				if (typeof value == "string") {
-					ret = enumeration[value];
-					if (ret == null) throw new Error("wrong constant " + value);
-				}
+				if (Array.isArray(value)) ret = value.map(getValue).reduce(function (a, b) {
+					return a | b;
+				});else if (typeof value == "string") ret = getValue(value);
 				return ret;
 			}
 		};
@@ -44679,8 +44686,7 @@ function compose(t1, t2) {
 		// SCEN_GRP_SETTING: ...,
 		PROTOCOL_NUM: enumeration({
 			NERO_II_SmartHome: 0,
-			INTRO_II_SmartHome: 1,
-			All_protocols: 255 }),
+			INTRO_II_SmartHome: 1 }),
 		PROTOCOLS: set("PROTOCOL_NUM"),
 		MODEM_FUNCTIONS: set({}),
 
@@ -44826,7 +44832,7 @@ function compose(t1, t2) {
 	command("Change_modem_work_mode", { cmdLo: 25, cmdHi: 1, MODEM_MODE: _9 });
 	command("Do_id_nx_substitution", { cmdLo: 25, cmdHi: 2, DEV_NUM: _9_10 }); // 0xffff - modem
 	command("Delete_id_nx_of_device", { cmdLo: 25, cmdHi: 3, DEV_NUM: _9_10 }); // 0xffff - all
-	command("Change_protocol", { cmdLo: 25, cmdHi: 4, PROTOCOL_NUM: _9 });
+	command("Change_protocol", { cmdLo: 25, cmdHi: 4, PROTOCOLS: _9 });
 })();
 
 },{"co":"/home/vadzim/v/work/nerojs/src/co.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modemcrc":"/home/vadzim/v/work/nerojs/src/modemcrc.js"}],"/home/vadzim/v/work/nerojs/src/modemcrc.js":[function(require,module,exports){
@@ -47288,19 +47294,23 @@ var modem = ra(Object.defineProperties({
 	socket: null,
 	pingInterval: config.modemPingInterval,
 
+	devices: null,
+
 	createSocket: function createSocket() {
+		var _this = this;
+
 		return new Promise(function (resolve, reject) {
 			console.error("creating socket");
 			var socket = undefined;
 			var reconnect = lodash.once(function () {
-				if (modem.socket && socket != modem.socket) return;
+				if (_this.socket && socket != _this.socket) return;
 				setTimeout(function () {
-					if (!modem.socket) modem.createSocket();
-				}, modem.retryInterval);
+					if (!_this.socket) _this.createSocket();
+				}, _this.retryInterval);
 				if (socket) {
 					closeSocket(socket);
 					socket = null;
-					modem.socket = null;
+					_this.socket = null;
 				}
 			});
 			var onerror = function onerror(error) {
@@ -47309,12 +47319,12 @@ var modem = ra(Object.defineProperties({
 				reject(error);
 			};
 			var connect = function connect(port) {
-				if (modem.socket) {
-					closeSocket(modem.socket);
-					modem.socket = null;
+				if (_this.socket) {
+					closeSocket(_this.socket);
+					_this.socket = null;
 				}
-				console.error("trying to connect to: " + port + (modem.proxy ? " via " + modem.proxy : ""));
-				if (modem.proxy) {
+				console.error("trying to connect to: " + port + "" + (_this.proxy ? " via " + _this.proxy : ""));
+				if (_this.proxy) {
 					socket = new stream.Duplex();
 					socket.destroy = function () {
 						this.ps.stdin.end();
@@ -47327,7 +47337,7 @@ var modem = ra(Object.defineProperties({
 						callback();
 					};
 					socket.connect = function (path) {
-						var _this = this;
+						var _this2 = this;
 
 						LOG("starting proxy", modem.proxy, port);
 						this.ps = require("child_process").spawn(modem.proxy, [path]);
@@ -47335,23 +47345,23 @@ var modem = ra(Object.defineProperties({
 							return process.stdout.write(String(data).blue);
 						});
 						this.ps.stdout.on("data", function (data) {
-							return _this.push(data);
+							return _this2.push(data);
 						});
 						this.ps.on("error", function (error) {
-							return _this.emit("error", error);
+							return _this2.emit("error", error);
 						});
 						this.ps.stdin.on("error", function (error) {
-							return _this.emit("error", error);
+							return _this2.emit("error", error);
 						});
 						this.ps.on("exit", function (data) {
-							return _this.push(null);
+							return _this2.push(null);
 						});
 						this.emit("connect");
 					};
 				} else if (typeof port == "number") socket = new net.Socket();else socket = new PingPong({ timeout: 3000 });
 				socket.on("connect", function () {
 					socket.unref();
-					modem.socket = socket;
+					_this.socket = socket;
 					resolve(socket);
 				});
 				socket.on("error", onerror);
@@ -47369,11 +47379,11 @@ var modem = ra(Object.defineProperties({
 				});
 				socket.connect(port);
 			};
-			if (modem.port == +modem.port) connect(+modem.port);else glob(modem.port, {}, function (error, dir) {
+			if (_this.port == +_this.port) connect(+_this.port);else glob(_this.port, {}, function (error, dir) {
 				if (error) return onerror(error);
-				if (!dir.length) return onerror(new Error("Cannot find a modem in " + modem.port));
-				if (modem.portIndex >= dir.length) modem.portIndex = 0;
-				connect(dir[modem.portIndex++]);
+				if (!dir.length) return onerror(new Error("Cannot find a modem in " + _this.port));
+				if (_this.portIndex >= dir.length) _this.portIndex = 0;
+				connect(dir[_this.portIndex++]);
 			});
 		});
 	},
@@ -47386,7 +47396,7 @@ var modem = ra(Object.defineProperties({
 		return regeneratorRuntime.wrap(function rawcommand$(context$1$0) {
 			while (1) switch (context$1$0.prev = context$1$0.next) {
 				case 0:
-					context$1$0.t0 = modem.handle;
+					context$1$0.t0 = this.handle;
 
 					if (!context$1$0.t0) {
 						context$1$0.next = 5;
@@ -47394,7 +47404,7 @@ var modem = ra(Object.defineProperties({
 					}
 
 					context$1$0.next = 4;
-					return modem.handle.lock(regeneratorRuntime.mark(function callee$1$0(command) {
+					return this.handle.lock(regeneratorRuntime.mark(function callee$1$0(command) {
 						return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
 							while (1) switch (context$2$0.prev = context$2$0.next) {
 								case 0:
@@ -47432,51 +47442,20 @@ var modem = ra(Object.defineProperties({
 		}, rawcommand, this);
 	}),
 
+	version: null,
 	sminVersion: String.fromCharCode(1, 5),
-
-	vercommand: regeneratorRuntime.mark(function vercommand() {
-		for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-			args[_key2] = arguments[_key2];
-		}
-
-		return regeneratorRuntime.wrap(function vercommand$(context$1$0) {
-			while (1) switch (context$1$0.prev = context$1$0.next) {
-				case 0:
-					if (modem.versionOK) {
-						context$1$0.next = 4;
-						break;
-					}
-
-					context$1$0.t0 = null;
-					context$1$0.next = 7;
-					break;
-
-				case 4:
-					context$1$0.next = 6;
-					return modem.rawcommand.apply(modem, args);
-
-				case 6:
-					context$1$0.t0 = context$1$0.sent;
-
-				case 7:
-					return context$1$0.abrupt("return", context$1$0.t0);
-
-				case 8:
-				case "end":
-					return context$1$0.stop();
-			}
-		}, vercommand, this);
-	}),
+	functions: null,
+	protocolOK: false,
 
 	sendcommand: regeneratorRuntime.mark(function sendcommand() {
-		for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-			args[_key3] = arguments[_key3];
+		for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+			args[_key2] = arguments[_key2];
 		}
 
 		return regeneratorRuntime.wrap(function sendcommand$(context$1$0) {
 			while (1) switch (context$1$0.prev = context$1$0.next) {
 				case 0:
-					if (modem.protocolOK) {
+					if (this.protocolOK) {
 						context$1$0.next = 4;
 						break;
 					}
@@ -47487,7 +47466,7 @@ var modem = ra(Object.defineProperties({
 
 				case 4:
 					context$1$0.next = 6;
-					return modem.vercommand.apply(modem, args);
+					return this.rawcommand.apply(this, args);
 
 				case 6:
 					context$1$0.t0 = context$1$0.sent;
@@ -47501,14 +47480,9 @@ var modem = ra(Object.defineProperties({
 			}
 		}, sendcommand, this);
 	}),
-
-	setModemWorkMode: function setModemWorkMode() {
-		return modem.command("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
-	},
-
 	command: function command() {
-		for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-			args[_key4] = arguments[_key4];
+		for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+			args[_key3] = arguments[_key3];
 		}
 
 		return co.gocall(regeneratorRuntime.mark(function callee$1$0() {
@@ -47529,19 +47503,25 @@ var modem = ra(Object.defineProperties({
 		}), this);
 	},
 
+	setModemWorkMode: function setModemWorkMode() {
+		return this.command("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
+	},
+
 	session: function session(callback) {
+		var _this3 = this;
+
 		return ra.detach(function () {
-			return co.go(regeneratorRuntime.mark(function callee$2$0() {
+			return co.gocall(regeneratorRuntime.mark(function callee$2$0() {
 				return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
 					while (1) switch (context$3$0.prev = context$3$0.next) {
 						case 0:
-							if (!modem.protocolOK) {
+							if (!this.protocolOK) {
 								context$3$0.next = 6;
 								break;
 							}
 
 							context$3$0.next = 3;
-							return modem.handle.lock(callback);
+							return this.handle.lock(callback);
 
 						case 3:
 							return context$3$0.abrupt("return", context$3$0.sent);
@@ -47558,7 +47538,7 @@ var modem = ra(Object.defineProperties({
 							return context$3$0.stop();
 					}
 				}, callee$2$0, this);
-			}));
+			}), _this3);
 		});
 	},
 
@@ -47583,10 +47563,12 @@ var modem = ra(Object.defineProperties({
 			data = arguments[3];
 			socket = arguments[4];
 		}
-		return co.go(regeneratorRuntime.mark(function callee$1$0() {
+		return co.gocall(regeneratorRuntime.mark(function callee$1$0() {
 			var error, deviceCommand, group, device, commands, newstate, info, _group, passedToModem, my_timestamp, errors, errorneous;
 
 			return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
+				var _this4 = this;
+
 				while (1) switch (context$2$0.prev = context$2$0.next) {
 					case 0:
 						error = function error(status, message) {
@@ -47594,7 +47576,7 @@ var modem = ra(Object.defineProperties({
 						};
 
 						context$2$0.next = 3;
-						return modem.devices.waitForReady(socket);
+						return this.devices.waitForReady(socket);
 
 					case 3:
 						deviceCommand = command;
@@ -47605,16 +47587,16 @@ var modem = ra(Object.defineProperties({
 						info = undefined;
 
 						if (typeof deviceId == "number") group = deviceId;else {
-							device = modem.devices.getState().content[deviceId];
+							device = this.devices.getState().content[deviceId];
 							if (!device) error(HTTPStatus.NOT_FOUND);
 							if (!device.group) {
 								if (deviceCommand == "Link" || deviceCommand == "Reserve") {
-									_group = devdb.findFreeGroup(modem.devices.getState());
+									_group = devdb.findFreeGroup(this.devices.getState());
 
 									if (_group == null) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
-									modem.devices.applyItemChanges(deviceId, { group: _group });
+									this.devices.applyItemChanges(deviceId, { group: _group });
 									ra.forceCalculations();
-									device = modem.devices.getState().content[deviceId];
+									device = this.devices.getState().content[deviceId];
 								} else error(HTTPStatus.NOT_FOUND, "No group in device");
 							}
 							newstate = deviceActions.getNewState(device, deviceCommand, data);
@@ -47633,13 +47615,13 @@ var modem = ra(Object.defineProperties({
 						// first notify clients about things to change
 						if (device) {
 							co.defer(function () {
-								var device = modem.devices.getState().content[deviceId];
-								if (!passedToModem && device && my_timestamp == device.newstate_timestamp) modem.devices.applyItemChanges(deviceId, { newstate: null, newstate_timestamp: null, errorneous: errorneous });
+								var device = _this4.devices.getState().content[deviceId];
+								if (!passedToModem && device && my_timestamp == device.newstate_timestamp) _this4.devices.applyItemChanges(deviceId, { newstate: null, newstate_timestamp: null, errorneous: errorneous });
 							});
-							modem.devices.applyItemChanges(deviceId, { newstate: newstate, newstate_timestamp: my_timestamp, errorneous: null });
+							this.devices.applyItemChanges(deviceId, { newstate: newstate, newstate_timestamp: my_timestamp, errorneous: null });
 						}
 						context$2$0.next = 19;
-						return modem.session(regeneratorRuntime.mark(function callee$2$0(command) {
+						return this.session(regeneratorRuntime.mark(function callee$2$0(command) {
 							var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, c, answer;
 
 							return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
@@ -47761,7 +47743,7 @@ var modem = ra(Object.defineProperties({
 										// here newstate can become null if device has not answered
 										if (device && newstate != null) {
 											errorneous = null;
-											modem.devices.applyItemChanges(deviceId, { state: newstate, state_timestamp: my_timestamp, errorneous: null });
+											this.devices.applyItemChanges(deviceId, { state: newstate, state_timestamp: my_timestamp, errorneous: null });
 											passedToModem = true;
 										}
 
@@ -47770,17 +47752,17 @@ var modem = ra(Object.defineProperties({
 										return context$3$0.stop();
 								}
 							}, callee$2$0, this, [[3, 30, 34, 42], [7, 16], [35,, 37, 41]]);
-						}));
+						}).bind(this));
 
 					case 19:
 
 						if (device) {
 							if (deviceCommand == "Unlink" || deviceCommand == "Clear") {
-								modem.devices.applyChanges(devdb[deviceCommand](modem.devices.getState(), deviceId));
+								this.devices.applyChanges(devdb[deviceCommand](this.devices.getState(), deviceId));
 								ra.forceCalculations();
 							}
 							if (deviceCommand == "Set" || device.type == "group") {
-								if (!errorneous) modem.devices.applyChanges(devdb.Set(modem.devices.getState(), deviceId, { state: newstate }));else modem.devices.applyChanges(devdb.Set(modem.devices.getState(), deviceId, { errorneous: true }));
+								if (!errorneous) this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { state: newstate }));else this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { errorneous: true }));
 								ra.forceCalculations();
 							}
 						}
@@ -47790,20 +47772,20 @@ var modem = ra(Object.defineProperties({
 						return context$2$0.stop();
 				}
 			}, callee$1$0, this);
-		}));
+		}), this);
 	} }, {
 	initializeSocket: {
 		get: function () {
-			modem.createSocket();
+			this.createSocket();
 		},
 		configurable: true,
 		enumerable: true
 	},
 	handle: {
 		get: function () {
-			return modem.socket && new Modem(modem.socket, function () {
-				for (var _len5 = arguments.length, args = Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
-					args[_key5] = arguments[_key5];
+			return this.socket && new Modem(this.socket, function () {
+				for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+					args[_key4] = arguments[_key4];
 				}
 
 				return console.info.apply(console, [lu.time()].concat(args));
@@ -47812,16 +47794,9 @@ var modem = ra(Object.defineProperties({
 		configurable: true,
 		enumerable: true
 	},
-	version: {
-		get: function () {
-			return modem.rawcommand("Version");
-		},
-		configurable: true,
-		enumerable: true
-	},
 	pingModem: {
 		get: function () {
-			return modem.pingInterval && ra(regeneratorRuntime.mark(function callee$1$0() {
+			return this.pingInterval && ra(regeneratorRuntime.mark(function callee$1$0() {
 				return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
 					while (1) switch (context$2$0.prev = context$2$0.next) {
 						case 0:
@@ -47874,58 +47849,109 @@ var modem = ra(Object.defineProperties({
 		configurable: true,
 		enumerable: true
 	},
-	sversion: {
+	initializeModem: {
 		get: function () {
-			return modem.version && String.fromCharCode(modem.version.PRODUCT_VERSION, modem.version.PRODUCT_ID, modem.version.PRODUCT_HARD, modem.version.PRODUCT_VARIANT);
-		},
-		configurable: true,
-		enumerable: true
-	},
-	versionOK: {
-		get: function () {
-			return modem.sversion && modem.sversion >= modem.sminVersion;
-		},
-		configurable: true,
-		enumerable: true
-	},
-	functions: {
-		get: function () {
-			return modem.vercommand("Functions");
-		},
-		configurable: true,
-		enumerable: true
-	},
-	initProtocols: {
-		get: function () {
-			return modem.vercommand("Change_protocol", { PROTOCOL_NUM: "All_protocols" });
-		},
-		configurable: true,
-		enumerable: true
-	},
-	protocolOK: {
-		get: function () {
-			return !!(modem.functions && modem.functions.PROTOCOLS && modem.initProtocols);
+			return regeneratorRuntime.mark(function callee$1$0() {
+				var sversion;
+				return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
+					while (1) switch (context$2$0.prev = context$2$0.next) {
+						case 0:
+
+							this.protocolOK = false;
+							this.version = null;
+
+							context$2$0.next = 4;
+							return this.rawcommand("Version");
+
+						case 4:
+							this.version = context$2$0.sent;
+
+							if (this.version) {
+								context$2$0.next = 8;
+								break;
+							}
+
+							console.log("error getting modem version".red);
+							return context$2$0.abrupt("return");
+
+						case 8:
+							sversion = String.fromCharCode(this.version.PRODUCT_VERSION, this.version.PRODUCT_ID, this.version.PRODUCT_HARD, this.version.PRODUCT_VARIANT);
+
+							if (!(sversion < this.sminVersion)) {
+								context$2$0.next = 12;
+								break;
+							}
+
+							console.log("modem version too low".red);
+							return context$2$0.abrupt("return");
+
+						case 12:
+							context$2$0.next = 14;
+							return this.rawcommand("Functions");
+
+						case 14:
+							this.functions = context$2$0.sent;
+
+							if (!(!this.functions || !this.functions.PROTOCOLS)) {
+								context$2$0.next = 18;
+								break;
+							}
+
+							console.log("error getting modem functions".red);
+							return context$2$0.abrupt("return");
+
+						case 18:
+							context$2$0.next = 20;
+							return this.rawcommand("Change_protocol", { PROTOCOLS: /* this.functions.PROTOCOLS || */{
+									NERO_II_SmartHome: this.functions.PROTOCOLS.NERO_II_SmartHome,
+									INTRO_II_SmartHome: this.functions.PROTOCOLS.INTRO_II_SmartHome } });
+
+						case 20:
+							if (context$2$0.sent) {
+								context$2$0.next = 23;
+								break;
+							}
+
+							console.log("error changing modem protocol".red);
+							return context$2$0.abrupt("return");
+
+						case 23:
+							context$2$0.next = 25;
+							return this.rawcommand("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
+
+						case 25:
+							if (context$2$0.sent) {
+								context$2$0.next = 28;
+								break;
+							}
+
+							console.log("error changing modem work mode".red);
+							return context$2$0.abrupt("return");
+
+						case 28:
+
+							this.protocolOK = true;
+
+						case 29:
+						case "end":
+							return context$2$0.stop();
+					}
+				}, callee$1$0, this);
+			}).call(this);
 		},
 		configurable: true,
 		enumerable: true
 	},
 	freeCells: {
 		get: function () {
-			return modem.sendcommand("Free_Cell_Count");
-		},
-		configurable: true,
-		enumerable: true
-	},
-	initModemWorkMode: {
-		get: function () {
-			return modem.sendcommand("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
+			return this.sendcommand("Free_Cell_Count");
 		},
 		configurable: true,
 		enumerable: true
 	},
 	showModemStatus: {
 		get: function () {
-			console.info("Modem is " + (modem.protocolOK ? "active" : "inactive"));
+			console.info("Modem is " + (this.protocolOK ? "active" : "inactive"));
 		},
 		configurable: true,
 		enumerable: true
@@ -48224,8 +48250,8 @@ var onUpgrade = function onUpgrade(request, socket, head) {
 var createModemServer = function createModemServer(Server) {
 	var _Server$createServer$on;
 
-	for (var _len6 = arguments.length, connection = Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-		connection[_key6 - 1] = arguments[_key6];
+	for (var _len5 = arguments.length, connection = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+		connection[_key5 - 1] = arguments[_key5];
 	}
 
 	return (_Server$createServer$on = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply(_Server$createServer$on, connection);
