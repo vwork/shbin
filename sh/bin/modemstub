@@ -11045,6 +11045,8 @@ exports.sleep = function (milliseconds) {
 		} };
 };
 
+exports.tick = exports.sleep(1);
+
 exports.timeout = function (milliseconds) {
 	return { then: function then(_, reject) {
 			var timer = setTimeout(reject, milliseconds);
@@ -11069,8 +11071,6 @@ exports.promise = function (value) {
 		}, callee$1$0, this);
 	}))]);
 };
-
-exports["yield"] = exports.sleep(1);
 
 exports.requestAnimationFrame = { then: function then(resolve) {
 		if (typeof cancelAnimationFrame == "function") {
@@ -11441,7 +11441,7 @@ var Thread = (function () {
 		this._iterator = new IteratorProxy(iterator);
 		this._stopCount = 0;
 		this._stack = [];
-		this._global = Object.create(null);
+		this.global = Object.create(null);
 		this._currentPromise = null;
 		this._running = false;
 		this._killing = null;
@@ -11524,7 +11524,7 @@ var Thread = (function () {
 	}, {
 		key: "throw",
 		value: function _throw(exception) {
-			if (this._global == exports.global) throw exception;
+			if (this.global == exports.global) throw exception;
 			this._checkFinished();
 			this._newStep();
 			if (this._stopCount > 0) this._step.resume = this._step.fail.bind(this._step, exception);else this._step.fail(exception);
@@ -11543,10 +11543,19 @@ var Thread = (function () {
 				this._killing = { reason: reason };
 				throw new EKill();
 			}
+			var previousThread = exports.current;
+			var previosCB = exports.cb;
+			var previosGlobal = exports.global;
+			exports.cb = this._cb;
+			exports.global = this.global;
+			exports.current = this;
 			killIterator(this._iterator);
 			for (var a = this._stack, i = a.length - 1; i >= 0; --i) {
 				killIterator(a[i]);
-			}if (this._currentPromise) {
+			}exports.cb = previosCB;
+			exports.global = previosGlobal;
+			exports.current = previousThread;
+			if (this._currentPromise) {
 				try {
 					this._currentPromise.kill(reason);
 				} catch (e) {
@@ -11583,13 +11592,16 @@ var Thread = (function () {
 			for (;;) {
 				this._currentPromise = null;
 				this._running = true;
-				var previosThread = exports.cb;
+				var previousThread = exports.current;
+				var previosCB = exports.cb;
 				var previosGlobal = exports.global;
 				exports.cb = this._cb;
-				exports.global = this._global;
+				exports.global = this.global;
+				exports.current = this;
 				var v = this._iterator.call(imethod, result);
-				exports.cb = previosThread;
+				exports.cb = previosCB;
 				exports.global = previosGlobal;
+				exports.current = previousThread;
 				this._running = false;
 				if (this["debugger"] || step["debugger"]) debugger;
 				if (this._killing) {
@@ -11610,7 +11622,7 @@ var Thread = (function () {
 					if (v.iteratorFailed && this._attachedToStack) rethrow(v.value);
 					r(v.value);
 				} else if (!v.value) // any falsy value
-					exports["yield"].then(step.next);else if (v.value.then) {
+					exports.tick.then(step.next);else if (v.value.then) {
 					var p = v.value.then(step.next, step.fail);
 					if (p && p.kill) this._currentPromise = p;
 				} else if (v.value.next) {
@@ -11687,7 +11699,9 @@ Object.keys(Thread.prototype).forEach(function (k) {
 var mainThread = new Thread({ next: function next() {
 		return { value: { then: function then() {} } };
 	} }).waitForInput();
-exports.global = mainThread._global;
+exports.current = null;
+exports.global = mainThread.global;
+exports.cb = null;
 
 },{"events":false,"later":"/home/vadzim/v/work/nerojs/src/later.js"}],"/home/vadzim/v/work/nerojs/src/later.js":[function(require,module,exports){
 "use strict";
@@ -11702,6 +11716,11 @@ function _defineProperty(obj, key, value) { return Object.defineProperty(obj, ke
 var lodash = require("lodash");
 var co = require("co");
 var EventEmitter = require("events").EventEmitter || require("events");
+
+var NON_PARTIAL = Object.create(null);
+NON_PARTIAL.__partial__ = false;
+
+var PARTIAL = Object.create(null);
 
 function assert(value, message) {
 	if (!value) throw new Error("" + message);
@@ -12199,7 +12218,7 @@ var lu = module.exports = {
 		return proto === LiteralPrototype || proto === null;
 	},
 
-	applyDiff: function applyDiff(dest, diff) {
+	applyDiff: function applyDiff(dest, diff, partial) {
 		var ret = dest;
 		var cnt = 0;
 
@@ -12215,11 +12234,13 @@ var lu = module.exports = {
 			}
 		}
 
+		if (diff && diff.__partial__ === false) partial = false;
+
 		for (var key in diff) {
-			if (Object.prototype.hasOwnProperty.call(diff, key)) {
+			if (key != "__partial__" && Object.prototype.hasOwnProperty.call(diff, key)) {
 				var value = diff[key];
 				if (value === undefined) continue;
-				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value);
+				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value, partial);
 				if (value == null) {
 					if (ret != null && Object.prototype.hasOwnProperty.call(ret, key)) {
 						if (ret === dest) copyDest();
@@ -12234,7 +12255,55 @@ var lu = module.exports = {
 					cnt = Infinity;
 				}
 			}
+		}if (partial === false) for (var key in ret) {
+			if (Object.prototype.hasOwnProperty.call(ret, key)) {
+				if (!Object.prototype.hasOwnProperty.call(diff, key) || diff[key] === undefined) {
+					if (ret === dest) copyDest();
+					delete ret[key];
+					--cnt;
+				} else cnt = Infinity;
+			}
 		}if (ret !== dest && cnt == 0) ret = null;
+
+		return ret;
+	},
+
+	mergeDiffs: function mergeDiffs(a, b) {
+
+		if (a == null) a = NON_PARTIAL;
+		if (b == null) b = NON_PARTIAL;
+
+		if (b.__partial__ === false) return b;
+
+		var ret = a;
+
+		function copyDest() {
+			ret = Object.create(null);
+			for (var key in a) {
+				if (Object.prototype.hasOwnProperty.call(a, key)) {
+					var value = a[key];
+					if (value === undefined) continue;
+					ret[key] = a[key];
+				}
+			}
+		}
+
+		for (var key in b) {
+			if (Object.prototype.hasOwnProperty.call(b, key)) {
+				var value = b[key];
+				if (value === undefined) continue;
+				if (value == null) value = NON_PARTIAL;
+				if (typeof value == "object") {
+					var r = ret ? ret[key] : undefined;
+					if (r === undefined) r = PARTIAL;
+					value = lu.mergeDiffs(r, value);
+				}
+				if (ret == null || ret[key] !== value) {
+					if (ret === a) copyDest();
+					ret[key] = value;
+				}
+			}
+		}if (ret !== a && typeof a != "object") ret.__partial__ = false;
 
 		return ret;
 	},
@@ -12282,10 +12351,6 @@ var lu = module.exports = {
 			}
 		}
 		return ret ? ret : undefined;
-	},
-
-	assignDiff: function assignDiff(dest, src) {
-		return lu.applyDiff(dest, lu.makeDiff(dest, src));
 	},
 
 	concatString: function concatString(array) {
@@ -12794,7 +12859,18 @@ var lu = module.exports = {
 		};
 	} };
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/modem.js":[function(require,module,exports){
+function _copy(obj) {
+	var ret = Object.create(null);
+	for (var key in obj) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			var value = obj[key];
+			if (value === undefined) continue;
+			ret[key] = obj[key];
+		}
+	}return ret;
+}
+
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/modem.js":[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -12806,7 +12882,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 var lodash = require("lodash");
-var CRC = require("modemcrc");
+var CRC = require("netro/modemcrc");
 var co = require("co");
 var lu = require("localUtils");
 
@@ -13236,6 +13312,7 @@ function compose(t1, t2) {
 		}
 		function getValue(value) {
 			if (typeof value == "number") return value;
+			if (String(Number(value)) == value) return Number(value);
 			var ret = enumeration[value];
 			if (ret == null) throw new Error("wrong constant " + value);
 			return ret;
@@ -13552,7 +13629,7 @@ function compose(t1, t2) {
 	command("Change_protocol", { cmdLo: 25, cmdHi: 4, PROTOCOLS: _9 });
 })();
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modemcrc":"/home/vadzim/v/work/nerojs/src/modemcrc.js"}],"/home/vadzim/v/work/nerojs/src/modemcrc.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","netro/modemcrc":"/home/vadzim/v/work/nerojs/src/netro/modemcrc.js"}],"/home/vadzim/v/work/nerojs/src/netro/modemcrc.js":[function(require,module,exports){
 "use strict";
 
 var marked0$0 = [append_crc].map(regeneratorRuntime.mark);
@@ -13726,10 +13803,10 @@ module.exports = {
 	calc_crc: calc_crc,
 	append_crc: append_crc };
 
-},{}],"/home/vadzim/v/work/nerojs/src/modemstub.js":[function(require,module,exports){
+},{}],"/home/vadzim/v/work/nerojs/src/netro/modemstub.js":[function(require,module,exports){
 "use strict";
 
-var Modem = require("modem");
+var Modem = require("netro/modem");
 var net = require("net");
 var fs = require("fs");
 var lu = require("localUtils");
@@ -13762,7 +13839,7 @@ var ondata = co.func(regeneratorRuntime.mark(function callee$0$0(data) {
 				ret = "Packet_Error";
 				pause = 0;
 				context$1$0.t0 = data.id;
-				context$1$0.next = context$1$0.t0 === "Version" ? 10 : context$1$0.t0 === "Free_Cell_Count" ? 12 : context$1$0.t0 === "Functions" ? 14 : context$1$0.t0 === "Change_modem_work_mode" ? 16 : context$1$0.t0 === "Write_Group" ? 18 : context$1$0.t0 === "Set_To_Comfort" ? 18 : context$1$0.t0 === "Set_To_Comfort_1" ? 18 : context$1$0.t0 === "Set_To_Comfort_2" ? 18 : context$1$0.t0 === "Up" ? 18 : context$1$0.t0 === "Down" ? 18 : context$1$0.t0 === "Stop" ? 18 : context$1$0.t0 === "Delete_Group_In_Idle_Mode" ? 21 : 24;
+				context$1$0.next = context$1$0.t0 === "Version" ? 10 : context$1$0.t0 === "Free_Cell_Count" ? 12 : context$1$0.t0 === "Functions" ? 14 : context$1$0.t0 === "Change_modem_work_mode" ? 16 : context$1$0.t0 === "Change_protocol" ? 18 : context$1$0.t0 === "Write_Group" ? 20 : context$1$0.t0 === "Set_To_Comfort" ? 20 : context$1$0.t0 === "Set_To_Comfort_1" ? 20 : context$1$0.t0 === "Set_To_Comfort_2" ? 20 : context$1$0.t0 === "Up" ? 20 : context$1$0.t0 === "Down" ? 20 : context$1$0.t0 === "Stop" ? 20 : context$1$0.t0 === "Delete_Group_In_Idle_Mode" ? 23 : context$1$0.t0 === "Delete_Group_In_Programming_Mode" ? 23 : context$1$0.t0 === "GoTo_Mode" ? 23 : 26;
 				break;
 
 			case 10:
@@ -13771,50 +13848,54 @@ var ondata = co.func(regeneratorRuntime.mark(function callee$0$0(data) {
 					PRODUCT_ID: 73,
 					PRODUCT_HARD: 22,
 					PRODUCT_VARIANT: 8 };
-				return context$1$0.abrupt("break", 24);
+				return context$1$0.abrupt("break", 26);
 
 			case 12:
 				ret = {
 					COUNT: 122 };
-				return context$1$0.abrupt("break", 24);
+				return context$1$0.abrupt("break", 26);
 
 			case 14:
 				ret = {
 					PROTOCOLS: { NERO_II_SmartHome: true, INTRO_II_SmartHome: true },
 					MODEM_FUNCTIONS: {} };
-				return context$1$0.abrupt("break", 24);
+				return context$1$0.abrupt("break", 26);
 
 			case 16:
 				if (data.MODEM_MODE == "Work_Mode") ret = "OK";
-				return context$1$0.abrupt("break", 24);
+				return context$1$0.abrupt("break", 26);
 
 			case 18:
+				ret = "OK";
+				return context$1$0.abrupt("break", 26);
+
+			case 20:
 				pause = 600;
 				ret = "OK";
-				return context$1$0.abrupt("break", 24);
+				return context$1$0.abrupt("break", 26);
 
-			case 21:
+			case 23:
 				pause = 300;
 				ret = "OK";
-				return context$1$0.abrupt("break", 24);
+				return context$1$0.abrupt("break", 26);
 
-			case 24:
+			case 26:
 				if (typeof ret == "string") ret = {
 					id: "answer_Result",
 					RESULT: ret };
 
 				if (!pause) {
-					context$1$0.next = 28;
+					context$1$0.next = 30;
 					break;
 				}
 
-				context$1$0.next = 28;
+				context$1$0.next = 30;
 				return co.sleep(pause);
 
-			case 28:
+			case 30:
 				this.write(Modem.encode(ret.id || "answer_" + data.id, ret));
 
-			case 29:
+			case 31:
 			case "end":
 				return context$1$0.stop();
 		}
@@ -14117,7 +14198,7 @@ parsed: { id: 'answer_Result',
 
  */
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js"}],"/home/vadzim/v/work/nerojs/src/scheduler.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","net":false,"netro/modem":"/home/vadzim/v/work/nerojs/src/netro/modem.js","watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js"}],"/home/vadzim/v/work/nerojs/src/scheduler.js":[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -14228,4 +14309,4 @@ function watch(fn) {
 
 module.exports = watch;
 
-},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/modemstub.js"]);
+},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/netro/modemstub.js"]);

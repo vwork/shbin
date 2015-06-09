@@ -38990,6 +38990,8 @@ exports.sleep = function (milliseconds) {
 		} };
 };
 
+exports.tick = exports.sleep(1);
+
 exports.timeout = function (milliseconds) {
 	return { then: function then(_, reject) {
 			var timer = setTimeout(reject, milliseconds);
@@ -39014,8 +39016,6 @@ exports.promise = function (value) {
 		}, callee$1$0, this);
 	}))]);
 };
-
-exports["yield"] = exports.sleep(1);
 
 exports.requestAnimationFrame = { then: function then(resolve) {
 		if (typeof cancelAnimationFrame == "function") {
@@ -39386,7 +39386,7 @@ var Thread = (function () {
 		this._iterator = new IteratorProxy(iterator);
 		this._stopCount = 0;
 		this._stack = [];
-		this._global = Object.create(null);
+		this.global = Object.create(null);
 		this._currentPromise = null;
 		this._running = false;
 		this._killing = null;
@@ -39469,7 +39469,7 @@ var Thread = (function () {
 	}, {
 		key: "throw",
 		value: function _throw(exception) {
-			if (this._global == exports.global) throw exception;
+			if (this.global == exports.global) throw exception;
 			this._checkFinished();
 			this._newStep();
 			if (this._stopCount > 0) this._step.resume = this._step.fail.bind(this._step, exception);else this._step.fail(exception);
@@ -39488,10 +39488,19 @@ var Thread = (function () {
 				this._killing = { reason: reason };
 				throw new EKill();
 			}
+			var previousThread = exports.current;
+			var previosCB = exports.cb;
+			var previosGlobal = exports.global;
+			exports.cb = this._cb;
+			exports.global = this.global;
+			exports.current = this;
 			killIterator(this._iterator);
 			for (var a = this._stack, i = a.length - 1; i >= 0; --i) {
 				killIterator(a[i]);
-			}if (this._currentPromise) {
+			}exports.cb = previosCB;
+			exports.global = previosGlobal;
+			exports.current = previousThread;
+			if (this._currentPromise) {
 				try {
 					this._currentPromise.kill(reason);
 				} catch (e) {
@@ -39528,13 +39537,16 @@ var Thread = (function () {
 			for (;;) {
 				this._currentPromise = null;
 				this._running = true;
-				var previosThread = exports.cb;
+				var previousThread = exports.current;
+				var previosCB = exports.cb;
 				var previosGlobal = exports.global;
 				exports.cb = this._cb;
-				exports.global = this._global;
+				exports.global = this.global;
+				exports.current = this;
 				var v = this._iterator.call(imethod, result);
-				exports.cb = previosThread;
+				exports.cb = previosCB;
 				exports.global = previosGlobal;
+				exports.current = previousThread;
 				this._running = false;
 				if (this["debugger"] || step["debugger"]) debugger;
 				if (this._killing) {
@@ -39555,7 +39567,7 @@ var Thread = (function () {
 					if (v.iteratorFailed && this._attachedToStack) rethrow(v.value);
 					r(v.value);
 				} else if (!v.value) // any falsy value
-					exports["yield"].then(step.next);else if (v.value.then) {
+					exports.tick.then(step.next);else if (v.value.then) {
 					var p = v.value.then(step.next, step.fail);
 					if (p && p.kill) this._currentPromise = p;
 				} else if (v.value.next) {
@@ -39632,7 +39644,9 @@ Object.keys(Thread.prototype).forEach(function (k) {
 var mainThread = new Thread({ next: function next() {
 		return { value: { then: function then() {} } };
 	} }).waitForInput();
-exports.global = mainThread._global;
+exports.current = null;
+exports.global = mainThread.global;
+exports.cb = null;
 
 },{"events":false,"later":"/home/vadzim/v/work/nerojs/src/later.js"}],"/home/vadzim/v/work/nerojs/src/csvConfig.js":[function(require,module,exports){
 "use strict";
@@ -40411,6 +40425,11 @@ var lodash = require("lodash");
 var co = require("co");
 var EventEmitter = require("events").EventEmitter || require("events");
 
+var NON_PARTIAL = Object.create(null);
+NON_PARTIAL.__partial__ = false;
+
+var PARTIAL = Object.create(null);
+
 function assert(value, message) {
 	if (!value) throw new Error("" + message);
 }
@@ -40907,7 +40926,7 @@ var lu = module.exports = {
 		return proto === LiteralPrototype || proto === null;
 	},
 
-	applyDiff: function applyDiff(dest, diff) {
+	applyDiff: function applyDiff(dest, diff, partial) {
 		var ret = dest;
 		var cnt = 0;
 
@@ -40923,11 +40942,13 @@ var lu = module.exports = {
 			}
 		}
 
+		if (diff && diff.__partial__ === false) partial = false;
+
 		for (var key in diff) {
-			if (Object.prototype.hasOwnProperty.call(diff, key)) {
+			if (key != "__partial__" && Object.prototype.hasOwnProperty.call(diff, key)) {
 				var value = diff[key];
 				if (value === undefined) continue;
-				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value);
+				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value, partial);
 				if (value == null) {
 					if (ret != null && Object.prototype.hasOwnProperty.call(ret, key)) {
 						if (ret === dest) copyDest();
@@ -40942,7 +40963,55 @@ var lu = module.exports = {
 					cnt = Infinity;
 				}
 			}
+		}if (partial === false) for (var key in ret) {
+			if (Object.prototype.hasOwnProperty.call(ret, key)) {
+				if (!Object.prototype.hasOwnProperty.call(diff, key) || diff[key] === undefined) {
+					if (ret === dest) copyDest();
+					delete ret[key];
+					--cnt;
+				} else cnt = Infinity;
+			}
 		}if (ret !== dest && cnt == 0) ret = null;
+
+		return ret;
+	},
+
+	mergeDiffs: function mergeDiffs(a, b) {
+
+		if (a == null) a = NON_PARTIAL;
+		if (b == null) b = NON_PARTIAL;
+
+		if (b.__partial__ === false) return b;
+
+		var ret = a;
+
+		function copyDest() {
+			ret = Object.create(null);
+			for (var key in a) {
+				if (Object.prototype.hasOwnProperty.call(a, key)) {
+					var value = a[key];
+					if (value === undefined) continue;
+					ret[key] = a[key];
+				}
+			}
+		}
+
+		for (var key in b) {
+			if (Object.prototype.hasOwnProperty.call(b, key)) {
+				var value = b[key];
+				if (value === undefined) continue;
+				if (value == null) value = NON_PARTIAL;
+				if (typeof value == "object") {
+					var r = ret ? ret[key] : undefined;
+					if (r === undefined) r = PARTIAL;
+					value = lu.mergeDiffs(r, value);
+				}
+				if (ret == null || ret[key] !== value) {
+					if (ret === a) copyDest();
+					ret[key] = value;
+				}
+			}
+		}if (ret !== a && typeof a != "object") ret.__partial__ = false;
 
 		return ret;
 	},
@@ -40990,10 +41059,6 @@ var lu = module.exports = {
 			}
 		}
 		return ret ? ret : undefined;
-	},
-
-	assignDiff: function assignDiff(dest, src) {
-		return lu.applyDiff(dest, lu.makeDiff(dest, src));
 	},
 
 	concatString: function concatString(array) {
@@ -41502,6 +41567,17 @@ var lu = module.exports = {
 		};
 	} };
 
+function _copy(obj) {
+	var ret = Object.create(null);
+	for (var key in obj) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			var value = obj[key];
+			if (value === undefined) continue;
+			ret[key] = obj[key];
+		}
+	}return ret;
+}
+
 },{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/platform.js":[function(require,module,exports){
 "use strict";
 
@@ -41509,14 +41585,6 @@ Object.defineProperty(Object.prototype, "_LOG_", { value: function value() {
 		console.log(this);
 		return this;
 	}, configurable: true });
-
-// require( `colors` )
-
-// global.EventEmitter = require( `events` ).EventEmitter
-
-// global.Immutable = require( `immutable` )
-// if ( Symbol.iterator && !Immutable.Sequence.prototype[ Symbol.iterator ] )
-// 	initImmutableIterators()
 
 if (typeof Symbol == "function" && Symbol.iterator) {
 	var x = null;
@@ -41527,70 +41595,6 @@ if (typeof Symbol == "function" && Symbol.iterator) {
 		return this;
 	};
 }
-
-// global.lodash = require( `lodash` )
-// global.UID = require( `uid` )
-// global.co = require( `co` )
-// global.ra = require( `ra` )
-// global.lu = require( `localUtils` )
-// global.httpClient = require( `httpClient` )
-
-// global.React = require( `myReact` )
-
-// global.Morearty = require( `morearty` )
-
-// global.Router = require( `abyssa` ).Router
-
-function initImmutableIterators() {
-
-	var sequenceIterator = function sequenceIterator() {
-		var seq = this;
-		return {
-			next: function next() {
-				var value = seq.first();
-				var ret = {
-					value: value,
-					done: value === void 0 && seq.length === 0
-				};
-				seq = seq.rest();
-				return ret;
-			}
-		};
-	};
-
-	var indexedIterator = function indexedIterator() {
-		var _this = this;
-
-		var index = 0;
-		return {
-			next: function next() {
-				return index < _this.length ? { value: _this.get(index++) } : { done: true };
-			}
-		};
-	};
-
-	var valuesIterator = function valuesIterator() {
-		return indexedIterator.call(this.values());
-	};
-
-	var it = function it(constructor, iterator) {
-		return constructor.prototype[Symbol.iterator] = iterator;
-	};
-
-	it(Immutable.Sequence, sequenceIterator);
-	it(Immutable.Range, indexedIterator);
-	it(Immutable.Vector, indexedIterator);
-	it(Immutable.Repeat, indexedIterator);
-	it(Immutable.Map, valuesIterator);
-	it(Immutable.OrderedMap, valuesIterator);
-	it(Immutable.Set, valuesIterator);
-	var m = Immutable.Map({ x: 1 });
-	it(m.values().constructor, indexedIterator);
-	it(m.keys().constructor, indexedIterator);
-	it(Immutable.Sequence(2, 3, 4).constructor, indexedIterator);
-}
-
-// global.window && ( global.Promise = require( `promise` ) )
 
 },{}],"/home/vadzim/v/work/nerojs/src/ra.js":[function(require,module,exports){
 /*

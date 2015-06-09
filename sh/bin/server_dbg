@@ -40008,7 +40008,6 @@ var fs = require("fs");
 var lodash = require("lodash");
 var UID = require("uid");
 var lu = require("localUtils");
-var HTTPStatus = require("http-status");
 
 var MAX_CACHE_SIZE = 10000;
 var SLEEP_BETWEEN_SAVES = 300;
@@ -40182,11 +40181,9 @@ var JSONservice = (function () {
 			return !M.last.text && _this.waitForChange(response);
 		};
 
-		this.applyChanges = function (changes) {
-			var partial = arguments[1] === undefined ? true : arguments[1];
-
+		this.applyChanges = function (changes, partial) {
 			var json = M.last.json.valueOf();
-			var n = (partial ? lu.applyDiff : lu.assignDiff)(json, changes) || {};
+			var n = lu.applyDiff(json, changes, partial) || {};
 			if (n !== json) {
 				M.map = (partial ? M.map : Immutable.OrderedMap()).withMutations(function (map) {
 					while (map.length > MAX_CACHE_SIZE) map["delete"](map.findKey(lu.returnTrue));
@@ -40219,7 +40216,7 @@ var JSONservice = (function () {
 								previous = clientData.uid;
 							}
 						}
-						connection.send({ what: "data", partial: partial, data: data, previous: previous });
+						connection.send({ what: "data", partial: partial, data: partial ? data : Object.assign({ __partial__: false }, data), previous: previous });
 					},
 					configurable: true,
 					enumerable: true
@@ -40238,7 +40235,7 @@ var JSONservice = (function () {
 						}
 					case "save":
 						{
-							_this.applyChanges(message.data, !!message.partial);
+							_this.applyChanges(message.data, message.partial);
 							ra.forceCalculations();
 							connection.send({ what: "saved", messageId: message.messageId });
 							break;
@@ -40248,84 +40245,6 @@ var JSONservice = (function () {
 				}
 			};
 		};
-
-		this.httpService = co.func(regeneratorRuntime.mark(function callee$2$0(request, response, next) {
-			var data, clientData, diff;
-			return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
-				while (1) switch (context$3$0.prev = context$3$0.next) {
-					case 0:
-						if (!(request.method != "POST")) {
-							context$3$0.next = 2;
-							break;
-						}
-
-						return context$3$0.abrupt("return", response.status(HTTPStatus.METHOD_NOT_ALLOWED).end());
-
-					case 2:
-						context$3$0.next = 4;
-						return lu.readStream(request);
-
-					case 4:
-						data = context$3$0.sent.toString().trim();
-
-						if (!(data && request.query.id)) {
-							context$3$0.next = 7;
-							break;
-						}
-
-						return context$3$0.abrupt("return", response.status(HTTPStatus.BAD_REQUEST).end());
-
-					case 7:
-						context$3$0.next = 9;
-						return this.waitForReady(response);
-
-					case 9:
-						if (!data) {
-							context$3$0.next = 13;
-							break;
-						}
-
-						data = JSON.parse(data);
-						this.applyChanges(data.data, !!data.partial);
-						return context$3$0.abrupt("return", response.status(HTTPStatus.ACCEPTED).end());
-
-					case 13:
-						response.contentType("json");
-
-						if (!(request.query.id && request.query.id == M.last.json.uid)) {
-							context$3$0.next = 17;
-							break;
-						}
-
-						context$3$0.next = 17;
-						return this.waitForChange(response);
-
-					case 17:
-						clientData = undefined;
-
-						if (!(request.query.id && (clientData = M.map.get(request.query.id)))) {
-							context$3$0.next = 22;
-							break;
-						}
-
-						diff = lu.makeDiff(clientData, M.last.json.valueOf());
-
-						if (isDataLongerThan(20, diff)) {
-							context$3$0.next = 22;
-							break;
-						}
-
-						return context$3$0.abrupt("return", response.end(JSON.stringify({ partial: true, data: diff })));
-
-					case 22:
-						response.end("{\"partial\":false,\"data\":" + M.last.text + "}");
-
-					case 23:
-					case "end":
-						return context$3$0.stop();
-				}
-			}, callee$2$0, this);
-		})).bind(this);
 	}
 
 	_createClass(JSONservice, [{
@@ -40343,49 +40262,10 @@ var JSONservice = (function () {
 
 module.exports = JSONservice;
 
-function isDataLongerThan(maxLength, data) {
-	var length = 0;
-	!(function walk(x) {
-		if (x instanceof Immutable.Map) {
-			length += x.length;
-			var _iteratorNormalCompletion = true;
-			var _didIteratorError = false;
-			var _iteratorError = undefined;
-
-			try {
-				for (var _iterator = x[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-					var y = _step.value;
-
-					if (length > maxSize) return;else walk(y);
-				}
-			} catch (err) {
-				_didIteratorError = true;
-				_iteratorError = err;
-			} finally {
-				try {
-					if (!_iteratorNormalCompletion && _iterator["return"]) {
-						_iterator["return"]();
-					}
-				} finally {
-					if (_didIteratorError) {
-						throw _iteratorError;
-					}
-				}
-			}
-		} else ++length;
-	})(data);
-	return length > maxLength;
-}
-
 // sleep in the beginning of the function before touching any observeable to eliminate write requests
 // if ( M.last.json.makeBackups )
 
-/* TODO
-- перайсьці на бібліятэку перасылкі паведамленьняў, няхай яно само longpoll'іць.
-- ці хаця б вынесьці ў наладкі перыяд і рэлізаваць таймаўт - калі час перазапускаць той longpolling - дзень-два напрыклад.
-*/
-
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
 "use strict";
 
 require("colors");
@@ -40972,151 +40852,7 @@ var WebQueue = (function () {
 
 module.exports = WebQueue;
 
-},{}],"/home/vadzim/v/work/nerojs/src/actionToCommands.js":[function(require,module,exports){
-// TODO:
-// вызначыць пасьлядоўнасьці для ускосных камандаў уверх і ўніз.
-
-"use strict";
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
-
-var lodash = require("lodash");
-
-var asArray = function asArray(obj) {
-	return Array.isArray(obj) ? obj : [obj];
-};
-
-var inherit = function inherit(props) {
-	var _ref;
-
-	var base = arguments[1] === undefined ? null : arguments[1];
-	return (_ref = []).concat.apply(_ref, _toConsumableArray(asArray(base).map(function (base) {
-		return asArray(props).map(function (props) {
-			return lodash.reduce(props, function (ret, value, index) {
-				return (ret[index] = value, ret);
-			}, Object.create(base));
-		});
-	})));
-};
-
-var flatten = function flatten(obj) {
-	if (!obj || !Object.getPrototypeOf(obj)) return obj;
-	var ret = Object.create(null);
-	for (var i in obj) {
-		ret[i] = obj[i];
-	}return ret;
-};
-
-var concat = function concat() {
-	for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-		args[_key] = arguments[_key];
-	}
-
-	return args.reduce(function (ret, arg) {
-		return inherit(arg, ret);
-	}, null).map(flatten);
-};
-
-var call = function call(fun) {
-	for (var _len2 = arguments.length, params = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-		params[_key2 - 1] = arguments[_key2];
-	}
-
-	return typeof fun == "function" ? fun.apply(undefined, params) : fun;
-};
-
-var click = [{ TIME: "Pressed_0_sec" }, { TIME: "Released_0_sec" }];
-var press = { TIME: "Pressed_0_sec" };
-var RL = { ROL: 1, DIM: 1 };
-var ROL = { ROL: 1 };
-var DIM = { DIM: 1 };
-
-// commands:
-
-// Comfort_1
-// Comfort_2
-// Up
-// Down
-// ToUp
-// ToDown
-// Stop
-// Loop
-// Script
-
-var All = Object.create(null);
-All.Comfort_1 = concat(press, RL, { id: "Set_To_Comfort_1" });
-All.Comfort_2 = concat(press, RL, { id: "Set_To_Comfort_2" });
-All.Stop = concat(click, ROL, { id: "Stop" });
-All.Set = function (COMFORT) {
-	return [{ id: "Set_To_Comfort", COMFORT: COMFORT }];
-};
-var link = concat(press, { id: "Write_Group" });
-All.Clear = All.Reserve = function (_, GROUP) {
-	return [{ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: GROUP }];
-};
-All.Link = function (_, GROUP) {
-	return [].concat(_toConsumableArray(All.Reserve(_, GROUP)), _toConsumableArray(link));
-};
-All.Unlink = concat({ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: "Any_Group" });
-// All.AppendTo = GROUP => ( { id: `Write_Group_In_Idle`, GROUP } )
-All.AppendTo = function (GROUP) {
-	return [{ id: "GoTo_Mode", To_MODE: 7 }].concat(_toConsumableArray(concat(link, { group: GROUP })), [{ id: "GoTo_Mode", To_MODE: 1 }]);
-};
-All.RemoveFrom = function (GROUP) {
-	return [{ id: "Delete_Group_In_Programming_Mode", GROUP: GROUP }];
-};
-All.Reset = { id: "Clear_Device_Memory_In_Idle_Mode", ACK: false };
-
-var RollShutter = Object.create(All);
-RollShutter.Up = concat(click, RL, { id: "Up" });
-RollShutter.Down = concat(click, RL, { id: "Down" });
-RollShutter.ToUp = concat(click, RL, { id: "Up" });
-RollShutter.ToDown = concat(click, RL, { id: "Down" });
-RollShutter.Script = concat(click, RL, { id: "Script" });
-RollShutter.Loop = null;
-
-var Jalousie = Object.create(All);
-Jalousie.Up = concat(click, { id: "Up" });
-Jalousie.Down = concat(click, { id: "Down" });
-Jalousie.ToUp = concat(click, { id: "Up" });
-Jalousie.ToDown = concat(click, { id: "Down" });
-Jalousie.Script = concat(click, { id: "Script" });
-Jalousie.Loop = null;
-
-var Dimeer = Object.create(All);
-Dimeer.Up = concat(press, RL, { id: "Up" });
-Dimeer.Down = concat(press, RL, { id: "Down" });
-Dimeer.ToUp = concat(press, RL, { id: "Up" });
-Dimeer.ToDown = concat(press, RL, { id: "Down" });
-Dimeer.Script = concat(click, RL, { id: "Script" });
-Dimeer.Loop = null;
-
-var deviceTypes = {
-	RollShutter: RollShutter,
-	Jalousie: Jalousie,
-	Dimeer: Dimeer };
-
-function find(obj) {
-	for (var _len3 = arguments.length, path = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-		path[_key3 - 1] = arguments[_key3];
-	}
-
-	return path.reduce(function (obj, name) {
-		return obj && obj[name];
-	}, obj);
-}
-
-function createCommandSequence(group, deviceType, action, data) {
-	return asArray(call(find(deviceTypes, deviceType, action), data, group) || (function () {
-		throw new Error("wrong action specified: " + deviceType + "." + action);
-	})()).map(function (cmd) {
-		return Object.assign({ group: group }, cmd);
-	});
-}
-
-exports.createCommandSequence = createCommandSequence;
-
-},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/checkreboot.js":[function(require,module,exports){
+},{}],"/home/vadzim/v/work/nerojs/src/checkreboot.js":[function(require,module,exports){
 "use strict";
 
 require("colors");
@@ -41347,6 +41083,8 @@ exports.sleep = function (milliseconds) {
 		} };
 };
 
+exports.tick = exports.sleep(1);
+
 exports.timeout = function (milliseconds) {
 	return { then: function then(_, reject) {
 			var timer = setTimeout(reject, milliseconds);
@@ -41371,8 +41109,6 @@ exports.promise = function (value) {
 		}, callee$1$0, this);
 	}))]);
 };
-
-exports["yield"] = exports.sleep(1);
 
 exports.requestAnimationFrame = { then: function then(resolve) {
 		if (typeof cancelAnimationFrame == "function") {
@@ -41743,7 +41479,7 @@ var Thread = (function () {
 		this._iterator = new IteratorProxy(iterator);
 		this._stopCount = 0;
 		this._stack = [];
-		this._global = Object.create(null);
+		this.global = Object.create(null);
 		this._currentPromise = null;
 		this._running = false;
 		this._killing = null;
@@ -41826,7 +41562,7 @@ var Thread = (function () {
 	}, {
 		key: "throw",
 		value: function _throw(exception) {
-			if (this._global == exports.global) throw exception;
+			if (this.global == exports.global) throw exception;
 			this._checkFinished();
 			this._newStep();
 			if (this._stopCount > 0) this._step.resume = this._step.fail.bind(this._step, exception);else this._step.fail(exception);
@@ -41845,10 +41581,19 @@ var Thread = (function () {
 				this._killing = { reason: reason };
 				throw new EKill();
 			}
+			var previousThread = exports.current;
+			var previosCB = exports.cb;
+			var previosGlobal = exports.global;
+			exports.cb = this._cb;
+			exports.global = this.global;
+			exports.current = this;
 			killIterator(this._iterator);
 			for (var a = this._stack, i = a.length - 1; i >= 0; --i) {
 				killIterator(a[i]);
-			}if (this._currentPromise) {
+			}exports.cb = previosCB;
+			exports.global = previosGlobal;
+			exports.current = previousThread;
+			if (this._currentPromise) {
 				try {
 					this._currentPromise.kill(reason);
 				} catch (e) {
@@ -41885,13 +41630,16 @@ var Thread = (function () {
 			for (;;) {
 				this._currentPromise = null;
 				this._running = true;
-				var previosThread = exports.cb;
+				var previousThread = exports.current;
+				var previosCB = exports.cb;
 				var previosGlobal = exports.global;
 				exports.cb = this._cb;
-				exports.global = this._global;
+				exports.global = this.global;
+				exports.current = this;
 				var v = this._iterator.call(imethod, result);
-				exports.cb = previosThread;
+				exports.cb = previosCB;
 				exports.global = previosGlobal;
+				exports.current = previousThread;
 				this._running = false;
 				if (this["debugger"] || step["debugger"]) debugger;
 				if (this._killing) {
@@ -41912,7 +41660,7 @@ var Thread = (function () {
 					if (v.iteratorFailed && this._attachedToStack) rethrow(v.value);
 					r(v.value);
 				} else if (!v.value) // any falsy value
-					exports["yield"].then(step.next);else if (v.value.then) {
+					exports.tick.then(step.next);else if (v.value.then) {
 					var p = v.value.then(step.next, step.fail);
 					if (p && p.kill) this._currentPromise = p;
 				} else if (v.value.next) {
@@ -41989,7 +41737,9 @@ Object.keys(Thread.prototype).forEach(function (k) {
 var mainThread = new Thread({ next: function next() {
 		return { value: { then: function then() {} } };
 	} }).waitForInput();
-exports.global = mainThread._global;
+exports.current = null;
+exports.global = mainThread.global;
+exports.cb = null;
 
 },{"events":false,"later":"/home/vadzim/v/work/nerojs/src/later.js"}],"/home/vadzim/v/work/nerojs/src/csvConfig.js":[function(require,module,exports){
 "use strict";
@@ -42310,60 +42060,7 @@ exports.cleanDatabase = function (devices) {
 	return lu.makeDiff(devices, ret);
 };
 
-},{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/deviceActions.js":[function(require,module,exports){
-"use strict";
-
-var deviceTypes = require("deviceTypes");
-
-var actions = {
-	Up: function Up(device) {
-		return 1;
-	},
-	Down: function Down(device) {
-		return 0;
-	},
-	Comfort_1: function Comfort_1(device) {
-		return device.comfort_1;
-	},
-	Comfort_2: function Comfort_2(device) {
-		return device.comfort_2;
-	},
-	Stop: function Stop(device) {
-		return null;
-	},
-	Loop: function Loop(device) {
-		return device.state ? 0 : 1;
-	},
-	Script: function Script(device) {
-		return null;
-	},
-	Link: function Link(device) {
-		return null;
-	},
-	Set: function Set(_, data) {
-		return data;
-	} };
-
-function getNewState(device, action, data) {
-	// let type = deviceTypes[ device.model ]
-	return device && Object.prototype.hasOwnProperty.call(actions, action) ? actions[action](device, data) : null;
-}
-
-exports.getNewState = getNewState;
-
-},{"deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/deviceTypes.json":[function(require,module,exports){
-module.exports={
-	"Nero II 8713-50": {
-		"buttons": "RollShutter"
-	},
-	"Intro II 8513-50": {
-		"buttons": "RollShutter"
-	},
-	"Nero II 8421": {
-		"buttons": "Dimeer"
-	}
-}
-},{}],"/home/vadzim/v/work/nerojs/src/http_common_server.js":[function(require,module,exports){
+},{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/http_common_server.js":[function(require,module,exports){
 "use strict";
 
 var path = require("path");
@@ -42986,6 +42683,11 @@ var lodash = require("lodash");
 var co = require("co");
 var EventEmitter = require("events").EventEmitter || require("events");
 
+var NON_PARTIAL = Object.create(null);
+NON_PARTIAL.__partial__ = false;
+
+var PARTIAL = Object.create(null);
+
 function assert(value, message) {
 	if (!value) throw new Error("" + message);
 }
@@ -43482,7 +43184,7 @@ var lu = module.exports = {
 		return proto === LiteralPrototype || proto === null;
 	},
 
-	applyDiff: function applyDiff(dest, diff) {
+	applyDiff: function applyDiff(dest, diff, partial) {
 		var ret = dest;
 		var cnt = 0;
 
@@ -43498,11 +43200,13 @@ var lu = module.exports = {
 			}
 		}
 
+		if (diff && diff.__partial__ === false) partial = false;
+
 		for (var key in diff) {
-			if (Object.prototype.hasOwnProperty.call(diff, key)) {
+			if (key != "__partial__" && Object.prototype.hasOwnProperty.call(diff, key)) {
 				var value = diff[key];
 				if (value === undefined) continue;
-				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value);
+				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value, partial);
 				if (value == null) {
 					if (ret != null && Object.prototype.hasOwnProperty.call(ret, key)) {
 						if (ret === dest) copyDest();
@@ -43517,7 +43221,55 @@ var lu = module.exports = {
 					cnt = Infinity;
 				}
 			}
+		}if (partial === false) for (var key in ret) {
+			if (Object.prototype.hasOwnProperty.call(ret, key)) {
+				if (!Object.prototype.hasOwnProperty.call(diff, key) || diff[key] === undefined) {
+					if (ret === dest) copyDest();
+					delete ret[key];
+					--cnt;
+				} else cnt = Infinity;
+			}
 		}if (ret !== dest && cnt == 0) ret = null;
+
+		return ret;
+	},
+
+	mergeDiffs: function mergeDiffs(a, b) {
+
+		if (a == null) a = NON_PARTIAL;
+		if (b == null) b = NON_PARTIAL;
+
+		if (b.__partial__ === false) return b;
+
+		var ret = a;
+
+		function copyDest() {
+			ret = Object.create(null);
+			for (var key in a) {
+				if (Object.prototype.hasOwnProperty.call(a, key)) {
+					var value = a[key];
+					if (value === undefined) continue;
+					ret[key] = a[key];
+				}
+			}
+		}
+
+		for (var key in b) {
+			if (Object.prototype.hasOwnProperty.call(b, key)) {
+				var value = b[key];
+				if (value === undefined) continue;
+				if (value == null) value = NON_PARTIAL;
+				if (typeof value == "object") {
+					var r = ret ? ret[key] : undefined;
+					if (r === undefined) r = PARTIAL;
+					value = lu.mergeDiffs(r, value);
+				}
+				if (ret == null || ret[key] !== value) {
+					if (ret === a) copyDest();
+					ret[key] = value;
+				}
+			}
+		}if (ret !== a && typeof a != "object") ret.__partial__ = false;
 
 		return ret;
 	},
@@ -43565,10 +43317,6 @@ var lu = module.exports = {
 			}
 		}
 		return ret ? ret : undefined;
-	},
-
-	assignDiff: function assignDiff(dest, src) {
-		return lu.applyDiff(dest, lu.makeDiff(dest, src));
 	},
 
 	concatString: function concatString(array) {
@@ -44077,7 +43825,215 @@ var lu = module.exports = {
 		};
 	} };
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/modem.js":[function(require,module,exports){
+function _copy(obj) {
+	var ret = Object.create(null);
+	for (var key in obj) {
+		if (Object.prototype.hasOwnProperty.call(obj, key)) {
+			var value = obj[key];
+			if (value === undefined) continue;
+			ret[key] = obj[key];
+		}
+	}return ret;
+}
+
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/actionToCommands.js":[function(require,module,exports){
+// TODO:
+// вызначыць пасьлядоўнасьці для ускосных камандаў уверх і ўніз.
+
+"use strict";
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
+var lodash = require("lodash");
+
+var asArray = function asArray(obj) {
+	return Array.isArray(obj) ? obj : [obj];
+};
+
+var inherit = function inherit(props) {
+	var _ref;
+
+	var base = arguments[1] === undefined ? null : arguments[1];
+	return (_ref = []).concat.apply(_ref, _toConsumableArray(asArray(base).map(function (base) {
+		return asArray(props).map(function (props) {
+			return lodash.reduce(props, function (ret, value, index) {
+				return (ret[index] = value, ret);
+			}, Object.create(base));
+		});
+	})));
+};
+
+var flatten = function flatten(obj) {
+	if (!obj || !Object.getPrototypeOf(obj)) return obj;
+	var ret = Object.create(null);
+	for (var i in obj) {
+		ret[i] = obj[i];
+	}return ret;
+};
+
+var concat = function concat() {
+	for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+		args[_key] = arguments[_key];
+	}
+
+	return args.reduce(function (ret, arg) {
+		return inherit(arg, ret);
+	}, null).map(flatten);
+};
+
+var call = function call(fun) {
+	for (var _len2 = arguments.length, params = Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+		params[_key2 - 1] = arguments[_key2];
+	}
+
+	return typeof fun == "function" ? fun.apply(undefined, params) : fun;
+};
+
+var click = [{ TIME: "Pressed_0_sec" }, { TIME: "Released_0_sec" }];
+var press = { TIME: "Pressed_0_sec" };
+var RL = { ROL: 1, DIM: 1 };
+var ROL = { ROL: 1 };
+var DIM = { DIM: 1 };
+
+// commands:
+
+// Comfort_1
+// Comfort_2
+// Up
+// Down
+// ToUp
+// ToDown
+// Stop
+// Loop
+// Script
+
+var All = Object.create(null);
+All.Comfort_1 = concat(press, RL, { id: "Set_To_Comfort_1" });
+All.Comfort_2 = concat(press, RL, { id: "Set_To_Comfort_2" });
+All.Stop = concat(click, ROL, { id: "Stop" });
+All.Set = function (COMFORT) {
+	return [{ id: "Set_To_Comfort", COMFORT: COMFORT }];
+};
+var link = concat(press, { id: "Write_Group" });
+All.Clear = All.Reserve = function (_, GROUP) {
+	return [{ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: GROUP }];
+};
+All.Link = function (_, GROUP) {
+	return [].concat(_toConsumableArray(All.Reserve(_, GROUP)), _toConsumableArray(link));
+};
+All.Unlink = concat({ id: "Delete_Group_In_Programming_Mode", ACK: false, GROUP: "Any_Group" });
+// All.AppendTo = GROUP => ( { id: `Write_Group_In_Idle`, GROUP } )
+All.AppendTo = function (GROUP) {
+	return [{ id: "GoTo_Mode", To_MODE: 7 }].concat(_toConsumableArray(concat(link, { group: GROUP })), [{ id: "GoTo_Mode", To_MODE: 1 }]);
+};
+All.RemoveFrom = function (GROUP) {
+	return [{ id: "Delete_Group_In_Programming_Mode", GROUP: GROUP }];
+};
+All.Reset = { id: "Clear_Device_Memory_In_Idle_Mode", ACK: false };
+
+var RollShutter = Object.create(All);
+RollShutter.Up = concat(click, RL, { id: "Up" });
+RollShutter.Down = concat(click, RL, { id: "Down" });
+RollShutter.ToUp = concat(click, RL, { id: "Up" });
+RollShutter.ToDown = concat(click, RL, { id: "Down" });
+RollShutter.Script = concat(click, RL, { id: "Script" });
+RollShutter.Loop = null;
+
+var Jalousie = Object.create(All);
+Jalousie.Up = concat(click, { id: "Up" });
+Jalousie.Down = concat(click, { id: "Down" });
+Jalousie.ToUp = concat(click, { id: "Up" });
+Jalousie.ToDown = concat(click, { id: "Down" });
+Jalousie.Script = concat(click, { id: "Script" });
+Jalousie.Loop = null;
+
+var Dimeer = Object.create(All);
+Dimeer.Up = concat(press, RL, { id: "Up" });
+Dimeer.Down = concat(press, RL, { id: "Down" });
+Dimeer.ToUp = concat(press, RL, { id: "Up" });
+Dimeer.ToDown = concat(press, RL, { id: "Down" });
+Dimeer.Script = concat(click, RL, { id: "Script" });
+Dimeer.Loop = null;
+
+var deviceTypes = {
+	RollShutter: RollShutter,
+	Jalousie: Jalousie,
+	Dimeer: Dimeer };
+
+function find(obj) {
+	for (var _len3 = arguments.length, path = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+		path[_key3 - 1] = arguments[_key3];
+	}
+
+	return path.reduce(function (obj, name) {
+		return obj && obj[name];
+	}, obj);
+}
+
+function createCommandSequence(group, deviceType, action, data) {
+	return asArray(call(find(deviceTypes, deviceType, action), data, group) || (function () {
+		throw new Error("wrong action specified: " + deviceType + "." + action);
+	})()).map(function (cmd) {
+		return Object.assign({ group: group }, cmd);
+	});
+}
+
+exports.createCommandSequence = createCommandSequence;
+
+},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/deviceActions.js":[function(require,module,exports){
+"use strict";
+
+var deviceTypes = require("netro/deviceTypes");
+
+var actions = {
+	Up: function Up(device) {
+		return 1;
+	},
+	Down: function Down(device) {
+		return 0;
+	},
+	Comfort_1: function Comfort_1(device) {
+		return device.comfort_1;
+	},
+	Comfort_2: function Comfort_2(device) {
+		return device.comfort_2;
+	},
+	Stop: function Stop(device) {
+		return null;
+	},
+	Loop: function Loop(device) {
+		return device.state ? 0 : 1;
+	},
+	Script: function Script(device) {
+		return null;
+	},
+	Link: function Link(device) {
+		return null;
+	},
+	Set: function Set(_, data) {
+		return data;
+	} };
+
+function getNewState(device, action, data) {
+	// let type = deviceTypes[ device.model ]
+	return device && Object.prototype.hasOwnProperty.call(actions, action) ? actions[action](device, data) : null;
+}
+
+exports.getNewState = getNewState;
+
+},{"netro/deviceTypes":"/home/vadzim/v/work/nerojs/src/netro/deviceTypes.json"}],"/home/vadzim/v/work/nerojs/src/netro/deviceTypes.json":[function(require,module,exports){
+module.exports={
+	"Nero II 8713-50": {
+		"buttons": "RollShutter"
+	},
+	"Intro II 8513-50": {
+		"buttons": "RollShutter"
+	},
+	"Nero II 8421": {
+		"buttons": "Dimeer"
+	}
+}
+},{}],"/home/vadzim/v/work/nerojs/src/netro/modem.js":[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
@@ -44089,7 +44045,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
 var lodash = require("lodash");
-var CRC = require("modemcrc");
+var CRC = require("netro/modemcrc");
 var co = require("co");
 var lu = require("localUtils");
 
@@ -44519,6 +44475,7 @@ function compose(t1, t2) {
 		}
 		function getValue(value) {
 			if (typeof value == "number") return value;
+			if (String(Number(value)) == value) return Number(value);
 			var ret = enumeration[value];
 			if (ret == null) throw new Error("wrong constant " + value);
 			return ret;
@@ -44835,7 +44792,7 @@ function compose(t1, t2) {
 	command("Change_protocol", { cmdLo: 25, cmdHi: 4, PROTOCOLS: _9 });
 })();
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modemcrc":"/home/vadzim/v/work/nerojs/src/modemcrc.js"}],"/home/vadzim/v/work/nerojs/src/modemcrc.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","netro/modemcrc":"/home/vadzim/v/work/nerojs/src/netro/modemcrc.js"}],"/home/vadzim/v/work/nerojs/src/netro/modemcrc.js":[function(require,module,exports){
 "use strict";
 
 var marked0$0 = [append_crc].map(regeneratorRuntime.mark);
@@ -45146,14 +45103,6 @@ Object.defineProperty(Object.prototype, "_LOG_", { value: function value() {
 		return this;
 	}, configurable: true });
 
-// require( `colors` )
-
-// global.EventEmitter = require( `events` ).EventEmitter
-
-// global.Immutable = require( `immutable` )
-// if ( Symbol.iterator && !Immutable.Sequence.prototype[ Symbol.iterator ] )
-// 	initImmutableIterators()
-
 if (typeof Symbol == "function" && Symbol.iterator) {
 	var x = null;
 	try {
@@ -45163,70 +45112,6 @@ if (typeof Symbol == "function" && Symbol.iterator) {
 		return this;
 	};
 }
-
-// global.lodash = require( `lodash` )
-// global.UID = require( `uid` )
-// global.co = require( `co` )
-// global.ra = require( `ra` )
-// global.lu = require( `localUtils` )
-// global.httpClient = require( `httpClient` )
-
-// global.React = require( `myReact` )
-
-// global.Morearty = require( `morearty` )
-
-// global.Router = require( `abyssa` ).Router
-
-function initImmutableIterators() {
-
-	var sequenceIterator = function sequenceIterator() {
-		var seq = this;
-		return {
-			next: function next() {
-				var value = seq.first();
-				var ret = {
-					value: value,
-					done: value === void 0 && seq.length === 0
-				};
-				seq = seq.rest();
-				return ret;
-			}
-		};
-	};
-
-	var indexedIterator = function indexedIterator() {
-		var _this = this;
-
-		var index = 0;
-		return {
-			next: function next() {
-				return index < _this.length ? { value: _this.get(index++) } : { done: true };
-			}
-		};
-	};
-
-	var valuesIterator = function valuesIterator() {
-		return indexedIterator.call(this.values());
-	};
-
-	var it = function it(constructor, iterator) {
-		return constructor.prototype[Symbol.iterator] = iterator;
-	};
-
-	it(Immutable.Sequence, sequenceIterator);
-	it(Immutable.Range, indexedIterator);
-	it(Immutable.Vector, indexedIterator);
-	it(Immutable.Repeat, indexedIterator);
-	it(Immutable.Map, valuesIterator);
-	it(Immutable.OrderedMap, valuesIterator);
-	it(Immutable.Set, valuesIterator);
-	var m = Immutable.Map({ x: 1 });
-	it(m.values().constructor, indexedIterator);
-	it(m.keys().constructor, indexedIterator);
-	it(Immutable.Sequence(2, 3, 4).constructor, indexedIterator);
-}
-
-// global.window && ( global.Promise = require( `promise` ) )
 
 },{}],"/home/vadzim/v/work/nerojs/src/ra.js":[function(require,module,exports){
 /*
@@ -47142,7 +47027,7 @@ module.exports = Scheduler;
 
 "use strict";
 
-var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }
 
@@ -47175,10 +47060,10 @@ var PingPong = require("pingpong");
 var SubConnections = require("subconnections");
 
 var devdb = require("devdb");
-var actionToCommands = require("actionToCommands");
-var deviceActions = require("deviceActions");
-var deviceTypes = require("deviceTypes");
-var Modem = require("modem");
+var actionToCommands = require("netro/actionToCommands");
+var deviceActions = require("netro/deviceActions");
+var deviceTypes = require("netro/deviceTypes");
+var Modem = require("netro/modem");
 var Inc = require("inc");
 var lodash = require("lodash");
 var ra = require("ra");
@@ -47542,11 +47427,8 @@ var modem = ra(Object.defineProperties({
 		});
 	},
 
-	check: function check(answer) {
-		var result = arguments[1] === undefined ? "OK" : arguments[1];
-
-		if (answer.id !== "answer_Result" || answer.RESULT !== result) throw new Error("unexpected modem result");
-		return answer.RESULT;
+	resultOK: function resultOK(answer) {
+		return !!(answer && answer.id == "answer_Result" && answer.RESULT == "OK");
 	},
 
 	userCommand: function userCommand(_ref2) {
@@ -47758,11 +47640,11 @@ var modem = ra(Object.defineProperties({
 
 						if (device) {
 							if (deviceCommand == "Unlink" || deviceCommand == "Clear") {
-								this.devices.applyChanges(devdb[deviceCommand](this.devices.getState(), deviceId));
+								this.devices.applyChanges(devdb[deviceCommand](this.devices.getState(), deviceId), true);
 								ra.forceCalculations();
 							}
 							if (deviceCommand == "Set" || device.type == "group") {
-								if (!errorneous) this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { state: newstate }));else this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { errorneous: true }));
+								if (!errorneous) this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { state: newstate }), true);else this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { errorneous: true }), true);
 								ra.forceCalculations();
 							}
 						}
@@ -47774,6 +47656,46 @@ var modem = ra(Object.defineProperties({
 			}, callee$1$0, this);
 		}), this);
 	} }, {
+	initDevices: {
+		get: function () {
+			this.devices = new JSONservice(config["var"] + "/database", {});
+		},
+		configurable: true,
+		enumerable: true
+	},
+	checkDevices: {
+		get: function () {
+			return regeneratorRuntime.mark(function callee$1$0() {
+				var devices;
+				return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
+					var _this5 = this;
+
+					while (1) switch (context$2$0.prev = context$2$0.next) {
+						case 0:
+							context$2$0.next = 2;
+							return co.sleep(5000);
+
+						case 2:
+							devices = this.devices.getState();
+
+							ra.detach(function () {
+								var ret = devdb.cleanDatabase(devices);
+								if (ret) {
+									console.log(JSON.stringify(ret).yellow);
+									_this5.devices.applyChanges(ret, true);
+								}
+							});
+
+						case 4:
+						case "end":
+							return context$2$0.stop();
+					}
+				}, callee$1$0, this);
+			}).call(this);
+		},
+		configurable: true,
+		enumerable: true
+	},
 	initializeSocket: {
 		get: function () {
 			this.createSocket();
@@ -47902,37 +47824,44 @@ var modem = ra(Object.defineProperties({
 
 						case 18:
 							context$2$0.next = 20;
-							return this.rawcommand("Change_protocol", { PROTOCOLS: /* this.functions.PROTOCOLS || */{
+							return this.rawcommand("Change_protocol", { PROTOCOLS:
+								// this.functions.PROTOCOLS
+								{
 									NERO_II_SmartHome: this.functions.PROTOCOLS.NERO_II_SmartHome,
-									INTRO_II_SmartHome: this.functions.PROTOCOLS.INTRO_II_SmartHome } });
+									INTRO_II_SmartHome: this.functions.PROTOCOLS.INTRO_II_SmartHome }
+							});
 
 						case 20:
-							if (context$2$0.sent) {
-								context$2$0.next = 23;
+							context$2$0.t0 = context$2$0.sent;
+
+							if (this.resultOK(context$2$0.t0)) {
+								context$2$0.next = 24;
 								break;
 							}
 
 							console.log("error changing modem protocol".red);
 							return context$2$0.abrupt("return");
 
-						case 23:
-							context$2$0.next = 25;
+						case 24:
+							context$2$0.next = 26;
 							return this.rawcommand("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
 
-						case 25:
-							if (context$2$0.sent) {
-								context$2$0.next = 28;
+						case 26:
+							context$2$0.t1 = context$2$0.sent;
+
+							if (this.resultOK(context$2$0.t1)) {
+								context$2$0.next = 30;
 								break;
 							}
 
 							console.log("error changing modem work mode".red);
 							return context$2$0.abrupt("return");
 
-						case 28:
+						case 30:
 
 							this.protocolOK = true;
 
-						case 29:
+						case 31:
 						case "end":
 							return context$2$0.stop();
 					}
@@ -48101,31 +48030,7 @@ var modemService = express().use(cookieParser).use(require("http_log")).use(func
 				return context$1$0.stop();
 		}
 	}, callee$0$0, this, [[1, 6]]);
-}))).all(/^\/(rooms|devices|database)$/, (modem.devices = new JSONservice(config["var"] + "/database", {}), ra(regeneratorRuntime.mark(function callee$0$0() {
-	var devices;
-	return regeneratorRuntime.wrap(function callee$0$0$(context$1$0) {
-		while (1) switch (context$1$0.prev = context$1$0.next) {
-			case 0:
-				context$1$0.next = 2;
-				return co.sleep(5000);
-
-			case 2:
-				devices = modem.devices.getState();
-
-				ra.detach(function () {
-					var ret = devdb.cleanDatabase(devices);
-					if (ret) {
-						console.log(JSON.stringify(ret).yellow);
-						modem.devices.applyChanges(ret);
-					}
-				});
-
-			case 4:
-			case "end":
-				return context$1$0.stop();
-		}
-	}, callee$0$0, this);
-})), modem.devices).httpService);
+})));
 
 var WebSocket = require("websockets/lib/websockets/socket");
 var NodeWebSocketToJSON = require("NodeWebSocketToJSON");
@@ -48526,6 +48431,10 @@ modemREPL().listen("/tmp/modem" + process.pid);
 
 // repl: [],
 
+// let's be lazy
+
+// force correct indices after changes
+
 // response
 // then lock the modem
 
@@ -48536,14 +48445,10 @@ modemREPL().listen("/tmp/modem" + process.pid);
 
 /* calculate limits at the begin */
 // будзем ветлівымі, і ўсё пазакрываем, і логеру ўсё скажам
-
-// let's be lazy
-
-// force correct indices after changes
 // if ( config.repl )
 // 	lu.array1( config.repl ).filter( Boolean ).forEach( p => modemREPL().listen( p ) )
 
-},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","NodeWebSocketToJSON":"/home/vadzim/v/work/nerojs/src/NodeWebSocketToJSON.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","actionToCommands":"/home/vadzim/v/work/nerojs/src/actionToCommands.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":"/home/vadzim/v/work/nerojs/node_modules/compression/index.js","constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","devdb":"/home/vadzim/v/work/nerojs/src/devdb.js","deviceActions":"/home/vadzim/v/work/nerojs/src/deviceActions.js","deviceTypes":"/home/vadzim/v/work/nerojs/src/deviceTypes.json","express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js","fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","modem":"/home/vadzim/v/work/nerojs/src/modem.js","net":false,"os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"subconnections":"/home/vadzim/v/work/nerojs/src/subconnections.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/subconnections.js":[function(require,module,exports){
+},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","NodeWebSocketToJSON":"/home/vadzim/v/work/nerojs/src/NodeWebSocketToJSON.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":"/home/vadzim/v/work/nerojs/node_modules/compression/index.js","constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","devdb":"/home/vadzim/v/work/nerojs/src/devdb.js","express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js","fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"netro/actionToCommands":"/home/vadzim/v/work/nerojs/src/netro/actionToCommands.js","netro/deviceActions":"/home/vadzim/v/work/nerojs/src/netro/deviceActions.js","netro/deviceTypes":"/home/vadzim/v/work/nerojs/src/netro/deviceTypes.json","netro/modem":"/home/vadzim/v/work/nerojs/src/netro/modem.js","os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"subconnections":"/home/vadzim/v/work/nerojs/src/subconnections.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/subconnections.js":[function(require,module,exports){
 /*
 Only hard linked subconnections are implemented for now - closing subconnection closes the whole connection.
 */
