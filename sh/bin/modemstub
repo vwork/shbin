@@ -10881,8 +10881,6 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-var marked0$0 = [_IteratorProxy].map(regeneratorRuntime.mark);
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
@@ -10896,10 +10894,6 @@ var threadCatcher = null;
 
 exports.cb = null;
 exports.global = null;
-
-var id = function id(value) {
-	return value;
-};
 
 exports.go = function (fun) {
 	for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -11074,10 +11068,16 @@ exports.promise = function (value) {
 
 exports.requestAnimationFrame = { then: function then(resolve) {
 		if (typeof cancelAnimationFrame == "function") {
-			var frame = requestAnimationFrame(resolve);
-			return { kill: function kill() {
-					cancelAnimationFrame(timer);
-				} };
+			var _ret4 = (function () {
+				var frame = requestAnimationFrame(resolve);
+				return {
+					v: { kill: function kill() {
+							cancelAnimationFrame(frame);
+						} }
+				};
+			})();
+
+			if (typeof _ret4 === "object") return _ret4.v;
 		} else return exports.sleep(1).then(resolve);
 	} };
 
@@ -11153,9 +11153,6 @@ function killIterator(iterator) {
 }
 
 // Thread
-
-var _private = { writable: true };
-var notEnumerable = { enumerable: false };
 
 var catchDefer = function catchDefer(func) {
 	// optimization -- using try/catch in a separate function.
@@ -11259,9 +11256,9 @@ var IteratorProxy = (function () {
 				while (this._deferred.length) {
 					var def = catchDefer(this._deferred.pop());
 					if (def != null && typeof def.next == "function") {
-						var _ret4 = iteratorNext(def);
-						if (!_ret4.done) _ret4 = iteratorReturn(def);
-						this.save(_ret4);
+						var _ret5 = iteratorNext(def);
+						if (!_ret5.done) _ret5 = iteratorReturn(def);
+						this.save(_ret5);
 					}
 				}
 				ret = this._result;
@@ -11278,158 +11275,90 @@ var IteratorProxy = (function () {
 
 IteratorProxy._iterator = null;
 
-function _IteratorProxy(iterator) {
-	var deffered, ret, save, step, it, yieldResult;
-	return regeneratorRuntime.wrap(function _IteratorProxy$(context$1$0) {
-		while (1) switch (context$1$0.prev = context$1$0.next) {
-			case 0:
-				save = function save(it) {
-					if (ret == null || it.iteratorFailed) {
-						if (ret && ret.iteratorFailed) rethrow(ret.value);
-						ret = it;
-					}
-				};
-
-				deffered = [];
-				ret = null;
-				step = iteratorNext;
-				it = null;
-				context$1$0.prev = 5;
-
-			case 6:
-				if (!true) {
-					context$1$0.next = 40;
-					break;
-				}
-
-				yieldResult = undefined;
-
-				step = iteratorNext;
-
-				if (!(it != null)) {
-					context$1$0.next = 22;
-					break;
-				}
-
-				context$1$0.prev = 10;
-				context$1$0.next = 13;
-				return it.value;
-
-			case 13:
-				yieldResult = context$1$0.sent;
-				context$1$0.next = 20;
-				break;
-
-			case 16:
-				context$1$0.prev = 16;
-				context$1$0.t0 = context$1$0["catch"](10);
-
-				yieldResult = context$1$0.t0;
-				step = iteratorThrow;
-
-			case 20:
-				context$1$0.next = 23;
-				break;
-
-			case 22:
-				yieldResult = undefined;
-
-			case 23:
-				_IteratorProxy.deferred = deferred;
-				it = step(iterator, yieldResult);
-				_IteratorProxy.deferred = null;
-
-				if (it.done) {
-					context$1$0.next = 28;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 6);
-
-			case 28:
-				save(it);
-				it = undefined;
-
-			case 30:
-				if (!deffered.length) {
-					context$1$0.next = 36;
-					break;
-				}
-
-				iterator = catchDefer(deffered.shift());
-
-				if (!(iterator != null && typeof iterator.next == "function")) {
-					context$1$0.next = 34;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 6);
-
-			case 34:
-				context$1$0.next = 30;
-				break;
-
-			case 36:
-				iterator = null;
-				return context$1$0.abrupt("break", 40);
-
-			case 40:
-				context$1$0.prev = 40;
-
-				if (iterator) save(iteratorReturn(iterator));
-				while (deffered.length) {
-					iterator = catchDefer(deffered.shift());
-					if (iterator != null && typeof iterator.next == "function") {
-						it = iteratorNext(iterator, undefined);
-						if (!it.done) it = iteratorReturn(iterator);
-						save(it);
-					}
-				}
-
-				if (!ret) {
-					context$1$0.next = 49;
-					break;
-				}
-
-				if (!ret.iteratorFailed) {
-					context$1$0.next = 48;
-					break;
-				}
-
-				throw ret.value;
-
-			case 48:
-				return context$1$0.abrupt("return", ret.value);
-
-			case 49:
-				return context$1$0.finish(40);
-
-			case 50:
-			case "end":
-				return context$1$0.stop();
-		}
-	}, marked0$0[0], this, [[5,, 40, 50], [10, 16]]);
-}
+// function* _IteratorProxy( iterator ) {
+// 	let deffered = []
+// 	let ret = null
+// 	function save( it ) {
+// 		if ( ret == null || it.iteratorFailed ) {
+// 			if ( ret && ret.iteratorFailed )
+// 				rethrow( ret.value )
+// 			ret = it
+// 		}
+// 	}
+// 	let step = iteratorNext
+// 	let it = null
+// 	try {
+// 		main: while ( true ) {
+// 			let yieldResult
+// 			step = iteratorNext
+// 			if ( it != null ) {
+// 				try {
+// 					yieldResult = yield it.value
+// 				}
+// 				catch ( error ) {
+// 					yieldResult = error
+// 					step = iteratorThrow
+// 				}
+// 			}
+// 			else
+// 				yieldResult = undefined
+// 			_IteratorProxy.deferred = deferred
+// 			it = step( iterator, yieldResult )
+// 			_IteratorProxy.deferred = null
+// 			if ( !it.done )
+// 				continue main
+// 			save( it )
+// 			it = undefined
+// 			while ( deffered.length ) {
+// 				iterator = catchDefer( deffered.shift() )
+// 				if ( iterator != null && typeof iterator.next == `function` )
+// 					continue main
+// 			}
+// 			iterator = null
+// 			break main
+// 		}
+// 	}
+// 	finally {
+// 		if ( iterator )
+// 			save( iteratorReturn( iterator ) )
+// 		while ( deffered.length ) {
+// 			iterator = catchDefer( deffered.shift() )
+// 			if ( iterator != null && typeof iterator.next == `function` ) {
+// 				it = iteratorNext( iterator, undefined )
+// 				if ( !it.done )
+// 					it = iteratorReturn( iterator )
+// 				save( it )
+// 			}
+// 		}
+// 		if ( ret )
+// 			if ( ret.iteratorFailed )
+// 				throw ret.value
+// 			else
+// 				return ret.value
+// 	}
+// }
 
 exports.defer = function (proc) {
 	if (!IteratorProxy._iterator) throw new Error("defer: not in a co-thread");
 	return IteratorProxy._iterator.defer(proc);
 };
 
-exports._defer = function (proc) {
-	if (typeof proc != "function") throw new Error("type error: only functions can be deferred");
-	var deferred = _IteratorProxy.deferred;
-	if (deferred) throw new Error("defer: not in a co-thread");
-	deferred.push(proc);
-	return { close: function close() {
-			if (deferred) for (var i = deferred.length - 1; i >= 0; --i) {
-				if (deferred[i] == proc) {
-					deferred.splice(i, 1);
-					return;
-				}
-			}
-		} };
-};
+// exports._defer = proc => {
+// 	if ( typeof proc != `function` )
+// 		throw new Error( `type error: only functions can be deferred` )
+// 	let deferred = _IteratorProxy.deferred
+// 	if ( deferred )
+// 		throw new Error( `defer: not in a co-thread` )
+// 	deferred.push( proc )
+// 	return { close: () => {
+// 		if ( deferred )
+// 			for ( let i = deferred.length - 1; i >= 0; --i )
+// 				if ( deferred[ i ] == proc ) {
+// 					deferred.splice( i, 1 )
+// 					return
+// 				}
+// 	} }
+// }
 
 var Thread = (function () {
 	function Thread(iterator) {
@@ -11692,16 +11621,21 @@ var Thread = (function () {
 
 exports.Thread = Thread;
 
-Object.keys(Thread.prototype).forEach(function (k) {
-	return k.match(/^_/) && Object.defineProperty(Thread.prototype, k, notEnumerable);
-});
+{
+	(function () {
+		var notEnumerable = { enumerable: false };
+		Object.keys(Thread.prototype).forEach(function (k) {
+			return k.match(/^_/) && Object.defineProperty(Thread.prototype, k, notEnumerable);
+		});
 
-var mainThread = new Thread({ next: function next() {
-		return { value: { then: function then() {} } };
-	} }).waitForInput();
-exports.current = null;
-exports.global = mainThread.global;
-exports.cb = null;
+		var mainThread = new Thread({ next: function next() {
+				return { value: { then: function then() {} } };
+			} }).waitForInput();
+		exports.current = null;
+		exports.global = mainThread.global;
+		exports.cb = null;
+	})();
+}
 
 },{"events":false,"later":"/home/vadzim/v/work/nerojs/src/later.js"}],"/home/vadzim/v/work/nerojs/src/later.js":[function(require,module,exports){
 "use strict";
@@ -11715,7 +11649,6 @@ function _defineProperty(obj, key, value) { return Object.defineProperty(obj, ke
 
 var lodash = require("lodash");
 var co = require("co");
-var EventEmitter = require("events").EventEmitter || require("events");
 
 var NON_PARTIAL = Object.create(null);
 NON_PARTIAL.__partial__ = false;
@@ -12859,18 +12792,7 @@ var lu = module.exports = {
 		};
 	} };
 
-function _copy(obj) {
-	var ret = Object.create(null);
-	for (var key in obj) {
-		if (Object.prototype.hasOwnProperty.call(obj, key)) {
-			var value = obj[key];
-			if (value === undefined) continue;
-			ret[key] = obj[key];
-		}
-	}return ret;
-}
-
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/modem.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/modem.js":[function(require,module,exports){
 "use strict";
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();

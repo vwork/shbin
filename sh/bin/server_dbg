@@ -40919,8 +40919,6 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-var marked0$0 = [_IteratorProxy].map(regeneratorRuntime.mark);
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
@@ -40934,10 +40932,6 @@ var threadCatcher = null;
 
 exports.cb = null;
 exports.global = null;
-
-var id = function id(value) {
-	return value;
-};
 
 exports.go = function (fun) {
 	for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -41112,10 +41106,16 @@ exports.promise = function (value) {
 
 exports.requestAnimationFrame = { then: function then(resolve) {
 		if (typeof cancelAnimationFrame == "function") {
-			var frame = requestAnimationFrame(resolve);
-			return { kill: function kill() {
-					cancelAnimationFrame(timer);
-				} };
+			var _ret4 = (function () {
+				var frame = requestAnimationFrame(resolve);
+				return {
+					v: { kill: function kill() {
+							cancelAnimationFrame(frame);
+						} }
+				};
+			})();
+
+			if (typeof _ret4 === "object") return _ret4.v;
 		} else return exports.sleep(1).then(resolve);
 	} };
 
@@ -41191,9 +41191,6 @@ function killIterator(iterator) {
 }
 
 // Thread
-
-var _private = { writable: true };
-var notEnumerable = { enumerable: false };
 
 var catchDefer = function catchDefer(func) {
 	// optimization -- using try/catch in a separate function.
@@ -41297,9 +41294,9 @@ var IteratorProxy = (function () {
 				while (this._deferred.length) {
 					var def = catchDefer(this._deferred.pop());
 					if (def != null && typeof def.next == "function") {
-						var _ret4 = iteratorNext(def);
-						if (!_ret4.done) _ret4 = iteratorReturn(def);
-						this.save(_ret4);
+						var _ret5 = iteratorNext(def);
+						if (!_ret5.done) _ret5 = iteratorReturn(def);
+						this.save(_ret5);
 					}
 				}
 				ret = this._result;
@@ -41316,158 +41313,90 @@ var IteratorProxy = (function () {
 
 IteratorProxy._iterator = null;
 
-function _IteratorProxy(iterator) {
-	var deffered, ret, save, step, it, yieldResult;
-	return regeneratorRuntime.wrap(function _IteratorProxy$(context$1$0) {
-		while (1) switch (context$1$0.prev = context$1$0.next) {
-			case 0:
-				save = function save(it) {
-					if (ret == null || it.iteratorFailed) {
-						if (ret && ret.iteratorFailed) rethrow(ret.value);
-						ret = it;
-					}
-				};
-
-				deffered = [];
-				ret = null;
-				step = iteratorNext;
-				it = null;
-				context$1$0.prev = 5;
-
-			case 6:
-				if (!true) {
-					context$1$0.next = 40;
-					break;
-				}
-
-				yieldResult = undefined;
-
-				step = iteratorNext;
-
-				if (!(it != null)) {
-					context$1$0.next = 22;
-					break;
-				}
-
-				context$1$0.prev = 10;
-				context$1$0.next = 13;
-				return it.value;
-
-			case 13:
-				yieldResult = context$1$0.sent;
-				context$1$0.next = 20;
-				break;
-
-			case 16:
-				context$1$0.prev = 16;
-				context$1$0.t0 = context$1$0["catch"](10);
-
-				yieldResult = context$1$0.t0;
-				step = iteratorThrow;
-
-			case 20:
-				context$1$0.next = 23;
-				break;
-
-			case 22:
-				yieldResult = undefined;
-
-			case 23:
-				_IteratorProxy.deferred = deferred;
-				it = step(iterator, yieldResult);
-				_IteratorProxy.deferred = null;
-
-				if (it.done) {
-					context$1$0.next = 28;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 6);
-
-			case 28:
-				save(it);
-				it = undefined;
-
-			case 30:
-				if (!deffered.length) {
-					context$1$0.next = 36;
-					break;
-				}
-
-				iterator = catchDefer(deffered.shift());
-
-				if (!(iterator != null && typeof iterator.next == "function")) {
-					context$1$0.next = 34;
-					break;
-				}
-
-				return context$1$0.abrupt("continue", 6);
-
-			case 34:
-				context$1$0.next = 30;
-				break;
-
-			case 36:
-				iterator = null;
-				return context$1$0.abrupt("break", 40);
-
-			case 40:
-				context$1$0.prev = 40;
-
-				if (iterator) save(iteratorReturn(iterator));
-				while (deffered.length) {
-					iterator = catchDefer(deffered.shift());
-					if (iterator != null && typeof iterator.next == "function") {
-						it = iteratorNext(iterator, undefined);
-						if (!it.done) it = iteratorReturn(iterator);
-						save(it);
-					}
-				}
-
-				if (!ret) {
-					context$1$0.next = 49;
-					break;
-				}
-
-				if (!ret.iteratorFailed) {
-					context$1$0.next = 48;
-					break;
-				}
-
-				throw ret.value;
-
-			case 48:
-				return context$1$0.abrupt("return", ret.value);
-
-			case 49:
-				return context$1$0.finish(40);
-
-			case 50:
-			case "end":
-				return context$1$0.stop();
-		}
-	}, marked0$0[0], this, [[5,, 40, 50], [10, 16]]);
-}
+// function* _IteratorProxy( iterator ) {
+// 	let deffered = []
+// 	let ret = null
+// 	function save( it ) {
+// 		if ( ret == null || it.iteratorFailed ) {
+// 			if ( ret && ret.iteratorFailed )
+// 				rethrow( ret.value )
+// 			ret = it
+// 		}
+// 	}
+// 	let step = iteratorNext
+// 	let it = null
+// 	try {
+// 		main: while ( true ) {
+// 			let yieldResult
+// 			step = iteratorNext
+// 			if ( it != null ) {
+// 				try {
+// 					yieldResult = yield it.value
+// 				}
+// 				catch ( error ) {
+// 					yieldResult = error
+// 					step = iteratorThrow
+// 				}
+// 			}
+// 			else
+// 				yieldResult = undefined
+// 			_IteratorProxy.deferred = deferred
+// 			it = step( iterator, yieldResult )
+// 			_IteratorProxy.deferred = null
+// 			if ( !it.done )
+// 				continue main
+// 			save( it )
+// 			it = undefined
+// 			while ( deffered.length ) {
+// 				iterator = catchDefer( deffered.shift() )
+// 				if ( iterator != null && typeof iterator.next == `function` )
+// 					continue main
+// 			}
+// 			iterator = null
+// 			break main
+// 		}
+// 	}
+// 	finally {
+// 		if ( iterator )
+// 			save( iteratorReturn( iterator ) )
+// 		while ( deffered.length ) {
+// 			iterator = catchDefer( deffered.shift() )
+// 			if ( iterator != null && typeof iterator.next == `function` ) {
+// 				it = iteratorNext( iterator, undefined )
+// 				if ( !it.done )
+// 					it = iteratorReturn( iterator )
+// 				save( it )
+// 			}
+// 		}
+// 		if ( ret )
+// 			if ( ret.iteratorFailed )
+// 				throw ret.value
+// 			else
+// 				return ret.value
+// 	}
+// }
 
 exports.defer = function (proc) {
 	if (!IteratorProxy._iterator) throw new Error("defer: not in a co-thread");
 	return IteratorProxy._iterator.defer(proc);
 };
 
-exports._defer = function (proc) {
-	if (typeof proc != "function") throw new Error("type error: only functions can be deferred");
-	var deferred = _IteratorProxy.deferred;
-	if (deferred) throw new Error("defer: not in a co-thread");
-	deferred.push(proc);
-	return { close: function close() {
-			if (deferred) for (var i = deferred.length - 1; i >= 0; --i) {
-				if (deferred[i] == proc) {
-					deferred.splice(i, 1);
-					return;
-				}
-			}
-		} };
-};
+// exports._defer = proc => {
+// 	if ( typeof proc != `function` )
+// 		throw new Error( `type error: only functions can be deferred` )
+// 	let deferred = _IteratorProxy.deferred
+// 	if ( deferred )
+// 		throw new Error( `defer: not in a co-thread` )
+// 	deferred.push( proc )
+// 	return { close: () => {
+// 		if ( deferred )
+// 			for ( let i = deferred.length - 1; i >= 0; --i )
+// 				if ( deferred[ i ] == proc ) {
+// 					deferred.splice( i, 1 )
+// 					return
+// 				}
+// 	} }
+// }
 
 var Thread = (function () {
 	function Thread(iterator) {
@@ -41730,16 +41659,21 @@ var Thread = (function () {
 
 exports.Thread = Thread;
 
-Object.keys(Thread.prototype).forEach(function (k) {
-	return k.match(/^_/) && Object.defineProperty(Thread.prototype, k, notEnumerable);
-});
+{
+	(function () {
+		var notEnumerable = { enumerable: false };
+		Object.keys(Thread.prototype).forEach(function (k) {
+			return k.match(/^_/) && Object.defineProperty(Thread.prototype, k, notEnumerable);
+		});
 
-var mainThread = new Thread({ next: function next() {
-		return { value: { then: function then() {} } };
-	} }).waitForInput();
-exports.current = null;
-exports.global = mainThread.global;
-exports.cb = null;
+		var mainThread = new Thread({ next: function next() {
+				return { value: { then: function then() {} } };
+			} }).waitForInput();
+		exports.current = null;
+		exports.global = mainThread.global;
+		exports.cb = null;
+	})();
+}
 
 },{"events":false,"later":"/home/vadzim/v/work/nerojs/src/later.js"}],"/home/vadzim/v/work/nerojs/src/csvConfig.js":[function(require,module,exports){
 "use strict";
@@ -42681,7 +42615,6 @@ function _defineProperty(obj, key, value) { return Object.defineProperty(obj, ke
 
 var lodash = require("lodash");
 var co = require("co");
-var EventEmitter = require("events").EventEmitter || require("events");
 
 var NON_PARTIAL = Object.create(null);
 NON_PARTIAL.__partial__ = false;
@@ -43825,18 +43758,7 @@ var lu = module.exports = {
 		};
 	} };
 
-function _copy(obj) {
-	var ret = Object.create(null);
-	for (var key in obj) {
-		if (Object.prototype.hasOwnProperty.call(obj, key)) {
-			var value = obj[key];
-			if (value === undefined) continue;
-			ret[key] = obj[key];
-		}
-	}return ret;
-}
-
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","events":false,"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/actionToCommands.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/netro/actionToCommands.js":[function(require,module,exports){
 // TODO:
 // вызначыць пасьлядоўнасьці для ускосных камандаў уверх і ўніз.
 
@@ -45151,7 +45073,7 @@ null
 
 "use strict";
 
-var _get = function get(_x5, _x6, _x7) { var _again = true; _function: while (_again) { var object = _x5, property = _x6, receiver = _x7; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x5 = parent; _x6 = property; _x7 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -45285,12 +45207,8 @@ updates.later = function (proc) {
 
 updates.later.then = updates.later;
 
-var emptyMap = typeof Immutable == "undefined" ? null : Immutable.Map();
 var checkNull = function checkNull(value) {
-	return value == null || value == emptyMap ? null : value;
-};
-var checkMap = function checkMap(value) {
-	return value == null ? emptyMap : value;
+	return value == null ? null : value;
 };
 var returnThis = function returnThis() {
 	return this;
@@ -45302,11 +45220,6 @@ var isLiteral = function isLiteral(value) {
 var getValue = function getValue(value) {
 	return value == null || value.valueOf == null ? value : value.valueOf();
 };
-var close = function close(value) {
-	return value != null && value.close != null && value.close();
-};
-
-// let _m = obj => checkMap( obj.valueOf() )
 
 function AbstractGuard() {}
 
@@ -45435,25 +45348,6 @@ var ImmutableInterface = (function (_AbstractGuard) {
 			var m = this.valueOf();
 			return m == null ? EMPTY_ARRAY : Object.keys(m);
 		}
-
-		// clear() { let m = _m( this ); return m.clear.apply( m, arguments ) }
-		// entries() { let m = _m( this ); return m.entries.apply( m, arguments ) }
-		// get() { let m = _m( this ); return m.get.apply( m, arguments ) }
-		// keys() { let m = _m( this ); return m.keys.apply( m, arguments ) }
-		// last() { let m = _m( this ); return m.last.apply( m, arguments ) }
-		// map() { let m = _m( this ); return m.map.apply( m, arguments ) }
-		// merge() { let m = _m( this ); return m.merge.apply( m, arguments ) }
-		// mergeDeep() { let m = _m( this ); return m.mergeDeep.apply( m, arguments ) }
-		// mergeDeepWith() { let m = _m( this ); return m.mergeDeepWith.apply( m, arguments ) }
-		// mergeWith() { let m = _m( this ); return m.mergeWith.apply( m, arguments ) }
-		// remove() { let m = _m( this ); return m.remove.apply( m, arguments ) }
-		// set() { let m = _m( this ); return m.set.apply( m, arguments ) }
-		// update() { let m = _m( this ); return m.update.apply( m, arguments ) }
-		// updateIn() { let m = _m( this ); return m.updateIn.apply( m, arguments ) }
-		// values() { let m = _m( this ); return m.values.apply( m, arguments ) }
-		// withMutations() { let m = _m( this ); return m.withMutations.apply( m, arguments ) }
-		// toJS() { let m = _m( this ); return m.toJS() }
-
 	}]);
 
 	return ImmutableInterface;
@@ -45804,8 +45698,6 @@ var Cell = (function (_ImmutableInterface2) {
 	}, {
 		key: "defineProperty",
 		value: function defineProperty(key) {
-			var inheritParent = arguments[1] === undefined ? false : arguments[1];
-
 			// pass key == `` to make Cell object, not value
 			if (!this._live) {
 				this._live = Object.create(null);
@@ -46174,7 +46066,7 @@ var Action = (function () {
 
 					case 6:
 						if (errorCatched) {
-							context$2$0.next = 50;
+							context$2$0.next = 48;
 							break;
 						}
 
@@ -46183,7 +46075,7 @@ var Action = (function () {
 							break;
 						}
 
-						return context$2$0.abrupt("break", 68);
+						return context$2$0.abrupt("break", 66);
 
 					case 9:
 						this._begin();
@@ -46191,151 +46083,149 @@ var Action = (function () {
 						ret = undefined;
 
 						if (!this._children) {
-							context$2$0.next = 35;
+							context$2$0.next = 34;
 							break;
 						}
 
 						ret = co.catchThreads(this._fun, this._onthread);
 
 						if (!(!ret || ret[raValue])) {
-							context$2$0.next = 18;
+							context$2$0.next = 17;
 							break;
 						}
 
-						null;
-						context$2$0.next = 33;
+						context$2$0.next = 32;
 						break;
 
-					case 18:
+					case 17:
 						if (!(ret.next && ret["throw"])) {
-							context$2$0.next = 29;
+							context$2$0.next = 28;
 							break;
 						}
 
 						if (!this._generatorProxy) this._initGeneratorProxy();
 						this._generator = ret;
-						context$2$0.prev = 21;
-						return context$2$0.delegateYield(this._generatorProxy, "t0", 23);
+						context$2$0.prev = 20;
+						return context$2$0.delegateYield(this._generatorProxy, "t0", 22);
 
-					case 23:
+					case 22:
 						ret = context$2$0.t0;
 
-					case 24:
-						context$2$0.prev = 24;
-						this._generator = null;return context$2$0.finish(24);
+					case 23:
+						context$2$0.prev = 23;
+						this._generator = null;return context$2$0.finish(23);
 
-					case 27:
-						context$2$0.next = 33;
+					case 26:
+						context$2$0.next = 32;
 						break;
 
-					case 29:
+					case 28:
 						if (!ret.then) {
-							context$2$0.next = 33;
+							context$2$0.next = 32;
 							break;
 						}
 
-						context$2$0.next = 32;
+						context$2$0.next = 31;
 						return ret;
 
-					case 32:
+					case 31:
 						ret = context$2$0.sent;
 
-					case 33:
-						context$2$0.next = 49;
+					case 32:
+						context$2$0.next = 47;
 						break;
 
-					case 35:
+					case 34:
 						ret = (0, this._fun)();
 
 						if (!(!ret || ret[raValue])) {
-							context$2$0.next = 40;
+							context$2$0.next = 38;
 							break;
 						}
 
-						null;
-						context$2$0.next = 49;
+						context$2$0.next = 47;
 						break;
+
+					case 38:
+						if (!(ret.next && ret["throw"])) {
+							context$2$0.next = 43;
+							break;
+						}
+
+						return context$2$0.delegateYield(ret, "t1", 40);
 
 					case 40:
-						if (!(ret.next && ret["throw"])) {
-							context$2$0.next = 45;
-							break;
-						}
-
-						return context$2$0.delegateYield(ret, "t1", 42);
-
-					case 42:
 						ret = context$2$0.t1;
-						context$2$0.next = 49;
+						context$2$0.next = 47;
 						break;
 
-					case 45:
+					case 43:
 						if (!ret.then) {
-							context$2$0.next = 49;
+							context$2$0.next = 47;
 							break;
 						}
 
-						context$2$0.next = 48;
+						context$2$0.next = 46;
 						return ret;
 
-					case 48:
+					case 46:
 						ret = context$2$0.sent;
 
-					case 49:
+					case 47:
 						if (this._dest) this._dest.assign(ret);
 
-					case 50:
+					case 48:
 						errorCatched = false;
 
 						if (!this.isClosed()) {
-							context$2$0.next = 53;
+							context$2$0.next = 51;
 							break;
 						}
 
-						return context$2$0.abrupt("break", 68);
+						return context$2$0.abrupt("break", 66);
 
-					case 53:
+					case 51:
 						context$2$0.t2 = this._end();
-						context$2$0.next = context$2$0.t2 === false ? 56 : context$2$0.t2 === true ? 57 : 59;
+						context$2$0.next = context$2$0.t2 === false ? 54 : context$2$0.t2 === true ? 55 : 57;
 						break;
 
-					case 56:
-						return context$2$0.abrupt("break", 68);
+					case 54:
+						return context$2$0.abrupt("break", 66);
 
-					case 57:
-						context$2$0.next = 59;
+					case 55:
+						context$2$0.next = 57;
 						return next
 						// case null:
 						/* immediate recalculation */
 						;
 
-					case 59:
+					case 57:
 						context$2$0.next = 6;
 						break;
 
-					case 61:
-						context$2$0.next = 66;
+					case 59:
+						context$2$0.next = 64;
 						break;
 
-					case 63:
-						context$2$0.prev = 63;
+					case 61:
+						context$2$0.prev = 61;
 						context$2$0.t3 = context$2$0["catch"](5);
 
 						if (errorCatched) this._dest["throw"](context$2$0.t3);else rethrow(context$2$0.t3);
 
-					case 66:
+					case 64:
 						context$2$0.next = 5;
 						break;
 
-					case 68:
+					case 66:
 						co.global[actionKey] = null;
 						this._finalize();
 
-					case 70:
+					case 68:
 					case "end":
 						return context$2$0.stop();
 				}
-			}, _loop, this, [[5, 63], [21,, 24, 27]]);
+			}, _loop, this, [[5, 61], [20,, 23, 26]]);
 		})
 	}, {
 		key: "isClosed",
@@ -46540,8 +46430,7 @@ var ra = function ra() {
 	    fun = undefined,
 	    sticky = undefined,
 	    isValueEqual = undefined,
-	    index = 0,
-	    length = arguments.length - 1;
+	    index = 0;
 	if (typeof arguments[index] == "string") name = arguments[index++];
 	if (typeof arguments[index] == "boolean") sticky = arguments[index++];
 	fun = arguments[index++];
@@ -46790,7 +46679,6 @@ var DB = (function () {
 	}, {
 		key: "createRecord",
 		value: function createRecord() {
-			var initial = arguments[0] === undefined ? null : arguments[0];
 			// not detached
 			var ret = this._head.valueOf().createNext();
 			this._head.assign(ret);
@@ -46883,42 +46771,44 @@ exports.keymap = function (array, mapper) {
 	return ra(function () {
 		return lodash.zipObject(array.valueOf(), mapped.valueOf());
 	});
-};
+}
 
-exports.slice = function (dest, source, keysVar) {
-	throw new Error("message");
-	// TODO: optimization
-	if (!(dest instanceof Cell)) dest = ra.clean(dest);
-	var cacheHolder = ra.clean();
-	ra.clean(function () {
-		var keys = getValue(keysVar);
-		if (keys) keys.sort();
-		updates.later(function () {
-			var c = ra.clean();
-			var s = c.defineProperty("source");
-			var d = c.defineProperty("dest");
-			keys && keys.forEach(function (k) {
-				var sk = s.defineProperty(k);
-				var dk = d.defineProperty(k);
-				ra.clean(function () {
-					return dk.assign(sk.valueOf());
-				});
-			});
-			var t = cacheHolder.valueOf();
-			cacheHolder.assign(c);
-			t && t.close();
-		});
-	});
-	ra.clean(function () {
-		var c = cacheHolder.valueOf();
-		c && c.source && c.source.assign(source.valueOf());
-	});
-	ra.clean(function () {
-		var c = cacheHolder.valueOf();
-		dest.assign(c && c.dest && c.dest.valueOf());
-	});
-	return dest;
-};
+// exports.slice = ( dest, source, keysVar ) => {
+// 	throw new Error( "message" )
+// 	// TODO: optimization
+// 	if ( !( dest instanceof Cell ) )
+// 		dest = ra.clean( dest )
+// 	let cacheHolder = ra.clean()
+// 	ra.clean( () => {
+// 		let keys = getValue( keysVar )
+// 		if ( keys )
+// 			keys.sort()
+// 		updates.later( () => {
+// 			let c = ra.clean()
+// 			let s = c.defineProperty( `source` )
+// 			let d = c.defineProperty( `dest` )
+// 			keys && keys.forEach( k => {
+// 				let sk = s.defineProperty( k )
+// 				let dk = d.defineProperty( k )
+// 				ra.clean( () => dk.assign( sk.valueOf() ) )
+// 			} )
+// 			let t = cacheHolder.valueOf()
+// 			cacheHolder.assign( c )
+// 			t && t.close()
+// 		} )
+// 	} )
+// 	ra.clean( () => {
+// 		let c = cacheHolder.valueOf()
+// 		c && c.source && c.source.assign( source.valueOf() )
+// 	} )
+// 	ra.clean( () => {
+// 		let c = cacheHolder.valueOf()
+// 		dest.assign( c && c.dest && c.dest.valueOf() )
+// 	} )
+// 	return dest
+// }
+; // noop
+// noop
 
 // delete( obj ) { delete obj[ id ] },
 
