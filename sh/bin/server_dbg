@@ -41370,217 +41370,77 @@ var catchDefer = function catchDefer(func) {
 	}
 };
 
-var IteratorProxy = (function () {
-	function IteratorProxy(iterator) {
-		_classCallCheck(this, IteratorProxy);
-
-		if (iterator instanceof IteratorProxy) return iterator;
-		this._iterator = iterator;
-		this._deferred = null;
-		this._result = null;
+var dummyIterator = {
+	next: function next() {
+		return DONE;
+	},
+	"throw": function _throw(error) {
+		throw error;
+	},
+	"return": function _return(value) {
+		return { value: value, done: true };
 	}
-
-	_createClass(IteratorProxy, [{
-		key: "defer",
-		value: function defer(proc) {
-			var _this2 = this;
-
-			if (typeof proc != "function") throw new Error("type error: only functions can be deferred");
-			if (!this._deferred) this._deferred = [];
-			this._deferred.push(proc);
-			return { close: function close() {
-					if (_this2._deferred) for (var i = _this2._deferred.length - 1; i >= 0; --i) {
-						if (_this2._deferred[i] == proc) {
-							_this2._deferred.splice(i, 1);
-							return;
-						}
-					}
-				} };
-		}
-	}, {
-		key: "save",
-		value: function save(result) {
-			if (!this._result) this._result = result;else if (result.iteratorFailed) {
-				if (this._result.iteratorFailed) rethrow(this._result.value);
-				this._result = result;
-			}
-		}
-	}, {
-		key: "call",
-		value: function call(proc, value) {
-			var old = IteratorProxy._iterator;
-			IteratorProxy._iterator = this;
-			try {
-				start: for (;;) {
-					var ret = proc(this._iterator, value);
-					if (!ret.done) return ret;
-					this._iterator = null;
-					if (!this._deferred) return ret;
-					this.save(ret);
-					while (this._deferred.length) {
-						var def = catchDefer(this._deferred.pop());
-						if (def == null || typeof def.next != "function") continue;
-						this._iterator = def;
-						value = undefined;
-						proc = iteratorNext;
-						continue start;
-					}
-					ret = this._result;
-					this._result = null;
-					return ret;
-				}
-			} finally {
-				IteratorProxy._iterator = old;
-			}
-		}
-	}, {
-		key: "next",
-		value: function next(value) {
-			return iteratorCheck(this.call(iteratorNext, value));
-		}
-	}, {
-		key: "throw",
-		value: function _throw(value) {
-			return iteratorCheck(this.call(iteratorThrow, value));
-		}
-	}, {
-		key: "return",
-		value: function _return(value) {
-			if (!this._iterator) return;
-			this.save({ done: true, value: value });
-			var old = IteratorProxy._iterator;
-			IteratorProxy._iterator = this;
-			try {
-				var ret = iteratorReturn(this._iterator);
-				this._iterator = null;
-				if (!this.deferred) {
-					iteratorCheck(ret);
-					return;
-				}
-				this.save(ret);
-				while (this._deferred.length) {
-					var def = catchDefer(this._deferred.pop());
-					if (def != null && typeof def.next == "function") {
-						var _ret5 = iteratorNext(def);
-						if (!_ret5.done) _ret5 = iteratorReturn(def);
-						this.save(_ret5);
-					}
-				}
-				ret = this._result;
-				this._result = null;
-				iteratorCheck(ret);
-			} finally {
-				IteratorProxy._iterator = old;
-			}
-		}
-	}]);
-
-	return IteratorProxy;
-})();
-
-IteratorProxy._iterator = null;
-
-// function* _IteratorProxy( iterator ) {
-// 	let deffered = []
-// 	let ret = null
-// 	function save( it ) {
-// 		if ( ret == null || it.iteratorFailed ) {
-// 			if ( ret && ret.iteratorFailed )
-// 				rethrow( ret.value )
-// 			ret = it
-// 		}
-// 	}
-// 	let step = iteratorNext
-// 	let it = null
-// 	try {
-// 		main: while ( true ) {
-// 			let yieldResult
-// 			step = iteratorNext
-// 			if ( it != null ) {
-// 				try {
-// 					yieldResult = yield it.value
-// 				}
-// 				catch ( error ) {
-// 					yieldResult = error
-// 					step = iteratorThrow
-// 				}
-// 			}
-// 			else
-// 				yieldResult = undefined
-// 			_IteratorProxy.deferred = deferred
-// 			it = step( iterator, yieldResult )
-// 			_IteratorProxy.deferred = null
-// 			if ( !it.done )
-// 				continue main
-// 			save( it )
-// 			it = undefined
-// 			while ( deffered.length ) {
-// 				iterator = catchDefer( deffered.shift() )
-// 				if ( iterator != null && typeof iterator.next == `function` )
-// 					continue main
-// 			}
-// 			iterator = null
-// 			break main
-// 		}
-// 	}
-// 	finally {
-// 		if ( iterator )
-// 			save( iteratorReturn( iterator ) )
-// 		while ( deffered.length ) {
-// 			iterator = catchDefer( deffered.shift() )
-// 			if ( iterator != null && typeof iterator.next == `function` ) {
-// 				it = iteratorNext( iterator, undefined )
-// 				if ( !it.done )
-// 					it = iteratorReturn( iterator )
-// 				save( it )
-// 			}
-// 		}
-// 		if ( ret )
-// 			if ( ret.iteratorFailed )
-// 				throw ret.value
-// 			else
-// 				return ret.value
-// 	}
-// }
-
-exports.defer = function (proc) {
-	if (!IteratorProxy._iterator) throw new Error("defer: not in a co-thread");
-	return IteratorProxy._iterator.defer(proc);
 };
 
-// exports._defer = proc => {
-// 	if ( typeof proc != `function` )
-// 		throw new Error( `type error: only functions can be deferred` )
-// 	let deferred = _IteratorProxy.deferred
-// 	if ( deferred )
-// 		throw new Error( `defer: not in a co-thread` )
-// 	deferred.push( proc )
-// 	return { close: () => {
-// 		if ( deferred )
-// 			for ( let i = deferred.length - 1; i >= 0; --i )
-// 				if ( deferred[ i ] == proc ) {
-// 					deferred.splice( i, 1 )
-// 					return
-// 				}
-// 	} }
-// }
+exports.defer = function (proc) {
+	if (typeof proc != "function") throw new Error("only functions can be deferred");
+	var thread = exports.current;
+	if (!thread) throw new Error("not in a thread");
+	if (!thread._stack) thread._stack = [];
+	var iterator = undefined;
+	function createIterator() {
+		iterator = proc();
+		if (!iterator || typeof iterator.next != "function") iterator = dummyIterator;
+		return iterator;
+	}
+	var rec = {
+		next: function next(value) {
+			return (iterator || createIterator()).next(value);
+		},
+		"throw": function _throw(error) {
+			iterator || createIterator();
+			return (iterator["throw"] ? iterator : dummyIterator)["throw"](error);
+		},
+		"return": function _return(value) {
+			// let deffered iterator do one step
+			iterator || createIterator().next(undefined);
+			if (iterator["return"]) return iterator["return"](value);else {
+				if (iterator["throw"]) !(function () {
+					try {
+						iterator["throw"](new EKill("return"));
+					} catch (_) {}
+				})();
+				return dummyIterator["return"](value);
+			}
+		}
+	};
+	thread._stack.push(rec);
+	return { close: function close() {
+			if (!rec) return;
+			if (thread._stack) {
+				var i = thread._stack.indexOf(rec);
+				if (i >= 0) thread._stack.splice(i, 1);
+			}
+			rec = null;
+		} };
+};
 
 var Thread = (function () {
 	function Thread(iterator) {
-		var _this3 = this;
+		var _this2 = this;
 
 		_classCallCheck(this, Thread);
 
 		this._attachedToStack = true;
-		this._iterator = new IteratorProxy(iterator);
+		this._iterator = iterator;
 		this._stopCount = 0;
-		this._stack = [];
+		this._stack = null;
 		this.global = Object.create(null);
 		this._currentPromise = null;
 		this._running = false;
 		this._killing = null;
 		this._cb = function (error, data) {
-			if (_this3._step) if (error) _this3._step.fail(error);else _this3._step.next(data);
+			if (_this2._step) if (error) _this2._step.fail(error);else _this2._step.next(data);
 		};
 		this.$name = { toString: function toString() {
 				return "<Thread>";
@@ -41588,17 +41448,17 @@ var Thread = (function () {
 
 		this._newStep();
 		this._start = function () {
-			if (_this3._start && _this3._step && _this3._step.next) {
-				if (_this3._stopCount > 0) _this3._step.resume = _this3._start;else {
-					_this3._start = null;
-					_this3._step.next();
+			if (_this2._start && _this2._step && _this2._step.next) {
+				if (_this2._stopCount > 0) _this2._step.resume = _this2._start;else {
+					_this2._start = null;
+					_this2._step.next();
 				}
 			}
 		};
 
 		this._promise = new Promise(function (resolve, reject) {
-			_this3._resolve = resolve;
-			_this3._reject = reject;
+			_this2._resolve = resolve;
+			_this2._reject = reject;
 		});
 		if (!this._resolve) throw new Error("assertion failure: wrong implementation of Promise");
 
@@ -41684,7 +41544,7 @@ var Thread = (function () {
 			exports.global = this.global;
 			exports.current = this;
 			killIterator(this._iterator);
-			for (var a = this._stack, i = a.length - 1; i >= 0; --i) {
+			if (this._stack) for (var a = this._stack, i = a.length - 1; i >= 0; --i) {
 				killIterator(a[i]);
 			}exports.cb = previosCB;
 			exports.global = previosGlobal;
@@ -41732,7 +41592,7 @@ var Thread = (function () {
 				exports.cb = this._cb;
 				exports.global = this.global;
 				exports.current = this;
-				var v = this._iterator.call(imethod, result);
+				var v = imethod(this._iterator, result);
 				exports.cb = previosCB;
 				exports.global = previosGlobal;
 				exports.current = previousThread;
@@ -41746,7 +41606,7 @@ var Thread = (function () {
 				}
 				if (v.done) {
 					if (this.isFinished()) return;
-					if (this._iterator = this._stack.pop()) {
+					if (this._iterator = this._stack && this._stack.pop()) {
 						imethod = v.iteratorFailed ? iteratorThrow : iteratorNext;
 						result = v.value;
 						continue;
@@ -41760,8 +41620,8 @@ var Thread = (function () {
 					var p = v.value.then(step.next, step.fail);
 					if (p && p.kill) this._currentPromise = p;
 				} else if (v.value.next) {
-					this._stack.push(this._iterator);
-					this._iterator = new IteratorProxy(v.value);
+					this._stack ? this._stack.push(this._iterator) : this._stack = [this._iterator];
+					this._iterator = v.value;
 					imethod = iteratorNext;
 					result = undefined;
 					continue;
