@@ -39465,9 +39465,8 @@ var Thread = (function () {
 			exports.global = this.global;
 			exports.current = this;
 			killIterator(this._iterator);
-			if (this._stack) for (var a = this._stack, i = a.length - 1; i >= 0; --i) {
-				killIterator(a[i]);
-			}exports.cb = previosCB;
+			if (this._stack) while (this._stack.length) killIterator(this._stack.pop());
+			exports.cb = previosCB;
 			exports.global = previosGlobal;
 			exports.current = previousThread;
 			if (this._currentPromise) {
