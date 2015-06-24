@@ -947,7 +947,7 @@ module.exports = {
 },{"./$":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.js","./$.assert":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.assert.js","./$.ctx":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.ctx.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.shared.js":[function(require,module,exports){
 var $      = require('./$')
   , SHARED = '__core-js_shared__'
-  , store  = $.g[SHARED] || $.hide($.g, SHARED, {})[SHARED];
+  , store  = $.g[SHARED] || ($.g[SHARED] = {});
 module.exports = function(key){
   return store[key] || (store[key] = {});
 };
@@ -1036,8 +1036,6 @@ var $      = require('./$')
   , process            = global.process
   , setTask            = global.setImmediate
   , clearTask          = global.clearImmediate
-  , postMessage        = global.postMessage
-  , addEventListener   = global.addEventListener
   , MessageChannel     = global.MessageChannel
   , counter            = 0
   , queue              = {}
@@ -1075,11 +1073,11 @@ if(!isFunction(setTask) || !isFunction(clearTask)){
     };
   // Modern browsers, skip implementation for WebWorkers
   // IE8 has postMessage, but it's sync & typeof its postMessage is object
-  } else if(addEventListener && isFunction(postMessage) && !global.importScripts){
+  } else if(global.addEventListener && isFunction(global.postMessage) && !global.importScripts){
     defer = function(id){
-      postMessage(id, '*');
+      global.postMessage(id, '*');
     };
-    addEventListener('message', listner, false);
+    global.addEventListener('message', listner, false);
   // WebWorkers
   } else if(isFunction(MessageChannel)){
     channel = new MessageChannel;
@@ -1952,6 +1950,7 @@ var $        = require('./$')
   , PROMISE  = 'Promise'
   , global   = $.g
   , process  = global.process
+  , isNode   = cof(process) == 'process'
   , asap     = process && process.nextTick || require('./$.task').set
   , P        = global[PROMISE]
   , isFunction     = $.isFunction
@@ -1981,6 +1980,14 @@ var useNative = function(){
     if(!(P2.resolve(5).then(function(){}) instanceof P2)){
       works = false;
     }
+    // actual V8 bug, https://code.google.com/p/v8/issues/detail?id=4162
+    if(works && $.DESC){
+      var thenableThenGotten = false;
+      P.resolve($.setDesc({}, 'then', {
+        get: function(){ thenableThenGotten = true; }
+      }));
+      works = thenableThenGotten;
+    }
   } catch(e){ works = false; }
   return works;
 }();
@@ -2005,7 +2012,8 @@ function isThenable(it){
 }
 function notify(record){
   var chain = record.c;
-  if(chain.length)asap(function(){
+  // strange IE + webpack dev server bug - use .call(global)
+  if(chain.length)asap.call(global, function(){
     var value = record.v
       , ok    = record.s == 1
       , i     = 0;
@@ -2051,11 +2059,12 @@ function $reject(value){
   record.s = 2;
   record.a = record.c.slice();
   setTimeout(function(){
-    asap(function(){
+    // strange IE + webpack dev server bug - use .call(global)
+    asap.call(global, function(){
       if(isUnhandled(promise = record.p)){
-        if(cof(process) == 'process'){
+        if(isNode){
           process.emit('unhandledRejection', value, promise);
-        } else if(global.console && isFunction(console.error)){
+        } else if(global.console && console.error){
           console.error('Unhandled promise rejection', value);
         }
       }
@@ -2066,21 +2075,28 @@ function $reject(value){
 }
 function $resolve(value){
   var record = this
-    , then, wrapper;
+    , then;
   if(record.d)return;
   record.d = true;
   record = record.r || record; // unwrap
   try {
     if(then = isThenable(value)){
-      wrapper = {r: record, d: false}; // wrap
-      then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+      // strange IE + webpack dev server bug - use .call(global)
+      asap.call(global, function(){
+        var wrapper = {r: record, d: false}; // wrap
+        try {
+          then.call(value, ctx($resolve, wrapper, 1), ctx($reject, wrapper, 1));
+        } catch(e){
+          $reject.call(wrapper, e);
+        }
+      });
     } else {
       record.v = value;
       record.s = 1;
       notify(record);
     }
-  } catch(err){
-    $reject.call(wrapper || {r: record, d: false}, err); // wrap
+  } catch(e){
+    $reject.call({r: record, d: false}, e); // wrap
   }
 }
 
@@ -2813,11 +2829,12 @@ $def($def.S, 'Object', {
   entries: createObjectToArray(true)
 });
 },{"./$":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.js","./$.def":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.def.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/es7.regexp.escape.js":[function(require,module,exports){
-// https://gist.github.com/kangax/9698100
+// https://github.com/benjamingr/RexExp.escape
 var $def = require('./$.def');
 $def($def.S, 'RegExp', {
-  escape: require('./$.replacer')(/([\\\-[\]{}()*+?.,^$|])/g, '\\$1', true)
+  escape: require('./$.replacer')(/[\\^$*+?.()|[\]{}]/g, '\\$&', true)
 });
+
 },{"./$.def":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.def.js","./$.replacer":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.replacer.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/es7.set.to-json.js":[function(require,module,exports){
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
 require('./$.collection-to-json')('Set');
@@ -3096,7 +3113,10 @@ module.exports = require('./modules/$').core;
       var value = result.value;
       return value instanceof AwaitArgument
         ? Promise.resolve(value.arg).then(invokeNext, invokeThrow)
-        : result;
+        : Promise.resolve(value).then(function(unwrapped) {
+            result.value = unwrapped;
+            return result;
+          }, invokeThrow);
     }
 
     if (typeof process === "object" && process.domain) {
@@ -3131,7 +3151,7 @@ module.exports = require('./modules/$').core;
       // Avoid propagating enqueueResult failures to Promises returned by
       // later invocations of the iterator, and call generator.return() to
       // allow the generator a chance to clean up.
-      previousPromise = enqueueResult.catch(invokeReturn);
+      previousPromise = enqueueResult["catch"](invokeReturn);
 
       return enqueueResult;
     }
@@ -40168,6 +40188,8 @@ var fs = require("fs");
 var lodash = require("lodash");
 var UID = require("uid");
 var lu = require("localUtils");
+var Diff = require("diff");
+var YAML = require("yamljs");
 
 var MAX_CACHE_SIZE = 10000;
 var SLEEP_BETWEEN_SAVES = 300;
@@ -40192,7 +40214,7 @@ var JSONservice = (function () {
 				$: {
 					// update json&text synchronously
 
-					get: function () {
+					get: function get() {
 						return M.map && {
 							json: M.map.last(),
 							text: JSON.stringify(M.map.last(), null, "\t")
@@ -40204,7 +40226,7 @@ var JSONservice = (function () {
 			})
 		}, {
 			readFile: {
-				get: function () {
+				get: function get() {
 					return regeneratorRuntime.mark(function callee$3$0() {
 						var json, text;
 						return regeneratorRuntime.wrap(function callee$3$0$(context$4$0) {
@@ -40264,7 +40286,7 @@ var JSONservice = (function () {
 				enumerable: true
 			},
 			writeFile: {
-				get: function () {
+				get: function get() {
 					return regeneratorRuntime.mark(function callee$3$0() {
 						return regeneratorRuntime.wrap(function callee$3$0$(context$4$0) {
 							while (1) switch (context$4$0.prev = context$4$0.next) {
@@ -40281,7 +40303,7 @@ var JSONservice = (function () {
 									M.savedUID = M.last.json.uid;
 									context$4$0.prev = 4;
 									context$4$0.next = 7;
-									return co.wait(fs.rename(file, "" + file + "." + M.savedUID, co.cb));
+									return co.wait(fs.rename(file, file + "." + M.savedUID, co.cb));
 
 								case 7:
 									context$4$0.next = 11;
@@ -40347,8 +40369,8 @@ var JSONservice = (function () {
 		};
 
 		this.applyChanges = function (changes, partial) {
-			var json = M.last.json.valueOf();
-			var n = lu.applyDiff(json, changes, partial) || {};
+			var json = M.map.last();
+			var n = Diff.apply(json, changes, partial) || {};
 			if (n !== json) {
 				M.map = (partial ? M.map : Immutable.OrderedMap()).withMutations(function (map) {
 					while (map.length > MAX_CACHE_SIZE) map["delete"](map.findKey(lu.returnTrue));
@@ -40356,8 +40378,7 @@ var JSONservice = (function () {
 					map.set(n.uid, n);
 				});
 			}
-			ra.forceCalculations();
-			return M.map.last();
+			return n;
 		};
 
 		this.wsService = function (connection) {
@@ -40366,7 +40387,7 @@ var JSONservice = (function () {
 				id: null
 			}, {
 				sendChanges: {
-					get: function () {
+					get: function get() {
 						if (!connection || !self.active || !self.id || self.id == M.last.json.uid) return;
 						var clientData = M.map.get(self.id);
 						self.id = M.last.json.uid;
@@ -40374,7 +40395,7 @@ var JSONservice = (function () {
 						var data = M.last.json.valueOf();
 						var previous = undefined;
 						if (clientData) {
-							var diff = lu.makeDiff(clientData, M.last.json.valueOf());
+							var diff = Diff.make(clientData, M.last.json.valueOf());
 							var dtext = JSON.stringify(diff);
 							if (M.last.text.length > dtext.length * 1.5) {
 								partial = true;
@@ -40402,7 +40423,7 @@ var JSONservice = (function () {
 					case "save":
 						{
 							_this.applyChanges(message.data, message.partial);
-							ra.forceCalculations();
+							// ra.forceCalculations()
 							connection.send({ what: "saved", messageId: message.messageId });
 							break;
 						}
@@ -40431,7 +40452,7 @@ module.exports = JSONservice;
 // sleep in the beginning of the function before touching any observeable to eliminate write requests
 // if ( M.last.json.makeBackups )
 
-},{"co":"/home/vadzim/v/work/nerojs/src/co.js","fs":false,"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","diff":"/home/vadzim/v/work/nerojs/src/diff.js","fs":false,"immutable":"/home/vadzim/v/work/nerojs/node_modules/immutable/dist/immutable.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","path":false,"ra":"/home/vadzim/v/work/nerojs/src/ra.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/LOG.js":[function(require,module,exports){
 "use strict";
 
 require("colors");
@@ -40441,7 +40462,7 @@ var LOG = function LOG(msg) {
     data[_key - 1] = arguments[_key];
   }
 
-  return console.log.apply(console, ["" + new Date().toISOString().replace("T", "=").replace("Z", "") + " " + msg].concat(data));
+  return console.log.apply(console, [new Date().toISOString().replace("T", "=").replace("Z", "") + " " + msg].concat(data));
 };
 LOG.LOG = LOG;
 LOG.INFO = LOG;
@@ -40456,7 +40477,7 @@ module.exports = LOG;
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -40526,7 +40547,7 @@ module.exports = function (ws) {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -40676,7 +40697,7 @@ module.exports.silent = function (q) {
 },{"WebQueue":"/home/vadzim/v/work/nerojs/src/WebQueue.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/StreamToJSON.js":[function(require,module,exports){
 'use strict';
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ('value' in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
@@ -41083,13 +41104,12 @@ co.go(regeneratorRuntime.mark(function callee$0$0() {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x5, _x6, _x7) { var _again = true; _function: while (_again) { var object = _x5, property = _x6, receiver = _x7; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x5 = parent; _x6 = property; _x7 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
-var later = require("later");
 var EventEmitter = require("events").EventEmitter;
 
 var co = module.exports = exports = new EventEmitter();
@@ -41117,7 +41137,7 @@ exports.go = function (fun) {
 			};
 		})();
 	}
-	return new Thread(fun);
+	return new Thread(fun, false);
 };
 
 exports.gocall = function (fun, context) {
@@ -41125,7 +41145,7 @@ exports.gocall = function (fun, context) {
 		args[_key2 - 2] = arguments[_key2];
 	}
 
-	return new Thread(fun.apply(context, args));
+	return new Thread(fun.apply(context, args), false);
 };
 
 exports.func = function (fun) {
@@ -41133,13 +41153,13 @@ exports.func = function (fun) {
 		return f(g);
 	});
 	return function proc() {
-		return new Thread(fun.apply(this, arguments));
+		return new Thread(fun.apply(this, arguments), true);
 	};
 };
 
 exports.eventHandler = function (fun) {
 	return function proc() {
-		var ret = new Thread(fun.apply(this, arguments));
+		var ret = new Thread(fun.apply(this, arguments), true);
 		ret.waitForInput();
 		return ret;
 	};
@@ -41239,7 +41259,7 @@ exports.sleep = function (milliseconds) {
 	return { then: function then(resolve) {
 			var timer = setTimeout(resolve, milliseconds);
 			return { kill: function kill() {
-					clearTimout(timer);
+					clearTimeout(timer);
 				} };
 		} };
 };
@@ -41250,7 +41270,7 @@ exports.timeout = function (milliseconds) {
 	return { then: function then(_, reject) {
 			var timer = setTimeout(reject, milliseconds);
 			return { kill: function kill() {
-					clearTimout(timer);
+					clearTimeout(timer);
 				} };
 		} };
 };
@@ -41287,10 +41307,11 @@ exports.requestAnimationFrame = { then: function then(resolve) {
 	} };
 
 var rethrow = function rethrow(e) {
-	return setTimeout(function () {
+	return process.nextTick(function () {
 		throw e;
-	}, 1);
+	});
 };
+var noop = function noop() {};
 
 function iteratorFailed(error) {
 	return { done: true, iteratorFailed: true, value: error };
@@ -41331,10 +41352,10 @@ var EKill = (function (_Error) {
 
 exports.EKill = EKill;
 
-function iteratorReturn(iterator) {
+function iteratorReturn(iterator, value) {
 	if (iterator["return"]) {
 		try {
-			iterator["return"]();
+			iterator["return"](value);
 		} catch (error) {
 			return iteratorFailed(error);
 		}
@@ -41350,25 +41371,15 @@ function iteratorCheck(ret) {
 	if (ret && ret.done && ret.iteratorFailed) throw ret.value;else return ret;
 }
 
-function killIterator(iterator) {
+function killIterator(iterator, value) {
 	if (iterator) {
-		var res = iteratorReturn(iterator);
+		var res = iteratorReturn(iterator, value);
 		if (res.done && res.iteratorFailed) rethrow(res.value);
 	}
+	return DONE;
 }
 
 // Thread
-
-var catchDefer = function catchDefer(func) {
-	// optimization -- using try/catch in a separate function.
-	try {
-		return func();
-	} catch (error) {
-		return { next: function next() {
-				return iteratorFailed(error);
-			} };
-	}
-};
 
 var dummyIterator = {
 	next: function next() {
@@ -41385,106 +41396,380 @@ var dummyIterator = {
 exports.defer = function (proc) {
 	if (typeof proc != "function") throw new Error("only functions can be deferred");
 	var thread = exports.current;
-	if (!thread) throw new Error("not in a thread");
-	if (!thread._stack) thread._stack = [];
-	var iterator = undefined;
+	if (!thread || !thread._current) throw new Error("not in a thread");
+	var iterator = dummyIterator;
 	function createIterator() {
-		iterator = proc();
-		if (!iterator || typeof iterator.next != "function") iterator = dummyIterator;
+		if (proc) {
+			// Keep in mind exceptions. Save state consistent in case of exception in proc().
+			var p = proc;
+			proc = null;
+			var i = p();
+			if (i && typeof i.next == "function") iterator = i;
+			deferRec._iterator = iterator;
+		}
 		return iterator;
 	}
-	var rec = {
+	var lazyIteratorProxy = {
 		next: function next(value) {
-			return (iterator || createIterator()).next(value);
+			return createIterator().next(value);
 		},
 		"throw": function _throw(error) {
-			iterator || createIterator();
-			return (iterator["throw"] ? iterator : dummyIterator)["throw"](error);
+			createIterator();
+			return iterator["throw"] ? iterator["throw"](error) : dummyIterator["throw"](error);
 		},
 		"return": function _return(value) {
-			// let deffered iterator do one step
-			iterator || createIterator().next(undefined);
+			if (proc)
+				// let deffered iterator do at least one step
+				createIterator().next(undefined);
 			if (iterator["return"]) return iterator["return"](value);else {
 				if (iterator["throw"]) !(function () {
+					var ekill = new EKill("return");
 					try {
-						iterator["throw"](new EKill("return"));
-					} catch (_) {}
+						iterator["throw"](ekill);
+					} catch (error) {
+						if (error != ekill) throw error;
+					}
 				})();
 				return dummyIterator["return"](value);
 			}
 		}
 	};
-	thread._stack.push(rec);
+	var deferRec = new IteratorRec(thread, lazyIteratorProxy, thread._current._caller);
+	thread._stack.push(deferRec);
 	return { close: function close() {
-			if (!rec) return;
-			if (thread._stack) {
-				var i = thread._stack.indexOf(rec);
-				if (i >= 0) thread._stack.splice(i, 1);
-			}
-			rec = null;
+			proc = null;
 		} };
 };
 
+exports.nextTick = function (proc) {
+	return exports.current ? exports.current.nextTick(proc) : process.nextTick(proc);
+};
+
+function DEBUGGER() {
+	debugger;
+}
+
+var IteratorRec = (function () {
+	function IteratorRec(thread, iterator, caller) {
+		_classCallCheck(this, IteratorRec);
+
+		this._thread = thread;
+		this._caller = caller;
+		this._iterator = iterator;
+		this._method = iteratorNext;
+		this._value = undefined;
+		this._currentPromise = null;
+		this._next = this._next.bind(this);
+		this._throw = this._throw.bind(this);
+		this._cb = this._cb.bind(this);
+	}
+
+	_createClass(IteratorRec, [{
+		key: "_store",
+		value: function _store(value, isError) {
+			if (isError) {
+				if (this._method == iteratorThrow) rethrow(this._value);else this._method = iteratorThrow;
+				this._value = value;
+			} else if (this._method == null) {
+				this._method = iteratorNext;
+				this._value = value;
+			}
+		}
+	}, {
+		key: "_onvalue",
+		value: function _onvalue(method, value) {
+			if (_debug && _debug.has(this._thread)) debugger;
+			this._currentPromise = null;
+			if (this._thread) {
+				this._value = value;
+				this._method = method;
+				process.nextTick(this._thread._processIterator);
+			}
+		}
+	}, {
+		key: "_next",
+		value: function _next(value) {
+			this._onvalue(iteratorNext, value);
+		}
+	}, {
+		key: "_throw",
+		value: function _throw(error) {
+			if (!this._thread) rethrow(error);
+			this._onvalue(iteratorThrow, error);
+		}
+	}, {
+		key: "_cb",
+		value: function _cb(error, data) {
+			if (error) this._throw(error);else this._next(data);
+		}
+	}]);
+
+	return IteratorRec;
+})();
+
+function _onsuccess(event) {
+	this._next(event.target.result);
+}
+
+function _onload(event) {
+	this._next(event.target);
+}
+
+function _onerror(event) {
+	this._throw(event.target.error || event);
+}
+
+var DummyValue = { value: { then: function then() {} } };
+
 var Thread = (function () {
-	function Thread(iterator) {
+	function Thread(iterator, standalone) {
 		var _this2 = this;
 
 		_classCallCheck(this, Thread);
 
-		this._attachedToStack = true;
-		this._iterator = iterator;
-		this._stopCount = 0;
-		this._stack = null;
-		this.global = Object.create(null);
-		this._currentPromise = null;
-		this._running = false;
-		this._killing = null;
-		this._cb = function (error, data) {
-			if (_this2._step) if (error) _this2._step.fail(error);else _this2._step.next(data);
-		};
-		this.$name = { toString: function toString() {
-				return "<Thread>";
-			} };
-
-		this._newStep();
-		this._start = function () {
-			if (_this2._start && _this2._step && _this2._step.next) {
-				if (_this2._stopCount > 0) _this2._step.resume = _this2._start;else {
-					_this2._start = null;
-					_this2._step.next();
-				}
+		(function () {
+			try {
+				throw new Error();
+			} catch (e) {
+				_this2._dbg = e;
 			}
-		};
-
+		})();
+		this._wait = 0;
+		this._processTicks = this._processTicks.bind(this);
+		this._processIterator = this._processIterator.bind(this);
 		this._promise = new Promise(function (resolve, reject) {
 			_this2._resolve = resolve;
 			_this2._reject = reject;
 		});
-		if (!this._resolve) throw new Error("assertion failure: wrong implementation of Promise");
-
-		later.then(this._start);
+		var it = new IteratorRec(this, null, null);
+		it._method = null;
+		this._stack = [it, new IteratorRec(this, iterator, it)];
+		this._ticks = [];
+		this._index = 0;
+		this._current = null;
+		this._started = false;
+		this._killing = false;
+		this._children = null;
+		this._owner = null;
+		this.global = Object.create(null);
+		if (!standalone && co.current) co.current._linkChild(this);
 		if (threadCatcher) threadCatcher(this);
-
 		exports.emit("start", this);
+		process.nextTick(this._processIterator);
 	}
 
 	_createClass(Thread, [{
+		key: "_linkChild",
+		value: function _linkChild(child) {
+			if (this._killing) throw new Error("CREATING CHILD WHILE KILLING OWNER!!!");
+			if (child._owner != null) throw new Error("child already linked");
+			if (!this._children) this._children = new Set();
+			child._owner = this;
+			this._children.add(child);
+		}
+	}, {
+		key: "_unlinkChild",
+		value: function _unlinkChild(child) {
+			if (child._owner != this) throw new Error("not a child");
+			child._owner = null;
+			if (!this._killing && this._children) this._children["delete"](child);
+		}
+	}, {
+		key: "nextTick",
+		value: function nextTick(tick) {
+			if (this._ticks.length == 0) process.nextTick(this._processTicks);
+			this._ticks.push(tick);
+		}
+	}, {
+		key: "_processTicks",
+		value: function _processTicks() {
+			if (_debug && _debug.has(this)) debugger;
+			var previousThread = exports.current;
+			var previousCB = exports.cb;
+			var previousGlobal = exports.global;
+			exports.cb = null;
+			exports.global = this.global;
+			exports.current = this;
+			try {
+				this._callTicks();
+			} finally {
+				exports.cb = previousCB;
+				exports.global = previousGlobal;
+				exports.current = previousThread;
+				if (this._ticks.length > 0) {
+					this._ticks.splice(0, this._index);
+					process.nextTick(this._processTicks);
+				}
+			}
+		}
+	}, {
+		key: "_callTicks",
+		value: function _callTicks() {
+			var t = this._ticks;
+			for (var i = 0; i < t.length; ++i) {
+				this._index = i + 1;
+				t[i]();
+			}
+			t.length = 0;
+		}
+	}, {
+		key: "_call",
+		value: function _call(proc) {
+			var previousThread = exports.current;
+			var previousCB = exports.cb;
+			var previousGlobal = exports.global;
+			exports.cb = null;
+			exports.global = this.global;
+			exports.current = this;
+			try {
+				proc();
+			} finally {
+				exports.cb = previousCB;
+				exports.global = previousGlobal;
+				exports.current = previousThread;
+			}
+		}
+	}, {
+		key: "_finalize",
+		value: function _finalize(it) {
+			this._killing = true;
+			if (it._method == iteratorNext) this._resolve(it._value);else // it._method == iteratorThrow or it._method == null ( when killing )
+				this._reject(it._value);
+			if (this._owner) this._owner._unlinkChild(this);
+			// TODO !!!!!!!!!!! debugger !!!!!
+			this._children = null;
+			if (this._children) {
+				var reason = it._method == iteratorNext ? undefined : it._value === undefined ? null : it._value;
+				var _iteratorNormalCompletion = true;
+				var _didIteratorError = false;
+				var _iteratorError = undefined;
+
+				try {
+					for (var _iterator = this._children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+						var c = _step.value;
+
+						c.kill(reason);
+					}
+				} catch (err) {
+					_didIteratorError = true;
+					_iteratorError = err;
+				} finally {
+					try {
+						if (!_iteratorNormalCompletion && _iterator["return"]) {
+							_iterator["return"]();
+						}
+					} finally {
+						if (_didIteratorError) {
+							throw _iteratorError;
+						}
+					}
+				}
+			}
+			// _promise must be left to store thread result
+			this._resolve = null;
+			this._reject = null;
+			this._current = null;
+			this._children = null;
+			this._owner = null;
+		}
+	}, {
+		key: "_processIterator",
+		value: function _processIterator() {
+			if (_debug && _debug.has(this)) debugger;
+			this._started = true;
+			if (this._wait > 0) {
+				--this._wait;
+				return;
+			}
+			if (this._stack.length == 0) return;
+			if (this._ticks.length > 0) {
+				// do any ticks before yielding
+				process.nextTick(this._processIterator);
+				return;
+			}
+			var it = this._stack.pop();
+			if (!this._killing && it._method == null) {
+				debugger;
+				throw new Error("it._method cannot be null");
+			}
+			if (this._stack.length == 0) return this._finalize(it);
+			var previousThread = exports.current;
+			var previousCB = exports.cb;
+			var previousGlobal = exports.global;
+			exports.cb = it._cb;
+			exports.global = this.global;
+			exports.current = this;
+			var method = undefined,
+			    value = undefined;
+			if (!this._killing) {
+				method = it._method; // || iteratorNext
+				value = it._value;
+			} else {
+				method = killIterator;
+				value = undefined;
+			}
+			it._method = null;
+			it._value = null;
+			it._currentPromise = null;
+			this._current = it;
+			var v = method(it._iterator, value);
+			exports.cb = previousCB;
+			exports.global = previousGlobal;
+			exports.current = previousThread;
+			this._current = null;
+			if (this._killing) {
+				if (v.done && v.iteratorFailed) rethrow(v.value);
+				process.nextTick(this._processIterator);
+				return;
+			}
+			if (v.done) {
+				it._caller._store(v.value, v.iteratorFailed);
+				process.nextTick(this._processIterator);
+				return;
+			}
+			this._stack.push(it);
+			if (v.value) {
+				if (v.value.then) {
+					var p = v.value.then(it._next, it._throw);
+					if (p && p.kill) it._currentPromise = p;
+					return;
+				}
+				if (v.value.next) {
+					this._stack.push(new IteratorRec(this, v.value, it));
+					process.nextTick(this._processIterator);
+					return;
+				}
+				if (v.value && typeof v.value == "object" && "onload" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
+					v.value.onload = _onload.bind(it);
+					v.value.onerror = _onerror.bind(it);
+					return;
+				}
+				if (v.value && typeof v.value == "object" && "onsuccess" in v.value && !v.value.onsuccess && "onerror" in v.value && !v.value.onerror) {
+					v.value.onsuccess = _onsuccess.bind(it);
+					v.value.onerror = _onerror.bind(it);
+					return;
+				}
+			}
+			it._next(undefined);
+		}
+	}, {
 		key: "linkName",
 		value: function linkName(value) {
 			var suffix = arguments[1] === undefined ? ":thread" : arguments[1];
 
-			if (value.$name) value = value.$name;
-			this.$name.toString = function () {
-				return "" + value + suffix;
-			};
+			// if ( value.$name )
+			// 	value = value.$name
+			// this.$name.toString = () => `` + value + suffix
 			return this;
 		}
 	}, {
 		key: "waitForInput",
 		value: function waitForInput() {
-			this._checkFinished();
-			if (this._stopCount > 0) throw new Error("thread is paused");
-			if (this._start) this._start();
+			if (!this._started) {
+				this._processIterator();
+				++this._wait // compensate extra _processIterator call
+				;
+			}
 			return this;
 		}
 	}, {
@@ -41496,183 +41781,39 @@ var Thread = (function () {
 	}, {
 		key: "then",
 		value: function then(onFulfilled, onRejected) {
-			this._attachedToStack = false;
 			return this._attachPromise(this._promise.then(onFulfilled, onRejected));
 		}
 	}, {
 		key: "catch",
 		value: function _catch(onRejected) {
-			this._attachedToStack = false;
 			return this._attachPromise(this._promise["catch"](onRejected));
 		}
 	}, {
 		key: "isFinished",
 		value: function isFinished() {
-			return !this._step || this._killing;
-		}
-	}, {
-		key: "isPaused",
-		value: function isPaused() {
-			return this._stopCount > 0;
+			return this._stack == 0;
 		}
 	}, {
 		key: "throw",
-		value: function _throw(exception) {
-			if (this.global == exports.global) throw exception;
+		value: function _throw(error) {
+			if (this._current) throw error;
 			this._checkFinished();
-			this._newStep();
-			if (this._stopCount > 0) this._step.resume = this._step.fail.bind(this._step, exception);else this._step.fail(exception);
-		}
-	}, {
-		key: "attachToStack",
-		value: function attachToStack() {
-			this._attachedToStack = true;
+			var it = this._stack.pop();
+			var jt = new IteratorRec(this, it._iterator, it._caller);
+			it._thread = it._iterator = it._caller = null;
+			this._stack.push(jt);
+			jt._throw(error);
 		}
 	}, {
 		key: "kill",
 		value: function kill(reason) {
-			if (this.isFinished()) return;
-			this._reject(reason);
-			if (this._running) {
-				this._killing = { reason: reason };
-				throw new EKill();
+			if (_debug && _debug.has(this)) debugger;
+			if (!this.isFinished()) {
+				this._killing = true;
+				this._stack[0]._store(reason, reason !== undefined);
+				if (!this._current) process.nextTick(this._processIterator);
 			}
-			var previousThread = exports.current;
-			var previosCB = exports.cb;
-			var previosGlobal = exports.global;
-			exports.cb = this._cb;
-			exports.global = this.global;
-			exports.current = this;
-			killIterator(this._iterator);
-			if (this._stack) while (this._stack.length) killIterator(this._stack.pop());
-			exports.cb = previosCB;
-			exports.global = previosGlobal;
-			exports.current = previousThread;
-			if (this._currentPromise) {
-				try {
-					this._currentPromise.kill(reason);
-				} catch (e) {
-					rethrow(e);
-				}
-			}
-			this._done();
-		}
-	}, {
-		key: "pause",
-		value: function pause() {
-			this._checkFinished();
-			++this._stopCount;
-		}
-	}, {
-		key: "resume",
-		value: function resume() {
-			if (this._stopCount == 0) throw new Error("thread not paused");
-			if (0 == --this._stopCount && this._step && this._step.resume) {
-				later.then(this._step.resume);
-				this._step.resume = null;
-			}
-		}
-	}, {
-		key: "_tick",
-		value: function _tick(step, imethod, result) {
-			if (this["debugger"] || step["debugger"]) debugger;
-			if (this._running) throw new Error("FATAL: reentering thread tick");
-			if (step !== this._step) return;
-			if (this._stopCount > 0) {
-				step.resume = this._tick.bind(this, step, imethod, result);
-				return;
-			}
-			for (;;) {
-				this._currentPromise = null;
-				this._running = true;
-				var previousThread = exports.current;
-				var previosCB = exports.cb;
-				var previosGlobal = exports.global;
-				exports.cb = this._cb;
-				exports.global = this.global;
-				exports.current = this;
-				var v = imethod(this._iterator, result);
-				exports.cb = previosCB;
-				exports.global = previosGlobal;
-				exports.current = previousThread;
-				this._running = false;
-				if (this["debugger"] || step["debugger"]) debugger;
-				if (this._killing) {
-					var reason = this._killing.reason;
-					this._killing = null;
-					this.kill(reason);
-					return;
-				}
-				if (v.done) {
-					if (this.isFinished()) return;
-					if (this._iterator = this._stack && this._stack.pop()) {
-						imethod = v.iteratorFailed ? iteratorThrow : iteratorNext;
-						result = v.value;
-						continue;
-					}
-					var r = v.iteratorFailed ? this._reject : this._resolve;
-					this._done();
-					if (v.iteratorFailed && this._attachedToStack) rethrow(v.value);
-					r(v.value);
-				} else if (!v.value) // any falsy value
-					exports.tick.then(step.next);else if (v.value.then) {
-					var p = v.value.then(step.next, step.fail);
-					if (p && p.kill) this._currentPromise = p;
-				} else if (v.value.next) {
-					this._stack ? this._stack.push(this._iterator) : this._stack = [this._iterator];
-					this._iterator = v.value;
-					imethod = iteratorNext;
-					result = undefined;
-					continue;
-				} else if ("onload" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
-					v.value.onload = step.next;
-					v.value.onerror = step.fail;
-				} else if ("onsuccess" in v.value && !v.value.onload && "onerror" in v.value && !v.value.onerror) {
-					if (!step.success_error) step.success_error = {
-						onsuccess: function onsuccess(event) {
-							step.next(event.target.result);
-						},
-						onerror: function onerror(event) {
-							step.fail(event.target.error || event);
-						}
-					};
-					v.value.onsuccess = step.success_error.onsuccess;
-					v.value.onerror = step.success_error.onerror;
-				} else throw new Error("thread type error");
-				break;
-			}
-		}
-	}, {
-		key: "_done",
-		value: function _done() {
-			this._step = null;
-			this._iterator = null;
-			this._stack = null;
-			this._resolve = null;
-			this._reject = null;
-			this._currentPromise = null;
-			this._killing = null;
-		}
-	}, {
-		key: "_newStep",
-		value: function _newStep() {
-			var step = this._step = { resume: null };
-			step.next = this._tick.bind(this, step, iteratorNext);
-			step.fail = this._tick.bind(this, step, iteratorThrow);
-			var $name = this.$name;
-			step.next.$name = { toString: function toString() {
-					return $name + ":next";
-				} };
-			step.fail.$name = { toString: function toString() {
-					return $name + ":fail";
-				} };
-		}
-	}, {
-		key: "_onPromise",
-		value: function _onPromise(resolve, reject) {
-			this._resolve = resolve;
-			this._reject = reject;
-			this.resume();
+			return this.then(noop, noop);
 		}
 	}, {
 		key: "_checkFinished",
@@ -41686,6 +41827,13 @@ var Thread = (function () {
 
 exports.Thread = Thread;
 
+var _debug = null;
+exports._debug = function () {
+	var thread = arguments[0] === undefined ? exports.current : arguments[0];
+	var debug = arguments[1] === undefined ? true : arguments[1];
+	return debug ? (_debug || (_debug = new WeakSet())).add(thread) : _debug && _debug["delete"](thread);
+};
+
 {
 	(function () {
 		var notEnumerable = { enumerable: false };
@@ -41695,14 +41843,15 @@ exports.Thread = Thread;
 
 		var mainThread = new Thread({ next: function next() {
 				return { value: { then: function then() {} } };
-			} }).waitForInput();
+			} }, true).waitForInput();
 		exports.current = null;
 		exports.global = mainThread.global;
 		exports.cb = null;
 	})();
 }
+// move loop to the function w/o try/finally to allow optimizations
 
-},{"events":false,"later":"/home/vadzim/v/work/nerojs/src/later.js"}],"/home/vadzim/v/work/nerojs/src/csvConfig.js":[function(require,module,exports){
+},{"events":false}],"/home/vadzim/v/work/nerojs/src/csvConfig.js":[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41758,9 +41907,10 @@ function read(text, key) {
 
 			case 2:
 				context$1$0.t0 = context$1$0.sent;
-				return context$1$0.abrupt("return", parse(context$1$0.t0, key));
+				context$1$0.t1 = key;
+				return context$1$0.abrupt("return", parse(context$1$0.t0, context$1$0.t1));
 
-			case 4:
+			case 5:
 			case "end":
 				return context$1$0.stop();
 		}
@@ -41875,8 +42025,8 @@ function parseArrays(csv) {
 function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
 
 var lodash = require("lodash");
+var Diff = require("diff");
 var UID = require("uid");
-var lu = require("localUtils");
 
 exports.Clear = exports.Unlink = function (devices, deviceId) {
 	return lodash.reduce(devices.content, function (ret, q, index) {
@@ -41910,7 +42060,7 @@ exports.findFreeGroup = function (devices) {
 exports.cleanDatabase = function (devices) {
 	var ret = devices || {};
 	function _save(diff) {
-		ret = lu.applyDiff(ret, diff);
+		ret = Diff.apply(ret, diff);
 	}
 	function _change(path, value) {
 		_save(path.reduceRight(function (ret, key) {
@@ -41970,7 +42120,7 @@ exports.cleanDatabase = function (devices) {
 	function groupIndex(key) {
 		if (!reachable) {
 			(function () {
-				var push = function (key) {
+				var push = function push(key) {
 					if (!(key in reachable) && ret.content.hasOwnProperty(key)) {
 						reachable[key] = true;
 						reachableKeys.push(key);
@@ -42019,10 +42169,179 @@ exports.cleanDatabase = function (devices) {
 		});
 	});
 
-	return lu.makeDiff(devices, ret);
+	return Diff.make(devices, ret);
 };
 
-},{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/http_common_server.js":[function(require,module,exports){
+},{"diff":"/home/vadzim/v/work/nerojs/src/diff.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/diff.js":[function(require,module,exports){
+"use strict";
+
+var lodash = require("lodash");
+
+var LiteralPrototype = Object.getPrototypeOf({});
+
+var isSet = function isSet(obj) {
+	if (obj == null) return false;
+	var proto = Object.getPrototypeOf(obj);
+	return proto === LiteralPrototype || proto === null;
+};
+
+var NON_PARTIAL = Object.create(null);
+NON_PARTIAL.__partial__ = false;
+
+var PARTIAL = Object.create(null);
+
+var Diff = {
+	apply: function apply(dest, diff, partial) {
+		var ret = dest;
+		var cnt = 0;
+
+		function copyDest() {
+			ret = Object.create(null);
+			for (var key in dest) {
+				if (Object.prototype.hasOwnProperty.call(dest, key)) {
+					var value = dest[key];
+					if (value === undefined) continue;
+					ret[key] = dest[key];
+					++cnt;
+				}
+			}
+		}
+
+		if (diff && diff.__partial__ === false) partial = false;
+
+		for (var key in diff) {
+			if (key != "__partial__" && Object.prototype.hasOwnProperty.call(diff, key)) {
+				var value = diff[key];
+				if (value === undefined) continue;
+				if (value != null && typeof value == "object") value = Diff.apply(ret && ret[key], value, partial);
+				if (value == null) {
+					if (ret != null && Object.prototype.hasOwnProperty.call(ret, key)) {
+						if (ret === dest) copyDest();
+						delete ret[key];
+						--cnt;
+					}
+				} else {
+					if (ret == null || ret[key] !== value) {
+						if (ret === dest) copyDest();
+						ret[key] = value;
+					}
+					cnt = Infinity;
+				}
+			}
+		}if (partial === false) for (var key in ret) {
+			if (Object.prototype.hasOwnProperty.call(ret, key)) {
+				if (!Object.prototype.hasOwnProperty.call(diff, key) || diff[key] === undefined) {
+					if (ret === dest) copyDest();
+					delete ret[key];
+					--cnt;
+				} else cnt = Infinity;
+			}
+		}if (ret !== dest && cnt == 0) ret = null;
+
+		return ret;
+	},
+
+	merge: function merge(a, b) {
+
+		if (a == null) a = NON_PARTIAL;
+		if (b == null) b = NON_PARTIAL;
+
+		if (b.__partial__ === false) return b;
+
+		var ret = a;
+
+		function copyDest() {
+			ret = Object.create(null);
+			for (var key in a) {
+				if (Object.prototype.hasOwnProperty.call(a, key)) {
+					var value = a[key];
+					if (value === undefined) continue;
+					ret[key] = a[key];
+				}
+			}
+		}
+
+		for (var key in b) {
+			if (Object.prototype.hasOwnProperty.call(b, key)) {
+				var value = b[key];
+				if (value === undefined) continue;
+				if (value == null) value = NON_PARTIAL;
+				if (typeof value == "object") {
+					var r = ret ? ret[key] : undefined;
+					if (r === undefined) r = PARTIAL;
+					value = Diff.merge(r, value);
+				}
+				if (ret == null || ret[key] !== value) {
+					if (ret === a) copyDest();
+					ret[key] = value;
+				}
+			}
+		}if (ret !== a && typeof a != "object") ret.__partial__ = false;
+
+		return ret;
+	},
+
+	make: function make(previous, next) {
+		if (previous === next) return undefined;
+		var ret = undefined;
+		function toArray(obj) {
+			var ret = [];
+			lodash.forEach(obj, function (value, key) {
+				return ret.push({ value: value, key: key });
+			});
+			return ret.sort(function (v1, v2) {
+				return v1.key < v2.key ? -1 : v1.key > v2.key ? 1 : 0;
+			});
+		}
+		var pa = toArray(previous);
+		var na = toArray(next);
+		var p = pa.pop();
+		var n = na.pop();
+		while (p || n) {
+			if (!n || p && p.key > n.key) {
+				if (!ret) ret = Object.create(null);
+				ret[p.key] = null; // deleting
+				p = pa.pop();
+			} else if (!p || p.key < n.key) {
+				if (!ret) ret = Object.create(null);
+				ret[n.key] = n.value;
+				n = na.pop();
+			} else {
+				if (p.value !== n.value) {
+					if (isSet(p.value) && isSet(n.value)) {
+						var diff = Diff.make(p.value, n.value);
+						if (diff) {
+							if (!ret) ret = Object.create(null);
+							ret[n.key] = diff;
+						}
+					} else {
+						if (!ret) ret = Object.create(null);
+						ret[n.key] = n.value;
+					}
+				}
+				p = pa.pop();
+				n = na.pop();
+			}
+		}
+		return ret ? ret : undefined;
+	}
+};
+
+module.exports = Diff
+
+// function assert( value, message ) {
+// 	if ( !value )
+// 		throw new Error( `` + message )
+// }
+
+// function testDiff() {
+// 	let p = { a: 1, x: { u: 9 } }
+// 	let q = { x: { c: 2 } }
+// 	assert( JSON.stringify( q ) == JSON.stringify( Diff.apply( p, Diff.make( p, q ) ) ) )
+// }
+;
+
+},{"lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/http_common_server.js":[function(require,module,exports){
 "use strict";
 
 var path = require("path");
@@ -42109,7 +42428,7 @@ module.exports = function (router) {
 			json: null
 		}, {
 			updateFile: {
-				get: function () {
+				get: function get() {
 					return regeneratorRuntime.mark(function callee$3$0() {
 						var file, obj, i;
 						return regeneratorRuntime.wrap(function callee$3$0$(context$4$0) {
@@ -42131,44 +42450,45 @@ module.exports = function (router) {
 
 								case 9:
 									context$4$0.prev = 9;
-									context$4$0.next = 12;
+									context$4$0.t1 = JSON;
+									context$4$0.next = 13;
 									return co.wait(fs.readFile(fn, co.cb));
 
-								case 12:
-									context$4$0.t1 = context$4$0.sent;
-									context$4$0.t2 = String(context$4$0.t1);
-									file = JSON.parse(context$4$0.t2);
-									context$4$0.next = 19;
+								case 13:
+									context$4$0.t2 = context$4$0.sent;
+									context$4$0.t3 = String(context$4$0.t2);
+									file = context$4$0.t1.parse.call(context$4$0.t1, context$4$0.t3);
+									context$4$0.next = 20;
 									break;
 
-								case 17:
-									context$4$0.prev = 17;
-									context$4$0.t3 = context$4$0["catch"](9);
+								case 18:
+									context$4$0.prev = 18;
+									context$4$0.t4 = context$4$0["catch"](9);
 
-								case 19:
+								case 20:
 									if (!file) file = {};
 									obj = clients.json;
 
 									clients.json = {};
 									for (i in obj) {
 										if (Object.prototype.hasOwnProperty.call(obj, i)) file[i] = obj[i];
-									}context$4$0.prev = 23;
-									context$4$0.next = 26;
+									}context$4$0.prev = 24;
+									context$4$0.next = 27;
 									return co.wait(fs.writeFile(fn, JSON.stringify(file, null, "   "), co.cb));
 
-								case 26:
-									context$4$0.next = 30;
+								case 27:
+									context$4$0.next = 31;
 									break;
 
-								case 28:
-									context$4$0.prev = 28;
-									context$4$0.t4 = context$4$0["catch"](23);
+								case 29:
+									context$4$0.prev = 29;
+									context$4$0.t5 = context$4$0["catch"](24);
 
-								case 30:
+								case 31:
 								case "end":
 									return context$4$0.stop();
 							}
-						}, callee$3$0, this, [[2, 7], [9, 17], [23, 28]]);
+						}, callee$3$0, this, [[2, 7], [9, 18], [24, 29]]);
 					}).call(this);
 				},
 				configurable: true,
@@ -42186,54 +42506,6 @@ module.exports = function (router) {
 	})());
 
 	app.use(require("compression")({ threshold: 0 }));
-
-	app.get("/debugHtml", co.func(regeneratorRuntime.mark(function callee$1$0(request, response) {
-		return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
-			while (1) switch (context$2$0.prev = context$2$0.next) {
-				case 0:
-					response.status(200);
-					response.contentType("html");
-					context$2$0.next = 4;
-					return co.wait(fs.readFile(__dirname + "/../tmp/debug.html", "utf8", co.cb));
-
-				case 4:
-					context$2$0.t0 = context$2$0.sent.replace(/\b(script|manifest)\b/g, function ($) {
-						return "no" + $;
-					});
-					response.end(context$2$0.t0);
-
-				case 6:
-				case "end":
-					return context$2$0.stop();
-			}
-		}, callee$1$0, this);
-	})));
-
-	app.post("/debugHtml", co.func(regeneratorRuntime.mark(function callee$1$0(request, response) {
-		return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
-			while (1) switch (context$2$0.prev = context$2$0.next) {
-				case 0:
-					console.log("receiving debugHtml...".yellow);
-					context$2$0.t0 = __dirname + "/../tmp/debug.html";
-					context$2$0.next = 4;
-					return lu.readStream(request);
-
-				case 4:
-					context$2$0.t1 = context$2$0.sent;
-					context$2$0.t2 = beautify(context$2$0.t1);
-					context$2$0.t3 = fs.writeFile(context$2$0.t0, context$2$0.t2, co.cb);
-					context$2$0.next = 9;
-					return co.wait(context$2$0.t3);
-
-				case 9:
-					response.end();
-
-				case 10:
-				case "end":
-					return context$2$0.stop();
-			}
-		}, callee$1$0, this);
-	})));
 
 	if (router) router(app);
 
@@ -42329,7 +42601,7 @@ module.exports = function (request, response, next) {
 	}
 
 	if (global._LOG) {
-		console.log('' + request.method + ' ' + request.url.green);
+		console.log(request.method + ' ' + request.url.green);
 		request.startTime = new Date();
 		request.clientID = instanceID && (clientNames[instanceID] || instanceID) || '?';
 		L(request, response, next);
@@ -42386,26 +42658,29 @@ function staticData(value) {
 		return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
 			while (1) switch (context$2$0.prev = context$2$0.next) {
 				case 0:
+					context$2$0.t0 = response.contentType(contentType);
+
 					if (!value.then) {
-						context$2$0.next = 6;
+						context$2$0.next = 7;
 						break;
 					}
 
-					context$2$0.next = 3;
+					context$2$0.next = 4;
 					return value;
 
-				case 3:
-					context$2$0.t0 = context$2$0.sent;
-					context$2$0.next = 7;
+				case 4:
+					context$2$0.t1 = context$2$0.sent;
+					context$2$0.next = 8;
 					break;
 
-				case 6:
-					context$2$0.t0 = value;
-
 				case 7:
-					response.contentType(contentType).end(context$2$0.t0);
+					context$2$0.t1 = value;
 
 				case 8:
+					context$2$0.t2 = context$2$0.t1;
+					context$2$0.t0.end.call(context$2$0.t0, context$2$0.t2);
+
+				case 10:
 				case "end":
 					return context$2$0.stop();
 			}
@@ -42437,90 +42712,95 @@ module.exports = function (app) {
 
 				case 9:
 					if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-						context$2$0.next = 22;
+						context$2$0.next = 25;
 						break;
 					}
 
 					f = _step.value;
-					context$2$0.next = 13;
+					context$2$0.t0 = ret.push;
+					context$2$0.t1 = ret;
+					context$2$0.t2 = cfg;
+					context$2$0.next = 16;
 					return files[f];
 
-				case 13:
-					context$2$0.t0 = context$2$0.sent;
-					context$2$0.next = 16;
-					return cfg.readTree(context$2$0.t0);
-
 				case 16:
-					context$2$0.t1 = context$2$0.sent;
-					context$2$0.t2 = _toConsumableArray(context$2$0.t1);
-					ret.push.apply(ret, context$2$0.t2);
+					context$2$0.t3 = context$2$0.sent;
+					context$2$0.next = 19;
+					return context$2$0.t2.readTree.call(context$2$0.t2, context$2$0.t3);
 
 				case 19:
+					context$2$0.t4 = context$2$0.sent;
+					context$2$0.t5 = _toConsumableArray(context$2$0.t4);
+					context$2$0.t0.apply.call(context$2$0.t0, context$2$0.t1, context$2$0.t5);
+
+				case 22:
 					_iteratorNormalCompletion = true;
 					context$2$0.next = 9;
 					break;
 
-				case 22:
-					context$2$0.next = 28;
+				case 25:
+					context$2$0.next = 31;
 					break;
 
-				case 24:
-					context$2$0.prev = 24;
-					context$2$0.t3 = context$2$0["catch"](7);
+				case 27:
+					context$2$0.prev = 27;
+					context$2$0.t6 = context$2$0["catch"](7);
 					_didIteratorError = true;
-					_iteratorError = context$2$0.t3;
+					_iteratorError = context$2$0.t6;
 
-				case 28:
-					context$2$0.prev = 28;
-					context$2$0.prev = 29;
+				case 31:
+					context$2$0.prev = 31;
+					context$2$0.prev = 32;
 
 					if (!_iteratorNormalCompletion && _iterator["return"]) {
 						_iterator["return"]();
 					}
 
-				case 31:
-					context$2$0.prev = 31;
+				case 34:
+					context$2$0.prev = 34;
 
 					if (!_didIteratorError) {
-						context$2$0.next = 34;
+						context$2$0.next = 37;
 						break;
 					}
 
 					throw _iteratorError;
 
-				case 34:
+				case 37:
+					return context$2$0.finish(34);
+
+				case 38:
 					return context$2$0.finish(31);
 
-				case 35:
-					return context$2$0.finish(28);
-
-				case 36:
+				case 39:
 					return context$2$0.abrupt("return", JSON.stringify(ret));
 
-				case 37:
+				case 40:
 				case "end":
 					return context$2$0.stop();
 			}
-		}, callee$1$0, this, [[7, 24, 28, 36], [29,, 31, 35]]);
+		}, callee$1$0, this, [[7, 27, 31, 39], [32,, 34, 38]]);
 	}))));
 
 	app.get("/messages", staticData(co.go(regeneratorRuntime.mark(function callee$1$0() {
 		return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
 			while (1) switch (context$2$0.prev = context$2$0.next) {
 				case 0:
-					context$2$0.next = 2;
+					context$2$0.t0 = JSON;
+					context$2$0.t1 = cfg;
+					context$2$0.next = 4;
 					return co.wait(fs.readFile(__dirname + "/../templates/messages.csv", "utf8", co.cb));
 
-				case 2:
-					context$2$0.t0 = context$2$0.sent;
-					context$2$0.next = 5;
-					return cfg.read(context$2$0.t0, "id");
-
-				case 5:
-					context$2$0.t1 = context$2$0.sent;
-					return context$2$0.abrupt("return", JSON.stringify(context$2$0.t1));
+				case 4:
+					context$2$0.t2 = context$2$0.sent;
+					context$2$0.next = 7;
+					return context$2$0.t1.read.call(context$2$0.t1, context$2$0.t2, "id");
 
 				case 7:
+					context$2$0.t3 = context$2$0.sent;
+					return context$2$0.abrupt("return", context$2$0.t0.stringify.call(context$2$0.t0, context$2$0.t3));
+
+				case 9:
 				case "end":
 					return context$2$0.stop();
 			}
@@ -42554,39 +42834,41 @@ module.exports = function (app) {
 
 				case 8:
 					if ((context$2$0.t1 = context$2$0.t0()).done) {
-						context$2$0.next = 22;
+						context$2$0.next = 24;
 						break;
 					}
 
 					_name = context$2$0.t1.value;
 
 					if (!Object.prototype.hasOwnProperty.call(images, _name)) {
-						context$2$0.next = 20;
+						context$2$0.next = 22;
 						break;
 					}
 
 					if (written) response.write(",");
 					response.write(JSON.stringify(_name));
 					response.write(":");
-					context$2$0.next = 16;
+					context$2$0.t2 = response;
+					context$2$0.t3 = JSON;
+					context$2$0.next = 18;
 					return images[_name];
 
-				case 16:
-					context$2$0.t2 = context$2$0.sent;
-					context$2$0.t3 = JSON.stringify(context$2$0.t2);
-					response.write(context$2$0.t3);
+				case 18:
+					context$2$0.t4 = context$2$0.sent;
+					context$2$0.t5 = context$2$0.t3.stringify.call(context$2$0.t3, context$2$0.t4);
+					context$2$0.t2.write.call(context$2$0.t2, context$2$0.t5);
 
 					written = true;
 
-				case 20:
+				case 22:
 					context$2$0.next = 8;
 					break;
 
-				case 22:
+				case 24:
 					response.write("}");
 					response.end();
 
-				case 24:
+				case 26:
 				case "end":
 					return context$2$0.stop();
 			}
@@ -42633,23 +42915,11 @@ module.exports = function () {
 	return ret;
 };
 
-},{}],"/home/vadzim/v/work/nerojs/src/later.js":[function(require,module,exports){
+},{}],"/home/vadzim/v/work/nerojs/src/localUtils.js":[function(require,module,exports){
 "use strict";
-
-module.exports = new (require("scheduler"))();
-
-},{"scheduler":"/home/vadzim/v/work/nerojs/src/scheduler.js"}],"/home/vadzim/v/work/nerojs/src/localUtils.js":[function(require,module,exports){
-"use strict";
-
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
 
 var lodash = require("lodash");
 var co = require("co");
-
-var NON_PARTIAL = Object.create(null);
-NON_PARTIAL.__partial__ = false;
-
-var PARTIAL = Object.create(null);
 
 function assert(value, message) {
 	if (!value) throw new Error("" + message);
@@ -42687,11 +42957,12 @@ var lu = module.exports = {
 	},
 
 	rests: function rests(num) {
+		var ret = [];
+
 		for (var _len = arguments.length, _rests = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
 			_rests[_key - 1] = arguments[_key];
 		}
 
-		var ret = [];
 		var _iteratorNormalCompletion = true;
 		var _didIteratorError = false;
 		var _iteratorError = undefined;
@@ -42735,7 +43006,7 @@ var lu = module.exports = {
 
 	time: function time() {
 		var d = new Date();
-		return "" + d.getHours() + ":" + lu.pad(d.getMinutes(), 2, 0) + ":" + lu.pad(d.getSeconds(), 2, 0) + "." + lu.pad(d.getMilliseconds(), 3, 0);
+		return d.getHours() + ":" + lu.pad(d.getMinutes(), 2, 0) + ":" + lu.pad(d.getSeconds(), 2, 0) + "." + lu.pad(d.getMilliseconds(), 3, 0);
 	},
 
 	stack: function stack() {
@@ -42782,7 +43053,7 @@ var lu = module.exports = {
 	},
 
 	byJSON: function byJSON(callback) {
-		return byLines(function (line) {
+		return lu.byLines(function (line) {
 			return callback(JSON.parse(line.trim()));
 		});
 	},
@@ -43001,14 +43272,15 @@ var lu = module.exports = {
 		return regeneratorRuntime.wrap(function readJSON$(context$1$0) {
 			while (1) switch (context$1$0.prev = context$1$0.next) {
 				case 0:
-					context$1$0.next = 2;
+					context$1$0.t0 = JSON;
+					context$1$0.next = 3;
 					return lu.readStream(stream);
 
-				case 2:
-					context$1$0.t0 = context$1$0.sent;
-					return context$1$0.abrupt("return", JSON.parse(context$1$0.t0));
+				case 3:
+					context$1$0.t1 = context$1$0.sent;
+					return context$1$0.abrupt("return", context$1$0.t0.parse.call(context$1$0.t0, context$1$0.t1));
 
-				case 4:
+				case 5:
 				case "end":
 					return context$1$0.stop();
 			}
@@ -43052,41 +43324,6 @@ var lu = module.exports = {
 			}
 		}, readChunk, this);
 	}),
-
-	"static": function _static(fun) {
-		return co.func(regeneratorRuntime.mark(function callee$1$0(request, response) {
-			var headWritten, responseEnded, body;
-			return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
-				while (1) switch (context$2$0.prev = context$2$0.next) {
-					case 0:
-						headWritten = false, responseEnded = false;
-						context$2$0.prev = 1;
-						context$2$0.next = 4;
-						return fun();
-
-					case 4:
-						body = context$2$0.sent;
-
-						response.writeHead(200, _defineProperty({}, "Content-Type", "text/html; charset=UTF-8"));
-						headWritten = true;
-						if (typeof body != "string") body = React.renderComponentToString(body);
-						response.end(body);
-						responseEnded = true;
-
-					case 10:
-						context$2$0.prev = 10;
-
-						if (!headWritten) response.writeHead(500, _defineProperty({}, "Content-Type", "text/plain"));
-						if (!responseEnded) response.end("<<< ERROR >>>");
-						return context$2$0.finish(10);
-
-					case 14:
-					case "end":
-						return context$2$0.stop();
-				}
-			}, callee$1$0, this, [[1,, 10, 14]]);
-		}));
-	},
 
 	property: function property(obj, name, defaultValue) {
 		var privateName = "_" + name;
@@ -43136,151 +43373,10 @@ var lu = module.exports = {
 		return ret;
 	},
 
-	testDiff: function testDiff() {
-		var p = { a: 1, x: { u: 9 } };
-		var q = { x: { c: 2 } };
-		assert(JSON.stringify(q) == JSON.stringify(lu.applyDiff(p, lu.makeDiff(p, q))));
-	},
-
 	isSet: function isSet(obj) {
 		if (obj == null) return false;
 		var proto = Object.getPrototypeOf(obj);
 		return proto === LiteralPrototype || proto === null;
-	},
-
-	applyDiff: function applyDiff(dest, diff, partial) {
-		var ret = dest;
-		var cnt = 0;
-
-		function copyDest() {
-			ret = Object.create(null);
-			for (var key in dest) {
-				if (Object.prototype.hasOwnProperty.call(dest, key)) {
-					var value = dest[key];
-					if (value === undefined) continue;
-					ret[key] = dest[key];
-					++cnt;
-				}
-			}
-		}
-
-		if (diff && diff.__partial__ === false) partial = false;
-
-		for (var key in diff) {
-			if (key != "__partial__" && Object.prototype.hasOwnProperty.call(diff, key)) {
-				var value = diff[key];
-				if (value === undefined) continue;
-				if (value != null && typeof value == "object") value = lu.applyDiff(ret && ret[key], value, partial);
-				if (value == null) {
-					if (ret != null && Object.prototype.hasOwnProperty.call(ret, key)) {
-						if (ret === dest) copyDest();
-						delete ret[key];
-						--cnt;
-					}
-				} else {
-					if (ret == null || ret[key] !== value) {
-						if (ret === dest) copyDest();
-						ret[key] = value;
-					}
-					cnt = Infinity;
-				}
-			}
-		}if (partial === false) for (var key in ret) {
-			if (Object.prototype.hasOwnProperty.call(ret, key)) {
-				if (!Object.prototype.hasOwnProperty.call(diff, key) || diff[key] === undefined) {
-					if (ret === dest) copyDest();
-					delete ret[key];
-					--cnt;
-				} else cnt = Infinity;
-			}
-		}if (ret !== dest && cnt == 0) ret = null;
-
-		return ret;
-	},
-
-	mergeDiffs: function mergeDiffs(a, b) {
-
-		if (a == null) a = NON_PARTIAL;
-		if (b == null) b = NON_PARTIAL;
-
-		if (b.__partial__ === false) return b;
-
-		var ret = a;
-
-		function copyDest() {
-			ret = Object.create(null);
-			for (var key in a) {
-				if (Object.prototype.hasOwnProperty.call(a, key)) {
-					var value = a[key];
-					if (value === undefined) continue;
-					ret[key] = a[key];
-				}
-			}
-		}
-
-		for (var key in b) {
-			if (Object.prototype.hasOwnProperty.call(b, key)) {
-				var value = b[key];
-				if (value === undefined) continue;
-				if (value == null) value = NON_PARTIAL;
-				if (typeof value == "object") {
-					var r = ret ? ret[key] : undefined;
-					if (r === undefined) r = PARTIAL;
-					value = lu.mergeDiffs(r, value);
-				}
-				if (ret == null || ret[key] !== value) {
-					if (ret === a) copyDest();
-					ret[key] = value;
-				}
-			}
-		}if (ret !== a && typeof a != "object") ret.__partial__ = false;
-
-		return ret;
-	},
-
-	makeDiff: function makeDiff(previous, next) {
-		if (previous === next) return undefined;
-		var ret = undefined;
-		function toArray(obj) {
-			var ret = [];
-			lodash.forEach(obj, function (value, key) {
-				return ret.push({ value: value, key: key });
-			});
-			return ret.sort(function (v1, v2) {
-				return v1.key < v2.key ? -1 : v1.key > v2.key ? 1 : 0;
-			});
-		}
-		var pa = toArray(previous);
-		var na = toArray(next);
-		var p = pa.pop();
-		var n = na.pop();
-		while (p || n) {
-			if (!n || p && p.key > n.key) {
-				if (!ret) ret = Object.create(null);
-				ret[p.key] = null; // deleting
-				p = pa.pop();
-			} else if (!p || p.key < n.key) {
-				if (!ret) ret = Object.create(null);
-				ret[n.key] = n.value;
-				n = na.pop();
-			} else {
-				if (p.value !== n.value) {
-					if (lu.isSet(p.value) && lu.isSet(n.value)) {
-						var diff = lu.makeDiff(p.value, n.value);
-						if (diff) {
-							if (!ret) ret = Object.create(null);
-							ret[n.key] = diff;
-						}
-					} else {
-						if (!ret) ret = Object.create(null);
-						ret[n.key] = n.value;
-					}
-				}
-				p = pa.pop();
-				n = na.pop();
-			}
-		}
-		return ret ? ret : undefined;
 	},
 
 	concatString: function concatString(array) {
@@ -43694,15 +43790,15 @@ var lu = module.exports = {
 	}),
 
 	word: function word(w) {
-		return [w & 255, w >> 8 & 255];
+		return [w & 0xff, w >> 8 & 0xff];
 	},
 
 	dword: function dword(w) {
-		return [w & 255, w >> 8 & 255, w >> 16 & 255, w >> 24 & 255];
+		return [w & 0xff, w >> 8 & 0xff, w >> 16 & 0xff, w >> 24 & 0xff];
 	},
 
 	makeWord: function makeWord(lo, hi) {
-		return (lo & 255) + (hi & 255) << 8;
+		return (lo & 0xff) + (hi & 0xff) << 8;
 	},
 
 	arrayEqual: function arrayEqual(a, b) {
@@ -43996,6 +44092,8 @@ module.exports={
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
+var _get = function get(_x4, _x5, _x6) { var _again = true; _function: while (_again) { var object = _x4, property = _x5, receiver = _x6; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x4 = parent; _x5 = property; _x6 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -44007,8 +44105,8 @@ var CRC = require("netro/modemcrc");
 var co = require("co");
 var lu = require("localUtils");
 
-var USB_bFLAG_DATA = 126;
-var USB_bSTAF_DATA = 125;
+var USB_bFLAG_DATA = 0x7e;
+var USB_bSTAF_DATA = 0x7d;
 var PROTOCOL_NUMBER = 1;
 
 var MODEM_TIMEOUT = 9000;
@@ -44017,9 +44115,7 @@ var ModemError = (function (_Error) {
 	function ModemError() {
 		_classCallCheck(this, ModemError);
 
-		if (_Error != null) {
-			_Error.apply(this, arguments);
-		}
+		_get(Object.getPrototypeOf(ModemError.prototype), "constructor", this).apply(this, arguments);
 	}
 
 	_inherits(ModemError, _Error);
@@ -44031,9 +44127,7 @@ var ModemTimeout = (function (_ModemError) {
 	function ModemTimeout() {
 		_classCallCheck(this, ModemTimeout);
 
-		if (_ModemError != null) {
-			_ModemError.apply(this, arguments);
-		}
+		_get(Object.getPrototypeOf(ModemTimeout.prototype), "constructor", this).apply(this, arguments);
 	}
 
 	_inherits(ModemTimeout, _ModemError);
@@ -44080,11 +44174,7 @@ var Modem = (function () {
 							context$3$0.prev = 4;
 							context$3$0.next = 7;
 							return callback.call(this, function () {
-								for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-									args[_key] = arguments[_key];
-								}
-
-								return _this._sendBuffer(Modem.encode.apply(Modem, args));
+								return _this._sendBuffer(Modem.encode.apply(Modem, arguments));
 							});
 
 						case 7:
@@ -44172,8 +44262,8 @@ var Modem = (function () {
 		key: "encodeArray",
 		value: function encodeArray(array) {
 			array = lu.copy(array);
-			if (array.length > 255) throw new ModemError("too long message");
-			array.unshift(255, 3, PROTOCOL_NUMBER, array.length);
+			if (array.length > 0xff) throw new ModemError("too long message");
+			array.unshift(0xff, 0x03, PROTOCOL_NUMBER, array.length);
 			array.push.apply(array, _toConsumableArray(lu.word(CRC.calc_crc(array))));
 			var buffer = [USB_bFLAG_DATA];
 			var _iteratorNormalCompletion = true;
@@ -44285,7 +44375,7 @@ Modem.extractMessages = function (buffer) {
 Modem.extractMessage = function (data) {
 	if (data.length < 4) return null;
 	data = lu.array(data);
-	if (!(data[0] == USB_bFLAG_DATA && data[1] == 255 && data[2] == 3 && data[3] == PROTOCOL_NUMBER)) return false;
+	if (!(data[0] == USB_bFLAG_DATA && data[1] == 0xff && data[2] == 0x03 && data[3] == PROTOCOL_NUMBER)) return false;
 	return checkCRC(data, ApplyP1Readers);
 };
 
@@ -44316,8 +44406,8 @@ function byte(pos) {
 }
 
 function writeWord(pos, data, value) {
-	data[pos] = value & 255;
-	data[pos + 1] = value >> 8 & 255;
+	data[pos] = value & 0xff;
+	data[pos + 1] = value >> 8 & 0xff;
 	return data;
 }
 
@@ -44335,10 +44425,10 @@ function word(pos) {
 function dword(pos) {
 	return {
 		write: function write(data, value) {
-			data[pos] = value & 255;
-			data[pos + 1] = value >> 8 & 255;
-			data[pos + 2] = value >> 16 & 255;
-			data[pos + 3] = value >> 24 & 255;
+			data[pos] = value & 0xff;
+			data[pos + 1] = value >> 8 & 0xff;
+			data[pos + 2] = value >> 16 & 0xff;
+			data[pos + 3] = value >> 24 & 0xff;
 			return data;
 		},
 		read: function read(data) {
@@ -44772,21 +44862,21 @@ function compose(t1, t2) {
 "use strict";
 
 var marked0$0 = [append_crc].map(regeneratorRuntime.mark);
-var initial_crc = 0;
+var initial_crc = 0x0000;
 
 function update_crc(crc, byte) {
 	// не знаю, как это должно работать, не мое
 	// і не маё таксама :)
 	for (var i = 0; i < 8; i++) {
-		if (crc & 32768) {
+		if (crc & 0x8000) {
 			crc <<= 1;
-			crc &= 65535;
-			if (byte & 1) crc |= 1;
-			crc ^= 4129;
+			crc &= 0xffff;
+			if (byte & 0x0001) crc |= 0x0001;
+			crc ^= 0x1021;
 		} else {
 			crc <<= 1;
-			crc &= 65535;
-			if (byte & 1) crc |= 1;
+			crc &= 0xffff;
+			if (byte & 0x0001) crc |= 0x0001;
 		}
 		byte = byte >> 1;
 	}
@@ -44923,11 +45013,11 @@ function append_crc(data) {
 
 			case 30:
 				context$1$0.next = 32;
-				return crc & 255;
+				return crc & 0xff;
 
 			case 32:
 				context$1$0.next = 34;
-				return crc >> 8 & 255;
+				return crc >> 8 & 0xff;
 
 			case 34:
 			case "end":
@@ -44948,7 +45038,7 @@ module.exports = {
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x, _x2, _x3) { var _again = true; _function: while (_again) { var object = _x, property = _x2, receiver = _x3; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x = parent; _x2 = property; _x3 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -45128,139 +45218,25 @@ null
 
 "use strict";
 
-var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
-
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
 
-var later = require("later").push;
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var co = require("co");
 var UID = require("uid");
+var Diff = require("diff");
 var lodash = require("lodash");
-
-var _require = require("LOG");
-
-var LOG = _require.LOG;
 
 var actionKey = "_RA_ACTION_" + UID();
 var raValue = "_RA_VALUE_" + UID();
 
 // let debugLog = false
-
-var updates = {};
-updates.scheduled = false;
-updates.procs = [];
-updates.index = 0;
-updates.maxIndex = 32768;
-updates.processing = false;
-updates.totalTime = 0;
-updates.maxTime = 0;
-updates.maxTime1 = 0;
-updates.minTime = Infinity;
-updates.runCount = 0;
-updates.runAllCount = 0;
-
-global.updates = updates; // debugger
-
-var performance = global.performance || global.Date;
-updates.start = performance.now();
-
-updates.log = function () {
-	return console.log(":: " + updates.totalTime / 1000 + " / " + (performance.now() - updates.start) / 1000 + " (" + updates.maxTime / 1000 + ", " + updates.maxTime1 / 1000 + ", " + updates.minTime / 1000 + ", " + Action.maxCount + ", " + updates.runCount + ", " + updates.runAllCount + ")");
-};
-
-// co.go( function* () { // debugger
-// 	let sleep5000 = co.sleep( 5000 )
-// 	for (;;) {
-// 		let totalTime = updates.totalTime
-// 		yield sleep5000
-// 		if ( totalTime != updates.totalTime )
-// 			updates.log()
-// 	}
-// } )
-
-updates.checkSchedule = function () {
-	if (!updates.scheduled && updates.procs.length > 0) {
-		updates.scheduled = true;
-		later(updates.tick);
-	}
-};
-
-updates.tick = function () {
-	updates.scheduled = false;
-	for (var _try = 0; _try < 1000; ++_try) {
-		try {
-			updates.runAll();
-			break;
-		} catch (error) {
-			setTimeout(function () {
-				throw error;
-			}, 1);
-		}
-	}
-	updates.checkSchedule();
-};
-
-updates.runAll = function () {
-	// if ( updates.processing )
-	// 	return
-
-	var start = performance.now();
-	var st1 = start;
-	var runCount = updates.runCount;
-
-	var processing = updates.processing;
-	updates.processing = true;
-	var action = co.global[actionKey];
-	if (action != null) co.global[actionKey] = null;
-	try {
-		while (updates.index < updates.procs.length) {
-			if (global.APP_TIMEOUT && global.APP_TIMEOUT < Date.now) {
-				alert("Application is running too long");
-			}
-			var proc = updates.procs[updates.index];
-			++updates.index;
-			++updates.runCount;
-			if (updates.index >= updates.maxIndex && updates.index * 3 > updates.procs.length) {
-				updates.procs.splice(0, updates.index);
-				updates.index = 0;
-			}
-			proc();
-			var t1 = performance.now();
-			if (updates.maxTime1 < t1 - st1) updates.maxTime1 = t1 - st1;
-			// if ( t1 - st1 > 10 )
-			// 	console.log( t1 - st1, `` + proc.$name ) // debugger
-			st1 = t1;
-		}
-		updates.index = updates.procs.length = 0;
-	} finally {
-		if (action != null) co.global[actionKey] = action;
-		updates.processing = processing;
-		if (!processing) {
-			var time = performance.now() - start;
-			updates.totalTime += time;
-			if (updates.maxTime < time) updates.maxTime = time;
-			runCount = updates.runCount - runCount;
-			if (runCount) {
-				++updates.runAllCount;
-				if (updates.minTime > time) updates.minTime = time;
-			}
-			if (time > 300) LOG("updates have been run for " + time.toString().red + " ms");
-		}
-	}
-};
-
-updates.later = function (proc) {
-	updates.procs.push(proc);
-	updates.checkSchedule();
-};
-
-updates.later.then = updates.later;
 
 var checkNull = function checkNull(value) {
 	return value == null ? null : value;
@@ -45276,18 +45252,57 @@ var getValue = function getValue(value) {
 	return value == null || value.valueOf == null ? value : value.valueOf();
 };
 
-function AbstractGuard() {}
+var usedPropsGuard = function usedPropsGuard() {
+	_classCallCheck(this, usedPropsGuard);
+};
+
+var AbstractGuard = (function (_usedPropsGuard) {
+	function AbstractGuard() {
+		_classCallCheck(this, AbstractGuard);
+
+		_get(Object.getPrototypeOf(AbstractGuard.prototype), "constructor", this).apply(this, arguments);
+	}
+
+	_inherits(AbstractGuard, _usedPropsGuard);
+
+	return AbstractGuard;
+})(usedPropsGuard);
+
+var _iteratorNormalCompletion = true;
+var _didIteratorError = false;
+var _iteratorError = undefined;
+
+try {
+
+	for (var _iterator = "toString valueOf toLocaleString hasOwnProperty isPrototypeOf propertyIsEnumerable".split(" ")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+		var i = _step.value;
+
+		Object.defineProperty(AbstractGuard.prototype, i, { value: ({})[i], enumerable: false });
+	}
+} catch (err) {
+	_didIteratorError = true;
+	_iteratorError = err;
+} finally {
+	try {
+		if (!_iteratorNormalCompletion && _iterator["return"]) {
+			_iterator["return"]();
+		}
+	} finally {
+		if (_didIteratorError) {
+			throw _iteratorError;
+		}
+	}
+}
+
+Object.defineProperty(AbstractGuard.prototype, "$name", { value: "<...>", enumerable: false, writable: true });
 
 var invalidKeyCall = function invalidKeyCall(key) {
 	throw new Error("access to an undeclared property \"" + this.$name + "." + key + "\"");
 };
 
-var usedProps = Object.create(null);
-var usedPropsProto = Object.create(null);
 var guardProp = function guardProp(key) {
-	if (!usedProps[key]) {
-		usedProps[key] = true;
-		Object.defineProperty(usedPropsProto, key, {
+	if (Object.prototype.hasOwnProperty.call(usedPropsGuard.prototype, key)) {
+		Object.defineProperty(usedPropsGuard.prototype, key, {
 			get: function get() {
 				invalidKeyCall.call(this, key);
 			},
@@ -45297,7 +45312,6 @@ var guardProp = function guardProp(key) {
 		});
 	}
 };
-AbstractGuard.prototype = usedPropsProto;
 
 // Не зразумела толкам, як гэты Proxy працуе ў якасьці прататыпу.
 // Пакуль што, здаецца, паводзіны не адпавядаюць сьпецыфікацыі (2014.11.25)
@@ -45309,50 +45323,39 @@ AbstractGuard.prototype = usedPropsProto;
 // 	} )
 // }
 
-if (global.APP_DEBUG) {
-	//
-	// аб'яўленьне аб'екта з ~700-800 уласьцівасьцяў з функцыямі чытаньня/запісу
-	// займае ў Google Chrome'е каля траціны секунды.
-	// Правераныя спосабы:
-	// - дабаўленьне па адным праз Object.defineProperty
-	// - дабаўленьне гуртам праз Object.defineProperties
-	// - кампіляцыя зыходніка праз лакальны eval
-	// - кампіляцыя зыходніка праз глабальны eval
-	// - кампіляцыя зыходніка праз дабаўленьне тэгу script з зыходнікам
-	// Не правераныя спосабы:
-	// - дабаўленьне тэгу script з пазнакай src
-	// Паляпшае сітуацыю (напалову):
-	// - стварэньне для кожнай уласьцівасьці новага аб'екта са старым аб'ектам
-	// у якасьці прататыпу. Пры гэтым доступ да неаб'яўленых уласьцівасьцяў можа
-	// стаць адносна доўгім па часе, але ж гэта ня так важна, бо ў выніку ўсё адно
-	// кідаецца памылка.
-	//
-	// Генерацыя тэксту зыходніка адбываецца імгненна.
-	//
-	// Зыходзячы з гэтага улучаць стражнікаў доступу да неаб'яўленых уласьцівасьцяў
-	// трэба толькі пры адладцы.
-	//
-	AbstractGuard.prototype = (global.__UsedScriptIdentifiers__ + "").split(/[\s,]+/).reduce(function (proto, key) {
-		return Object.create(proto, _defineProperty({}, key, {
-			get: function get() {
-				invalidKeyCall.call(this, key);
-			},
-			set: function set(_) {
-				invalidKeyCall.call(this, key);
-			}
-		}));
-	}, AbstractGuard.prototype);
-}
-
-AbstractGuard.prototype = Object.create(AbstractGuard.prototype, {
-	toString: { value: ({}).toString },
-	valueOf: { value: ({}).valueOf },
-	toLocaleString: { value: ({}).toLocaleString },
-	hasOwnProperty: { value: ({}).hasOwnProperty },
-	isPrototypeOf: { value: ({}).isPrototypeOf },
-	propertyIsEnumerable: { value: ({}).propertyIsEnumerable },
-	$name: { value: "<...>", writable: 1 }
-});
+// if ( global.APP_DEBUG ) {
+// 	//
+// 	// аб'яўленьне аб'екта з ~700-800 уласьцівасьцяў з функцыямі чытаньня/запісу
+// 	// займае ў Google Chrome'е каля траціны секунды.
+// 	// Правераныя спосабы:
+// 	// - дабаўленьне па адным праз Object.defineProperty
+// 	// - дабаўленьне гуртам праз Object.defineProperties
+// 	// - кампіляцыя зыходніка праз лакальны eval
+// 	// - кампіляцыя зыходніка праз глабальны eval
+// 	// - кампіляцыя зыходніка праз дабаўленьне тэгу script з зыходнікам
+// 	// Не правераныя спосабы:
+// 	// - дабаўленьне тэгу script з пазнакай src
+// 	// Паляпшае сітуацыю (напалову):
+// 	// - стварэньне для кожнай уласьцівасьці новага аб'екта са старым аб'ектам
+// 	// у якасьці прататыпу. Пры гэтым доступ да неаб'яўленых уласьцівасьцяў можа
+// 	// стаць адносна доўгім па часе, але ж гэта ня так важна, бо ў выніку ўсё адно
+// 	// кідаецца памылка.
+// 	//
+// 	// Генерацыя тэксту зыходніка адбываецца імгненна.
+// 	//
+// 	// Зыходзячы з гэтага улучаць стражнікаў доступу да неаб'яўленых уласьцівасьцяў
+// 	// трэба толькі пры адладцы.
+// 	//
+// 	AbstractGuard.prototype =
+// 		( global.__UsedScriptIdentifiers__ + `` )
+// 		.split( /[\s,]+/ )
+// 		.reduce( ( proto, key ) =>
+// 			Object.create( proto, { [ key ]: {
+// 				get: function () { invalidKeyCall.call( this, key ) },
+// 				set: function ( _ ) { invalidKeyCall.call( this, key ) },
+// 			} } ),
+// 			AbstractGuard.prototype )
+// }
 
 var EMPTY_ARRAY = [];
 Object.freeze(EMPTY_ARRAY);
@@ -45361,9 +45364,7 @@ var ImmutableInterface = (function (_AbstractGuard) {
 	function ImmutableInterface() {
 		_classCallCheck(this, ImmutableInterface);
 
-		if (_AbstractGuard != null) {
-			_AbstractGuard.apply(this, arguments);
-		}
+		_get(Object.getPrototypeOf(ImmutableInterface.prototype), "constructor", this).apply(this, arguments);
 	}
 
 	_inherits(ImmutableInterface, _AbstractGuard);
@@ -45393,17 +45394,17 @@ var ImmutableInterface = (function (_AbstractGuard) {
 		key: "props",
 
 		// debugger
-		get: function () {
+		get: function get() {
 			throw new Error("access to deprecated 'props' property detected");
 		}
 	}, {
 		key: "declaredProperties",
-		get: function () {
+		get: function get() {
 			return this.live;
 		}
 	}, {
 		key: "length",
-		get: function () {
+		get: function get() {
 			var m = this.valueOf();return m == null ? 0 : Object.keys(m).length;
 		}
 	}]);
@@ -45453,12 +45454,12 @@ var ReadOnlyCell = (function (_ImmutableInterface) {
 		}
 	}, {
 		key: "live",
-		get: function () {
+		get: function get() {
 			return this._parent.live;
 		}
 	}, {
 		key: "$name",
-		get: function () {
+		get: function get() {
 			return this._parent.$name;
 		}
 	}]);
@@ -45593,7 +45594,7 @@ var Cell = (function (_ImmutableInterface2) {
 	}, {
 		key: "update",
 		value: function update(diff) {
-			return this.assign(lu.applyDiff(this.noTouch(), diff));
+			return this.assign(Diff.apply(this.noTouch(), diff));
 		}
 	}, {
 		key: "throw",
@@ -45625,27 +45626,27 @@ var Cell = (function (_ImmutableInterface2) {
 			this._fire();
 			if (this._parent) this._parent.close();
 			if (this._liveArray) {
-				var _iteratorNormalCompletion = true;
-				var _didIteratorError = false;
-				var _iteratorError = undefined;
+				var _iteratorNormalCompletion2 = true;
+				var _didIteratorError2 = false;
+				var _iteratorError2 = undefined;
 
 				try {
-					for (var _iterator = this._liveArray[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-						var p = _step.value;
+					for (var _iterator2 = this._liveArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+						var p = _step2.value;
 
 						p.close();
 					}
 				} catch (err) {
-					_didIteratorError = true;
-					_iteratorError = err;
+					_didIteratorError2 = true;
+					_iteratorError2 = err;
 				} finally {
 					try {
-						if (!_iteratorNormalCompletion && _iterator["return"]) {
-							_iterator["return"]();
+						if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
+							_iterator2["return"]();
 						}
 					} finally {
-						if (_didIteratorError) {
-							throw _iteratorError;
+						if (_didIteratorError2) {
+							throw _iteratorError2;
 						}
 					}
 				}
@@ -45665,27 +45666,27 @@ var Cell = (function (_ImmutableInterface2) {
 			this._fire(); // TODO для выдаленьня спасылак абысьціся без _fire і адпаведна без лішняга прагону
 			if (this._parent) this._parent.freeze();
 			if (this._liveArray) {
-				var _iteratorNormalCompletion2 = true;
-				var _didIteratorError2 = false;
-				var _iteratorError2 = undefined;
+				var _iteratorNormalCompletion3 = true;
+				var _didIteratorError3 = false;
+				var _iteratorError3 = undefined;
 
 				try {
-					for (var _iterator2 = this._liveArray[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-						var p = _step2.value;
+					for (var _iterator3 = this._liveArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+						var p = _step3.value;
 
 						p.freeze();
 					}
 				} catch (err) {
-					_didIteratorError2 = true;
-					_iteratorError2 = err;
+					_didIteratorError3 = true;
+					_iteratorError3 = err;
 				} finally {
 					try {
-						if (!_iteratorNormalCompletion2 && _iterator2["return"]) {
-							_iterator2["return"]();
+						if (!_iteratorNormalCompletion3 && _iterator3["return"]) {
+							_iterator3["return"]();
 						}
 					} finally {
-						if (_didIteratorError2) {
-							throw _iteratorError2;
+						if (_didIteratorError3) {
+							throw _iteratorError3;
 						}
 					}
 				}
@@ -45699,22 +45700,14 @@ var Cell = (function (_ImmutableInterface2) {
 	}, {
 		key: "toString",
 		value: function toString() {
-			for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-				args[_key] = arguments[_key];
-			}
-
 			var v = this._read();
-			return v == null || !v.toString ? "" + v : v.toString.apply(v, args);
+			return v == null || !v.toString ? "" + v : v.toString.apply(v, arguments);
 		}
 	}, {
 		key: "toJSON",
 		value: function toJSON() {
-			for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-				args[_key2] = arguments[_key2];
-			}
-
 			var v = this._read();
-			return v == null || !v.toJSON ? v : v.toJSON.apply(v, args);
+			return v == null || !v.toJSON ? v : v.toJSON.apply(v, arguments);
 		}
 	}, {
 		key: "with",
@@ -45866,27 +45859,27 @@ var Cell = (function (_ImmutableInterface2) {
 				this._value = newValue;
 				this._error = newError;
 				if (this._live) {
-					var _iteratorNormalCompletion3 = true;
-					var _didIteratorError3 = false;
-					var _iteratorError3 = undefined;
+					var _iteratorNormalCompletion4 = true;
+					var _didIteratorError4 = false;
+					var _iteratorError4 = undefined;
 
 					try {
-						for (var _iterator3 = this._liveArray[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-							var _p = _step3.value;
+						for (var _iterator4 = this._liveArray[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+							var _p = _step4.value;
 
 							_p._write(newValue && newValue[_p._key], true);
 						}
 					} catch (err) {
-						_didIteratorError3 = true;
-						_iteratorError3 = err;
+						_didIteratorError4 = true;
+						_iteratorError4 = err;
 					} finally {
 						try {
-							if (!_iteratorNormalCompletion3 && _iterator3["return"]) {
-								_iterator3["return"]();
+							if (!_iteratorNormalCompletion4 && _iterator4["return"]) {
+								_iterator4["return"]();
 							}
 						} finally {
-							if (_didIteratorError3) {
-								throw _iteratorError3;
+							if (_didIteratorError4) {
+								throw _iteratorError4;
 							}
 						}
 					}
@@ -45913,13 +45906,13 @@ var Cell = (function (_ImmutableInterface2) {
 					ret[key] = this._value[key];
 					++cnt;
 				}
-			}var _iteratorNormalCompletion4 = true;
-			var _didIteratorError4 = false;
-			var _iteratorError4 = undefined;
+			}var _iteratorNormalCompletion5 = true;
+			var _didIteratorError5 = false;
+			var _iteratorError5 = undefined;
 
 			try {
-				for (var _iterator4 = this._liveArray[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-					var p = _step4.value;
+				for (var _iterator5 = this._liveArray[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
+					var p = _step5.value;
 
 					if (p._dirty) p._updateSelf();
 					if (p._error) {
@@ -45940,16 +45933,16 @@ var Cell = (function (_ImmutableInterface2) {
 					}
 				}
 			} catch (err) {
-				_didIteratorError4 = true;
-				_iteratorError4 = err;
+				_didIteratorError5 = true;
+				_iteratorError5 = err;
 			} finally {
 				try {
-					if (!_iteratorNormalCompletion4 && _iterator4["return"]) {
-						_iterator4["return"]();
+					if (!_iteratorNormalCompletion5 && _iterator5["return"]) {
+						_iterator5["return"]();
 					}
 				} finally {
-					if (_didIteratorError4) {
-						throw _iteratorError4;
+					if (_didIteratorError5) {
+						throw _iteratorError5;
 					}
 				}
 			}
@@ -45987,7 +45980,7 @@ var Cell = (function (_ImmutableInterface2) {
 			a = this._onchange;
 			if (a.length) {
 				for (var i = 0; i < a.length; i++) {
-					updates.later(a[i]);
+					process.nextTick(a[i]);
 				}a.length = 0;
 			}
 		}
@@ -45999,12 +45992,12 @@ var Cell = (function (_ImmutableInterface2) {
 		}
 	}, {
 		key: "live",
-		get: function () {
+		get: function get() {
 			return this._live;
 		}
 	}, {
 		key: raValue,
-		get: function () {
+		get: function get() {
 			return true;
 		}
 	}]);
@@ -46033,7 +46026,7 @@ var Action = (function () {
 		this.$name = { toString: function toString() {
 				return "<Action>";
 			} };
-		this._thread = co.gocall(this._loop, this).linkName(this).waitForInput();
+		this._thread = co.gocall(this._loop, this).waitForInput();
 		this._runCount = 0;
 		var owner = undefined;
 		if ((owner = co.global[actionKey]) && owner._children) owner._children.push(this);
@@ -46111,7 +46104,7 @@ var Action = (function () {
 				while (1) switch (context$2$0.prev = context$2$0.next) {
 					case 0:
 						context$2$0.next = 2;
-						return updates.later;
+						return;
 
 					case 2:
 						next = { then: function then(next) {
@@ -46121,171 +46114,172 @@ var Action = (function () {
 						co.global[actionKey] = this;
 						errorCatched = false;
 
-					case 5:
-						context$2$0.prev = 5;
+						co.defer(function () {
+							co.global[actionKey] = null;
+							_this4._finalize();
+						});
 
 					case 6:
+						context$2$0.prev = 6;
+
+					case 7:
 						if (errorCatched) {
-							context$2$0.next = 48;
+							context$2$0.next = 49;
 							break;
 						}
 
 						if (!this.isClosed()) {
-							context$2$0.next = 9;
+							context$2$0.next = 10;
 							break;
 						}
 
-						return context$2$0.abrupt("break", 66);
+						return context$2$0.abrupt("break", 67);
 
-					case 9:
+					case 10:
 						this._begin();
 						errorCatched = true;
 						ret = undefined;
 
 						if (!this._children) {
-							context$2$0.next = 34;
+							context$2$0.next = 35;
 							break;
 						}
 
 						ret = co.catchThreads(this._fun, this._onthread);
 
 						if (!(!ret || ret[raValue])) {
-							context$2$0.next = 17;
+							context$2$0.next = 18;
 							break;
 						}
 
-						context$2$0.next = 32;
+						context$2$0.next = 33;
 						break;
 
-					case 17:
+					case 18:
 						if (!(ret.next && ret["throw"])) {
-							context$2$0.next = 28;
+							context$2$0.next = 29;
 							break;
 						}
 
 						if (!this._generatorProxy) this._initGeneratorProxy();
 						this._generator = ret;
-						context$2$0.prev = 20;
-						return context$2$0.delegateYield(this._generatorProxy, "t0", 22);
-
-					case 22:
-						ret = context$2$0.t0;
+						context$2$0.prev = 21;
+						return context$2$0.delegateYield(this._generatorProxy, "t0", 23);
 
 					case 23:
-						context$2$0.prev = 23;
-						this._generator = null;return context$2$0.finish(23);
+						ret = context$2$0.t0;
 
-					case 26:
-						context$2$0.next = 32;
+					case 24:
+						context$2$0.prev = 24;
+						this._generator = null;return context$2$0.finish(24);
+
+					case 27:
+						context$2$0.next = 33;
 						break;
 
-					case 28:
+					case 29:
 						if (!ret.then) {
-							context$2$0.next = 32;
+							context$2$0.next = 33;
 							break;
 						}
 
-						context$2$0.next = 31;
+						context$2$0.next = 32;
 						return ret;
 
-					case 31:
+					case 32:
 						ret = context$2$0.sent;
 
-					case 32:
-						context$2$0.next = 47;
+					case 33:
+						context$2$0.next = 48;
 						break;
 
-					case 34:
+					case 35:
 						ret = (0, this._fun)();
 
 						if (!(!ret || ret[raValue])) {
-							context$2$0.next = 38;
+							context$2$0.next = 39;
 							break;
 						}
 
-						context$2$0.next = 47;
+						context$2$0.next = 48;
 						break;
 
-					case 38:
+					case 39:
 						if (!(ret.next && ret["throw"])) {
-							context$2$0.next = 43;
+							context$2$0.next = 44;
 							break;
 						}
 
-						return context$2$0.delegateYield(ret, "t1", 40);
+						return context$2$0.delegateYield(ret, "t1", 41);
 
-					case 40:
+					case 41:
 						ret = context$2$0.t1;
-						context$2$0.next = 47;
+						context$2$0.next = 48;
 						break;
 
-					case 43:
+					case 44:
 						if (!ret.then) {
-							context$2$0.next = 47;
+							context$2$0.next = 48;
 							break;
 						}
 
-						context$2$0.next = 46;
+						context$2$0.next = 47;
 						return ret;
 
-					case 46:
+					case 47:
 						ret = context$2$0.sent;
 
-					case 47:
+					case 48:
 						if (this._dest) this._dest.assign(ret);
 
-					case 48:
+					case 49:
 						errorCatched = false;
 
 						if (!this.isClosed()) {
-							context$2$0.next = 51;
+							context$2$0.next = 52;
 							break;
 						}
 
-						return context$2$0.abrupt("break", 66);
+						return context$2$0.abrupt("break", 67);
 
-					case 51:
+					case 52:
 						context$2$0.t2 = this._end();
-						context$2$0.next = context$2$0.t2 === false ? 54 : context$2$0.t2 === true ? 55 : 57;
+						context$2$0.next = context$2$0.t2 === false ? 55 : context$2$0.t2 === true ? 56 : 58;
 						break;
 
-					case 54:
-						return context$2$0.abrupt("break", 66);
-
 					case 55:
-						context$2$0.next = 57;
+						return context$2$0.abrupt("break", 67);
+
+					case 56:
+						context$2$0.next = 58;
 						return next
 						// case null:
 						/* immediate recalculation */
 						;
 
-					case 57:
-						context$2$0.next = 6;
+					case 58:
+						context$2$0.next = 7;
 						break;
 
-					case 59:
-						context$2$0.next = 64;
+					case 60:
+						context$2$0.next = 65;
 						break;
 
-					case 61:
-						context$2$0.prev = 61;
-						context$2$0.t3 = context$2$0["catch"](5);
+					case 62:
+						context$2$0.prev = 62;
+						context$2$0.t3 = context$2$0["catch"](6);
 
 						if (errorCatched) this._dest["throw"](context$2$0.t3);else rethrow(context$2$0.t3);
 
-					case 64:
-						context$2$0.next = 5;
+					case 65:
+						context$2$0.next = 6;
 						break;
 
-					case 66:
-						co.global[actionKey] = null;
-						this._finalize();
-
-					case 68:
+					case 67:
 					case "end":
 						return context$2$0.stop();
 				}
-			}, _loop, this, [[5, 61], [20,, 23, 26]]);
+			}, _loop, this, [[6, 62], [21,, 24, 27]]);
 		})
 	}, {
 		key: "isClosed",
@@ -46383,6 +46377,7 @@ var Action = (function () {
 	}, {
 		key: "_linkCell",
 		value: function _linkCell(cell) {
+			if (!this._cellSet) return; // TODO debugger workaround: this._cellSet must not be null
 			var c = this._cellSet[cell._id];
 			if (c == null) {
 				c = this._cellSet[cell._id] = {
@@ -46408,6 +46403,7 @@ var Action = (function () {
 		key: "onread",
 		value: function onread(cell) {
 			var c = this._linkCell(cell);
+			if (!c) return; // TODO debugger workaround: this._linkCell must not return null
 			c.read = true;
 			c.value = cell._value;
 			c.error = cell._error;
@@ -46420,7 +46416,7 @@ var Action = (function () {
 	}, {
 		key: "_fire",
 		value: function _fire() {
-			if (this._onchange) updates.later(this._onchange);
+			if (this._onchange) this._thread.nextTick(this._onchange);
 			this._unsubscribe();
 		}
 	}]);
@@ -46431,33 +46427,6 @@ var Action = (function () {
 Action.maxCount = 0;
 
 var newReactive = function newReactive(getter, handlers, sticky, isValueEqual) {
-	var _iteratorNormalCompletion5 = true;
-	var _didIteratorError5 = false;
-	var _iteratorError5 = undefined;
-
-	try {
-		for (var _iterator5 = handlers[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-			var h = _step5.value;
-
-			if (h != null && typeof h != "function") throw new Error("wrong parameters");
-		}
-	} catch (err) {
-		_didIteratorError5 = true;
-		_iteratorError5 = err;
-	} finally {
-		try {
-			if (!_iteratorNormalCompletion5 && _iterator5["return"]) {
-				_iterator5["return"]();
-			}
-		} finally {
-			if (_didIteratorError5) {
-				throw _iteratorError5;
-			}
-		}
-	}
-
-	var cell = new Cell(sticky);
-	if (getter !== undefined) cell._init(getter, false, true, isValueEqual);
 	var _iteratorNormalCompletion6 = true;
 	var _didIteratorError6 = false;
 	var _iteratorError6 = undefined;
@@ -46466,7 +46435,7 @@ var newReactive = function newReactive(getter, handlers, sticky, isValueEqual) {
 		for (var _iterator6 = handlers[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
 			var h = _step6.value;
 
-			h && (h.length ? runSetter : runGetter)(cell, h, sticky);
+			if (h != null && typeof h != "function") throw new Error("wrong parameters");
 		}
 	} catch (err) {
 		_didIteratorError6 = true;
@@ -46479,6 +46448,33 @@ var newReactive = function newReactive(getter, handlers, sticky, isValueEqual) {
 		} finally {
 			if (_didIteratorError6) {
 				throw _iteratorError6;
+			}
+		}
+	}
+
+	var cell = new Cell(sticky);
+	if (getter !== undefined) cell._init(getter, false, true, isValueEqual);
+	var _iteratorNormalCompletion7 = true;
+	var _didIteratorError7 = false;
+	var _iteratorError7 = undefined;
+
+	try {
+		for (var _iterator7 = handlers[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
+			var h = _step7.value;
+
+			h && (h.length ? runSetter : runGetter)(cell, h, sticky);
+		}
+	} catch (err) {
+		_didIteratorError7 = true;
+		_iteratorError7 = err;
+	} finally {
+		try {
+			if (!_iteratorNormalCompletion7 && _iterator7["return"]) {
+				_iterator7["return"]();
+			}
+		} finally {
+			if (_didIteratorError7) {
+				throw _iteratorError7;
 			}
 		}
 	}
@@ -46531,8 +46527,8 @@ exports.Value = function (obj) {
 };
 
 exports.clean = function (getter) {
-	for (var _len3 = arguments.length, handers = Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-		handers[_key3 - 1] = arguments[_key3];
+	for (var _len = arguments.length, handers = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+		handers[_key - 1] = arguments[_key];
 	}
 
 	return newReactive(getter, handers, false);
@@ -46570,27 +46566,27 @@ exports.on = function (emitter, event, getter) {
 		return ret.assign(getter(data));
 	};
 	if (event == "string") emitter.on(event, handler);else {
-		var _iteratorNormalCompletion7 = true;
-		var _didIteratorError7 = false;
-		var _iteratorError7 = undefined;
+		var _iteratorNormalCompletion8 = true;
+		var _didIteratorError8 = false;
+		var _iteratorError8 = undefined;
 
 		try {
-			for (var _iterator7 = event[Symbol.iterator](), _step7; !(_iteratorNormalCompletion7 = (_step7 = _iterator7.next()).done); _iteratorNormalCompletion7 = true) {
-				var _e = _step7.value;
+			for (var _iterator8 = event[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
+				var _e = _step8.value;
 
 				emitter.on(_e, handler);
 			}
 		} catch (err) {
-			_didIteratorError7 = true;
-			_iteratorError7 = err;
+			_didIteratorError8 = true;
+			_iteratorError8 = err;
 		} finally {
 			try {
-				if (!_iteratorNormalCompletion7 && _iterator7["return"]) {
-					_iterator7["return"]();
+				if (!_iteratorNormalCompletion8 && _iterator8["return"]) {
+					_iterator8["return"]();
 				}
 			} finally {
-				if (_didIteratorError7) {
-					throw _iteratorError7;
+				if (_didIteratorError8) {
+					throw _iteratorError8;
 				}
 			}
 		}
@@ -46609,9 +46605,6 @@ exports.importFrom = function (observable) {
 			return observable.live[name].valueOf();
 		});
 	});
-};
-exports.forceCalculations = function () {
-	return updates.runAll();
 };
 
 function createActual() {
@@ -46639,7 +46632,7 @@ var DBChunk = (function () {
 		chunk.assign(initial);
 		var actual = this._actual = createActual();
 		actual[_DBChunk_Getter] = ra(function () {
-			return lu.applyDiff(getter.valueOf(), chunk.valueOf());
+			return Diff.apply(getter.valueOf(), chunk.valueOf());
 		});
 		this._summary = ra(function () {
 			return actual.valueOf()[_DBChunk_Getter].valueOf();
@@ -46693,20 +46686,20 @@ var DBChunk = (function () {
 		}
 	}, {
 		key: "before",
-		get: function () {
+		get: function get() {
 			return this._getter.valueOf();
 		}
 	}, {
 		key: "summary",
-		get: function () {
+		get: function get() {
 			return this._summary.valueOf();
 		}
 	}, {
 		key: "chunk",
-		get: function () {
+		get: function get() {
 			return this._chunk.valueOf();
 		},
-		set: function (value) {
+		set: function set(value) {
 			this._chunk.assign(value);
 		}
 	}]);
@@ -46742,7 +46735,7 @@ var DB = (function () {
 		}
 	}, {
 		key: "data",
-		get: function () {
+		get: function get() {
 			return this.valueOf();
 		}
 	}]);
@@ -46847,7 +46840,7 @@ exports.keymap = function (array, mapper) {
 // 		let keys = getValue( keysVar )
 // 		if ( keys )
 // 			keys.sort()
-// 		updates.later( () => {
+// 		process.nextTick( () => {
 // 			let c = ra.clean()
 // 			let s = c.defineProperty( `source` )
 // 			let d = c.defineProperty( `dest` )
@@ -46871,11 +46864,13 @@ exports.keymap = function (array, mapper) {
 // 	} )
 // 	return dest
 // }
-; // noop
+; // console.log( Object.keys( usedPropsGuard.prototype ).length )
+// console.log( Object.getOwnPropertyNames( usedPropsGuard.prototype ).length )
+// noop
 // noop
 // delete( obj ) { delete obj[ id ] },
 
-},{"LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","co":"/home/vadzim/v/work/nerojs/src/co.js","later":"/home/vadzim/v/work/nerojs/src/later.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/rewriter.js":[function(require,module,exports){
+},{"co":"/home/vadzim/v/work/nerojs/src/co.js","diff":"/home/vadzim/v/work/nerojs/src/diff.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js"}],"/home/vadzim/v/work/nerojs/src/rewriter.js":[function(require,module,exports){
 "use strict";
 
 var express = require("express");
@@ -46887,87 +46882,7 @@ express.Router.rewrite = express.application.rewrite = function rewrite(what, re
 	});
 };
 
-},{"express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js"}],"/home/vadzim/v/work/nerojs/src/scheduler.js":[function(require,module,exports){
-"use strict";
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var maxIndex = 32768;
-
-var Scheduler = (function () {
-	function Scheduler(options) {
-		_classCallCheck(this, Scheduler);
-
-		this.setImmediate = options && options.setImmediate || process.nextTick;
-		this.maxTicks = options && options.maxTicks || Infinity;
-		this._procs = [];
-		this._index = 0;
-		this._scheduled = false;
-		this._processing = false;
-		this._handler = this._handler.bind(this);
-		this.push = this.then.bind(this);
-	}
-
-	_createClass(Scheduler, [{
-		key: "then",
-		value: function then(proc) {
-			this._procs.push(proc);
-			if (!this._processing) this._schedule();
-		}
-	}, {
-		key: "_schedule",
-		value: function _schedule() {
-			if (!this._scheduled) {
-				this.setImmediate(this._handler);
-				this._scheduled = true;
-			}
-		}
-	}, {
-		key: "_handler",
-		value: function _handler() {
-			this._scheduled = false;
-			while (this._procs.length) {
-				try {
-					this._handler1();
-				} catch (error) {
-					setTimeout(function () {
-						throw error;
-					}, 0);
-				}
-			}
-		}
-	}, {
-		key: "_handler1",
-		value: function _handler1() {
-			this._processing = true;
-			try {
-				var t = 0;
-				while (this._index < this._procs.length && ++t <= this.maxTicks) {
-					var proc = this._procs[this._index];
-					this._procs[this._index] = null;
-					++this._index;
-					if (this._index >= maxIndex && this._index * 3 > this._procs.length) {
-						this._procs.splice(0, this._index);
-						this._index = 0;
-					}
-					proc();
-				}
-			} finally {
-				this._processing = false;
-				if (this._procs.length && this._index >= this._procs.length) this._procs.length = this._index = 0;
-				if (this._index) this._schedule();
-			}
-		}
-	}]);
-
-	return Scheduler;
-})();
-
-module.exports = Scheduler;
-
-},{}],"/home/vadzim/v/work/nerojs/src/server.js":[function(require,module,exports){
+},{"express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js"}],"/home/vadzim/v/work/nerojs/src/server.js":[function(require,module,exports){
 // window.webkitRTCPeerConnection
 
 // TODO:
@@ -46980,7 +46895,7 @@ module.exports = Scheduler;
 
 "use strict";
 
-var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
+var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
 function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }
 
@@ -47007,7 +46922,6 @@ var net = require("net");
 var crypto = require("crypto");
 var stream = require("stream");
 
-var glob = require("glob");
 var constants = require("constants");
 var PingPong = require("pingpong");
 var SubConnections = require("subconnections");
@@ -47028,6 +46942,8 @@ var _require = require("LOG");
 
 var LOG = _require.LOG;
 
+var Diff = require("diff");
+
 var configName = process.argv[2] || __dirname + "/../server.conf";
 var config = lu["catch"](function () {
 	return YAML.load(configName);
@@ -47038,7 +46954,7 @@ var updateInterfacesInterval = 2000;
 config = lodash.merge({
 	port: 80,
 	serviceport: 8088,
-	modem: "/dev/ttyACM*",
+	modem: /^win/i.test(os.platform()) ? "COM*" : "/dev/ttyACM*",
 	// modem: 2233,
 	modemPingInterval: 6000, // 0 to disable
 	// modemProxy: `./usb_port`,
@@ -47105,7 +47021,7 @@ var service = ra(Object.defineProperties({
 	}, lu.JSONEqual)
 }, {
 	updateInterfacesTimer: {
-		get: function () {
+		get: function get() {
 			setInterval(function () {
 				return service.live.interfacesTimer.touch();
 			}, updateInterfacesInterval);
@@ -47127,6 +47043,30 @@ var CustomError = (function (_Error) {
 
 	return CustomError;
 })(Error);
+
+var cbPromise = function cbPromise(cbproc) {
+	return new Promise(function (resolve, reject) {
+		return cbproc(function (error, result) {
+			return error ? reject(error) : resolve(result);
+		});
+	});
+};
+
+function getPorts(mask) {
+	return new Promise(function (resolve, reject) {
+		if (mask == "COM*") return cbPromise(function (cb) {
+			return require("child_process").exec("wmic path Win32_SerialPort Get DeviceID", cb);
+		}).then(function (data) {
+			var com = /\bCOM\d+\b/gi;
+			var r = {};
+			var i = undefined;
+			while (i = com.exec(data)) r["\\\\.\\" + i[0]] = true;
+			return Object.keys(r);
+		});else return cbPromise(function (cb) {
+			return require("glob")(mask, {}, cb);
+		});
+	});
+}
 
 var modem = ra(Object.defineProperties({
 
@@ -47166,7 +47106,7 @@ var modem = ra(Object.defineProperties({
 					closeSocket(_this.socket);
 					_this.socket = null;
 				}
-				console.error("trying to connect to: " + port + "" + (_this.proxy ? " via " + _this.proxy : ""));
+				console.error("trying to connect to: " + port + (_this.proxy ? " via " + _this.proxy : ""));
 				if (_this.proxy) {
 					socket = new stream.Duplex();
 					socket.destroy = function () {
@@ -47222,12 +47162,11 @@ var modem = ra(Object.defineProperties({
 				});
 				socket.connect(port);
 			};
-			if (_this.port == +_this.port) connect(+_this.port);else glob(_this.port, {}, function (error, dir) {
-				if (error) return onerror(error);
+			if (_this.port == +_this.port) connect(+_this.port);else getPorts(_this.port).then(function (dir) {
 				if (!dir.length) return onerror(new Error("Cannot find a modem in " + _this.port));
 				if (_this.portIndex >= dir.length) _this.portIndex = 0;
 				connect(dir[_this.portIndex++]);
-			});
+			}, onerror);
 		});
 	},
 
@@ -47291,10 +47230,7 @@ var modem = ra(Object.defineProperties({
 	protocolOK: false,
 
 	sendcommand: regeneratorRuntime.mark(function sendcommand() {
-		for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-			args[_key2] = arguments[_key2];
-		}
-
+		var args$1$0 = arguments;
 		return regeneratorRuntime.wrap(function sendcommand$(context$1$0) {
 			while (1) switch (context$1$0.prev = context$1$0.next) {
 				case 0:
@@ -47309,7 +47245,7 @@ var modem = ra(Object.defineProperties({
 
 				case 4:
 					context$1$0.next = 6;
-					return this.rawcommand.apply(this, args);
+					return this.rawcommand.apply(this, args$1$0);
 
 				case 6:
 					context$1$0.t0 = context$1$0.sent;
@@ -47324,8 +47260,8 @@ var modem = ra(Object.defineProperties({
 		}, sendcommand, this);
 	}),
 	command: function command() {
-		for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-			args[_key3] = arguments[_key3];
+		for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+			args[_key2] = arguments[_key2];
 		}
 
 		return co.gocall(regeneratorRuntime.mark(function callee$1$0() {
@@ -47404,8 +47340,7 @@ var modem = ra(Object.defineProperties({
 			socket = arguments[4];
 		}
 		return co.gocall(regeneratorRuntime.mark(function callee$1$0() {
-			var error, deviceCommand, group, device, commands, newstate, info, _group, passedToModem, my_timestamp, errors, errorneous;
-
+			var error, deviceCommand, group, device, commands, newstate, info, passedToModem, my_timestamp, errors, errorneous;
 			return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
 				var _this4 = this;
 
@@ -47430,18 +47365,16 @@ var modem = ra(Object.defineProperties({
 							device = this.devices.getState().content[deviceId];
 							if (!device) error(HTTPStatus.NOT_FOUND);
 							if (!device.group) {
+								debugger;
 								if (deviceCommand == "Link" || deviceCommand == "Reserve") {
-									_group = devdb.findFreeGroup(this.devices.getState());
-
-									if (_group == null) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
-									this.devices.applyItemChanges(deviceId, { group: _group });
-									ra.forceCalculations();
-									device = this.devices.getState().content[deviceId];
+									group = devdb.findFreeGroup(this.devices.getState());
+									if (group == null) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
+									device = this.devices.applyItemChanges(deviceId, { group: group });
 								} else error(HTTPStatus.NOT_FOUND, "No group in device");
 							}
+							group = device.group;
 							newstate = deviceActions.getNewState(device, deviceCommand, data);
 							info = deviceTypes[device.model];
-							group = device.group;
 						}
 
 						commands = actionToCommands.createCommandSequence(group, info && info.buttons || "Dimeer", deviceCommand, data);
@@ -47599,11 +47532,9 @@ var modem = ra(Object.defineProperties({
 						if (device) {
 							if (deviceCommand == "Unlink" || deviceCommand == "Clear") {
 								this.devices.applyChanges(devdb[deviceCommand](this.devices.getState(), deviceId), true);
-								ra.forceCalculations();
 							}
 							if (deviceCommand == "Set" || device.type == "group") {
 								if (!errorneous) this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { state: newstate }), true);else this.devices.applyChanges(devdb.Set(this.devices.getState(), deviceId, { errorneous: true }), true);
-								ra.forceCalculations();
 							}
 						}
 
@@ -47617,14 +47548,14 @@ var modem = ra(Object.defineProperties({
 
 }, {
 	initDevices: {
-		get: function () {
+		get: function get() {
 			this.devices = new JSONservice(config["var"] + "/database", {});
 		},
 		configurable: true,
 		enumerable: true
 	},
 	checkDevices: {
-		get: function () {
+		get: function get() {
 			return regeneratorRuntime.mark(function callee$1$0() {
 				var devices;
 				return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
@@ -47657,17 +47588,17 @@ var modem = ra(Object.defineProperties({
 		enumerable: true
 	},
 	initializeSocket: {
-		get: function () {
+		get: function get() {
 			this.createSocket();
 		},
 		configurable: true,
 		enumerable: true
 	},
 	handle: {
-		get: function () {
+		get: function get() {
 			return this.socket && new Modem(this.socket, function () {
-				for (var _len4 = arguments.length, args = Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-					args[_key4] = arguments[_key4];
+				for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+					args[_key3] = arguments[_key3];
 				}
 
 				return console.info.apply(console, [lu.time()].concat(args));
@@ -47677,7 +47608,7 @@ var modem = ra(Object.defineProperties({
 		enumerable: true
 	},
 	pingModem: {
-		get: function () {
+		get: function get() {
 			return this.pingInterval && ra(regeneratorRuntime.mark(function callee$1$0() {
 				return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
 					while (1) switch (context$2$0.prev = context$2$0.next) {
@@ -47732,7 +47663,7 @@ var modem = ra(Object.defineProperties({
 		enumerable: true
 	},
 	initializeModem: {
-		get: function () {
+		get: function get() {
 			return regeneratorRuntime.mark(function callee$1$0() {
 				var sversion;
 				return regeneratorRuntime.wrap(function callee$1$0$(context$2$0) {
@@ -47783,7 +47714,8 @@ var modem = ra(Object.defineProperties({
 							return context$2$0.abrupt("return");
 
 						case 18:
-							context$2$0.next = 20;
+							context$2$0.t0 = this;
+							context$2$0.next = 21;
 							return this.rawcommand("Change_protocol", { PROTOCOLS:
 								// this.functions.PROTOCOLS
 								{
@@ -47792,37 +47724,38 @@ var modem = ra(Object.defineProperties({
 								}
 							});
 
-						case 20:
-							context$2$0.t0 = context$2$0.sent;
+						case 21:
+							context$2$0.t1 = context$2$0.sent;
 
-							if (this.resultOK(context$2$0.t0)) {
-								context$2$0.next = 24;
+							if (context$2$0.t0.resultOK.call(context$2$0.t0, context$2$0.t1)) {
+								context$2$0.next = 25;
 								break;
 							}
 
 							console.log("error changing modem protocol".red);
 							return context$2$0.abrupt("return");
 
-						case 24:
-							context$2$0.next = 26;
+						case 25:
+							context$2$0.t2 = this;
+							context$2$0.next = 28;
 							return this.rawcommand("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
 
-						case 26:
-							context$2$0.t1 = context$2$0.sent;
+						case 28:
+							context$2$0.t3 = context$2$0.sent;
 
-							if (this.resultOK(context$2$0.t1)) {
-								context$2$0.next = 30;
+							if (context$2$0.t2.resultOK.call(context$2$0.t2, context$2$0.t3)) {
+								context$2$0.next = 32;
 								break;
 							}
 
 							console.log("error changing modem work mode".red);
 							return context$2$0.abrupt("return");
 
-						case 30:
+						case 32:
 
 							this.protocolOK = true;
 
-						case 31:
+						case 33:
 						case "end":
 							return context$2$0.stop();
 					}
@@ -47833,14 +47766,14 @@ var modem = ra(Object.defineProperties({
 		enumerable: true
 	},
 	freeCells: {
-		get: function () {
+		get: function get() {
 			return this.sendcommand("Free_Cell_Count");
 		},
 		configurable: true,
 		enumerable: true
 	},
 	showModemStatus: {
-		get: function () {
+		get: function get() {
 			console.info("Modem is " + (this.protocolOK ? "active" : "inactive"));
 		},
 		configurable: true,
@@ -47904,7 +47837,7 @@ var checkAuthorization = co.func(regeneratorRuntime.mark(function callee$0$0(req
 				return co.sleep(200);
 
 			case 5:
-				secret = toBase64("" + auth.name + ":" + auth.userkey);
+				secret = toBase64(auth.name + ":" + auth.userkey);
 				a = request.headers.authorization;
 
 				a && (a = a.match(/^Basic\s+(.*)$/));
@@ -48118,8 +48051,8 @@ var onUpgrade = function onUpgrade(request, socket, head) {
 var createModemServer = function createModemServer(Server) {
 	var _Server$createServer$on;
 
-	for (var _len5 = arguments.length, connection = Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-		connection[_key5 - 1] = arguments[_key5];
+	for (var _len4 = arguments.length, connection = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+		connection[_key4 - 1] = arguments[_key4];
 	}
 
 	return (_Server$createServer$on = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply(_Server$createServer$on, connection);
@@ -48200,7 +48133,7 @@ var tellToBoss = function tellToBoss() {
 	socket.onmessage = function (data) {
 		var start = Date.now();
 		var LOG1 = function LOG1(msg) {
-			return LOG("" + msg + " in " + (Date.now() - start) + " ms", process.memoryUsage());
+			return LOG(msg + " in " + (Date.now() - start) + " ms", process.memoryUsage());
 		};
 		LOG("boss data".red, data);
 		if (!data) return;
@@ -48241,7 +48174,7 @@ var tellToBoss = function tellToBoss() {
 									var name = _arr2$_i2[1];
 
 									psocket.then(function () {
-										return LOG1("" + name + " is ready for " + streamid);
+										return LOG1(name + " is ready for " + streamid);
 									}, function () {
 										return LOG1("error in " + name + " connection for " + streamid);
 									});
@@ -48343,7 +48276,7 @@ var modemREPL = function modemREPL() {
 				return modem.devices.getState();
 			},
 			cdb: function cdb() {
-				return lu.applyDiff(modem.devices.getState(), devdb.cleanDatabase(modem.devices.getState()));
+				return Diff.apply(modem.devices.getState(), devdb.cleanDatabase(modem.devices.getState()));
 			},
 			m: function m(str) {
 				str = (str + "").split(/\r|\n|\s/).filter(Boolean);
@@ -48410,12 +48343,14 @@ modemREPL().listen("/tmp/modem" + process.pid);
 // 	return { RESULT: `Connection_error` }
 // }
 
+// ra.forceCalculations()
+// ra.forceCalculations()
 /* calculate limits at the begin */
 // будзем ветлівымі, і ўсё пазакрываем, і логеру ўсё скажам
 // if ( config.repl )
 // 	lu.array1( config.repl ).filter( Boolean ).forEach( p => modemREPL().listen( p ) )
 
-},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","NodeWebSocketToJSON":"/home/vadzim/v/work/nerojs/src/NodeWebSocketToJSON.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":"/home/vadzim/v/work/nerojs/node_modules/compression/index.js","constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","devdb":"/home/vadzim/v/work/nerojs/src/devdb.js","express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js","fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"netro/actionToCommands":"/home/vadzim/v/work/nerojs/src/netro/actionToCommands.js","netro/deviceActions":"/home/vadzim/v/work/nerojs/src/netro/deviceActions.js","netro/deviceTypes":"/home/vadzim/v/work/nerojs/src/netro/deviceTypes.json","netro/modem":"/home/vadzim/v/work/nerojs/src/netro/modem.js","os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"subconnections":"/home/vadzim/v/work/nerojs/src/subconnections.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/subconnections.js":[function(require,module,exports){
+},{"JSONservice":"/home/vadzim/v/work/nerojs/src/JSONservice.js","LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","NodeWebSocketToJSON":"/home/vadzim/v/work/nerojs/src/NodeWebSocketToJSON.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","checkreboot":"/home/vadzim/v/work/nerojs/src/checkreboot.js","child_process":false,"co":"/home/vadzim/v/work/nerojs/src/co.js","compression":"/home/vadzim/v/work/nerojs/node_modules/compression/index.js","constants":false,"cookie-parser":"/home/vadzim/v/work/nerojs/node_modules/cookie-parser/index.js","crypto":false,"csvConfig":"/home/vadzim/v/work/nerojs/src/csvConfig.js","devdb":"/home/vadzim/v/work/nerojs/src/devdb.js","diff":"/home/vadzim/v/work/nerojs/src/diff.js","express":"/home/vadzim/v/work/nerojs/node_modules/express/index.js","fs":false,"glob":"/home/vadzim/v/work/nerojs/node_modules/glob/glob.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","http_log":"/home/vadzim/v/work/nerojs/src/http_log.js","inc":"/home/vadzim/v/work/nerojs/src/inc.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"netro/actionToCommands":"/home/vadzim/v/work/nerojs/src/netro/actionToCommands.js","netro/deviceActions":"/home/vadzim/v/work/nerojs/src/netro/deviceActions.js","netro/deviceTypes":"/home/vadzim/v/work/nerojs/src/netro/deviceTypes.json","netro/modem":"/home/vadzim/v/work/nerojs/src/netro/modem.js","os":false,"path":false,"pingpong":"/home/vadzim/v/work/nerojs/src/pingpong.js","platform":"/home/vadzim/v/work/nerojs/src/platform.js","ra":"/home/vadzim/v/work/nerojs/src/ra.js","repl":false,"rewriter":"/home/vadzim/v/work/nerojs/src/rewriter.js","stream":false,"subconnections":"/home/vadzim/v/work/nerojs/src/subconnections.js","uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","websockets/lib/websockets/socket":"/home/vadzim/v/work/nerojs/node_modules/websockets/lib/websockets/socket.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/subconnections.js":[function(require,module,exports){
 /*
 Only hard linked subconnections are implemented for now - closing subconnection closes the whole connection.
 */
@@ -48468,7 +48403,7 @@ var SubConnections = (function () {
 		key: "open",
 		value: function open(channel) {
 			var self = this;
-			if (self._subs[channel]) throw new Error("" + channel + " has been already open");
+			if (self._subs[channel]) throw new Error(channel + " has been already open");
 			++self._count;
 			return self._subs[channel] = {
 				send: function send(data) {
