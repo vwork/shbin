@@ -58563,6 +58563,9 @@ var LOG = _require.LOG;
 
 var Diff = require("diff");
 
+require("iconv-lite").extendNodeEncodings();
+var jschardet = require("jschardet");
+
 var configName = process.argv[2] || __dirname + "/../server.conf";
 var config = lu["catch"](function () {
 	return YAML.load(configName);
@@ -58663,9 +58666,6 @@ var CustomError = (function (_Error) {
 	return CustomError;
 })(Error);
 
-require("iconv-lite").extendNodeEncodings();
-var jschardet = require("jschardet");
-
 var concatStdStream = function concatStdStream(stream) {
 	return new Promise(function (resolve, reject) {
 		stream.on("error", reject);
@@ -58675,13 +58675,9 @@ var concatStdStream = function concatStdStream(stream) {
 		});
 		stream.on("end", function () {
 			var buf = Buffer.concat(ret);
-			var _arr2 = ["utf8", "utf16le"];
-			for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
-				var encoding = _arr2[_i2];
-				var str = buf.toString(encoding);
-				if (new Buffer(str, encoding).toString("hex") == buf.toString("hex")) return resolve(str);
-			}
-			resolve(buf.toString("binary"));
+			var det = jschardet.detect(buf);
+			var encoding = det && det.confidence > 0.97 && Buffer.isEncoding(det.encoding) ? det.encoding : "binary";
+			resolve(buf.toString(encoding));
 		});
 	});
 };
@@ -59798,7 +59794,7 @@ var tellToBoss = function tellToBoss() {
 		switch (data.what) {
 			case "reconnect for client":
 				co.go(regeneratorRuntime.mark(function callee$2$0() {
-					var streamid, tomodem, toclient, pmodem, pclient, _arr3, _loop, _i3;
+					var streamid, tomodem, toclient, pmodem, pclient, _arr2, _loop, _i2;
 
 					return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
 						while (1) switch (context$3$0.prev = context$3$0.next) {
@@ -59823,13 +59819,13 @@ var tellToBoss = function tellToBoss() {
 
 								pmodem = waitForSocket(tomodem);
 								pclient = waitForSocket(toclient);
-								_arr3 = [[pmodem, "modem"], [pclient, "boss"]];
+								_arr2 = [[pmodem, "modem"], [pclient, "boss"]];
 
 								_loop = function () {
-									var _arr3$_i3 = _slicedToArray(_arr3[_i3], 2);
+									var _arr2$_i2 = _slicedToArray(_arr2[_i2], 2);
 
-									var psocket = _arr3$_i3[0];
-									var name = _arr3$_i3[1];
+									var psocket = _arr2$_i2[0];
+									var name = _arr2$_i2[1];
 
 									psocket.then(function () {
 										return LOG1(name + " is ready for " + streamid);
@@ -59838,7 +59834,7 @@ var tellToBoss = function tellToBoss() {
 									});
 								};
 
-								for (_i3 = 0; _i3 < _arr3.length; _i3++) {
+								for (_i2 = 0; _i2 < _arr2.length; _i2++) {
 									_loop();
 								}context$3$0.next = 14;
 								return Promise.all([pmodem, pclient]);
