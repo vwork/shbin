@@ -58676,7 +58676,7 @@ var concatStdStream = function concatStdStream(stream) {
 		stream.on("end", function () {
 			var buf = Buffer.concat(ret);
 			var det = jschardet.detect(buf);
-			var encoding = det && det.confidence > 0.97 && Buffer.isEncoding(det.encoding) ? det.encoding : "binary";
+			var encoding = det && det.confidence > 0.5 && Buffer.isEncoding(det.encoding) ? det.encoding : "binary";
 			resolve(buf.toString(encoding));
 		});
 	});
