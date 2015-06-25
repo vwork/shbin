@@ -59321,49 +59321,57 @@ var modem = ra(Object.defineProperties({
 							this.protocolOK = false;
 							this.version = null;
 
-							context$2$0.next = 4;
-							return this.rawcommand("Version");
-
-						case 4:
-							this.version = context$2$0.sent;
-
-							if (this.version) {
-								context$2$0.next = 8;
+							if (!(!this.socket || !this.handle)) {
+								context$2$0.next = 4;
 								break;
 							}
 
-							console.log("error getting modem version".red);
 							return context$2$0.abrupt("return");
 
-						case 8:
+						case 4:
+							context$2$0.next = 6;
+							return this.rawcommand("Version");
+
+						case 6:
+							this.version = context$2$0.sent;
+
+							if (this.version) {
+								context$2$0.next = 10;
+								break;
+							}
+
+							this.socket.emit("error", "error getting modem version".red);
+							return context$2$0.abrupt("return");
+
+						case 10:
 							sversion = String.fromCharCode(this.version.PRODUCT_VERSION, this.version.PRODUCT_ID, this.version.PRODUCT_HARD, this.version.PRODUCT_VARIANT);
 
 							if (!(sversion < this.sminVersion)) {
-								context$2$0.next = 12;
+								context$2$0.next = 14;
 								break;
 							}
 
 							console.log("modem version too low".red);
 							return context$2$0.abrupt("return");
 
-						case 12:
-							context$2$0.next = 14;
+						case 14:
+							context$2$0.next = 16;
 							return this.rawcommand("Functions");
 
-						case 14:
+						case 16:
 							this.functions = context$2$0.sent;
 
 							if (!(!this.functions || !this.functions.PROTOCOLS)) {
-								context$2$0.next = 18;
+								context$2$0.next = 20;
 								break;
 							}
 
 							console.log("error getting modem functions".red);
 							return context$2$0.abrupt("return");
 
-						case 18:
+						case 20:
 							context$2$0.t0 = this;
-							context$2$0.next = 21;
+							context$2$0.next = 23;
 							return this.rawcommand("Change_protocol", { PROTOCOLS:
 								// this.functions.PROTOCOLS
 								{
@@ -59372,38 +59380,38 @@ var modem = ra(Object.defineProperties({
 								}
 							});
 
-						case 21:
+						case 23:
 							context$2$0.t1 = context$2$0.sent;
 
 							if (context$2$0.t0.resultOK.call(context$2$0.t0, context$2$0.t1)) {
-								context$2$0.next = 25;
+								context$2$0.next = 27;
 								break;
 							}
 
 							console.log("error changing modem protocol".red);
 							return context$2$0.abrupt("return");
 
-						case 25:
+						case 27:
 							context$2$0.t2 = this;
-							context$2$0.next = 28;
+							context$2$0.next = 30;
 							return this.rawcommand("Change_modem_work_mode", { MODEM_MODE: "Work_Mode" });
 
-						case 28:
+						case 30:
 							context$2$0.t3 = context$2$0.sent;
 
 							if (context$2$0.t2.resultOK.call(context$2$0.t2, context$2$0.t3)) {
-								context$2$0.next = 32;
+								context$2$0.next = 34;
 								break;
 							}
 
 							console.log("error changing modem work mode".red);
 							return context$2$0.abrupt("return");
 
-						case 32:
+						case 34:
 
 							this.protocolOK = true;
 
-						case 33:
+						case 35:
 						case "end":
 							return context$2$0.stop();
 					}
