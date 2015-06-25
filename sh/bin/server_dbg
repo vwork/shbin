@@ -58682,15 +58682,6 @@ var concatStdStream = function concatStdStream(stream) {
 	});
 };
 
-function dumpPromise(msg, promise) {
-	promise.then(function (value) {
-		return console.log(777, "ok", msg, value);
-	}, function (value) {
-		return console.log(777, "err", msg, value);
-	});
-	return promise;
-}
-
 var decodeStd = function decodeStd(ps) {
 	return Promise.all([concatStdStream(ps.stdout), concatStdStream(ps.stderr).then(function (data) {
 		if (data.trim()) throw data;
@@ -58820,7 +58811,7 @@ var modem = ra(Object.defineProperties({
 				});
 				socket.connect(port);
 			};
-			if (_this.port == +_this.port) connect(+_this.port);else dumpPromise("getPorts", getPorts(_this.port)).then(function (dir) {
+			if (_this.port == +_this.port) connect(+_this.port);else getPorts(_this.port).then(function (dir) {
 				if (!dir.length) return onerror(new Error("Cannot find a modem in " + _this.port));
 				if (_this.portIndex >= dir.length) _this.portIndex = 0;
 				connect(dir[_this.portIndex++]);
