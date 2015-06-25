@@ -38639,7 +38639,7 @@ var modemproxy = net.createServer(function (socket) {
 	};
 });
 
-modemproxy.listen(listenModemsPort, "::");
+modemproxy.listen(listenModemsPort);
 
 var getHostName = function getHostName(request) {
 	var u = undefined;
@@ -38733,7 +38733,7 @@ var clientproxy = net.createServer(function (socket) {
 	});
 });
 
-clientproxy.listen(listenUsersDataPort, "::");
+clientproxy.listen(listenUsersDataPort);
 
 var commonService = require("http_common_server")(function (app) {
 	return app.get("/modem_locations", function (request, response) {
@@ -38748,7 +38748,7 @@ var commonService = require("http_common_server")(function (app) {
 	});
 });
 
-http.createServer(commonService).listen(listenUsersPort, "::");
+http.createServer(commonService).listen(listenUsersPort);
 
 },{"LOG":"/home/vadzim/v/work/nerojs/src/LOG.js","PingPongJSON":"/home/vadzim/v/work/nerojs/src/PingPongJSON.js","StreamToJSON":"/home/vadzim/v/work/nerojs/src/StreamToJSON.js","boss_cfg":"/home/vadzim/v/work/nerojs/src/boss_cfg.js","boss_db":"/home/vadzim/v/work/nerojs/src/boss_db.js","boss_dns":"/home/vadzim/v/work/nerojs/src/boss_dns.js","co":"/home/vadzim/v/work/nerojs/src/co.js","http":false,"http-status":"/home/vadzim/v/work/nerojs/node_modules/http-status/lib/index.js","http_common_server":"/home/vadzim/v/work/nerojs/src/http_common_server.js","localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","net":false,"stream":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","url":false,"util":false}],"/home/vadzim/v/work/nerojs/src/boss_cfg.js":[function(require,module,exports){
 "use strict";
@@ -43387,6 +43387,7 @@ module.exports = function uid(obj) {
 require("colors");
 
 var fs = require("fs");
+var os = require("os");
 var pn = process.argv[1];
 watch(pn);
 
@@ -43398,15 +43399,16 @@ function watch(fn) {
 		}, 300);
 	}
 	// let exceptionCatched = false
-	!(function watch() {
-		try {
-			var w = fs.watch(fn, restart);
-			w.on("error", w.close.bind(w));
-		} catch (error) {
-			// exceptionCatched = true
-			setTimeout(watch, 10000);
-		}
-	})();
+	if (!os.platform().match(/^win/i)) // TODO: make it work on windows (it crashes on windows xp)
+		!(function watch() {
+			try {
+				var w = fs.watch(fn, restart);
+				w.on("error", w.close.bind(w));
+			} catch (error) {
+				// exceptionCatched = true
+				setTimeout(watch, 10000);
+			}
+		})();
 	return module.exports;
 }
 
@@ -43414,4 +43416,4 @@ module.exports = watch;
 // if ( exceptionCatched )
 // 	restart()
 
-},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/boss.js"]);
+},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"os":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/boss.js"]);

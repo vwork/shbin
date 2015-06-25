@@ -47044,6 +47044,38 @@ var CustomError = (function (_Error) {
 	return CustomError;
 })(Error);
 
+var concatStdStream = function concatStdStream(stream) {
+	return new Promise(function (resolve, reject) {
+		stream.on("error", reject);
+		var ret = [];
+		stream.on("data", function (data) {
+			return ret.push(data);
+		});
+		stream.on("end", function () {
+			debugger;
+			var buf = Buffer.concat(ret);
+			var _arr2 = ["utf8", "ucs2", "utf16le", "ascii"];
+			for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
+				var encoding = _arr2[_i2];
+				var str = buf.toString(encoding);
+				if (new Buffer(str, encoding).toString("hex") == buf.toString("hex")) return resolve(str);
+			}
+			resolve(buf + "");
+		});
+	});
+};
+
+var decodeStd = function decodeStd(ps) {
+	return Promise.all([concatStdStream(ps.stdout), concatStdStream(ps.stderr).then(function (data) {
+		if (data.trim()) throw data;
+	}), new Promise(function (resolve, reject) {
+		ps.on("error", reject);
+		ps.on("exit", resolve);
+	})]).then(function (data) {
+		return data[0];
+	});
+};
+
 var cbPromise = function cbPromise(cbproc) {
 	return new Promise(function (resolve, reject) {
 		return cbproc(function (error, result) {
@@ -47054,15 +47086,22 @@ var cbPromise = function cbPromise(cbproc) {
 
 function getPorts(mask) {
 	return new Promise(function (resolve, reject) {
-		if (mask == "COM*") return cbPromise(function (cb) {
-			return require("child_process").exec("wmic path Win32_SerialPort Get DeviceID", cb);
-		}).then(function (data) {
-			var com = /\bCOM\d+\b/gi;
-			var r = {};
-			var i = undefined;
-			while (i = com.exec(data)) r["\\\\.\\" + i[0]] = true;
-			return Object.keys(r);
-		});else return cbPromise(function (cb) {
+		if (mask == "COM*") {
+			debugger;
+			var ps = require("child_process").spawn("wmic"[("path", "Win32_SerialPort", "Get", "DeviceID")]);
+			ps.stdin.end();
+			return decodeStd(ps).then(function (data) {
+				debugger;
+				var com = /\bCOM\d+\b/gi;
+				var r = {};
+				var i = undefined;
+				while (i = com.exec(data)) r["\\\\.\\" + i[0]] = true;
+				return Object.keys(r);
+			})["catch"](function (error) {
+				debugger;
+				throw error;
+			});
+		} else return cbPromise(function (cb) {
 			return require("glob")(mask, {}, cb);
 		});
 	});
@@ -48058,8 +48097,12 @@ var createModemServer = function createModemServer(Server) {
 	return (_Server$createServer$on = Server.createServer(modemService).on("upgrade", onUpgrade)).listen.apply(_Server$createServer$on, connection);
 };
 
-createModemServer(http, config.serviceport, "::");
-createModemServer(http, internalModemService);
+createModemServer(http, config.serviceport);
+createModemServer(http, internalModemService).on("error", function () {
+	return createModemServer(http, 0, "localhost", function () {
+		internalModemService = this.address().port;
+	});
+});
 
 var commonService = require("http_common_server")(function (app) {
 	return app.get("/modem_locations", function (request, response) {
@@ -48067,7 +48110,7 @@ var commonService = require("http_common_server")(function (app) {
 	});
 });
 
-http.createServer(commonService).listen(config.port, "::");
+http.createServer(commonService).listen(config.port);
 
 var waitForSocket = function waitForSocket(socket) {
 	return new Promise(function (resolve, reject) {
@@ -48140,7 +48183,7 @@ var tellToBoss = function tellToBoss() {
 		switch (data.what) {
 			case "reconnect for client":
 				co.go(regeneratorRuntime.mark(function callee$2$0() {
-					var streamid, tomodem, toclient, pmodem, pclient, _arr2, _loop, _i2;
+					var streamid, tomodem, toclient, pmodem, pclient, _arr3, _loop, _i3;
 
 					return regeneratorRuntime.wrap(function callee$2$0$(context$3$0) {
 						while (1) switch (context$3$0.prev = context$3$0.next) {
@@ -48165,13 +48208,13 @@ var tellToBoss = function tellToBoss() {
 
 								pmodem = waitForSocket(tomodem);
 								pclient = waitForSocket(toclient);
-								_arr2 = [[pmodem, "modem"], [pclient, "boss"]];
+								_arr3 = [[pmodem, "modem"], [pclient, "boss"]];
 
 								_loop = function () {
-									var _arr2$_i2 = _slicedToArray(_arr2[_i2], 2);
+									var _arr3$_i3 = _slicedToArray(_arr3[_i3], 2);
 
-									var psocket = _arr2$_i2[0];
-									var name = _arr2$_i2[1];
+									var psocket = _arr3$_i3[0];
+									var name = _arr3$_i3[1];
 
 									psocket.then(function () {
 										return LOG1(name + " is ready for " + streamid);
@@ -48180,7 +48223,7 @@ var tellToBoss = function tellToBoss() {
 									});
 								};
 
-								for (_i2 = 0; _i2 < _arr2.length; _i2++) {
+								for (_i3 = 0; _i3 < _arr3.length; _i3++) {
 									_loop();
 								}context$3$0.next = 14;
 								return Promise.all([pmodem, pclient]);
@@ -48449,6 +48492,7 @@ module.exports = function uid(obj) {
 require("colors");
 
 var fs = require("fs");
+var os = require("os");
 var pn = process.argv[1];
 watch(pn);
 
@@ -48460,15 +48504,16 @@ function watch(fn) {
 		}, 300);
 	}
 	// let exceptionCatched = false
-	!(function watch() {
-		try {
-			var w = fs.watch(fn, restart);
-			w.on("error", w.close.bind(w));
-		} catch (error) {
-			// exceptionCatched = true
-			setTimeout(watch, 10000);
-		}
-	})();
+	if (!os.platform().match(/^win/i)) // TODO: make it work on windows (it crashes on windows xp)
+		!(function watch() {
+			try {
+				var w = fs.watch(fn, restart);
+				w.on("error", w.close.bind(w));
+			} catch (error) {
+				// exceptionCatched = true
+				setTimeout(watch, 10000);
+			}
+		})();
 	return module.exports;
 }
 
@@ -48476,4 +48521,4 @@ module.exports = watch;
 // if ( exceptionCatched )
 // 	restart()
 
-},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/server.js"]);
+},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"os":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/server.js"]);

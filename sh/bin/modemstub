@@ -14130,6 +14130,7 @@ parsed: { id: 'answer_Result',
 require("colors");
 
 var fs = require("fs");
+var os = require("os");
 var pn = process.argv[1];
 watch(pn);
 
@@ -14141,15 +14142,16 @@ function watch(fn) {
 		}, 300);
 	}
 	// let exceptionCatched = false
-	!(function watch() {
-		try {
-			var w = fs.watch(fn, restart);
-			w.on("error", w.close.bind(w));
-		} catch (error) {
-			// exceptionCatched = true
-			setTimeout(watch, 10000);
-		}
-	})();
+	if (!os.platform().match(/^win/i)) // TODO: make it work on windows (it crashes on windows xp)
+		!(function watch() {
+			try {
+				var w = fs.watch(fn, restart);
+				w.on("error", w.close.bind(w));
+			} catch (error) {
+				// exceptionCatched = true
+				setTimeout(watch, 10000);
+			}
+		})();
 	return module.exports;
 }
 
@@ -14157,4 +14159,4 @@ module.exports = watch;
 // if ( exceptionCatched )
 // 	restart()
 
-},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/netro/modemstub.js"]);
+},{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false,"os":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/netro/modemstub.js"]);
