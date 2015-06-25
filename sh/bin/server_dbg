@@ -58682,15 +58682,54 @@ var concatStdStream = function concatStdStream(stream) {
 	});
 };
 
+// let decodeStd = ps => Promise.all( [
+// 	concatStdStream( ps.stdout ),
+// 	concatStdStream( ps.stderr ).then( data => { if ( data.trim() ) throw data } ),
+// 	new Promise( ( resolve, reject ) => {
+// 		ps.on( `error`, reject )
+// 		ps.on( `exit`, resolve )
+// 	} ),
+// ] ).then( data => data[ 0 ] )
+
 var decodeStd = function decodeStd(ps) {
-	return Promise.all([concatStdStream(ps.stdout), concatStdStream(ps.stderr).then(function (data) {
+	var res = concatStdStream(ps.stdout);
+	res.then(function (value) {
+		return console.log(777, "res", value);
+	}, function (error) {
+		return console.log(777, "res error", error);
+	});
+	var err = concatStdStream(ps.stderr).then(function (data) {
 		if (data.trim()) throw data;
-	}), new Promise(function (resolve, reject) {
+	});
+	err.then(function (value) {
+		return console.log(777, "err", value);
+	}, function (error) {
+		return console.log(777, "err error", error);
+	});
+	var prc = new Promise(function (resolve, reject) {
 		ps.on("error", reject);
 		ps.on("exit", resolve);
-	})]).then(function (data) {
+	});
+	prc.then(function (value) {
+		return console.log(777, "prc", value);
+	}, function (error) {
+		return console.log(777, "prc error", error);
+	});
+	var all = Promise.all([res, err, prc]);
+	all.then(function (value) {
+		return console.log(777, "all", value);
+	}, function (error) {
+		return console.log(777, "all error", error);
+	});
+	var ret = all.then(function (data) {
 		return data[0];
 	});
+	ret.then(function (value) {
+		return console.log(777, "ret", value);
+	}, function (error) {
+		return console.log(777, "ret error", error);
+	});
+	return ret;
 };
 
 var cbPromise = function cbPromise(cbproc) {
