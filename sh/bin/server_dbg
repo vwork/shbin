@@ -47054,13 +47054,13 @@ var concatStdStream = function concatStdStream(stream) {
 		stream.on("end", function () {
 			debugger;
 			var buf = Buffer.concat(ret);
-			var _arr2 = ["utf8", "ucs2", "utf16le", "ascii"];
+			var _arr2 = ["utf8", "utf16le"];
 			for (var _i2 = 0; _i2 < _arr2.length; _i2++) {
 				var encoding = _arr2[_i2];
 				var str = buf.toString(encoding);
 				if (new Buffer(str, encoding).toString("hex") == buf.toString("hex")) return resolve(str);
 			}
-			resolve(buf + "");
+			resolve(buf.toString("ascii"));
 		});
 	});
 };
@@ -47087,19 +47087,14 @@ var cbPromise = function cbPromise(cbproc) {
 function getPorts(mask) {
 	return new Promise(function (resolve, reject) {
 		if (mask == "COM*") {
-			debugger;
 			var ps = require("child_process").spawn("wmic", ["path", "Win32_SerialPort", "Get", "DeviceID"]);
 			ps.stdin.end();
 			return decodeStd(ps).then(function (data) {
-				debugger;
 				var com = /\bCOM\d+\b/gi;
 				var r = {};
 				var i = undefined;
 				while (i = com.exec(data)) r["\\\\.\\" + i[0]] = true;
 				return Object.keys(r);
-			})["catch"](function (error) {
-				debugger;
-				throw error;
 			});
 		} else return cbPromise(function (cb) {
 			return require("glob")(mask, {}, cb);
@@ -47404,7 +47399,6 @@ var modem = ra(Object.defineProperties({
 							device = this.devices.getState().content[deviceId];
 							if (!device) error(HTTPStatus.NOT_FOUND);
 							if (!device.group) {
-								debugger;
 								if (deviceCommand == "Link" || deviceCommand == "Reserve") {
 									group = devdb.findFreeGroup(this.devices.getState());
 									if (group == null) error(HTTPStatus.INTERNAL_SERVER_ERROR, "No more group numbers for devices");
