@@ -7218,6 +7218,6 @@ module.exports={
 "use strict";var counter=0;module.exports=function(t){var r=(++counter).toString(36),n=parseInt(Math.random().toString().slice(2,17)).toString(36),o=(n.length+9).toString(36)+n+r;return null==t?o:(t.uid=o,t)};
 
 },{}],"/home/vadzim/v/work/nerojs/src/watchStop.js":[function(require,module,exports){
-"use strict";function watch(e){function r(){setTimeout(function(){process.stderr.write("\n"+"Aborting process".red+" "+pn.yellow+". Changed "+e+"\n"),process.exit(1)},300)}var t=!1;return!function s(){try{fs.watch(e,r),t&&r()}catch(o){t=!0,setTimeout(s,1e4)}}(),module.exports}require("colors");var fs=require("fs"),pn=process.argv[1];watch(pn),module.exports=watch;
+"use strict";function watch(e){function r(){setTimeout(function(){process.stderr.write("\n"+"Aborting process".red+" "+pn.yellow+". Changed "+e+"\n"),process.exit(1)},300)}return!function t(){try{var o=fs.watch(e,r);o.on("error",o.close.bind(o))}catch(s){setTimeout(t,1e4)}}(),module.exports}require("colors");var fs=require("fs"),pn=process.argv[1];watch(pn),module.exports=watch;
 
 },{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/server.js"]);

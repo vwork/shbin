@@ -14140,13 +14140,13 @@ function watch(fn) {
 			process.exit(1);
 		}, 300);
 	}
-	var exceptionCatched = false;
+	// let exceptionCatched = false
 	!(function watch() {
 		try {
-			fs.watch(fn, restart);
-			if (exceptionCatched) restart();
+			var w = fs.watch(fn, restart);
+			w.on("error", w.close.bind(w));
 		} catch (error) {
-			exceptionCatched = true;
+			// exceptionCatched = true
 			setTimeout(watch, 10000);
 		}
 	})();
@@ -14154,5 +14154,7 @@ function watch(fn) {
 }
 
 module.exports = watch;
+// if ( exceptionCatched )
+// 	restart()
 
 },{"colors":"/home/vadzim/v/work/nerojs/node_modules/colors/lib/index.js","fs":false}]},{},["/home/vadzim/v/work/nerojs/node_modules/babelify/polyfill.js","/home/vadzim/v/work/nerojs/src/netro/modemstub.js"]);
