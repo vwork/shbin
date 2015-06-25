@@ -14145,8 +14145,12 @@ function watch(fn) {
 	if (!os.platform().match(/^win/i)) // TODO: make it work on windows (it crashes on windows xp)
 		!(function watch() {
 			try {
-				var w = fs.watch(fn, restart);
-				w.on("error", w.close.bind(w));
+				(function () {
+					var w = fs.watch(fn, restart);
+					w.on("error", function () {
+						return w.close();
+					});
+				})();
 			} catch (error) {
 				// exceptionCatched = true
 				setTimeout(watch, 10000);
