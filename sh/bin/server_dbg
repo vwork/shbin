@@ -58711,20 +58711,18 @@ var cbPromise = function cbPromise(cbproc) {
 };
 
 function getPorts(mask) {
-	return new Promise(function (resolve, reject) {
-		if (mask == "COM*") {
-			var ps = require("child_process").spawn("wmic", ["path", "Win32_SerialPort", "Get", "DeviceID"]);
-			ps.stdin.end();
-			return decodeStd(ps).then(function (data) {
-				var com = /\bCOM\d+\b/gi;
-				var r = {};
-				var i = undefined;
-				while (i = com.exec(data)) r["\\\\.\\" + i[0]] = true;
-				return Object.keys(r);
-			});
-		} else return cbPromise(function (cb) {
-			return require("glob")(mask, {}, cb);
+	if (mask == "COM*") {
+		var ps = require("child_process").spawn("wmic", ["path", "Win32_SerialPort", "Get", "DeviceID"]);
+		ps.stdin.end();
+		return decodeStd(ps).then(function (data) {
+			var com = /\bCOM\d+\b/gi;
+			var r = {};
+			var i = undefined;
+			while (i = com.exec(data)) r["\\\\.\\" + i[0]] = true;
+			return Object.keys(r);
 		});
+	} else return cbPromise(function (cb) {
+		return require("glob")(mask, {}, cb);
 	});
 }
 
