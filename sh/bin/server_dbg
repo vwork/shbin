@@ -47088,7 +47088,7 @@ function getPorts(mask) {
 	return new Promise(function (resolve, reject) {
 		if (mask == "COM*") {
 			debugger;
-			var ps = require("child_process").spawn("wmic"[("path", "Win32_SerialPort", "Get", "DeviceID")]);
+			var ps = require("child_process").spawn("wmic", ["path", "Win32_SerialPort", "Get", "DeviceID"]);
 			ps.stdin.end();
 			return decodeStd(ps).then(function (data) {
 				debugger;
