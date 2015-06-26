@@ -3,15 +3,43 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/babel-core/lib/babel/polyfill.js":[function(require,module,exports){
 "use strict";
 
+var _toolsProtectJs2 = require("./tools/protect.js");
+
+var _toolsProtectJs3 = _interopRequireDefault(_toolsProtectJs2);
+
 require("core-js/shim");
 
 require("regenerator/runtime");
+
+_toolsProtectJs3["default"](module);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 if (global._babelPolyfill) {
   throw new Error("only one instance of babel/polyfill is allowed");
 }
 global._babelPolyfill = true;
-},{"core-js/shim":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/shim.js","regenerator/runtime":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/regenerator/runtime.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.array-includes.js":[function(require,module,exports){
+},{"./tools/protect.js":"/home/vadzim/v/work/nerojs/node_modules/babel-core/lib/babel/tools/protect.js","core-js/shim":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/shim.js","regenerator/runtime":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/regenerator/runtime.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/lib/babel/tools/protect.js":[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _path = require("path");
+
+var _path2 = _interopRequireDefault(_path);
+
+var root = _path2["default"].resolve(__dirname, "../../../");
+
+exports["default"] = function (module) {
+  if (module.parent && module.parent.filename.indexOf(root) !== 0) {
+    throw new Error("Don't hotlink internal Babel files.");
+  }
+};
+
+module.exports = exports["default"];
+},{"path":false}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.array-includes.js":[function(require,module,exports){
 // false -> Array#indexOf
 // true  -> Array#includes
 var $ = require('./$');
@@ -51795,7 +51823,7 @@ module.exports = Yaml;
 
 var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
 
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -53484,12 +53512,11 @@ exports.parse = parse;
 exports.parseTree = parseTree;
 exports.parseArrays = parseArrays;
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
+
 function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
 
 var marked0$0 = [readCSV, read, readArrays, readTree].map(regeneratorRuntime.mark);
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
-
 var csv = require("csv");
 var co = require("co");
 var lodash = require("lodash");
@@ -53641,7 +53668,7 @@ function parseArrays(csv) {
 },{"co":"/home/vadzim/v/work/nerojs/src/co.js","csv":"/home/vadzim/v/work/nerojs/node_modules/csv/lib/index.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js"}],"/home/vadzim/v/work/nerojs/src/devdb.js":[function(require,module,exports){
 "use strict";
 
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var lodash = require("lodash");
 var Diff = require("diff");
@@ -54230,10 +54257,9 @@ module.exports = function (request, response, next) {
 },{"localUtils":"/home/vadzim/v/work/nerojs/src/localUtils.js","lodash":"/home/vadzim/v/work/nerojs/node_modules/lodash/dist/lodash.js","morgan":"/home/vadzim/v/work/nerojs/node_modules/morgan/index.js","path":false,"uid":"/home/vadzim/v/work/nerojs/src/uid.js","watchStop":"/home/vadzim/v/work/nerojs/src/watchStop.js","yamljs":"/home/vadzim/v/work/nerojs/node_modules/yamljs/lib/Yaml.js"}],"/home/vadzim/v/work/nerojs/src/http_static.js":[function(require,module,exports){
 "use strict";
 
-var marked0$0 = [readFiles].map(regeneratorRuntime.mark);
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
+var marked0$0 = [readFiles].map(regeneratorRuntime.mark);
 var path = require("path");
 var fs = require("fs");
 var cfg = require("csvConfig");
@@ -54577,16 +54603,15 @@ var lu = module.exports = {
 
 	rests: function rests(num) {
 		var ret = [];
-
-		for (var _len = arguments.length, _rests = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-			_rests[_key - 1] = arguments[_key];
-		}
-
 		var _iteratorNormalCompletion = true;
 		var _didIteratorError = false;
 		var _iteratorError = undefined;
 
 		try {
+			for (var _len = arguments.length, _rests = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+				_rests[_key - 1] = arguments[_key];
+			}
+
 			for (var _iterator = _rests[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 				var r = _step.value;
 
@@ -55461,15 +55486,15 @@ var lu = module.exports = {
 	},
 
 	get: function get(obj) {
-		for (var _len4 = arguments.length, path = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-			path[_key4 - 1] = arguments[_key4];
-		}
-
 		var _iteratorNormalCompletion8 = true;
 		var _didIteratorError8 = false;
 		var _iteratorError8 = undefined;
 
 		try {
+			for (var _len4 = arguments.length, path = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+				path[_key4 - 1] = arguments[_key4];
+			}
+
 			for (var _iterator8 = path[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
 				var p = _step8.value;
 
@@ -56841,7 +56866,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 var _get = function get(_x3, _x4, _x5) { var _again = true; _function: while (_again) { var object = _x3, property = _x4, receiver = _x5; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x3 = parent; _x4 = property; _x5 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-function _defineProperty(obj, key, value) { return Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
 
@@ -58514,15 +58539,15 @@ express.Router.rewrite = express.application.rewrite = function rewrite(what, re
 
 "use strict";
 
+var _slicedToArray = (function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; })();
+
 var _get = function get(_x2, _x3, _x4) { var _again = true; _function: while (_again) { var object = _x2, property = _x3, receiver = _x4; desc = parent = getter = undefined; _again = false; if (object === null) object = Function.prototype; var desc = Object.getOwnPropertyDescriptor(object, property); if (desc === undefined) { var parent = Object.getPrototypeOf(object); if (parent === null) { return undefined; } else { _x2 = parent; _x3 = property; _x4 = receiver; _again = true; continue _function; } } else if ("value" in desc) { return desc.value; } else { var getter = desc.get; if (getter === undefined) { return undefined; } return getter.call(receiver); } } };
 
-function _slicedToArray(arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) subClass.__proto__ = superClass; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
 require("checkreboot");
 require("platform");

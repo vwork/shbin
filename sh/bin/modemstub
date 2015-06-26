@@ -3,15 +3,43 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({"/home/vadzim/v/work/nerojs/node_modules/babel-core/lib/babel/polyfill.js":[function(require,module,exports){
 "use strict";
 
+var _toolsProtectJs2 = require("./tools/protect.js");
+
+var _toolsProtectJs3 = _interopRequireDefault(_toolsProtectJs2);
+
 require("core-js/shim");
 
 require("regenerator/runtime");
+
+_toolsProtectJs3["default"](module);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
 if (global._babelPolyfill) {
   throw new Error("only one instance of babel/polyfill is allowed");
 }
 global._babelPolyfill = true;
-},{"core-js/shim":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/shim.js","regenerator/runtime":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/regenerator/runtime.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.array-includes.js":[function(require,module,exports){
+},{"./tools/protect.js":"/home/vadzim/v/work/nerojs/node_modules/babel-core/lib/babel/tools/protect.js","core-js/shim":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/shim.js","regenerator/runtime":"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/regenerator/runtime.js"}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/lib/babel/tools/protect.js":[function(require,module,exports){
+"use strict";
+
+exports.__esModule = true;
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
+
+var _path = require("path");
+
+var _path2 = _interopRequireDefault(_path);
+
+var root = _path2["default"].resolve(__dirname, "../../../");
+
+exports["default"] = function (module) {
+  if (module.parent && module.parent.filename.indexOf(root) !== 0) {
+    throw new Error("Don't hotlink internal Babel files.");
+  }
+};
+
+module.exports = exports["default"];
+},{"path":false}],"/home/vadzim/v/work/nerojs/node_modules/babel-core/node_modules/core-js/modules/$.array-includes.js":[function(require,module,exports){
 // false -> Array#indexOf
 // true  -> Array#includes
 var $ = require('./$');
@@ -11849,16 +11877,15 @@ var lu = module.exports = {
 
 	rests: function rests(num) {
 		var ret = [];
-
-		for (var _len = arguments.length, _rests = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-			_rests[_key - 1] = arguments[_key];
-		}
-
 		var _iteratorNormalCompletion = true;
 		var _didIteratorError = false;
 		var _iteratorError = undefined;
 
 		try {
+			for (var _len = arguments.length, _rests = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+				_rests[_key - 1] = arguments[_key];
+			}
+
 			for (var _iterator = _rests[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 				var r = _step.value;
 
@@ -12733,15 +12760,15 @@ var lu = module.exports = {
 	},
 
 	get: function get(obj) {
-		for (var _len4 = arguments.length, path = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-			path[_key4 - 1] = arguments[_key4];
-		}
-
 		var _iteratorNormalCompletion8 = true;
 		var _didIteratorError8 = false;
 		var _iteratorError8 = undefined;
 
 		try {
+			for (var _len4 = arguments.length, path = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+				path[_key4 - 1] = arguments[_key4];
+			}
+
 			for (var _iterator8 = path[Symbol.iterator](), _step8; !(_iteratorNormalCompletion8 = (_step8 = _iterator8.next()).done); _iteratorNormalCompletion8 = true) {
 				var p = _step8.value;
 
