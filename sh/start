@@ -1,0 +1,8 @@
+#!/bin/sh
+
+cd /smarthome
+./eth_rs232_converter &
+cd /smarthome/shbin/sh
+./update &
+./run &
+

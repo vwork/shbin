@@ -1,0 +1,26 @@
+#!/bin/sh
+
+cd ..
+
+while true;
+do
+	if [ -f updating ]
+	then
+		rm updating
+		rm binary
+	fi
+	t1=`stat -c %Y binary`
+	touch updating
+	sync
+	wget -N http://controller.sh.neroelectronics.by/binary
+	t2=`stat -c %Y binary`
+	if [ "$t1" != "$t2" ]
+	then
+		echo uncompressing
+		tar -xzf binary
+	fi
+	rm updating
+	echo sleeping
+	sleep 60
+done
+
