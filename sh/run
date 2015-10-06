@@ -1,12 +1,18 @@
 #!/bin/sh
 
+s=./bin/server
+if [ -n "$DEVELOPMENT" ]
+then
+	s=./bin/server_dbg
+fi
+
 while true;
 do
 	date
 	echo starting server
 	date >>/tmp/nj.log
 	echo starting server >>/tmp/nj.log
-	./bin/server_dbg $1;
+	$s $1;
 	echo waiting 1 second before restarting...
 	sleep 1
 done

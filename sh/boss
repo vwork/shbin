@@ -1,12 +1,18 @@
 #!/bin/sh
 
+s=./bin/boss
+if [ -n "$DEVELOPMENT" ]
+then
+	s=./bin/boss_dbg
+fi
+
 while true;
 do
 	date
 	echo starting boss
 	date >>/tmp/njb.log
 	echo starting boss >>/tmp/njb.log
-	./bin/boss_dbg $1;
+	$s $1;
 	echo waiting 1 second before restarting...
 	sleep 1
 done
