@@ -1,29 +1,29 @@
-<html manifest='/index.manifest' id='j4neumna1bh1ljl'>
+<html manifest='/index.manifest' id='j4f7jnl03bip81'>
 
-<noscript id='j3oxl588tzf1ljm'>
-!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1444099475778
+<noscript id='if52ygjckjp82'>
+!!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1444384761468
 </noscript>
-<head id='j6g7491weur1ljn'>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' id='j5h9nuesc511ljo'/>
-<title id='j97axrkjg8f1ljp'>Smart home</title>
+<head id='j1pdpoqvtg5p83'>
+<meta http-equiv='Content-Type' content='text/html; charset=utf-8' id='i9u67f99w4p84'/>
+<title id='j21wbkjzvt6p85'>Smart home</title>
 
-<meta name='mobile-web-app-capable' content='yes' id='j1kp09a62kg1ljr'/>
-<meta name='apple-mobile-web-app-capable' content='yes' id='j6c3ntzch0j1ljs'/>
+<meta name='mobile-web-app-capable' content='yes' id='j79005235ybp87'/>
+<meta name='apple-mobile-web-app-capable' content='yes' id='im2c9wjgu2p88'/>
 
-<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' id='j2b56egga2j1ljt'/>
+<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' id='j2sfgk17jzlp89'/>
 
-<meta name='format-detection' content='telephone=no' id='j9ozwi87dxt1lju'/>
+<meta name='format-detection' content='telephone=no' id='j2geq98i6j4p8a'/>
 
 
-<meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=0' id='j6defb3kebd1ljv'/>
+<meta name='viewport' content='initial-scale=1.0, maximum-scale=1.0, user-scalable=0' id='j8cqmvbrdx6p8b'/>
 
-<style id='j4tf7sdwdd11ljw'> html { -webkit-text-size-adjust: 100%; } </style>
+<style id='i2czgvxyuep8c'> html { -webkit-text-size-adjust: 100%; } </style>
 
-<link rel='shortcut icon' href='/favicon96.ico' id='j26fyxd7ekg1ljx'/>
+<link rel='shortcut icon' href='/favicon96.ico' id='itr9yo6pzep8d'/>
 
 <meta id='screenTitle' name='apple-mobile-web-app-title' content='My Home'/>
 </head>
-<body style='background-color: white;' id='j8j3fdy0ip91ljy'>
+<body style='background-color: white;' id='iq1es2eqlsp8e'>
 <script>"use strict";
 
 !(function () {
@@ -40,7 +40,7 @@
 })();</script>
 <div id='checkingBrowser' style='position: fixed; left: 0; top: 0; right: 0; bottom: 0; background-color: black; display: none; z-order: 9999;'>
 
-<div class='checkingBrowser' style='position: absolute; left: 0; top: 0; right: 0; bottom: 0;' id='j8tojklbcym1lk0'></div>
+<div class='checkingBrowser' style='position: absolute; left: 0; top: 0; right: 0; bottom: 0;' id='j1r74n0rtljp8g'></div>
 </div>
 <script>"use strict";
 
@@ -77,6 +77,18 @@
     return locked(cb, cb);
   } : setTimeout;
 })();</script>
+<script>// Leave only allowed keys in localStorage.
+"use strict";
+
+!(function () {
+  var keys = [];for (var i = 0; i < localStorage.length; ++i) {
+    keys.push(localStorage.key(i));
+  }for (var i = 0; i < keys.length; ++i) {
+    switch (keys[i]) {case "./main.html":case "./js/index.js":case "/database":case "debug":
+        break;default:
+        localStorage.removeItem(keys[i]);}
+  }
+})();</script>
 <script>//
 // WARNING:
 //
@@ -84,33 +96,36 @@
 //
 "use strict";
 
-function getCookie(name) {
-  return (("; " + document.cookie).split("; " + name + "=", 2)[1] || "").split(";", 1)[0];
-}function cacheUrlResource(url, debugUrl) {
-  if (localStorage.getItem("debug") || getCookie("instanceDebug")) return new Promise(function (resolve) {
-    var xhr = new XMLHttpRequest();xhr.open("get", debugUrl || url, false);xhr.send();resolve(xhr.responseText);
-  });var resources = window.cachedUrlResources || (window.cachedUrlResources = Object.create(null));return resources[url] || (resources[url] = new Promise(function (resolve) {
-    function save(ret) {
-      if (localStorage.getItem(url) != ret) {
-        localStorage.setItem(url, ret);postMessage({ what: "urlResourceUpdated", url: url }, "*");
-      }if (!resolve) return;resolve(ret);resolve = null;
-    }function loadUrl(initial) {
-      function onerror() {
-        if (initial && resolve) setTimeout(loadUrl, 2000, true);
-      }var xhr = new XMLHttpRequest();xhr.onload = function () {
-        if (xhr.status >= 200 && xhr.status <= 299) {
-          console.log("got " + url + ", received " + (xhr.response && xhr.response.length) + " character(s)");save(xhr.response == null ? null : xhr.response);
-        } else onerror();
-      };xhr.ontimeout = onerror;xhr.onerror = onerror;xhr.open("get", url);xhr.responseType = "text";xhr.send();
-    }function startLoading() {
-      loadUrl(true);setInterval(loadUrl, 30 * 60 * 1000);
-    }var res = localStorage.getItem(url);if (res != null) {
-      console.log("fecthing " + url + " from the cache");save(res);setTimeout(startLoading, 2000);
-    } else {
-      console.log("fecthing " + url + " from the server");startLoading();
-    }
-  }));
-}if (typeof module != "undefined") module.exports = cacheUrlResource;</script>
+!(function () {
+  // function getCookie( name ) {
+  // 	return ( ( `; ${ document.cookie }` ).split( `; ${ name }=`, 2 )[ 1 ] || `` ).split( `;`, 1 )[ 0 ]
+  // }
+  function cacheUrlResource(url) {
+    var resources = window.cachedUrlResources || (window.cachedUrlResources = Object.create(null));return resources[url] || (resources[url] = new Promise(function (resolve) {
+      function save(ret) {
+        if (resolve) {
+          resolve(ret);resolve = null;
+        }if (localStorage.getItem(url) != ret) {
+          localStorage.removeItem(url);localStorage.setItem(url, ret);postMessage({ what: "urlResourceUpdated", url: url }, "*");
+        }
+      }function loadUrl(initial) {
+        function onerror() {
+          if (initial && resolve) setTimeout(loadUrl, 2000, true);
+        }var xhr = new XMLHttpRequest();xhr.onload = function () {
+          if (xhr.status >= 200 && xhr.status <= 299) {
+            console.log("got " + url + ", received " + (xhr.response && xhr.response.length) + " character(s)");save(xhr.response == null ? null : xhr.response);
+          } else onerror();
+        };xhr.ontimeout = onerror;xhr.onerror = onerror;xhr.open("get", url);xhr.responseType = "text";xhr.send();
+      }function startLoading() {
+        loadUrl(true);setInterval(loadUrl, 30 * 60 * 1000);
+      }var res = localStorage.getItem(url);if (res != null) {
+        console.log("fecthing " + url + " from the cache");save(res);setTimeout(startLoading, 2000);
+      } else {
+        console.log("fecthing " + url + " from the server");startLoading();
+      }
+    }));
+  }window.cacheUrlResource = cacheUrlResource;
+})();</script>
 <script>"use strict";
 
 !(function () {
@@ -120,7 +135,7 @@ function getCookie(name) {
     var ms = timer.now() - startTime;console.log(msg + " for " + ms / 1000 + "s");startTime = timer.now();
   }function script(text) {
     var script = document.createElement("script");script.appendChild(document.createTextNode(text));return script;
-  }var code = cacheUrlResource("/js/index.js", "/js/index_dbg.js");cacheUrlResource("./main.html");code.then(function (code) {
+  }var code = cacheUrlResource("./js/index.js");cacheUrlResource("./main.html");code.then(function (code) {
     return onAppOrientationLocked(function () {
       say("getting script");document.body.appendChild(script("window.SHModules = function () { " + code + " }"));say("script has been compiled");if (!window.SHModules) (0, eval)("(function(){ " + code + " })");window.SHModules();say("script has been run");LOADED = true;if (window.onerror == ON_START_ERROR) window.onerror = null;
     });
