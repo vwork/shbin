@@ -2,9 +2,8 @@
 
 echo 0 > /sys/class/leds/smarthome\:green\:usr0/brightness
 echo 1 > /sys/class/leds/smarthome\:red\:usr0/brightness
-cd /smarthome
+cd /smarthome/shbin
 ./eth_rs232_converter &
-cd /smarthome/shbin/sh
 ./update &
 ./run &
 
