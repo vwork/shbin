@@ -15,13 +15,14 @@ mkdir -p ./usr
 
 echo '#!/bin/sh
 
-/smarthome/shbin/sh/start
+/smarthome/shbin/start
 ' > ./smarthome/server/start
 chmod +x ./smarthome/server/start
 
 nodeurl=$(wget -O- https://nodejs.org/dist/latest/ | grep -Eo 'node-v[0-9.]*-linux-armv6l.tar.gz' | head -n 1)
 pushd ./smarthome/shbin
 wget http://controller.sh.neroelectronics.by/binary -O- | tar -xz
+rm -rf sh
 popd
 
 if [ ! -f ./smarthome/shconfig/user.conf ]
