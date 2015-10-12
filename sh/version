@@ -2,7 +2,7 @@
 
 "use strict"
 
-let path = "/dev/ttyACM0"
+let path = process.argv[ 2 ] || "/dev/ttyACM0"
 let net = require( "net" )
 let fs = require( "fs" )
 let constants = require( "constants" )
