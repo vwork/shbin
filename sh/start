@@ -1,7 +1,6 @@
 #!/bin/sh
 
-echo 0 > /sys/class/leds/smarthome\:green\:usr0/brightness
-echo 1 > /sys/class/leds/smarthome\:red\:usr0/brightness
+led 0 green
 cd /smarthome/shbin
 ./eth_rs232_converter &
 ./update &
