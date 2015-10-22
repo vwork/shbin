@@ -7,26 +7,19 @@
 
 set -eo pipefail
 
+rm -rf ./smarthome/shbin
+rm -rf ./smarthome/server
+
 mkdir -p ./smarthome
 mkdir -p ./smarthome/server
-mkdir -p ./smarthome/shbin
 mkdir -p ./smarthome/shconfig
 mkdir -p ./usr
 
-echo '#!/bin/sh
-
-/smarthome/shbin/start
-' > ./smarthome/server/start
-chmod +x ./smarthome/server/start
-
-nodeurl=$(wget -O- https://nodejs.org/dist/latest/ | grep -Eo 'node-v[0-9.]*-linux-armv6l.tar.gz' | head -n 1)
-pushd ./smarthome/shbin
+pushd ./smarthome/server
 wget http://controller.sh.neroelectronics.by/binary -O- | tar -xz
-rm -rf sh
 popd
 
-if [ ! -f ./smarthome/shconfig/user.conf ]
-then
+if [ ! -f ./smarthome/shconfig/user.conf ] ; then
 	echo 'modem: m
 modemkey: k
 userkey: "123456"
@@ -34,11 +27,11 @@ userkey: "123456"
 fi
 
 mount -o remount,rw ubi0:rootfs
-pushd ./usr/bin
-if [ -f iojs ] ; then rm iojs ; fi
-if [ -f node ] ; then rm node ; fi
-wget -O- https://nodejs.org/dist/latest/$nodeurl | tar -xz --wildcards --strip-components=2 "*/bin/node"
-popd
+
+if [ -f ./usr/bin/node ] ; then rm ./usr/bin/node ; fi
+if [ -f ./usr/bin/iojs ] ; then rm ./usr/bin/iojs ; fi
+wget -O- https://nodejs.org/dist/latest/$(wget -O- https://nodejs.org/dist/latest/ | grep -Eo 'node-v[0-9.]*-linux-armv6l.tar.gz' | head -n 1) | tar -xz --wildcards --strip-components=2 -O "*/bin/node" >./usr/bin/node
+chmod +x ./usr/bin/node
 
 t=$(mktemp -d)
 pushd $t
