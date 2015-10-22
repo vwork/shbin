@@ -11,7 +11,7 @@ rm -rf ./smarthome/shbin
 rm -rf ./smarthome/server
 
 mkdir -p ./smarthome
-mkdir -p ./smarthome/server
+mkdir -p "./smarthome/server/!!This folder will be deleted while updating!!"
 mkdir -p ./smarthome/shconfig
 mkdir -p ./usr
 
