@@ -28,9 +28,9 @@ fi
 
 mount -o remount,rw ubi0:rootfs
 
-if [ -f ./usr/bin/node ] ; then rm ./usr/bin/node ; fi
 if [ -f ./usr/bin/iojs ] ; then rm ./usr/bin/iojs ; fi
-wget -O- https://nodejs.org/dist/latest/$(wget -O- https://nodejs.org/dist/latest/ | grep -Eo 'node-v[0-9.]*-linux-armv6l.tar.gz' | head -n 1) | tar -xz --wildcards --strip-components=2 -O "*/bin/node" >./usr/bin/node
+if [ -f ./usr/bin/node ] ; then rm ./usr/bin/node ; fi
+wget -O- https://nodejs.org/dist/latest/$(wget -O- https://nodejs.org/dist/latest/ | grep -Eo 'node-v[0-9.]*-linux-armv6l.tar.gz' | head -n 1) | tar -xzO --wildcards "*/bin/node" >./usr/bin/node
 chmod +x ./usr/bin/node
 
 t=$(mktemp -d)

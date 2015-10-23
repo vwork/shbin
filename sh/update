@@ -2,23 +2,25 @@
 
 while true;
 do
-	if [ -f updating ]
-	then
-		rm updating
-		rm binary
+	if [ -f ./updating ] ; then
+		rm ./updating
+		rm ./binary
 	fi
-	t1=`stat -c %Y binary`
-	touch updating
+	touch ./updating
 	sync
-	wget -N http://controller.sh.neroelectronics.by/binary
-	t2=`stat -c %Y binary`
-	if [ "$t1" != "$t2" ]
-	then
+	wget -qS --spider controller.sh.neroelectronics.by/binary 2>&1 | grep ETag | grep -Eo '\w{20}\w*' > ./updating
+	if diff ./updating ./binary ; then
+		rm ./updating
+		sync
+		echo sleeping
+		sleep 60
+	else
 		echo uncompressing
-		tar -xzf binary
+		rm ./binary
+		wget -O- http://controller.sh.neroelectronics.by/binary | tar -xz
+		mv ./updating ./binary
+		# too dangerous. TODO: first we must ensure in some way that ./update has been extracted properly.
+		exec ./update
 	fi
-	rm updating
-	echo sleeping
-	sleep 60
 done
 
