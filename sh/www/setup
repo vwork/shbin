@@ -2,6 +2,8 @@
 
 # run:
 # cd / ; wget -O- sh.neroelectronics.by/setup | bash
+# or:
+# cd / ; wget -O- sh.neroelectronics.by/setup | env NO_SYS_UPDATE=1 bash
 
 # TODO: create /smarthome/cfg if there is no one. Just copy git://datafs/cfg there.
 
