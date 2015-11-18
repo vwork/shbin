@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1447329191787
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1447865382642
 
 CACHE:
 
@@ -12,6 +12,9 @@ CACHE:
 /img/theme3.jpg
 /img/MagistralC.otf
 /img/MagistralC-Bold.otf
+/backgrounds/плашка%20верхняя.svg
+/backgrounds/плашка%20нижняя%20маленькая.svg
+/backgrounds/плашка%20квадратная.svg
 
 /img/bottom/help.svg
 /img/bottom/menu.svg
