@@ -35532,8 +35532,8 @@ var commands = exports.commands = Object.assign(Object.create(null), {
 		db = Diff.apply(db, { content: _defineProperty({}, placeId, {
 				__present__: true,
 				content: _defineProperty({}, itemId, {
-					index: getNextIndex(place.content),
-					controlled: !!controlled
+					index: place.content && place.content[itemId] ? undefined : getNextIndex(place.content),
+					controlled: controlled === undefined ? undefined : Boolean(controlled)
 				})
 			}) });
 		if (controlled && place.group == null) return [db, "ReserveGroup", { itemId: placeId }];else return [db, "UpdateGroups"];
@@ -45762,6 +45762,10 @@ var _htmlutils = require("htmlutils");
 
 var htmlutils = _interopRequireWildcard(_htmlutils);
 
+var _localUtils = require("localUtils");
+
+var lu = _interopRequireWildcard(_localUtils);
+
 var _ra = require("ra");
 
 var _ra2 = _interopRequireDefault(_ra);
@@ -45770,15 +45774,47 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
+var commandMessage = function commandMessage(app, message) {
+	return message && app.message(message).normalize().toLocaleLowerCase();
+};
+
 exports.default = function (app) {
 	return function (_ref) {
+		var _context;
+
 		var onclick = _ref.onclick;
+		var onturnon = _ref.onturnon;
+		var onturnoff = _ref.onturnoff;
 		var url = _ref.url;
 		var visible = _ref.visible;
 		var enabled = _ref.enabled;
 		var message = _ref.message;
+		var message_off = _ref.message_off;
+		var value = _ref.value;
 
-		var content = app.message(message).normalize().toLocaleLowerCase();
+		if (!message) throw new Error("wrong parameters");
+		if (message_off || value || onturnon || onturnoff) {
+			if (!message_off || !value || !onturnon || !onturnoff || onclick || url) throw new Error("wrong parameters");
+		}
+		var content = undefined;
+		var isSwitchedOn = (_context = (0, _ra2.default)(function () {
+			return Boolean(value && value());
+		})).valueOf.bind(_context);
+		if (!message_off) {
+			content = commandMessage(app, message);
+		} else {
+			(function () {
+				var content_on = commandMessage(app, message);
+				var content_off = commandMessage(app, message_off);
+				content = function () {
+					return isSwitchedOn() ? content_off : content_on;
+				};
+				onclick = function () {
+					return isSwitchedOn() ? onturnoff() : onturnon();
+				};
+			})();
+		}
+
 		var isEnabled = function isEnabled() {
 			return (url || onclick) && (!enabled || enabled());
 		};
@@ -45822,7 +45858,7 @@ exports.default = function (app) {
 	};
 };
 
-},{"htmlutils":291,"ra":306}],322:[function(require,module,exports){
+},{"htmlutils":291,"localUtils":294,"ra":306}],322:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -45858,20 +45894,21 @@ exports.default = function (app, local) {
 		}),
 		__(Command, {
 			message: "commandToFavourites",
+			message_off: "commandRemoveFromFavourites",
 			visible: function visible() {
-				return !app.editing && app.activeParentType == "place" && app.activeControlled === false;
+				return !app.editing && app.activeDeviceId != app.main && app.activeParentPlaceId != app.main;
 			},
-			onclick: function onclick() {
+			value: function value() {
+				return app.activeControlled === true;
+			},
+			enabled: function enabled() {
+				return app.activeParentType == "place";
+			},
+			onturnon: function onturnon() {
 				app.commands.LinkItemToPlace({ itemId: app.activeDeviceId, placeId: app.activeParentPlaceId, controlled: true });
 				app.notification("Добавлено в избранное");
-			}
-		}),
-		__(Command, {
-			message: "commandRemoveFromFavourites",
-			visible: function visible() {
-				return !app.editing && app.activeParentType == "place" && app.activeControlled === true;
 			},
-			onclick: function onclick() {
+			onturnoff: function onturnoff() {
 				app.commands.LinkItemToPlace({ itemId: app.activeDeviceId, placeId: app.activeParentPlaceId, controlled: false });
 				app.notification("Удалено из избранного");
 			}
