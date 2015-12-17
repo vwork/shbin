@@ -35441,7 +35441,15 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; } // DB for client
 
-// Пажаданьні карыстальніка заўсёды выконваюцца - сказана ўключыць у групу, значыць будзе паказвацца ўключаным. І будзе спрабаваць дагрукацца да прылады і спрабаваць уключыць раз за разам. А на экране паказваць, што нейкая праблема пакуль што ёсьць.
+/*
+TODO:
+
+1. прывязка прылады.
+
+Зараз: аддаецца каманда на прывязку, група адразу запісваецца щ БЗ. Пасьля запытваем карыстальніка, і калі не прывязалася, даем каманду што не прывязалася. Добра: іншыя ўжо могуць адвязаць. Ці пасьля разрыву сувязі.
+Магчыма: аддаецца каманда на папярэднюю прывязку, пасьля запыт у карыстальніка і толькі тады запіс у БЗ. Па-мойму, практычней цяперашні варыянт.
+
+*/
 
 var canBeRemoved = exports.canBeRemoved = Object.assign(Object.create(null), {
 	SetState: function SetState(_ref, command, data) {
