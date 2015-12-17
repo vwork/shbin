@@ -35599,8 +35599,17 @@ var commands = exports.commands = Object.assign(Object.create(null), {
 			}) });
 		return [db, "InitializeDevice", { itemId: itemId }];
 	},
-	DeinitializeDevice: function DeinitializeDevice(db, _ref7) {
+	DeviceHasNotBeenInitialized: function DeviceHasNotBeenInitialized(db, _ref7) {
 		var itemId = _ref7.itemId;
+
+		db = Diff.apply(db, { content: _defineProperty({}, itemId, {
+				__present__: true,
+				pending: true
+			}) });
+		return [db, "DeviceHasNotBeenInitialized", { itemId: itemId }];
+	},
+	DeinitializeDevice: function DeinitializeDevice(db, _ref8) {
+		var itemId = _ref8.itemId;
 
 		db = Diff.apply(db, { content: _defineProperty({}, itemId, {
 				__present__: true,
@@ -35608,8 +35617,8 @@ var commands = exports.commands = Object.assign(Object.create(null), {
 			}) });
 		return [db, "DeinitializeDevice", { itemId: itemId }];
 	},
-	DeleteItemFromProgram: function DeleteItemFromProgram(db, _ref8) {
-		var itemId = _ref8.itemId;
+	DeleteItemFromProgram: function DeleteItemFromProgram(db, _ref9) {
+		var itemId = _ref9.itemId;
 
 		var item = db.content[itemId];
 		db = Diff.apply(db, { content: _defineProperty({}, itemId, null) });
@@ -35644,13 +35653,13 @@ var commands = exports.commands = Object.assign(Object.create(null), {
 		if (item.type != "single") return [db, "UpdateGroups"];else if (item.group != null) return [db, "DeinitializeDevice", { itemId: itemId }];
 		return [db];
 	},
-	CreateItem: function CreateItem(db, _ref9) {
-		var type = _ref9.type;
-		var itemId = _ref9.itemId;
-		var placeId = _ref9.placeId;
-		var caption = _ref9.caption;
-		var icon = _ref9.icon;
-		var controlled = _ref9.controlled;
+	CreateItem: function CreateItem(db, _ref10) {
+		var type = _ref10.type;
+		var itemId = _ref10.itemId;
+		var placeId = _ref10.placeId;
+		var caption = _ref10.caption;
+		var icon = _ref10.icon;
+		var controlled = _ref10.controlled;
 
 		switch (type) {
 			case "single":case "place":case 'group':case "scenario":
@@ -35662,10 +35671,10 @@ var commands = exports.commands = Object.assign(Object.create(null), {
 		db = Diff.apply(db, { content: _defineProperty({}, itemId, { type: type, caption: caption, icon: icon }) });
 		if (placeId) return commands.LinkItemToPlace(db, { placeId: placeId, itemId: itemId, controlled: controlled });else return [db];
 	},
-	UpdateItem: function UpdateItem(db, _ref10) {
-		var itemId = _ref10.itemId;
-		var caption = _ref10.caption;
-		var icon = _ref10.icon;
+	UpdateItem: function UpdateItem(db, _ref11) {
+		var itemId = _ref11.itemId;
+		var caption = _ref11.caption;
+		var icon = _ref11.icon;
 
 		db = Diff.apply(db, { content: _defineProperty({}, itemId, {
 				__present__: true,
@@ -35673,15 +35682,15 @@ var commands = exports.commands = Object.assign(Object.create(null), {
 			}) });
 		return [db];
 	},
-	RenameItem: function RenameItem(db, _ref11) {
-		var itemId = _ref11.itemId;
-		var caption = _ref11.caption;
+	RenameItem: function RenameItem(db, _ref12) {
+		var itemId = _ref12.itemId;
+		var caption = _ref12.caption;
 
 		return commands.UpdateItem(db, { itemId: itemId, caption: caption });
 	},
-	ChangePicture: function ChangePicture(db, _ref12) {
-		var itemId = _ref12.itemId;
-		var icon = _ref12.icon;
+	ChangePicture: function ChangePicture(db, _ref13) {
+		var itemId = _ref13.itemId;
+		var icon = _ref13.icon;
 
 		return commands.UpdateItem(db, { itemId: itemId, icon: icon });
 	}
@@ -35742,8 +35751,8 @@ function getConnectedIds(db, groupId) {
 function getNextIndex(content) {
 	var _Math;
 
-	return 1 + (_Math = Math).max.apply(_Math, [0].concat(_toConsumableArray(lodash.values(content).map(function (_ref13) {
-		var index = _ref13.index;
+	return 1 + (_Math = Math).max.apply(_Math, [0].concat(_toConsumableArray(lodash.values(content).map(function (_ref14) {
+		var index = _ref14.index;
 		return index;
 	}))));
 }
@@ -35790,9 +35799,9 @@ function getDeviceParams(item) {
 	};
 }
 
-var compareIndices = exports.compareIndices = function compareIndices(_ref14, _ref15) {
-	var index1 = _ref14.value.index;
-	var index2 = _ref15.value.index;
+var compareIndices = exports.compareIndices = function compareIndices(_ref15, _ref16) {
+	var index1 = _ref15.value.index;
+	var index2 = _ref16.value.index;
 	return index1 - index2;
 };
 
@@ -35801,11 +35810,11 @@ var getContent = exports.getContent = function getContent(db, placeId) {
 };
 
 var sortContent = exports.sortContent = function sortContent(content) {
-	var pairs = lodash.pairs /*O(n)*/(content).map /*O(n)*/(function (_ref16) {
-		var _ref17 = _slicedToArray(_ref16, 2);
+	var pairs = lodash.pairs /*O(n)*/(content).map /*O(n)*/(function (_ref17) {
+		var _ref18 = _slicedToArray(_ref17, 2);
 
-		var key = _ref17[0];
-		var value = _ref17[1];
+		var key = _ref18[0];
+		var value = _ref18[1];
 		return { key: key, value: value };
 	});
 	return pairs.sort /*O(n*log(n))*/(compareIndices);
@@ -45116,7 +45125,11 @@ exports.default = function (_ref) {
 				),
 				__(
 					Button,
-					{ onclick: "AskToLinkDevice" },
+					{ onclick: function onclick() {
+							var itemId = app.linkingPlaceId || app.activeDeviceId;
+							app.commands.DeviceHasNotBeenInitialized({ itemId: itemId });
+							app.dialog = "AskToLinkDevice";
+						} },
 					"нет"
 				)
 			);
@@ -45569,10 +45582,7 @@ exports.default = function (app) {
 	var Button = app.load(_Button2.default);
 	return __(
 		"div",
-		{ ondialogshow: function ondialogshow() {
-				var itemId = app.linkingPlaceId || app.activeDeviceId;
-				app.commands.DeinitializeDevice({ itemId: itemId });
-			} },
+		null,
 		__(
 			"p",
 			null,
