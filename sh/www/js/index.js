@@ -9012,7 +9012,7 @@ exports.comment = function(node) {
     return this._comment(node);
 };
 
-},{"fs":6,"path":239,"source-map":220,"source-map-resolve":257,"urix":267}],220:[function(require,module,exports){
+},{"fs":6,"path":239,"source-map":220,"source-map-resolve":247,"urix":267}],220:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -24551,7 +24551,7 @@ process.umask = function() { return 0; };
 
 },{}],242:[function(require,module,exports){
 (function (global){
-/*! https://mths.be/punycode v1.3.2 by @mathias */
+/*! https://mths.be/punycode v1.4.0 by @mathias */
 ;(function(root) {
 
 	/** Detect free variables */
@@ -24617,7 +24617,7 @@ process.umask = function() { return 0; };
 	 * @returns {Error} Throws a `RangeError` with the applicable error message.
 	 */
 	function error(type) {
-		throw RangeError(errors[type]);
+		throw new RangeError(errors[type]);
 	}
 
 	/**
@@ -24764,7 +24764,7 @@ process.umask = function() { return 0; };
 
 	/**
 	 * Bias adaptation function as per section 3.4 of RFC 3492.
-	 * http://tools.ietf.org/html/rfc3492#section-3.4
+	 * https://tools.ietf.org/html/rfc3492#section-3.4
 	 * @private
 	 */
 	function adapt(delta, numPoints, firstTime) {
@@ -25069,14 +25069,17 @@ process.umask = function() { return 0; };
 			return punycode;
 		});
 	} else if (freeExports && freeModule) {
-		if (module.exports == freeExports) { // in Node.js or RingoJS v0.8.0+
+		if (module.exports == freeExports) {
+			// in Node.js, io.js, or RingoJS v0.8.0+
 			freeModule.exports = punycode;
-		} else { // in Narwhal or RingoJS v0.7.0-
+		} else {
+			// in Narwhal or RingoJS v0.7.0-
 			for (key in punycode) {
 				punycode.hasOwnProperty(key) && (freeExports[key] = punycode[key]);
 			}
 		}
-	} else { // in Rhino or a web browser
+	} else {
+		// in Rhino or a web browser
 		root.punycode = punycode;
 	}
 
@@ -25264,9 +25267,471 @@ exports.decode = exports.parse = require('./decode');
 exports.encode = exports.stringify = require('./encode');
 
 },{"./decode":243,"./encode":244}],246:[function(require,module,exports){
+// Copyright 2014 Simon Lydell
+// X11 (“MIT”) Licensed. (See LICENSE.)
+
+void (function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(factory)
+  } else if (typeof exports === "object") {
+    module.exports = factory()
+  } else {
+    root.resolveUrl = factory()
+  }
+}(this, function() {
+
+  function resolveUrl(/* ...urls */) {
+    var numUrls = arguments.length
+
+    if (numUrls === 0) {
+      throw new Error("resolveUrl requires at least one argument; got none.")
+    }
+
+    var base = document.createElement("base")
+    base.href = arguments[0]
+
+    if (numUrls === 1) {
+      return base.href
+    }
+
+    var head = document.getElementsByTagName("head")[0]
+    head.insertBefore(base, head.firstChild)
+
+    var a = document.createElement("a")
+    var resolved
+
+    for (var index = 1; index < numUrls; index++) {
+      a.href = arguments[index]
+      resolved = a.href
+      base.href = resolved
+    }
+
+    head.removeChild(base)
+
+    return resolved
+  }
+
+  return resolveUrl
+
+}));
+
+},{}],247:[function(require,module,exports){
+// Copyright 2014 Simon Lydell
+// X11 (“MIT”) Licensed. (See LICENSE.)
+
+// Note: source-map-resolve.js is generated from source-map-resolve-node.js and
+// source-map-resolve-template.js. Only edit the two latter files, _not_
+// source-map-resolve.js!
+
+void (function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(["source-map-url", "resolve-url"], factory)
+  } else if (typeof exports === "object") {
+    var sourceMappingURL = require("source-map-url")
+    var resolveUrl = require("resolve-url")
+    module.exports = factory(sourceMappingURL, resolveUrl)
+  } else {
+    root.sourceMapResolve = factory(root.sourceMappingURL, root.resolveUrl)
+  }
+}(this, function(sourceMappingURL, resolveUrl) {
+
+  function callbackAsync(callback, error, result) {
+    setImmediate(function() { callback(error, result) })
+  }
+
+  function parseMapToJSON(string) {
+    return JSON.parse(string.replace(/^\)\]\}'/, ""))
+  }
+
+
+
+  function resolveSourceMap(code, codeUrl, read, callback) {
+    var mapData
+    try {
+      mapData = resolveSourceMapHelper(code, codeUrl)
+    } catch (error) {
+      return callbackAsync(callback, error)
+    }
+    if (!mapData || mapData.map) {
+      return callbackAsync(callback, null, mapData)
+    }
+    read(mapData.url, function(error, result) {
+      if (error) {
+        return callback(error)
+      }
+      try {
+        mapData.map = parseMapToJSON(String(result))
+      } catch (error) {
+        return callback(error)
+      }
+      callback(null, mapData)
+    })
+  }
+
+  function resolveSourceMapSync(code, codeUrl, read) {
+    var mapData = resolveSourceMapHelper(code, codeUrl)
+    if (!mapData || mapData.map) {
+      return mapData
+    }
+    mapData.map = parseMapToJSON(String(read(mapData.url)))
+    return mapData
+  }
+
+  var dataUriRegex = /^data:([^,;]*)(;[^,;]*)*(?:,(.*))?$/
+  var jsonMimeTypeRegex = /^(?:application|text)\/json$/
+
+  function resolveSourceMapHelper(code, codeUrl) {
+    var url = sourceMappingURL.getFrom(code)
+    if (!url) {
+      return null
+    }
+
+    var dataUri = url.match(dataUriRegex)
+    if (dataUri) {
+      var mimeType = dataUri[1]
+      var lastParameter = dataUri[2]
+      var encoded = dataUri[3]
+      if (!jsonMimeTypeRegex.test(mimeType)) {
+        throw new Error("Unuseful data uri mime type: " + (mimeType || "text/plain"))
+      }
+      return {
+        sourceMappingURL: url,
+        url: null,
+        sourcesRelativeTo: codeUrl,
+        map: parseMapToJSON(lastParameter === ";base64" ? atob(encoded) : decodeURIComponent(encoded))
+      }
+    }
+
+    var mapUrl = resolveUrl(codeUrl, url)
+    return {
+      sourceMappingURL: url,
+      url: mapUrl,
+      sourcesRelativeTo: mapUrl,
+      map: null
+    }
+  }
+
+
+
+  function resolveSources(map, mapUrl, read, options, callback) {
+    if (typeof options === "function") {
+      callback = options
+      options = {}
+    }
+    var pending = map.sources.length
+    var errored = false
+    var result = {
+      sourcesResolved: [],
+      sourcesContent:  []
+    }
+
+    var done = function(error) {
+      if (errored) {
+        return
+      }
+      if (error) {
+        errored = true
+        return callback(error)
+      }
+      pending--
+      if (pending === 0) {
+        callback(null, result)
+      }
+    }
+
+    resolveSourcesHelper(map, mapUrl, options, function(fullUrl, sourceContent, index) {
+      result.sourcesResolved[index] = fullUrl
+      if (typeof sourceContent === "string") {
+        result.sourcesContent[index] = sourceContent
+        callbackAsync(done, null)
+      } else {
+        read(fullUrl, function(error, source) {
+          result.sourcesContent[index] = String(source)
+          done(error)
+        })
+      }
+    })
+  }
+
+  function resolveSourcesSync(map, mapUrl, read, options) {
+    var result = {
+      sourcesResolved: [],
+      sourcesContent:  []
+    }
+    resolveSourcesHelper(map, mapUrl, options, function(fullUrl, sourceContent, index) {
+      result.sourcesResolved[index] = fullUrl
+      if (read !== null) {
+        if (typeof sourceContent === "string") {
+          result.sourcesContent[index] = sourceContent
+        } else {
+          result.sourcesContent[index] = String(read(fullUrl))
+        }
+      }
+    })
+    return result
+  }
+
+  var endingSlash = /\/?$/
+
+  function resolveSourcesHelper(map, mapUrl, options, fn) {
+    options = options || {}
+    var fullUrl
+    var sourceContent
+    for (var index = 0, len = map.sources.length; index < len; index++) {
+      if (map.sourceRoot && !options.ignoreSourceRoot) {
+        // Make sure that the sourceRoot ends with a slash, so that `/scripts/subdir` becomes
+        // `/scripts/subdir/<source>`, not `/scripts/<source>`. Pointing to a file as source root
+        // does not make sense.
+        fullUrl = resolveUrl(mapUrl, map.sourceRoot.replace(endingSlash, "/"), map.sources[index])
+      } else {
+        fullUrl = resolveUrl(mapUrl, map.sources[index])
+      }
+      sourceContent = (map.sourcesContent || [])[index]
+      fn(fullUrl, sourceContent, index)
+    }
+  }
+
+
+
+  function resolve(code, codeUrl, read, options, callback) {
+    if (typeof options === "function") {
+      callback = options
+      options = {}
+    }
+    resolveSourceMap(code, codeUrl, read, function(error, mapData) {
+      if (error) {
+        return callback(error)
+      }
+      if (!mapData) {
+        return callback(null, null)
+      }
+      resolveSources(mapData.map, mapData.sourcesRelativeTo, read, options, function(error, result) {
+        if (error) {
+          return callback(error)
+        }
+        mapData.sourcesResolved = result.sourcesResolved
+        mapData.sourcesContent  = result.sourcesContent
+        callback(null, mapData)
+      })
+    })
+  }
+
+  function resolveSync(code, codeUrl, read, options) {
+    var mapData = resolveSourceMapSync(code, codeUrl, read)
+    if (!mapData) {
+      return null
+    }
+    var result = resolveSourcesSync(mapData.map, mapData.sourcesRelativeTo, read, options)
+    mapData.sourcesResolved = result.sourcesResolved
+    mapData.sourcesContent  = result.sourcesContent
+    return mapData
+  }
+
+
+
+  return {
+    resolveSourceMap:     resolveSourceMap,
+    resolveSourceMapSync: resolveSourceMapSync,
+    resolveSources:       resolveSources,
+    resolveSourcesSync:   resolveSourcesSync,
+    resolve:              resolve,
+    resolveSync:          resolveSync
+  }
+
+}));
+
+},{"resolve-url":246,"source-map-url":248}],248:[function(require,module,exports){
+// Copyright 2014 Simon Lydell
+// X11 (“MIT”) Licensed. (See LICENSE.)
+
+void (function(root, factory) {
+  if (typeof define === "function" && define.amd) {
+    define(factory)
+  } else if (typeof exports === "object") {
+    module.exports = factory()
+  } else {
+    root.sourceMappingURL = factory()
+  }
+}(this, function() {
+
+  var innerRegex = /[#@] sourceMappingURL=([^\s'"]*)/
+
+  var regex = RegExp(
+    "(?:" +
+      "/\\*" +
+      "(?:\\s*\r?\n(?://)?)?" +
+      "(?:" + innerRegex.source + ")" +
+      "\\s*" +
+      "\\*/" +
+      "|" +
+      "//(?:" + innerRegex.source + ")" +
+    ")" +
+    "\\s*$"
+  )
+
+  return {
+
+    regex: regex,
+    _innerRegex: innerRegex,
+
+    getFrom: function(code) {
+      var match = code.match(regex)
+      return (match ? match[1] || match[2] || "" : null)
+    },
+
+    existsIn: function(code) {
+      return regex.test(code)
+    },
+
+    removeFrom: function(code) {
+      return code.replace(regex, "")
+    },
+
+    insertBefore: function(code, string) {
+      var match = code.match(regex)
+      if (match) {
+        return code.slice(0, match.index) + string + code.slice(match.index)
+      } else {
+        return code + string
+      }
+    }
+  }
+
+}));
+
+},{}],249:[function(require,module,exports){
+// Copyright Joyent, Inc. and other Node contributors.
+//
+// Permission is hereby granted, free of charge, to any person obtaining a
+// copy of this software and associated documentation files (the
+// "Software"), to deal in the Software without restriction, including
+// without limitation the rights to use, copy, modify, merge, publish,
+// distribute, sublicense, and/or sell copies of the Software, and to permit
+// persons to whom the Software is furnished to do so, subject to the
+// following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
+// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+// USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+module.exports = Stream;
+
+var EE = require('events').EventEmitter;
+var inherits = require('inherits');
+
+inherits(Stream, EE);
+Stream.Readable = require('readable-stream/readable.js');
+Stream.Writable = require('readable-stream/writable.js');
+Stream.Duplex = require('readable-stream/duplex.js');
+Stream.Transform = require('readable-stream/transform.js');
+Stream.PassThrough = require('readable-stream/passthrough.js');
+
+// Backwards-compat with node 0.4.x
+Stream.Stream = Stream;
+
+
+
+// old-style streams.  Note that the pipe method (the only relevant
+// part of this class) is overridden in the Readable class.
+
+function Stream() {
+  EE.call(this);
+}
+
+Stream.prototype.pipe = function(dest, options) {
+  var source = this;
+
+  function ondata(chunk) {
+    if (dest.writable) {
+      if (false === dest.write(chunk) && source.pause) {
+        source.pause();
+      }
+    }
+  }
+
+  source.on('data', ondata);
+
+  function ondrain() {
+    if (source.readable && source.resume) {
+      source.resume();
+    }
+  }
+
+  dest.on('drain', ondrain);
+
+  // If the 'end' option is not supplied, dest.end() will be called when
+  // source gets the 'end' or 'close' events.  Only dest.end() once.
+  if (!dest._isStdio && (!options || options.end !== false)) {
+    source.on('end', onend);
+    source.on('close', onclose);
+  }
+
+  var didOnEnd = false;
+  function onend() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    dest.end();
+  }
+
+
+  function onclose() {
+    if (didOnEnd) return;
+    didOnEnd = true;
+
+    if (typeof dest.destroy === 'function') dest.destroy();
+  }
+
+  // don't leave dangling pipes when there are errors.
+  function onerror(er) {
+    cleanup();
+    if (EE.listenerCount(this, 'error') === 0) {
+      throw er; // Unhandled stream error in pipe.
+    }
+  }
+
+  source.on('error', onerror);
+  dest.on('error', onerror);
+
+  // remove all the event listeners that were added.
+  function cleanup() {
+    source.removeListener('data', ondata);
+    dest.removeListener('drain', ondrain);
+
+    source.removeListener('end', onend);
+    source.removeListener('close', onclose);
+
+    source.removeListener('error', onerror);
+    dest.removeListener('error', onerror);
+
+    source.removeListener('end', cleanup);
+    source.removeListener('close', cleanup);
+
+    dest.removeListener('close', cleanup);
+  }
+
+  source.on('end', cleanup);
+  source.on('close', cleanup);
+
+  dest.on('close', cleanup);
+
+  dest.emit('pipe', source);
+
+  // Allow for unix-like usage: A.pipe(B).pipe(C)
+  return dest;
+};
+
+},{"events":230,"inherits":232,"readable-stream/duplex.js":250,"readable-stream/passthrough.js":256,"readable-stream/readable.js":257,"readable-stream/transform.js":258,"readable-stream/writable.js":259}],250:[function(require,module,exports){
 module.exports = require("./lib/_stream_duplex.js")
 
-},{"./lib/_stream_duplex.js":247}],247:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":251}],251:[function(require,module,exports){
 // a duplex stream is just a stream that is both readable and writable.
 // Since JS doesn't have multiple prototypal inheritance, this class
 // prototypally inherits from Readable, and then parasitically from
@@ -25350,7 +25815,7 @@ function forEach (xs, f) {
   }
 }
 
-},{"./_stream_readable":249,"./_stream_writable":251,"core-util-is":209,"inherits":232,"process-nextick-args":240}],248:[function(require,module,exports){
+},{"./_stream_readable":253,"./_stream_writable":255,"core-util-is":209,"inherits":232,"process-nextick-args":240}],252:[function(require,module,exports){
 // a passthrough stream.
 // basically just the most minimal sort of Transform stream.
 // Every written chunk gets output as-is.
@@ -25379,7 +25844,7 @@ PassThrough.prototype._transform = function(chunk, encoding, cb) {
   cb(null, chunk);
 };
 
-},{"./_stream_transform":250,"core-util-is":209,"inherits":232}],249:[function(require,module,exports){
+},{"./_stream_transform":254,"core-util-is":209,"inherits":232}],253:[function(require,module,exports){
 (function (process){
 'use strict';
 
@@ -26357,7 +26822,7 @@ function indexOf (xs, x) {
 
 }).call(this,require('_process'))
 
-},{"./_stream_duplex":247,"_process":241,"buffer":7,"core-util-is":209,"events":230,"inherits":232,"isarray":235,"process-nextick-args":240,"string_decoder/":260,"util":5}],250:[function(require,module,exports){
+},{"./_stream_duplex":251,"_process":241,"buffer":7,"core-util-is":209,"events":230,"inherits":232,"isarray":235,"process-nextick-args":240,"string_decoder/":260,"util":5}],254:[function(require,module,exports){
 // a transform stream is a readable/writable stream where you do
 // something with the data.  Sometimes it's called a "filter",
 // but that's not a great name for it, since that implies a thing where
@@ -26556,7 +27021,7 @@ function done(stream, er) {
   return stream.push(null);
 }
 
-},{"./_stream_duplex":247,"core-util-is":209,"inherits":232}],251:[function(require,module,exports){
+},{"./_stream_duplex":251,"core-util-is":209,"inherits":232}],255:[function(require,module,exports){
 // A bit simpler than readable streams.
 // Implement an async ._write(chunk, encoding, cb), and it'll handle all
 // the drain event emission and buffering.
@@ -27085,10 +27550,10 @@ function endWritable(stream, state, cb) {
   state.ended = true;
 }
 
-},{"./_stream_duplex":247,"buffer":7,"core-util-is":209,"events":230,"inherits":232,"process-nextick-args":240,"util-deprecate":270}],252:[function(require,module,exports){
+},{"./_stream_duplex":251,"buffer":7,"core-util-is":209,"events":230,"inherits":232,"process-nextick-args":240,"util-deprecate":270}],256:[function(require,module,exports){
 module.exports = require("./lib/_stream_passthrough.js")
 
-},{"./lib/_stream_passthrough.js":248}],253:[function(require,module,exports){
+},{"./lib/_stream_passthrough.js":252}],257:[function(require,module,exports){
 var Stream = (function (){
   try {
     return require('st' + 'ream'); // hack to fix a circular dependency issue when used with browserify
@@ -27102,475 +27567,13 @@ exports.Duplex = require('./lib/_stream_duplex.js');
 exports.Transform = require('./lib/_stream_transform.js');
 exports.PassThrough = require('./lib/_stream_passthrough.js');
 
-},{"./lib/_stream_duplex.js":247,"./lib/_stream_passthrough.js":248,"./lib/_stream_readable.js":249,"./lib/_stream_transform.js":250,"./lib/_stream_writable.js":251}],254:[function(require,module,exports){
+},{"./lib/_stream_duplex.js":251,"./lib/_stream_passthrough.js":252,"./lib/_stream_readable.js":253,"./lib/_stream_transform.js":254,"./lib/_stream_writable.js":255}],258:[function(require,module,exports){
 module.exports = require("./lib/_stream_transform.js")
 
-},{"./lib/_stream_transform.js":250}],255:[function(require,module,exports){
+},{"./lib/_stream_transform.js":254}],259:[function(require,module,exports){
 module.exports = require("./lib/_stream_writable.js")
 
-},{"./lib/_stream_writable.js":251}],256:[function(require,module,exports){
-// Copyright 2014 Simon Lydell
-// X11 (“MIT”) Licensed. (See LICENSE.)
-
-void (function(root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(factory)
-  } else if (typeof exports === "object") {
-    module.exports = factory()
-  } else {
-    root.resolveUrl = factory()
-  }
-}(this, function() {
-
-  function resolveUrl(/* ...urls */) {
-    var numUrls = arguments.length
-
-    if (numUrls === 0) {
-      throw new Error("resolveUrl requires at least one argument; got none.")
-    }
-
-    var base = document.createElement("base")
-    base.href = arguments[0]
-
-    if (numUrls === 1) {
-      return base.href
-    }
-
-    var head = document.getElementsByTagName("head")[0]
-    head.insertBefore(base, head.firstChild)
-
-    var a = document.createElement("a")
-    var resolved
-
-    for (var index = 1; index < numUrls; index++) {
-      a.href = arguments[index]
-      resolved = a.href
-      base.href = resolved
-    }
-
-    head.removeChild(base)
-
-    return resolved
-  }
-
-  return resolveUrl
-
-}));
-
-},{}],257:[function(require,module,exports){
-// Copyright 2014 Simon Lydell
-// X11 (“MIT”) Licensed. (See LICENSE.)
-
-// Note: source-map-resolve.js is generated from source-map-resolve-node.js and
-// source-map-resolve-template.js. Only edit the two latter files, _not_
-// source-map-resolve.js!
-
-void (function(root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(["source-map-url", "resolve-url"], factory)
-  } else if (typeof exports === "object") {
-    var sourceMappingURL = require("source-map-url")
-    var resolveUrl = require("resolve-url")
-    module.exports = factory(sourceMappingURL, resolveUrl)
-  } else {
-    root.sourceMapResolve = factory(root.sourceMappingURL, root.resolveUrl)
-  }
-}(this, function(sourceMappingURL, resolveUrl) {
-
-  function callbackAsync(callback, error, result) {
-    setImmediate(function() { callback(error, result) })
-  }
-
-  function parseMapToJSON(string) {
-    return JSON.parse(string.replace(/^\)\]\}'/, ""))
-  }
-
-
-
-  function resolveSourceMap(code, codeUrl, read, callback) {
-    var mapData
-    try {
-      mapData = resolveSourceMapHelper(code, codeUrl)
-    } catch (error) {
-      return callbackAsync(callback, error)
-    }
-    if (!mapData || mapData.map) {
-      return callbackAsync(callback, null, mapData)
-    }
-    read(mapData.url, function(error, result) {
-      if (error) {
-        return callback(error)
-      }
-      try {
-        mapData.map = parseMapToJSON(String(result))
-      } catch (error) {
-        return callback(error)
-      }
-      callback(null, mapData)
-    })
-  }
-
-  function resolveSourceMapSync(code, codeUrl, read) {
-    var mapData = resolveSourceMapHelper(code, codeUrl)
-    if (!mapData || mapData.map) {
-      return mapData
-    }
-    mapData.map = parseMapToJSON(String(read(mapData.url)))
-    return mapData
-  }
-
-  var dataUriRegex = /^data:([^,;]*)(;[^,;]*)*(?:,(.*))?$/
-  var jsonMimeTypeRegex = /^(?:application|text)\/json$/
-
-  function resolveSourceMapHelper(code, codeUrl) {
-    var url = sourceMappingURL.getFrom(code)
-    if (!url) {
-      return null
-    }
-
-    var dataUri = url.match(dataUriRegex)
-    if (dataUri) {
-      var mimeType = dataUri[1]
-      var lastParameter = dataUri[2]
-      var encoded = dataUri[3]
-      if (!jsonMimeTypeRegex.test(mimeType)) {
-        throw new Error("Unuseful data uri mime type: " + (mimeType || "text/plain"))
-      }
-      return {
-        sourceMappingURL: url,
-        url: null,
-        sourcesRelativeTo: codeUrl,
-        map: parseMapToJSON(lastParameter === ";base64" ? atob(encoded) : decodeURIComponent(encoded))
-      }
-    }
-
-    var mapUrl = resolveUrl(codeUrl, url)
-    return {
-      sourceMappingURL: url,
-      url: mapUrl,
-      sourcesRelativeTo: mapUrl,
-      map: null
-    }
-  }
-
-
-
-  function resolveSources(map, mapUrl, read, options, callback) {
-    if (typeof options === "function") {
-      callback = options
-      options = {}
-    }
-    var pending = map.sources.length
-    var errored = false
-    var result = {
-      sourcesResolved: [],
-      sourcesContent:  []
-    }
-
-    var done = function(error) {
-      if (errored) {
-        return
-      }
-      if (error) {
-        errored = true
-        return callback(error)
-      }
-      pending--
-      if (pending === 0) {
-        callback(null, result)
-      }
-    }
-
-    resolveSourcesHelper(map, mapUrl, options, function(fullUrl, sourceContent, index) {
-      result.sourcesResolved[index] = fullUrl
-      if (typeof sourceContent === "string") {
-        result.sourcesContent[index] = sourceContent
-        callbackAsync(done, null)
-      } else {
-        read(fullUrl, function(error, source) {
-          result.sourcesContent[index] = String(source)
-          done(error)
-        })
-      }
-    })
-  }
-
-  function resolveSourcesSync(map, mapUrl, read, options) {
-    var result = {
-      sourcesResolved: [],
-      sourcesContent:  []
-    }
-    resolveSourcesHelper(map, mapUrl, options, function(fullUrl, sourceContent, index) {
-      result.sourcesResolved[index] = fullUrl
-      if (read !== null) {
-        if (typeof sourceContent === "string") {
-          result.sourcesContent[index] = sourceContent
-        } else {
-          result.sourcesContent[index] = String(read(fullUrl))
-        }
-      }
-    })
-    return result
-  }
-
-  var endingSlash = /\/?$/
-
-  function resolveSourcesHelper(map, mapUrl, options, fn) {
-    options = options || {}
-    var fullUrl
-    var sourceContent
-    for (var index = 0, len = map.sources.length; index < len; index++) {
-      if (map.sourceRoot && !options.ignoreSourceRoot) {
-        // Make sure that the sourceRoot ends with a slash, so that `/scripts/subdir` becomes
-        // `/scripts/subdir/<source>`, not `/scripts/<source>`. Pointing to a file as source root
-        // does not make sense.
-        fullUrl = resolveUrl(mapUrl, map.sourceRoot.replace(endingSlash, "/"), map.sources[index])
-      } else {
-        fullUrl = resolveUrl(mapUrl, map.sources[index])
-      }
-      sourceContent = (map.sourcesContent || [])[index]
-      fn(fullUrl, sourceContent, index)
-    }
-  }
-
-
-
-  function resolve(code, codeUrl, read, options, callback) {
-    if (typeof options === "function") {
-      callback = options
-      options = {}
-    }
-    resolveSourceMap(code, codeUrl, read, function(error, mapData) {
-      if (error) {
-        return callback(error)
-      }
-      if (!mapData) {
-        return callback(null, null)
-      }
-      resolveSources(mapData.map, mapData.sourcesRelativeTo, read, options, function(error, result) {
-        if (error) {
-          return callback(error)
-        }
-        mapData.sourcesResolved = result.sourcesResolved
-        mapData.sourcesContent  = result.sourcesContent
-        callback(null, mapData)
-      })
-    })
-  }
-
-  function resolveSync(code, codeUrl, read, options) {
-    var mapData = resolveSourceMapSync(code, codeUrl, read)
-    if (!mapData) {
-      return null
-    }
-    var result = resolveSourcesSync(mapData.map, mapData.sourcesRelativeTo, read, options)
-    mapData.sourcesResolved = result.sourcesResolved
-    mapData.sourcesContent  = result.sourcesContent
-    return mapData
-  }
-
-
-
-  return {
-    resolveSourceMap:     resolveSourceMap,
-    resolveSourceMapSync: resolveSourceMapSync,
-    resolveSources:       resolveSources,
-    resolveSourcesSync:   resolveSourcesSync,
-    resolve:              resolve,
-    resolveSync:          resolveSync
-  }
-
-}));
-
-},{"resolve-url":256,"source-map-url":258}],258:[function(require,module,exports){
-// Copyright 2014 Simon Lydell
-// X11 (“MIT”) Licensed. (See LICENSE.)
-
-void (function(root, factory) {
-  if (typeof define === "function" && define.amd) {
-    define(factory)
-  } else if (typeof exports === "object") {
-    module.exports = factory()
-  } else {
-    root.sourceMappingURL = factory()
-  }
-}(this, function() {
-
-  var innerRegex = /[#@] sourceMappingURL=([^\s'"]*)/
-
-  var regex = RegExp(
-    "(?:" +
-      "/\\*" +
-      "(?:\\s*\r?\n(?://)?)?" +
-      "(?:" + innerRegex.source + ")" +
-      "\\s*" +
-      "\\*/" +
-      "|" +
-      "//(?:" + innerRegex.source + ")" +
-    ")" +
-    "\\s*$"
-  )
-
-  return {
-
-    regex: regex,
-    _innerRegex: innerRegex,
-
-    getFrom: function(code) {
-      var match = code.match(regex)
-      return (match ? match[1] || match[2] || "" : null)
-    },
-
-    existsIn: function(code) {
-      return regex.test(code)
-    },
-
-    removeFrom: function(code) {
-      return code.replace(regex, "")
-    },
-
-    insertBefore: function(code, string) {
-      var match = code.match(regex)
-      if (match) {
-        return code.slice(0, match.index) + string + code.slice(match.index)
-      } else {
-        return code + string
-      }
-    }
-  }
-
-}));
-
-},{}],259:[function(require,module,exports){
-// Copyright Joyent, Inc. and other Node contributors.
-//
-// Permission is hereby granted, free of charge, to any person obtaining a
-// copy of this software and associated documentation files (the
-// "Software"), to deal in the Software without restriction, including
-// without limitation the rights to use, copy, modify, merge, publish,
-// distribute, sublicense, and/or sell copies of the Software, and to permit
-// persons to whom the Software is furnished to do so, subject to the
-// following conditions:
-//
-// The above copyright notice and this permission notice shall be included
-// in all copies or substantial portions of the Software.
-//
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-// OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-// MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN
-// NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
-// USE OR OTHER DEALINGS IN THE SOFTWARE.
-
-module.exports = Stream;
-
-var EE = require('events').EventEmitter;
-var inherits = require('inherits');
-
-inherits(Stream, EE);
-Stream.Readable = require('readable-stream/readable.js');
-Stream.Writable = require('readable-stream/writable.js');
-Stream.Duplex = require('readable-stream/duplex.js');
-Stream.Transform = require('readable-stream/transform.js');
-Stream.PassThrough = require('readable-stream/passthrough.js');
-
-// Backwards-compat with node 0.4.x
-Stream.Stream = Stream;
-
-
-
-// old-style streams.  Note that the pipe method (the only relevant
-// part of this class) is overridden in the Readable class.
-
-function Stream() {
-  EE.call(this);
-}
-
-Stream.prototype.pipe = function(dest, options) {
-  var source = this;
-
-  function ondata(chunk) {
-    if (dest.writable) {
-      if (false === dest.write(chunk) && source.pause) {
-        source.pause();
-      }
-    }
-  }
-
-  source.on('data', ondata);
-
-  function ondrain() {
-    if (source.readable && source.resume) {
-      source.resume();
-    }
-  }
-
-  dest.on('drain', ondrain);
-
-  // If the 'end' option is not supplied, dest.end() will be called when
-  // source gets the 'end' or 'close' events.  Only dest.end() once.
-  if (!dest._isStdio && (!options || options.end !== false)) {
-    source.on('end', onend);
-    source.on('close', onclose);
-  }
-
-  var didOnEnd = false;
-  function onend() {
-    if (didOnEnd) return;
-    didOnEnd = true;
-
-    dest.end();
-  }
-
-
-  function onclose() {
-    if (didOnEnd) return;
-    didOnEnd = true;
-
-    if (typeof dest.destroy === 'function') dest.destroy();
-  }
-
-  // don't leave dangling pipes when there are errors.
-  function onerror(er) {
-    cleanup();
-    if (EE.listenerCount(this, 'error') === 0) {
-      throw er; // Unhandled stream error in pipe.
-    }
-  }
-
-  source.on('error', onerror);
-  dest.on('error', onerror);
-
-  // remove all the event listeners that were added.
-  function cleanup() {
-    source.removeListener('data', ondata);
-    dest.removeListener('drain', ondrain);
-
-    source.removeListener('end', onend);
-    source.removeListener('close', onclose);
-
-    source.removeListener('error', onerror);
-    dest.removeListener('error', onerror);
-
-    source.removeListener('end', cleanup);
-    source.removeListener('close', cleanup);
-
-    dest.removeListener('close', cleanup);
-  }
-
-  source.on('end', cleanup);
-  source.on('close', cleanup);
-
-  dest.on('close', cleanup);
-
-  dest.emit('pipe', source);
-
-  // Allow for unix-like usage: A.pipe(B).pipe(C)
-  return dest;
-};
-
-},{"events":230,"inherits":232,"readable-stream/duplex.js":246,"readable-stream/passthrough.js":252,"readable-stream/readable.js":253,"readable-stream/transform.js":254,"readable-stream/writable.js":255}],260:[function(require,module,exports){
+},{"./lib/_stream_writable.js":255}],260:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -32728,7 +32731,7 @@ var synchronized = exports.synchronized = function synchronized(func) {
 
 }).call(this,require('_process'))
 
-},{"_process":241,"stream":259}],281:[function(require,module,exports){
+},{"_process":241,"stream":249}],281:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -34109,7 +34112,7 @@ var attachFunction = exports.attachFunction = (0, _method2.default)(function (co
 
 }).call(this,require('_process'))
 
-},{"_process":241,"deferred":285,"method":296,"stream":259}],282:[function(require,module,exports){
+},{"_process":241,"deferred":285,"method":296,"stream":249}],282:[function(require,module,exports){
 (function (process){
 "use strict";
 
@@ -36067,7 +36070,7 @@ exports.default = Duplexer;
 
 }).call(this,require('_process'))
 
-},{"_process":241,"stream":259}],288:[function(require,module,exports){
+},{"_process":241,"stream":249}],288:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40818,7 +40821,7 @@ function compose(t1, t2) {
 
 }).call(this,require("buffer").Buffer)
 
-},{"buffer":7,"cc":280,"localUtils":294,"lodash":236,"log":295,"netro/modemcrc":298,"stream":259,"streams":308,"util":272}],298:[function(require,module,exports){
+},{"buffer":7,"cc":280,"localUtils":294,"lodash":236,"log":295,"netro/modemcrc":298,"stream":249,"streams":308,"util":272}],298:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44491,7 +44494,7 @@ var unzip = exports.unzip = (0, _method2.default)(function (predicates) {
 
 }).call(this,require('_process'))
 
-},{"_process":241,"deferred":285,"duplex2func":286,"duplexer":287,"method":296,"pipe":303,"piper":304,"stream":259,"string_decoder":260}],309:[function(require,module,exports){
+},{"_process":241,"deferred":285,"duplex2func":286,"duplexer":287,"method":296,"pipe":303,"piper":304,"stream":249,"string_decoder":260}],309:[function(require,module,exports){
 (function (Buffer){
 "use strict";
 
@@ -45566,7 +45569,10 @@ exports.default = function (app) {
 	var Button = app.load(_Button2.default);
 	return __(
 		"div",
-		null,
+		{ ondialogshow: function ondialogshow() {
+				var itemId = app.linkingPlaceId || app.activeDeviceId;
+				app.commands.DeinitializeDevice({ itemId: itemId });
+			} },
 		__(
 			"p",
 			null,
@@ -49313,7 +49319,7 @@ exports.default = function (websocket) {
 
 }).call(this,require('_process'),require("buffer").Buffer)
 
-},{"_process":241,"buffer":7,"stream":259,"stringChunk":309}],351:[function(require,module,exports){
+},{"_process":241,"buffer":7,"stream":249,"stringChunk":309}],351:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
