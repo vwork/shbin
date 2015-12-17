@@ -44747,9 +44747,10 @@ exports.default = function (app) {
 		return __(Command, {
 			message: "commandAddExistingItem",
 			onclick: function onclick() {
+				var placeId = app.activeDeviceId;
 				app.dialog = "SearchItems";
 				app.searchAction = function (itemId) {
-					app.commands.LinkItemToPlace({ placeId: app.activeDeviceId, itemId: itemId });
+					app.commands.LinkItemToPlace({ placeId: placeId, itemId: itemId });
 					app.dialog = "";
 				};
 				app.searchFilter = null;
@@ -45873,6 +45874,24 @@ exports.default = function (app, local) {
 			onclick: function onclick() {
 				app.commands.LinkItemToPlace({ itemId: app.activeDeviceId, placeId: app.activeParentPlaceId, controlled: false });
 				app.notification("Удалено из избранного");
+			}
+		}),
+		__(Command, {
+			message: "commandCopy",
+			visible: function visible() {
+				return !app.editing && app.activeDeviceId != app.main;
+			},
+			onclick: function onclick() {
+				var itemId = app.activeDeviceId;
+				app.dialog = "SearchItems";
+				app.searchAction = function (placeId) {
+					app.commands.LinkItemToPlace({ placeId: placeId, itemId: itemId });
+					app.dialog = "";
+				};
+				app.searchFilter = function (placeId) {
+					var device = app.getDevice(placeId);
+					return device && (device.type == "place" || device.type == "group");
+				};
 			}
 		}),
 		__(Command, {
