@@ -30534,12 +30534,17 @@ exports.default = function (appid) {
 				var type = _ref4$.type;
 				var content = _ref4$.content;
 				return type == "place" && content && content[id] && placeId != _this9.main;
-			});
-			if (places.length == 1) return places[0].id;
-			if (this.parentPlaceId && places.some(function (_ref5) {
+			}).map(function (_ref5) {
 				var _ref6 = _slicedToArray(_ref5, 1);
 
-				var id = _ref6[0];
+				var placeId = _ref6[0];
+				return placeId;
+			});
+			if (places.length == 1) return places[0][0];
+			if (this.parentPlaceId && places.some(function (_ref7) {
+				var _ref8 = _slicedToArray(_ref7, 1);
+
+				var id = _ref8[0];
 				return id == _this9.parentPlaceId;
 			})) return this.parentPlaceId;
 			return null;
@@ -30727,11 +30732,11 @@ exports.default = function (appid) {
 		linkActiveToFavourites: function linkActiveToFavourites(itemId) {
 			return this.linkToFavourites(this.activeDeviceId);
 		},
-		createItem: function createItem(_ref7) {
-			var type = _ref7.type;
-			var placeId = _ref7.placeId;
-			var caption = _ref7.caption;
-			var icon = _ref7.icon;
+		createItem: function createItem(_ref9) {
+			var type = _ref9.type;
+			var placeId = _ref9.placeId;
+			var caption = _ref9.caption;
+			var icon = _ref9.icon;
 
 			return this.commands.CreateItem({
 				type: type,

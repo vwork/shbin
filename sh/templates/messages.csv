@@ -13,6 +13,7 @@ commandLanguage,Мова / Language,Язык / Language,Language
 commandTestMenu,Тэставая версія,Тестовая версия,Test version
 commandLinkDevice,Прывязаць прыладу,Привязать устройство,Link device
 commandAdd,Дабавіць,Добавить,Add
+commandCopy,Капіраваць,Копировать,Copy
 commandAddPlace,Памяшканне альбо месца,Помещение или место,Room or place
 commandAddNewDevice,Новую прыладу,Новое устройство,New device
 commandCreateNewGroup,Групу прыладаў,Группу устройств,Device group
