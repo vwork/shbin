@@ -1,11 +1,11 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1449058296235
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 1450330397244
 
 CACHE:
 
-/favicon.ico
-/favicon96.ico
+/favicon.ico?v=3
+/favicon96.ico?v=3
 
 /img/theme1.jpg
 /img/theme2.jpg

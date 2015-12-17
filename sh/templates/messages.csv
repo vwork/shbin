@@ -4,7 +4,7 @@ ru,Руская,Русский,Russian
 by,Беларуская,Белорусский,Belarusian
 en,Ангельская,Английский,English
 
-favorites,мой дом,мой дом,my house
+favorites,Мой дом,Мой дом,Home
 commandMoveIcons,Упарадкаваць цэтлікі,Упорядочить значки,Order icons
 commandAddToHomeScreen,Дабавіць на галоўны экран,Добавить на главный экран,Add to home screen
 commandSearchDevices,Пошук,Поиск,Search
@@ -16,6 +16,7 @@ commandAdd,Дабавіць,Добавить,Add
 commandAddPlace,Памяшканне альбо месца,Помещение или место,Room or place
 commandAddNewDevice,Новую прыладу,Новое устройство,New device
 commandCreateNewGroup,Групу прыладаў,Группу устройств,Device group
+commandCreateNewScenario,Сцэнарый,Сценарий,Scenario
 commandAddExistingItem,Выбраць са спісу,Выбрать из списка,Choose existing item
 commandPurgeItem,Выдаліць з праграмы,Удалить из программы,Remove from program
 commandRenameItem,Змяніць назву,Изменить название,Rename device
@@ -25,7 +26,13 @@ nothingHere,Тут прыладаў пакуль няма,Здесь устро�
 commandShowLabels,Паказаць подпісы,Показать подписи,Show labels
 commandHideLabels,Схаваць подпісы,Спрятать подписи,Hide labels
 commandToFavourites,У абаранае,В избранное,To favourites
+commandRemoveFromFavourites,Выдаліць з абаранага,Удалить из избранного,Remove from favourites
 commandMoveIcons,Упарадкаваць,Упорядочить,Move icons
 commandDeleteIcons,Выдаліць,Удалить,Delete icons
 commandShowDefaultGroup,Паказаць групу памяшкання,Показать группу помещения,Show location group
 commandHideDefaultGroup,Схаваць групу памяшкання,Спрятать группу помещения,Hide use location group
+
+single,Прылада,Устройство,Device
+group,Група,Группа,Group
+place,Месца,Помещение,Place
+scenario,Сцэнарый,Сценарий,Scenario
