@@ -44,19 +44,19 @@ function update {
 			if [ -d server ] ; then
 				echo cannot delete 'server' folder
 			else
-				mkdir server
+				mkdir -p "server/!!This folder will be deleted while updating!!"
 				if [ ! -d server ] ; then
 					echo cannot create 'server' folder
 				else
 					echo uncompressing update archive
 					pushd server
 					tar -xzf /tmp/server_binary
-					mkdir "!!This folder will be deleted while updating!!"
 					popd
 					echo $hash>.binary_hash
 					rm .updating_flag
 					echo updating successfull
 					echo restarting
+					cp /smarthome/server/www/start_server /smarthome/start_server
 					sync
 					# do not return from updating. restart.
 					$restart

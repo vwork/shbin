@@ -2,4 +2,5 @@
 
 # Obsolete. Please, update references to /smarthome/start_server
 
+cp /smarthome/server/www/start_server /smarthome/start_server
 exec /smarthome/start_server
