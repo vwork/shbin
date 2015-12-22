@@ -1,0 +1,13 @@
+#!/bin/sh
+
+led 0 green
+
+# SHNetroManager
+
+# TODO: read modem path from ./server.conf
+
+rm /tmp/netro.socket
+./manager/SHNetroManager -t unix --unix_server_path /tmp/netro.socket --netro_path /dev/ttyO3 &
+
+# node server
+./run &
