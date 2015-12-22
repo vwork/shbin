@@ -28,18 +28,18 @@ function update {
 			echo update archive is valid. fire.
 			led 0 red
 			touch .updating_flag
-			if [ -n "$pid" ]; then
+			if [ -n "$pid" ] ; then
 				echo killing services
 				kill -TERM -$pid
 			else
 				echo no services to kill
 			fi
 			rm -rf server
-			if [ -d server ]
+			if [ -d server ] ; then
 				echo cannot delete 'server' folder
 			else
 				mkdir server
-				if [ ! -d server ]
+				if [ ! -d server ] ; then
 					echo cannot create 'server' folder
 				else
 					echo uncompressing update archive
