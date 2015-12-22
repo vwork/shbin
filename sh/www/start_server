@@ -63,6 +63,7 @@ function update {
 
 if [ -f .updating_flag ] ; then
 	echo broken update found
+	led 0 red
 	update
 	echo sleeping
 	sleep 3
