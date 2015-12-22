@@ -11,8 +11,14 @@ url=controller.sh.neroelectronics.by/binary
 led 0 yellow
 cd /smarthome
 
-if [ ! -x server/services ] ; then touch .updating_flag ; fi
-if [ ! -f .binary_hash ] ; then touch .updating_flag ; fi
+if [ ! -x server/services ] ; then
+	echo cannot find executable /smarthome/server/services
+	touch .updating_flag
+fi
+if [ ! -f .binary_hash ] ; then
+	echo cannot find previous update flag
+	touch .updating_flag
+fi
 
 pid=
 restart="exec $0 $1 $2 $3 $4 $5 $6 $7 $8 $9"
