@@ -55,6 +55,7 @@ function update {
 					rm .updating_flag
 					if [ -f .updating_flag ] ; then
 						echo error deleting .updating_flag
+						ls -a
 						sleep 10000
 					fi
 					echo updating successfull
