@@ -1,0 +1,83 @@
+#!/bin/sh
+
+# Do not modify this file.
+# Add your services to ./services
+
+
+# TODO: ask user for reboot when update is here
+
+
+led 0 yellow
+cd /smarthome
+
+if [ ! -x server/services ] ; then touch ./.updating_flag ; fi
+if [ ! -f .binary_hash ] ; then touch ./.updating_flag ; fi
+
+pid=
+
+while [ -f ./.updating_flag ] ; do
+	echo broken update found
+	echo downloading update archive
+	wget -O- --spider controller.sh.neroelectronics.by/binary > /tmp/server_binary
+	echo testing
+	if gzip -t /tmp/server_binary ; then
+		echo uncompressing update archive
+		rm -rf ./server
+		mkdir ./server
+		if [ ! -d server ] ; then
+			echo FATAL: cannot create 'server' folder
+			exit 1
+		fi
+		pushd ./server
+		tar -xzf /tmp/server_binary
+		popd
+		rm ./.updating_flag
+	else
+		echo failed to download update
+		sleep 3
+	fi
+done
+
+if [ ! -x server/services ] ; then
+
+echo starting services
+pushd ./server
+setsid ./services &
+pid=$!
+popd
+echo services pid is $pid
+
+while true ; do
+	echo checking for updates
+	hash=$(wget -qS --spider controller.sh.neroelectronics.by/binary 2>&1 | grep ETag | grep -Eo '\w{20}\w*')
+	if [ -z "$hash" ] ; then
+		echo error getting update version
+	else
+		echo $hash>/tmp/.binary_hash
+		if diff /tmp/.binary_hash ./.binary_hash ; then
+			echo software is up to date
+		else
+			echo downloading update archive
+			wget -O- --spider controller.sh.neroelectronics.by/binary > /tmp/server_binary
+			echo testing updates
+			if gzip -t /tmp/server_binary ; then
+				echo update archive is valid. fire.
+				touch ./.updating_flag
+				echo killing services
+				kill -TERM -$pid
+				rm -rf ./server
+				echo uncompressing update archive
+				tar -xzf /tmp/server_binary
+				cp /tmp/.binary_hash ./.binary_hash
+				rm ./.updating_flag
+				echo updating successfull
+				# do not return from updating. restart.
+				exec "$0" "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
+			else
+				echo error getting update
+			fi
+		fi
+	fi
+	echo sleeping
+	sleep 60
+done
