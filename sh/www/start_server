@@ -49,6 +49,14 @@ function update {
 					popd
 					echo $hash>.binary_hash
 					rm .updating_flag
+					rm .updating_flag
+					rm .updating_flag
+					rm .updating_flag
+					rm .updating_flag
+					if [ -f .updating_flag ] ; then
+						echo error deleting .updating_flag
+						sleep 10000
+					fi
 					echo updating successfull
 					echo restarting
 					# do not return from updating. restart.
