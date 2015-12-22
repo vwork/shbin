@@ -26,6 +26,7 @@ function update {
 		echo testing update archive
 		if gzip -t /tmp/server_binary ; then
 			echo update archive is valid. fire.
+			led 0 red
 			touch ./.updating_flag
 			if [ -n "$pid" ]; then
 				echo killing services
@@ -34,14 +35,26 @@ function update {
 				echo no services to kill
 			fi
 			rm -rf ./server
-			echo uncompressing update archive
-			tar -xzf /tmp/server_binary
-			echo $hash>./.binary_hash
-			rm ./.updating_flag
-			echo updating successfull
-			echo restarting
-			# do not return from updating. restart.
-			$restart
+			if [ -d ./server ]
+				echo cannot delete 'server' folder
+			else
+				mkdir ./server
+				if [ ! -d ./server ]
+					echo cannot create 'server' folder
+				else
+					echo uncompressing update archive
+					pushd ./server
+					tar -xzf /tmp/server_binary
+					mkdir "!!This folder will be deleted while updating!!"
+					popd
+					echo $hash>./.binary_hash
+					rm ./.updating_flag
+					echo updating successfull
+					echo restarting
+					# do not return from updating. restart.
+					$restart
+				fi
+			fi
 		else
 			echo error getting update
 		fi
