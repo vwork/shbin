@@ -19,7 +19,7 @@ restart="exec $0 $1 $2 $3 $4 $5 $6 $7 $8 $9"
 
 function update {
 	echo downloading update archive
-	hash=$(wget -qS $url 2>&1 >/tmp/server_binary | grep ETag | grep -Eo '\w{20}\w*')
+	hash=$(wget -qS -O- $url 3>&1 1>/tmp/server_binary 2>&3 | grep ETag | grep -Eo '\w{20}\w*')
 	if [ -z "$hash" ] ; then
 		echo error getting update archive
 	else
