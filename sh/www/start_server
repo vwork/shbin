@@ -11,8 +11,8 @@ url=controller.sh.neroelectronics.by/binary
 led 0 yellow
 cd /smarthome
 
-if [ ! -x server/services ] ; then touch ./.updating_flag ; fi
-if [ ! -f .binary_hash ] ; then touch ./.updating_flag ; fi
+if [ ! -x server/services ] ; then touch .updating_flag ; fi
+if [ ! -f .binary_hash ] ; then touch .updating_flag ; fi
 
 pid=
 restart="exec $0 $1 $2 $3 $4 $5 $6 $7 $8 $9"
@@ -27,28 +27,28 @@ function update {
 		if gzip -t /tmp/server_binary ; then
 			echo update archive is valid. fire.
 			led 0 red
-			touch ./.updating_flag
+			touch .updating_flag
 			if [ -n "$pid" ]; then
 				echo killing services
 				kill -TERM -$pid
 			else
 				echo no services to kill
 			fi
-			rm -rf ./server
-			if [ -d ./server ]
+			rm -rf server
+			if [ -d server ]
 				echo cannot delete 'server' folder
 			else
-				mkdir ./server
-				if [ ! -d ./server ]
+				mkdir server
+				if [ ! -d server ]
 					echo cannot create 'server' folder
 				else
 					echo uncompressing update archive
-					pushd ./server
+					pushd server
 					tar -xzf /tmp/server_binary
 					mkdir "!!This folder will be deleted while updating!!"
 					popd
-					echo $hash>./.binary_hash
-					rm ./.updating_flag
+					echo $hash>.binary_hash
+					rm .updating_flag
 					echo updating successfull
 					echo restarting
 					# do not return from updating. restart.
@@ -61,7 +61,7 @@ function update {
 	fi
 }
 
-if [ -f ./.updating_flag ] ; then
+if [ -f .updating_flag ] ; then
 	echo broken update found
 	update
 	echo sleeping
@@ -71,7 +71,7 @@ if [ -f ./.updating_flag ] ; then
 fi
 
 echo starting services
-pushd ./server
+pushd server
 setsid ./services &
 pid=$!
 popd
@@ -84,7 +84,7 @@ while true ; do
 		echo error getting update version
 	else
 		echo $hash>/tmp/.binary_hash
-		if diff /tmp/.binary_hash ./.binary_hash ; then
+		if diff /tmp/.binary_hash .binary_hash ; then
 			echo software is up to date
 		else
 			update
