@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Do not modify this file.
 # Add your services to ./services
@@ -6,6 +6,7 @@
 
 # TODO: ask user for reboot when update is here
 
+url=controller.sh.neroelectronics.by/binary
 
 led 0 yellow
 cd /smarthome
@@ -14,31 +15,47 @@ if [ ! -x server/services ] ; then touch ./.updating_flag ; fi
 if [ ! -f .binary_hash ] ; then touch ./.updating_flag ; fi
 
 pid=
+restart="exec $0 $1 $2 $3 $4 $5 $6 $7 $8 $9"
 
-while [ -f ./.updating_flag ] ; do
-	echo broken update found
+function update {
 	echo downloading update archive
-	wget -O- --spider controller.sh.neroelectronics.by/binary > /tmp/server_binary
-	echo testing
-	if gzip -t /tmp/server_binary ; then
-		echo uncompressing update archive
-		rm -rf ./server
-		mkdir ./server
-		if [ ! -d server ] ; then
-			echo FATAL: cannot create 'server' folder
-			exit 1
-		fi
-		pushd ./server
-		tar -xzf /tmp/server_binary
-		popd
-		rm ./.updating_flag
+	hash=$(wget -qS $url 2>&1 >/tmp/server_binary | grep ETag | grep -Eo '\w{20}\w*')
+	if [ -z "$hash" ] ; then
+		echo error getting update archive
 	else
-		echo failed to download update
-		sleep 3
+		echo testing update archive
+		if gzip -t /tmp/server_binary ; then
+			echo update archive is valid. fire.
+			touch ./.updating_flag
+			if [ -n "$pid" ]; then
+				echo killing services
+				kill -TERM -$pid
+			else
+				echo no services to kill
+			fi
+			rm -rf ./server
+			echo uncompressing update archive
+			tar -xzf /tmp/server_binary
+			echo $hash>./.binary_hash
+			rm ./.updating_flag
+			echo updating successfull
+			echo restarting
+			# do not return from updating. restart.
+			$restart
+		else
+			echo error getting update
+		fi
 	fi
-done
+}
 
-if [ ! -x server/services ] ; then
+if [ -f ./.updating_flag ] ; then
+	echo broken update found
+	update
+	echo sleeping
+	sleep 3
+	echo restarting
+	$restart
+fi
 
 echo starting services
 pushd ./server
@@ -49,7 +66,7 @@ echo services pid is $pid
 
 while true ; do
 	echo checking for updates
-	hash=$(wget -qS --spider controller.sh.neroelectronics.by/binary 2>&1 | grep ETag | grep -Eo '\w{20}\w*')
+	hash=$(wget -qS --spider $url 2>&1 | grep ETag | grep -Eo '\w{20}\w*')
 	if [ -z "$hash" ] ; then
 		echo error getting update version
 	else
@@ -57,25 +74,7 @@ while true ; do
 		if diff /tmp/.binary_hash ./.binary_hash ; then
 			echo software is up to date
 		else
-			echo downloading update archive
-			wget -O- --spider controller.sh.neroelectronics.by/binary > /tmp/server_binary
-			echo testing updates
-			if gzip -t /tmp/server_binary ; then
-				echo update archive is valid. fire.
-				touch ./.updating_flag
-				echo killing services
-				kill -TERM -$pid
-				rm -rf ./server
-				echo uncompressing update archive
-				tar -xzf /tmp/server_binary
-				cp /tmp/.binary_hash ./.binary_hash
-				rm ./.updating_flag
-				echo updating successfull
-				# do not return from updating. restart.
-				exec "$0" "$1" "$2" "$3" "$4" "$5" "$6" "$7" "$8" "$9"
-			else
-				echo error getting update
-			fi
+			update
 		fi
 	fi
 	echo sleeping
