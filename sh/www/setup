@@ -12,14 +12,19 @@ set -eo pipefail
 rm -rf ./smarthome/shbin
 rm -rf ./smarthome/server
 
-mkdir -p ./smarthome
-mkdir -p "./smarthome/server/!!This folder will be deleted while updating!!"
 mkdir -p ./smarthome/shconfig
+mkdir -p ./smarthome/server
 mkdir -p ./usr
 
-pushd ./smarthome/server
-wget http://controller.sh.neroelectronics.by/binary -O- | tar -xz
-popd
+touch ./smarthome/.updating_flag
+
+wget -O- http://controller.sh.neroelectronics.by/start_server > ./smarthome/start_server
+chmod +x ./smarthome/start_server
+
+echo '#!/bin/sh
+exec /smarthome/start_server
+' > ./smarthome/server/start
+chmod +x ./smarthome/server/start
 
 if [ ! -f ./smarthome/shconfig/user.conf ] ; then
 	echo 'modem: m
