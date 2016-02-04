@@ -7,7 +7,7 @@ led 0 green
 # TODO: read modem path from ./server.conf
 
 rm /tmp/netro.socket
-./manager/SHNetroManager -t unix --unix_server_path /tmp/netro.socket --netro_path /dev/ttyO3 &
+env LD_LIBRARY_PATH=./manager ./manager/SHNetroManager -t unix --unix_server_path /tmp/netro.socket --netro_path /dev/ttyO3 &
 
 # node server
 ./run &
