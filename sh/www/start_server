@@ -84,6 +84,7 @@ setsid ./services &
 pid=$!
 popd
 echo services pid is $pid
+echo $pid > /tmp/smarthome
 
 while true ; do
 	echo checking for updates
