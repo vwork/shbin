@@ -13,8 +13,8 @@ env \
 	LD_LIBRARY_PATH=$(pwd)/manager \
 	./manager/SHNetroManager \
 	-t unix \
-	--unix_server_path $(unix_socket) \
-	--netro_path $(netro_path) \
+	--unix_server_path $unix_socket \
+	--netro_path $netro_path \
 	&
 
 # node server
