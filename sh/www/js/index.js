@@ -36947,174 +36947,180 @@ exports.default = collections.transformer(regeneratorRuntime.mark(function _call
 
 				case 6:
 					if ((_11 = _context3.sent).done) {
-						_context3.next = 38;
+						_context3.next = 46;
 						break;
 					}
 
 					_12 = true;
 					chunk = _11.value;
+
+					debugger;console.log("###########################".green);
+					debugger;console.log(String(chunk).green);
 					_iteratorNormalCompletion = true;
 					_didIteratorError = false;
 					_iteratorError = undefined;
-					_context3.prev = 12;
+					_context3.prev = 16;
 					_iterator = buf(chunk)[Symbol.iterator]();
 
-				case 14:
+				case 18:
 					if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-						_context3.next = 22;
+						_context3.next = 30;
 						break;
 					}
 
 					_step$value = _slicedToArray(_step.value, 1);
 					_obj = _step$value[0];
-					_context3.next = 19;
+
+					debugger;console.log("###########################".blue);
+					debugger;console.log(JSON.stringify(_obj).blue);
+					_context3.next = 27;
 					return _obj;
 
-				case 19:
+				case 27:
 					_iteratorNormalCompletion = true;
-					_context3.next = 14;
+					_context3.next = 18;
 					break;
 
-				case 22:
-					_context3.next = 28;
+				case 30:
+					_context3.next = 36;
 					break;
 
-				case 24:
-					_context3.prev = 24;
-					_context3.t0 = _context3["catch"](12);
+				case 32:
+					_context3.prev = 32;
+					_context3.t0 = _context3["catch"](16);
 					_didIteratorError = true;
 					_iteratorError = _context3.t0;
 
-				case 28:
-					_context3.prev = 28;
-					_context3.prev = 29;
+				case 36:
+					_context3.prev = 36;
+					_context3.prev = 37;
 
 					if (!_iteratorNormalCompletion && _iterator.return) {
 						_iterator.return();
 					}
 
-				case 31:
-					_context3.prev = 31;
+				case 39:
+					_context3.prev = 39;
 
 					if (!_didIteratorError) {
-						_context3.next = 34;
+						_context3.next = 42;
 						break;
 					}
 
 					throw _iteratorError;
 
-				case 34:
-					return _context3.finish(31);
+				case 42:
+					return _context3.finish(39);
 
-				case 35:
-					return _context3.finish(28);
+				case 43:
+					return _context3.finish(36);
 
-				case 36:
+				case 44:
 					_context3.next = 3;
 					break;
 
-				case 38:
-					_context3.next = 44;
+				case 46:
+					_context3.next = 52;
 					break;
 
-				case 40:
-					_context3.prev = 40;
+				case 48:
+					_context3.prev = 48;
 					_context3.t1 = _context3["catch"](2);
 
 					_14 = true;
 					_13 = _context3.t1;
 
-				case 44:
-					_context3.prev = 44;
-					_context3.prev = 45;
+				case 52:
+					_context3.prev = 52;
+					_context3.prev = 53;
 
 					if (!(_12 && _10.return)) {
-						_context3.next = 49;
+						_context3.next = 57;
 						break;
 					}
 
-					_context3.next = 49;
+					_context3.next = 57;
 					return regeneratorRuntime.awrap(_10.return());
 
-				case 49:
-					_context3.prev = 49;
+				case 57:
+					_context3.prev = 57;
 
 					if (!_14) {
-						_context3.next = 52;
+						_context3.next = 60;
 						break;
 					}
 
 					throw _13;
 
-				case 52:
-					return _context3.finish(49);
+				case 60:
+					return _context3.finish(57);
 
-				case 53:
-					return _context3.finish(44);
+				case 61:
+					return _context3.finish(52);
 
-				case 54:
+				case 62:
 					_iteratorNormalCompletion2 = true;
 					_didIteratorError2 = false;
 					_iteratorError2 = undefined;
-					_context3.prev = 57;
+					_context3.prev = 65;
 					_iterator2 = buf(null)[Symbol.iterator]();
 
-				case 59:
+				case 67:
 					if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-						_context3.next = 67;
+						_context3.next = 75;
 						break;
 					}
 
 					_step2$value = _slicedToArray(_step2.value, 1);
 					_obj2 = _step2$value[0];
-					_context3.next = 64;
+					_context3.next = 72;
 					return _obj2;
 
-				case 64:
+				case 72:
 					_iteratorNormalCompletion2 = true;
-					_context3.next = 59;
+					_context3.next = 67;
 					break;
 
-				case 67:
-					_context3.next = 73;
+				case 75:
+					_context3.next = 81;
 					break;
 
-				case 69:
-					_context3.prev = 69;
-					_context3.t2 = _context3["catch"](57);
+				case 77:
+					_context3.prev = 77;
+					_context3.t2 = _context3["catch"](65);
 					_didIteratorError2 = true;
 					_iteratorError2 = _context3.t2;
 
-				case 73:
-					_context3.prev = 73;
-					_context3.prev = 74;
+				case 81:
+					_context3.prev = 81;
+					_context3.prev = 82;
 
 					if (!_iteratorNormalCompletion2 && _iterator2.return) {
 						_iterator2.return();
 					}
 
-				case 76:
-					_context3.prev = 76;
+				case 84:
+					_context3.prev = 84;
 
 					if (!_didIteratorError2) {
-						_context3.next = 79;
+						_context3.next = 87;
 						break;
 					}
 
 					throw _iteratorError2;
 
-				case 79:
-					return _context3.finish(76);
+				case 87:
+					return _context3.finish(84);
 
-				case 80:
-					return _context3.finish(73);
+				case 88:
+					return _context3.finish(81);
 
-				case 81:
+				case 89:
 				case "end":
 					return _context3.stop();
 			}
 		}
-	}, _callee3, this, [[2, 40, 44, 54], [12, 24, 28, 36], [29,, 31, 35], [45,, 49, 53], [57, 69, 73, 81], [74,, 76, 80]]);
+	}, _callee3, this, [[2, 48, 52, 62], [16, 32, 36, 44], [37,, 39, 43], [53,, 57, 61], [65, 77, 81, 89], [82,, 84, 88]]);
 }));
 var readFirst = exports.readFirst = function readFirst(stream) {
 	return new _bluebird2.default(function (resolve) {
