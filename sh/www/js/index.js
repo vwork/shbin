@@ -44902,7 +44902,7 @@ function getDeviceParams(item) {
 		group: item.group,
 		model: item.model,
 		single: item.type == "single",
-		acknowledgement: item.type == "single" && item.acknowledgement !== false
+		acknowledgement: Boolean(item.type == "single" && item.acknowledgement !== false)
 	};
 }
 

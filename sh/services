@@ -4,10 +4,18 @@ led 0 green
 
 # SHNetroManager
 
-# TODO: read modem path from ./server.conf
+netro_path=/dev/ttyO3
+
+unix_socket=$(cat ./server.conf | grep -E '^modem:' | sed s'/modem:\s*//')
 
 rm /tmp/netro.socket
-env LD_LIBRARY_PATH=./manager ./manager/SHNetroManager -t unix --unix_server_path /tmp/netro.socket --netro_path /dev/ttyO3 &
+env \
+	LD_LIBRARY_PATH=$(pwd)/manager \
+	./manager/SHNetroManager \
+	-t unix \
+	--unix_server_path $(unix_socket) \
+	--netro_path $(netro_path) \
+	&
 
 # node server
 ./run &
