@@ -51327,6 +51327,11 @@ var Cell = function (_ImmutableInterface2) {
 				} };
 		}
 	}, {
+		key: "_liveRec",
+		get: function get() {
+			return this._live && this._live.object;
+		}
+	}, {
 		key: "live",
 		get: function get() {
 			return this._live && this._live.object;
@@ -51779,8 +51784,8 @@ ra.apply = function (value, partial) {
 ra.throw = function (value) {
 	return getCell(this)._throw(value);
 };
-ra.touch = function () {
-	return getCell(this)._touch();
+ra.touch = function (name) {
+	return (name == null ? getCell(this) : getCell(this)._liveRec[name])._touch();
 };
 
 ra.noTouch = function (fun) {
