@@ -39534,14 +39534,14 @@ var Thread = exports.Thread = function (_Child) {
 (function (process){
 "use strict";
 
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-exports.attachHandler = exports.attachFunction = exports.makeFunction = exports.attachAsyncFunction = exports.makeAsyncFunction = exports.makeSender = exports.makeReceiver = exports.mixer = exports.demux = exports.mix = exports.zip = exports.unzipA = exports.unzip = exports.wrap = exports.timer = exports.connect = exports.transformer = exports.repair = exports.concat = exports.takeWhile = exports.filter = exports.map = exports.transform = exports.reduce = exports.forEach = exports.for = exports.stream = exports.duplex = exports.toReadable = exports.fromReadable = exports.__namespace__ = undefined;
+exports.attachHandler = exports.attachFunction = exports.makeFunction = exports.attachAsyncFunction = exports.makeAsyncFunction = exports.makeSender = exports.makeReceiver = exports.mixer = exports.demux = exports.mix = exports.zip = exports.unzipA = exports.unzip = exports.wrap = exports.timer = exports.connect = exports.transformer = exports.repair = exports.concat = exports.takeWhile = exports.filter = exports.map = exports.transform = exports.reduce = exports.forEach = exports.for = exports.stream = exports.duplex = exports.streams = exports.toReadable = exports.fromReadable = exports.__namespace__ = undefined;
 
 var _bluebird = require("bluebird");
 
@@ -39573,171 +39573,64 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 var __namespace__ = exports.__namespace__ = true;
 
-var _AGProto = Object.getPrototypeOf(regeneratorRuntime.mark(function _callee() {
-	return regeneratorRuntime.async(function _callee$(_context) {
-		while (1) {
-			switch (_context.prev = _context.next) {
-				case 0:
-				case "end":
-					return _context.stop();
-			}
-		}
-	}, _callee, this);
-})());
-if (!_AGProto[Symbol.iterator]) Object.defineProperty(_AGProto, Symbol.asyncIterator, { configurable: true, value: function value() {
-		return this;
-	} });
-
-if (!_stream2.default.Readable.prototype[Symbol.asyncIterator]) Object.defineProperty(_stream2.default.Readable.prototype, Symbol.asyncIterator, { configurable: true, value: function value() {
-
-		var s = this;
-		s.pause();
-
-		var waitForReadable = null,
-		    done = false,
-		    error = null;
-
-		var onreadable = function onreadable() {
-			if (waitForReadable != null) {
-				process.nextTick(waitForReadable);
-				waitForReadable = null;
-			}
-		};
-		var onend = function onend() {
-			done = true;
-			onreadable();
-		};
-		var onerror = function onerror(e) {
-			error = e;
-			onend();
-		};
-
-		s.on("error", onerror);
-		s.on("end", onend);
-		s.on("readable", onreadable);
-
-		return regeneratorRuntime.mark(function _callee2() {
-			var value;
-			return regeneratorRuntime.async(function _callee2$(_context2) {
-				while (1) {
-					switch (_context2.prev = _context2.next) {
-						case 0:
-							_context2.prev = 0;
-
-						case 1:
-							if (done) {
-								_context2.next = 12;
-								break;
-							}
-
-							value = s.read();
-
-							if (!(value != null)) {
-								_context2.next = 8;
-								break;
-							}
-
-							_context2.next = 6;
-							return value;
-
-						case 6:
-							_context2.next = 10;
-							break;
-
-						case 8:
-							_context2.next = 10;
-							return regeneratorRuntime.awrap(new _bluebird2.default(function (resolve) {
-								return waitForReadable = resolve;
-							}));
-
-						case 10:
-							_context2.next = 1;
-							break;
-
-						case 12:
-							_context2.prev = 12;
-
-							s.removeListener("error", onerror);
-							s.removeListener("end", onend);
-							s.removeListener("readable", onreadable);
-							return _context2.finish(12);
-
-						case 17:
-							if (!(error != null)) {
-								_context2.next = 19;
-								break;
-							}
-
-							throw error;
-
-						case 19:
-						case "end":
-							return _context2.stop();
-					}
-				}
-			}, _callee2, this, [[0,, 12, 17]]);
-		})();
-	}
-});
-
 var fromReadable = exports.fromReadable = (0, _method2.default)(function (s) {
 	return _stream2.default.Readable.prototype[Symbol.asyncIterator].call(s);
 });
 
 var makeReadMethod = function makeReadMethod(collection) {
 	var i = null;
-	return function _callee3() {
-		var _ref, _value, done, v;
+	return function _callee() {
+		var _ref, value, done, v;
 
-		return regeneratorRuntime.async(function _callee3$(_context3) {
+		return regeneratorRuntime.async(function _callee$(_context) {
 			while (1) {
-				switch (_context3.prev = _context3.next) {
+				switch (_context.prev = _context.next) {
 					case 0:
-						_context3.prev = 0;
+						_context.prev = 0;
 
 						if (i == null) i = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-						_context3.next = 4;
+						_context.next = 4;
 						return regeneratorRuntime.awrap(i.next());
 
 					case 4:
-						_ref = _context3.sent;
-						_value = _ref.value;
+						_ref = _context.sent;
+						value = _ref.value;
 						done = _ref.done;
 
 						if (!done) {
-							_context3.next = 11;
+							_context.next = 11;
 							break;
 						}
 
-						this.push(null);_context3.next = 15;
+						this.push(null);_context.next = 15;
 						break;
 
 					case 11:
-						_context3.next = 13;
-						return regeneratorRuntime.awrap(_value);
+						_context.next = 13;
+						return regeneratorRuntime.awrap(value);
 
 					case 13:
-						v = _context3.sent;
+						v = _context.sent;
 
 						if (v == null) this.push(_bluebird2.default.resolve(v));else this.push(v);
 
 					case 15:
-						_context3.next = 20;
+						_context.next = 20;
 						break;
 
 					case 17:
-						_context3.prev = 17;
-						_context3.t0 = _context3["catch"](0);
+						_context.prev = 17;
+						_context.t0 = _context["catch"](0);
 
 						try {
 							this.push(null);
 						} finally {
-							this.emit("error", _context3.t0);
+							this.emit("error", _context.t0);
 						}
 
 					case 20:
 					case "end":
-						return _context3.stop();
+						return _context.stop();
 				}
 			}
 		}, null, this, [[0, 17]]);
@@ -39748,13 +39641,21 @@ var toReadable = exports.toReadable = (0, _method2.default)(function (collection
 	return new _stream2.default.Readable({ objectMode: true, read: makeReadMethod(collection) });
 });
 
-var duplex = exports.duplex = function duplex(_duplex) {
+var streams = exports.streams = function streams(_ref2) {
+	var _ref3 = _slicedToArray(_ref2, 2);
+
+	var instream = _ref3[0];
+	var outstream = _ref3[1];
 	return function (collection) {
-		_bluebird2.default.resolve(_duplex).then(function (duplex) {
-			return toReadable(collection).pipe(duplex);
+		_bluebird2.default.resolve(outstream).then(function (outstream) {
+			return toReadable(collection).pipe(outstream);
 		});
-		return (0, _iterable2.default)(_duplex);
+		return (0, _iterable2.default)(instream);
 	};
+};
+
+var duplex = exports.duplex = function duplex(_duplex) {
+	return streams([_duplex, _duplex]);
 };
 
 var makeStream = function makeStream(consumer) {
@@ -39791,307 +39692,307 @@ var m = function m(proc) {
 	});
 };
 
-var genAsync = regeneratorRuntime.mark(function _callee4(collection, generator) {
+var genAsync = regeneratorRuntime.mark(function _callee2(collection, generator) {
 	var cok, error, isError, c, g, cv, gv;
-	return regeneratorRuntime.async(function _callee4$(_context4) {
+	return regeneratorRuntime.async(function _callee2$(_context2) {
 		while (1) {
-			switch (_context4.prev = _context4.next) {
+			switch (_context2.prev = _context2.next) {
 				case 0:
 					cok = true, error = undefined, isError = false;
 					c = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
 					g = (0, _iterable2.default)(generator)[Symbol.asyncIterator]();
-					_context4.prev = 3;
+					_context2.prev = 3;
 					cv = undefined;
-					_context4.next = 7;
+					_context2.next = 7;
 					return regeneratorRuntime.awrap(g.next());
 
 				case 7:
-					gv = _context4.sent;
+					gv = _context2.sent;
 
 				case 8:
 					if (gv.done) {
-						_context4.next = 39;
+						_context2.next = 39;
 						break;
 					}
 
-					_context4.next = 11;
+					_context2.next = 11;
 					return gv.value;
 
 				case 11:
-					_context4.prev = 11;
+					_context2.prev = 11;
 
 					cok = true;
-					_context4.next = 15;
+					_context2.next = 15;
 					return regeneratorRuntime.awrap(c.next());
 
 				case 15:
-					cv = _context4.sent;
-					_context4.next = 26;
+					cv = _context2.sent;
+					_context2.next = 26;
 					break;
 
 				case 18:
-					_context4.prev = 18;
-					_context4.t0 = _context4["catch"](11);
+					_context2.prev = 18;
+					_context2.t0 = _context2["catch"](11);
 
 					if (g.throw) {
-						_context4.next = 22;
+						_context2.next = 22;
 						break;
 					}
 
-					throw _context4.t0;
+					throw _context2.t0;
 
 				case 22:
-					_context4.next = 24;
-					return regeneratorRuntime.awrap(g.throw(_context4.t0));
+					_context2.next = 24;
+					return regeneratorRuntime.awrap(g.throw(_context2.t0));
 
 				case 24:
-					gv = _context4.sent;
-					return _context4.abrupt("break", 39);
+					gv = _context2.sent;
+					return _context2.abrupt("break", 39);
 
 				case 26:
 					if (!cv.done) {
-						_context4.next = 33;
+						_context2.next = 33;
 						break;
 					}
 
 					if (g.return) {
-						_context4.next = 29;
+						_context2.next = 29;
 						break;
 					}
 
-					return _context4.abrupt("return", cv.value);
+					return _context2.abrupt("return", cv.value);
 
 				case 29:
-					_context4.next = 31;
+					_context2.next = 31;
 					return regeneratorRuntime.awrap(g.return(cv.value));
 
 				case 31:
-					gv = _context4.sent;
-					return _context4.abrupt("break", 39);
+					gv = _context2.sent;
+					return _context2.abrupt("break", 39);
 
 				case 33:
 					cok = false;
-					_context4.next = 36;
+					_context2.next = 36;
 					return regeneratorRuntime.awrap(g.next(cv.value));
 
 				case 36:
-					gv = _context4.sent;
-					_context4.next = 8;
+					gv = _context2.sent;
+					_context2.next = 8;
 					break;
 
 				case 39:
 					if (gv.done) {
-						_context4.next = 47;
+						_context2.next = 47;
 						break;
 					}
 
-					_context4.next = 42;
+					_context2.next = 42;
 					return gv.value;
 
 				case 42:
-					_context4.next = 44;
+					_context2.next = 44;
 					return regeneratorRuntime.awrap(g.next());
 
 				case 44:
-					gv = _context4.sent;
-					_context4.next = 39;
+					gv = _context2.sent;
+					_context2.next = 39;
 					break;
 
 				case 47:
-					return _context4.abrupt("return", gv.value);
+					return _context2.abrupt("return", gv.value);
 
 				case 50:
-					_context4.prev = 50;
-					_context4.t1 = _context4["catch"](3);
+					_context2.prev = 50;
+					_context2.t1 = _context2["catch"](3);
 
-					error = _context4.t1;
+					error = _context2.t1;
 					isError = true;
 
 				case 54:
-					_context4.prev = 54;
-					_context4.prev = 55;
+					_context2.prev = 54;
+					_context2.prev = 55;
 
 					if (!(!cok && c.return)) {
-						_context4.next = 59;
+						_context2.next = 59;
 						break;
 					}
 
-					_context4.next = 59;
+					_context2.next = 59;
 					return regeneratorRuntime.awrap(c.return());
 
 				case 59:
-					_context4.prev = 59;
+					_context2.prev = 59;
 
 					if (!isError) {
-						_context4.next = 62;
+						_context2.next = 62;
 						break;
 					}
 
 					throw error;
 
 				case 62:
-					return _context4.finish(59);
+					return _context2.finish(59);
 
 				case 63:
-					return _context4.finish(54);
+					return _context2.finish(54);
 
 				case 64:
 				case "end":
-					return _context4.stop();
+					return _context2.stop();
 			}
 		}
-	}, _callee4, this, [[3, 50, 54, 64], [11, 18], [55,, 59, 63]]);
+	}, _callee2, this, [[3, 50, 54, 64], [11, 18], [55,, 59, 63]]);
 });
 
-var genSync = regeneratorRuntime.mark(function _callee5(collection, generator) {
+var genSync = regeneratorRuntime.mark(function _callee3(collection, generator) {
 	var cok, error, isError, c, g, _cv, _gv;
 
-	return regeneratorRuntime.wrap(function _callee5$(_context5) {
+	return regeneratorRuntime.wrap(function _callee3$(_context3) {
 		while (1) {
-			switch (_context5.prev = _context5.next) {
+			switch (_context3.prev = _context3.next) {
 				case 0:
 					cok = true, error = undefined, isError = false;
 					c = collection[Symbol.iterator]();
 					g = generator[Symbol.iterator]();
-					_context5.prev = 3;
+					_context3.prev = 3;
 					_cv = undefined, _gv = g.next();
 
 				case 5:
 					if (_gv.done) {
-						_context5.next = 28;
+						_context3.next = 28;
 						break;
 					}
 
-					_context5.next = 8;
+					_context3.next = 8;
 					return _gv.value;
 
 				case 8:
-					_context5.prev = 8;
+					_context3.prev = 8;
 
 					cok = true;
 					_cv = c.next();
-					_context5.next = 19;
+					_context3.next = 19;
 					break;
 
 				case 13:
-					_context5.prev = 13;
-					_context5.t0 = _context5["catch"](8);
+					_context3.prev = 13;
+					_context3.t0 = _context3["catch"](8);
 
 					if (g.throw) {
-						_context5.next = 17;
+						_context3.next = 17;
 						break;
 					}
 
-					throw _context5.t0;
+					throw _context3.t0;
 
 				case 17:
-					_gv = g.throw(_context5.t0);
-					return _context5.abrupt("break", 28);
+					_gv = g.throw(_context3.t0);
+					return _context3.abrupt("break", 28);
 
 				case 19:
 					if (!_cv.done) {
-						_context5.next = 24;
+						_context3.next = 24;
 						break;
 					}
 
 					if (g.return) {
-						_context5.next = 22;
+						_context3.next = 22;
 						break;
 					}
 
-					return _context5.abrupt("return", _cv.value);
+					return _context3.abrupt("return", _cv.value);
 
 				case 22:
 					_gv = g.return(_cv.value);
-					return _context5.abrupt("break", 28);
+					return _context3.abrupt("break", 28);
 
 				case 24:
 					cok = false;
 					_gv = g.next(_cv.value);
-					_context5.next = 5;
+					_context3.next = 5;
 					break;
 
 				case 28:
 					if (_gv.done) {
-						_context5.next = 34;
+						_context3.next = 34;
 						break;
 					}
 
-					_context5.next = 31;
+					_context3.next = 31;
 					return _gv.value;
 
 				case 31:
 					_gv = g.next();
-					_context5.next = 28;
+					_context3.next = 28;
 					break;
 
 				case 34:
-					return _context5.abrupt("return", _gv.value);
+					return _context3.abrupt("return", _gv.value);
 
 				case 37:
-					_context5.prev = 37;
-					_context5.t1 = _context5["catch"](3);
+					_context3.prev = 37;
+					_context3.t1 = _context3["catch"](3);
 
-					error = _context5.t1;
+					error = _context3.t1;
 					isError = true;
 
 				case 41:
-					_context5.prev = 41;
-					_context5.prev = 42;
+					_context3.prev = 41;
+					_context3.prev = 42;
 
 					if (!cok && c.return) c.return();
 
 				case 44:
-					_context5.prev = 44;
+					_context3.prev = 44;
 
 					if (!isError) {
-						_context5.next = 47;
+						_context3.next = 47;
 						break;
 					}
 
 					throw error;
 
 				case 47:
-					return _context5.finish(44);
+					return _context3.finish(44);
 
 				case 48:
-					return _context5.finish(41);
+					return _context3.finish(41);
 
 				case 49:
 				case "end":
-					return _context5.stop();
+					return _context3.stop();
 			}
 		}
-	}, _callee5, this, [[3, 37, 41, 49], [8, 13], [42,, 44, 48]]);
+	}, _callee3, this, [[3, 37, 41, 49], [8, 13], [42,, 44, 48]]);
 });
 
-var runAsync = function _callee6(generator) {
+var runAsync = function _callee4(generator) {
 	var p, it;
-	return regeneratorRuntime.async(function _callee6$(_context6) {
+	return regeneratorRuntime.async(function _callee4$(_context4) {
 		while (1) {
-			switch (_context6.prev = _context6.next) {
+			switch (_context4.prev = _context4.next) {
 				case 0:
 					p = undefined, it = (0, _iterable2.default)(generator)[Symbol.asyncIterator]();
 
 				case 1:
-					_context6.next = 3;
+					_context4.next = 3;
 					return regeneratorRuntime.awrap(it.next());
 
 				case 3:
-					p = _context6.sent;
+					p = _context4.sent;
 
 				case 4:
 					if (!p.done) {
-						_context6.next = 1;
+						_context4.next = 1;
 						break;
 					}
 
 				case 5:
-					return _context6.abrupt("return", p.value);
+					return _context4.abrupt("return", p.value);
 
 				case 6:
 				case "end":
-					return _context6.stop();
+					return _context4.stop();
 			}
 		}
 	}, null, undefined);
@@ -40111,94 +40012,94 @@ var for_ = m(function (collection, generator) {
 	if (_iterable2.default.isSync(collection) && _iterable2.default.isSync(generator)) return runSync(genSync(collection, generator));else return runAsync(genAsync(collection, generator));
 });
 exports.for = for_;
-var forEach = exports.forEach = m(function _callee7(collection, proc) {
-	var _23, _22, _21, _20, _19, _value2;
+var forEach = exports.forEach = m(function _callee5(collection, proc) {
+	var _23, _22, _21, _20, _19, _value;
 
-	return regeneratorRuntime.async(function _callee7$(_context7) {
+	return regeneratorRuntime.async(function _callee5$(_context5) {
 		while (1) {
-			switch (_context7.prev = _context7.next) {
+			switch (_context5.prev = _context5.next) {
 				case 0:
 					_23 = undefined, _22 = undefined, _21 = undefined, _20 = undefined, _19 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-					_context7.prev = 1;
+					_context5.prev = 1;
 
 				case 2:
 					_21 = false;
-					_context7.next = 5;
+					_context5.next = 5;
 					return regeneratorRuntime.awrap(_19.next());
 
 				case 5:
-					if ((_20 = _context7.sent).done) {
-						_context7.next = 15;
+					if ((_20 = _context5.sent).done) {
+						_context5.next = 15;
 						break;
 					}
 
 					_21 = true;
-					_value2 = _20.value;
-					_context7.next = 10;
-					return regeneratorRuntime.awrap(proc(_value2));
+					_value = _20.value;
+					_context5.next = 10;
+					return regeneratorRuntime.awrap(proc(_value));
 
 				case 10:
-					_context7.t0 = _context7.sent;
+					_context5.t0 = _context5.sent;
 
-					if (!(false === _context7.t0)) {
-						_context7.next = 13;
+					if (!(false === _context5.t0)) {
+						_context5.next = 13;
 						break;
 					}
 
-					return _context7.abrupt("break", 15);
+					return _context5.abrupt("break", 15);
 
 				case 13:
-					_context7.next = 2;
+					_context5.next = 2;
 					break;
 
 				case 15:
-					_context7.next = 21;
+					_context5.next = 21;
 					break;
 
 				case 17:
-					_context7.prev = 17;
-					_context7.t1 = _context7["catch"](1);
+					_context5.prev = 17;
+					_context5.t1 = _context5["catch"](1);
 
 					_23 = true;
-					_22 = _context7.t1;
+					_22 = _context5.t1;
 
 				case 21:
-					_context7.prev = 21;
-					_context7.prev = 22;
+					_context5.prev = 21;
+					_context5.prev = 22;
 
 					if (!(_21 && _19.return)) {
-						_context7.next = 26;
+						_context5.next = 26;
 						break;
 					}
 
-					_context7.next = 26;
+					_context5.next = 26;
 					return regeneratorRuntime.awrap(_19.return());
 
 				case 26:
-					_context7.prev = 26;
+					_context5.prev = 26;
 
 					if (!_23) {
-						_context7.next = 29;
+						_context5.next = 29;
 						break;
 					}
 
 					throw _22;
 
 				case 29:
-					return _context7.finish(26);
+					return _context5.finish(26);
 
 				case 30:
-					return _context7.finish(21);
+					return _context5.finish(21);
 
 				case 31:
 				case "end":
-					return _context7.stop();
+					return _context5.stop();
 			}
 		}
 	}, null, undefined, [[1, 17, 21, 31], [22,, 26, 30]]);
 });
 
-var reduce = exports.reduce = m(function _callee8(collection, proc) {
+var reduce = exports.reduce = m(function _callee6(collection, proc) {
 	var result,
 	    first,
 	    _28,
@@ -40206,245 +40107,245 @@ var reduce = exports.reduce = m(function _callee8(collection, proc) {
 	    _26,
 	    _25,
 	    _24,
-	    _value3,
-	    _args8 = arguments;
+	    _value2,
+	    _args6 = arguments;
 
-	return regeneratorRuntime.async(function _callee8$(_context8) {
+	return regeneratorRuntime.async(function _callee6$(_context6) {
 		while (1) {
-			switch (_context8.prev = _context8.next) {
+			switch (_context6.prev = _context6.next) {
 				case 0:
 					collection = (0, _iterable2.default)(collection);
-					result = _args8[2], first = _args8.length == 2;
+					result = _args6[2], first = _args6.length == 2;
 					_28 = undefined, _27 = undefined, _26 = undefined, _25 = undefined, _24 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-					_context8.prev = 3;
+					_context6.prev = 3;
 
 				case 4:
 					_26 = false;
-					_context8.next = 7;
+					_context6.next = 7;
 					return regeneratorRuntime.awrap(_24.next());
 
 				case 7:
-					if ((_25 = _context8.sent).done) {
-						_context8.next = 20;
+					if ((_25 = _context6.sent).done) {
+						_context6.next = 20;
 						break;
 					}
 
 					_26 = true;
-					_value3 = _25.value;
+					_value2 = _25.value;
 
 					if (!first) {
-						_context8.next = 15;
+						_context6.next = 15;
 						break;
 					}
 
 					first = false;
-					result = _value3;
-					_context8.next = 18;
+					result = _value2;
+					_context6.next = 18;
 					break;
 
 				case 15:
-					_context8.next = 17;
-					return regeneratorRuntime.awrap(proc(result, _value3));
+					_context6.next = 17;
+					return regeneratorRuntime.awrap(proc(result, _value2));
 
 				case 17:
-					result = _context8.sent;
+					result = _context6.sent;
 
 				case 18:
-					_context8.next = 4;
+					_context6.next = 4;
 					break;
 
 				case 20:
-					_context8.next = 26;
+					_context6.next = 26;
 					break;
 
 				case 22:
-					_context8.prev = 22;
-					_context8.t0 = _context8["catch"](3);
+					_context6.prev = 22;
+					_context6.t0 = _context6["catch"](3);
 
 					_28 = true;
-					_27 = _context8.t0;
+					_27 = _context6.t0;
 
 				case 26:
-					_context8.prev = 26;
-					_context8.prev = 27;
+					_context6.prev = 26;
+					_context6.prev = 27;
 
 					if (!(_26 && _24.return)) {
-						_context8.next = 31;
+						_context6.next = 31;
 						break;
 					}
 
-					_context8.next = 31;
+					_context6.next = 31;
 					return regeneratorRuntime.awrap(_24.return());
 
 				case 31:
-					_context8.prev = 31;
+					_context6.prev = 31;
 
 					if (!_28) {
-						_context8.next = 34;
+						_context6.next = 34;
 						break;
 					}
 
 					throw _27;
 
 				case 34:
-					return _context8.finish(31);
+					return _context6.finish(31);
 
 				case 35:
-					return _context8.finish(26);
+					return _context6.finish(26);
 
 				case 36:
-					return _context8.abrupt("return", result);
+					return _context6.abrupt("return", result);
 
 				case 37:
 				case "end":
-					return _context8.stop();
+					return _context6.stop();
 			}
 		}
 	}, null, this, [[3, 22, 26, 36], [27,, 31, 35]]);
 });
 
-var transform = exports.transform = m(regeneratorRuntime.mark(function _callee9(collection, transformer) {
-	var _33, _32, _31, _30, _29, _value4, _38, _37, _36, _35, _34, _v;
+var transform = exports.transform = m(regeneratorRuntime.mark(function _callee7(collection, transformer) {
+	var _33, _32, _31, _30, _29, _value3, _38, _37, _36, _35, _34, _v;
 
-	return regeneratorRuntime.async(function _callee9$(_context9) {
+	return regeneratorRuntime.async(function _callee7$(_context7) {
 		while (1) {
-			switch (_context9.prev = _context9.next) {
+			switch (_context7.prev = _context7.next) {
 				case 0:
 					_33 = undefined, _32 = undefined, _31 = undefined, _30 = undefined, _29 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-					_context9.prev = 1;
+					_context7.prev = 1;
 
 				case 2:
 					_31 = false;
-					_context9.next = 5;
+					_context7.next = 5;
 					return regeneratorRuntime.awrap(_29.next());
 
 				case 5:
-					if ((_30 = _context9.sent).done) {
-						_context9.next = 38;
+					if ((_30 = _context7.sent).done) {
+						_context7.next = 38;
 						break;
 					}
 
 					_31 = true;
-					_value4 = _30.value;
-					_38 = undefined, _37 = undefined, _36 = undefined, _35 = undefined, _34 = (0, _iterable2.default)(transformer(_value4))[Symbol.asyncIterator]();
-					_context9.prev = 9;
+					_value3 = _30.value;
+					_38 = undefined, _37 = undefined, _36 = undefined, _35 = undefined, _34 = (0, _iterable2.default)(transformer(_value3))[Symbol.asyncIterator]();
+					_context7.prev = 9;
 
 				case 10:
 					_36 = false;
-					_context9.next = 13;
+					_context7.next = 13;
 					return regeneratorRuntime.awrap(_34.next());
 
 				case 13:
-					if ((_35 = _context9.sent).done) {
-						_context9.next = 20;
+					if ((_35 = _context7.sent).done) {
+						_context7.next = 20;
 						break;
 					}
 
 					_36 = true;
 					_v = _35.value;
-					_context9.next = 18;
+					_context7.next = 18;
 					return _v;
 
 				case 18:
-					_context9.next = 10;
+					_context7.next = 10;
 					break;
 
 				case 20:
-					_context9.next = 26;
+					_context7.next = 26;
 					break;
 
 				case 22:
-					_context9.prev = 22;
-					_context9.t0 = _context9["catch"](9);
+					_context7.prev = 22;
+					_context7.t0 = _context7["catch"](9);
 
 					_38 = true;
-					_37 = _context9.t0;
+					_37 = _context7.t0;
 
 				case 26:
-					_context9.prev = 26;
-					_context9.prev = 27;
+					_context7.prev = 26;
+					_context7.prev = 27;
 
 					if (!(_36 && _34.return)) {
-						_context9.next = 31;
+						_context7.next = 31;
 						break;
 					}
 
-					_context9.next = 31;
+					_context7.next = 31;
 					return regeneratorRuntime.awrap(_34.return());
 
 				case 31:
-					_context9.prev = 31;
+					_context7.prev = 31;
 
 					if (!_38) {
-						_context9.next = 34;
+						_context7.next = 34;
 						break;
 					}
 
 					throw _37;
 
 				case 34:
-					return _context9.finish(31);
+					return _context7.finish(31);
 
 				case 35:
-					return _context9.finish(26);
+					return _context7.finish(26);
 
 				case 36:
-					_context9.next = 2;
+					_context7.next = 2;
 					break;
 
 				case 38:
-					_context9.next = 44;
+					_context7.next = 44;
 					break;
 
 				case 40:
-					_context9.prev = 40;
-					_context9.t1 = _context9["catch"](1);
+					_context7.prev = 40;
+					_context7.t1 = _context7["catch"](1);
 
 					_33 = true;
-					_32 = _context9.t1;
+					_32 = _context7.t1;
 
 				case 44:
-					_context9.prev = 44;
-					_context9.prev = 45;
+					_context7.prev = 44;
+					_context7.prev = 45;
 
 					if (!(_31 && _29.return)) {
-						_context9.next = 49;
+						_context7.next = 49;
 						break;
 					}
 
-					_context9.next = 49;
+					_context7.next = 49;
 					return regeneratorRuntime.awrap(_29.return());
 
 				case 49:
-					_context9.prev = 49;
+					_context7.prev = 49;
 
 					if (!_33) {
-						_context9.next = 52;
+						_context7.next = 52;
 						break;
 					}
 
 					throw _32;
 
 				case 52:
-					return _context9.finish(49);
+					return _context7.finish(49);
 
 				case 53:
-					return _context9.finish(44);
+					return _context7.finish(44);
 
 				case 54:
 				case "end":
-					return _context9.stop();
+					return _context7.stop();
 			}
 		}
-	}, _callee9, this, [[1, 40, 44, 54], [9, 22, 26, 36], [27,, 31, 35], [45,, 49, 53]]);
+	}, _callee7, this, [[1, 40, 44, 54], [9, 22, 26, 36], [27,, 31, 35], [45,, 49, 53]]);
 }));
 
-var map = exports.map = m(regeneratorRuntime.mark(function _callee10(collection, mapper) {
-	var _43, _42, _41, _40, _39, _value5;
+var map = exports.map = m(regeneratorRuntime.mark(function _callee8(collection, mapper) {
+	var _43, _42, _41, _40, _39, _value4;
 
-	return regeneratorRuntime.async(function _callee10$(_context10) {
+	return regeneratorRuntime.async(function _callee8$(_context8) {
 		while (1) {
-			switch (_context10.prev = _context10.next) {
+			switch (_context8.prev = _context8.next) {
 				case 0:
 					if (typeof mapper == "string") {
 						(function () {
@@ -40455,252 +40356,252 @@ var map = exports.map = m(regeneratorRuntime.mark(function _callee10(collection,
 						})();
 					}
 					_43 = undefined, _42 = undefined, _41 = undefined, _40 = undefined, _39 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-					_context10.prev = 2;
+					_context8.prev = 2;
 
 				case 3:
 					_41 = false;
-					_context10.next = 6;
+					_context8.next = 6;
 					return regeneratorRuntime.awrap(_39.next());
 
 				case 6:
-					if ((_40 = _context10.sent).done) {
-						_context10.next = 13;
+					if ((_40 = _context8.sent).done) {
+						_context8.next = 13;
 						break;
 					}
 
 					_41 = true;
-					_value5 = _40.value;
-					_context10.next = 11;
-					return mapper(_value5);
+					_value4 = _40.value;
+					_context8.next = 11;
+					return mapper(_value4);
 
 				case 11:
-					_context10.next = 3;
+					_context8.next = 3;
 					break;
 
 				case 13:
-					_context10.next = 19;
+					_context8.next = 19;
 					break;
 
 				case 15:
-					_context10.prev = 15;
-					_context10.t0 = _context10["catch"](2);
+					_context8.prev = 15;
+					_context8.t0 = _context8["catch"](2);
 
 					_43 = true;
-					_42 = _context10.t0;
+					_42 = _context8.t0;
 
 				case 19:
-					_context10.prev = 19;
-					_context10.prev = 20;
+					_context8.prev = 19;
+					_context8.prev = 20;
 
 					if (!(_41 && _39.return)) {
-						_context10.next = 24;
+						_context8.next = 24;
 						break;
 					}
 
-					_context10.next = 24;
+					_context8.next = 24;
 					return regeneratorRuntime.awrap(_39.return());
 
 				case 24:
-					_context10.prev = 24;
+					_context8.prev = 24;
 
 					if (!_43) {
-						_context10.next = 27;
+						_context8.next = 27;
 						break;
 					}
 
 					throw _42;
 
 				case 27:
-					return _context10.finish(24);
+					return _context8.finish(24);
 
 				case 28:
-					return _context10.finish(19);
+					return _context8.finish(19);
 
 				case 29:
 				case "end":
-					return _context10.stop();
+					return _context8.stop();
 			}
 		}
-	}, _callee10, this, [[2, 15, 19, 29], [20,, 24, 28]]);
+	}, _callee8, this, [[2, 15, 19, 29], [20,, 24, 28]]);
 }));
 
-var filter = exports.filter = m(regeneratorRuntime.mark(function _callee11(collection, predicate) {
-	var _48, _47, _46, _45, _44, _value6;
+var filter = exports.filter = m(regeneratorRuntime.mark(function _callee9(collection, predicate) {
+	var _48, _47, _46, _45, _44, _value5;
 
-	return regeneratorRuntime.async(function _callee11$(_context11) {
+	return regeneratorRuntime.async(function _callee9$(_context9) {
 		while (1) {
-			switch (_context11.prev = _context11.next) {
+			switch (_context9.prev = _context9.next) {
 				case 0:
 					_48 = undefined, _47 = undefined, _46 = undefined, _45 = undefined, _44 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-					_context11.prev = 1;
+					_context9.prev = 1;
 
 				case 2:
 					_46 = false;
-					_context11.next = 5;
+					_context9.next = 5;
 					return regeneratorRuntime.awrap(_44.next());
 
 				case 5:
-					if ((_45 = _context11.sent).done) {
-						_context11.next = 15;
+					if ((_45 = _context9.sent).done) {
+						_context9.next = 15;
 						break;
 					}
 
 					_46 = true;
-					_value6 = _45.value;
-					_context11.next = 10;
-					return regeneratorRuntime.awrap(filter(_value6));
+					_value5 = _45.value;
+					_context9.next = 10;
+					return regeneratorRuntime.awrap(filter(_value5));
 
 				case 10:
-					if (!_context11.sent) {
-						_context11.next = 13;
+					if (!_context9.sent) {
+						_context9.next = 13;
 						break;
 					}
 
-					_context11.next = 13;
-					return _value6;
+					_context9.next = 13;
+					return _value5;
 
 				case 13:
-					_context11.next = 2;
+					_context9.next = 2;
 					break;
 
 				case 15:
-					_context11.next = 21;
+					_context9.next = 21;
 					break;
 
 				case 17:
-					_context11.prev = 17;
-					_context11.t0 = _context11["catch"](1);
+					_context9.prev = 17;
+					_context9.t0 = _context9["catch"](1);
 
 					_48 = true;
-					_47 = _context11.t0;
+					_47 = _context9.t0;
 
 				case 21:
-					_context11.prev = 21;
-					_context11.prev = 22;
+					_context9.prev = 21;
+					_context9.prev = 22;
 
 					if (!(_46 && _44.return)) {
-						_context11.next = 26;
+						_context9.next = 26;
 						break;
 					}
 
-					_context11.next = 26;
+					_context9.next = 26;
 					return regeneratorRuntime.awrap(_44.return());
 
 				case 26:
-					_context11.prev = 26;
+					_context9.prev = 26;
 
 					if (!_48) {
-						_context11.next = 29;
+						_context9.next = 29;
 						break;
 					}
 
 					throw _47;
 
 				case 29:
-					return _context11.finish(26);
+					return _context9.finish(26);
 
 				case 30:
-					return _context11.finish(21);
+					return _context9.finish(21);
 
 				case 31:
 				case "end":
-					return _context11.stop();
+					return _context9.stop();
 			}
 		}
-	}, _callee11, this, [[1, 17, 21, 31], [22,, 26, 30]]);
+	}, _callee9, this, [[1, 17, 21, 31], [22,, 26, 30]]);
 }));
 
-var takeWhile = exports.takeWhile = m(regeneratorRuntime.mark(function _callee12(collection, predicate) {
-	var _53, _52, _51, _50, _49, _value7;
+var takeWhile = exports.takeWhile = m(regeneratorRuntime.mark(function _callee10(collection, predicate) {
+	var _53, _52, _51, _50, _49, _value6;
 
-	return regeneratorRuntime.async(function _callee12$(_context12) {
+	return regeneratorRuntime.async(function _callee10$(_context10) {
 		while (1) {
-			switch (_context12.prev = _context12.next) {
+			switch (_context10.prev = _context10.next) {
 				case 0:
 					_53 = undefined, _52 = undefined, _51 = undefined, _50 = undefined, _49 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-					_context12.prev = 1;
+					_context10.prev = 1;
 
 				case 2:
 					_51 = false;
-					_context12.next = 5;
+					_context10.next = 5;
 					return regeneratorRuntime.awrap(_49.next());
 
 				case 5:
-					if ((_50 = _context12.sent).done) {
-						_context12.next = 18;
+					if ((_50 = _context10.sent).done) {
+						_context10.next = 18;
 						break;
 					}
 
 					_51 = true;
-					_value7 = _50.value;
-					_context12.next = 10;
-					return regeneratorRuntime.awrap(predicate(_value7));
+					_value6 = _50.value;
+					_context10.next = 10;
+					return regeneratorRuntime.awrap(predicate(_value6));
 
 				case 10:
-					if (!_context12.sent) {
-						_context12.next = 15;
+					if (!_context10.sent) {
+						_context10.next = 15;
 						break;
 					}
 
-					_context12.next = 13;
-					return _value7;
+					_context10.next = 13;
+					return _value6;
 
 				case 13:
-					_context12.next = 16;
+					_context10.next = 16;
 					break;
 
 				case 15:
-					return _context12.abrupt("break", 18);
+					return _context10.abrupt("break", 18);
 
 				case 16:
-					_context12.next = 2;
+					_context10.next = 2;
 					break;
 
 				case 18:
-					_context12.next = 24;
+					_context10.next = 24;
 					break;
 
 				case 20:
-					_context12.prev = 20;
-					_context12.t0 = _context12["catch"](1);
+					_context10.prev = 20;
+					_context10.t0 = _context10["catch"](1);
 
 					_53 = true;
-					_52 = _context12.t0;
+					_52 = _context10.t0;
 
 				case 24:
-					_context12.prev = 24;
-					_context12.prev = 25;
+					_context10.prev = 24;
+					_context10.prev = 25;
 
 					if (!(_51 && _49.return)) {
-						_context12.next = 29;
+						_context10.next = 29;
 						break;
 					}
 
-					_context12.next = 29;
+					_context10.next = 29;
 					return regeneratorRuntime.awrap(_49.return());
 
 				case 29:
-					_context12.prev = 29;
+					_context10.prev = 29;
 
 					if (!_53) {
-						_context12.next = 32;
+						_context10.next = 32;
 						break;
 					}
 
 					throw _52;
 
 				case 32:
-					return _context12.finish(29);
+					return _context10.finish(29);
 
 				case 33:
-					return _context12.finish(24);
+					return _context10.finish(24);
 
 				case 34:
 				case "end":
-					return _context12.stop();
+					return _context10.stop();
 			}
 		}
-	}, _callee12, this, [[1, 20, 24, 34], [25,, 29, 33]]);
+	}, _callee10, this, [[1, 20, 24, 34], [25,, 29, 33]]);
 }));
 
 var concat = exports.concat = (0, _method2.default)(function () {
@@ -40711,140 +40612,140 @@ var concat = exports.concat = (0, _method2.default)(function () {
 	return transform.call(collections, lodash.identity);
 });
 
-var repair = exports.repair = (0, _method2.default)(regeneratorRuntime.mark(function _callee14(collection, endHandler) {
+var repair = exports.repair = (0, _method2.default)(regeneratorRuntime.mark(function _callee12(collection, endHandler) {
 	var _this = this;
 
 	var getNext, n, r;
-	return regeneratorRuntime.async(function _callee14$(_context14) {
+	return regeneratorRuntime.async(function _callee12$(_context12) {
 		while (1) {
-			switch (_context14.prev = _context14.next) {
+			switch (_context12.prev = _context12.next) {
 				case 0:
 					collection = (0, _iterable2.default)(collection);
 
-					getNext = function _callee13() {
+					getNext = function _callee11() {
 						var ret;
-						return regeneratorRuntime.async(function _callee13$(_context13) {
+						return regeneratorRuntime.async(function _callee11$(_context11) {
 							while (1) {
-								switch (_context13.prev = _context13.next) {
+								switch (_context11.prev = _context11.next) {
 									case 0:
-										_context13.prev = 0;
-										_context13.next = 3;
+										_context11.prev = 0;
+										_context11.next = 3;
 										return regeneratorRuntime.awrap(collection.next());
 
 									case 3:
-										ret = _context13.sent;
+										ret = _context11.sent;
 
 										if (!ret.done) {
-											_context13.next = 12;
+											_context11.next = 12;
 											break;
 										}
 
-										_context13.next = 7;
+										_context11.next = 7;
 										return regeneratorRuntime.awrap(endHandler(null));
 
 									case 7:
-										collection = _context13.sent;
+										collection = _context11.sent;
 
 										if (!(collection == null)) {
-											_context13.next = 10;
+											_context11.next = 10;
 											break;
 										}
 
-										return _context13.abrupt("return", ret);
+										return _context11.abrupt("return", ret);
 
 									case 10:
-										_context13.next = 13;
+										_context11.next = 13;
 										break;
 
 									case 12:
-										return _context13.abrupt("return", ret);
+										return _context11.abrupt("return", ret);
 
 									case 13:
-										_context13.next = 22;
+										_context11.next = 22;
 										break;
 
 									case 15:
-										_context13.prev = 15;
-										_context13.t0 = _context13["catch"](0);
-										_context13.next = 19;
-										return regeneratorRuntime.awrap(endHandler(_context13.t0));
+										_context11.prev = 15;
+										_context11.t0 = _context11["catch"](0);
+										_context11.next = 19;
+										return regeneratorRuntime.awrap(endHandler(_context11.t0));
 
 									case 19:
-										collection = _context13.sent;
+										collection = _context11.sent;
 
 										if (!(collection == null)) {
-											_context13.next = 22;
+											_context11.next = 22;
 											break;
 										}
 
-										throw _context13.t0;
+										throw _context11.t0;
 
 									case 22:
 										collection = (0, _iterable2.default)(collection);
 
 									case 23:
-										_context13.next = 0;
+										_context11.next = 0;
 										break;
 
 									case 25:
 									case "end":
-										return _context13.stop();
+										return _context11.stop();
 								}
 							}
 						}, null, _this, [[0, 15]]);
 					};
 
 					n = undefined, r = undefined;
-					_context14.prev = 3;
+					_context12.prev = 3;
 
 				case 4:
 					r = false;
-					_context14.next = 7;
+					_context12.next = 7;
 					return regeneratorRuntime.awrap(getNext());
 
 				case 7:
-					_context14.t0 = !(n = _context14.sent).done;
+					_context12.t0 = !(n = _context12.sent).done;
 
-					if (!_context14.t0) {
-						_context14.next = 10;
+					if (!_context12.t0) {
+						_context12.next = 10;
 						break;
 					}
 
-					_context14.t0 = r = true;
+					_context12.t0 = r = true;
 
 				case 10:
-					if (!_context14.t0) {
-						_context14.next = 15;
+					if (!_context12.t0) {
+						_context12.next = 15;
 						break;
 					}
 
-					_context14.next = 13;
+					_context12.next = 13;
 					return n.value;
 
 				case 13:
-					_context14.next = 4;
+					_context12.next = 4;
 					break;
 
 				case 15:
-					_context14.prev = 15;
+					_context12.prev = 15;
 
 					if (!(r && collection.return)) {
-						_context14.next = 19;
+						_context12.next = 19;
 						break;
 					}
 
-					_context14.next = 19;
+					_context12.next = 19;
 					return regeneratorRuntime.awrap(collection.return());
 
 				case 19:
-					return _context14.finish(15);
+					return _context12.finish(15);
 
 				case 20:
 				case "end":
-					return _context14.stop();
+					return _context12.stop();
 			}
 		}
-	}, _callee14, this, [[3,, 15, 20]]);
+	}, _callee12, this, [[3,, 15, 20]]);
 }));
 
 var transformer = exports.transformer = function transformer() {
@@ -40854,15 +40755,19 @@ var transformer = exports.transformer = function transformer() {
 
 	if (args.length == 2) {
 		var _ret2 = function () {
-			var encoder = args[0];
-			var decoder = args[1];
+			var encode = args[0];
+			var decode = args[1];
 
 			return {
-				v: function v(consumer) {
+				v: Object.assign(function (consumer) {
 					return function (collection) {
-						return decoder(consumer(encoder(collection)));
+						return decode(consumer(encode(collection)));
 					};
-				}
+				}, {
+					encode: (0, _method2.default)(encode),
+					decode: (0, _method2.default)(decode),
+					__namespace__: true
+				})
 			};
 		}();
 
@@ -40909,7 +40814,7 @@ var connect = exports.connect = function connect() {
 };
 
 var timer = exports.timer = function timer(interval) {
-	var _ref2;
+	var _ref4;
 
 	var autoreset = arguments.length <= 1 || arguments[1] === undefined ? true : arguments[1];
 
@@ -40920,12 +40825,12 @@ var timer = exports.timer = function timer(interval) {
 	var timer = null;
 	var index = 0;
 	var active = true;
-	var fire = function _callee15() {
-		return regeneratorRuntime.async(function _callee15$(_context15) {
+	var fire = function _callee13() {
+		return regeneratorRuntime.async(function _callee13$(_context13) {
 			while (1) {
-				switch (_context15.prev = _context15.next) {
+				switch (_context13.prev = _context13.next) {
 					case 0:
-						_context15.next = 2;
+						_context13.next = 2;
 						return regeneratorRuntime.awrap(push(index++));
 
 					case 2:
@@ -40933,7 +40838,7 @@ var timer = exports.timer = function timer(interval) {
 
 					case 3:
 					case "end":
-						return _context15.stop();
+						return _context13.stop();
 				}
 			}
 		}, null, undefined);
@@ -40952,33 +40857,33 @@ var timer = exports.timer = function timer(interval) {
 		}
 	};
 	reset();
-	return _ref2 = {}, _defineProperty(_ref2, Symbol.asyncIterator, function () {
+	return _ref4 = {}, _defineProperty(_ref4, Symbol.asyncIterator, function () {
 		return events;
-	}), _defineProperty(_ref2, "reset", reset), _defineProperty(_ref2, "pause", pause), _defineProperty(_ref2, "stop", function stop(error) {
+	}), _defineProperty(_ref4, "reset", reset), _defineProperty(_ref4, "pause", pause), _defineProperty(_ref4, "stop", function stop(error) {
 		pause();
 		active = false;
 		push(error ? _bluebird2.default.reject(error) : _iterable2.default.end);
-	}), _ref2;
+	}), _ref4;
 };
 
-var wrap = exports.wrap = regeneratorRuntime.mark(function _callee16(value) {
-	return regeneratorRuntime.async(function _callee16$(_context16) {
+var wrap = exports.wrap = regeneratorRuntime.mark(function _callee14(value) {
+	return regeneratorRuntime.async(function _callee14$(_context14) {
 		while (1) {
-			switch (_context16.prev = _context16.next) {
+			switch (_context14.prev = _context14.next) {
 				case 0:
-					_context16.next = 2;
+					_context14.next = 2;
 					return regeneratorRuntime.awrap(value);
 
 				case 2:
-					_context16.next = 4;
-					return _context16.sent;
+					_context14.next = 4;
+					return _context14.sent;
 
 				case 4:
 				case "end":
-					return _context16.stop();
+					return _context14.stop();
 			}
 		}
-	}, _callee16, this);
+	}, _callee14, this);
 });
 
 var unzip = exports.unzip = m(function (collection, labels) {
@@ -41014,184 +40919,184 @@ var unzip = exports.unzip = m(function (collection, labels) {
 		}
 	}
 
-	void function _callee17() {
-		var _58, _57, _56, _55, _54, _$value, label, _value8, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, p, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3;
+	void function _callee15() {
+		var _58, _57, _56, _55, _54, _$value, label, _value7, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, p, _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3;
 
-		return regeneratorRuntime.async(function _callee17$(_context17) {
+		return regeneratorRuntime.async(function _callee15$(_context15) {
 			while (1) {
-				switch (_context17.prev = _context17.next) {
+				switch (_context15.prev = _context15.next) {
 					case 0:
-						_context17.prev = 0;
+						_context15.prev = 0;
 						_58 = undefined, _57 = undefined, _56 = undefined, _55 = undefined, _54 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-						_context17.prev = 2;
+						_context15.prev = 2;
 
 					case 3:
 						_56 = false;
-						_context17.next = 6;
+						_context15.next = 6;
 						return regeneratorRuntime.awrap(_54.next());
 
 					case 6:
-						if ((_55 = _context17.sent).done) {
-							_context17.next = 19;
+						if ((_55 = _context15.sent).done) {
+							_context15.next = 19;
 							break;
 						}
 
 						_56 = true;
 						_$value = _slicedToArray(_55.value, 2);
 						label = _$value[0];
-						_value8 = _$value[1];
+						_value7 = _$value[1];
 
 						if (!push[label]) {
-							_context17.next = 16;
+							_context15.next = 16;
 							break;
 						}
 
-						_context17.next = 14;
-						return regeneratorRuntime.awrap(push[label](_value8));
+						_context15.next = 14;
+						return regeneratorRuntime.awrap(push[label](_value7));
 
 					case 14:
-						_context17.next = 17;
+						_context15.next = 17;
 						break;
 
 					case 16:
 						throw new Error("unkown label: " + label);
 
 					case 17:
-						_context17.next = 3;
+						_context15.next = 3;
 						break;
 
 					case 19:
-						_context17.next = 25;
+						_context15.next = 25;
 						break;
 
 					case 21:
-						_context17.prev = 21;
-						_context17.t0 = _context17["catch"](2);
+						_context15.prev = 21;
+						_context15.t0 = _context15["catch"](2);
 
 						_58 = true;
-						_57 = _context17.t0;
+						_57 = _context15.t0;
 
 					case 25:
-						_context17.prev = 25;
-						_context17.prev = 26;
+						_context15.prev = 25;
+						_context15.prev = 26;
 
 						if (!(_56 && _54.return)) {
-							_context17.next = 30;
+							_context15.next = 30;
 							break;
 						}
 
-						_context17.next = 30;
+						_context15.next = 30;
 						return regeneratorRuntime.awrap(_54.return());
 
 					case 30:
-						_context17.prev = 30;
+						_context15.prev = 30;
 
 						if (!_58) {
-							_context17.next = 33;
+							_context15.next = 33;
 							break;
 						}
 
 						throw _57;
 
 					case 33:
-						return _context17.finish(30);
+						return _context15.finish(30);
 
 					case 34:
-						return _context17.finish(25);
+						return _context15.finish(25);
 
 					case 35:
 						_iteratorNormalCompletion2 = true;
 						_didIteratorError2 = false;
 						_iteratorError2 = undefined;
-						_context17.prev = 38;
+						_context15.prev = 38;
 
 						for (_iterator2 = lodash.values(push)[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
 							p = _step2.value;
 							p(_iterable2.default.end);
-						}_context17.next = 46;
+						}_context15.next = 46;
 						break;
 
 					case 42:
-						_context17.prev = 42;
-						_context17.t1 = _context17["catch"](38);
+						_context15.prev = 42;
+						_context15.t1 = _context15["catch"](38);
 						_didIteratorError2 = true;
-						_iteratorError2 = _context17.t1;
+						_iteratorError2 = _context15.t1;
 
 					case 46:
-						_context17.prev = 46;
-						_context17.prev = 47;
+						_context15.prev = 46;
+						_context15.prev = 47;
 
 						if (!_iteratorNormalCompletion2 && _iterator2.return) {
 							_iterator2.return();
 						}
 
 					case 49:
-						_context17.prev = 49;
+						_context15.prev = 49;
 
 						if (!_didIteratorError2) {
-							_context17.next = 52;
+							_context15.next = 52;
 							break;
 						}
 
 						throw _iteratorError2;
 
 					case 52:
-						return _context17.finish(49);
+						return _context15.finish(49);
 
 					case 53:
-						return _context17.finish(46);
+						return _context15.finish(46);
 
 					case 54:
-						_context17.next = 77;
+						_context15.next = 77;
 						break;
 
 					case 56:
-						_context17.prev = 56;
-						_context17.t2 = _context17["catch"](0);
+						_context15.prev = 56;
+						_context15.t2 = _context15["catch"](0);
 						_iteratorNormalCompletion3 = true;
 						_didIteratorError3 = false;
 						_iteratorError3 = undefined;
-						_context17.prev = 61;
+						_context15.prev = 61;
 
 						for (_iterator3 = lodash.values(push)[Symbol.iterator](); !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 							p = _step3.value;
-							p(_bluebird2.default.reject(_context17.t2));
-						}_context17.next = 69;
+							p(_bluebird2.default.reject(_context15.t2));
+						}_context15.next = 69;
 						break;
 
 					case 65:
-						_context17.prev = 65;
-						_context17.t3 = _context17["catch"](61);
+						_context15.prev = 65;
+						_context15.t3 = _context15["catch"](61);
 						_didIteratorError3 = true;
-						_iteratorError3 = _context17.t3;
+						_iteratorError3 = _context15.t3;
 
 					case 69:
-						_context17.prev = 69;
-						_context17.prev = 70;
+						_context15.prev = 69;
+						_context15.prev = 70;
 
 						if (!_iteratorNormalCompletion3 && _iterator3.return) {
 							_iterator3.return();
 						}
 
 					case 72:
-						_context17.prev = 72;
+						_context15.prev = 72;
 
 						if (!_didIteratorError3) {
-							_context17.next = 75;
+							_context15.next = 75;
 							break;
 						}
 
 						throw _iteratorError3;
 
 					case 75:
-						return _context17.finish(72);
+						return _context15.finish(72);
 
 					case 76:
-						return _context17.finish(69);
+						return _context15.finish(69);
 
 					case 77:
 					case "end":
-						return _context17.stop();
+						return _context15.stop();
 				}
 			}
 		}, null, this, [[0, 56], [2, 21, 25, 35], [26,, 30, 34], [38, 42, 46, 54], [47,, 49, 53], [61, 65, 69, 77], [70,, 72, 76]]);
@@ -41207,11 +41112,11 @@ var unzipA = exports.unzipA = m(function (collection, labels) {
 });
 
 var zip = exports.zip = (0, _method2.default)(function (collections) {
-	return mix.apply(undefined, _toConsumableArray(lodash.toPairs(collections).map(function (_ref3) {
-		var _ref4 = _slicedToArray(_ref3, 2);
+	return mix.apply(undefined, _toConsumableArray(lodash.toPairs(collections).map(function (_ref5) {
+		var _ref6 = _slicedToArray(_ref5, 2);
 
-		var label = _ref4[0];
-		var collection = _ref4[1];
+		var label = _ref6[0];
+		var collection = _ref6[1];
 		return map(collection, function (value) {
 			return [label, value];
 		});
@@ -41223,85 +41128,85 @@ var mix = exports.mix = (0, _method2.default)(function () {
 		collections[_key5] = arguments[_key5];
 	}
 
-	return _iterable2.default.create(function _callee19(push) {
-		return regeneratorRuntime.async(function _callee19$(_context19) {
+	return _iterable2.default.create(function _callee17(push) {
+		return regeneratorRuntime.async(function _callee17$(_context17) {
 			while (1) {
-				switch (_context19.prev = _context19.next) {
+				switch (_context17.prev = _context17.next) {
 					case 0:
-						_context19.prev = 0;
-						_context19.next = 3;
-						return regeneratorRuntime.awrap(_bluebird2.default.all(collections.map(function _callee18(collection) {
-							var _63, _62, _61, _60, _59, _value9;
+						_context17.prev = 0;
+						_context17.next = 3;
+						return regeneratorRuntime.awrap(_bluebird2.default.all(collections.map(function _callee16(collection) {
+							var _63, _62, _61, _60, _59, _value8;
 
-							return regeneratorRuntime.async(function _callee18$(_context18) {
+							return regeneratorRuntime.async(function _callee16$(_context16) {
 								while (1) {
-									switch (_context18.prev = _context18.next) {
+									switch (_context16.prev = _context16.next) {
 										case 0:
 											_63 = undefined, _62 = undefined, _61 = undefined, _60 = undefined, _59 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-											_context18.prev = 1;
+											_context16.prev = 1;
 
 										case 2:
 											_61 = false;
-											_context18.next = 5;
+											_context16.next = 5;
 											return regeneratorRuntime.awrap(_59.next());
 
 										case 5:
-											if ((_60 = _context18.sent).done) {
-												_context18.next = 12;
+											if ((_60 = _context16.sent).done) {
+												_context16.next = 12;
 												break;
 											}
 
 											_61 = true;
-											_value9 = _60.value;
-											_context18.next = 10;
-											return regeneratorRuntime.awrap(push(_value9));
+											_value8 = _60.value;
+											_context16.next = 10;
+											return regeneratorRuntime.awrap(push(_value8));
 
 										case 10:
-											_context18.next = 2;
+											_context16.next = 2;
 											break;
 
 										case 12:
-											_context18.next = 18;
+											_context16.next = 18;
 											break;
 
 										case 14:
-											_context18.prev = 14;
-											_context18.t0 = _context18["catch"](1);
+											_context16.prev = 14;
+											_context16.t0 = _context16["catch"](1);
 
 											_63 = true;
-											_62 = _context18.t0;
+											_62 = _context16.t0;
 
 										case 18:
-											_context18.prev = 18;
-											_context18.prev = 19;
+											_context16.prev = 18;
+											_context16.prev = 19;
 
 											if (!(_61 && _59.return)) {
-												_context18.next = 23;
+												_context16.next = 23;
 												break;
 											}
 
-											_context18.next = 23;
+											_context16.next = 23;
 											return regeneratorRuntime.awrap(_59.return());
 
 										case 23:
-											_context18.prev = 23;
+											_context16.prev = 23;
 
 											if (!_63) {
-												_context18.next = 26;
+												_context16.next = 26;
 												break;
 											}
 
 											throw _62;
 
 										case 26:
-											return _context18.finish(23);
+											return _context16.finish(23);
 
 										case 27:
-											return _context18.finish(18);
+											return _context16.finish(18);
 
 										case 28:
 										case "end":
-											return _context18.stop();
+											return _context16.stop();
 									}
 								}
 							}, null, undefined, [[1, 14, 18, 28], [19,, 23, 27]]);
@@ -41309,18 +41214,18 @@ var mix = exports.mix = (0, _method2.default)(function () {
 
 					case 3:
 						push(_iterable2.default.end);
-						_context19.next = 9;
+						_context17.next = 9;
 						break;
 
 					case 6:
-						_context19.prev = 6;
-						_context19.t0 = _context19["catch"](0);
+						_context17.prev = 6;
+						_context17.t0 = _context17["catch"](0);
 
-						push(_bluebird2.default.reject(_context19.t0));
+						push(_bluebird2.default.reject(_context17.t0));
 
 					case 9:
 					case "end":
-						return _context19.stop();
+						return _context17.stop();
 				}
 			}
 		}, null, undefined, [[0, 6]]);
@@ -41333,108 +41238,108 @@ var dropError = function dropError(name, value) {
 };
 
 var _demux = function _demux(collection, out, drop) {
-	return process.nextTick(function _callee20() {
-		var _68, _67, _66, _65, _64, _$value2, name, _value10;
+	return process.nextTick(function _callee18() {
+		var _68, _67, _66, _65, _64, _$value2, name, _value9;
 
-		return regeneratorRuntime.async(function _callee20$(_context20) {
+		return regeneratorRuntime.async(function _callee18$(_context18) {
 			while (1) {
-				switch (_context20.prev = _context20.next) {
+				switch (_context18.prev = _context18.next) {
 					case 0:
-						_context20.prev = 0;
+						_context18.prev = 0;
 						_68 = undefined, _67 = undefined, _66 = undefined, _65 = undefined, _64 = (0, _iterable2.default)(collection)[Symbol.asyncIterator]();
-						_context20.prev = 2;
+						_context18.prev = 2;
 
 					case 3:
 						_66 = false;
-						_context20.next = 6;
+						_context18.next = 6;
 						return regeneratorRuntime.awrap(_64.next());
 
 					case 6:
-						if ((_65 = _context20.sent).done) {
-							_context20.next = 20;
+						if ((_65 = _context18.sent).done) {
+							_context18.next = 20;
 							break;
 						}
 
 						_66 = true;
 						_$value2 = _slicedToArray(_65.value, 2);
 						name = _$value2[0];
-						_value10 = _$value2[1];
+						_value9 = _$value2[1];
 
 						if (!out[name]) {
-							_context20.next = 16;
+							_context18.next = 16;
 							break;
 						}
 
-						_context20.next = 14;
-						return regeneratorRuntime.awrap(out[name](_value10));
+						_context18.next = 14;
+						return regeneratorRuntime.awrap(out[name](_value9));
 
 					case 14:
-						_context20.next = 18;
+						_context18.next = 18;
 						break;
 
 					case 16:
-						_context20.next = 18;
-						return regeneratorRuntime.awrap(drop(name, _value10));
+						_context18.next = 18;
+						return regeneratorRuntime.awrap(drop(name, _value9));
 
 					case 18:
-						_context20.next = 3;
+						_context18.next = 3;
 						break;
 
 					case 20:
-						_context20.next = 26;
+						_context18.next = 26;
 						break;
 
 					case 22:
-						_context20.prev = 22;
-						_context20.t0 = _context20["catch"](2);
+						_context18.prev = 22;
+						_context18.t0 = _context18["catch"](2);
 
 						_68 = true;
-						_67 = _context20.t0;
+						_67 = _context18.t0;
 
 					case 26:
-						_context20.prev = 26;
-						_context20.prev = 27;
+						_context18.prev = 26;
+						_context18.prev = 27;
 
 						if (!(_66 && _64.return)) {
-							_context20.next = 31;
+							_context18.next = 31;
 							break;
 						}
 
-						_context20.next = 31;
+						_context18.next = 31;
 						return regeneratorRuntime.awrap(_64.return());
 
 					case 31:
-						_context20.prev = 31;
+						_context18.prev = 31;
 
 						if (!_68) {
-							_context20.next = 34;
+							_context18.next = 34;
 							break;
 						}
 
 						throw _67;
 
 					case 34:
-						return _context20.finish(31);
+						return _context18.finish(31);
 
 					case 35:
-						return _context20.finish(26);
+						return _context18.finish(26);
 
 					case 36:
 						for (name in out) {
 							out[name](_iterable2.default.end);
-						}_context20.next = 42;
+						}_context18.next = 42;
 						break;
 
 					case 39:
-						_context20.prev = 39;
-						_context20.t1 = _context20["catch"](0);
+						_context18.prev = 39;
+						_context18.t1 = _context18["catch"](0);
 
 						for (name in out) {
-							out[name](_bluebird2.default.reject(_context20.t1));
+							out[name](_bluebird2.default.reject(_context18.t1));
 						}
 					case 42:
 					case "end":
-						return _context20.stop();
+						return _context18.stop();
 				}
 			}
 		}, null, this, [[0, 39], [2, 22, 26, 36], [27,, 31, 35]]);
@@ -41488,101 +41393,101 @@ var mixer = exports.mixer = function mixer() {
 								return output;
 							};
 						});
-						void function _callee21() {
-							var _73, _72, _71, _70, _69, _value11;
+						void function _callee19() {
+							var _73, _72, _71, _70, _69, _value10;
 
-							return regeneratorRuntime.async(function _callee21$(_context21) {
+							return regeneratorRuntime.async(function _callee19$(_context19) {
 								while (1) {
-									switch (_context21.prev = _context21.next) {
+									switch (_context19.prev = _context19.next) {
 										case 0:
-											_context21.prev = 0;
+											_context19.prev = 0;
 											_73 = undefined, _72 = undefined, _71 = undefined, _70 = undefined, _69 = (0, _iterable2.default)(pinput)[Symbol.asyncIterator]();
-											_context21.prev = 2;
+											_context19.prev = 2;
 
 										case 3:
 											_71 = false;
-											_context21.next = 6;
+											_context19.next = 6;
 											return regeneratorRuntime.awrap(_69.next());
 
 										case 6:
-											if ((_70 = _context21.sent).done) {
-												_context21.next = 15;
+											if ((_70 = _context19.sent).done) {
+												_context19.next = 15;
 												break;
 											}
 
 											_71 = true;
-											_value11 = _70.value;
+											_value10 = _70.value;
 
 											if (!(out[name] != opush)) {
-												_context21.next = 11;
+												_context19.next = 11;
 												break;
 											}
 
-											return _context21.abrupt("break", 15);
+											return _context19.abrupt("break", 15);
 
 										case 11:
-											_context21.next = 13;
-											return regeneratorRuntime.awrap(push([name, _value11]));
+											_context19.next = 13;
+											return regeneratorRuntime.awrap(push([name, _value10]));
 
 										case 13:
-											_context21.next = 3;
+											_context19.next = 3;
 											break;
 
 										case 15:
-											_context21.next = 21;
+											_context19.next = 21;
 											break;
 
 										case 17:
-											_context21.prev = 17;
-											_context21.t0 = _context21["catch"](2);
+											_context19.prev = 17;
+											_context19.t0 = _context19["catch"](2);
 
 											_73 = true;
-											_72 = _context21.t0;
+											_72 = _context19.t0;
 
 										case 21:
-											_context21.prev = 21;
-											_context21.prev = 22;
+											_context19.prev = 21;
+											_context19.prev = 22;
 
 											if (!(_71 && _69.return)) {
-												_context21.next = 26;
+												_context19.next = 26;
 												break;
 											}
 
-											_context21.next = 26;
+											_context19.next = 26;
 											return regeneratorRuntime.awrap(_69.return());
 
 										case 26:
-											_context21.prev = 26;
+											_context19.prev = 26;
 
 											if (!_73) {
-												_context21.next = 29;
+												_context19.next = 29;
 												break;
 											}
 
 											throw _72;
 
 										case 29:
-											return _context21.finish(26);
+											return _context19.finish(26);
 
 										case 30:
-											return _context21.finish(21);
+											return _context19.finish(21);
 
 										case 31:
-											_context21.next = 36;
+											_context19.next = 36;
 											break;
 
 										case 33:
-											_context21.prev = 33;
-											_context21.t1 = _context21["catch"](0);
+											_context19.prev = 33;
+											_context19.t1 = _context19["catch"](0);
 
 											if (out[name] == opush) {
 												done = true;
-												push(_bluebird2.default.reject(_context21.t1));
+												push(_bluebird2.default.reject(_context19.t1));
 											}
 
 										case 36:
 										case "end":
-											return _context21.stop();
+											return _context19.stop();
 									}
 								}
 							}, null, this, [[0, 33], [2, 17, 21, 31], [22,, 26, 30]]);
@@ -41605,13 +41510,13 @@ var makeReceiver = exports.makeReceiver = (0, _method2.default)(function (consum
 });
 
 var makeSender = exports.makeSender = (0, _method2.default)(function (consumer, handler) {
-	var _context22;
+	var _context20;
 
 	var push = undefined,
 	    collection = _iterable2.default.create(function (p) {
 		return push = p;
 	});
-	(_context22 = consumer(collection), forEach).call(_context22, function () {
+	(_context20 = consumer(collection), forEach).call(_context20, function () {
 		throw new Error("no data expected");
 	});
 	var ret = {
@@ -41643,26 +41548,26 @@ var makeAsyncFunction = exports.makeAsyncFunction = (0, _method2.default)(functi
 	    collection = _iterable2.default.create(function (p) {
 		return apush = p;
 	});
-	void function _callee22() {
+	void function _callee20() {
 		var error, _78, _77, _76, _75, _74, _$value3, _id, result, type, resolve, rpush, _iteratorNormalCompletion4, _didIteratorError4, _iteratorError4, _iterator4, _step4, _iteratorNormalCompletion5, _didIteratorError5, _iteratorError5, _iterator5, _step5;
 
-		return regeneratorRuntime.async(function _callee22$(_context23) {
+		return regeneratorRuntime.async(function _callee20$(_context21) {
 			while (1) {
-				switch (_context23.prev = _context23.next) {
+				switch (_context21.prev = _context21.next) {
 					case 0:
 						error = undefined;
-						_context23.prev = 1;
+						_context21.prev = 1;
 						_78 = undefined, _77 = undefined, _76 = undefined, _75 = undefined, _74 = (0, _iterable2.default)(consumer(collection))[Symbol.asyncIterator]();
-						_context23.prev = 3;
+						_context21.prev = 3;
 
 					case 4:
 						_76 = false;
-						_context23.next = 7;
+						_context21.next = 7;
 						return regeneratorRuntime.awrap(_74.next());
 
 					case 7:
-						if ((_75 = _context23.sent).done) {
-							_context23.next = 46;
+						if ((_75 = _context21.sent).done) {
+							_context21.next = 46;
 							break;
 						}
 
@@ -41675,27 +41580,27 @@ var makeAsyncFunction = exports.makeAsyncFunction = (0, _method2.default)(functi
 						rpush = undefined;
 
 						if (!resolve) {
-							_context23.next = 19;
+							_context21.next = 19;
 							break;
 						}
 
-						buffer.delete(_id);_context23.next = 23;
+						buffer.delete(_id);_context21.next = 23;
 						break;
 
 					case 19:
 						rpush = chunks.get(_id);
 
 						if (!(rpush == null)) {
-							_context23.next = 23;
+							_context21.next = 23;
 							break;
 						}
 
 						console.error("unexpected", [_id, result, type]);
-						return _context23.abrupt("continue", 4);
+						return _context21.abrupt("continue", 4);
 
 					case 23:
-						_context23.t0 = type;
-						_context23.next = _context23.t0 === undefined ? 26 : _context23.t0 === null ? 26 : _context23.t0 === "error" ? 28 : _context23.t0 === "next" ? 31 : 43;
+						_context21.t0 = type;
+						_context21.next = _context21.t0 === undefined ? 26 : _context21.t0 === null ? 26 : _context21.t0 === "error" ? 28 : _context21.t0 === "next" ? 31 : 43;
 						break;
 
 					case 26:
@@ -41704,7 +41609,7 @@ var makeAsyncFunction = exports.makeAsyncFunction = (0, _method2.default)(functi
 							if (result !== undefined) rpush(result);
 							rpush(_iterable2.default.end);
 						}
-						return _context23.abrupt("break", 44);
+						return _context21.abrupt("break", 44);
 
 					case 28:
 						error = _bluebird2.default.reject(new Error(result));
@@ -41713,7 +41618,7 @@ var makeAsyncFunction = exports.makeAsyncFunction = (0, _method2.default)(functi
 							chunks.delete(_id);
 							rpush(error);
 						}
-						return _context23.abrupt("break", 44);
+						return _context21.abrupt("break", 44);
 
 					case 31:
 						if (resolve) {
@@ -41722,188 +41627,188 @@ var makeAsyncFunction = exports.makeAsyncFunction = (0, _method2.default)(functi
 							}));
 							chunks.set(_id, rpush);
 						}
-						_context23.prev = 32;
-						_context23.next = 35;
+						_context21.prev = 32;
+						_context21.next = 35;
 						return regeneratorRuntime.awrap(rpush(result));
 
 					case 35:
-						_context23.next = 42;
+						_context21.next = 42;
 						break;
 
 					case 37:
-						_context23.prev = 37;
-						_context23.t1 = _context23["catch"](32);
+						_context21.prev = 37;
+						_context21.t1 = _context21["catch"](32);
 
-						console.error(_context23.t1);
+						console.error(_context21.t1);
 						chunks.delete(_id);
 						apush([_id, "stop"]);
 
 					case 42:
-						return _context23.abrupt("break", 44);
+						return _context21.abrupt("break", 44);
 
 					case 43:
 						throw new Error("unknown type");
 
 					case 44:
-						_context23.next = 4;
+						_context21.next = 4;
 						break;
 
 					case 46:
-						_context23.next = 52;
+						_context21.next = 52;
 						break;
 
 					case 48:
-						_context23.prev = 48;
-						_context23.t2 = _context23["catch"](3);
+						_context21.prev = 48;
+						_context21.t2 = _context21["catch"](3);
 
 						_78 = true;
-						_77 = _context23.t2;
+						_77 = _context21.t2;
 
 					case 52:
-						_context23.prev = 52;
-						_context23.prev = 53;
+						_context21.prev = 52;
+						_context21.prev = 53;
 
 						if (!(_76 && _74.return)) {
-							_context23.next = 57;
+							_context21.next = 57;
 							break;
 						}
 
-						_context23.next = 57;
+						_context21.next = 57;
 						return regeneratorRuntime.awrap(_74.return());
 
 					case 57:
-						_context23.prev = 57;
+						_context21.prev = 57;
 
 						if (!_78) {
-							_context23.next = 60;
+							_context21.next = 60;
 							break;
 						}
 
 						throw _77;
 
 					case 60:
-						return _context23.finish(57);
+						return _context21.finish(57);
 
 					case 61:
-						return _context23.finish(52);
+						return _context21.finish(52);
 
 					case 62:
-						_context23.next = 69;
+						_context21.next = 69;
 						break;
 
 					case 64:
-						_context23.prev = 64;
-						_context23.t3 = _context23["catch"](1);
+						_context21.prev = 64;
+						_context21.t3 = _context21["catch"](1);
 
-						console.info("makeAsyncFunction", "ERROR", _context23.t3);
-						error = _context23.t3;
-						console.error(_context23.t3);
+						console.info("makeAsyncFunction", "ERROR", _context21.t3);
+						error = _context21.t3;
+						console.error(_context21.t3);
 
 					case 69:
 						_iteratorNormalCompletion4 = true;
 						_didIteratorError4 = false;
 						_iteratorError4 = undefined;
-						_context23.prev = 72;
+						_context21.prev = 72;
 
 						for (_iterator4 = buffer.values()[Symbol.iterator](); !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
 							resolve = _step4.value;
 							resolve(_bluebird2.default.reject(error || createEndOfStream()));
-						}_context23.next = 80;
+						}_context21.next = 80;
 						break;
 
 					case 76:
-						_context23.prev = 76;
-						_context23.t4 = _context23["catch"](72);
+						_context21.prev = 76;
+						_context21.t4 = _context21["catch"](72);
 						_didIteratorError4 = true;
-						_iteratorError4 = _context23.t4;
+						_iteratorError4 = _context21.t4;
 
 					case 80:
-						_context23.prev = 80;
-						_context23.prev = 81;
+						_context21.prev = 80;
+						_context21.prev = 81;
 
 						if (!_iteratorNormalCompletion4 && _iterator4.return) {
 							_iterator4.return();
 						}
 
 					case 83:
-						_context23.prev = 83;
+						_context21.prev = 83;
 
 						if (!_didIteratorError4) {
-							_context23.next = 86;
+							_context21.next = 86;
 							break;
 						}
 
 						throw _iteratorError4;
 
 					case 86:
-						return _context23.finish(83);
+						return _context21.finish(83);
 
 					case 87:
-						return _context23.finish(80);
+						return _context21.finish(80);
 
 					case 88:
 						_iteratorNormalCompletion5 = true;
 						_didIteratorError5 = false;
 						_iteratorError5 = undefined;
-						_context23.prev = 91;
+						_context21.prev = 91;
 						for (_iterator5 = chunks.values()[Symbol.iterator](); !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
 							rpush = _step5.value;
 							rpush(_bluebird2.default.reject(error || createEndOfStream()));
-						}_context23.next = 99;
+						}_context21.next = 99;
 						break;
 
 					case 95:
-						_context23.prev = 95;
-						_context23.t5 = _context23["catch"](91);
+						_context21.prev = 95;
+						_context21.t5 = _context21["catch"](91);
 						_didIteratorError5 = true;
-						_iteratorError5 = _context23.t5;
+						_iteratorError5 = _context21.t5;
 
 					case 99:
-						_context23.prev = 99;
-						_context23.prev = 100;
+						_context21.prev = 99;
+						_context21.prev = 100;
 
 						if (!_iteratorNormalCompletion5 && _iterator5.return) {
 							_iterator5.return();
 						}
 
 					case 102:
-						_context23.prev = 102;
+						_context21.prev = 102;
 
 						if (!_didIteratorError5) {
-							_context23.next = 105;
+							_context21.next = 105;
 							break;
 						}
 
 						throw _iteratorError5;
 
 					case 105:
-						return _context23.finish(102);
+						return _context21.finish(102);
 
 					case 106:
-						return _context23.finish(99);
+						return _context21.finish(99);
 
 					case 107:
 						buffer = chunks = null;
 
 					case 108:
 					case "end":
-						return _context23.stop();
+						return _context21.stop();
 				}
 			}
 		}, null, this, [[1, 64], [3, 48, 52, 62], [32, 37], [53,, 57, 61], [72, 76, 80, 88], [81,, 83, 87], [91, 95, 99, 107], [100,, 102, 106]]);
 	}();
-	return function _callee23() {
+	return function _callee21() {
 		for (var _len6 = arguments.length, args = Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
 			args[_key6] = arguments[_key6];
 		}
 
 		var ret;
-		return regeneratorRuntime.async(function _callee23$(_context24) {
+		return regeneratorRuntime.async(function _callee21$(_context22) {
 			while (1) {
-				switch (_context24.prev = _context24.next) {
+				switch (_context22.prev = _context22.next) {
 					case 0:
 						if (!(buffer == null)) {
-							_context24.next = 2;
+							_context22.next = 2;
 							break;
 						}
 
@@ -41916,74 +41821,74 @@ var makeAsyncFunction = exports.makeAsyncFunction = (0, _method2.default)(functi
 						});
 
 						apush([id, args]); // send value __only__ after preparing buffer
-						return _context24.abrupt("return", ret);
+						return _context22.abrupt("return", ret);
 
 					case 6:
 					case "end":
-						return _context24.stop();
+						return _context22.stop();
 				}
 			}
 		}, null, undefined);
 	};
 });
 
-var attachAsyncFunction = exports.attachAsyncFunction = (0, _method2.default)(function _callee24(consumer, func) {
+var attachAsyncFunction = exports.attachAsyncFunction = (0, _method2.default)(function _callee22(consumer, func) {
 	var last, push, collection, processing, _83, _82, _81, _80, _79, data, send, process;
 
-	return regeneratorRuntime.async(function _callee24$(_context27) {
+	return regeneratorRuntime.async(function _callee22$(_context25) {
 		while (1) {
-			switch (_context27.prev = _context27.next) {
+			switch (_context25.prev = _context25.next) {
 				case 0:
-					process = function process(_ref5) {
-						var _ref6 = _slicedToArray(_ref5, 2);
+					process = function process(_ref7) {
+						var _ref8 = _slicedToArray(_ref7, 2);
 
-						var id = _ref6[0];
-						var args = _ref6[1];
+						var id = _ref8[0];
+						var args = _ref8[1];
 
 						var _result, _88, _87, _86, _85, _84, item;
 
-						return regeneratorRuntime.async(function process$(_context26) {
+						return regeneratorRuntime.async(function process$(_context24) {
 							while (1) {
-								switch (_context26.prev = _context26.next) {
+								switch (_context24.prev = _context24.next) {
 									case 0:
-										_context26.prev = 0;
+										_context24.prev = 0;
 
 										if (!Array.isArray(args)) {
-											_context26.next = 45;
+											_context24.next = 45;
 											break;
 										}
 
-										_context26.next = 4;
+										_context24.next = 4;
 										return regeneratorRuntime.awrap(func.apply(undefined, _toConsumableArray(args)));
 
 									case 4:
-										_result = _context26.sent;
+										_result = _context24.sent;
 
 										if (!(_result == null || _result[Symbol.iterator] == null || _result[Symbol.asyncIterator] == null)) {
-											_context26.next = 10;
+											_context24.next = 10;
 											break;
 										}
 
-										_context26.next = 8;
+										_context24.next = 8;
 										return regeneratorRuntime.awrap(send([id, _result]));
 
 									case 8:
-										_context26.next = 43;
+										_context24.next = 43;
 										break;
 
 									case 10:
 										processing.add(id);
 										_88 = undefined, _87 = undefined, _86 = undefined, _85 = undefined, _84 = (0, _iterable2.default)(_result)[Symbol.asyncIterator]();
-										_context26.prev = 12;
+										_context24.prev = 12;
 
 									case 13:
 										_86 = false;
-										_context26.next = 16;
+										_context24.next = 16;
 										return regeneratorRuntime.awrap(_84.next());
 
 									case 16:
-										if ((_85 = _context26.sent).done) {
-											_context26.next = 25;
+										if ((_85 = _context24.sent).done) {
+											_context24.next = 25;
 											break;
 										}
 
@@ -41991,119 +41896,119 @@ var attachAsyncFunction = exports.attachAsyncFunction = (0, _method2.default)(fu
 										item = _85.value;
 
 										if (processing.has(id)) {
-											_context26.next = 21;
+											_context24.next = 21;
 											break;
 										}
 
-										return _context26.abrupt("return");
+										return _context24.abrupt("return");
 
 									case 21:
-										_context26.next = 23;
+										_context24.next = 23;
 										return regeneratorRuntime.awrap(send([id, item, "next"]));
 
 									case 23:
-										_context26.next = 13;
+										_context24.next = 13;
 										break;
 
 									case 25:
-										_context26.next = 31;
+										_context24.next = 31;
 										break;
 
 									case 27:
-										_context26.prev = 27;
-										_context26.t0 = _context26["catch"](12);
+										_context24.prev = 27;
+										_context24.t0 = _context24["catch"](12);
 
 										_88 = true;
-										_87 = _context26.t0;
+										_87 = _context24.t0;
 
 									case 31:
-										_context26.prev = 31;
-										_context26.prev = 32;
+										_context24.prev = 31;
+										_context24.prev = 32;
 
 										if (!(_86 && _84.return)) {
-											_context26.next = 36;
+											_context24.next = 36;
 											break;
 										}
 
-										_context26.next = 36;
+										_context24.next = 36;
 										return regeneratorRuntime.awrap(_84.return());
 
 									case 36:
-										_context26.prev = 36;
+										_context24.prev = 36;
 
 										if (!_88) {
-											_context26.next = 39;
+											_context24.next = 39;
 											break;
 										}
 
 										throw _87;
 
 									case 39:
-										return _context26.finish(36);
+										return _context24.finish(36);
 
 									case 40:
-										return _context26.finish(31);
+										return _context24.finish(31);
 
 									case 41:
-										_context26.next = 43;
+										_context24.next = 43;
 										return regeneratorRuntime.awrap(send([id]));
 
 									case 43:
-										_context26.next = 49;
+										_context24.next = 49;
 										break;
 
 									case 45:
 										if (!(args == "stop")) {
-											_context26.next = 48;
+											_context24.next = 48;
 											break;
 										}
 
-										_context26.next = 49;
+										_context24.next = 49;
 										break;
 
 									case 48:
 										throw new Error("wrong arguments");
 
 									case 49:
-										_context26.next = 55;
+										_context24.next = 55;
 										break;
 
 									case 51:
-										_context26.prev = 51;
-										_context26.t1 = _context26["catch"](0);
-										_context26.next = 55;
-										return regeneratorRuntime.awrap(send([id, String(_context26.t1 && _context26.t1.message || _context26.t1), "error"]));
+										_context24.prev = 51;
+										_context24.t1 = _context24["catch"](0);
+										_context24.next = 55;
+										return regeneratorRuntime.awrap(send([id, String(_context24.t1 && _context24.t1.message || _context24.t1), "error"]));
 
 									case 55:
-										_context26.prev = 55;
+										_context24.prev = 55;
 
 										processing.delete(id);
-										return _context26.finish(55);
+										return _context24.finish(55);
 
 									case 58:
 									case "end":
-										return _context26.stop();
+										return _context24.stop();
 								}
 							}
 						}, null, this, [[0, 51, 55, 58], [12, 27, 31, 41], [32,, 36, 40]]);
 					};
 
 					send = function send(data) {
-						return regeneratorRuntime.async(function send$(_context25) {
+						return regeneratorRuntime.async(function send$(_context23) {
 							while (1) {
-								switch (_context25.prev = _context25.next) {
+								switch (_context23.prev = _context23.next) {
 									case 0:
-										_context25.next = 2;
+										_context23.next = 2;
 										return regeneratorRuntime.awrap(last);
 
 									case 2:
 										// await another thread if present
 										last = push(data);
-										return _context25.abrupt("return", last);
+										return _context23.abrupt("return", last);
 
 									case 4:
 									case "end":
-										return _context25.stop();
+										return _context23.stop();
 								}
 							}
 						}, null, this);
@@ -42114,72 +42019,72 @@ var attachAsyncFunction = exports.attachAsyncFunction = (0, _method2.default)(fu
 					});
 					processing = new Set();
 					_83 = undefined, _82 = undefined, _81 = undefined, _80 = undefined, _79 = (0, _iterable2.default)(consumer(collection))[Symbol.asyncIterator]();
-					_context27.prev = 5;
+					_context25.prev = 5;
 
 				case 6:
 					_81 = false;
-					_context27.next = 9;
+					_context25.next = 9;
 					return regeneratorRuntime.awrap(_79.next());
 
 				case 9:
-					if ((_80 = _context27.sent).done) {
-						_context27.next = 17;
+					if ((_80 = _context25.sent).done) {
+						_context25.next = 17;
 						break;
 					}
 
 					_81 = true;
 					data = _80.value;
-					_context27.next = 14;
+					_context25.next = 14;
 					return regeneratorRuntime.awrap(last);
 
 				case 14:
 					// pause reading if not written
 					process(data);
-					_context27.next = 6;
+					_context25.next = 6;
 					break;
 
 				case 17:
-					_context27.next = 23;
+					_context25.next = 23;
 					break;
 
 				case 19:
-					_context27.prev = 19;
-					_context27.t0 = _context27["catch"](5);
+					_context25.prev = 19;
+					_context25.t0 = _context25["catch"](5);
 
 					_83 = true;
-					_82 = _context27.t0;
+					_82 = _context25.t0;
 
 				case 23:
-					_context27.prev = 23;
-					_context27.prev = 24;
+					_context25.prev = 23;
+					_context25.prev = 24;
 
 					if (!(_81 && _79.return)) {
-						_context27.next = 28;
+						_context25.next = 28;
 						break;
 					}
 
-					_context27.next = 28;
+					_context25.next = 28;
 					return regeneratorRuntime.awrap(_79.return());
 
 				case 28:
-					_context27.prev = 28;
+					_context25.prev = 28;
 
 					if (!_83) {
-						_context27.next = 31;
+						_context25.next = 31;
 						break;
 					}
 
 					throw _82;
 
 				case 31:
-					return _context27.finish(28);
+					return _context25.finish(28);
 
 				case 32:
-					return _context27.finish(23);
+					return _context25.finish(23);
 
 				case 33:
 				case "end":
-					return _context27.stop();
+					return _context25.stop();
 			}
 		}
 	}, null, undefined, [[5, 19, 23, 33], [24,, 28, 32]]);
@@ -42191,27 +42096,27 @@ var makeFunction = exports.makeFunction = (0, _method2.default)(function (consum
 	    collection = _iterable2.default.create(function (p) {
 		return push = p;
 	});
-	void function _callee25() {
+	void function _callee23() {
 		var error, results, _93, _92, _91, _90, _89, _result2, _iteratorNormalCompletion6, _didIteratorError6, _iteratorError6, _iterator6, _step6, _resolve;
 
-		return regeneratorRuntime.async(function _callee25$(_context28) {
+		return regeneratorRuntime.async(function _callee23$(_context26) {
 			while (1) {
-				switch (_context28.prev = _context28.next) {
+				switch (_context26.prev = _context26.next) {
 					case 0:
 						error = undefined;
-						_context28.prev = 1;
+						_context26.prev = 1;
 						results = (0, _iterable2.default)(consumer(collection));
 						_93 = undefined, _92 = undefined, _91 = undefined, _90 = undefined, _89 = results[Symbol.asyncIterator]();
-						_context28.prev = 4;
+						_context26.prev = 4;
 
 					case 5:
 						_91 = false;
-						_context28.next = 8;
+						_context26.next = 8;
 						return regeneratorRuntime.awrap(_89.next());
 
 					case 8:
-						if ((_90 = _context28.sent).done) {
-							_context28.next = 14;
+						if ((_90 = _context26.sent).done) {
+							_context26.next = 14;
 							break;
 						}
 
@@ -42219,119 +42124,119 @@ var makeFunction = exports.makeFunction = (0, _method2.default)(function (consum
 						_result2 = _90.value;
 
 						if (buffer.length) buffer.shift()(_result2);else unexpected(_result2);
-						_context28.next = 5;
+						_context26.next = 5;
 						break;
 
 					case 14:
-						_context28.next = 20;
+						_context26.next = 20;
 						break;
 
 					case 16:
-						_context28.prev = 16;
-						_context28.t0 = _context28["catch"](4);
+						_context26.prev = 16;
+						_context26.t0 = _context26["catch"](4);
 
 						_93 = true;
-						_92 = _context28.t0;
+						_92 = _context26.t0;
 
 					case 20:
-						_context28.prev = 20;
-						_context28.prev = 21;
+						_context26.prev = 20;
+						_context26.prev = 21;
 
 						if (!(_91 && _89.return)) {
-							_context28.next = 25;
+							_context26.next = 25;
 							break;
 						}
 
-						_context28.next = 25;
+						_context26.next = 25;
 						return regeneratorRuntime.awrap(_89.return());
 
 					case 25:
-						_context28.prev = 25;
+						_context26.prev = 25;
 
 						if (!_93) {
-							_context28.next = 28;
+							_context26.next = 28;
 							break;
 						}
 
 						throw _92;
 
 					case 28:
-						return _context28.finish(25);
+						return _context26.finish(25);
 
 					case 29:
-						return _context28.finish(20);
+						return _context26.finish(20);
 
 					case 30:
-						_context28.next = 36;
+						_context26.next = 36;
 						break;
 
 					case 32:
-						_context28.prev = 32;
-						_context28.t1 = _context28["catch"](1);
+						_context26.prev = 32;
+						_context26.t1 = _context26["catch"](1);
 
-						error = _context28.t1;
-						console.error(_context28.t1);
+						error = _context26.t1;
+						console.error(_context26.t1);
 
 					case 36:
 						_iteratorNormalCompletion6 = true;
 						_didIteratorError6 = false;
 						_iteratorError6 = undefined;
-						_context28.prev = 39;
+						_context26.prev = 39;
 
 						for (_iterator6 = buffer[Symbol.iterator](); !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
 							_resolve = _step6.value;
 							_resolve(_bluebird2.default.reject(error || createEndOfStream()));
-						}_context28.next = 47;
+						}_context26.next = 47;
 						break;
 
 					case 43:
-						_context28.prev = 43;
-						_context28.t2 = _context28["catch"](39);
+						_context26.prev = 43;
+						_context26.t2 = _context26["catch"](39);
 						_didIteratorError6 = true;
-						_iteratorError6 = _context28.t2;
+						_iteratorError6 = _context26.t2;
 
 					case 47:
-						_context28.prev = 47;
-						_context28.prev = 48;
+						_context26.prev = 47;
+						_context26.prev = 48;
 
 						if (!_iteratorNormalCompletion6 && _iterator6.return) {
 							_iterator6.return();
 						}
 
 					case 50:
-						_context28.prev = 50;
+						_context26.prev = 50;
 
 						if (!_didIteratorError6) {
-							_context28.next = 53;
+							_context26.next = 53;
 							break;
 						}
 
 						throw _iteratorError6;
 
 					case 53:
-						return _context28.finish(50);
+						return _context26.finish(50);
 
 					case 54:
-						return _context28.finish(47);
+						return _context26.finish(47);
 
 					case 55:
 						buffer = null;
 
 					case 56:
 					case "end":
-						return _context28.stop();
+						return _context26.stop();
 				}
 			}
 		}, null, this, [[1, 32], [4, 16, 20, 30], [21,, 25, 29], [39, 43, 47, 55], [48,, 50, 54]]);
 	}();
-	return function _callee26(value) {
+	return function _callee24(value) {
 		var ret;
-		return regeneratorRuntime.async(function _callee26$(_context29) {
+		return regeneratorRuntime.async(function _callee24$(_context27) {
 			while (1) {
-				switch (_context29.prev = _context29.next) {
+				switch (_context27.prev = _context27.next) {
 					case 0:
 						if (!(buffer == null)) {
-							_context29.next = 2;
+							_context27.next = 2;
 							break;
 						}
 
@@ -42343,19 +42248,118 @@ var makeFunction = exports.makeFunction = (0, _method2.default)(function (consum
 						});
 
 						push(value); // send value __only__ after preparing buffer
-						return _context29.abrupt("return", ret);
+						return _context27.abrupt("return", ret);
 
 					case 5:
 					case "end":
-						return _context29.stop();
+						return _context27.stop();
 				}
 			}
 		}, null, undefined);
 	};
 });
 
-var attachFunction = exports.attachFunction = (0, _method2.default)(function _callee28(consumer, func) {
+var attachFunction = exports.attachFunction = (0, _method2.default)(function _callee26(consumer, func) {
 	var push, collection, _98, _97, _96, _95, _94, _loop2;
+
+	return regeneratorRuntime.async(function _callee26$(_context29) {
+		while (1) {
+			switch (_context29.prev = _context29.next) {
+				case 0:
+					push = undefined, collection = _iterable2.default.create(function (p) {
+						return push = p;
+					});
+					_98 = undefined, _97 = undefined, _96 = undefined, _95 = undefined, _94 = (0, _iterable2.default)(consumer(collection))[Symbol.asyncIterator]();
+					_context29.prev = 2;
+
+					_loop2 = function _callee25() {
+						var data;
+						return regeneratorRuntime.async(function _callee25$(_context28) {
+							while (1) {
+								switch (_context28.prev = _context28.next) {
+									case 0:
+										_96 = true;
+										data = _95.value;
+										_context28.next = 4;
+										return regeneratorRuntime.awrap(push(_bluebird2.default.try(function () {
+											return func(data);
+										})));
+
+									case 4:
+									case "end":
+										return _context28.stop();
+								}
+							}
+						}, null, undefined);
+					};
+
+				case 4:
+					_96 = false;
+					_context29.next = 7;
+					return regeneratorRuntime.awrap(_94.next());
+
+				case 7:
+					if ((_95 = _context29.sent).done) {
+						_context29.next = 12;
+						break;
+					}
+
+					_context29.next = 10;
+					return regeneratorRuntime.awrap(_loop2());
+
+				case 10:
+					_context29.next = 4;
+					break;
+
+				case 12:
+					_context29.next = 18;
+					break;
+
+				case 14:
+					_context29.prev = 14;
+					_context29.t0 = _context29["catch"](2);
+
+					_98 = true;
+					_97 = _context29.t0;
+
+				case 18:
+					_context29.prev = 18;
+					_context29.prev = 19;
+
+					if (!(_96 && _94.return)) {
+						_context29.next = 23;
+						break;
+					}
+
+					_context29.next = 23;
+					return regeneratorRuntime.awrap(_94.return());
+
+				case 23:
+					_context29.prev = 23;
+
+					if (!_98) {
+						_context29.next = 26;
+						break;
+					}
+
+					throw _97;
+
+				case 26:
+					return _context29.finish(23);
+
+				case 27:
+					return _context29.finish(18);
+
+				case 28:
+				case "end":
+					return _context29.stop();
+			}
+		}
+	}, null, undefined, [[2, 14, 18, 28], [19,, 23, 27]]);
+});
+
+var attachHandler = exports.attachHandler = (0, _method2.default)(function _callee28(consumer, func) {
+	var push, collection, _103, _102, _101, _100, _99, _loop3;
 
 	return regeneratorRuntime.async(function _callee28$(_context31) {
 		while (1) {
@@ -42364,193 +42368,94 @@ var attachFunction = exports.attachFunction = (0, _method2.default)(function _ca
 					push = undefined, collection = _iterable2.default.create(function (p) {
 						return push = p;
 					});
-					_98 = undefined, _97 = undefined, _96 = undefined, _95 = undefined, _94 = (0, _iterable2.default)(consumer(collection))[Symbol.asyncIterator]();
-					_context31.prev = 2;
-
-					_loop2 = function _callee27() {
-						var data;
-						return regeneratorRuntime.async(function _callee27$(_context30) {
-							while (1) {
-								switch (_context30.prev = _context30.next) {
-									case 0:
-										_96 = true;
-										data = _95.value;
-										_context30.next = 4;
-										return regeneratorRuntime.awrap(push(_bluebird2.default.try(function () {
-											return func(data);
-										})));
-
-									case 4:
-									case "end":
-										return _context30.stop();
-								}
-							}
-						}, null, undefined);
-					};
-
-				case 4:
-					_96 = false;
-					_context31.next = 7;
-					return regeneratorRuntime.awrap(_94.next());
-
-				case 7:
-					if ((_95 = _context31.sent).done) {
-						_context31.next = 12;
-						break;
-					}
-
-					_context31.next = 10;
-					return regeneratorRuntime.awrap(_loop2());
-
-				case 10:
-					_context31.next = 4;
-					break;
-
-				case 12:
-					_context31.next = 18;
-					break;
-
-				case 14:
-					_context31.prev = 14;
-					_context31.t0 = _context31["catch"](2);
-
-					_98 = true;
-					_97 = _context31.t0;
-
-				case 18:
-					_context31.prev = 18;
-					_context31.prev = 19;
-
-					if (!(_96 && _94.return)) {
-						_context31.next = 23;
-						break;
-					}
-
-					_context31.next = 23;
-					return regeneratorRuntime.awrap(_94.return());
-
-				case 23:
-					_context31.prev = 23;
-
-					if (!_98) {
-						_context31.next = 26;
-						break;
-					}
-
-					throw _97;
-
-				case 26:
-					return _context31.finish(23);
-
-				case 27:
-					return _context31.finish(18);
-
-				case 28:
-				case "end":
-					return _context31.stop();
-			}
-		}
-	}, null, undefined, [[2, 14, 18, 28], [19,, 23, 27]]);
-});
-
-var attachHandler = exports.attachHandler = (0, _method2.default)(function _callee30(consumer, func) {
-	var push, collection, _103, _102, _101, _100, _99, _loop3;
-
-	return regeneratorRuntime.async(function _callee30$(_context33) {
-		while (1) {
-			switch (_context33.prev = _context33.next) {
-				case 0:
-					push = undefined, collection = _iterable2.default.create(function (p) {
-						return push = p;
-					});
 					_103 = undefined, _102 = undefined, _101 = undefined, _100 = undefined, _99 = (0, _iterable2.default)(consumer(collection))[Symbol.asyncIterator]();
-					_context33.prev = 2;
+					_context31.prev = 2;
 
 					_loop3 = function _loop3() {
 						_101 = true;
-						var data = _100.value;void function _callee29() {
+						var data = _100.value;void function _callee27() {
 							var _108, _107, _106, _105, _104, _data;
 
-							return regeneratorRuntime.async(function _callee29$(_context32) {
+							return regeneratorRuntime.async(function _callee27$(_context30) {
 								while (1) {
-									switch (_context32.prev = _context32.next) {
+									switch (_context30.prev = _context30.next) {
 										case 0:
-											_context32.prev = 0;
+											_context30.prev = 0;
 											_108 = undefined, _107 = undefined, _106 = undefined, _105 = undefined, _104 = (0, _iterable2.default)(func(data))[Symbol.asyncIterator]();
-											_context32.prev = 2;
+											_context30.prev = 2;
 
 										case 3:
 											_106 = false;
-											_context32.next = 6;
+											_context30.next = 6;
 											return regeneratorRuntime.awrap(_104.next());
 
 										case 6:
-											if ((_105 = _context32.sent).done) {
-												_context32.next = 13;
+											if ((_105 = _context30.sent).done) {
+												_context30.next = 13;
 												break;
 											}
 
 											_106 = true;
 											_data = _105.value;
-											_context32.next = 11;
+											_context30.next = 11;
 											return regeneratorRuntime.awrap(push(_data));
 
 										case 11:
-											_context32.next = 3;
+											_context30.next = 3;
 											break;
 
 										case 13:
-											_context32.next = 19;
+											_context30.next = 19;
 											break;
 
 										case 15:
-											_context32.prev = 15;
-											_context32.t0 = _context32["catch"](2);
+											_context30.prev = 15;
+											_context30.t0 = _context30["catch"](2);
 
 											_108 = true;
-											_107 = _context32.t0;
+											_107 = _context30.t0;
 
 										case 19:
-											_context32.prev = 19;
-											_context32.prev = 20;
+											_context30.prev = 19;
+											_context30.prev = 20;
 
 											if (!(_106 && _104.return)) {
-												_context32.next = 24;
+												_context30.next = 24;
 												break;
 											}
 
-											_context32.next = 24;
+											_context30.next = 24;
 											return regeneratorRuntime.awrap(_104.return());
 
 										case 24:
-											_context32.prev = 24;
+											_context30.prev = 24;
 
 											if (!_108) {
-												_context32.next = 27;
+												_context30.next = 27;
 												break;
 											}
 
 											throw _107;
 
 										case 27:
-											return _context32.finish(24);
+											return _context30.finish(24);
 
 										case 28:
-											return _context32.finish(19);
+											return _context30.finish(19);
 
 										case 29:
-											_context32.next = 35;
+											_context30.next = 35;
 											break;
 
 										case 31:
-											_context32.prev = 31;
-											_context32.t1 = _context32["catch"](0);
-											_context32.next = 35;
-											return regeneratorRuntime.awrap(push(_bluebird2.default.reject(_context32.t1)));
+											_context30.prev = 31;
+											_context30.t1 = _context30["catch"](0);
+											_context30.next = 35;
+											return regeneratorRuntime.awrap(push(_bluebird2.default.reject(_context30.t1)));
 
 										case 35:
 										case "end":
-											return _context32.stop();
+											return _context30.stop();
 									}
 								}
 							}, null, this, [[0, 31], [2, 15, 19, 29], [20,, 24, 28]]);
@@ -42559,62 +42464,62 @@ var attachHandler = exports.attachHandler = (0, _method2.default)(function _call
 
 				case 4:
 					_101 = false;
-					_context33.next = 7;
+					_context31.next = 7;
 					return regeneratorRuntime.awrap(_99.next());
 
 				case 7:
-					if ((_100 = _context33.sent).done) {
-						_context33.next = 11;
+					if ((_100 = _context31.sent).done) {
+						_context31.next = 11;
 						break;
 					}
 
 					_loop3();
 
-					_context33.next = 4;
+					_context31.next = 4;
 					break;
 
 				case 11:
-					_context33.next = 17;
+					_context31.next = 17;
 					break;
 
 				case 13:
-					_context33.prev = 13;
-					_context33.t0 = _context33["catch"](2);
+					_context31.prev = 13;
+					_context31.t0 = _context31["catch"](2);
 
 					_103 = true;
-					_102 = _context33.t0;
+					_102 = _context31.t0;
 
 				case 17:
-					_context33.prev = 17;
-					_context33.prev = 18;
+					_context31.prev = 17;
+					_context31.prev = 18;
 
 					if (!(_101 && _99.return)) {
-						_context33.next = 22;
+						_context31.next = 22;
 						break;
 					}
 
-					_context33.next = 22;
+					_context31.next = 22;
 					return regeneratorRuntime.awrap(_99.return());
 
 				case 22:
-					_context33.prev = 22;
+					_context31.prev = 22;
 
 					if (!_103) {
-						_context33.next = 25;
+						_context31.next = 25;
 						break;
 					}
 
 					throw _102;
 
 				case 25:
-					return _context33.finish(22);
+					return _context31.finish(22);
 
 				case 26:
-					return _context33.finish(17);
+					return _context31.finish(17);
 
 				case 27:
 				case "end":
-					return _context33.stop();
+					return _context31.stop();
 			}
 		}
 	}, null, undefined, [[2, 13, 17, 27], [18,, 22, 26]]);
@@ -48679,9 +48584,124 @@ var _bluebird = require("bluebird");
 
 var _bluebird2 = _interopRequireDefault(_bluebird);
 
+var _stream = require("stream");
+
+var _stream2 = _interopRequireDefault(_stream);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+if (!Symbol.asyncIterator) Symbol.asyncIterator = Symbol("asyncIterator");
+
+var AGProto = Object.getPrototypeOf(regeneratorRuntime.mark(function _callee() {
+	return regeneratorRuntime.async(function _callee$(_context) {
+		while (1) {
+			switch (_context.prev = _context.next) {
+				case 0:
+				case "end":
+					return _context.stop();
+			}
+		}
+	}, _callee, this);
+})());
+if (!AGProto[Symbol.iterator]) Object.defineProperty(AGProto, Symbol.asyncIterator, { configurable: true, value: function value() {
+		return this;
+	} });
+
+if (!_stream2.default.Readable.prototype[Symbol.asyncIterator]) {
+	Object.defineProperty(_stream2.default.Readable.prototype, Symbol.asyncIterator, { configurable: true, value: function value() {
+
+			var s = this;
+			s.pause();
+
+			var waitForReadable = null,
+			    done = false,
+			    error = null;
+
+			var onreadable = function onreadable() {
+				if (waitForReadable != null) {
+					process.nextTick(waitForReadable);
+					waitForReadable = null;
+				}
+			};
+			var onend = function onend() {
+				done = true;
+				onreadable();
+			};
+			var onerror = function onerror(e) {
+				error = e;
+				onend();
+			};
+
+			s.on("error", onerror);
+			s.on("end", onend);
+			s.on("readable", onreadable);
+
+			return regeneratorRuntime.mark(function _callee2() {
+				var value;
+				return regeneratorRuntime.async(function _callee2$(_context2) {
+					while (1) {
+						switch (_context2.prev = _context2.next) {
+							case 0:
+								_context2.prev = 0;
+
+							case 1:
+								if (done) {
+									_context2.next = 12;
+									break;
+								}
+
+								value = s.read();
+
+								if (!(value != null)) {
+									_context2.next = 8;
+									break;
+								}
+
+								_context2.next = 6;
+								return value;
+
+							case 6:
+								_context2.next = 10;
+								break;
+
+							case 8:
+								_context2.next = 10;
+								return regeneratorRuntime.awrap(new _bluebird2.default(function (resolve) {
+									return waitForReadable = resolve;
+								}));
+
+							case 10:
+								_context2.next = 1;
+								break;
+
+							case 12:
+								_context2.prev = 12;
+
+								s.removeListener("error", onerror);
+								s.removeListener("end", onend);
+								s.removeListener("readable", onreadable);
+								return _context2.finish(12);
+
+							case 17:
+								if (!(error != null)) {
+									_context2.next = 19;
+									break;
+								}
+
+								throw error;
+
+							case 19:
+							case "end":
+								return _context2.stop();
+						}
+					}
+				}, _callee2, this, [[0,, 12, 17]]);
+			})();
+		}
+	});
+}
 
 var defIterator = {
 	throw: function _throw(value) {
@@ -48750,10 +48770,10 @@ function cleanup(writing) {
 	try {
 		for (var _iterator = writing[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
 			var _step$value = _step.value;
-			var value = _step$value.value;
+			var _value = _step$value.value;
 			var resolve = _step$value.resolve;
 
-			resolve(pushAfterDone(value));
+			resolve(pushAfterDone(_value));
 		}
 	} catch (err) {
 		_didIteratorError = true;
@@ -48772,7 +48792,7 @@ function cleanup(writing) {
 }
 
 var create = exports.create = iterable.create = function (proc) {
-	// returned value of push resolves when collection has started to process argument
+	// returned value of push resolves when collection starts processing of argument
 	var reading = null;
 	var writing = [];
 	var done = false;
@@ -48796,62 +48816,62 @@ var create = exports.create = iterable.create = function (proc) {
 		}
 	}
 
-	return regeneratorRuntime.mark(function _callee() {
-		var next, _writing$shift, value, resolve;
+	return regeneratorRuntime.mark(function _callee3() {
+		var next, _writing$shift, _value2, resolve;
 
-		return regeneratorRuntime.async(function _callee$(_context) {
+		return regeneratorRuntime.async(function _callee3$(_context3) {
 			while (1) {
-				switch (_context.prev = _context.next) {
+				switch (_context3.prev = _context3.next) {
 					case 0:
-						_context.prev = 0;
+						_context3.prev = 0;
 
 					case 1:
 						next = undefined;
 
 						if (writing.length) {
 							_writing$shift = writing.shift();
-							value = _writing$shift.value;
+							_value2 = _writing$shift.value;
 							resolve = _writing$shift.resolve;
 
 							process.nextTick(resolve, true);
-							next = value;
+							next = _value2;
 						} else next = new _bluebird2.default(function (resolve) {
 							return reading = resolve;
 						});
-						_context.next = 5;
+						_context3.next = 5;
 						return regeneratorRuntime.awrap(next);
 
 					case 5:
-						next = _context.sent;
+						next = _context3.sent;
 
 						if (!(next === end)) {
-							_context.next = 8;
+							_context3.next = 8;
 							break;
 						}
 
-						return _context.abrupt("break", 12);
+						return _context3.abrupt("break", 12);
 
 					case 8:
-						_context.next = 10;
+						_context3.next = 10;
 						return next;
 
 					case 10:
-						_context.next = 1;
+						_context3.next = 1;
 						break;
 
 					case 12:
-						_context.prev = 12;
+						_context3.prev = 12;
 
 						done = true;
 						cleanup(writing);
-						return _context.finish(12);
+						return _context3.finish(12);
 
 					case 16:
 					case "end":
-						return _context.stop();
+						return _context3.stop();
 				}
 			}
-		}, _callee, this, [[0,, 12, 16]]);
+		}, _callee3, this, [[0,, 12, 16]]);
 	})();
 };
 
@@ -48869,7 +48889,7 @@ var isSync = exports.isSync = iterable.isSync = function (iterator) {
 
 }).call(this,require('_process'))
 
-},{"_process":241,"bluebird":5}],292:[function(require,module,exports){
+},{"_process":241,"bluebird":5,"stream":249}],292:[function(require,module,exports){
 (function (process,global,Buffer){
 "use strict";
 
