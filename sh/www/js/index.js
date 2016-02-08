@@ -39686,9 +39686,9 @@ var m = function m(proc) {
 			args[_key] = arguments[_key];
 		}
 
-		if (args.length < proc.length) return function (self) {
+		if (args.length < proc.length) return (0, _method2.default)(function (self) {
 			return proc.apply(undefined, [self].concat(args));
-		};else return proc.apply(undefined, args);
+		});else return proc.apply(undefined, args);
 	});
 };
 
@@ -40449,7 +40449,7 @@ var filter = exports.filter = m(regeneratorRuntime.mark(function _callee9(collec
 					_46 = true;
 					_value5 = _45.value;
 					_context9.next = 10;
-					return regeneratorRuntime.awrap(filter(_value5));
+					return regeneratorRuntime.awrap(predicate(_value5));
 
 				case 10:
 					if (!_context9.sent) {
