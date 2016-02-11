@@ -25,10 +25,16 @@ restart="exec $0 $1 $2 $3 $4 $5 $6 $7 $8 $9"
 
 function update {
 
-	# if [ -n "$pid" ] ; then
-	# 	echo rebooting for update
-	# 	exec reboot
-	# fi
+	if [ -n "$pid" ] ; then
+		# Ёсьць праблемы з рэстартам SHNetroManager (#2554)
+		# а тасксама з рэстаратам шэлаўскіх скрыптоў.
+		# Карацей, пакуль не прадумана сістэма перазагрузкі працэсаў, рэбуцім увесь сервер.
+		# Надалей - пры адладцы нейкай новай сістэмы абнаўленьня, праверыць, што лішняй інфы на экране няма - нават tar часам лаяўся.
+		touch .updating_flag
+		sync
+		echo rebooting for update
+		exec reboot
+	fi
 
 	echo downloading update archive
 	hash=$(wget -qS -O- $url 3>&1 1>/tmp/server_binary 2>&3 | grep ETag | grep -Eo '\w{20}\w*')
@@ -41,6 +47,7 @@ function update {
 			led 0 red
 			touch .updating_flag
 			if [ -n "$pid" ] ; then
+				# Зараз сервер заўсёды рэбуціцца, а гэты код чакае лепшых часоў.
 				echo killing services
 				kill -TERM -$pid
 				echo waiting 1 sec
@@ -63,12 +70,13 @@ function update {
 					pushd server
 					tar -xzf /tmp/server_binary
 					popd
-					echo $hash>.binary_hash
-					rm .updating_flag
 					echo updating successfull
-					echo restarting
 					cp /smarthome/server/www/start_server /smarthome/start_server
 					sync
+					echo $hash>.binary_hash
+					rm .updating_flag
+					sync
+					echo restarting
 					# do not return from updating. restart.
 					sleep 2
 					$restart
