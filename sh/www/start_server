@@ -44,8 +44,6 @@ function update {
 			fi
 			echo removing old programs
 			rm -rf server
-			# sleep 1
-			# rm -rf server
 			if [ -d server ] ; then
 				echo cannot delete 'server' folder
 			else
