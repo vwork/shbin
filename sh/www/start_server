@@ -44,10 +44,12 @@ function update {
 			fi
 			echo removing old programs
 			rm -rf server
+			sleep 1
 			if [ -d server ] ; then
 				echo cannot delete 'server' folder
 			else
 				mkdir -p "server/!!This folder will be deleted while updating!!"
+				sleep 1
 				if [ ! -d server ] ; then
 					echo cannot create 'server' folder
 				else
