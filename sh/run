@@ -14,8 +14,8 @@ do
 	echo ls ./bin/
 	ls ./bin/
 
-	echo ls ./
-	ls ./
+	echo ls .
+	ls .
 
 	date >>/tmp/nj.log
 	echo starting server >>/tmp/nj.log
