@@ -37,10 +37,15 @@ function update {
 			if [ -n "$pid" ] ; then
 				echo killing services
 				kill -TERM -$pid
+				echo waiting 1 sec
+				sleep 1
 			else
 				echo no services to kill
 			fi
+			echo removing old programs
 			rm -rf server
+			# sleep 1
+			# rm -rf server
 			if [ -d server ] ; then
 				echo cannot delete 'server' folder
 			else
@@ -59,7 +64,9 @@ function update {
 					cp /smarthome/server/www/start_server /smarthome/start_server
 					sync
 					# do not return from updating. restart.
+					sleep 2
 					$restart
+					echo ERROR RESTARTING !!!!
 				fi
 			fi
 		else
@@ -99,6 +106,6 @@ while true ; do
 			update
 		fi
 	fi
-	echo sleeping
+	echo sleeping: $0
 	sleep 60
 done
