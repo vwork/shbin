@@ -10,6 +10,13 @@ while true;
 do
 	date
 	echo starting server in $(pwd)
+
+	echo ls ./bin/
+	ls ./bin/
+
+	echo ls ./
+	ls ./
+
 	date >>/tmp/nj.log
 	echo starting server >>/tmp/nj.log
 	$s $1;
