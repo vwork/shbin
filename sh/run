@@ -9,7 +9,7 @@ fi
 while true;
 do
 	date
-	echo starting server
+	echo starting server in $(pwd)
 	date >>/tmp/nj.log
 	echo starting server >>/tmp/nj.log
 	$s $1;
