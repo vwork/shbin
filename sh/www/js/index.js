@@ -43866,27 +43866,27 @@
 
 	var _MainScreen2 = _interopRequireDefault(_MainScreen);
 
-	var _StartupScreen = __webpack_require__(427);
+	var _StartupScreen = __webpack_require__(431);
 
 	var _StartupScreen2 = _interopRequireDefault(_StartupScreen);
 
-	var _Background = __webpack_require__(429);
+	var _Background = __webpack_require__(433);
 
 	var _Background2 = _interopRequireDefault(_Background);
 
-	var _Screen = __webpack_require__(428);
+	var _Screen = __webpack_require__(432);
 
 	var _Screen2 = _interopRequireDefault(_Screen);
 
-	var _Top = __webpack_require__(434);
+	var _Top = __webpack_require__(438);
 
 	var _Top2 = _interopRequireDefault(_Top);
 
-	var _Bottom = __webpack_require__(436);
+	var _Bottom = __webpack_require__(439);
 
 	var _Bottom2 = _interopRequireDefault(_Bottom);
 
-	var _Button = __webpack_require__(438);
+	var _Button = __webpack_require__(441);
 
 	var _Button2 = _interopRequireDefault(_Button);
 
@@ -44033,35 +44033,35 @@
 	      var _context;
 
 	      return (_context = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(439));
+	        resolve(__webpack_require__(442));
 	      }), app.load).call(_context);
 	    },
 	    ContextMenu: function ContextMenu() {
 	      var _context2;
 
 	      return (_context2 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(440));
+	        resolve(__webpack_require__(443));
 	      }), app.load).call(_context2);
 	    },
 	    AddMenu: function AddMenu() {
 	      var _context3;
 
 	      return (_context3 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(444));
+	        resolve(__webpack_require__(447));
 	      }), app.load).call(_context3);
 	    },
 	    ThemeMenu: function ThemeMenu() {
 	      var _context4;
 
 	      return (_context4 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(445));
+	        resolve(__webpack_require__(448));
 	      }), app.load).call(_context4);
 	    },
 	    SearchItems: function SearchItems() {
 	      var _context5;
 
 	      return (_context5 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(446));
+	        resolve(__webpack_require__(449));
 	      }), app.load).call(_context5);
 	    },
 	    SearchPictures: function SearchPictures() {
@@ -57812,11 +57812,11 @@
 
 	var dbc = _interopRequireWildcard(_dbc);
 
-	var _IconImage = __webpack_require__(451);
+	var _IconImage = __webpack_require__(427);
 
 	var _IconImage2 = _interopRequireDefault(_IconImage);
 
-	var _IconLabel = __webpack_require__(435);
+	var _IconLabel = __webpack_require__(430);
 
 	var _IconLabel2 = _interopRequireDefault(_IconLabel);
 
@@ -58829,7 +58829,389 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _Screen = __webpack_require__(428);
+	exports.default = IconImage;
+
+	var _ra = __webpack_require__(332);
+
+	var _ra2 = _interopRequireDefault(_ra);
+
+	var _lodash = __webpack_require__(329);
+
+	var lodash = _interopRequireWildcard(_lodash);
+
+	var _localUtils = __webpack_require__(324);
+
+	var lu = _interopRequireWildcard(_localUtils);
+
+	var _htmlutils = __webpack_require__(384);
+
+	var htmlutils = _interopRequireWildcard(_htmlutils);
+
+	var _cc = __webpack_require__(331);
+
+	var cc = _interopRequireWildcard(_cc);
+
+	var _animate = __webpack_require__(428);
+
+	var _animate2 = _interopRequireDefault(_animate);
+
+	var _cssTime = __webpack_require__(429);
+
+	var cssTime = _interopRequireWildcard(_cssTime);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+	{
+	  __(
+	    "head",
+	    null,
+	    __(
+	      "style",
+	      null,
+	      "\n\t.icon_image {\n\t\tposition: relative;\n\t}\n\t.icon_image svg {\n\t\tposition: absolute;\n\t\twidth: 100%;\n\t\theight: 100%;\n\t\tleft: 0;\n\t\ttop: 0;\n\t}\n"
+	    ),
+	    __(
+	      "register",
+	      null,
+	      "div.icon_image ",
+	      function (_ref) {
+	        var app = _ref.app;
+	        var src = _ref.src;
+	        var _ref$state = _ref.state;
+	        var state = _ref$state === undefined ? 1 : _ref$state;
+	        var _ref$absent = _ref.absent;
+	        var absent = _ref$absent === undefined ? false : _ref$absent;
+
+	        var attr = _objectWithoutProperties(_ref, ["app", "src", "state", "absent"]);
+
+	        var ii = IconImage(app)({ src: src, state: state, absent: absent });
+	        return __(
+	          "div",
+	          { "class": function _class() {
+	              return ii.className;
+	            }, _: attr },
+	          function () {
+	            return ii.node;
+	          }
+	        );
+	      }
+	    )
+	  );
+	}
+
+	function IconImage(app) {
+	  return function (opts) {
+	    var _state = null;
+	    var _current = null;
+	    return (0, _ra2.default)({
+	      get template() {
+	        return app.getIconTemplate(lu.valueOf(opts.src));
+	      },
+	      get node() {
+	        var ret = void 0;
+	        if (this.template) ret = htmlutils.importComponent(this.template);
+	        if (!ret) ret = null;else ret.classList.add("animations");
+	        return ret;
+	      },
+	      _setImageState: function _setImageState(state) {
+	        _current = state;
+	        this.node.setState(state);
+	      },
+
+	      get _updateDataState() {
+	        return regeneratorRuntime.mark(function _callee() {
+	          var data, duration;
+	          return regeneratorRuntime.wrap(function _callee$(_context) {
+	            while (1) switch (_context.prev = _context.next) {
+	              case 0:
+	                data = this.node;
+
+	                if (data && data.setState) {
+	                  _context.next = 3;
+	                  break;
+	                }
+
+	                return _context.abrupt("return");
+
+	              case 3:
+	                _state = lu.valueOf(opts.state);
+
+	                if (!(_state == _current)) {
+	                  _context.next = 6;
+	                  break;
+	                }
+
+	                return _context.abrupt("return");
+
+	              case 6:
+	                _context.next = 8;
+	                return cc.requestAnimationFrame;
+
+	              case 8:
+	                if (!(_current != null)) {
+	                  _context.next = 15;
+	                  break;
+	                }
+
+	                duration = window.getComputedStyle(data).transitionDuration;
+
+	                if (duration) duration = cssTime.from(duration);
+
+	                if (!duration) {
+	                  _context.next = 15;
+	                  break;
+	                }
+
+	                _context.next = 14;
+	                return (0, _animate2.default)(this._setImageState, {
+	                  from: _current,
+	                  to: _state,
+	                  duration: duration
+	                });
+
+	              case 14:
+	                return _context.abrupt("return");
+
+	              case 15:
+	                this._setImageState(_state);
+
+	              case 16:
+	              case "end":
+	                return _context.stop();
+	            }
+	          }, _callee, this);
+	        }).call(this);
+	      },
+	      get className() {
+	        var absent = lu.valueOf(opts.absent);
+	        var state100 = Math.round(absent ? 0 : opts.state * 100);
+	        return [absent ? "absent" : "present", String(state100 + 1000).slice(1), state100 ? "on" : "off", state100 == 0 || state100 == 100 ? "extreme" : "percentage"].map(function (c) {
+	          return "state_" + c;
+	        });
+	      }
+	    });
+	  };
+	}
+	{
+	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
+	    __esModule: {
+	      value: true
+	    },
+	    default: {
+	      value: exports.default
+	    }
+	  });
+	  module.exports = exports.default;
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
+
+/***/ },
+/* 428 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _cc = __webpack_require__(331);
+
+	var cc = _interopRequireWildcard(_cc);
+
+	var _cssTime = __webpack_require__(429);
+
+	var cssTime = _interopRequireWildcard(_cssTime);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	var animate = cc.factory(regeneratorRuntime.mark(function _callee(func, _ref) {
+	  var _ref$from = _ref.from;
+	  var from = _ref$from === undefined ? 0 : _ref$from;
+	  var _ref$to = _ref.to;
+	  var to = _ref$to === undefined ? 1 : _ref$to;
+	  var _ref$duration = _ref.duration;
+	  var duration = _ref$duration === undefined ? 400 : _ref$duration;
+	  var _ref$easing = _ref.easing;
+	  var easing = _ref$easing === undefined ? "swing" : _ref$easing;
+	  var start, delta, pos;
+	  return regeneratorRuntime.wrap(function _callee$(_context) {
+	    while (1) switch (_context.prev = _context.next) {
+	      case 0:
+	        if (typeof easing == "string") easing = animate[easing]; // allow plugins
+	        if (typeof duration == "string") duration = cssTime.from(duration);
+	        start = Date.now();
+
+	      case 3:
+	        delta = Date.now() - start;
+
+	        if (!(delta >= duration)) {
+	          _context.next = 6;
+	          break;
+	        }
+
+	        return _context.abrupt("return", func(to));
+
+	      case 6:
+	        pos = from + (to - from) * easing(Math.min(1, delta / duration));
+
+	        func(pos);
+
+	        _context.next = 10;
+	        return cc.requestAnimationFrame;
+
+	      case 10:
+	        _context.next = 3;
+	        break;
+
+	      case 12:
+	      case "end":
+	        return _context.stop();
+	    }
+	  }, _callee, this);
+	}));
+
+	animate.linear = function (p) {
+	  return p;
+	};
+	animate.swing = function (p) {
+	  return 0.5 - Math.cos(p * Math.PI) / 2;
+	};
+
+	exports.default = animate;
+	{
+	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
+	    __esModule: {
+	      value: true
+	    },
+	    default: {
+	      value: exports.default
+	    }
+	  });
+	  module.exports = exports.default;
+	}
+
+/***/ },
+/* 429 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_RESULT__;/*globals define, module */
+
+	// This module contains functions for converting milliseconds
+	// to and from CSS time strings.
+
+	(function (globals) {
+	    'use strict';
+
+	    var regex = /^([\-\+]?[0-9]+(\.[0-9]+)?)(m?s)$/,
+
+	    functions = {
+	        from: from,
+	        to: to
+	    };
+
+	    exportFunctions();
+
+	    // Public function `from`.
+	    //
+	    // Returns the number of milliseconds represented by a
+	    // CSS time string.
+	    function from (cssTime) {
+	        var matches = regex.exec(cssTime);
+
+	        if (matches === null) {
+	            throw new Error('Invalid CSS time');
+	        }
+
+	        return parseFloat(matches[1]) * (matches[3] === 's' ? 1000 : 1);
+	    }
+
+	    // Public function `to`.
+	    //
+	    // Returns a CSS time string representing the number
+	    // of milliseconds passed in the arguments.
+	    function to (milliseconds) {
+	        if (typeof milliseconds !== 'number' || isNaN(milliseconds)) {
+	            throw new Error('Invalid milliseconds');
+	        }
+
+	        return milliseconds + 'ms';
+	    }
+
+	    function exportFunctions () {
+	        if (true) {
+	            !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
+	                return functions;
+	            }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	        } else if (typeof module !== 'undefined' && module !== null && module.exports) {
+	            module.exports = functions;
+	        } else {
+	            globals.cssTime = functions;
+	        }
+	    }
+	}(this));
+
+
+
+/***/ },
+/* 430 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _htmlutils = __webpack_require__(384);
+
+	var htmlutils = _interopRequireWildcard(_htmlutils);
+
+	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+	// import * as lu from "localUtils"
+
+	exports.default = function (_ref) {
+	  var _context;
+
+	  var length = _ref.length;
+	  var text = _ref.text;
+	  return (_context = (_context = text.normalize().toLocaleLowerCase(), htmlutils.normalizeSpace).call(_context), htmlutils.firstCharacters).call(_context, length).trim();
+	};
+
+	{
+	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
+	    __esModule: {
+	      value: true
+	    },
+	    default: {
+	      value: exports.default
+	    }
+	  });
+	  module.exports = exports.default;
+	}
+
+/***/ },
+/* 431 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _Screen = __webpack_require__(432);
 
 	var _Screen2 = _interopRequireDefault(_Screen);
 
@@ -58900,7 +59282,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 428 */
+/* 432 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -58911,7 +59293,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _Background = __webpack_require__(429);
+	var _Background = __webpack_require__(433);
 
 	var _Background2 = _interopRequireDefault(_Background);
 
@@ -58951,7 +59333,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 429 */
+/* 433 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -58962,7 +59344,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _colorString = __webpack_require__(430);
+	var _colorString = __webpack_require__(434);
 
 	var cs = _interopRequireWildcard(_colorString);
 
@@ -58997,12 +59379,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 430 */
+/* 434 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* MIT license */
-	var colorNames = __webpack_require__(431);
-	var swizzle = __webpack_require__(432);
+	var colorNames = __webpack_require__(435);
+	var swizzle = __webpack_require__(436);
 
 	var reverseNames = {};
 
@@ -59184,7 +59566,7 @@
 
 
 /***/ },
-/* 431 */
+/* 435 */
 /***/ function(module, exports) {
 
 	module.exports = {
@@ -59339,12 +59721,12 @@
 	};
 
 /***/ },
-/* 432 */
+/* 436 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	var isArrayish = __webpack_require__(433);
+	var isArrayish = __webpack_require__(437);
 
 	var concat = Array.prototype.concat;
 	var slice = Array.prototype.slice;
@@ -59374,7 +59756,7 @@
 
 
 /***/ },
-/* 433 */
+/* 437 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -59391,7 +59773,7 @@
 
 
 /***/ },
-/* 434 */
+/* 438 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -59410,7 +59792,7 @@
 
 	var htmlutils = _interopRequireWildcard(_htmlutils);
 
-	var _IconLabel = __webpack_require__(435);
+	var _IconLabel = __webpack_require__(430);
 
 	var _IconLabel2 = _interopRequireDefault(_IconLabel);
 
@@ -59474,47 +59856,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 435 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	var _htmlutils = __webpack_require__(384);
-
-	var htmlutils = _interopRequireWildcard(_htmlutils);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	// import * as lu from "localUtils"
-
-	exports.default = function (_ref) {
-	  var _context;
-
-	  var length = _ref.length;
-	  var text = _ref.text;
-	  return (_context = (_context = text.normalize().toLocaleLowerCase(), htmlutils.normalizeSpace).call(_context), htmlutils.firstCharacters).call(_context, length).trim();
-	};
-
-	{
-	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
-	    __esModule: {
-	      value: true
-	    },
-	    default: {
-	      value: exports.default
-	    }
-	  });
-	  module.exports = exports.default;
-	}
-
-/***/ },
-/* 436 */
+/* 439 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -59529,7 +59871,7 @@
 
 	var htmlutils = _interopRequireWildcard(_htmlutils);
 
-	__webpack_require__(437);
+	__webpack_require__(440);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -59613,7 +59955,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 437 */
+/* 440 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -59635,7 +59977,7 @@
 	});
 
 /***/ },
-/* 438 */
+/* 441 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -59678,7 +60020,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 439 */
+/* 442 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -59769,7 +60111,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 440 */
+/* 443 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -59780,15 +60122,15 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _Menu = __webpack_require__(441);
+	var _Menu = __webpack_require__(444);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
-	var _Command = __webpack_require__(442);
+	var _Command = __webpack_require__(445);
 
 	var _Command2 = _interopRequireDefault(_Command);
 
-	var _AddExistingItem = __webpack_require__(443);
+	var _AddExistingItem = __webpack_require__(446);
 
 	var _AddExistingItem2 = _interopRequireDefault(_AddExistingItem);
 
@@ -59994,7 +60336,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 441 */
+/* 444 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60044,7 +60386,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 442 */
+/* 445 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60169,7 +60511,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 443 */
+/* 446 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60180,7 +60522,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _Command = __webpack_require__(442);
+	var _Command = __webpack_require__(445);
 
 	var _Command2 = _interopRequireDefault(_Command);
 
@@ -60223,7 +60565,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 444 */
+/* 447 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60234,15 +60576,15 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _Menu = __webpack_require__(441);
+	var _Menu = __webpack_require__(444);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
-	var _Command = __webpack_require__(442);
+	var _Command = __webpack_require__(445);
 
 	var _Command2 = _interopRequireDefault(_Command);
 
-	var _AddExistingItem = __webpack_require__(443);
+	var _AddExistingItem = __webpack_require__(446);
 
 	var _AddExistingItem2 = _interopRequireDefault(_AddExistingItem);
 
@@ -60318,7 +60660,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 445 */
+/* 448 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60331,11 +60673,11 @@
 
 	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
-	var _Menu = __webpack_require__(441);
+	var _Menu = __webpack_require__(444);
 
 	var _Menu2 = _interopRequireDefault(_Menu);
 
-	var _Command = __webpack_require__(442);
+	var _Command = __webpack_require__(445);
 
 	var _Command2 = _interopRequireDefault(_Command);
 
@@ -60384,7 +60726,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 446 */
+/* 449 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60395,7 +60737,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _fuzzy = __webpack_require__(447);
+	var _fuzzy = __webpack_require__(450);
 
 	var _fuzzy2 = _interopRequireDefault(_fuzzy);
 
@@ -60415,11 +60757,11 @@
 
 	var lu = _interopRequireWildcard(_localUtils);
 
-	var _Search = __webpack_require__(449);
+	var _Search = __webpack_require__(452);
 
 	var _Search2 = _interopRequireDefault(_Search);
 
-	var _IconImage = __webpack_require__(451);
+	var _IconImage = __webpack_require__(427);
 
 	var _IconImage2 = _interopRequireDefault(_IconImage);
 
@@ -60710,7 +61052,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 447 */
+/* 450 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -60721,7 +61063,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _DamerauLevenshtein = __webpack_require__(448);
+	var _DamerauLevenshtein = __webpack_require__(451);
 
 	var _DamerauLevenshtein2 = _interopRequireDefault(_DamerauLevenshtein);
 
@@ -60762,7 +61104,7 @@
 	}
 
 /***/ },
-/* 448 */
+/* 451 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -60813,7 +61155,7 @@
 	}
 
 /***/ },
-/* 449 */
+/* 452 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
@@ -60828,7 +61170,7 @@
 
 	var _ra2 = _interopRequireDefault(_ra);
 
-	var _iscroll = __webpack_require__(450);
+	var _iscroll = __webpack_require__(453);
 
 	var _iscroll2 = _interopRequireDefault(_iscroll);
 
@@ -60922,7 +61264,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
 
 /***/ },
-/* 450 */
+/* 453 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -62956,348 +63298,6 @@
 	})(window, document, Math);
 
 /***/ },
-/* 451 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	exports.default = IconImage;
-
-	var _ra = __webpack_require__(332);
-
-	var _ra2 = _interopRequireDefault(_ra);
-
-	var _lodash = __webpack_require__(329);
-
-	var lodash = _interopRequireWildcard(_lodash);
-
-	var _localUtils = __webpack_require__(324);
-
-	var lu = _interopRequireWildcard(_localUtils);
-
-	var _htmlutils = __webpack_require__(384);
-
-	var htmlutils = _interopRequireWildcard(_htmlutils);
-
-	var _cc = __webpack_require__(331);
-
-	var cc = _interopRequireWildcard(_cc);
-
-	var _animate = __webpack_require__(452);
-
-	var _animate2 = _interopRequireDefault(_animate);
-
-	var _cssTime = __webpack_require__(453);
-
-	var cssTime = _interopRequireWildcard(_cssTime);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-	{
-	  __(
-	    "head",
-	    null,
-	    __(
-	      "style",
-	      null,
-	      "\n\t.icon_image {\n\t\tposition: relative;\n\t}\n\t.icon_image svg {\n\t\tposition: absolute;\n\t\twidth: 100%;\n\t\theight: 100%;\n\t\tleft: 0;\n\t\ttop: 0;\n\t}\n"
-	    ),
-	    __(
-	      "register",
-	      null,
-	      "div.icon_image ",
-	      function (_ref) {
-	        var app = _ref.app;
-	        var src = _ref.src;
-	        var _ref$state = _ref.state;
-	        var state = _ref$state === undefined ? 1 : _ref$state;
-	        var _ref$absent = _ref.absent;
-	        var absent = _ref$absent === undefined ? false : _ref$absent;
-
-	        var attr = _objectWithoutProperties(_ref, ["app", "src", "state", "absent"]);
-
-	        var ii = IconImage(app)({ src: src, state: state, absent: absent });
-	        return __(
-	          "div",
-	          { "class": function _class() {
-	              return ii.className;
-	            }, _: attr },
-	          function () {
-	            return ii.node;
-	          }
-	        );
-	      }
-	    )
-	  );
-	}
-
-	function IconImage(app) {
-	  return function (opts) {
-	    var _state = null;
-	    var _current = null;
-	    return (0, _ra2.default)({
-	      get template() {
-	        return app.getIconTemplate(lu.valueOf(opts.src));
-	      },
-	      get node() {
-	        var ret = void 0;
-	        if (this.template) ret = htmlutils.importComponent(this.template);
-	        if (!ret) ret = null;else ret.classList.add("animations");
-	        return ret;
-	      },
-	      _setImageState: function _setImageState(state) {
-	        _current = state;
-	        this.node.setState(state);
-	      },
-
-	      get _updateDataState() {
-	        return regeneratorRuntime.mark(function _callee() {
-	          var data, duration;
-	          return regeneratorRuntime.wrap(function _callee$(_context) {
-	            while (1) switch (_context.prev = _context.next) {
-	              case 0:
-	                data = this.node;
-
-	                if (data && data.setState) {
-	                  _context.next = 3;
-	                  break;
-	                }
-
-	                return _context.abrupt("return");
-
-	              case 3:
-	                _state = lu.valueOf(opts.state);
-
-	                if (!(_state == _current)) {
-	                  _context.next = 6;
-	                  break;
-	                }
-
-	                return _context.abrupt("return");
-
-	              case 6:
-	                _context.next = 8;
-	                return cc.requestAnimationFrame;
-
-	              case 8:
-	                if (!(_current != null)) {
-	                  _context.next = 15;
-	                  break;
-	                }
-
-	                duration = window.getComputedStyle(data).transitionDuration;
-
-	                if (duration) duration = cssTime.from(duration);
-
-	                if (!duration) {
-	                  _context.next = 15;
-	                  break;
-	                }
-
-	                _context.next = 14;
-	                return (0, _animate2.default)(this._setImageState, {
-	                  from: _current,
-	                  to: _state,
-	                  duration: duration
-	                });
-
-	              case 14:
-	                return _context.abrupt("return");
-
-	              case 15:
-	                this._setImageState(_state);
-
-	              case 16:
-	              case "end":
-	                return _context.stop();
-	            }
-	          }, _callee, this);
-	        }).call(this);
-	      },
-	      get className() {
-	        var absent = lu.valueOf(opts.absent);
-	        var state100 = Math.round(absent ? 0 : opts.state * 100);
-	        return [absent ? "absent" : "present", String(state100 + 1000).slice(1), state100 ? "on" : "off", state100 == 0 || state100 == 100 ? "extreme" : "percentage"].map(function (c) {
-	          return "state_" + c;
-	        });
-	      }
-	    });
-	  };
-	}
-	{
-	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
-	    __esModule: {
-	      value: true
-	    },
-	    default: {
-	      value: exports.default
-	    }
-	  });
-	  module.exports = exports.default;
-	}
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
-
-/***/ },
-/* 452 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
-
-	var _cc = __webpack_require__(331);
-
-	var cc = _interopRequireWildcard(_cc);
-
-	var _cssTime = __webpack_require__(453);
-
-	var cssTime = _interopRequireWildcard(_cssTime);
-
-	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-	var animate = cc.factory(regeneratorRuntime.mark(function _callee(func, _ref) {
-	  var _ref$from = _ref.from;
-	  var from = _ref$from === undefined ? 0 : _ref$from;
-	  var _ref$to = _ref.to;
-	  var to = _ref$to === undefined ? 1 : _ref$to;
-	  var _ref$duration = _ref.duration;
-	  var duration = _ref$duration === undefined ? 400 : _ref$duration;
-	  var _ref$easing = _ref.easing;
-	  var easing = _ref$easing === undefined ? "swing" : _ref$easing;
-	  var start, delta, pos;
-	  return regeneratorRuntime.wrap(function _callee$(_context) {
-	    while (1) switch (_context.prev = _context.next) {
-	      case 0:
-	        if (typeof easing == "string") easing = animate[easing]; // allow plugins
-	        if (typeof duration == "string") duration = cssTime.from(duration);
-	        start = Date.now();
-
-	      case 3:
-	        delta = Date.now() - start;
-
-	        if (!(delta >= duration)) {
-	          _context.next = 6;
-	          break;
-	        }
-
-	        return _context.abrupt("return", func(to));
-
-	      case 6:
-	        pos = from + (to - from) * easing(Math.min(1, delta / duration));
-
-	        func(pos);
-
-	        _context.next = 10;
-	        return cc.requestAnimationFrame;
-
-	      case 10:
-	        _context.next = 3;
-	        break;
-
-	      case 12:
-	      case "end":
-	        return _context.stop();
-	    }
-	  }, _callee, this);
-	}));
-
-	animate.linear = function (p) {
-	  return p;
-	};
-	animate.swing = function (p) {
-	  return 0.5 - Math.cos(p * Math.PI) / 2;
-	};
-
-	exports.default = animate;
-	{
-	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
-	    __esModule: {
-	      value: true
-	    },
-	    default: {
-	      value: exports.default
-	    }
-	  });
-	  module.exports = exports.default;
-	}
-
-/***/ },
-/* 453 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_RESULT__;/*globals define, module */
-
-	// This module contains functions for converting milliseconds
-	// to and from CSS time strings.
-
-	(function (globals) {
-	    'use strict';
-
-	    var regex = /^([\-\+]?[0-9]+(\.[0-9]+)?)(m?s)$/,
-
-	    functions = {
-	        from: from,
-	        to: to
-	    };
-
-	    exportFunctions();
-
-	    // Public function `from`.
-	    //
-	    // Returns the number of milliseconds represented by a
-	    // CSS time string.
-	    function from (cssTime) {
-	        var matches = regex.exec(cssTime);
-
-	        if (matches === null) {
-	            throw new Error('Invalid CSS time');
-	        }
-
-	        return parseFloat(matches[1]) * (matches[3] === 's' ? 1000 : 1);
-	    }
-
-	    // Public function `to`.
-	    //
-	    // Returns a CSS time string representing the number
-	    // of milliseconds passed in the arguments.
-	    function to (milliseconds) {
-	        if (typeof milliseconds !== 'number' || isNaN(milliseconds)) {
-	            throw new Error('Invalid milliseconds');
-	        }
-
-	        return milliseconds + 'ms';
-	    }
-
-	    function exportFunctions () {
-	        if (true) {
-	            !(__WEBPACK_AMD_DEFINE_RESULT__ = function () {
-	                return functions;
-	            }.call(exports, __webpack_require__, exports, module), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	        } else if (typeof module !== 'undefined' && module !== null && module.exports) {
-	            module.exports = functions;
-	        } else {
-	            globals.cssTime = functions;
-	        }
-	    }
-	}(this));
-
-
-
-/***/ },
 /* 454 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -63309,7 +63309,7 @@
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
 
-	var _fuzzy = __webpack_require__(447);
+	var _fuzzy = __webpack_require__(450);
 
 	var _fuzzy2 = _interopRequireDefault(_fuzzy);
 
@@ -63329,11 +63329,11 @@
 
 	var lu = _interopRequireWildcard(_localUtils);
 
-	var _Search = __webpack_require__(449);
+	var _Search = __webpack_require__(452);
 
 	var _Search2 = _interopRequireDefault(_Search);
 
-	var _IconImage = __webpack_require__(451);
+	var _IconImage = __webpack_require__(427);
 
 	var _IconImage2 = _interopRequireDefault(_IconImage);
 
@@ -63779,7 +63779,7 @@
 
 	var cc = _interopRequireWildcard(_cc);
 
-	var _Button = __webpack_require__(438);
+	var _Button = __webpack_require__(441);
 
 	var _Button2 = _interopRequireDefault(_Button);
 

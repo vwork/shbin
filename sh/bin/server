@@ -79138,7 +79138,7 @@
 
 	var Log = _interopRequireWildcard(_log);
 
-	var _localdns = __webpack_require__(545);
+	var _localdns = __webpack_require__(557);
 
 	var _localdns2 = _interopRequireDefault(_localdns);
 
@@ -79150,7 +79150,7 @@
 
 	var _compression2 = _interopRequireDefault(_compression);
 
-	var _socket = __webpack_require__(546);
+	var _socket = __webpack_require__(558);
 
 	var _socket2 = _interopRequireDefault(_socket);
 
@@ -79162,7 +79162,7 @@
 
 	var collections = _interopRequireWildcard(_collections);
 
-	var _stringChunk = __webpack_require__(554);
+	var _stringChunk = __webpack_require__(566);
 
 	var _stringChunk2 = _interopRequireDefault(_stringChunk);
 
@@ -79225,7 +79225,7 @@
 	  var: "./var",
 	  firmware: {
 	    version: "./manager/SHModem.json",
-	    binary: "./manager/SHModem.bin"
+	    binary: "./manager/SHModem.tgz"
 	  }
 	}, config);
 
@@ -83091,10 +83091,10 @@
 	    },
 	    GetState: function GetState(_ref4) {
 	      var group = _ref4.group;
-	      return regeneratorRuntime.async(function GetState$(_context) {
-	        while (1) switch (_context.prev = _context.next) {
+	      return regeneratorRuntime.async(function GetState$(_context2) {
+	        while (1) switch (_context2.prev = _context2.next) {
 	          case 0:
-	            _context.next = 2;
+	            _context2.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "getDevicePosition",
@@ -83103,11 +83103,11 @@
 	            }).result);
 
 	          case 2:
-	            return _context.abrupt("return", _context.sent.destinationPosition.value);
+	            return _context2.abrupt("return", _context2.sent.destinationPosition.value);
 
 	          case 3:
 	          case "end":
-	            return _context.stop();
+	            return _context2.stop();
 	        }
 	      }, null, this);
 	    },
@@ -83117,10 +83117,10 @@
 	      var single = _ref5.single;
 	      var acknowledgement = _ref5.acknowledgement;
 	      var model = _ref5.model;
-	      return regeneratorRuntime.async(function SetState$(_context2) {
-	        while (1) switch (_context2.prev = _context2.next) {
+	      return regeneratorRuntime.async(function SetState$(_context3) {
+	        while (1) switch (_context3.prev = _context3.next) {
 	          case 0:
-	            _context2.next = 2;
+	            _context3.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "controlDevice",
@@ -83132,7 +83132,7 @@
 
 	          case 2:
 	          case "end":
-	            return _context2.stop();
+	            return _context3.stop();
 	        }
 	      }, null, this);
 	    },
@@ -83141,10 +83141,10 @@
 	      var single = _ref6.single;
 	      var acknowledgement = _ref6.acknowledgement;
 	      var model = _ref6.model;
-	      return regeneratorRuntime.async(function Scenario$(_context3) {
-	        while (1) switch (_context3.prev = _context3.next) {
+	      return regeneratorRuntime.async(function Scenario$(_context4) {
+	        while (1) switch (_context4.prev = _context4.next) {
 	          case 0:
-	            _context3.next = 2;
+	            _context4.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "controlDevice",
@@ -83155,7 +83155,7 @@
 
 	          case 2:
 	          case "end":
-	            return _context3.stop();
+	            return _context4.stop();
 	        }
 	      }, null, this);
 	    },
@@ -83165,10 +83165,10 @@
 	      var single = _ref7.single;
 	      var acknowledgement = _ref7.acknowledgement;
 	      var action = _ref7.action;
-	      return regeneratorRuntime.async(function AddGroup$(_context4) {
-	        while (1) switch (_context4.prev = _context4.next) {
+	      return regeneratorRuntime.async(function AddGroup$(_context5) {
+	        while (1) switch (_context5.prev = _context5.next) {
 	          case 0:
-	            _context4.next = 2;
+	            _context5.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "writeDeviceGroup",
@@ -83180,7 +83180,7 @@
 
 	          case 2:
 	          case "end":
-	            return _context4.stop();
+	            return _context5.stop();
 	        }
 	      }, null, this);
 	    },
@@ -83189,10 +83189,10 @@
 	      var groupId = _ref8.groupId;
 	      var single = _ref8.single;
 	      var acknowledgement = _ref8.acknowledgement;
-	      return regeneratorRuntime.async(function RemoveGroup$(_context5) {
-	        while (1) switch (_context5.prev = _context5.next) {
+	      return regeneratorRuntime.async(function RemoveGroup$(_context6) {
+	        while (1) switch (_context6.prev = _context6.next) {
 	          case 0:
-	            _context5.next = 2;
+	            _context6.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "deleteDeviceGroup",
@@ -83203,16 +83203,16 @@
 
 	          case 2:
 	          case "end":
-	            return _context5.stop();
+	            return _context6.stop();
 	        }
 	      }, null, this);
 	    },
 	    ClearAbandonedGroup: function ClearAbandonedGroup(_ref9) {
 	      var group = _ref9.group;
-	      return regeneratorRuntime.async(function ClearAbandonedGroup$(_context6) {
-	        while (1) switch (_context6.prev = _context6.next) {
+	      return regeneratorRuntime.async(function ClearAbandonedGroup$(_context7) {
+	        while (1) switch (_context7.prev = _context7.next) {
 	          case 0:
-	            _context6.next = 2;
+	            _context7.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "deleteDeviceGroup",
@@ -83223,7 +83223,7 @@
 
 	          case 2:
 	          case "end":
-	            return _context6.stop();
+	            return _context7.stop();
 	        }
 	      }, null, this);
 	    },
@@ -83231,10 +83231,10 @@
 	      var group = _ref10.group;
 	      var acknowledgement = _ref10.acknowledgement;
 	      var data;
-	      return regeneratorRuntime.async(function InitializeDevice$(_context7) {
-	        while (1) switch (_context7.prev = _context7.next) {
+	      return regeneratorRuntime.async(function InitializeDevice$(_context8) {
+	        while (1) switch (_context8.prev = _context8.next) {
 	          case 0:
-	            _context7.next = 2;
+	            _context8.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "initDeviceGroup",
@@ -83244,30 +83244,30 @@
 	            }).result);
 
 	          case 2:
-	            data = _context7.sent;
+	            data = _context8.sent;
 
 	            if (!(data && data.destinationPosition)) {
-	              _context7.next = 7;
+	              _context8.next = 7;
 	              break;
 	            }
 
-	            return _context7.abrupt("return", data.destinationPosition.value);
+	            return _context8.abrupt("return", data.destinationPosition.value);
 
 	          case 7:
-	            return _context7.abrupt("return", null);
+	            return _context8.abrupt("return", null);
 
 	          case 8:
 	          case "end":
-	            return _context7.stop();
+	            return _context8.stop();
 	        }
 	      }, null, this);
 	    },
 	    DeinitializeDevice: function DeinitializeDevice(_ref11) {
 	      var group = _ref11.group;
-	      return regeneratorRuntime.async(function DeinitializeDevice$(_context8) {
-	        while (1) switch (_context8.prev = _context8.next) {
+	      return regeneratorRuntime.async(function DeinitializeDevice$(_context9) {
+	        while (1) switch (_context9.prev = _context9.next) {
 	          case 0:
-	            _context8.next = 2;
+	            _context9.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "deleteDeviceGroup",
@@ -83278,35 +83278,44 @@
 
 	          case 2:
 	          case "end":
-	            return _context8.stop();
-	        }
-	      }, null, this);
-	    },
-	    UpdateFirmware: function UpdateFirmware(firmware) {
-	      return regeneratorRuntime.async(function UpdateFirmware$(_context9) {
-	        while (1) switch (_context9.prev = _context9.next) {
-	          case 0:
-	            if (!Buffer.isBuffer(firmware)) firmware = new Buffer(firmware);
-	            _context9.next = 3;
-	            return regeneratorRuntime.awrap(command({
-	              class: "netro",
-	              command: "updateFirmware",
-	              type: "modem",
-	              firmware: firmware.toString("base64"),
-	              size: firmware.length
-	            }).result);
-
-	          case 3:
-	          case "end":
 	            return _context9.stop();
 	        }
 	      }, null, this);
 	    },
-	    GetVersion: function GetVersion() {
-	      return regeneratorRuntime.async(function GetVersion$(_context10) {
+	    UpdateFirmware: function UpdateFirmware(firmware) {
+	      var _context;
+
+	      var files, encoded;
+	      return regeneratorRuntime.async(function UpdateFirmware$(_context10) {
 	        while (1) switch (_context10.prev = _context10.next) {
 	          case 0:
 	            _context10.next = 2;
+	            return regeneratorRuntime.awrap((0, _tarjs2.default)((_context = [firmware], collections.toReadable).call(_context).pipe(new zlib.Gunzip())));
+
+	          case 2:
+	            files = _context10.sent;
+	            encoded = lodash.mapValues(files, function (b) {
+	              return b.toString("base64");
+	            });
+	            _context10.next = 6;
+	            return regeneratorRuntime.awrap(command({
+	              class: "netro",
+	              command: "updateFirmware",
+	              type: "modem",
+	              firmware: encoded
+	            }).result);
+
+	          case 6:
+	          case "end":
+	            return _context10.stop();
+	        }
+	      }, null, this);
+	    },
+	    GetVersion: function GetVersion() {
+	      return regeneratorRuntime.async(function GetVersion$(_context11) {
+	        while (1) switch (_context11.prev = _context11.next) {
+	          case 0:
+	            _context11.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "netro",
 	              command: "getModemParams",
@@ -83314,19 +83323,19 @@
 	            }).result);
 
 	          case 2:
-	            return _context10.abrupt("return", _context10.sent.modemVersion);
+	            return _context11.abrupt("return", _context11.sent.modemVersion);
 
 	          case 3:
 	          case "end":
-	            return _context10.stop();
+	            return _context11.stop();
 	        }
 	      }, null, this);
 	    },
 	    DeviceProgrammingMode: function DeviceProgrammingMode(value) {
-	      return regeneratorRuntime.async(function DeviceProgrammingMode$(_context11) {
-	        while (1) switch (_context11.prev = _context11.next) {
+	      return regeneratorRuntime.async(function DeviceProgrammingMode$(_context12) {
+	        while (1) switch (_context12.prev = _context12.next) {
 	          case 0:
-	            _context11.next = 2;
+	            _context12.next = 2;
 	            return regeneratorRuntime.awrap(command({
 	              class: "service",
 	              command: "setDeniedCommand",
@@ -83334,11 +83343,11 @@
 	            }).result);
 
 	          case 2:
-	            return _context11.abrupt("return", _context11.sent);
+	            return _context12.abrupt("return", _context12.sent);
 
 	          case 3:
 	          case "end":
-	            return _context11.stop();
+	            return _context12.stop();
 	        }
 	      }, null, this);
 	    }
@@ -83362,6 +83371,18 @@
 	var _collections = __webpack_require__(336);
 
 	var collections = _interopRequireWildcard(_collections);
+
+	var _tarjs = __webpack_require__(545);
+
+	var _tarjs2 = _interopRequireDefault(_tarjs);
+
+	var _zlib = __webpack_require__(419);
+
+	var zlib = _interopRequireWildcard(_zlib);
+
+	var _lodash = __webpack_require__(329);
+
+	var lodash = _interopRequireWildcard(_lodash);
 
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
@@ -83630,6 +83651,1573 @@
 	  value: true
 	});
 
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+	var _path2 = __webpack_require__(389);
+
+	var _path3 = _interopRequireDefault(_path2);
+
+	var _bluebird = __webpack_require__(286);
+
+	var _bluebird2 = _interopRequireDefault(_bluebird);
+
+	var _tarParse = __webpack_require__(546);
+
+	var _tarParse2 = _interopRequireDefault(_tarParse);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	function parsePath(p) {
+	  return p.split("/").filter(Boolean);
+	}
+
+	exports.default = function (stream) {
+	  return new _bluebird2.default(function (resolve, reject) {
+	    stream = stream.pipe((0, _tarParse2.default)());
+	    var ret = {};
+	    var links = [];
+
+	    function get(p) {
+	      var value = ret.root;
+	      var _iteratorNormalCompletion = true;
+	      var _didIteratorError = false;
+	      var _iteratorError = undefined;
+
+	      try {
+	        for (var _iterator = parsePath(p)[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	          var n = _step.value;
+
+	          value = value && value[n];
+	        }
+	      } catch (err) {
+	        _didIteratorError = true;
+	        _iteratorError = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion && _iterator.return) {
+	            _iterator.return();
+	          }
+	        } finally {
+	          if (_didIteratorError) {
+	            throw _iteratorError;
+	          }
+	        }
+	      }
+
+	      return value;
+	    }
+
+	    function find(p) {
+	      var dir = ret;
+	      var name = "root";
+	      var _iteratorNormalCompletion2 = true;
+	      var _didIteratorError2 = false;
+	      var _iteratorError2 = undefined;
+
+	      try {
+	        for (var _iterator2 = parsePath(p)[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	          var n = _step2.value;
+
+	          dir = dir[name] || (dir[name] = {});
+	          name = n;
+	        }
+	      } catch (err) {
+	        _didIteratorError2 = true;
+	        _iteratorError2 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	            _iterator2.return();
+	          }
+	        } finally {
+	          if (_didIteratorError2) {
+	            throw _iteratorError2;
+	          }
+	        }
+	      }
+
+	      return [dir, name];
+	    }
+
+	    function set(p, value) {
+	      var _find = find(p);
+
+	      var _find2 = _slicedToArray(_find, 2);
+
+	      var dir = _find2[0];
+	      var name = _find2[1];
+
+	      dir[name] = value;
+	    }
+
+	    stream.on("error", reject);
+
+	    stream.on("data", function (entry) {
+	      var buf = [];
+	      switch (entry.type) {
+	        case "Link":
+	          links.push({ path: entry.path, target: entry.props.linkpath });
+	          break;
+	        case "SymbolicLink":
+	          links.push({ path: entry.path, target: _path3.default.resolve("/", _path3.default.dirname(entry.path) || "", entry.props.linkpath) });
+	          break;
+	        case "Directory":
+	          break;
+	        default:
+	          entry.on("error", reject);
+	          entry.on("data", function (data) {
+	            return buf.push(data);
+	          });
+	          entry.on("end", function () {
+	            return set(entry.path, Buffer.concat(buf));
+	          });
+	      }
+	      entry.resume();
+	    });
+
+	    stream.on("end", function () {
+	      var _iteratorNormalCompletion3 = true;
+	      var _didIteratorError3 = false;
+	      var _iteratorError3 = undefined;
+
+	      try {
+	        for (var _iterator3 = links[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+	          var _step3$value = _step3.value;
+	          var _path = _step3$value.path;
+	          var target = _step3$value.target;
+
+	          set(_path, get(target));
+	        }
+	      } catch (err) {
+	        _didIteratorError3 = true;
+	        _iteratorError3 = err;
+	      } finally {
+	        try {
+	          if (!_iteratorNormalCompletion3 && _iterator3.return) {
+	            _iterator3.return();
+	          }
+	        } finally {
+	          if (_didIteratorError3) {
+	            throw _iteratorError3;
+	          }
+	        }
+	      }
+
+	      resolve(ret.root);
+	    });
+	  });
+	};
+
+	{
+	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
+	    __esModule: {
+	      value: true
+	    },
+	    default: {
+	      value: exports.default
+	    }
+	  });
+	  module.exports = exports.default;
+	}
+
+/***/ },
+/* 546 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var duplex = __webpack_require__(547)
+	  , chunks = __webpack_require__(548)
+	  , parser = __webpack_require__(550)
+	  , EE = __webpack_require__(374).EventEmitter
+
+	var emit = EE.prototype.emit
+	emit = emit.bind.bind(emit)
+
+	module.exports = parse
+
+	function parse() {
+	  var _global = {}
+	    , stream = duplex()
+	    , parse = parser(_global)
+	    , blocks = chunks(512)
+	    , eof_started = false
+	    , ended = false
+	    , entry = null
+	    , remaining = 0
+	    , position = 0
+
+	  stream.global = _global 
+
+	  stream
+	    .on('_data', recv_data)
+	    .on('_end', recv_end)
+
+	  blocks
+	    .on('error', emit(stream, 'error'))
+	    .on('drain', emit(stream, 'drain'))
+
+	  parse
+	    .on('*',      emit(stream, '*'))
+	    .on('error',  emit(stream, 'error'))
+	    .on('data',   stream._data)
+	    .on('end',    stream._end)
+	    .on('global', merge)
+
+	  blocks.pipe(parse)
+
+	  return stream
+
+	  function recv_data(data) {
+	    if(blocks.write(data) === false) {
+	      stream.emit('pause')
+	    }
+	  }
+
+	  function recv_end() {
+	    blocks.end()
+	  }
+
+	  function merge(flags) {
+	    for(var key in flags) {
+	      stream.global[key] = flags[key]
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 547 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Stream = __webpack_require__(322)
+
+	module.exports = function (write, end) {
+	  var stream = new Stream() 
+	  var buffer = [], ended = false, destroyed = false, emitEnd
+	  stream.writable = stream.readable = true
+	  stream.paused = false
+	  stream._paused = false
+	  stream.buffer = buffer
+	  
+	  stream
+	    .on('pause', function () {
+	      stream._paused = true
+	    })
+	    .on('drain', function () {
+	      stream._paused = false
+	    })
+	   
+	  function destroySoon () {
+	    process.nextTick(stream.destroy.bind(stream))
+	  }
+
+	  if(write)
+	    stream.on('_data', write)
+	  if(end)
+	    stream.on('_end', end)
+
+	  //destroy the stream once both ends are over
+	  //but do it in nextTick, so that other listeners
+	  //on end have time to respond
+	  stream.once('end', function () { 
+	    stream.readable = false
+	    if(!stream.writable) {
+	      process.nextTick(function () {
+	        stream.destroy()
+	      })
+	    }
+	  })
+
+	  stream.once('_end', function () { 
+	    stream.writable = false
+	    if(!stream.readable)
+	      stream.destroy()
+	  })
+
+	  // this is the default write method,
+	  // if you overide it, you are resposible
+	  // for pause state.
+
+	  
+	  stream._data = function (data) {
+	    if(!stream.paused && !buffer.length)
+	      stream.emit('data', data)
+	    else 
+	      buffer.push(data)
+	    return !(stream.paused || buffer.length)
+	  }
+
+	  stream._end = function (data) { 
+	    if(data) stream._data(data)
+	    if(emitEnd) return
+	    emitEnd = true
+	    //destroy is handled above.
+	    stream.drain()
+	  }
+
+	  stream.write = function (data) {
+	    stream.emit('_data', data)
+	    return !stream._paused
+	  }
+
+	  stream.end = function () {
+	    stream.writable = false
+	    if(stream.ended) return
+	    stream.ended = true
+	    stream.emit('_end')
+	  }
+
+	  stream.drain = function () {
+	    if(!buffer.length && !emitEnd) return
+	    //if the stream is paused after just before emitEnd()
+	    //end should be buffered.
+	    while(!stream.paused) {
+	      if(buffer.length) {
+	        stream.emit('data', buffer.shift())
+	        if(buffer.length == 0) {
+	          stream.emit('_drain')
+	        }
+	      }
+	      else if(emitEnd && stream.readable) {
+	        stream.readable = false
+	        stream.emit('end')
+	        return
+	      } else {
+	        //if the buffer has emptied. emit drain.
+	        return true
+	      }
+	    }
+	  }
+	  var started = false
+	  stream.resume = function () {
+	    //this is where I need pauseRead, and pauseWrite.
+	    //here the reading side is unpaused,
+	    //but the writing side may still be paused.
+	    //the whole buffer might not empity at once.
+	    //it might pause again.
+	    //the stream should never emit data inbetween pause()...resume()
+	    //and write should return !buffer.length
+	    started = true
+	    stream.paused = false
+	    stream.drain() //will emit drain if buffer empties.
+	    return stream
+	  }
+
+	  stream.destroy = function () {
+	    if(destroyed) return
+	    destroyed = ended = true     
+	    buffer.length = 0
+	    stream.emit('close')
+	  }
+	  var pauseCalled = false
+	  stream.pause = function () {
+	    started = true
+	    stream.paused = true
+	    stream.emit('_pause')
+	    return stream
+	  }
+	  stream._pause = function () {
+	    if(!stream._paused) {
+	      stream._paused = true
+	      stream.emit('pause')
+	    }
+	    return this
+	  }
+	  stream.paused = true
+	  process.nextTick(function () {
+	    //unless the user manually paused
+	    if(started) return
+	    stream.resume()
+	  })
+	 
+	  return stream
+	}
+
+
+
+/***/ },
+/* 548 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var through = __webpack_require__(549)
+	  , Buffer = __webpack_require__(449).Buffer
+	  , min = Math.min
+
+	module.exports = chunked
+
+	function chunked(size, type) {
+	  type = type || Buffer
+
+	  var stream = through(write, end)
+	    , buffered_bytes = 0
+	    , buffer = []
+	    , chunk = new type(size)
+	    , offset = 0
+
+	  return stream
+
+	  function write(input) {
+	    buffer[buffer.length] = input
+	    buffered_bytes += input.length
+
+	    if(buffered_bytes < size) {
+	      return 
+	    }
+
+	    output()
+	  }
+
+	  function end() {
+	    if(buffer.length) {
+	      output()
+	    }
+	    stream.queue(null)
+	  }
+
+	  function output() {
+	    var idx = 0
+	      , end
+
+	    while(buffered_bytes >= size && idx < buffer.length) {
+	      if(!buffer[idx].length) {
+	        ++idx
+	        continue
+	      }
+
+	      end = min(size, buffer[idx].length)
+
+	      buffer[idx].copy(chunk, offset, 0, end)
+	      buffered_bytes -= end - offset
+	      offset = end
+
+	      buffer[idx] = buffer[idx].slice(end)
+
+	      if(offset === size) {
+	        stream.queue(chunk)
+	        offset = 0
+	        chunk = new type(size)
+	      }
+	    }
+
+	    buffer = buffer.slice(idx)
+
+	  }
+	}
+
+
+/***/ },
+/* 549 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Stream = __webpack_require__(322)
+
+	// through
+	//
+	// a stream that does nothing but re-emit the input.
+	// useful for aggregating a series of changing but not ending streams into one stream)
+
+
+
+	exports = module.exports = through
+	through.through = through
+
+	//create a readable writable stream.
+
+	function through (write, end) {
+	  write = write || function (data) { this.queue(data) }
+	  end = end || function () { this.queue(null) }
+
+	  var ended = false, destroyed = false, buffer = []
+	  var stream = new Stream()
+	  stream.readable = stream.writable = true
+	  stream.paused = false
+
+	  stream.write = function (data) {
+	    write.call(this, data)
+	    return !stream.paused
+	  }
+
+	  function drain() {
+	    while(buffer.length && !stream.paused) {
+	      var data = buffer.shift()
+	      if(null === data)
+	        return stream.emit('end')
+	      else
+	        stream.emit('data', data)
+	    }
+	  }
+
+	  stream.queue = stream.push = function (data) {
+	    buffer.push(data)
+	    drain()
+	    return stream
+	  }
+
+	  //this will be registered as the first 'end' listener
+	  //must call destroy next tick, to make sure we're after any
+	  //stream piped from here.
+	  //this is only a problem if end is not emitted synchronously.
+	  //a nicer way to do this is to make sure this is the last listener for 'end'
+
+	  stream.on('end', function () {
+	    stream.readable = false
+	    if(!stream.writable)
+	      process.nextTick(function () {
+	        stream.destroy()
+	      })
+	  })
+
+	  function _end () {
+	    stream.writable = false
+	    end.call(stream)
+	    if(!stream.readable)
+	      stream.destroy()
+	  }
+
+	  stream.end = function (data) {
+	    if(ended) return
+	    ended = true
+	    if(arguments.length) stream.write(data)
+	    _end() // will emit or queue
+	    return stream
+	  }
+
+	  stream.destroy = function () {
+	    if(destroyed) return
+	    destroyed = true
+	    ended = true
+	    buffer.length = 0
+	    stream.writable = stream.readable = false
+	    stream.emit('close')
+	    return stream
+	  }
+
+	  stream.pause = function () {
+	    if(stream.paused) return
+	    stream.paused = true
+	    stream.emit('pause')
+	    return stream
+	  }
+	  stream.resume = function () {
+	    if(stream.paused) {
+	      stream.paused = false
+	    }
+	    drain()
+	    //may have become paused again,
+	    //as drain emits 'data'.
+	    if(!stream.paused)
+	      stream.emit('drain')
+	    return stream
+	  }
+	  return stream
+	}
+
+
+
+/***/ },
+/* 550 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = parser
+
+	var duplex = __webpack_require__(547)
+	  , header = __webpack_require__(551)
+	  , EE = __webpack_require__(374).EventEmitter
+
+	var tarentry = __webpack_require__(553)
+	  , tarextendedheader = __webpack_require__(555)
+	  , tarbufferentry = __webpack_require__(556)
+
+	var emit = EE.prototype.emit
+	emit = emit.bind.bind(emit)
+
+	function parser(global) {
+	  var stream = duplex()
+	    , extended = null
+	    , position = 0
+	    , entry = null
+
+	  stream
+	    .on('_data',  recv_data)
+	    .on('_end',   recv_end)
+
+	  return stream
+
+	  function recv_data(data) {
+	    var ret = entry ?
+	      write_entry(data) :
+	      write_non_entry(data)
+
+	    position += 512
+	    if(ret === false) {
+	      stream._pause()
+	    }
+	  }
+
+	  function recv_end() {
+	    if(entry) {
+	      return entry.end()
+	    }
+	    return stream._end()
+	  }
+
+	  function write_entry(chunk) {
+	    return entry.write(chunk)
+	  }
+
+	  function write_non_entry(chunk) {
+	    var zero = true
+	    for(var i = 0; i < 512 && zero; ++i) {
+	      zero = (chunk[i] === undefined ? chunk.get(i) : chunk[i]) === 0
+	    }
+
+	    if(zero) {
+	      ended = eof_started
+	      eof_started = true 
+	    } else {
+	      ended = eof_started = false
+	      entry = start_entry(chunk)
+	      return entry ? !entry.paused : true
+	    }
+	  }
+
+	  function start_entry(chunk) {
+	    var head = header(chunk)
+	      , meta = false
+	      , _entry
+	      , onend
+	      , error
+	      , type
+
+	    if(null === head.size || !head.cksum_valid) {
+	      error = new Error('invalid tar file')
+	      error.header = head
+	      error.tar_file_offset = position
+	      error.tar_block = (position / 512)>>>0
+	      stream.emit('error', error)
+	    }
+
+	    var _ext = extended
+	      , _global = global
+	      , ev
+
+	    switch(header.types[head.type]) {
+	      case "File":
+	      case "OldFile":
+	      case "Link":
+	      case "SymbolicLink":
+	      case "CharacterDevice":
+	      case "BlockDevice":
+	      case "Directory":
+	      case "FIFO":
+	      case "ContiguousFile":
+	      case "GNUDumpDir":
+	        type = tarentry
+	        ev = 'entry'
+	        break
+	      case "GlobalExtendedHeader":
+	        // extended headers that apply to the rest of the tarball
+	        type = tarextendedheader 
+	        onend = function () {
+	          global = global || {}
+	          for(var key in entry.fields) {
+	            global[key] = entry.fields[key]
+	          }
+	        }
+	        meta = true
+	        ev = 'globalExtendedHeader'
+	        break
+	      case "ExtendedHeader":
+	      case "OldExtendedHeader":
+	        // extended headers that apply to the next entry
+	        type = tarextendedheader
+	        onend = function () {
+	          extended = entry.fields
+	        }
+	        meta = true
+	        ev = 'extendedHeader'
+	        break
+
+	      case "NextFileHasLongLinkpath":
+	        // set linkpath=<contents> in extended header
+	        type = tarbufferentry
+	        onend = function () {
+	          extended = extended || {}
+	          extended.linkpath = _entry.body
+	        }
+	        meta = true
+	        ev = 'longLinkpath'
+
+	        break
+
+	      case "NextFileHasLongPath":
+	      case "OldGnuLongPath":
+	        // set path=<contents> in file-extended header
+	        type = tarbufferentry
+	        onend = function () {
+	          extended = extended || {}
+	          extended.path = _entry.body
+	        }
+	        meta = true
+	        ev = 'longPath'
+	        break
+
+	      default:
+	        // all the rest we skip, but still set the _entry
+	        // member, so that we can skip over their data appropriately.
+	        // emit an event to say that this is an ignored entry type?
+	        type = tarentry
+	        ev = "ignoredEntry"
+	        break
+	    }
+
+	    if(meta) {
+	      _ext = _global = null
+	    } else {
+	      extended = null
+	    }
+	    _entry = type(head, _ext, _global)
+	    _entry.meta = meta
+	    if(onend) {
+	      _entry.on('end', onend)
+	    }
+
+	    _entry
+	      .on('error', emit(stream, 'error')) 
+	      .on('end', _end)
+
+	    if(!meta) {
+	      stream._data(_entry)
+	    }
+
+	    stream.emit('*', ev, _entry)
+
+	    if(_entry.props.size === 0) {
+	      if(!_entry.paused) {
+	        _entry.end()
+	        return null
+	      }
+	      _entry.once('drain', function() {
+	        _entry.end()
+	        entry = null
+	      })
+	    } else {
+	      _entry.pause()
+	      process.nextTick(function() {
+	        _entry.resume()
+	      })
+	    }
+
+	    if(_entry) {
+	      _entry.on('drain', emit(stream, 'drain'))
+	    }
+	    return _entry
+
+	    function _end() {
+	      entry = null
+	    }
+	  }
+	}
+
+
+/***/ },
+/* 551 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = header
+
+	var f = 0
+	  , fields = {}
+	  , path = fields.path = f++
+	  , mode = fields.mode = f++
+	  , uid = fields.uid = f++
+	  , gid = fields.gid = f++
+	  , size = fields.size = f++
+	  , mtime = fields.mtime = f++
+	  , cksum = fields.cksum = f++
+	  , type = fields.type = f++
+	  , linkpath = fields.linkpath = f++
+	  , header_size = 512
+	  , block_size = 512
+	  , field_size = []
+	  , utf8 = __webpack_require__(552)
+
+	field_size[path] = 100
+	field_size[mode] = 8
+	field_size[uid] = 8
+	field_size[gid] = 8
+	field_size[size] = 12
+	field_size[mtime] = 12
+	field_size[cksum] = 8
+	field_size[type] = 1
+	field_size[linkpath] = 100
+
+	var ustar = fields.ustar = f++
+	  , ustarver = fields.ustarver = f++
+	  , uname = fields.uname = f++
+	  , gname = fields.gname = f++
+	  , devmaj = fields.devmaj = f++
+	  , devmin = fields.devmin = f++
+	  , prefix = fields.prefix = f++
+	  , fill = fields.fill = f++
+
+	// terminate fields.
+	fields[f] = null
+
+	field_size[ustar] = 6
+	field_size[ustarver] = 2
+	field_size[uname] = 32
+	field_size[gname] = 32
+	field_size[devmaj] = 8
+	field_size[devmin] = 8
+	field_size[prefix] = 155
+	field_size[fill] = 12
+
+	// nb: prefix field may in fact be 130 bytes of prefix,
+	// a null char, 12 bytes for atime, 12 bytes for ctime.
+	//
+	// To recognize this format:
+	// 1. prefix[130] === ' ' or '\0'
+	// 2. atime and ctime are octal numeric values
+	// 3. atime and ctime have ' ' in their last byte
+
+	var field_ends = {}
+	  , field_offs = {}
+	  , fe = 0
+	for (var i = 0; i < f; i ++) {
+	  field_offs[i] = fe
+	  field_ends[i] = (fe += field_size[i])
+	}
+
+	// build a translation table of field paths.
+	Object.keys(fields).forEach(function (f) {
+	  if (fields[f] !== null) fields[fields[f]] = f
+	})
+
+	// different values of the 'type' field
+	// paths match the values of Stats.isX() functions, where appropriate
+	var types =
+	  { 0: "File"
+	  , "\0": "OldFile" // like 0
+	  , "": "OldFile"
+	  , 1: "Link"
+	  , 2: "SymbolicLink"
+	  , 3: "CharacterDevice"
+	  , 4: "BlockDevice"
+	  , 5: "Directory"
+	  , 6: "FIFO"
+	  , 7: "ContiguousFile" // like 0
+	  // posix headers
+	  , g: "GlobalExtendedHeader" // k=v for the rest of the archive
+	  , x: "ExtendedHeader" // k=v for the next file
+	  // vendor-specific stuff
+	  , A: "SolarisACL" // skip
+	  , D: "GNUDumpDir" // like 5, but with data, which should be skipped
+	  , I: "Inode" // metadata only, skip
+	  , K: "NextFileHasLongLinkpath" // data = link path of next file
+	  , L: "NextFileHasLongPath" // data = path of next file
+	  , M: "ContinuationFile" // skip
+	  , N: "OldGnuLongPath" // like L
+	  , S: "SparseFile" // skip
+	  , V: "TapeVolumeHeader" // skip
+	  , X: "OldExtendedHeader" // like x
+	  }
+
+	Object.keys(types).forEach(function (t) {
+	  types[types[t]] = types[types[t]] || t
+	})
+
+	// values for the mode field
+	var modes =
+	  { suid: 04000 // set uid on extraction
+	  , sgid: 02000 // set gid on extraction
+	  , svtx: 01000 // set restricted deletion flag on dirs on extraction
+	  , uread:  0400
+	  , uwrite: 0200
+	  , uexec:  0100
+	  , gread:  040
+	  , gwrite: 020
+	  , gexec:  010
+	  , oread:  4
+	  , owrite: 2
+	  , oexec:  1
+	  , all: 07777
+	  }
+
+	var numeric =
+	  { mode: true
+	  , uid: true
+	  , gid: true
+	  , size: true
+	  , mtime: true
+	  , devmaj: true
+	  , devmin: true
+	  , cksum: true
+	  , atime: true
+	  , ctime: true
+	  , dev: true
+	  , ino: true
+	  , nlink: true
+	  }
+
+	Object.keys(modes).forEach(function (t) {
+	  modes[modes[t]] = modes[modes[t]] || t
+	})
+
+	var knownExtended =
+	  { atime: true
+	  , charset: true
+	  , comment: true
+	  , ctime: true
+	  , gid: true
+	  , gname: true
+	  , linkpath: true
+	  , mtime: true
+	  , path: true
+	  , realtime: true
+	  , security: true
+	  , size: true
+	  , uid: true
+	  , uname: true }
+
+	var space = ' '.charCodeAt(0)
+	  , slash = '/'.charCodeAt(0)
+	  , bslash = process.platform === 'win32' ? '\\'.charCodeAt(0) : null
+
+	header.types = types
+	header.fields = fields
+	header.numeric = numeric
+
+	var slice = buffer_slice
+
+	function buffer_slice(buf, start, end) {
+	  return buf.slice(start, end)
+	}
+
+	function uint8_slice(buf, start, end) {
+	  return buf.subarray(start, end)
+	}
+
+	function header(block) {
+	  var should_return = false
+	    , prefix
+	    , uint8
+	    , field
+	    , out
+	    , val
+
+	  if(block[0] === undefined) {
+	    uint8 = new Uint8Array(512)
+	    for(var i = 0, len = block.length; i < len; ++i) {
+	      uint8[i] = block.get(i)
+	    }
+	    block = uint8
+	    slice = uint8_slice
+	  }
+
+	  out = {cksum_valid: checksum(block)}
+
+	  prefix = null
+	  for(var f = 0; fields[f] !== null; ++f) {
+	    field = fields[f]
+	    val = slice(block, field_offs[f], field_ends[f])
+	    switch(field) {
+	      case 'ustar': parse_ustar(); break
+	      case 'prefix': parse_prefix(); break
+	      default: null_or_number(); break
+	    }
+
+	    if(should_return) {
+	      return out
+	    }
+	  }
+
+	  if(prefix) {
+	    out.path = prefix + '/' + out.path
+	  }
+
+	  return out
+
+	  function parse_ustar() {
+	    var str = utf8(val)
+	    out.ustar = str === 'ustar\0' ? str : false
+	    should_return = !out.ustar
+	  }
+
+	  function parse_prefix() {
+	    var atime = parse_numeric(slice(val, 131, 131 + 12))
+	      , ctime = parse_numeric(slice(val, 131 + 12, 131 + 12 + 12))
+
+	    if(val[130] === 0 || val[130] === space &&
+	       atime !== null && ctime !== null &&
+	       val[131 + 12] === space &&
+	       val[131 + 12 + 12] === space) {
+	      out.atime = atime
+	      out.ctime = ctime
+	      val = slice(val, 0, 130)      
+	    }
+	    prefix = utf8(val).replace(/\0+$/, '')
+	  }
+
+	  function null_or_number() {
+	    out[field] = numeric[field] ?
+	        parse_numeric(val) :
+	        utf8(val).replace(/\0+$/, '')
+	  }
+	}
+
+	function calcsum(block) {
+	  var sum = 0
+	    , start = field_offs[fields.cksum]
+	    , end = field_ends[fields.cksum]
+
+	  for(var i = 0, len = field_offs[fields.cksum]; i < len; ++i) {
+	    sum += block[i]
+	  }
+
+	  for(var i = start; i < end; ++i) {
+	    sum += space
+	  }
+
+	  for(var i = end; i < 512; ++i) {
+	    sum += block[i]
+	  }
+
+	  return sum
+	}
+
+	function checksum(block) {
+	  var sum = calcsum(block)
+	    , cksum = slice(block, field_offs[fields.cksum], field_ends[fields.cksum])
+	  
+	  cksum = parse_numeric(cksum)
+	  return cksum === sum
+	}
+
+	function parse256(buf) {
+	  var positive = buf[0] === 0x80 ? true :
+	                 buf[0] === 0xFF ? false :
+	                 null
+
+	  if(positive === null) {
+	    return positive
+	  }
+
+	  var zero = false
+	    , tuple = []
+	    , byte
+
+	  for(var i = buf.length - 1; i > 0; --i) {
+	    byte = buf[i]
+	    if(positive) {
+	      tuple[tuple.length] = byte
+	    } else if(zero && byte === 0) {
+	      tuple[tuple.length] = 0
+	    } else if(zero) {
+	      zero = false
+	      tuple[tuple.length] = 0x100 - byte
+	    } else {
+	      tuple[tuple.length] = 0xFF - byte
+	    } 
+	  }
+
+	  for(var sum = 0, i = 0, len = tuple.length; i < len; ++i) {
+	    sum += tuple[i] * Math.pow(256, i)
+	  }
+
+	  return positive ? sum : -1 * sum
+	}
+
+	function parse_numeric(field) {
+	  if(field[0] & 0x80) {
+	    return parse256(field)
+	  }
+
+	  var str = utf8(field).split('\0')[0]
+	    , res
+
+	  str = str.replace(/^\s+/g, '').replace(/\s+$/g, '')
+
+	  res = parseInt(str, 8)
+
+	  return res !== res ? null : res
+	}
+
+
+/***/ },
+/* 552 */
+/***/ function(module, exports) {
+
+	module.exports = to_utf8
+
+	var out = []
+	  , col = []
+	  , fcc = String.fromCharCode
+	  , mask = [0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01]
+	  , unmask = [
+	      0x00
+	    , 0x01
+	    , 0x02 | 0x01
+	    , 0x04 | 0x02 | 0x01
+	    , 0x08 | 0x04 | 0x02 | 0x01
+	    , 0x10 | 0x08 | 0x04 | 0x02 | 0x01
+	    , 0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01
+	    , 0x40 | 0x20 | 0x10 | 0x08 | 0x04 | 0x02 | 0x01
+	  ]
+
+	function to_utf8(bytes, start, end) {
+	  start = start === undefined ? 0 : start
+	  end = end === undefined ? bytes.length : end
+
+	  var idx = 0
+	    , hi = 0x80
+	    , collecting = 0
+	    , pos
+	    , by
+
+	  col.length =
+	  out.length = 0
+
+	  while(idx < bytes.length) {
+	    by = bytes[idx]
+	    if(!collecting && by & hi) {
+	      pos = find_pad_position(by)
+	      collecting += pos
+	      if(pos < 8) {
+	        col[col.length] = by & unmask[6 - pos]
+	      }
+	    } else if(collecting) {
+	      col[col.length] = by & unmask[6]
+	      --collecting
+	      if(!collecting && col.length) {
+	        out[out.length] = fcc(reduced(col, pos))
+	        col.length = 0
+	      }
+	    } else { 
+	      out[out.length] = fcc(by)
+	    }
+	    ++idx
+	  }
+	  if(col.length && !collecting) {
+	    out[out.length] = fcc(reduced(col, pos))
+	    col.length = 0
+	  }
+	  return out.join('')
+	}
+
+	function find_pad_position(byt) {
+	  for(var i = 0; i < 7; ++i) {
+	    if(!(byt & mask[i])) {
+	      break
+	    }
+	  }
+	  return i
+	}
+
+	function reduced(list) {
+	  var out = 0
+	  for(var i = 0, len = list.length; i < len; ++i) {
+	    out |= list[i] << ((len - i - 1) * 6)
+	  }
+	  return out
+	}
+
+
+/***/ },
+/* 553 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = entry
+
+	var through = __webpack_require__(554)
+	  , header = __webpack_require__(551)
+	  , fields = header.fields
+	  , types = header.types
+	  , has
+
+	has = {}.hasOwnProperty
+	has = has.call.bind(has)
+
+	function entry(header, extended, global) {
+	  var stream = through(write)
+	    , remaining
+	    , slice
+
+	  stream.meta = false
+	  stream.props = {}
+	  stream._header = header
+	  stream._extended = extended || {}
+	  stream._global = {}
+
+	  for(var key in global) {
+	    stream._global[key] = global[key]
+	  }
+
+	  set_props(stream)
+
+	  remaining = stream.props.size
+
+	  return stream
+
+	  function write(buf) {
+	    if(!slice) {
+	      if(buf.slice) {
+	        slice = function(b, s, e) { return b.slice(s, e) } 
+	      } else {
+	        slice = function(b, s, e) { return b.subarray(s, e) }
+	      }
+	    }
+
+	    if(buf.length > remaining) {
+	      buf = slice(buf, 0, remaining)
+	    }
+
+	    remaining -= buf.length
+	    stream.queue(buf)
+
+	    if(remaining === 0) {
+	      stream.queue(null)
+	    }
+	  }
+	}
+
+	function set_props(stream) {
+	  var header = stream._header
+	    , dateify = ['mtime', 'ctime', 'atime']
+	    , extended = stream._extended
+	    , global = stream._global
+	    , props = stream.props
+	    , field
+	    , val
+
+	  for(var f = 0; fields[f] !== null; ++f) {
+	    field = fields[f]
+	    val = header[field]
+	    if(val !== undefined) {
+	      props[field] = val
+	    }
+	  }
+
+	  for(var key in global) {
+	    if(global[key] !== undefined) {
+	      props[key] = global[key]
+	    }
+	  }
+
+	  for(var key in extended) {
+	    if(extended[key] !== undefined) {
+	      props[key] = extended[key]
+	    }
+	  }
+
+	  if(has(props, 'path')) {
+	    props.path = props.path.split('\0')[0]
+	  }
+
+	  if(has(props, 'linkpath')) {
+	    props.linkpath = props.linkpath.split('\0')[0]
+	  }
+
+	  dateify.forEach(to_date)
+
+	  stream.type =
+	    types[props.type] in {'OldFile':0, 'ContiguousFile':0} ? 'File' :
+	    types[props.type] === 'GNUDumpDir' ? 'Directory' : 
+	    types[props.type] === undefined ? 'Unknown' : 
+	    types[props.type] 
+
+	  stream.path = props.path
+	  stream.size = props.size 
+
+	  return
+
+	  function to_date(property) {
+	    if(!has(props, property)) {
+	      return
+	    }
+
+	    props[property] = new Date(props[property] * 1000)
+	  }
+	}
+
+
+/***/ },
+/* 554 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var Stream = __webpack_require__(322)
+
+	// through
+	//
+	// a stream that does nothing but re-emit the input.
+	// useful for aggregating a series of changing but not ending streams into one stream)
+
+
+
+	exports = module.exports = through
+	through.through = through
+
+	//create a readable writable stream.
+
+	function through (write, end) {
+	  write = write || function (data) { this.queue(data) }
+	  end = end || function () { this.queue(null) }
+
+	  var ended = false, destroyed = false, buffer = []
+	  var stream = new Stream()
+	  stream.readable = stream.writable = true
+	  stream.paused = false
+
+	  stream.write = function (data) {
+	    write.call(this, data)
+	    return !stream.paused
+	  }
+
+	  function drain() {
+	    while(buffer.length && !stream.paused) {
+	      var data = buffer.shift()
+	      if(null === data)
+	        return stream.emit('end')
+	      else
+	        stream.emit('data', data)
+	    }
+	  }
+
+	  stream.queue = stream.push = function (data) {
+	    buffer.push(data)
+	    drain()
+	    return stream
+	  }
+
+	  //this will be registered as the first 'end' listener
+	  //must call destroy next tick, to make sure we're after any
+	  //stream piped from here.
+	  //this is only a problem if end is not emitted synchronously.
+	  //a nicer way to do this is to make sure this is the last listener for 'end'
+
+	  stream.on('end', function () {
+	    stream.readable = false
+	    if(!stream.writable)
+	      process.nextTick(function () {
+	        stream.destroy()
+	      })
+	  })
+
+	  function _end () {
+	    stream.writable = false
+	    end.call(stream)
+	    if(!stream.readable)
+	      stream.destroy()
+	  }
+
+	  stream.end = function (data) {
+	    if(ended) return
+	    ended = true
+	    if(arguments.length) stream.write(data)
+	    _end() // will emit or queue
+	    return stream
+	  }
+
+	  stream.destroy = function () {
+	    if(destroyed) return
+	    destroyed = true
+	    ended = true
+	    buffer.length = 0
+	    stream.writable = stream.readable = false
+	    stream.emit('close')
+	    return stream
+	  }
+
+	  stream.pause = function () {
+	    if(stream.paused) return
+	    stream.paused = true
+	    stream.emit('pause')
+	    return stream
+	  }
+	  stream.resume = function () {
+	    if(stream.paused) {
+	      stream.paused = false
+	    }
+	    drain()
+	    //may have become paused again,
+	    //as drain emits 'data'.
+	    if(!stream.paused)
+	      stream.emit('drain')
+	    return stream
+	  }
+	  return stream
+	}
+
+
+
+/***/ },
+/* 555 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = extended_header
+
+	var entry = __webpack_require__(553)
+	  , header = __webpack_require__(551)
+	  , utf8 = __webpack_require__(552)
+	  , numeric = header.numeric
+
+	var _ = 0
+	  , states = {}
+	  , SIZE = states.SIZE = _++
+	  , KEY = states.KEY = _++
+	  , VAL = states.VAL = _++
+	  , ERR = states.ERR = _++
+	  , character
+	  , fromcode
+
+	var trans = {
+	  'SCHILY.dev': 'dev'
+	, 'SCHILY.ino': 'ino'
+	, 'SCHILY.nlink': 'nlink'
+	}
+
+	character = ''.charCodeAt.call.bind(''.charCodeAt)
+	fromcode = function(c) {
+	  return String.fromCharCode(c)
+	}
+
+	var zero = character('0')
+	  , nine = character('9')
+	  , dot = character('.')
+	  , lower_a = character('a')
+	  , lower_z = character('z')
+	  , upper_a = character('A')
+	  , upper_z = character('Z')
+	  , space = character(' ')
+	  , equals = character('=')
+	  , newline = character('\n')
+
+	for(var key in states) {
+	  states[states[key]] = states[key]
+	}
+
+	function extended_header(header, extended, global) {
+	  var stream = entry(header, extended, global)
+	    , field_pos = 0
+	    , state = SIZE
+	    , sizebuf = []
+	    , key = []
+	    , val = []
+	    , size = 0
+	    , idx = 0
+
+	  stream.fields = {}
+
+	  stream
+	    .on('data', ondata)
+	    .on('end', onend)
+
+	  return stream
+
+	  function ondata(buf) {
+	    for(idx = 0, len = buf.length; idx < len; ++field_pos, ++idx) {
+	      var c = buf[idx] === undefined ? buf.get(idx) : buf[idx]
+	      switch(state) {
+	        case ERR: break
+	        case SIZE: parse_size(c); break
+	        case KEY: parse_key(c); break
+	        case VAL: parse_val(c); break
+	      }
+	    }
+	  }
+
+	  function onend() {
+	    
+	  }
+
+	  function parse_size(c) {
+	    if(c === space) {
+	      state = KEY
+	      size = parseInt(utf8(sizebuf), 10)
+	      sizebuf.length = 0
+	      return
+	    }
+	    if(c < zero || c > nine) {
+	      state = ERR
+	      stream.emit('error', new Error('expected 0..9, got '+fromcode(c)))
+	      return
+	    }
+	    sizebuf[sizebuf.length] = c
+	  }
+
+	  function parse_key(c) {
+	    if(c === equals) {
+	      state = VAL
+	      return      
+	    }
+	    key[key.length] = c
+	  }
+
+	  function parse_val(c) {
+	    if(field_pos === size - 1) {
+	      if(c !== newline) {
+	        state = ERR
+	        stream.emit('error', 'expected \\n at end of field')
+	        return
+	      }
+	      var keyval = utf8(key)
+	        , value = numeric[keyval] ?
+	          parseFloat(utf8(val)) :
+	          utf8(val).replace(/\0+$/, '')
+
+	      keyval = trans[keyval] ? trans[keyval] : keyval
+	      stream.fields[keyval] = value
+
+	      key.length =
+	      val.length =
+	      sizebuf.length = 0
+
+	      size = field_pos = -1
+	      state = SIZE
+	      return
+	    }
+	    val[val.length] = c
+	  }
+	} 
+
+
+/***/ },
+/* 556 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = buffer_entry
+
+	var entry = __webpack_require__(553)
+
+	function buffer_entry(header, extended, global) {
+	  var stream = entry(header, extended, global)
+	    , buffer = []
+	    , push
+
+	  push = [].push.call.bind([].push, buffer)
+
+	  stream.body = ''
+	  stream
+	    .on('data', push)
+	    .on('end', function() {
+	      stream.body = buffer.join('').replace(/\0+$/, '')
+	    })
+
+	  return stream
+	}
+
+
+/***/ },
+/* 557 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
 	var _this = this;
 
 	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
@@ -83793,7 +85381,7 @@
 	}
 
 /***/ },
-/* 546 */
+/* 558 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/***/
@@ -83862,7 +85450,7 @@
 	  var self = this;
 	  var arg0 = arguments[0], arg1 = arguments[1], arg2 = arguments[2], arg3 = arguments[3];
 
-	  var Protocol = __webpack_require__(547)("./" + _getProtocol.apply(null, arguments));
+	  var Protocol = __webpack_require__(559)("./" + _getProtocol.apply(null, arguments));
 	  var protocol = self.protocol = new Protocol(arg0, arg1, arg2, arg3);
 
 	  var i = length, evts = EVTS;
@@ -83925,22 +85513,22 @@
 
 
 /***/ },
-/* 547 */
+/* 559 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var map = {
-		"./draft-00": 548,
-		"./draft-00.js": 548,
-		"./draft-10": 549,
-		"./draft-10.js": 549,
-		"./rfc6455": 551,
-		"./rfc6455.js": 551,
-		"./server": 552,
-		"./server.js": 552,
-		"./socket": 546,
-		"./socket.js": 546,
-		"./websockets": 553,
-		"./websockets.js": 553
+		"./draft-00": 560,
+		"./draft-00.js": 560,
+		"./draft-10": 561,
+		"./draft-10.js": 561,
+		"./rfc6455": 563,
+		"./rfc6455.js": 563,
+		"./server": 564,
+		"./server.js": 564,
+		"./socket": 558,
+		"./socket.js": 558,
+		"./websockets": 565,
+		"./websockets.js": 565
 	};
 	function webpackContext(req) {
 		return __webpack_require__(webpackContextResolve(req));
@@ -83953,11 +85541,11 @@
 	};
 	webpackContext.resolve = webpackContextResolve;
 	module.exports = webpackContext;
-	webpackContext.id = 547;
+	webpackContext.id = 559;
 
 
 /***/ },
-/* 548 */
+/* 560 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/***/
@@ -84180,12 +85768,12 @@
 
 
 /***/ },
-/* 549 */
+/* 561 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/***/
 	var util = __webpack_require__(325), events = __webpack_require__(374), crypto = __webpack_require__(400);
-	var URL = __webpack_require__(324), http = __webpack_require__(326), https = __webpack_require__(550);
+	var URL = __webpack_require__(324), http = __webpack_require__(326), https = __webpack_require__(562);
 
 	var GUID = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11';
 	var HANDSHAKE_RESPONSE = 'HTTP/1.1 101 Switching Protocols\r\nSec-WebSocket-Protocol: *\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ';
@@ -84636,18 +86224,18 @@
 
 
 /***/ },
-/* 550 */
+/* 562 */
 /***/ function(module, exports) {
 
 	module.exports = require("https");
 
 /***/ },
-/* 551 */
+/* 563 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/***/
 	var util = __webpack_require__(325), events = __webpack_require__(374), crypto = __webpack_require__(400);
-	var URL = __webpack_require__(324), http = __webpack_require__(326), https = __webpack_require__(550);
+	var URL = __webpack_require__(324), http = __webpack_require__(326), https = __webpack_require__(562);
 
 	var GUID = '258EAFA5-E914-47DA-95CA-C5AB0DC85B11';
 	var HANDSHAKE_RESPONSE = 'HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ';
@@ -85140,14 +86728,14 @@
 
 
 /***/ },
-/* 552 */
+/* 564 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/***/
-	var http = __webpack_require__(326), https = __webpack_require__(550);
+	var http = __webpack_require__(326), https = __webpack_require__(562);
 	var events = __webpack_require__(374), util = __webpack_require__(325);
 
-	var Socket = __webpack_require__(546);
+	var Socket = __webpack_require__(558);
 
 	module.exports = WebSocketServer;
 
@@ -85227,12 +86815,12 @@
 
 
 /***/ },
-/* 553 */
+/* 565 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/***/
-	var Server = __webpack_require__(552);
-	var Socket = __webpack_require__(546);
+	var Server = __webpack_require__(564);
+	var Socket = __webpack_require__(558);
 
 	exports.Server = Server;
 	exports.WebSocket = Socket;
@@ -85251,7 +86839,7 @@
 
 
 /***/ },
-/* 554 */
+/* 566 */
 /***/ function(module, exports) {
 
 	"use strict";
