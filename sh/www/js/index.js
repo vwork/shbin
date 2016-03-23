@@ -34682,6 +34682,7 @@
 
 	ra.wait = function (predicate) {
 	  var timeout = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
+	  var msg = arguments.length <= 2 || arguments[2] === undefined ? "timeout" : arguments[2];
 	  return new _bluebird2.default(function (resolve, reject) {
 	    var opts = ra({
 	      get done() {
@@ -34699,7 +34700,7 @@
 	      }
 	    });
 	    var timer = timeout == null ? null : setTimeout(function () {
-	      reject(new Error("timeout "));
+	      reject(new Error(msg));
 	      ra.close.call(opts);
 	    }, timeout);
 	  });
@@ -48731,7 +48732,18 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = collections.connect(collections.mixer(), _numberedTransform2.default, (0, _pingpongTransform2.default)(), _JSONTransform2.default, collections.duplex);
+	exports.default = collections.connect(collections.mixer(), _numberedTransform2.default, (0, _pingpongTransform2.default)(), _JSONTransform2.default,
+	// collections.transformer(
+	// 	async function* ( stream ) { AWAIT_73549163_1:for ( const data of stream ) {
+	// 		console.log( `>`.blue, String( data ) )
+	// 		yield data
+	// 	} },
+	// 	async function* ( stream ) { AWAIT_73549163_2:for ( const data of stream ) {
+	// 		console.log( `<`.blue, String( data ) )
+	// 		yield data
+	// 	} },
+	// ),
+	collections.duplex);
 
 	// export
 	// const reconnectable =
