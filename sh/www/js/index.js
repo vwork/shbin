@@ -32166,11 +32166,11 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.Thread = exports.nextTick = exports.defer = exports.connect = exports.EKill = exports.wrap = exports.promise = exports.receive = exports.async = exports.factory = exports.go = exports._debug = exports.global = exports.current = undefined;
+	exports.for = exports.undefined = exports.break = exports.continue = exports.Thread = exports.nextTick = exports.defer = exports.connect = exports.EKill = exports.wrap = exports.promise = exports.receive = exports.async = exports.factory = exports.go = exports._debug = exports.global = exports.current = undefined;
 
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; // ConCurrent.js
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; }; // .ConCurrent.js
 
 	var _marked = [asyncIterator].map(regeneratorRuntime.mark);
 
@@ -32440,7 +32440,8 @@
 	  if (iterator.return) {
 	    try {
 	      var v = iterator.return(value);
-	      if (!v || !v.done) rethrow(new Error("thread has eaten return()"));
+	      if (v && v.done) return v;
+	      rethrow(new Error("thread has eaten return()"));
 	    } catch (error) {
 	      rethrow(new Error("thread has eaten return() and thrown an exception"));
 	      return iteratorFailed(error);
@@ -32568,6 +32569,14 @@
 	        this._value = value;
 	      } else if (this._method == null) {
 	        this._method = iteratorNext;
+	        this._value = value;
+	      }
+	    }
+	  }, {
+	    key: "_store_return",
+	    value: function _store_return(value) {
+	      if (this._method == null) {
+	        this._method = iteratorReturn;
 	        this._value = value;
 	      }
 	    }
@@ -32950,7 +32959,7 @@
 	          break processing;
 	        }
 	        this._stack.push(it);
-	        if (v.value != null) {
+	        if (v.value != null && (typeof v.value == "object" || typeof v.value == "function")) {
 	          if (typeof v.value.then == "function") {
 	            var p = v.value.then(it._next, it._throw);
 	            if (p && typeof p.kill == "function") it._currentPromise = p;else if (typeof v.value.kill == "function") it._currentPromise = v.value;
@@ -33074,6 +33083,133 @@
 	    }
 	  }, _marked[0], this, [[2,, 11, 16]]);
 	}
+
+	var continue_ = Object.freeze({});
+	exports.continue = continue_;
+
+
+	var break_ = Object.freeze({});
+	exports.break = break_;
+
+
+	var undefined_ = Object.freeze({});
+	exports.undefined = undefined_;
+
+
+	var for_ = regeneratorRuntime.mark(function for_(collection, handler) {
+	  var i, f, ok, v, lres;
+	  return regeneratorRuntime.wrap(function for_$(_context4) {
+	    while (1) switch (_context4.prev = _context4.next) {
+	      case 0:
+	        _context4.next = 2;
+	        return _bluebird2.default.resolve(collection);
+
+	      case 2:
+	        collection = _context4.sent;
+	        i = collection[Symbol.asyncIterator] ? collection[Symbol.asyncIterator]() : collection[Symbol.iterator]();
+	        f = true, ok = false;
+	        _context4.prev = 5;
+
+	      case 6:
+	        f = false;
+	        _context4.next = 9;
+	        return _bluebird2.default.resolve(i.next());
+
+	      case 9:
+	        v = _context4.sent;
+
+	        if (!v.done) {
+	          _context4.next = 12;
+	          break;
+	        }
+
+	        return _context4.abrupt("break", 28);
+
+	      case 12:
+	        f = true;
+	        lres = handler(v.value);
+
+	        if (!(lres != null && (typeof lres == "object" || typeof lres == "function") && (typeof lres.then == "function" || typeof lres.next == "function"))) {
+	          _context4.next = 18;
+	          break;
+	        }
+
+	        _context4.next = 17;
+	        return lres;
+
+	      case 17:
+	        lres = _context4.sent;
+
+	      case 18:
+	        _context4.t0 = lres;
+	        _context4.next = _context4.t0 === undefined ? 21 : _context4.t0 === continue_ ? 21 : _context4.t0 === break_ ? 22 : _context4.t0 === undefined_ ? 23 : 24;
+	        break;
+
+	      case 21:
+	        return _context4.abrupt("continue", 26);
+
+	      case 22:
+	        return _context4.abrupt("break", 28);
+
+	      case 23:
+	        lres = undefined;
+
+	      case 24:
+	        ccCurrent._current._caller._store_return(lres);
+	        return _context4.abrupt("break", 28);
+
+	      case 26:
+	        _context4.next = 6;
+	        break;
+
+	      case 28:
+	        ok = true;
+
+	      case 29:
+	        _context4.prev = 29;
+
+	        if (!(f && i.return)) {
+	          _context4.next = 44;
+	          break;
+	        }
+
+	        if (!ok) {
+	          _context4.next = 36;
+	          break;
+	        }
+
+	        _context4.next = 34;
+	        return _bluebird2.default.resolve(i.return());
+
+	      case 34:
+	        _context4.next = 44;
+	        break;
+
+	      case 36:
+	        _context4.prev = 36;
+	        _context4.next = 39;
+	        return _bluebird2.default.resolve(i.return());
+
+	      case 39:
+	        _context4.next = 44;
+	        break;
+
+	      case 41:
+	        _context4.prev = 41;
+	        _context4.t1 = _context4["catch"](36);
+
+	        console.error(_context4.t1);
+
+	      case 44:
+	        return _context4.finish(29);
+
+	      case 45:
+	      case "end":
+	        return _context4.stop();
+	    }
+	  }, for_, this, [[5,, 29, 45], [36, 41]]);
+	});
+	exports.for = for_;
 	/* WEBPACK VAR INJECTION */}.call(exports, window, __webpack_require__( 282 )))
 
 /***/ },
@@ -58013,8 +58149,7 @@
 	    var MOVE_SIDE_DIST = 0.33;
 
 	    var move = cc.async(regeneratorRuntime.mark(function _callee(start, events) {
-	      var done, currentPosition, transaction, setPosition, p, r, fingerShift, $, lastPosition, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, _n, pt, finger, corner, iconInfo, inCell, isInCenter, place, hover;
-
+	      var done, currentPosition, transaction, setPosition, p, r, fingerShift, $, lastPosition;
 	      return regeneratorRuntime.wrap(function _callee$(_context) {
 	        while (1) switch (_context.prev = _context.next) {
 	          case 0:
@@ -58078,187 +58213,83 @@
 	            }));
 
 	            lastPosition = null;
+	            _context.next = 22;
+	            return cc.for(events, function (pt) {
 
-	            // TODO: cleanup it.
-	            // AWAIT_73549163_1:for ( const pt of events ) {
-	            _iteratorNormalCompletion2 = true;
-	            _didIteratorError2 = false;
-	            _iteratorError2 = undefined;
-	            _context.prev = 23;
-	            _iterator2 = cc.asyncIterator(events)[Symbol.iterator]();
+	              var finger = getPoint(pt);
 
-	          case 25:
-	            if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-	              _context.next = 67;
-	              break;
-	            }
+	              var corner = {
+	                x: finger.x + fingerShift.x,
+	                y: finger.y + fingerShift.y
+	              };
 
-	            _n = _step2.value;
-	            _context.next = 29;
-	            return _n;
+	              if (opts.x != corner.x || opts.y != corner.y) opts.moved = true;
+	              opts.x = corner.x;
+	              opts.y = corner.y;
 
-	          case 29:
-	            if (_context.sent.done) {
-	              _context.next = 64;
-	              break;
-	            }
+	              var iconInfo = getIconConsts();
 
-	            _context.next = 32;
-	            return _n;
+	              // TODO: what about local.placesPages[ descr.placeId ]?
+	              var inCell = getPointIndex(finger);
 
-	          case 32:
-	            pt = _context.sent.value;
-	            finger = getPoint(pt);
-	            corner = {
-	              x: finger.x + fingerShift.x,
-	              y: finger.y + fingerShift.y
-	            };
+	              var isInCenter = inCell.ix > MOVE_SIDE_DIST && inCell.ix < 1 - MOVE_SIDE_DIST && inCell.iy > MOVE_SIDE_DIST && inCell.iy < 1 - MOVE_SIDE_DIST;
 
+	              if (!isInCenter || lastPosition != inCell.index) $.hoverid = null;
+	              lastPosition = inCell.index;
 
-	            if (opts.x != corner.x || opts.y != corner.y) opts.moved = true;
-	            opts.x = corner.x;
-	            opts.y = corner.y;
+	              if (pt.type != "stop") return cc.continue;
 
-	            iconInfo = getIconConsts();
+	              $.hoverid = null;
 
-	            // TODO: what about local.placesPages[ descr.placeId ]?
+	              // _LOG(JSON.stringify(inCell).replace(/"/g,``)+` `+iconInfo.pageWidth+` `+iconInfo.pageHeight)
+	              if (inCell.ix > 1 - MOVE_PAGE_DIST && inCell.x == iconInfo.pageWidth - 1) {
+	                if (app.movePage(descr.placeId, +1)) {
+	                  opts.x += iconInfo.menuWidth;
+	                  return cc.continue;
+	                }
+	              }
+	              if (inCell.ix < MOVE_PAGE_DIST && inCell.x == 0) {
+	                if (app.movePage(descr.placeId, -1)) {
+	                  opts.x -= iconInfo.menuWidth;
+	                  return cc.continue;
+	                }
+	              }
 
-	            inCell = getPointIndex(finger);
-	            isInCenter = inCell.ix > MOVE_SIDE_DIST && inCell.ix < 1 - MOVE_SIDE_DIST && inCell.iy > MOVE_SIDE_DIST && inCell.iy < 1 - MOVE_SIDE_DIST;
+	              var place = lu.get(app.devices, "content", descr.placeId, "content");
 
+	              if (!place || !place[iconId]) return null;
 
-	            if (!isInCenter || lastPosition != inCell.index) $.hoverid = null;
-	            lastPosition = inCell.index;
+	              if (isInCenter) {
+	                var hover = dbc.getKeyAtPosition(place, inCell.index);
+	                if (hover != null && hover != iconId) {
+	                  // const srcType = descr.type
+	                  // const dstType = app.getDeviceType( hover )
+	                  // TODO: allow dstType == `single` && srcType == `single`
+	                  if (dbc.canBeLinked(app.devices, iconId, hover, false)) {
+	                    $.hoverid = hover;
+	                    return cc.continue;
+	                  }
+	                }
+	              }
+	              setPosition(inCell.index);
+	            });
 
-	            if (!(pt.type != "stop")) {
-	              _context.next = 45;
-	              break;
-	            }
-
-	            return _context.abrupt("continue", 64);
-
-	          case 45:
-
-	            $.hoverid = null;
-
-	            // _LOG(JSON.stringify(inCell).replace(/"/g,``)+` `+iconInfo.pageWidth+` `+iconInfo.pageHeight)
-
-	            if (!(inCell.ix > 1 - MOVE_PAGE_DIST && inCell.x == iconInfo.pageWidth - 1)) {
-	              _context.next = 50;
-	              break;
-	            }
-
-	            if (!app.movePage(descr.placeId, +1)) {
-	              _context.next = 50;
-	              break;
-	            }
-
-	            opts.x += iconInfo.menuWidth;
-	            return _context.abrupt("continue", 64);
-
-	          case 50:
-	            if (!(inCell.ix < MOVE_PAGE_DIST && inCell.x == 0)) {
-	              _context.next = 54;
-	              break;
-	            }
-
-	            if (!app.movePage(descr.placeId, -1)) {
-	              _context.next = 54;
-	              break;
-	            }
-
-	            opts.x -= iconInfo.menuWidth;
-	            return _context.abrupt("continue", 64);
-
-	          case 54:
-	            place = lu.get(app.devices, "content", descr.placeId, "content");
-
-	            if (!(!place || !place[iconId])) {
-	              _context.next = 57;
-	              break;
-	            }
-
-	            return _context.abrupt("return");
-
-	          case 57:
-	            if (!isInCenter) {
-	              _context.next = 63;
-	              break;
-	            }
-
-	            hover = dbc.getKeyAtPosition(place, inCell.index);
-
-	            if (!(hover != null && hover != iconId)) {
-	              _context.next = 63;
-	              break;
-	            }
-
-	            if (!dbc.canBeLinked(app.devices, iconId, hover, false)) {
-	              _context.next = 63;
-	              break;
-	            }
-
-	            $.hoverid = hover;
-	            return _context.abrupt("continue", 64);
-
-	          case 63:
-	            setPosition(inCell.index);
-
-	          case 64:
-	            _iteratorNormalCompletion2 = true;
-	            _context.next = 25;
-	            break;
-
-	          case 67:
-	            _context.next = 73;
-	            break;
-
-	          case 69:
-	            _context.prev = 69;
-	            _context.t0 = _context["catch"](23);
-	            _didIteratorError2 = true;
-	            _iteratorError2 = _context.t0;
-
-	          case 73:
-	            _context.prev = 73;
-	            _context.prev = 74;
-
-	            if (!_iteratorNormalCompletion2 && _iterator2.return) {
-	              _iterator2.return();
-	            }
-
-	          case 76:
-	            _context.prev = 76;
-
-	            if (!_didIteratorError2) {
-	              _context.next = 79;
-	              break;
-	            }
-
-	            throw _iteratorError2;
-
-	          case 79:
-	            return _context.finish(76);
-
-	          case 80:
-	            return _context.finish(73);
-
-	          case 81:
+	          case 22:
 	            done = true;
 
 	            if ($.hoverid) {
-	              _context.next = 87;
+	              _context.next = 28;
 	              break;
 	            }
 
-	            _context.next = 85;
+	            _context.next = 26;
 	            return transaction.apply();
 
-	          case 85:
-	            _context.next = 88;
+	          case 26:
+	            _context.next = 29;
 	            break;
 
-	          case 87:
+	          case 28:
 	            (function () {
 	              var srcType = descr.type;
 	              var dstDevice = app.getDevice($.hoverid);
@@ -58292,11 +58323,11 @@
 	              global.getComputedStyle(icon); // force reflow
 	            })();
 
-	          case 88:
+	          case 29:
 	          case "end":
 	            return _context.stop();
 	        }
-	      }, _callee, this, [[23, 69, 73, 81], [74,, 76, 80]]);
+	      }, _callee, this);
 	    }));
 
 	    function dimm(events) {
@@ -60436,13 +60467,26 @@
 	      if (!message_turn_off || !value || !onturnon || !onturnoff || onclick || url) throw new Error("wrong parameters");
 	    }
 	    var content = void 0;
-	    var isSwitchedOn = (_context = (0, _ra2.default)(function () {
-	      return Boolean(value && value());
+	    if (typeof visible == "string") {
+	      (function () {
+	        var deviceType = visible;
+	        visible = function visible() {
+	          return app.activeType == deviceType;
+	        };
+	      })();
+	    }
+	    var isVisible = (_context = (0, _ra2.default)(function () {
+	      return Boolean(visible == null || visible());
 	    })).valueOf.bind(_context);
 	    if (!message_turn_off) {
 	      content = commandMessage(app, message);
 	    } else {
+	      var _context2;
+
 	      (function () {
+	        var isSwitchedOn = (_context2 = (0, _ra2.default)(function () {
+	          return Boolean(isVisible() && value && value());
+	        })).valueOf.bind(_context2);
 	        var content_on = commandMessage(app, message);
 	        var content_off = commandMessage(app, message_turn_off);
 	        content = function content() {
@@ -60457,14 +60501,6 @@
 	    var isEnabled = function isEnabled() {
 	      return (url || onclick) && (!enabled || enabled());
 	    };
-	    if (typeof visible == "string") {
-	      (function () {
-	        var deviceType = visible;
-	        visible = function visible() {
-	          return app.activeType == deviceType;
-	        };
-	      })();
-	    }
 	    var attr = url && !onclick ? { href: url, rel: "external", target: "_blank" } : { href: "javascript:void(0)", target: "_self", ontouch: function ontouch(event) {
 	        event.preventDefault();
 	        if (onclick && isEnabled()) {
@@ -60474,13 +60510,10 @@
 	          }
 	        }
 	      } };
-	    var isVisible = (0, _ra2.default)(function () {
-	      return visible == null || visible();
-	    });
-	    var ret = __(
+	    return Object.assign(__(
 	      "a",
 	      { _: attr, "class": function _class() {
-	          return "\n\t\tcommand\n\t\t" + message + "\n\t\t" + (isEnabled() ? "enabled" : "disabled") + "\n\t\t" + (visible == null || visible() ? "itemVisible" : "itemHidden") + "\n\t";
+	          return "\n\t\t\tcommand\n\t\t\t" + message + "\n\t\t\t" + (isEnabled() ? "enabled" : "disabled") + "\n\t\t\t" + (visible == null || visible() ? "itemVisible" : "itemHidden") + "\n\t\t";
 	        } },
 	      __(
 	        "div",
@@ -60491,9 +60524,7 @@
 	          content
 	        )
 	      )
-	    );
-	    ret.isVisible = isVisible.valueOf.bind(isVisible);
-	    return ret;
+	    ), { isVisible: isVisible });
 	  };
 	};
 
