@@ -44187,40 +44187,47 @@
 	        resolve(__webpack_require__(447));
 	      }), app.load).call(_context3);
 	    },
-	    ThemeMenu: function ThemeMenu() {
+	    DebugMenu: function DebugMenu() {
 	      var _context4;
 
 	      return (_context4 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(448));
+	        resolve(__webpack_require__(459));
 	      }), app.load).call(_context4);
 	    },
-	    SearchItems: function SearchItems() {
+	    ThemeMenu: function ThemeMenu() {
 	      var _context5;
 
 	      return (_context5 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(449));
+	        resolve(__webpack_require__(448));
 	      }), app.load).call(_context5);
 	    },
-	    SearchPictures: function SearchPictures() {
+	    SearchItems: function SearchItems() {
 	      var _context6;
 
 	      return (_context6 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(454));
+	        resolve(__webpack_require__(449));
 	      }), app.load).call(_context6);
 	    },
-	    AskNewName: function AskNewName() {
+	    SearchPictures: function SearchPictures() {
 	      var _context7;
 
 	      return (_context7 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(455));
+	        resolve(__webpack_require__(454));
 	      }), app.load).call(_context7);
 	    },
-	    AskToLinkDevice: function AskToLinkDevice() {
+	    AskNewName: function AskNewName() {
 	      var _context8;
 
 	      return (_context8 = new global.Promise(function (resolve) {
-	        resolve(__webpack_require__(458));
+	        resolve(__webpack_require__(455));
 	      }), app.load).call(_context8);
+	    },
+	    AskToLinkDevice: function AskToLinkDevice() {
+	      var _context9;
+
+	      return (_context9 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(458));
+	      }), app.load).call(_context9);
 	    },
 
 	    AskIfDeviceHasBeenLinked: function AskIfDeviceHasBeenLinked() {
@@ -44448,21 +44455,21 @@
 	  (0, _ra2.default)(regeneratorRuntime.mark(function _callee() {
 	    var dialogName, Template, control, _this, input, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, elem, state, dialog;
 
-	    return regeneratorRuntime.wrap(function _callee$(_context9) {
-	      while (1) switch (_context9.prev = _context9.next) {
+	    return regeneratorRuntime.wrap(function _callee$(_context10) {
+	      while (1) switch (_context10.prev = _context10.next) {
 	        case 0:
 	          dialogName = app.dialog;
 
 	          if (dialogName) {
-	            _context9.next = 3;
+	            _context10.next = 3;
 	            break;
 	          }
 
-	          return _context9.abrupt("return");
+	          return _context10.abrupt("return");
 
 	        case 3:
 	          if (Object.prototype.hasOwnProperty.call(dialogTemplates, dialogName)) {
-	            _context9.next = 7;
+	            _context10.next = 7;
 	            break;
 	          }
 
@@ -44470,17 +44477,17 @@
 	          _ra2.default.noTouch(function () {
 	            return app.dialog = "";
 	          });
-	          return _context9.abrupt("return");
+	          return _context10.abrupt("return");
 
 	        case 7:
 	          Template = dialogTemplates[dialogName];
 
 	          if (Template) {
-	            _context9.next = 10;
+	            _context10.next = 10;
 	            break;
 	          }
 
-	          return _context9.abrupt("return");
+	          return _context10.abrupt("return");
 
 	        case 10:
 	          dialogTemplates[dialogName] = null;
@@ -44488,18 +44495,18 @@
 	          control = Template();
 
 	          if (!(typeof control.then == "function")) {
-	            _context9.next = 16;
+	            _context10.next = 16;
 	            break;
 	          }
 
-	          _context9.next = 15;
+	          _context10.next = 15;
 	          return control;
 
 	        case 15:
-	          control = _context9.sent;
+	          control = _context10.sent;
 
 	        case 16:
-	          _context9.t0 = {
+	          _context10.t0 = {
 	            get isActive() {
 	              return dialogName == app.dialog;
 	            },
@@ -44552,7 +44559,7 @@
 	              }
 	            }
 	          };
-	          state = (0, _ra2.default)(_context9.t0);
+	          state = (0, _ra2.default)(_context10.t0);
 	          dialog = __(
 	            "div",
 	            { "class": function _class() {
@@ -44565,7 +44572,7 @@
 
 	        case 20:
 	        case "end":
-	          return _context9.stop();
+	          return _context10.stop();
 	      }
 	    }, _callee, this);
 	  }));
@@ -60230,38 +60237,6 @@
 	      }
 	    }),
 	    __(Command, {
-	      message: "turn on dimmering",
-	      message_turn_off: "turn off dimmering",
-	      visible: function visible() {
-	        return !app.editing && app.activeType != "place";
-	      },
-	      value: function value() {
-	        return app.activeDevice.dimmering !== false;
-	      },
-	      onturnon: function onturnon() {
-	        app.commands.UpdateItem({ itemId: app.activeDeviceId, dimmering: true });
-	      },
-	      onturnoff: function onturnoff() {
-	        app.commands.UpdateItem({ itemId: app.activeDeviceId, dimmering: false });
-	      }
-	    }),
-	    __(Command, {
-	      message: "turn on acknowledgement",
-	      message_turn_off: "turn off acknowledgement",
-	      visible: function visible() {
-	        return !app.editing && app.activeType != "place";
-	      },
-	      value: function value() {
-	        return app.activeDevice.acknowledgement !== false;
-	      },
-	      onturnon: function onturnon() {
-	        app.commands.UpdateItem({ itemId: app.activeDeviceId, acknowledgement: true });
-	      },
-	      onturnoff: function onturnoff() {
-	        app.commands.UpdateItem({ itemId: app.activeDeviceId, acknowledgement: false });
-	      }
-	    }),
-	    __(Command, {
 	      message: "commandLinkDevice",
 	      visible: "device",
 	      onclick: "AskToLinkDevice"
@@ -60490,6 +60465,9 @@
 	    var isVisible = (_context = (0, _ra2.default)(function () {
 	      return Boolean(visible == null || visible());
 	    })).valueOf.bind(_context);
+	    var isEnabled = (_context = (0, _ra2.default)(function () {
+	      return (url || onclick) && (!enabled || enabled());
+	    })).valueOf.bind(_context);
 	    if (!message_turn_off) {
 	      content = commandMessage(app, message);
 	    } else {
@@ -60510,9 +60488,6 @@
 	      })();
 	    }
 
-	    var isEnabled = function isEnabled() {
-	      return (url || onclick) && (!enabled || enabled());
-	    };
 	    var attr = url && !onclick ? { href: url, rel: "external", target: "_blank" } : { href: "javascript:void(0)", target: "_self", ontouch: function ontouch(event) {
 	        event.preventDefault();
 	        if (onclick && isEnabled()) {
@@ -63885,6 +63860,82 @@
 	      },
 	      "здесь"
 	    )
+	  );
+	};
+
+	{
+	  if (exports.default != null && (_typeof(exports.default) === "object" || typeof exports.default === "function") && !("default" in exports.default)) Object.defineProperties(exports.default, {
+	    __esModule: {
+	      value: true
+	    },
+	    default: {
+	      value: exports.default
+	    }
+	  });
+	  module.exports = exports.default;
+	}
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__( 323 ).createElement))
+
+/***/ },
+/* 459 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(__) {"use strict";
+
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+
+	var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol ? "symbol" : typeof obj; };
+
+	var _Menu = __webpack_require__(444);
+
+	var _Menu2 = _interopRequireDefault(_Menu);
+
+	var _Command = __webpack_require__(445);
+
+	var _Command2 = _interopRequireDefault(_Command);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+	exports.default = function (app) {
+	  var Menu = app.load(_Menu2.default);
+	  var Command = app.load(_Command2.default);
+	  return __(
+	    Menu,
+	    null,
+	    __(Command, {
+	      message: "turn on dimmering",
+	      message_turn_off: "turn off dimmering",
+	      enabled: function enabled() {
+	        return !app.editing && app.activeType != "place";
+	      },
+	      value: function value() {
+	        return !!app.activeDevice && app.activeDevice.dimmering !== false;
+	      },
+	      onturnon: function onturnon() {
+	        app.commands.UpdateItem({ itemId: app.activeDeviceId, dimmering: true });
+	      },
+	      onturnoff: function onturnoff() {
+	        app.commands.UpdateItem({ itemId: app.activeDeviceId, dimmering: false });
+	      }
+	    }),
+	    __(Command, {
+	      message: "turn on acknowledgement",
+	      message_turn_off: "turn off acknowledgement",
+	      enabled: function enabled() {
+	        return !app.editing && app.activeType != "place";
+	      },
+	      value: function value() {
+	        return !!app.activeDevice && app.activeDevice.acknowledgement !== false;
+	      },
+	      onturnon: function onturnon() {
+	        app.commands.UpdateItem({ itemId: app.activeDeviceId, acknowledgement: true });
+	      },
+	      onturnoff: function onturnoff() {
+	        app.commands.UpdateItem({ itemId: app.activeDeviceId, acknowledgement: false });
+	      }
+	    })
 	  );
 	};
 
