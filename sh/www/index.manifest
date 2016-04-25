@@ -1,6 +1,6 @@
 CACHE MANIFEST
 
-# !!! WARNING !!! This is an auto generated file. DO NOT EDIT IT. Timestamp: 20160401163626962526838
+# !!! WARNING !!! This is an auto genarated file. DO NOT EDIT IT. Timestamp: 20160425085833598796017
 
 CACHE:
 
@@ -21,6 +21,7 @@ CACHE:
 /img/logo.svg
 
 /touch.svg
+/messages
 /templates
 
 NETWORK:
