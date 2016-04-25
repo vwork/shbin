@@ -13497,7 +13497,6 @@
 
 	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-	exports.initComponent = initComponent;
 	exports.assignDOM = assignDOM;
 	exports.register = register;
 
@@ -13719,7 +13718,7 @@
 	  if (Array.isArray(value)) return value.map(toAttrString).join(" ");else if (value) return "" + value;else return "";
 	}
 
-	function appendContent(node, content, f) {
+	function appendContent(content, f) {
 	  if (!f) f = _dom2.default.document.createDocumentFragment();
 	  var _iteratorNormalCompletion2 = true;
 	  var _didIteratorError2 = false;
@@ -13731,9 +13730,9 @@
 
 	      if (c == null || c == "") continue;else if (typeof c == "function") {
 	        var p = _dom2.default.document.createElement("span");
-	        setContent(p, bindCalculatedThis(node, c));
+	        setContent(p, c);
 	        f.appendChild(p);
-	      } else if (c instanceof _dom2.default.Node) f.appendChild(getActualNode(c));else if (!isString(c) && c[Symbol.iterator]) appendContent(node, c, f);else f.appendChild(createTextNode(c));
+	      } else if (c instanceof _dom2.default.Node) f.appendChild(getActualNode(c));else if (!isString(c) && c[Symbol.iterator]) appendContent(c, f);else f.appendChild(createTextNode(c));
 	    }
 	  } catch (err) {
 	    _didIteratorError2 = true;
@@ -13763,17 +13762,8 @@
 	  }, _callee2, this);
 	}));
 
-	var once = function once(handlers) {
-	  if (handlers == null) return null;else if (!Array.isArray(handlers)) return function () {
-	    if (handlers == null) return;
-	    var h = handlers;
-	    handlers = null;
-	    return h.call.apply(h, [this].concat(Array.prototype.slice.call(arguments)));
-	  };else return handlers.map(handlers).filter(Boolean);
-	};
-
 	var attachEventHandlers = function attachEventHandlers(target, event, handlers) {
-	  if (handlers == null) return;else if (!Array.isArray(handlers)) target.addEventListener(event, handlers);else {
+	  if (handlers != null) if (!Array.isArray(handlers)) target.addEventListener(event, handlers);else {
 	    var _iteratorNormalCompletion3 = true;
 	    var _didIteratorError3 = false;
 	    var _iteratorError3 = undefined;
@@ -13782,7 +13772,7 @@
 	      for (var _iterator3 = handlers[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
 	        var _handler = _step3.value;
 
-	        if (_handler != null) target.addEventListener(event, _handler);
+	        target.addEventListener(event, _handler);
 	      }
 	    } catch (err) {
 	      _didIteratorError3 = true;
@@ -13901,15 +13891,9 @@
 	  return p instanceof _ra2.default.Cell;
 	};
 
-	var bindCalculatedThis = function bindCalculatedThis(This, proc) {
-	  return function () {
-	    return proc.call(This());
-	  };
-	};
-
-	var classesFunc = function classesFunc(node, reactive) {
+	var classesFunc = function classesFunc(reactive) {
 	  return (0, _ra2.default)(function () {
-	    return getClassesObject(parseClasses(node, lu.valueOf(reactive)));
+	    return getClassesObject(parseClasses(lu.valueOf(reactive)));
 	  });
 	};
 
@@ -13917,7 +13901,7 @@
 	  if (!value || typeof value === "boolean") classes[key] = !!value;else classes[key + value] = true;
 	};
 
-	var reactiveClassFields = function reactiveClassFields(node, obj) {
+	var reactiveClassFields = function reactiveClassFields(obj) {
 	  var ret = Object.create(null);
 	  var _iteratorNormalCompletion5 = true;
 	  var _didIteratorError5 = false;
@@ -13930,7 +13914,7 @@
 	      var key = _step5$value[0];
 	      var value = _step5$value[1];
 
-	      if (typeof value == "function") ret[key] = (0, _ra2.default)(bindCalculatedThis(node, value));else if (isReactive(value)) ret[key] = value;else setClassKey(ret, key, value);
+	      if (typeof value == "function") ret[key] = (0, _ra2.default)(value);else if (isReactive(value)) ret[key] = value;else setClassKey(ret, key, value);
 	    }
 	  } catch (err) {
 	    _didIteratorError5 = true;
@@ -13950,8 +13934,8 @@
 	  return ret;
 	};
 
-	var parseClasses = function parseClasses(node, classes) {
-	  var buffer = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	var parseClasses = function parseClasses(classes) {
+	  var buffer = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
 	  var makeBuffer = function makeBuffer() {
 	    if (buffer == null) buffer = [];
@@ -13966,7 +13950,7 @@
 	      for (var _iterator6 = classes[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
 	        var _c = _step6.value;
 
-	        buffer = parseClasses(node, _c, buffer);
+	        buffer = parseClasses(_c, buffer);
 	      }
 	    } catch (err) {
 	      _didIteratorError6 = true;
@@ -14011,7 +13995,7 @@
 	    }
 
 	    if (ret != null) makeBuffer().push(ret);
-	  } else if (typeof classes == "function") makeBuffer().push(classesFunc(node, (0, _ra2.default)(bindCalculatedThis(node, classes))));else if (isReactive(classes)) makeBuffer().push(classesFunc(node, classes));else makeBuffer().push(reactiveClassFields(node, classes));
+	  } else if (typeof classes == "function") makeBuffer().push(classesFunc((0, _ra2.default)(classes)));else if (isReactive(classes)) makeBuffer().push(classesFunc(classes));else makeBuffer().push(reactiveClassFields(classes));
 	  return buffer;
 	};
 
@@ -14100,13 +14084,13 @@
 	  return getClassesArray(array, constantOnly).sort().join(" ");
 	};
 
-	var stylesFunc = function stylesFunc(node, reactive) {
+	var stylesFunc = function stylesFunc(reactive) {
 	  return (0, _ra2.default)(function () {
-	    return getStylesObject(parseStyles(node, lu.valueOf(reactive)));
+	    return getStylesObject(parseStyles(lu.valueOf(reactive)));
 	  });
 	};
 
-	var reactiveStyleFields = function reactiveStyleFields(node, obj) {
+	var reactiveStyleFields = function reactiveStyleFields(obj) {
 	  var ret = Object.create(null);
 	  var _iteratorNormalCompletion10 = true;
 	  var _didIteratorError10 = false;
@@ -14119,7 +14103,7 @@
 	      var key = _step10$value[0];
 	      var value = _step10$value[1];
 
-	      if (typeof value == "function") ret[key] = (0, _ra2.default)(bindCalculatedThis(node, value));else ret[key] = value;
+	      if (typeof value == "function") ret[key] = (0, _ra2.default)(value);else ret[key] = value;
 	    }
 	  } catch (err) {
 	    _didIteratorError10 = true;
@@ -14139,8 +14123,8 @@
 	  return ret;
 	};
 
-	var parseStyles = function parseStyles(node, styles) {
-	  var buffer = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
+	var parseStyles = function parseStyles(styles) {
+	  var buffer = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
 
 	  var makeBuffer = function makeBuffer() {
 	    if (buffer == null) buffer = [];
@@ -14155,7 +14139,7 @@
 	      for (var _iterator11 = styles[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
 	        var _c2 = _step11.value;
 
-	        buffer = parseStyles(node, _c2, buffer);
+	        buffer = parseStyles(_c2, buffer);
 	      }
 	    } catch (err) {
 	      _didIteratorError11 = true;
@@ -14174,7 +14158,7 @@
 	  } else if (typeof styles == "string") {
 	    var ret = (0, _styleParse2.default)(styles);
 	    if (ret != null) makeBuffer().push(ret);
-	  } else if (typeof styles == "function") makeBuffer().push(stylesFunc(node, (0, _ra2.default)(bindCalculatedThis(node, styles))));else if (isReactive(styles)) makeBuffer().push(stylesFunc(node, styles));else makeBuffer().push(reactiveStyleFields(node, styles));
+	  } else if (typeof styles == "function") makeBuffer().push(stylesFunc((0, _ra2.default)(styles)));else if (isReactive(styles)) makeBuffer().push(stylesFunc(styles));else makeBuffer().push(reactiveStyleFields(styles));
 	  return buffer;
 	};
 
@@ -14287,7 +14271,7 @@
 	  }).join("");
 	};
 
-	var makeAttributes = function makeAttributes(node, attributes) {
+	var makeAttributes = function makeAttributes(attributes) {
 	  var ret = null;
 	  var classes = null;
 	  var style = null;
@@ -14314,15 +14298,15 @@
 	            walk(value);
 	            break;
 	          case "class":
-	            if (value != null) if (classes == null) classes = parseClasses(node, value);else {
+	            if (value != null) if (classes == null) classes = parseClasses(value);else {
 	              var _classes;
 
-	              var parsed = parseClasses(node, value);
+	              var parsed = parseClasses(value);
 	              if (parsed) (_classes = classes).push.apply(_classes, _toConsumableArray(parsed));
 	            }
 	            break;
 	          case "style":
-	            if (value != null) if (style == null) style = parseStyles(node, value);else (_style = style).push.apply(_style, _toConsumableArray(parseStyles(node, value)));
+	            if (value != null) if (style == null) style = parseStyles(value);else (_style = style).push.apply(_style, _toConsumableArray(parseStyles(value)));
 	            break;
 	          default:
 	            getRet()[name] = value;
@@ -14432,19 +14416,18 @@
 	}
 
 	function createElement(name, attributes, content) {
-	  var ret = null;
-	  var node = function node() {
-	    return ret = getActualNode(ret);
-	  };
-	  if (attributes) attributes = makeAttributes(node, attributes);
-	  if (typeof name == "string" && Classes[name]) return ret = Classes[name](attributes, content);
+	  if (attributes) attributes = makeAttributes(attributes);
+	  if (typeof name == "string" && Classes[name]) return Classes[name](attributes, content);
 	  content = filterContent(content);
-	  if (typeof name == "function") return ret = name(attributes || 0, isFunction(content) ? content : contentToArray(appendContent(node, content)));
+	  if (typeof name == "function") return name(attributes || 0, isFunction(content) ? content : contentToArray(appendContent(content)));
 	  var onUserHandleCreated = void 0;
 	  var onHandleCreated = void 0;
 	  var isDocumentFragment = name == "document-fragment" || name == "";
 	  // TODO: use & return document.createDocumentFragment instead of div & array
-	  ret = isDocumentFragment ? _dom2.default.document.createElement("document-fragment") : _dom2.default.document.createElement(name);
+	  var ret = isDocumentFragment ? _dom2.default.document.createElement("document-fragment") : _dom2.default.document.createElement(name);
+	  var node = function node() {
+	    return ret = getActualNode(ret);
+	  };
 	  // ret.id = `tmp_${ UID() }`
 	  var classes = attributes && attributes.class || EMPTY_ARRAY;
 
@@ -14485,6 +14468,7 @@
 	  }
 
 	  if (attributes != null) {
+	    var match = null;
 	    var _iteratorNormalCompletion19 = true;
 	    var _didIteratorError19 = false;
 	    var _iteratorError19 = undefined;
@@ -14496,19 +14480,15 @@
 	        var name = _step19$value[0];
 	        var value = _step19$value[1];
 
-	        var match = void 0;
 	        if (name == "class") return "continue";else if (/^constructing(\:|$)/.test(name)) return "continue";else if (name == "style") setStyleValue(node, value);else if (match = name.match(/^on(.*)$/)) {
 	          if (value != null) {
 	            (function () {
 	              var event = match[1];
-	              if (event == "handlecreated") onUserHandleCreated = push(onUserHandleCreated, value);else {
-	                if (event == "init") value = once(value);
-	                onHandleCreated = push(onHandleCreated, event == "windowresize" ? function () {
-	                  attachForeignEventHandlers(window, this, "resize", value);
-	                } : function () {
-	                  attachEventHandlers(this, event, value);
-	                });
-	              }
+	              if (event == "handlecreated") onUserHandleCreated = push(onUserHandleCreated, value);else onHandleCreated = push(onHandleCreated, event == "windowresize" ? function () {
+	                attachForeignEventHandlers(window, this, "resize", value);
+	              } : function () {
+	                attachEventHandlers(this, event, value);
+	              });
 	            })();
 	          }
 	        } else {
@@ -14551,7 +14531,7 @@
 	      setContent(ret, content[0]);
 	      break;
 	    default:
-	      ret.appendChild(appendContent(node, content));
+	      ret.appendChild(appendContent(content));
 	      break;
 	  }
 
@@ -14576,29 +14556,6 @@
 	  var ret = createElement(name, attributes, content);
 	  _lastModule = ret;
 	  return ret;
-	}
-
-	function initComponent(component) {
-	  var detail, result;
-	  return regeneratorRuntime.async(function initComponent$(_context4) {
-	    while (1) switch (_context4.prev = _context4.next) {
-	      case 0:
-	        detail = {};
-
-	        component.dispatchEvent(new global.CustomEvent("init", { bubbles: false, false: true, detail: detail }));
-	        _context4.next = 4;
-	        return regeneratorRuntime.awrap(detail.result);
-
-	      case 4:
-	        result = _context4.sent;
-
-	        if (result != null) assignDOM(component, result, { immediately: true });
-
-	      case 6:
-	      case "end":
-	        return _context4.stop();
-	    }
-	  }, null, this);
 	}
 
 	var actualNodes = new WeakMap();
@@ -45408,10 +45365,6 @@
 
 	__webpack_require__(406);
 
-	var _bluebird = __webpack_require__(288);
-
-	var _bluebird2 = _interopRequireDefault(_bluebird);
-
 	var _ra = __webpack_require__(337);
 
 	var _ra2 = _interopRequireDefault(_ra);
@@ -45487,149 +45440,73 @@
 	  window._app = app;
 	  window._local = local;
 
-	  // dialogs
-
-	  var shownDialog = (0, _ra2.default)();
-	  (0, _ra2.default)(function () {
-	    if (!app.dialog) shownDialog.assign("");
-	  });
-
-	  function Dialog(_ref2) {
-	    var name = _ref2.name;
-	    var _oninit = _ref2.oninit;
-
-	    var control = void 0,
-	        active = false,
-	        isActive = (0, _ra2.default)(function () {
-	      return name == app.dialog;
-	    });
-	    return __(
-	      "div",
-	      {
-	        "class": regeneratorRuntime.mark(function _class() {
-	          var showClass, oldActive, input, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, elem;
-
-	          return regeneratorRuntime.wrap(function _class$(_context10) {
-	            while (1) switch (_context10.prev = _context10.next) {
-	              case 0:
-	                showClass = void 0;
-	                oldActive = active;
-
-	                active = isActive.valueOf();
-
-	                if (!active) {
-	                  _context10.next = 16;
-	                  break;
-	                }
-
-	                _context10.next = 6;
-	                return components.initComponent(control);
-
-	              case 6:
-	                if (oldActive) {
-	                  _context10.next = 12;
-	                  break;
-	                }
-
-	                _context10.next = 9;
-	                return _bluebird2.default.delay(1);
-
-	              case 9:
-	                input = this.querySelector("*[ autofocus ]");
-
-	                if (input) app.focus(input);
-	                control.dispatchEvent(new window.CustomEvent("dialogshow", { detail: null }));
-
-	              case 12:
-	                shownDialog.assign(name);
-	                showClass = "dialogShown";
-	                _context10.next = 39;
-	                break;
-
-	              case 16:
-	                if (!oldActive) {
-	                  _context10.next = 38;
-	                  break;
-	                }
-
-	                _iteratorNormalCompletion = true;
-	                _didIteratorError = false;
-	                _iteratorError = undefined;
-	                _context10.prev = 20;
-
-	                for (_iterator = this.querySelectorAll("*:focus")[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-	                  elem = _step.value;
-
-	                  elem.blur();
-	                }_context10.next = 28;
-	                break;
-
-	              case 24:
-	                _context10.prev = 24;
-	                _context10.t0 = _context10["catch"](20);
-	                _didIteratorError = true;
-	                _iteratorError = _context10.t0;
-
-	              case 28:
-	                _context10.prev = 28;
-	                _context10.prev = 29;
-
-	                if (!_iteratorNormalCompletion && _iterator.return) {
-	                  _iterator.return();
-	                }
-
-	              case 31:
-	                _context10.prev = 31;
-
-	                if (!_didIteratorError) {
-	                  _context10.next = 34;
-	                  break;
-	                }
-
-	                throw _iteratorError;
-
-	              case 34:
-	                return _context10.finish(31);
-
-	              case 35:
-	                return _context10.finish(28);
-
-	              case 36:
-	                this.blur();
-	                control.dispatchEvent(new window.CustomEvent("dialoghide", { detail: null }));
-
-	              case 38:
-	                showClass = "dialogHidden";
-
-	              case 39:
-	                return _context10.abrupt("return", "modalDialog " + name + " " + showClass);
-
-	              case 40:
-	              case "end":
-	                return _context10.stop();
-	            }
-	          }, _class, this, [[20, 24, 28, 36], [29,, 31, 35]]);
-	        })
+	  var dialogContainer = void 0;
+	  var application = __(
+	    "div",
+	    { "class": function _class() {
+	        return "\n\t\tapplication\n\t\t" + (app.pageStarting ? "pageStarting" : "pageRunning") + "\n\t\t" + (app.initialLoading ? "JSONloading" : "JSONloaded") + "\n\t\t" + (app.initialized ? "alreadyRun" : "firstRun") + "\n\t\t" + (app.connectedToServer ? "appConnected" : "appDisconnected") + "\n\t\t" + "" /* app.credentials == null ? `showLogin` : `hideLogin` */ + "\n\t\t" + (app.templates ? "templatesLoaded" : "templatesLoading") + "\n\t\t" + (app.dialog && "dialog" + app.dialog) + "\n\t\t" + (app.dialog ? "dialogIsPresent" : "dialogIsAbsent") + "\n\t\tapp_labels_" + !!local.labels + "\n\t\tapp_editing_" + !!app.editing + "\n\t\tapp_deleting_" + (!!app.editing && !!app.deleting) + "\n\t\tapp_icons_" + (app.iconsVertical ? "vertical" : "horizontal") + "\n\t\tlayout_" + (lu.valueOf(app.windowSize) && lu.valueOf(app.windowSize).layout) + "\n\t\twindow_" + (lu.valueOf(app.windowSize) && lu.valueOf(app.windowSize).window) + "\n\t\ttheme" + app.themeName + "\n\t";
 	      },
-	      /*<style>{`
-	      .dialog${ name } .modalDialog.${ name } { display: block; }
-	      `}</style>*/__("div", {
-	        onhandlecreated: function onhandlecreated(_ref3) {
-	          var target = _ref3.target;
-	          return control = target;
-	        },
-	        oninit: function oninit(_ref4) {
-	          var detail = _ref4.detail;
-	          return detail.result = _oninit();
+	      onmousedown: function onmousedown(event) {
+	        if (event.ctrlKey && typeof window._debugMenu == "function") {
+	          event.preventDefault();
+	          event.stopPropagation();
+	          window._debugMenu();
 	        }
-	      })
-	    );
-	  }
+	      },
+	      _: attr
+	    },
+	    __(
+	      "style",
+	      null,
+	      function () {
+	        var ret = "";
+	        for (var i = 1; i <= 16; ++i) {
+	          ret += "\n\t\t\t\t.border_" + i + "px { border-width: " + i / app.windowSize.pixelRatio + "px; }\n\t\t\t\t.stroke_" + i + "px { stroke-width: " + i / app.windowSize.pixelRatio + "px; }\n\t\t\t";
+	        }return ret;
+	      }
+	    ),
+	    __(
+	      Screen,
+	      null,
+	      __(Top, null),
+	      __(Bottom, null),
+	      __(MainScreen, { instanceID: appid }),
+	      __(
+	        "div",
+	        { "class": "dialogs under_top above_bottom", onhandlecreated: function onhandlecreated(_ref2) {
+	            var target = _ref2.target;
+	            return dialogContainer = target;
+	          } },
+	        __(
+	          "div",
+	          { "class": "background app_content_background" },
+	          __(
+	            "div",
+	            { "class": "background backing_sized_background" },
+	            __(
+	              "div",
+	              { "class": "background under_top_background" },
+	              __(
+	                "div",
+	                { "class": "background above_bottom_background" },
+	                __(Background, null)
+	              )
+	            )
+	          )
+	        )
+	      )
+	    )
+	  );
 
-	  var CloseError = function CloseError(_ref5, text) {
-	    var onclick = _ref5.onclick;
+	  app.icons = IconTemplates.reduce(function (icons, template) {
+	    icons[template.dataset.name] = template;
+	    return icons;
+	  }, Object.create(null));
 
-	    var attr = _objectWithoutProperties(_ref5, ["onclick"]);
+	  var CloseError = function CloseError(_ref3, text) {
+	    var onclick = _ref3.onclick;
+
+	    var attr = _objectWithoutProperties(_ref3, ["onclick"]);
 
 	    return __(
 	      "p",
@@ -45648,10 +45525,10 @@
 	    );
 	  };
 
-	  var CloseDialog = function CloseDialog(_ref6, text) {
-	    var onclick = _ref6.onclick;
+	  var CloseDialog = function CloseDialog(_ref4, text) {
+	    var onclick = _ref4.onclick;
 
-	    var attr = _objectWithoutProperties(_ref6, ["onclick"]);
+	    var attr = _objectWithoutProperties(_ref4, ["onclick"]);
 
 	    return __(
 	      "p",
@@ -45668,7 +45545,138 @@
 	    );
 	  };
 
-	  var dialogs = __(
+	  // dialogs
+
+	  function Dialog(_ref5) {
+	    var name = _ref5.name;
+	    var _oninit = _ref5.oninit;
+
+	    var control = void 0,
+	        active = false,
+	        isActive = (0, _ra2.default)(function () {
+	      return name == app.dialog;
+	    });
+	    return __(
+	      "div",
+	      {
+	        "class": regeneratorRuntime.mark(function _class() {
+	          var showClass, oldActive, input, _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, elem;
+
+	          return regeneratorRuntime.wrap(function _class$(_context19) {
+	            while (1) switch (_context19.prev = _context19.next) {
+	              case 0:
+	                showClass = void 0;
+	                oldActive = active;
+
+	                active = isActive.valueOf();
+
+	                if (!active) {
+	                  _context19.next = 15;
+	                  break;
+	                }
+
+	                _context19.next = 6;
+	                return components.initComponent(control);
+
+	              case 6:
+	                if (oldActive) {
+	                  _context19.next = 12;
+	                  break;
+	                }
+
+	                _context19.next = 9;
+	                return Promise.delay(0);
+
+	              case 9:
+	                input = this.querySelector("*[ autofocus ]");
+
+	                if (input) app.focus(input);
+	                control.dispatchEvent(new window.CustomEvent("dialogshow", { detail: null }));
+
+	              case 12:
+	                showClass = "dialogShown";
+	                _context19.next = 38;
+	                break;
+
+	              case 15:
+	                if (!oldActive) {
+	                  _context19.next = 37;
+	                  break;
+	                }
+
+	                _iteratorNormalCompletion = true;
+	                _didIteratorError = false;
+	                _iteratorError = undefined;
+	                _context19.prev = 19;
+
+	                for (_iterator = this.querySelectorAll("*:focus")[Symbol.iterator](); !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+	                  elem = _step.value;
+
+	                  elem.blur();
+	                }_context19.next = 27;
+	                break;
+
+	              case 23:
+	                _context19.prev = 23;
+	                _context19.t0 = _context19["catch"](19);
+	                _didIteratorError = true;
+	                _iteratorError = _context19.t0;
+
+	              case 27:
+	                _context19.prev = 27;
+	                _context19.prev = 28;
+
+	                if (!_iteratorNormalCompletion && _iterator.return) {
+	                  _iterator.return();
+	                }
+
+	              case 30:
+	                _context19.prev = 30;
+
+	                if (!_didIteratorError) {
+	                  _context19.next = 33;
+	                  break;
+	                }
+
+	                throw _iteratorError;
+
+	              case 33:
+	                return _context19.finish(30);
+
+	              case 34:
+	                return _context19.finish(27);
+
+	              case 35:
+	                this.blur();
+	                control.dispatchEvent(new window.CustomEvent("dialoghide", { detail: null }));
+
+	              case 37:
+	                showClass = "dialogHidden";
+
+	              case 38:
+	                return _context19.abrupt("return", "modalDialog " + name + " " + showClass);
+
+	              case 39:
+	              case "end":
+	                return _context19.stop();
+	            }
+	          }, _class, this, [[19, 23, 27, 35], [28,, 30, 34]]);
+	        })
+	      },
+	      __("div", {
+	        onhandlecreated: function onhandlecreated(_ref6) {
+	          var target = _ref6.target;
+	          return control = target;
+	        },
+	        oninit: function oninit(_ref7) {
+	          var detail = _ref7.detail;
+	          return detail.result = _oninit();
+	        }
+	      })
+	    );
+	  }
+
+	  var dialogs_ = __(
 	    "document-fragment",
 	    null,
 	    __(Dialog, { name: "ServiceDialog", oninit: function oninit() {
@@ -45947,65 +45955,418 @@
 	      } })
 	  );
 
-	  var application = __(
-	    "div",
-	    { "class": function _class() {
-	        return "\n\t\tapplication\n\t\t" + (app.pageStarting ? "pageStarting" : "pageRunning") + "\n\t\t" + (app.initialLoading ? "JSONloading" : "JSONloaded") + "\n\t\t" + (app.initialized ? "alreadyRun" : "firstRun") + "\n\t\t" + (app.connectedToServer ? "appConnected" : "appDisconnected") + "\n\t\t" + "" /* app.credentials == null ? `showLogin` : `hideLogin` */ + "\n\t\t" + (app.templates ? "templatesLoaded" : "templatesLoading") + "\n\t\t" + (shownDialog.valueOf() && "dialog" + shownDialog.valueOf()) + "\n\t\t" + (shownDialog.valueOf() ? "dialogIsPresent" : "dialogIsAbsent") + "\n\t\tapp_labels_" + !!local.labels + "\n\t\tapp_editing_" + !!app.editing + "\n\t\tapp_deleting_" + (!!app.editing && !!app.deleting) + "\n\t\tapp_icons_" + (app.iconsVertical ? "vertical" : "horizontal") + "\n\t\tlayout_" + (lu.valueOf(app.windowSize) && lu.valueOf(app.windowSize).layout) + "\n\t\twindow_" + (lu.valueOf(app.windowSize) && lu.valueOf(app.windowSize).window) + "\n\t\ttheme" + app.themeName + "\n\t";
-	      },
-	      onmousedown: function onmousedown(event) {
-	        if (event.ctrlKey && typeof window._debugMenu == "function") {
-	          event.preventDefault();
-	          event.stopPropagation();
-	          window._debugMenu();
-	        }
-	      },
-	      _: attr
+	  var dialogTemplates = {
+
+	    ServiceDialog: function ServiceDialog() {
+	      var _context10;
+
+	      return (_context10 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(447));
+	      }), app.load).call(_context10);
 	    },
-	    __(
-	      "style",
-	      null,
-	      function () {
-	        var ret = "";
-	        for (var i = 1; i <= 16; ++i) {
-	          ret += "\n\t\t\t\t.border_" + i + "px { border-width: " + i / app.windowSize.pixelRatio + "px; }\n\t\t\t\t.stroke_" + i + "px { stroke-width: " + i / app.windowSize.pixelRatio + "px; }\n\t\t\t";
-	        }return ret;
-	      }
-	    ),
-	    __(
-	      Screen,
-	      null,
-	      __(Top, null),
-	      __(Bottom, null),
-	      __(MainScreen, { instanceID: appid }),
-	      __(
+	    ContextMenu: function ContextMenu() {
+	      var _context11;
+
+	      return (_context11 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(448));
+	      }), app.load).call(_context11);
+	    },
+	    AddMenu: function AddMenu() {
+	      var _context12;
+
+	      return (_context12 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(452));
+	      }), app.load).call(_context12);
+	    },
+	    DebugMenu: function DebugMenu() {
+	      var _context13;
+
+	      return (_context13 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(453));
+	      }), app.load).call(_context13);
+	    },
+	    ThemeMenu: function ThemeMenu() {
+	      var _context14;
+
+	      return (_context14 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(454));
+	      }), app.load).call(_context14);
+	    },
+	    SearchItems: function SearchItems() {
+	      var _context15;
+
+	      return (_context15 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(455));
+	      }), app.load).call(_context15);
+	    },
+	    SearchPictures: function SearchPictures() {
+	      var _context16;
+
+	      return (_context16 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(460));
+	      }), app.load).call(_context16);
+	    },
+	    AskNewName: function AskNewName() {
+	      var _context17;
+
+	      return (_context17 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(461));
+	      }), app.load).call(_context17);
+	    },
+	    AskToLinkDevice: function AskToLinkDevice() {
+	      var _context18;
+
+	      return (_context18 = new global.Promise(function (resolve) {
+	        resolve(__webpack_require__(464));
+	      }), app.load).call(_context18);
+	    },
+
+	    AskIfDeviceHasBeenLinked: function AskIfDeviceHasBeenLinked() {
+	      return __(
 	        "div",
-	        { "class": "dialogs under_top above_bottom" },
+	        null,
 	        __(
-	          "div",
-	          { "class": "background app_content_background" },
+	          "p",
+	          null,
+	          "Устройство было успешно привязано?"
+	        ),
+	        __(
+	          Button,
+	          { onclick: "StopDeviceNotification" },
+	          "да"
+	        ),
+	        __(
+	          Button,
+	          { onclick: function onclick() {
+	              var itemId = app.linkingPlaceId || app.activeDeviceId;
+	              app.commands.DeviceHasNotBeenInitialized({ itemId: itemId });
+	              app.dialog = "AskToLinkDevice";
+	            } },
+	          "нет"
+	        )
+	      );
+	    },
+
+	    StopDeviceNotification: function StopDeviceNotification() {
+	      return __(
+	        "div",
+	        null,
+	        __(
+	          "p",
+	          null,
+	          "Пожалуйста,",
+	          __("br", null),
+	          "переведите устройство в рабочий режим."
+	        ),
+	        __(
+	          Button,
+	          null,
+	          "Закрыть"
+	        )
+	      );
+	    },
+
+	    ErrorNoCarrier: function ErrorNoCarrier() {
+	      return __(
+	        "div",
+	        { "class": "errorDialog" },
+	        __(
+	          "p",
+	          null,
+	          "Ошибка"
+	        ),
+	        __(
+	          "p",
+	          null,
+	          "Произошла ошибка при попытке связаться с модемом."
+	        ),
+	        __(
+	          Button,
+	          null,
+	          "Закрыть"
+	        )
+	      );
+	    },
+
+	    ErrorUnlinkingDevice: function ErrorUnlinkingDevice() {
+	      return __(
+	        "div",
+	        { "class": "errorDialog" },
+	        __(
+	          "p",
+	          null,
+	          "Ошибка"
+	        ),
+	        __(
+	          "p",
+	          null,
+	          "Не удалось связаться с устройством и отвязать его."
+	        ),
+	        __(
+	          "p",
+	          null,
+	          "Что следует сделать?"
+	        ),
+	        __(
+	          "ul",
+	          null,
 	          __(
-	            "div",
-	            { "class": "background backing_sized_background" },
+	            CloseError,
+	            { onclick: function onclick(error) {
+	                return app.purgeItem(error.data.deviceId);
+	              }
+	            },
 	            __(
-	              "div",
-	              { "class": "background under_top_background" },
-	              __(
-	                "div",
-	                { "class": "background above_bottom_background" },
-	                __(Background, null)
-	              )
+	              "li",
+	              null,
+	              "Попытаться отвязать устройство ещё раз"
+	            )
+	          ),
+	          __(
+	            CloseError,
+	            null,
+	            __(
+	              "li",
+	              null,
+	              "Отменить удаление"
+	            )
+	          ),
+	          __(
+	            CloseError,
+	            { onclick: function onclick(error) {
+	                return app.purgeItem(error.data.deviceId, true);
+	              }
+	            },
+	            __(
+	              "li",
+	              null,
+	              "Забыть информацию об устройстве"
 	            )
 	          )
-	        ),
-	        dialogs
-	      )
-	    )
-	  );
+	        )
+	      );
+	    },
 
-	  app.icons = IconTemplates.reduce(function (icons, template) {
-	    icons[template.dataset.name] = template;
-	    return icons;
-	  }, Object.create(null));
+	    DeleteDevice: function DeleteDevice() {
+	      return __(
+	        "div",
+	        null,
+	        __(
+	          "p",
+	          null,
+	          {
+	            place: __(
+	              "span",
+	              null,
+	              "Помещение (место) \"",
+	              app.caption,
+	              "\" будет удалено из программы."
+	            ),
+	            single: __(
+	              "span",
+	              null,
+	              "Устройство \"",
+	              app.caption,
+	              "\" будет удалено из программы."
+	            ),
+	            group: __(
+	              "span",
+	              null,
+	              "Группа \"",
+	              app.caption,
+	              "\" будет удалена из программы."
+	            )
+	          }[app.activeType]
+	        ),
+	        __(
+	          "ul",
+	          null,
+	          __(
+	            CloseDialog,
+	            { "class": "dangerousAction", onclick: function onclick() {
+	                return app.purgeItem(app.activeDeviceId);
+	              }
+	            },
+	            __(
+	              "li",
+	              null,
+	              "Удалить"
+	            )
+	          ),
+	          __(
+	            CloseDialog,
+	            null,
+	            __(
+	              "li",
+	              null,
+	              "Не удалять"
+	            )
+	          )
+	        )
+	      );
+	    },
+
+	    StateWait: function StateWait() {
+	      return __(
+	        "div",
+	        null,
+	        __(
+	          "p",
+	          null,
+	          "Подождите..."
+	        )
+	      );
+	    },
+
+	    AskToReset: function AskToReset() {
+	      return __(
+	        "div",
+	        null,
+	        __(
+	          "p",
+	          null,
+	          "Память контроллера будет очищена,",
+	          __("br", null),
+	          "но память устройств очищаться не будет."
+	        ),
+	        __(
+	          Button,
+	          { "class": "dangerousAction", onclick: app.reset },
+	          "Очистить",
+	          __("br", null),
+	          "память"
+	        )
+	      );
+	    }
+
+	  };
+
+	  // AddPlace,
+	  // AddDevice,
+	  (0, _ra2.default)(regeneratorRuntime.mark(function _callee() {
+	    var dialogName, Template, control, _this, input, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, elem, state, dialog;
+
+	    return regeneratorRuntime.wrap(function _callee$(_context20) {
+	      while (1) switch (_context20.prev = _context20.next) {
+	        case 0:
+	          dialogName = app.dialog;
+
+	          if (dialogName) {
+	            _context20.next = 3;
+	            break;
+	          }
+
+	          return _context20.abrupt("return");
+
+	        case 3:
+	          if (Object.prototype.hasOwnProperty.call(dialogTemplates, dialogName)) {
+	            _context20.next = 7;
+	            break;
+	          }
+
+	          window.alert("Error: Could not find dialog named\n\"" + dialogName + "\"");
+	          _ra2.default.noTouch(function () {
+	            return app.dialog = "";
+	          });
+	          return _context20.abrupt("return");
+
+	        case 7:
+	          Template = dialogTemplates[dialogName];
+
+	          if (Template) {
+	            _context20.next = 10;
+	            break;
+	          }
+
+	          return _context20.abrupt("return");
+
+	        case 10:
+	          dialogTemplates[dialogName] = null;
+
+	          control = Template();
+
+	          if (!(typeof control.then == "function")) {
+	            _context20.next = 16;
+	            break;
+	          }
+
+	          _context20.next = 15;
+	          return control;
+
+	        case 15:
+	          control = _context20.sent;
+
+	        case 16:
+	          _context20.t0 = {
+	            get isActive() {
+	              return dialogName == app.dialog;
+	            },
+	            _timer: null,
+	            _activeState: false,
+
+	            get _activeChanged() {
+	              _this = this;
+
+	              clearTimeout(this._timer);
+	              this._timer = null;
+	              if (this.isActive) this._timer = setTimeout(function () {
+	                if (_this.isActive) _this._activeState = true;
+	              });else this._activeState = false;
+	            },
+	            get _activeStateChanged() {
+	              if (this._activeState) {
+	                input = control.querySelector("*[ autofocus ]");
+
+	                if (input) app.focus(input);
+	                control.dispatchEvent(new window.CustomEvent("dialogshow", { detail: null }));
+	              } else {
+	                _iteratorNormalCompletion2 = true;
+	                _didIteratorError2 = false;
+	                _iteratorError2 = undefined;
+
+	                try {
+	                  for (_iterator2 = control.querySelectorAll("*:focus")[Symbol.iterator](); !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+	                    elem = _step2.value;
+
+	                    elem.blur();
+	                  }
+	                } catch (err) {
+	                  _didIteratorError2 = true;
+	                  _iteratorError2 = err;
+	                } finally {
+	                  try {
+	                    if (!_iteratorNormalCompletion2 && _iterator2.return) {
+	                      _iterator2.return();
+	                    }
+	                  } finally {
+	                    if (_didIteratorError2) {
+	                      throw _iteratorError2;
+	                    }
+	                  }
+	                }
+
+	                dialog.blur();
+	                control.dispatchEvent(new window.CustomEvent("dialoghide", { detail: null }));
+	              }
+	            }
+	          };
+	          state = (0, _ra2.default)(_context20.t0);
+	          dialog = __(
+	            "div",
+	            { "class": function _class() {
+	                return "\n\t\t\tmodalDialog\n\t\t\t" + dialogName + "\n\t\t\t" + (state.isActive ? "dialogShown" : "dialogHidden") + "\n\t\t";
+	              } },
+	            control
+	          );
+
+	          dialogContainer.appendChild(dialog);
+
+	        case 20:
+	        case "end":
+	          return _context20.stop();
+	      }
+	    }, _callee, this);
+	  }));
 
 	  setTimeout(function () {
 	    return app.pageStarting = false;
@@ -50169,18 +50530,155 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = collections.connect(collections.mixer(), _numberedTransform2.default, (0, _pingpongTransform2.default)(), _JSONTransform2.default,
-	// collections.transformer(
-	// 	async function* ( stream ) { AWAIT_73549163_1:for ( const data of stream ) {
-	// 		console.log( `>`.blue, String( data ) )
-	// 		yield data
-	// 	} },
-	// 	async function* ( stream ) { AWAIT_73549163_2:for ( const data of stream ) {
-	// 		console.log( `<`.blue, String( data ) )
-	// 		yield data
-	// 	} },
-	// ),
-	collections.duplex);
+	exports.default = collections.connect(collections.mixer(), _numberedTransform2.default, (0, _pingpongTransform2.default)(), _JSONTransform2.default, collections.transformer(regeneratorRuntime.mark(function _callee(stream) {
+	  var _5, _4, _3, _2, _1, data;
+
+	  return regeneratorRuntime.async(function _callee$(_context) {
+	    while (1) switch (_context.prev = _context.next) {
+	      case 0:
+	        _5 = void 0, _4 = void 0, _3 = void 0, _2 = void 0, _1 = stream[Symbol.asyncIterator]();
+	        _context.prev = 1;
+
+	      case 2:
+	        _3 = false;
+	        _context.next = 5;
+	        return regeneratorRuntime.awrap(_1.next());
+
+	      case 5:
+	        if ((_2 = _context.sent).done) {
+	          _context.next = 13;
+	          break;
+	        }
+
+	        _3 = true;
+	        data = _2.value;
+
+	        console.log(">".blue, String(data));
+	        _context.next = 11;
+	        return data;
+
+	      case 11:
+	        _context.next = 2;
+	        break;
+
+	      case 13:
+	        _context.next = 19;
+	        break;
+
+	      case 15:
+	        _context.prev = 15;
+	        _context.t0 = _context["catch"](1);
+	        _5 = true;
+	        _4 = _context.t0;
+
+	      case 19:
+	        _context.prev = 19;
+	        _context.prev = 20;
+
+	        if (!(_3 && _1.return)) {
+	          _context.next = 24;
+	          break;
+	        }
+
+	        _context.next = 24;
+	        return regeneratorRuntime.awrap(_1.return());
+
+	      case 24:
+	        _context.prev = 24;
+
+	        if (!_5) {
+	          _context.next = 27;
+	          break;
+	        }
+
+	        throw _4;
+
+	      case 27:
+	        return _context.finish(24);
+
+	      case 28:
+	        return _context.finish(19);
+
+	      case 29:
+	      case "end":
+	        return _context.stop();
+	    }
+	  }, _callee, this, [[1, 15, 19, 29], [20,, 24, 28]]);
+	}), regeneratorRuntime.mark(function _callee2(stream) {
+	  var _10, _9, _8, _7, _6, data;
+
+	  return regeneratorRuntime.async(function _callee2$(_context2) {
+	    while (1) switch (_context2.prev = _context2.next) {
+	      case 0:
+	        _10 = void 0, _9 = void 0, _8 = void 0, _7 = void 0, _6 = stream[Symbol.asyncIterator]();
+	        _context2.prev = 1;
+
+	      case 2:
+	        _8 = false;
+	        _context2.next = 5;
+	        return regeneratorRuntime.awrap(_6.next());
+
+	      case 5:
+	        if ((_7 = _context2.sent).done) {
+	          _context2.next = 13;
+	          break;
+	        }
+
+	        _8 = true;
+	        data = _7.value;
+
+	        console.log("<".blue, String(data));
+	        _context2.next = 11;
+	        return data;
+
+	      case 11:
+	        _context2.next = 2;
+	        break;
+
+	      case 13:
+	        _context2.next = 19;
+	        break;
+
+	      case 15:
+	        _context2.prev = 15;
+	        _context2.t0 = _context2["catch"](1);
+	        _10 = true;
+	        _9 = _context2.t0;
+
+	      case 19:
+	        _context2.prev = 19;
+	        _context2.prev = 20;
+
+	        if (!(_8 && _6.return)) {
+	          _context2.next = 24;
+	          break;
+	        }
+
+	        _context2.next = 24;
+	        return regeneratorRuntime.awrap(_6.return());
+
+	      case 24:
+	        _context2.prev = 24;
+
+	        if (!_10) {
+	          _context2.next = 27;
+	          break;
+	        }
+
+	        throw _9;
+
+	      case 27:
+	        return _context2.finish(24);
+
+	      case 28:
+	        return _context2.finish(19);
+
+	      case 29:
+	      case "end":
+	        return _context2.stop();
+	    }
+	  }, _callee2, this, [[1, 15, 19, 29], [20,, 24, 28]]);
+	})), collections.duplex);
 
 	// export
 	// const reconnectable =
@@ -59119,9 +59617,9 @@
 
 	var _ra2 = _interopRequireDefault(_ra);
 
-	var _defun = __webpack_require__(384);
+	var _cc = __webpack_require__(336);
 
-	var _defun2 = _interopRequireDefault(_defun);
+	var cc = _interopRequireWildcard(_cc);
 
 	var _Place = __webpack_require__(430);
 
@@ -59292,8 +59790,8 @@
 	        }, function () {
 	          return opts.panning ? "user_changes_page" : "";
 	        }],
-	        onpan: (0, _defun2.default)(function _callee2(defer, data) {
-	          return regeneratorRuntime.async(function _callee2$(_context3) {
+	        onpan: function onpan(data) {
+	          return regeneratorRuntime.async(function onpan$(_context3) {
 	            while (1) switch (_context3.prev = _context3.next) {
 	              case 0:
 	                if (!(data.detail.axis == "horizontal")) {
@@ -59303,9 +59801,10 @@
 
 	                data.stopPropagation();
 	                opts.panning = true;
-	                defer(function () {
+	                cc.defer(function () {
 	                  return opts.panning = false;
 	                });
+	                // await pan( event.detail.events )
 	                _context3.next = 6;
 	                return regeneratorRuntime.awrap(pan(data.detail.events));
 
@@ -59314,7 +59813,7 @@
 	                return _context3.stop();
 	            }
 	          }, null, _this2);
-	        }),
+	        },
 	        onhandlecreated: function onhandlecreated() {
 	          var _this = this;
 
